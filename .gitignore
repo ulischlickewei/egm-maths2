@@ -1,0 +1,14 @@
+# Python virtual environment
+.venv/
+
+# OS generated files
+.DS_Store
+
+# Editor directories and files
+.vscode/
+
+# Build, outputs and logs
+logs/
+*.log
+output/
+generated-assets/
