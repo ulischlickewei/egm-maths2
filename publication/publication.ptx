@@ -151,7 +151,8 @@
     <!-- Search can be default or none, or you can use a Google-cx number to use google's search
     feature (but then variant should be set to none to avoid conflict) -->
       <!--<search variant="default" />-->
-
+    <search google="no" />
+    <assetsroot>assets</assetsroot>
     <!-- Table of Contents: focused="yes" enables expand/collapse functionality. -->
     <!-- @preexpanded-levels controls how deep to expend toc initially.          -->
       <!--<toc focused="yes" preexpanded-levels="1" />-->

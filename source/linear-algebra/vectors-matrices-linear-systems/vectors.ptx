@@ -1,0 +1,464 @@
+<subsection xml:id="subsec-vectors">
+    <title>Brief reminder: vectors</title>
+
+    <introduction>
+        <p>
+            In physics, many real-world quantities—such as force, velocity, or displacement—cannot be fully described by a single number. For example, if you apply a force to push a box, the outcome depends not only on how hard you push (the magnitude) but also on the direction in which you are pushing.
+        </p>
+        <p>
+            To capture both magnitude and direction simultaneously, we use mathematical objects called vectors. This concept extends naturally beyond physical space into abstract mathematics, allowing us to handle multi-dimensional spaces and systems.
+        </p>
+    </introduction>
+
+    <definition xml:id="def-vector">
+        <title>Vector</title>
+        <statement>
+            <p>
+                A <term>vector</term> of size <m>n</m> is an ordered tuple of <m>n</m> real numbers. The set of all vectors of size <m>n</m> is denoted by <m>\mathbb{R}^n</m>. A vector <m>\mathbf{v} \in \mathbb{R}^n</m> is commonly written as
+                <m>\mathbf{v} = (v_1, \dots, v_n)</m>
+                or in column form as
+                <me>\mathbf{v} = \begin{pmatrix} v_1 \\ \vdots \\ v_n \end{pmatrix}.</me>
+            </p>
+        </statement>
+    </definition>
+
+    <p>
+        Let us look at a concrete numerical representation of a vector in three-dimensional space.
+    </p>
+
+    <example xml:id="ex-vector">
+        <title>A Vector in <m>\mathbb{R}^3</m></title>
+        <p>
+            An example of a vector in <m>\mathbb{R}^3</m> is
+            <me>\mathbf{v} = \begin{pmatrix} 2 \\ -1 \\ 4 \end{pmatrix}.</me>
+        </p>
+    </example>
+
+    <p>
+        In <m>\mathbb{R}^2</m> and <m>\mathbb{R}^3</m>, vectors can be visualized as arrows in Euclidean space. In this geometric interpretation, a vector has a direction and a length, but it is not tied to a fixed starting point. A particularly useful representative is the position vector that starts at the origin.
+    </p>
+
+    <p>
+        At the same time, the algebraic point of view is more general: a vector is determined by its components. The geometric picture is very helpful in two and three dimensions, but the coordinate description remains meaningful in arbitrary dimension.
+    </p>
+
+    <p>
+        To make vectors useful, we need mathematical rules for how to combine them. The two most fundamental operations are adding two vectors and multiplying a vector by a real number.
+    </p>
+
+    <definition xml:id="def-vector-operations">
+        <title>Vector Operations</title>
+        <statement>
+            <p>
+                Let <m>\mathbf{v}, \mathbf{w} \in \mathbb{R}^n</m> and let <m>\lambda \in \mathbb{R}</m>. The sum of two vectors of the same size and the scalar multiple of a vector are defined component-wise.
+            </p>
+            <dl>
+                <li>
+                    <title>Addition</title>
+                    <p>
+                        The sum of <m>\mathbf{v}</m> and <m>\mathbf{w}</m> is
+                        <me>\mathbf{v}+\mathbf{w} = \begin{pmatrix} v_1+w_1 \\ \vdots \\ v_n+w_n \end{pmatrix}.</me>
+                    </p>
+                </li>
+                <li>
+                    <title>Scalar Multiplication</title>
+                    <p>
+                        The scalar multiple of <m>\mathbf{v}</m> by <m>\lambda</m> is
+                        <me>\lambda \mathbf{v} = \begin{pmatrix} \lambda v_1 \\ \vdots \\ \lambda v_n \end{pmatrix}.</me>
+                    </p>
+                </li>
+            </dl>
+        </statement>
+    </definition>
+
+    <example xml:id="ex-vector-operations">
+        <title>Calculating Sums and Scalar Multiples</title>
+        <p>
+            Let
+            <m>\mathbf{v} = \begin{pmatrix} 1 \\ 3 \end{pmatrix}</m>
+            and
+            <m>\mathbf{w} = \begin{pmatrix} 4 \\ -2 \end{pmatrix}</m>
+            be vectors in <m>\mathbb{R}^2</m>.
+        </p>
+        <p>
+            Their sum is
+            <me>\mathbf{v} + \mathbf{w} = \begin{pmatrix} 1+4 \\ 3+(-2) \end{pmatrix} = \begin{pmatrix} 5 \\ 1 \end{pmatrix}.</me>
+        </p>
+        <p>
+            If we scale <m>\mathbf{v}</m> by <m>\lambda = 3</m>, we obtain
+            <me>3\mathbf{v} = \begin{pmatrix} 3 \cdot 1 \\ 3 \cdot 3 \end{pmatrix} = \begin{pmatrix} 3 \\ 9 \end{pmatrix}.</me>
+        </p>
+    </example>
+
+    <example xml:id="ex-engineering-resultant-force">
+        <title>Resultant Force on a Mechanical Component</title>
+        <p>
+            Suppose two forces act on a component in the plane:
+            <me>\mathbf{F}_1 = \begin{pmatrix} 120 \\ 40 \end{pmatrix}\text{ N}, \qquad \mathbf{F}_2 = \begin{pmatrix} -30 \\ 90 \end{pmatrix}\text{ N}.</me>
+        </p>
+        <p>
+            The total force is obtained by vector addition:
+            <me>\mathbf{F}_{\text{res}} = \mathbf{F}_1 + \mathbf{F}_2 = \begin{pmatrix} 120 + (-30) \\ 40 + 90 \end{pmatrix} = \begin{pmatrix} 90 \\ 130 \end{pmatrix}\text{ N}.</me>
+        </p>
+        <p>
+            Thus, the component experiences a resultant force with horizontal component <m>90\text{ N}</m> and vertical component <m>130\text{ N}</m>.
+        </p>
+    </example>
+
+    <example xml:id="ex-engineering-velocity-displacement">
+        <title>Displacement from a Velocity Vector</title>
+        <p>
+            Consider a mobile robot moving with constant velocity
+            <me>\mathbf{v} = \begin{pmatrix} 1.2 \\ 0.5 \end{pmatrix}\text{ m/s}.</me>
+        </p>
+        <p>
+            After <m>10</m> seconds, its displacement is
+            <me>10\mathbf{v} = \begin{pmatrix} 12 \\ 5 \end{pmatrix}\text{ m}.</me>
+        </p>
+        <p>
+            This illustrates the meaning of scalar multiplication: multiplying the velocity vector by the travel time gives the displacement vector.
+        </p>
+    </example>
+
+    <figure xml:id="fig-geogebra-vector-addition">
+        <title>Interactive: Vector Addition</title>
+        <interactive geogebra="vgqcxgyn" aspect="4:3" width="80%">
+            <instructions>
+                <p>Drag the heads of vectors <m>\mathbf{v}</m> and <m>\mathbf{w}</m> to see how their sum <m>\mathbf{v}+\mathbf{w}</m> changes geometrically via the parallelogram rule.</p>
+            </instructions>
+        </interactive>
+    </figure>
+
+    <figure xml:id="fig-geogebra-scalar-multiplication">
+        <title>Interactive: Scalar Multiplication</title>
+        <interactive geogebra="jjw6ww6q" aspect="4:3" width="80%">
+            <instructions>
+                <p>Use the slider for <m>\lambda</m> to see how the scalar stretches, shrinks, or reverses the direction of the vector <m>\mathbf{v}</m>.</p>
+            </instructions>
+        </interactive>
+    </figure>
+
+    <p>
+        Having established these basic arithmetic operations, a special vector arises naturally when we scale any vector by zero or subtract a vector from itself.
+    </p>
+
+    <definition xml:id="def-zero-vector">
+        <title>Zero Vector</title>
+        <statement>
+            <p>
+                The <term>zero vector</term> in <m>\mathbb{R}^n</m> is the vector whose components are all equal to zero. It is denoted by <m>\mathbf{0}</m> and has the form
+                <me>\mathbf{0} = \begin{pmatrix} 0 \\ \vdots \\ 0 \end{pmatrix}.</me>
+            </p>
+        </statement>
+    </definition>
+
+    <p>
+        Just like ordinary numbers, vector operations satisfy several basic algebraic laws.
+    </p>
+
+    <theorem xml:id="thm-vector-arithmetic">
+        <title>Laws of Vector Arithmetic</title>
+        <statement>
+            <p>
+                For all vectors <m>\mathbf{u}, \mathbf{v}, \mathbf{w} \in \mathbb{R}^n</m> and all scalars <m>\lambda, \mu \in \mathbb{R}</m>, the following rules hold.
+            </p>
+            <ul>
+                <li><p><term>Associativity of Addition:</term> <m>\mathbf{u}+(\mathbf{v}+\mathbf{w})=(\mathbf{u}+\mathbf{v})+\mathbf{w}</m></p></li>
+                <li><p><term>Commutativity of Addition:</term> <m>\mathbf{u}+\mathbf{v}=\mathbf{v}+\mathbf{u}</m></p></li>
+                <li><p><term>Neutral Element:</term> <m>\mathbf{u}+\mathbf{0}=\mathbf{0}+\mathbf{u}=\mathbf{u}</m></p></li>
+                <li><p><term>Inverse Element:</term> <m>\mathbf{u}+(-\mathbf{u})=(-\mathbf{u})+\mathbf{u}=\mathbf{0}</m></p></li>
+                <li><p><term>Left Distributivity:</term> <m>\lambda(\mathbf{u}+\mathbf{v})=\lambda\mathbf{u}+\lambda\mathbf{v}</m></p></li>
+                <li><p><term>Right Distributivity:</term> <m>(\lambda+\mu)\mathbf{u}=\lambda\mathbf{u}+\mu\mathbf{u}</m></p></li>
+                <li><p><term>Associativity of Scalar Multiplication:</term> <m>(\lambda\mu)\mathbf{u}=\lambda(\mu\mathbf{u})</m></p></li>
+                <li><p><term>Multiplication by One:</term> <m>1\mathbf{u}=\mathbf{u}</m></p></li>
+            </ul>
+        </statement>
+    </theorem>
+
+    <p>
+        When working with several vectors, we often want to combine them using scalar multiplication and addition.
+    </p>
+
+    <definition xml:id="def-linear-combination">
+        <title>Linear Combination</title>
+        <statement>
+            <p>
+                Let <m>\mathbf{v}_1, \dots, \mathbf{v}_r \in \mathbb{R}^n</m> and let <m>x_1, \dots, x_r \in \mathbb{R}</m>. A vector of the form
+                <me>x_1 \mathbf{v}_1 + \dots + x_r \mathbf{v}_r</me>
+                is called a <term>linear combination</term> of the vectors <m>\mathbf{v}_1, \dots, \mathbf{v}_r</m>.
+            </p>
+        </statement>
+    </definition>
+
+    <p>
+        The concept of linear independence tells us whether a collection of vectors provides genuinely different directions. If one vector can already be obtained as a linear combination of the others, then it does not add new information.
+    </p>
+
+    <figure xml:id="fig-geogebra-linear-independence">
+        <title>Interactive: Visualizing Linear Independence</title>
+        <interactive geogebra="material_id_3" aspect="4:3" width="80%">
+            <instructions>
+                <p>Move the vectors to observe what happens when they become collinear or coplanar (linearly dependent) versus when they point in genuinely different directions (linearly independent).</p>
+            </instructions>
+        </interactive>
+    </figure>
+
+    <definition xml:id="def-linear-independence-basis">
+        <title>Linear Independence and Basis</title>
+        <statement>
+            <p>
+                Vectors <m>\mathbf{v}_1, \dots, \mathbf{v}_r \in \mathbb{R}^n</m> are called <term>linearly independent</term> if the equation
+                <me>x_1 \mathbf{v}_1 + \dots + x_r \mathbf{v}_r = \mathbf{0}</me>
+                has only the trivial solution
+                <m>x_1 = \dots = x_r = 0</m>.
+            </p>
+            <p>
+                A basis of <m>\mathbb{R}^n</m> is a tuple of <m>n</m> linearly independent vectors in <m>\mathbb{R}^n</m>. In that case, every vector in <m>\mathbb{R}^n</m> can be written uniquely as a linear combination of the basis vectors.
+            </p>
+        </statement>
+    </definition>
+
+    <example xml:id="ex-linearly-dependent-r2">
+        <title>A Counterexample in <m>\mathbb{R}^2</m></title>
+        <p>
+            Consider the vectors
+            <me>\mathbf{v}_1 = \begin{pmatrix} 1 \\ 2 \end{pmatrix}, \qquad \mathbf{v}_2 = \begin{pmatrix} 2 \\ 4 \end{pmatrix}.</me>
+        </p>
+        <p>
+            Since <m>\mathbf{v}_2 = 2\mathbf{v}_1</m>, one vector is a scalar multiple of the other. Therefore, the vectors are not linearly independent.
+        </p>
+    </example>
+
+    <p>
+        The most intuitive example of a basis is given by the standard coordinate axes.
+    </p>
+
+    <example xml:id="ex-basis">
+        <title>Standard Basis in <m>\mathbb{R}^2</m></title>
+        <p>
+            The vectors
+            <me>\mathbf{e}_1 = \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \qquad \mathbf{e}_2 = \begin{pmatrix} 0 \\ 1 \end{pmatrix}</me>
+            are linearly independent.
+        </p>
+        <p>
+            Indeed, the equation
+            <me>x_1 \mathbf{e}_1 + x_2 \mathbf{e}_2 = \mathbf{0}</me>
+            becomes
+            <me>\begin{pmatrix} x_1 \\ x_2 \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix},</me>
+            so necessarily <m>x_1 = 0</m> and <m>x_2 = 0</m>.
+        </p>
+        <p>
+            Hence, <m>(\mathbf{e}_1, \mathbf{e}_2)</m> is a basis of <m>\mathbb{R}^2</m>. This means that every vector in <m>\mathbb{R}^2</m> can be written uniquely as a linear combination of <m>\mathbf{e}_1</m> and <m>\mathbf{e}_2</m>.
+        </p>
+    </example>
+
+    <example xml:id="ex-linear-independence-r3">
+        <title>Three Linearly Independent Vectors in <m>\mathbb{R}^3</m></title>
+        <p>
+            Consider the vectors
+            <me>\mathbf{v}_1 = \begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix}, \qquad \mathbf{v}_2 = \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}, \qquad \mathbf{v}_3 = \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}.</me>
+        </p>
+        <p>
+            To test linear independence, we consider
+            <me>x_1\mathbf{v}_1 + x_2\mathbf{v}_2 + x_3\mathbf{v}_3 = \mathbf{0}.</me>
+        </p>
+        <p>
+            This gives
+            <me>\begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix},</me>
+            so <m>x_1 = x_2 = x_3 = 0</m>.
+        </p>
+        <p>
+            Therefore, the three vectors are linearly independent.
+        </p>
+    </example>
+
+    <example xml:id="ex-linear-dependence-r3">
+        <title>A Counterexample with Three Vectors in <m>\mathbb{R}^3</m></title>
+        <p>
+            Consider the vectors
+            <me>\mathbf{v}_1 = \begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix}, \qquad \mathbf{v}_2 = \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix}, \qquad \mathbf{v}_3 = \begin{pmatrix} 1 \\ 1 \\ 2 \end{pmatrix}.</me>
+        </p>
+        <p>
+            Since
+            <me>\mathbf{v}_3 = \mathbf{v}_1 + \mathbf{v}_2,</me>
+            the vector <m>\mathbf{v}_3</m> is a linear combination of the other two.
+        </p>
+        <p>
+            Hence, the three vectors are not linearly independent.
+        </p>
+    </example>
+
+    <p>
+        Besides combining vectors algebraically, we also want to measure geometric quantities such as length, distance, and angle. These are based on the scalar product.
+    </p>
+
+    <definition xml:id="def-scalar-product-metrics">
+        <title>Scalar Product, Norm, Distance, and Angle</title>
+        <statement>
+            <dl>
+                <li>
+                    <title>Scalar Product</title>
+                    <p>
+                        For vectors <m>\mathbf{v}, \mathbf{w} \in \mathbb{R}^n</m>, the scalar product is defined by
+                        <me>\mathbf{v} \cdot \mathbf{w} = v_1 w_1 + \dots + v_n w_n.</me>
+                    </p>
+                </li>
+                <li>
+                    <title>Norm</title>
+                    <p>
+                        The norm of <m>\mathbf{v}</m> is its length:
+                        <me>\|\mathbf{v}\| = \sqrt{\mathbf{v} \cdot \mathbf{v}} = \sqrt{v_1^2 + \dots + v_n^2}.</me>
+                    </p>
+                </li>
+                <li>
+                    <title>Distance</title>
+                    <p>
+                        The distance between <m>\mathbf{v}</m> and <m>\mathbf{w}</m> is
+                        <me>\operatorname{dist}(\mathbf{v},\mathbf{w}) = \|\mathbf{v}-\mathbf{w}\| = \sqrt{(v_1-w_1)^2 + \dots + (v_n-w_n)^2}.</me>
+                    </p>
+                </li>
+                <li>
+                    <title>Angle</title>
+                    <p>
+                        For two non-zero vectors <m>\mathbf{v}</m> and <m>\mathbf{w}</m>, the angle <m>\varphi</m> between them is defined by
+                        <me>\varphi = \arccos\left(\frac{\mathbf{v} \cdot \mathbf{w}}{\|\mathbf{v}\| \|\mathbf{w}\|}\right).</me>
+                    </p>
+                </li>
+                <li>
+                    <title>Orthogonality</title>
+                    <p>
+                        Two vectors <m>\mathbf{v}</m> and <m>\mathbf{w}</m> are called <term>orthogonal</term> if
+                        <me>\mathbf{v} \cdot \mathbf{w} = 0.</me>
+                    </p>
+                </li>
+            </dl>
+        </statement>
+    </definition>
+
+    <p>
+        The formula for the norm is a direct generalization of the Pythagorean theorem. In two dimensions, a vector
+        <m>\mathbf{v} = \begin{pmatrix} v_1 \\ v_2 \end{pmatrix}</m>
+        forms the hypotenuse of a right triangle whose legs have lengths <m>|v_1|</m> and <m>|v_2|</m>. Hence,
+        <m>\|\mathbf{v}\| = \sqrt{v_1^2 + v_2^2}</m>.
+        The same idea extends to higher dimensions.
+    </p>
+
+    <figure xml:id="fig-norm-pythagoras">
+        <title>Visualizing the Norm via the Pythagorean Theorem</title>
+        <image xml:id="img-norm-pythagoras" width="65%">
+            <description>A right-angled triangle formed by a vector and its components, with squares drawn on each side to geometrically illustrate that the square of the norm equals the sum of the squares of the components.</description>
+            <latex-image>
+                \begin{tikzpicture}[scale=0.8]
+                    \draw[-&gt;, gray!50] (-4,0) -- (8,0) node[right] {$x$};
+                    \draw[-&gt;, gray!50] (0,-4.5) -- (0,8) node[above] {$y$};
+
+                    \draw[fill=blue!10, draw=blue, thick] (0,0) -- (4,0) -- (4,-4) -- (0,-4) -- cycle;
+                    \node[blue, font=\large] at (2,-2) {Area $= v_1^2$};
+
+                    \draw[fill=red!10, draw=red, thick] (4,0) -- (4,3) -- (7,3) -- (7,0) -- cycle;
+                    \node[red, font=\large] at (5.5,1.5) {Area $= v_2^2$};
+
+                    \draw[fill=gray!15, draw=black, thick] (0,0) -- (4,3) -- (1,7) -- (-3,4) -- cycle;
+                    \node[black, font=\large, align=center] at (0.5,3.5) {Area $= \|\mathbf{v}\|^2$ \\ $= v_1^2 + v_2^2$};
+
+                    \draw[thick] (3.6,0) -- (3.6,0.4) -- (4,0.4);
+
+                    \draw[blue, ultra thick] (0,0) -- (4,0) node[midway, above, fill=white, inner sep=1pt] {$v_1$};
+                    \draw[red, ultra thick] (4,0) -- (4,3) node[midway, left, fill=white, inner sep=1pt] {$v_2$};
+
+                    \draw[-&gt;, black, ultra thick] (0,0) -- (4,3) node[midway, above left, inner sep=2pt] {$\|\mathbf{v}\| = \sqrt{v_1^2 + v_2^2}$};
+
+                    \filldraw[black] (4,3) circle (2pt) node[anchor=south west] {$\mathbf{v} = \begin{pmatrix} v_1 \\ v_2 \end{pmatrix}$};
+                \end{tikzpicture}
+            </latex-image>
+        </image>
+    </figure>
+
+    <example xml:id="ex-scalar-product-norm">
+        <title>Lengths and Orthogonality</title>
+        <p>
+            Consider the vectors
+            <m>\mathbf{v} = \begin{pmatrix} 3 \\ 4 \end{pmatrix}</m>
+            and
+            <m>\mathbf{w} = \begin{pmatrix} -4 \\ 3 \end{pmatrix}</m>.
+        </p>
+        <p>
+            The norm of <m>\mathbf{v}</m> is
+            <me>\|\mathbf{v}\| = \sqrt{3^2 + 4^2} = \sqrt{9 + 16} = \sqrt{25} = 5.</me>
+        </p>
+        <p>
+            Their scalar product is
+            <me>\mathbf{v} \cdot \mathbf{w} = (3)(-4) + (4)(3) = -12 + 12 = 0.</me>
+        </p>
+        <p>
+            Since the scalar product is zero, the vectors are orthogonal.
+        </p>
+    </example>
+
+    <example xml:id="ex-engineering-state-vector">
+        <title>A State Vector for Monitoring a Technical System</title>
+        <p>
+            In engineering applications, vectors are often used to represent system states rather than geometric arrows. For example, the operating condition of a motor might be described by the vector
+            <me>\mathbf{x} = \begin{pmatrix} 1.8 \\ 0.3 \\ -0.5 \end{pmatrix},</me>
+            where the components represent, for instance, a temperature deviation, a vibration level, and a current deviation.
+        </p>
+        <p>
+            Another operating condition may be represented by
+            <me>\mathbf{y} = \begin{pmatrix} 1.2 \\ 0.1 \\ -0.4 \end{pmatrix}.</me>
+        </p>
+        <p>
+            The distance between the two states is
+            <me>\operatorname{dist}(\mathbf{x},\mathbf{y}) = \|\mathbf{x}-\mathbf{y}\| = \sqrt{(1.8-1.2)^2 + (0.3-0.1)^2 + (-0.5-(-0.4))^2} = \sqrt{0.36 + 0.04 + 0.01} = \sqrt{0.41}.</me>
+        </p>
+        <p>
+            This shows that vectors in <m>\mathbb{R}^n</m> are not only geometric objects; they can also encode measurements and describe the state of a technical system.
+        </p>
+    </example>
+
+    <exercises xml:id="exercises-vectors-reminder">
+        <title>Check Your Understanding</title>
+
+        <exercise xml:id="exer-mc-orthogonal">
+            <title>Identifying Orthogonal Vectors</title>
+            <statement>
+                <p>Which of the following vectors is orthogonal to <m>\mathbf{v} = \begin{pmatrix} 2 \\ -3 \end{pmatrix}</m>?</p>
+            </statement>
+            <choices>
+                <choice>
+                    <statement><p><m>\begin{pmatrix} 2 \\ 3 \end{pmatrix}</m></p></statement>
+                    <feedback><p>Incorrect. The scalar product is <m>(2)(2) + (-3)(3) = 4 - 9 = -5</m>, not zero.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p><m>\begin{pmatrix} 3 \\ 2 \end{pmatrix}</m></p></statement>
+                    <feedback><p>Correct! The scalar product is <m>(2)(3) + (-3)(2) = 6 - 6 = 0</m>.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p><m>\begin{pmatrix} -2 \\ -3 \end{pmatrix}</m></p></statement>
+                    <feedback><p>Incorrect. The scalar product is <m>(2)(-2) + (-3)(-3) = -4 + 9 = 5</m>, not zero.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p><m>\begin{pmatrix} 1 \\ 1 \end{pmatrix}</m></p></statement>
+                    <feedback><p>Incorrect. The scalar product is <m>(2)(1) + (-3)(1) = 2 - 3 = -1</m>, not zero.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise xml:id="exer-tf-basis">
+            <title>Requirements for a Basis</title>
+            <statement>
+                <p>True or False: Any two non-zero vectors in <m>\mathbb{R}^2</m> automatically form a basis of that space.</p>
+            </statement>
+            <choices>
+                <choice>
+                    <statement><p>True</p></statement>
+                    <feedback><p>Incorrect. If the two vectors are scalar multiples of one another, then they are not linearly independent and therefore do not form a basis.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p>False</p></statement>
+                    <feedback><p>Correct! Two vectors in <m>\mathbb{R}^2</m> form a basis only if they are linearly independent.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+    </exercises>
+</subsection>

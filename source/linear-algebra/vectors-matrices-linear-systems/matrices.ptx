@@ -1,0 +1,695 @@
+<subsection xml:id="subsec-matrices">
+  <title>Matrices</title>
+
+  <introduction>
+    <p>
+      Matrices provide a convenient way to organize numerical data in rows and columns. They are used to describe systems of linear equations, to encode linear transformations, and to model input-output relations in engineering, economics, and the natural sciences.
+    </p>
+    <p>
+      In these notes, vectors are regarded as column vectors. Therefore, a vector in <m>\mathbb{R}^n</m> can also be viewed as an <m>(n\times 1)</m>-matrix.
+    </p>
+  </introduction>
+
+  <definition xml:id="def-matrix">
+    <title>Matrix, Rows, and Columns</title>
+    <statement>
+      <p>
+        A <term>matrix</term> is a rectangular array of real numbers arranged in rows and columns. A matrix with <m>m</m> rows and <m>n</m> columns is called an <term><m>(m\times n)</m>-matrix</term>. The set of all real <m>(m\times n)</m>-matrices is denoted by <m>\mathbb{R}^{m\times n}</m>.
+      </p>
+      <p>
+        A matrix <m>A \in \mathbb{R}^{m\times n}</m> is written in the form
+        <me>
+          A =
+          \begin{pmatrix}
+            a_{11} &amp; a_{12} &amp; \dots &amp; a_{1n} \\
+            a_{21} &amp; a_{22} &amp; \dots &amp; a_{2n} \\
+            \vdots &amp; \vdots &amp; &amp; \vdots \\
+            a_{m1} &amp; a_{m2} &amp; \dots &amp; a_{mn}
+          \end{pmatrix}.
+        </me>
+      </p>
+      <p>
+        The entry in the <m>i</m>-th row and <m>j</m>-th column is denoted by <m>a_{ij}</m>. We also write <m>A=(a_{ij})</m>.
+      </p>
+      <p>
+        The <m>i</m>-th row of <m>A</m> is
+        <me>
+          \begin{pmatrix}
+            a_{i1} &amp; a_{i2} &amp; \dots &amp; a_{in}
+          \end{pmatrix},
+        </me>
+        and the <m>j</m>-th column of <m>A</m> is
+        <me>
+          \begin{pmatrix}
+            a_{1j} \\
+            a_{2j} \\
+            \vdots \\
+            a_{mj}
+          \end{pmatrix}.
+        </me>
+      </p>
+    </statement>
+  </definition>
+
+  <example xml:id="ex-matrix-example">
+    <title>An Example of a Matrix</title>
+    <p>
+      The matrix
+      <me>
+        A =
+        \begin{pmatrix}
+          2 &amp; -1 &amp; 4 \\
+          0 &amp; 3 &amp; 5
+        \end{pmatrix}
+      </me>
+      has <m>2</m> rows and <m>3</m> columns, so <m>A \in \mathbb{R}^{2\times 3}</m>.
+    </p>
+    <p>
+      Its entry in the first row and third column is <m>a_{13}=4</m>. The second row is
+      <m>\begin{pmatrix} 0 &amp; 3 &amp; 5 \end{pmatrix}</m>, and the first column is
+      <m>\begin{pmatrix} 2 \\ 0 \end{pmatrix}</m>.
+    </p>
+  </example>
+
+  <definition xml:id="def-matrix-equality">
+    <title>Equality of Matrices</title>
+    <statement>
+      <p>
+        Two matrices <m>A</m> and <m>B</m> are equal if they have the same size and if all corresponding entries are equal.
+      </p>
+      <p>
+        Thus, for <m>A=(a_{ij})</m> and <m>B=(b_{ij})</m>, we have <m>A=B</m> exactly if <m>a_{ij}=b_{ij}</m> for all <m>i</m> and <m>j</m>.
+      </p>
+    </statement>
+  </definition>
+
+  <subsubsection xml:id="subsubsec-matrix-operations">
+    <title>Arithmetic Operations on Matrices</title>
+
+    <p>
+      We now introduce the basic arithmetic operations for matrices.
+    </p>
+
+    <definition xml:id="def-matrix-addition">
+      <title>Addition and Scalar Multiplication</title>
+      <statement>
+        <p>
+          Let <m>A=(a_{ij})</m> and <m>B=(b_{ij})</m> be matrices of the same size in <m>\mathbb{R}^{m\times n}</m>, and let <m>\lambda \in \mathbb{R}</m>.
+        </p>
+        <p>
+          The <term>sum</term> of <m>A</m> and <m>B</m> is defined component-wise by
+          <me>
+            A+B = (a_{ij}+b_{ij}).
+          </me>
+        </p>
+        <p>
+          The <term>scalar multiple</term> of <m>A</m> by <m>\lambda</m> is defined by
+          <me>
+            \lambda A = (\lambda a_{ij}).
+          </me>
+        </p>
+      </statement>
+    </definition>
+
+    <example xml:id="ex-matrix-addition-scalar">
+      <title>Addition and Scalar Multiplication</title>
+      <p>
+        Let
+        <me>
+          A=
+          \begin{pmatrix}
+            1 &amp; 2 \\
+            -1 &amp; 3
+          \end{pmatrix},
+          \qquad
+          B=
+          \begin{pmatrix}
+            4 &amp; 0 \\
+            2 &amp; -5
+          \end{pmatrix}.
+        </me>
+      </p>
+      <p>
+        Then
+        <me>
+          A+B=
+          \begin{pmatrix}
+            1+4 &amp; 2+0 \\
+            -1+2 &amp; 3+(-5)
+          \end{pmatrix}
+          =
+          \begin{pmatrix}
+            5 &amp; 2 \\
+            1 &amp; -2
+          \end{pmatrix}.
+        </me>
+      </p>
+      <p>
+        Moreover,
+        <me>
+          3A=
+          \begin{pmatrix}
+            3 &amp; 6 \\
+            -3 &amp; 9
+          \end{pmatrix}.
+        </me>
+      </p>
+    </example>
+
+    <definition xml:id="def-transposed-matrix">
+      <title>Transpose</title>
+      <statement>
+        <p>
+          Let <m>A=(a_{ij}) \in \mathbb{R}^{m\times n}</m>. The <term>transpose</term> of <m>A</m> is the matrix <m>A^T \in \mathbb{R}^{n\times m}</m> obtained by interchanging rows and columns.
+        </p>
+        <p>
+          In other words, the entry in row <m>j</m> and column <m>i</m> of <m>A^T</m> is <m>a_{ij}</m>. Thus,
+          <me>
+            (A^T)_{ji}=a_{ij}.
+          </me>
+        </p>
+      </statement>
+    </definition>
+
+    <example xml:id="ex-transpose">
+      <title>Computing a Transpose</title>
+      <p>
+        For
+        <me>
+          A=
+          \begin{pmatrix}
+            1 &amp; 4 &amp; -2 \\
+            0 &amp; 3 &amp; 5
+          \end{pmatrix},
+        </me>
+        the transpose is
+        <me>
+          A^T=
+          \begin{pmatrix}
+            1 &amp; 0 \\
+            4 &amp; 3 \\
+            -2 &amp; 5
+          \end{pmatrix}.
+        </me>
+      </p>
+    </example>
+
+    <definition xml:id="def-matrix-multiplication">
+      <title>Matrix Multiplication</title>
+      <statement>
+        <p>
+          Let <m>A=(a_{ij}) \in \mathbb{R}^{m\times n}</m> and <m>B=(b_{jk}) \in \mathbb{R}^{n\times r}</m>. Then the product <m>AB</m> is defined, because the number of columns of <m>A</m> equals the number of rows of <m>B</m>.
+        </p>
+        <p>
+          The product <m>AB</m> is an <m>(m\times r)</m>-matrix
+          <me>
+            C=(c_{ik}),
+          </me>
+          whose entries are given by
+          <me>
+            c_{ik}=a_{i1}b_{1k}+a_{i2}b_{2k}+\dots+a_{in}b_{nk}
+            =
+            \sum_{j=1}^n a_{ij}b_{jk}.
+          </me>
+        </p>
+        <p>
+          Equivalently, the entry <m>c_{ik}</m> is obtained as the scalar product of the <m>i</m>-th row of <m>A</m> and the <m>k</m>-th column of <m>B</m>.
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      Hence, the product <m>AB</m> is defined only if the inner dimensions agree: the number of columns of <m>A</m> must equal the number of rows of <m>B</m>.
+    </p>
+
+    <example xml:id="ex-matrix-multiplication">
+      <title>Computing a Matrix Product</title>
+      <p>
+        Let
+        <me>
+          A=
+          \begin{pmatrix}
+            1 &amp; 2 \\
+            3 &amp; 4
+          \end{pmatrix},
+          \qquad
+          B=
+          \begin{pmatrix}
+            5 &amp; 1 \\
+            6 &amp; 0
+          \end{pmatrix}.
+        </me>
+      </p>
+      <p>
+        Then
+        <me>
+          AB=
+          \begin{pmatrix}
+            1\cdot 5 + 2\cdot 6 &amp; 1\cdot 1 + 2\cdot 0 \\
+            3\cdot 5 + 4\cdot 6 &amp; 3\cdot 1 + 4\cdot 0
+          \end{pmatrix}
+          =
+          \begin{pmatrix}
+            17 &amp; 1 \\
+            39 &amp; 3
+          \end{pmatrix}.
+        </me>
+      </p>
+    </example>
+
+    <p>
+      Since vectors are regarded as column vectors, matrix multiplication also allows us to multiply a matrix by a vector.
+    </p>
+
+    <definition xml:id="def-matrix-vector-product">
+      <title>Matrix-Vector Product</title>
+      <statement>
+        <p>
+          Let <m>A \in \mathbb{R}^{m\times n}</m> and let <m>\mathbf{v} \in \mathbb{R}^n</m>. Interpreting <m>\mathbf{v}</m> as an <m>(n\times 1)</m>-matrix, the product <m>A\mathbf{v}</m> is defined and belongs to <m>\mathbb{R}^m</m>.
+        </p>
+      </statement>
+    </definition>
+
+    <example xml:id="ex-matrix-vector-product">
+      <title>A Matrix-Vector Product</title>
+      <p>
+        Let
+        <me>
+          A=
+          \begin{pmatrix}
+            1 &amp; 2 \\
+            3 &amp; 4
+          \end{pmatrix},
+          \qquad
+          \mathbf{v}=
+          \begin{pmatrix}
+            5 \\
+            6
+          \end{pmatrix}.
+        </me>
+      </p>
+      <p>
+        Then
+        <me>
+          A\mathbf{v}
+          =
+          \begin{pmatrix}
+            1\cdot 5 + 2\cdot 6 \\
+            3\cdot 5 + 4\cdot 6
+          \end{pmatrix}
+          =
+          \begin{pmatrix}
+            17 \\
+            39
+          \end{pmatrix}.
+        </me>
+      </p>
+    </example>
+
+    <p>
+      The matrix-vector product can also be interpreted in terms of the columns of the matrix. If
+      <me>
+        A=
+        \begin{pmatrix}
+          \vline &amp; &amp; \vline \\
+          \mathbf{a}_1 &amp; \dots &amp; \mathbf{a}_n \\
+          \vline &amp; &amp; \vline
+        \end{pmatrix}
+      </me>
+      and
+      <me>
+        \mathbf{v}=
+        \begin{pmatrix}
+          x_1 \\
+          \vdots \\
+          x_n
+        \end{pmatrix},
+      </me>
+      then
+      <me>
+        A\mathbf{v}=x_1\mathbf{a}_1+\dots+x_n\mathbf{a}_n.
+      </me>
+      Thus, <m>A\mathbf{v}</m> is a linear combination of the columns of <m>A</m>.
+    </p>
+
+    <example xml:id="ex-population-movements">
+      <title>Modelling Population Movements</title>
+      <p>
+        Consider a population distributed between suburban areas (<m>S</m>) and urban areas (<m>U</m>). Suppose that in one year, <m>97\%</m> of the suburban population remains in the suburban area and <m>3\%</m> moves to the urban area. Likewise, <m>95\%</m> of the urban population remains in the urban area and <m>5\%</m> moves to the suburban area.
+      </p>
+      <p>
+        If
+        <me>
+          \begin{pmatrix}
+            p_{S,0} \\
+            p_{U,0}
+          \end{pmatrix}
+        </me>
+        denotes the population vector at the beginning of the year, then the population vector at the end of the year is
+        <me>
+          \begin{pmatrix}
+            p_{S,1} \\
+            p_{U,1}
+          \end{pmatrix}
+          =
+          \begin{pmatrix}
+            0.97 &amp; 0.05 \\
+            0.03 &amp; 0.95
+          \end{pmatrix}
+          \begin{pmatrix}
+            p_{S,0} \\
+            p_{U,0}
+          \end{pmatrix}.
+        </me>
+      </p>
+      <p>
+        This is an example of a matrix-vector product describing the state update of a system.
+      </p>
+    </example>
+
+    <example xml:id="ex-sensor-calibration">
+      <title>Sensor Calibration</title>
+      <p>
+        Suppose a sensor system records two raw values collected in the vector
+        <me>
+          \mathbf{x}=
+          \begin{pmatrix}
+            10 \\
+            4
+          \end{pmatrix}.
+        </me>
+      </p>
+      <p>
+        A calibration matrix
+        <me>
+          A=
+          \begin{pmatrix}
+            1.1 &amp; 0.2 \\
+            0.05 &amp; 0.9
+          \end{pmatrix}
+        </me>
+        transforms the raw measurements into corrected values:
+        <me>
+          A\mathbf{x}
+          =
+          \begin{pmatrix}
+            1.1\cdot 10 + 0.2\cdot 4 \\
+            0.05\cdot 10 + 0.9\cdot 4
+          \end{pmatrix}
+          =
+          \begin{pmatrix}
+            11.8 \\
+            4.1
+          \end{pmatrix}.
+        </me>
+      </p>
+      <p>
+        Thus, matrices can be used to model calibration and coordinate transformations in engineering applications.
+      </p>
+    </example>
+
+  </subsubsection>
+
+  <subsubsection xml:id="subsubsec-special-matrices">
+    <title>Special Matrices and Laws of Arithmetic</title>
+
+    <definition xml:id="def-special-matrices">
+      <title>Special Matrices</title>
+      <statement>
+        <p>
+          Several classes of matrices occur frequently.
+        </p>
+        <dl>
+          <li>
+            <title>Zero Matrix</title>
+            <p>
+              A matrix all of whose entries are equal to zero.
+            </p>
+          </li>
+          <li>
+            <title>Square Matrix</title>
+            <p>
+              A matrix with the same number of rows and columns.
+            </p>
+          </li>
+          <li>
+            <title>Identity Matrix</title>
+            <p>
+              A square matrix whose diagonal entries are equal to <m>1</m> and whose off-diagonal entries are equal to <m>0</m>. It is denoted by <m>I</m> or, if the size matters, by <m>I_n</m>.
+            </p>
+          </li>
+          <li>
+            <title>Diagonal Matrix</title>
+            <p>
+              A square matrix whose off-diagonal entries are all zero.
+            </p>
+          </li>
+          <li>
+            <title>Triangular Matrix</title>
+            <p>
+              A square matrix is called upper triangular if all entries below the main diagonal are zero, and lower triangular if all entries above the main diagonal are zero.
+            </p>
+          </li>
+          <li>
+            <title>Symmetric Matrix</title>
+            <p>
+              A square matrix <m>A</m> satisfying <m>A^T=A</m>.
+            </p>
+          </li>
+          <li>
+            <title>Skew-Symmetric Matrix</title>
+            <p>
+              A square matrix <m>A</m> satisfying <m>A^T=-A</m>.
+            </p>
+          </li>
+        </dl>
+      </statement>
+    </definition>
+
+    <example xml:id="ex-special-matrices">
+      <title>Examples of Special Matrices</title>
+      <p>
+        The matrices
+        <me>
+          0=
+          \begin{pmatrix}
+            0 &amp; 0 \\
+            0 &amp; 0
+          \end{pmatrix},
+          \qquad
+          I_2=
+          \begin{pmatrix}
+            1 &amp; 0 \\
+            0 &amp; 1
+          \end{pmatrix},
+          \qquad
+          D=
+          \begin{pmatrix}
+            2 &amp; 0 \\
+            0 &amp; -3
+          \end{pmatrix}
+        </me>
+        are a zero matrix, an identity matrix, and a diagonal matrix, respectively.
+      </p>
+      <p>
+        Moreover,
+        <me>
+          U=
+          \begin{pmatrix}
+            1 &amp; 4 \\
+            0 &amp; 2
+          \end{pmatrix}
+        </me>
+        is upper triangular, and
+        <me>
+          S=
+          \begin{pmatrix}
+            2 &amp; 1 \\
+            1 &amp; 5
+          \end{pmatrix}
+        </me>
+        is symmetric.
+      </p>
+    </example>
+
+    <theorem xml:id="thm-matrix-arithmetic">
+      <title>Laws of Matrix Arithmetic</title>
+      <statement>
+        <p>
+          Let <m>A,B,C</m> be matrices of suitable sizes, and let <m>\lambda \in \mathbb{R}</m>. Then the following rules hold.
+        </p>
+        <ul>
+          <li><p><term>Addition:</term> <m>A+B=B+A</m> and <m>(A+B)+C=A+(B+C)</m>, provided the matrices have the same size.</p></li>
+          <li><p><term>Neutral and Inverse Elements:</term> <m>A+0=A</m> and <m>A+(-A)=0</m>.</p></li>
+          <li><p><term>Associativity of Multiplication:</term> <m>(AB)C=A(BC)</m>, whenever all products are defined.</p></li>
+          <li><p><term>Identity Matrix:</term> <m>AI=A</m> and <m>IA=A</m>, where <m>I</m> is the identity matrix of suitable size.</p></li>
+          <li><p><term>Distributivity:</term> <m>A(B+C)=AB+AC</m> and <m>(A+B)C=AC+BC</m>, whenever the products are defined.</p></li>
+          <li><p><term>Compatibility with Scalars:</term> <m>\lambda(AB)=(\lambda A)B=A(\lambda B)</m>.</p></li>
+        </ul>
+      </statement>
+    </theorem>
+
+    <remark xml:id="rem-commutativity">
+      <title>Matrix Multiplication Is Not Commutative</title>
+      <p>
+        In general, matrix multiplication is not commutative. This means that even if both products <m>AB</m> and <m>BA</m> are defined, they need not be equal.
+      </p>
+    </remark>
+
+    <example xml:id="ex-noncommutative-multiplication">
+      <title>A Counterexample to Commutativity</title>
+      <p>
+        Let
+        <me>
+          A=
+          \begin{pmatrix}
+            1 &amp; 1 \\
+            0 &amp; 0
+          \end{pmatrix},
+          \qquad
+          B=
+          \begin{pmatrix}
+            1 &amp; 0 \\
+            1 &amp; 0
+          \end{pmatrix}.
+        </me>
+      </p>
+      <p>
+        Then
+        <me>
+          AB=
+          \begin{pmatrix}
+            2 &amp; 0 \\
+            0 &amp; 0
+          \end{pmatrix},
+          \qquad
+          BA=
+          \begin{pmatrix}
+            1 &amp; 1 \\
+            1 &amp; 1
+          \end{pmatrix}.
+        </me>
+      </p>
+      <p>
+        Hence, <m>AB \neq BA</m>.
+      </p>
+    </example>
+  </subsubsection>
+
+  <subsubsection xml:id="subsubsec-linear-maps">
+    <title>Matrices Define Linear Maps</title>
+
+    <p>
+      Every matrix defines a map that sends input vectors to output vectors by matrix-vector multiplication.
+    </p>
+
+    <definition xml:id="def-linear-map">
+      <title>Linear Map Defined by a Matrix</title>
+      <statement>
+        <p>
+          Let <m>A \in \mathbb{R}^{m\times n}</m>. The map
+          <me>
+            \varphi_A : \mathbb{R}^n \to \mathbb{R}^m,
+            \qquad
+            \mathbf{v} \mapsto A\mathbf{v}
+          </me>
+          is called the <term>linear map defined by</term> <m>A</m>.
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      Thus, matrices do not merely store numbers. They also describe transformations of vectors.
+    </p>
+
+    <example xml:id="ex-rotation-matrix">
+      <title>Rotation in <m>\mathbb{R}^2</m> as a Linear Map</title>
+      <p>
+        A rotation about the origin through an angle <m>\alpha</m> is described by the matrix
+        <me>
+          A=
+          \begin{pmatrix}
+            \cos\alpha &amp; -\sin\alpha \\
+            \sin\alpha &amp; \cos\alpha
+          \end{pmatrix}.
+        </me>
+      </p>
+      <p>
+        For example, if <m>\alpha=\frac{\pi}{2}</m>, then
+        <me>
+          A=
+          \begin{pmatrix}
+            0 &amp; -1 \\
+            1 &amp; 0
+          \end{pmatrix}.
+        </me>
+      </p>
+      <p>
+        Applying this matrix to the vector <m>\begin{pmatrix}1\\0\end{pmatrix}</m> gives
+        <me>
+          A
+          \begin{pmatrix}
+            1 \\
+            0
+          \end{pmatrix}
+          =
+          \begin{pmatrix}
+            0 \\
+            1
+          \end{pmatrix}.
+        </me>
+      </p>
+      <p>
+        Hence, the vector is rotated by <m>90^\circ</m> counterclockwise.
+      </p>
+    </example>
+
+    <example xml:id="ex-column-interpretation-linear-map">
+      <title>The Columns of a Matrix Determine the Linear Map</title>
+      <p>
+        Consider
+        <me>
+          A=
+          \begin{pmatrix}
+            2 &amp; -1 \\
+            1 &amp; 3
+          \end{pmatrix}.
+        </me>
+      </p>
+      <p>
+        Its columns are
+        <me>
+          \mathbf{a}_1=
+          \begin{pmatrix}
+            2 \\
+            1
+          \end{pmatrix},
+          \qquad
+          \mathbf{a}_2=
+          \begin{pmatrix}
+            -1 \\
+            3
+          \end{pmatrix}.
+        </me>
+      </p>
+      <p>
+        For a vector
+        <me>
+          \mathbf{x}=
+          \begin{pmatrix}
+            x_1 \\
+            x_2
+          \end{pmatrix},
+        </me>
+        we have
+        <me>
+          A\mathbf{x}=x_1\mathbf{a}_1+x_2\mathbf{a}_2.
+        </me>
+      </p>
+      <p>
+        This shows that the image of <m>\mathbf{x}</m> under the linear map defined by <m>A</m> is obtained as a linear combination of the columns of <m>A</m>.
+      </p>
+    </example>
+
+  </subsubsection>
+</subsection>

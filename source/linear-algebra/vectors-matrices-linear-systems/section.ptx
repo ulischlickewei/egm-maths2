@@ -1,0 +1,13 @@
+<section xml:id="section-vectors-matrices-linear-systems" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Vectors, Matrices and Linear Systems of Equations</title>
+
+  <introduction>
+    <p>
+      In this section, we learn the basic notions underlying linear algebra: vectors, matrices and linear systems of equations. Many of the later concepts of linear algebra build on these elementary objects and the operations defined on them.
+    </p>
+  </introduction>
+
+  <xi:include href="vectors.ptx"/>
+  <xi:include href="matrices.ptx"/>
+  <xi:include href="linear-systems.ptx"/>
+</section>

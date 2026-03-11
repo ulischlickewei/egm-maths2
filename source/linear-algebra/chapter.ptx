@@ -1,0 +1,9 @@
+<chapter xml:id="chapter-linear-algebra" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Linear Algebra</title>
+
+  <p>Text before the first section.</p>
+
+  <xi:include href="vectors-matrices-linear-systems/section.ptx"/>
+  <xi:include href="determinants-inverse-matrices/section.ptx"/>
+  <xi:include href="eigenvalues-eigenvectors/section.ptx"/>
+</chapter>
