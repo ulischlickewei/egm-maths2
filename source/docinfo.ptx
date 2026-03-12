@@ -1,1 +1,19 @@
-<!-- Copy your existing docinfo.ptx from the current repository into this location. -->
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<docinfo xmlns:xi="http://www.w3.org/2001/XInclude">
+  <document-id>Mathematics 2</document-id>
+  <blurb shelf="AP Computer Science"> A simple string (no markup is allowed) to describe your book. </blurb>
+
+  <macros> \newcommand{\N}{\mathbb N} \newcommand{\Z}{\mathbb Z} \newcommand{\Q}{\mathbb Q} \newcommand{\R}{\mathbb R} </macros>
+
+  <latex-image-preamble> 
+    \usepackage{tikz, pgfplots} 
+    \usetikzlibrary{positioning,matrix,arrows} 
+    \usetikzlibrary{shapes,decorations,shadows,fadings,patterns} 
+    \usetikzlibrary{decorations.markings} 
+    \usetikzlibrary{calc}
+    \usepackage{graphicx}
+  </latex-image-preamble>
+
+</docinfo>

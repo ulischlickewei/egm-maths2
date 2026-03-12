@@ -105,24 +105,24 @@
         </p>
     </example>
 
-    <example xml:id="ex-engineering-velocity-displacement">
-        <title>Displacement from a Velocity Vector</title>
+    <example xml:id="ex-engineering-force-scaling">
+        <title>Scaling a Force Vector</title>
         <p>
-            Consider a mobile robot moving with constant velocity
-            <me>\mathbf{v} = \begin{pmatrix} 1.2 \\ 0.5 \end{pmatrix}\text{ m/s}.</me>
+            Suppose a force acting on a component is represented by
+            <me>\mathbf{F} = \begin{pmatrix} 120 \\ 40 \end{pmatrix}\text{ N}.</me>
         </p>
         <p>
-            After <m>10</m> seconds, its displacement is
-            <me>10\mathbf{v} = \begin{pmatrix} 12 \\ 5 \end{pmatrix}\text{ m}.</me>
+            If the same force is applied with twice the intensity, the new force vector is
+            <me>2\mathbf{F} = \begin{pmatrix} 240 \\ 80 \end{pmatrix}\text{ N}.</me>
         </p>
         <p>
-            This illustrates the meaning of scalar multiplication: multiplying the velocity vector by the travel time gives the displacement vector.
+            This illustrates scalar multiplication: all components are multiplied by the same scalar, so the direction remains the same while the magnitude changes.
         </p>
-    </example>
+    </example>  
 
     <figure xml:id="fig-geogebra-vector-addition">
         <title>Interactive: Vector Addition</title>
-        <interactive geogebra="vgqcxgyn" aspect="4:3" width="80%">
+        <interactive geogebra="vgqcxgyn" aspect="4:3" width="100%">
             <instructions>
                 <p>Drag the heads of vectors <m>\mathbf{v}</m> and <m>\mathbf{w}</m> to see how their sum <m>\mathbf{v}+\mathbf{w}</m> changes geometrically via the parallelogram rule.</p>
             </instructions>
@@ -131,7 +131,7 @@
 
     <figure xml:id="fig-geogebra-scalar-multiplication">
         <title>Interactive: Scalar Multiplication</title>
-        <interactive geogebra="jjw6ww6q" aspect="4:3" width="80%">
+        <interactive geogebra="jjw6ww6q" aspect="16:9" width="100%">
             <instructions>
                 <p>Use the slider for <m>\lambda</m> to see how the scalar stretches, shrinks, or reverses the direction of the vector <m>\mathbf{v}</m>.</p>
             </instructions>
@@ -176,7 +176,11 @@
     </theorem>
 
     <p>
-        When working with several vectors, we often want to combine them using scalar multiplication and addition.
+        When working with several vectors, we often want to build new vectors from those already given. The most natural way to do this is to scale the vectors and then add them. In this way, we can describe how a vector can be assembled from a collection of basic directions.
+    </p>
+
+    <p>
+        This idea is fundamental in linear algebra. It helps us answer questions such as: Can a given vector be generated from other vectors? Do several vectors together describe all directions in a space? And does one of the vectors contribute genuinely new information, or can it already be obtained from the others?
     </p>
 
     <definition xml:id="def-linear-combination">
@@ -190,18 +194,33 @@
         </statement>
     </definition>
 
+    <example xml:id="ex-linear-combination">
+        <title>A Linear Combination in <m>\mathbb{R}^2</m></title>
+        <p>
+            Consider the vectors
+            <me>\mathbf{v}_1 = \begin{pmatrix} 1 \\ 2 \end{pmatrix}, \qquad \mathbf{v}_2 = \begin{pmatrix} 3 \\ -1 \end{pmatrix}.</me>
+        </p>
+        <p>
+            Then
+            <me>2\mathbf{v}_1 - \mathbf{v}_2 = 2\begin{pmatrix} 1 \\ 2 \end{pmatrix} - \begin{pmatrix} 3 \\ -1 \end{pmatrix} = \begin{pmatrix} 2 \\ 4 \end{pmatrix} - \begin{pmatrix} 3 \\ -1 \end{pmatrix} = \begin{pmatrix} -1 \\ 5 \end{pmatrix}</me>
+        </p>
+        <p>
+            Hence,
+            <m>\begin{pmatrix} -1 \\ 5 \end{pmatrix}</m>
+            is a linear combination of
+            <m>\mathbf{v}_1</m>
+            and
+            <m>\mathbf{v}_2</m>.
+        </p>
+    </example>
+
     <p>
-        The concept of linear independence tells us whether a collection of vectors provides genuinely different directions. If one vector can already be obtained as a linear combination of the others, then it does not add new information.
+        Linear combinations tell us how new vectors can be generated from a given collection of vectors. This naturally leads to the question of whether all vectors in the collection are really needed.
     </p>
 
-    <figure xml:id="fig-geogebra-linear-independence">
-        <title>Interactive: Visualizing Linear Independence</title>
-        <interactive geogebra="material_id_3" aspect="4:3" width="80%">
-            <instructions>
-                <p>Move the vectors to observe what happens when they become collinear or coplanar (linearly dependent) versus when they point in genuinely different directions (linearly independent).</p>
-            </instructions>
-        </interactive>
-    </figure>
+    <p>
+        Indeed, it may happen that one of the vectors can already be written as a linear combination of the others. In that case, it does not contribute a genuinely new direction. To distinguish between such redundant situations and genuinely different directions, we introduce the concept of linear independence.
+    </p>
 
     <definition xml:id="def-linear-independence-basis">
         <title>Linear Independence and Basis</title>
@@ -218,6 +237,95 @@
         </statement>
     </definition>
 
+    <figure xml:id="fig-linear_dependence">
+        <title>Linear dependence and linear independence</title>
+        <caption>
+            This graphic visualizes the concept of linear dependence and linear independence.
+        </caption>
+        <image xml:id="img-linear_dependence" width="100%">
+            <latex-image>
+                \begin{tikzpicture}[scale=1.1, line cap=round, line join=round]
+
+                    \tikzset{
+                        axis/.style={->, thin, black},
+                        vec/.style={->, very thick, black},
+                        bluevec/.style={->, very thick, cyan!70!blue},
+                        point/.style={circle, fill=black, inner sep=1.6pt},
+                        bluepoint/.style={circle, fill=cyan!70!blue, inner sep=1.6pt},
+                        plane/.style={fill=blue!20, draw=blue!50},
+                        dashedhelp/.style={dashed, gray}
+                    }
+
+                    \begin{scope}[xshift=0cm]
+                        \coordinate (O) at (0,0);
+                        \coordinate (X) at (-2.2,-1.2);
+                        \coordinate (Y) at (2.6,-0.9);
+                        \coordinate (Z) at (0,2.0);
+
+                        \coordinate (P1) at ($(O)+(X)$);
+                        \coordinate (P2) at ($(O)+(Y)$);
+                        \coordinate (P3) at ($(P2)+(X)$);
+
+                        \filldraw[plane] (O) -- (P2) -- (P3) -- (P1) -- cycle;
+
+                        \draw[axis] (O) -- (X) node[below left] {$x_1$};
+                        \draw[axis] (O) -- (Y) node[right] {$x_2$};
+                        \draw[axis] (O) -- (Z) node[above] {$x_3$};
+
+                        \coordinate (U) at (-0.45,-0.82);
+                        \coordinate (V) at (1.55,-0.52);
+                        \coordinate (W) at (0.65,-0.95);
+
+                        \draw[vec] (O) -- (U);
+                        \draw[vec] (O) -- (V);
+                        \draw[bluevec] (O) -- (W);
+
+                        \node[point, label={[xshift=-2pt,yshift=-2pt]left:$\mathbf{u}$}] at (U) {};
+                        \node[point, label={[xshift=2pt,yshift=-2pt]right:$\mathbf{v}$}] at (V) {};
+                        \node[bluepoint, label={[xshift=2pt,yshift=-2pt]right:$\mathbf{w}$}] at (W) {};
+
+                        \node[align=center] at (0,-3.2) {Linearly dependent,\\ $\mathbf{w}$ lies in the plane determined by $\mathbf{u}$ and $\mathbf{v}$};
+                    \end{scope}
+
+                    \begin{scope}[xshift=7.2cm]
+                        \coordinate (O) at (0,0);
+                        \coordinate (X) at (-2.2,-1.2);
+                        \coordinate (Y) at (2.6,-0.9);
+                        \coordinate (Z) at (0,2.0);
+
+                        \coordinate (P1) at ($(O)+(X)$);
+                        \coordinate (P2) at ($(O)+(Y)$);
+                        \coordinate (P3) at ($(P2)+(X)$);
+
+                        \filldraw[plane] (O) -- (P2) -- (P3) -- (P1) -- cycle;
+
+                        \draw[axis] (O) -- (X) node[below left] {$x_1$};
+                        \draw[axis] (O) -- (Y) node[right] {$x_2$};
+                        \draw[axis] (O) -- (Z) node[above] {$x_3$};
+
+                        \coordinate (U) at (-0.45,-0.82);
+                        \coordinate (V) at (1.55,-0.52);
+                        \coordinate (Wb) at (0.75,1.15);
+                        \coordinate (Wp) at (0.75,-0.45);
+
+                        \draw[vec] (O) -- (U);
+                        \draw[vec] (O) -- (V);
+                        \draw[bluevec] (O) -- (Wb);
+                        \draw[dashedhelp] (Wp) -- (Wb);
+
+                        \node[point, label={[xshift=-2pt,yshift=-2pt]left:$\mathbf{u}$}] at (U) {};
+                        \node[point, label={[xshift=2pt,yshift=-2pt]right:$\mathbf{v}$}] at (V) {};
+                        \node[bluepoint, label={[xshift=2pt,yshift=1pt]right:$\mathbf{w}$}] at (Wb) {};
+
+                        \node[align=center] at (0,-3.2) {Linearly independent,\\ $\mathbf{w}$ does not lie in the plane determined by $\mathbf{u}$ and $\mathbf{v}$};
+                    \end{scope}
+
+                \end{tikzpicture}
+            </latex-image>
+        </image>
+    </figure>
+    
+
     <example xml:id="ex-linearly-dependent-r2">
         <title>A Counterexample in <m>\mathbb{R}^2</m></title>
         <p>
@@ -225,7 +333,10 @@
             <me>\mathbf{v}_1 = \begin{pmatrix} 1 \\ 2 \end{pmatrix}, \qquad \mathbf{v}_2 = \begin{pmatrix} 2 \\ 4 \end{pmatrix}.</me>
         </p>
         <p>
-            Since <m>\mathbf{v}_2 = 2\mathbf{v}_1</m>, one vector is a scalar multiple of the other. Therefore, the vectors are not linearly independent.
+            Since <m>\mathbf{v}_2 = 2\mathbf{v}_1</m>, one vector is a scalar multiple of the other. Therefore, the vectors are not linearly independent. Indeed:
+            <me>\mathbf{v}_2 = 2\mathbf{v}_1 \implies 2 \mathbf{v}_1 - \mathbf{v}_2 = \mathbf{0},</me>
+            so we have found a non-trivial solution <m>x_1=2, x_2=-1</m> to the equation
+            <me>x_1 \mathbf{v}_1 + x_2 \mathbf{x}_2 = \mathbf{0}.</me>
         </p>
     </example>
 

@@ -1,7 +1,1183 @@
 <subsection xml:id="subsec-linear-systems">
-  <title>Linear Systems of Equations</title>
+    <title>Linear Systems and the Gauss--Jordan Method</title>
 
-  <p>
-    Placeholder subsection for the upcoming treatment of linear systems of equations.
-  </p>
+    <introduction>
+        <p>
+            Systems of linear equations occur throughout mathematics, science, and engineering. They arise whenever several unknown quantities are linked by linear relations, for example in balance equations, circuit equations, calibration problems, or interpolation tasks.
+        </p>
+        <p>
+            Our goal is to solve such systems systematically. The key idea is to replace a given system by simpler equivalent systems whose solution sets remain unchanged. This leads to the Gauss algorithm and, as a further refinement, to the Gauss--Jordan method.
+        </p>
+        <p>
+            Throughout this section, it is important to distinguish carefully between four different objects. The <term>linear system</term> is the mathematical problem we want to solve. Its <term>augmented coefficient matrix</term> is a compact way of writing this problem. The <term>solution set</term> is the set of all vectors that satisfy the system. Finally, the <term>Gauss</term> and <term>Gauss--Jordan methods</term> are procedures that transform the matrix without changing the solution set of the underlying system.
+        </p>
+    </introduction>
+
+    <definition>
+        <title>Linear System and Augmented Coefficient Matrix</title>
+        <statement>
+            <p>
+                A <term>system of linear equations</term> with <m>m</m> equations and <m>n</m> unknowns is a system of the form
+                <me>
+                    \begin{aligned}
+                        a_{1,1}x_1 + \dots + a_{1,n}x_n &amp;= b_1,\\
+                        &amp;\vdots\\
+                        a_{m,1}x_1 + \dots + a_{m,n}x_n &amp;= b_m.
+                    \end{aligned}
+                </me>
+            </p>
+            <p>
+                Its <term>augmented coefficient matrix</term> is
+                <me>
+                    \left(
+                    \begin{array}{ccc|c}
+                        a_{1,1} &amp; \dots &amp; a_{1,n} &amp; b_1\\
+                        \vdots &amp; &amp; \vdots &amp; \vdots\\
+                        a_{m,1} &amp; \dots &amp; a_{m,n} &amp; b_m
+                    \end{array}
+                    \right).
+                </me>
+            </p>
+        </statement>
+    </definition>
+
+    <example>
+        <title>A Linear and a Non-Linear System</title>
+        <p>
+            Consider the system
+            <me>
+                \begin{aligned}
+                    2x_1 - 3x_2 + x_3 &amp;= 5,\\
+                    x_1 + 2x_3 &amp;= 0.
+                \end{aligned}
+            </me>
+            This is a linear system. Its augmented coefficient matrix is
+            <me>
+                \left(
+                \begin{array}{ccc|c}
+                    2 &amp; -3 &amp; 1 &amp; 5\\
+                    1 &amp; 0 &amp; 2 &amp; 0
+                \end{array}
+                \right).
+            </me>
+        </p>
+        <p>
+            In contrast, the system
+            <me>
+                \begin{aligned}
+                    2x_1 + x_1x_2 + x_3 &amp;= 5,\\
+                    x_1 + x_2 + x_3 &amp;= -3
+                \end{aligned}
+            </me>
+            is not linear, because the term <m>x_1x_2</m> is a product of unknowns.
+        </p>
+    </example>
+
+    <definition>
+        <title>Solution Set of a Linear System</title>
+        <statement>
+            <p>
+                The <term>solution set</term> of a system of linear equations is the set of all vectors
+                <m>\mathbf{x}=\begin{pmatrix}x_1\\ \vdots \\ x_n\end{pmatrix} \in \mathbb{R}^n</m>
+                whose components satisfy all equations of the system simultaneously.
+            </p>
+            <p>
+                If no such vector exists, the solution set is empty.
+            </p>
+        </statement>
+    </definition>
+
+    <definition>
+        <title>Elementary Row Operations and Row Equivalence</title>
+        <statement>
+            <p>
+                The following operations on the augmented coefficient matrix are called <term>elementary row operations</term>.
+            </p>
+            <ul>
+                <li><p>Interchanging two rows.</p></li>
+                <li><p>Multiplying a row by a non-zero scalar.</p></li>
+                <li><p>Adding a multiple of one row to another row.</p></li>
+            </ul>
+            <p>
+                Two matrices are called <term>row equivalent</term> if one can be transformed into the other by a finite sequence of elementary row operations.
+            </p>
+        </statement>
+    </definition>
+
+    <example>
+        <title>Examples of the Elementary Row Operations</title>
+        <p>
+            Consider the system
+            <me>
+                \begin{aligned}
+                    x_1 + x_2 &amp;= 3,\\
+                    2x_1 - x_2 &amp;= 0.
+                \end{aligned}
+            </me>
+            Its augmented coefficient matrix is
+            <me>
+                \left(
+                \begin{array}{cc|c}
+                    1 &amp; 1 &amp; 3\\
+                    2 &amp; -1 &amp; 0
+                \end{array}
+                \right).
+            </me>
+        </p>
+        <p>
+            Interchanging the two rows gives
+            <me>
+                \left(
+                \begin{array}{cc|c}
+                    2 &amp; -1 &amp; 0\\
+                    1 &amp; 1 &amp; 3
+                \end{array}
+                \right).
+            </me>
+            This simply changes the order of the equations.
+        </p>
+        <p>
+            Multiplying the first row by <m>2</m> gives
+            <me>
+                \left(
+                \begin{array}{cc|c}
+                    2 &amp; 2 &amp; 6\\
+                    2 &amp; -1 &amp; 0
+                \end{array}
+                \right).
+            </me>
+            This replaces the first equation by an equivalent one.
+        </p>
+        <p>
+            Adding <m>-2</m> times the first row to the second row gives
+            <me>
+                \left(
+                \begin{array}{cc|c}
+                    1 &amp; 1 &amp; 3\\
+                    0 &amp; -3 &amp; -6
+                \end{array}
+                \right).
+            </me>
+            This replaces the second equation by the difference of the old second equation and twice the first equation.
+        </p>
+    </example>
+
+    <example>
+        <title>The Solution Set Does Not Change Under Row Operations</title>
+        <p>
+            For the original system
+            <me>
+                \begin{aligned}
+                    x_1 + x_2 &amp;= 3,\\
+                    2x_1 - x_2 &amp;= 0
+                \end{aligned}
+            </me>
+            we compute from the first equation <m>x_2=3-x_1</m>. Substituting into the second equation yields
+            <me>
+                2x_1-(3-x_1)=0
+                \quad\Rightarrow\quad
+                3x_1=3
+                \quad\Rightarrow\quad
+                x_1=1,
+            </me>
+            and hence <m>x_2=2</m>. So the solution set is
+            <me>
+                \left\{
+                    \begin{pmatrix}
+                        1\\
+                        2
+                    \end{pmatrix}
+                \right\}.
+            </me>
+        </p>
+        <p>
+            After interchanging the rows, the system becomes
+            <me>
+                \begin{aligned}
+                    2x_1 - x_2 &amp;= 0,\\
+                    x_1 + x_2 &amp;= 3.
+                \end{aligned}
+            </me>
+            This is the same pair of equations in a different order, so the solution set remains unchanged.
+        </p>
+        <p>
+            After multiplying the first row by <m>2</m>, we obtain
+            <me>
+                \begin{aligned}
+                    2x_1 + 2x_2 &amp;= 6,\\
+                    2x_1 - x_2 &amp;= 0.
+                \end{aligned}
+            </me>
+            Since the first equation is just twice the original first equation, the solution set is again unchanged.
+        </p>
+        <p>
+            After replacing the second row by <m>R_2-2R_1</m>, we obtain
+            <me>
+                \begin{aligned}
+                    x_1 + x_2 &amp;= 3,\\
+                    -3x_2 &amp;= -6.
+                \end{aligned}
+            </me>
+            From the second equation we get <m>x_2=2</m>, and then the first equation gives <m>x_1=1</m>. Thus the solution set is still
+            <me>
+                \left\{
+                    \begin{pmatrix}
+                        1\\
+                        2
+                    \end{pmatrix}
+                \right\}.
+            </me>
+        </p>
+    </example>
+
+    <theorem>
+        <title>Row Equivalent Systems Have the Same Solution Set</title>
+        <statement>
+            <p>
+                Elementary row operations do not change the solution set of a linear system. In particular, if the augmented coefficient matrices of two linear systems are row equivalent, then the two systems have the same solution set.
+            </p>
+        </statement>
+    </theorem>
+
+    <p>
+        This result is the foundation of the elimination methods that follow. We simplify a linear system step by step until its structure becomes transparent.
+    </p>
+
+    <definition>
+        <title>Row Echelon Form and Reduced Row Echelon Form</title>
+        <statement>
+            <p>
+                A matrix is in <term>row echelon form</term> if it satisfies the following conditions.
+            </p>
+            <ul>
+                <li><p>All rows consisting entirely of zeros are at the bottom of the matrix.</p></li>
+                <li><p>In each lower non-zero row, the first non-zero entry lies strictly to the right of the first non-zero entry of the row above it. This first non-zero entry of a row is called a <term>pivot element</term>.</p></li>
+            </ul>
+            <p>
+                A matrix is in <term>reduced row echelon form</term> if, in addition, every pivot element is equal to <m>1</m> and is the only non-zero entry in its column.
+            </p>
+        </statement>
+    </definition>
+
+    <example>
+        <title>A Matrix in Row Echelon Form</title>
+        <p>
+            The matrix
+            <me>
+                \begin{pmatrix}
+                    2 &amp; -1 &amp; 3 &amp; 0\\
+                    0 &amp; 4 &amp; 1 &amp; -2\\
+                    0 &amp; 0 &amp; 5 &amp; 7\\
+                    0 &amp; 0 &amp; 0 &amp; 0
+                \end{pmatrix}
+            </me>
+            is in row echelon form. The first non-zero entries of the non-zero rows move strictly to the right as we go downward.
+        </p>
+    </example>
+
+    <example>
+        <title>A Matrix in Reduced Row Echelon Form</title>
+        <p>
+            The matrix
+            <me>
+                \begin{pmatrix}
+                    1 &amp; 0 &amp; 2 &amp; 0\\
+                    0 &amp; 1 &amp; -3 &amp; 0\\
+                    0 &amp; 0 &amp; 0 &amp; 1\\
+                    0 &amp; 0 &amp; 0 &amp; 0
+                \end{pmatrix}
+            </me>
+            is in reduced row echelon form. Each pivot is equal to <m>1</m>, and in each pivot column all other entries are zero.
+        </p>
+    </example>
+
+    <example>
+        <title>A Matrix That Is Not in Row Echelon Form</title>
+        <p>
+            The matrix
+            <me>
+                \begin{pmatrix}
+                    1 &amp; 2 &amp; 0\\
+                    0 &amp; 0 &amp; 3\\
+                    0 &amp; 4 &amp; 1
+                \end{pmatrix}
+            </me>
+            is not in row echelon form, because in the third row the first non-zero entry lies to the left of the first non-zero entry in the second row.
+        </p>
+    </example>
+
+    <example>
+        <title>Solving a System in Row Echelon Form</title>
+        <p>
+            Consider the augmented coefficient matrix
+            <me>
+                \left(
+                \begin{array}{ccc|c}
+                    2 &amp; 3 &amp; 0 &amp; 1\\
+                    0 &amp; 1 &amp; -1 &amp; 2\\
+                    0 &amp; 0 &amp; 3 &amp; 9
+                \end{array}
+                \right).
+            </me>
+        </p>
+        <p>
+            The corresponding system is
+            <me>
+                \begin{aligned}
+                    2x_1 + 3x_2 &amp;= 1,\\
+                    x_2 - x_3 &amp;= 2,\\
+                    3x_3 &amp;= 9.
+                \end{aligned}
+            </me>
+        </p>
+        <p>
+            The matrix is in row echelon form. We will now see that in this case the system can be solved easily. From the last equation we obtain
+            <me>x_3 = 3.</me>
+            Substituting this into the second equation gives
+            <me>x_2 - 3 = 2 \quad\Rightarrow\quad x_2 = 5.</me>
+            Finally, the first equation yields
+            <me>2x_1 + 3\cdot 5 = 1 \quad\Rightarrow\quad 2x_1 = -14 \quad\Rightarrow\quad x_1 = -7.</me>
+        </p>
+        <p>
+            Hence the solution set is
+            <me>
+                \left\{
+                    \begin{pmatrix}
+                        -7\\
+                        5\\
+                        3
+                    \end{pmatrix}
+                \right\}.
+            </me>
+        </p>
+    </example>
+
+    <p>
+        In general, a given system is not initially in row echelon form. The Gauss algorithm transforms it into such a form.
+    </p>
+
+    <definition>
+        <title>Gauss Algorithm</title>
+        <statement>
+            <p>
+                The <term>Gauss algorithm</term> transforms an augmented coefficient matrix into row echelon form by repeating the following steps.
+            </p>
+            <ol>
+                <li><p>Identify the leftmost column that contains a non-zero entry.</p></li>
+                <li><p>Choose a non-zero entry in this column and move it to the top of the remaining submatrix by interchanging rows if necessary.</p></li>
+                <li><p>Use row operations to create zeros below this entry.</p></li>
+                <li><p>Repeat the procedure with the submatrix obtained by deleting the pivot row and the pivot column.</p></li>
+            </ol>
+        </statement>
+    </definition>
+
+    <example>
+        <title>Applying the Gauss Algorithm</title>
+        <p>
+            Consider the augmented coefficient matrix
+            <me>
+                \left(
+                \begin{array}{ccccc|c}
+                    1 &amp; 2 &amp; -1 &amp; 0 &amp; 3 &amp; 4\\
+                    2 &amp; 4 &amp; 1 &amp; 1 &amp; 8 &amp; 11\\
+                    -1 &amp; -2 &amp; 2 &amp; 1 &amp; -1 &amp; 0
+                \end{array}
+                \right).
+            </me>
+        </p>
+        <p>
+            We choose the entry in the first row and first column as the first pivot and eliminate the entries below it:
+            <me>
+                R_2 \leftarrow R_2 - 2R_1,
+                \qquad
+                R_3 \leftarrow R_3 + R_1.
+            </me>
+            This gives
+            <me>
+                \left(
+                \begin{array}{ccccc|c}
+                    1 &amp; 2 &amp; -1 &amp; 0 &amp; 3 &amp; 4\\
+                    0 &amp; 0 &amp; 3 &amp; 1 &amp; 2 &amp; 3\\
+                    0 &amp; 0 &amp; 1 &amp; 1 &amp; 2 &amp; 4
+                \end{array}
+                \right).
+            </me>
+        </p>
+        <p>
+            In the remaining submatrix, the leftmost non-zero column is the third column. We choose the entry in the second row as the next pivot and eliminate the entry below it:
+            <me>
+                R_3 \leftarrow 3R_3 - R_2.
+            </me>
+            We obtain
+            <me>
+                \left(
+                \begin{array}{ccccc|c}
+                    1 &amp; 2 &amp; -1 &amp; 0 &amp; 3 &amp; 4\\
+                    0 &amp; 0 &amp; 3 &amp; 1 &amp; 2 &amp; 3\\
+                    0 &amp; 0 &amp; 0 &amp; 2 &amp; 4 &amp; 9
+                \end{array}
+                \right).
+            </me>
+        </p>
+        <p>
+            This matrix is in row echelon form. Its pivot columns are the first, third, and fourth columns. Therefore <m>x_1</m>, <m>x_3</m>, and <m>x_4</m> are basic variables, while <m>x_2</m> and <m>x_5</m> are free variables.
+        </p>
+    </example>
+
+    <p>
+        Row echelon form is already sufficient to analyze the system and to solve it by back substitution. We can also continue the reduction process further.
+    </p>
+    <p>
+        The difference between the two methods is simple: in the Gauss algorithm we create zeros <em>below</em> the pivots, while in the Gauss--Jordan method we continue until there are also zeros <em>above</em> the pivots.
+    </p>
+
+    <definition>
+        <title>Gauss--Jordan Method</title>
+        <statement>
+            <p>
+                The <term>Gauss--Jordan method</term> continues the row reduction after the Gauss algorithm until the augmented coefficient matrix is in reduced row echelon form.
+            </p>
+            <p>
+                Starting from a row echelon form, one begins with the pivot furthest to the bottom right. First, the corresponding row is scaled so that this pivot becomes equal to <m>1</m>. Then all entries above this pivot are eliminated, so that the whole pivot column is cleaned above the pivot. One then moves to the next pivot, again looking from the bottom right toward the upper left, and repeats the same procedure.
+            </p>
+        </statement>
+    </definition>
+
+    <example>
+        <title>Continuing the Example with Gauss--Jordan</title>
+        <p>
+            We continue with the row echelon form
+            <me>
+                \left(
+                \begin{array}{ccccc|c}
+                    1 &amp; 2 &amp; -1 &amp; 0 &amp; 3 &amp; 4\\
+                    0 &amp; 0 &amp; 3 &amp; 1 &amp; 2 &amp; 3\\
+                    0 &amp; 0 &amp; 0 &amp; 2 &amp; 4 &amp; 9
+                \end{array}
+                \right).
+            </me>
+        </p>
+        <p>
+            The pivot furthest to the bottom right is the entry <m>2</m> in the third row and fourth column. We first scale this row:
+            <me>
+                R_3 \leftarrow \frac{1}{2}R_3.
+            </me>
+            Then the matrix becomes
+            <me>
+                \left(
+                \begin{array}{ccccc|c}
+                    1 &amp; 2 &amp; -1 &amp; 0 &amp; 3 &amp; 4\\
+                    0 &amp; 0 &amp; 3 &amp; 1 &amp; 2 &amp; 3\\
+                    0 &amp; 0 &amp; 0 &amp; 1 &amp; 2 &amp; \frac{9}{2}
+                \end{array}
+                \right).
+            </me>
+            The entries above this pivot are now cleaned. In this case only the second row contains a non-zero entry in that column:
+            <me>
+                R_2 \leftarrow R_2 - R_3.
+            </me>
+            Hence
+            <me>
+                \left(
+                \begin{array}{ccccc|c}
+                    1 &amp; 2 &amp; -1 &amp; 0 &amp; 3 &amp; 4\\
+                    0 &amp; 0 &amp; 3 &amp; 0 &amp; 0 &amp; -\frac{3}{2}\\
+                    0 &amp; 0 &amp; 0 &amp; 1 &amp; 2 &amp; \frac{9}{2}
+                \end{array}
+                \right).
+            </me>
+        </p>
+        <p>
+            We now move to the next pivot, namely the entry <m>3</m> in the second row and third column. First, we scale:
+            <me>
+                R_2 \leftarrow \frac{1}{3}R_2.
+            </me>
+            This yields
+            <me>
+                \left(
+                \begin{array}{ccccc|c}
+                    1 &amp; 2 &amp; -1 &amp; 0 &amp; 3 &amp; 4\\
+                    0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; -\frac{1}{2}\\
+                    0 &amp; 0 &amp; 0 &amp; 1 &amp; 2 &amp; \frac{9}{2}
+                \end{array}
+                \right).
+            </me>
+            Now we clean the third column above this pivot:
+            <me>
+                R_1 \leftarrow R_1 + R_2.
+            </me>
+            Then
+            <me>
+                \left(
+                \begin{array}{ccccc|c}
+                    1 &amp; 2 &amp; 0 &amp; 0 &amp; 3 &amp; \frac{7}{2}\\
+                    0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; -\frac{1}{2}\\
+                    0 &amp; 0 &amp; 0 &amp; 1 &amp; 2 &amp; \frac{9}{2}
+                \end{array}
+                \right).
+            </me>
+        </p>
+        <p>
+            Finally, we consider the remaining pivot in the first row and first column. It is already equal to <m>1</m>, and there are no rows above it. Thus the matrix is now in reduced row echelon form.
+        </p>
+        <p>
+            From this form we read off
+            <me>
+                \begin{aligned}
+                    x_1 + 2x_2 + 3x_5 &amp;= \frac{7}{2},\\
+                    x_3 &amp;= -\frac{1}{2},\\
+                    x_4 + 2x_5 &amp;= \frac{9}{2}.
+                \end{aligned}
+            </me>
+        </p>
+        <p>
+            The variables <m>x_2</m> and <m>x_5</m> are free. Let
+            <me>
+                x_2=s,\qquad x_5=t,\qquad s,t\in\mathbb{R}.
+            </me>
+            Then
+            <me>
+                x_1=\frac{7}{2}-2s-3t,\qquad
+                x_3=-\frac{1}{2},\qquad
+                x_4=\frac{9}{2}-2t.
+            </me>
+        </p>
+        <p>
+            The free variables are not a mere technical leftover. They parametrize the whole solution set. Each choice of <m>s</m> and <m>t</m> produces one solution, and every solution arises in exactly this way.
+        </p>
+        <p>
+            Therefore, the solution set is
+            <me>
+                \left\{
+                    \begin{pmatrix}
+                        \frac{7}{2}-2s-3t\\
+                        s\\
+                        -\frac{1}{2}\\
+                        \frac{9}{2}-2t\\
+                        t
+                    \end{pmatrix}
+                    \in \mathbb{R}^5
+                    \;\middle|\;
+                    s,t\in\mathbb{R}
+                \right\}.
+            </me>
+        </p>
+        <p>
+            If we choose, for instance, <m>s=0</m> and <m>t=0</m>, we obtain one particular solution. But this is only a special solution, not the full solution set.
+        </p>
+    </example>
+
+    <p>
+        The position of the pivots tells us a great deal about the solution behavior of a system. The following examples illustrate the three basic situations.
+    </p>
+
+    <example>
+        <title>No Solution</title>
+        <p>
+            Consider the row echelon form
+            <me>
+                \left(
+                \begin{array}{ccc|c}
+                    1 &amp; 0 &amp; 2 &amp; 3\\
+                    0 &amp; 0 &amp; 0 &amp; 1
+                \end{array}
+                \right).
+            </me>
+        </p>
+        <p>
+            The second row corresponds to the equation
+            <me>0=1,</me>
+            which is impossible. Hence the system has no solution.
+        </p>
+    </example>
+
+    <example>
+        <title>A Unique Solution</title>
+        <p>
+            Consider the row echelon form
+            <me>
+                \left(
+                \begin{array}{ccc|c}
+                    1 &amp; 0 &amp; 0 &amp; 5\\
+                    0 &amp; 2 &amp; 4 &amp; 1\\
+                    0 &amp; 0 &amp; -1 &amp; 0
+                \end{array}
+                \right).
+            </me>
+        </p>
+        <p>
+            Every variable column contains a pivot, and the rightmost column does not. Therefore the system has a unique solution. From the last equation we obtain
+            <me>x_3=0.</me>
+            The second equation then gives
+            <me>2x_2+4\cdot 0=1 \quad\Rightarrow\quad x_2=\frac{1}{2},</me>
+            and the first equation yields
+            <me>x_1=5.</me>
+        </p>
+        <p>
+            Thus the solution set is
+            <me>
+                \left\{
+                    \begin{pmatrix}
+                        5\\[2pt]
+                        \frac{1}{2}\\[2pt]
+                        0
+                    \end{pmatrix}
+                \right\}.
+            </me>
+        </p>
+    </example>
+
+    <definition>
+        <title>Basic Variables and Free Variables</title>
+        <statement>
+            <p>
+                Assume that a linear system is solvable and that its augmented coefficient matrix is in row echelon form.
+            </p>
+            <p>
+                Variables whose columns are pivot columns are called <term>basic variables</term>. Their values are determined by the equations once the remaining variables have been chosen.
+            </p>
+            <p>
+                Variables whose columns are not pivot columns are called <term>free variables</term>. They are not fixed by the system and may be chosen freely.
+            </p>
+        </statement>
+    </definition>
+
+    <example>
+        <title>Infinitely Many Solutions</title>
+        <p>
+            Consider the row echelon form
+            <me>
+                \left(
+                \begin{array}{ccc|c}
+                    1 &amp; 1 &amp; 3 &amp; 4\\
+                    0 &amp; 0 &amp; 1 &amp; 2\\
+                    0 &amp; 0 &amp; 0 &amp; 0
+                \end{array}
+                \right).
+            </me>
+        </p>
+        <p>
+            The first and third columns are pivot columns, so <m>x_1</m> and <m>x_3</m> are basic variables. The second column is not a pivot column, so <m>x_2</m> is a free variable.
+        </p>
+        <p>
+            From the second equation we obtain
+            <me>x_3=2.</me>
+            The first equation becomes
+            <me>x_1+x_2+3\cdot 2=4,</me>
+            hence
+            <me>x_1+x_2=-2.</me>
+        </p>
+        <p>
+            Let <m>x_2=t</m> with <m>t\in\mathbb{R}</m>. Then
+            <me>x_1=-2-t,\qquad x_3=2.</me>
+        </p>
+        <p>
+            Therefore, the solution set is
+            <me>
+                \left\{
+                    \begin{pmatrix}
+                        -2-t\\
+                        t\\
+                        2
+                    \end{pmatrix}
+                    \in \mathbb{R}^3
+                    \;\middle|\;
+                    t\in\mathbb{R}
+                \right\}.
+            </me>
+        </p>
+        <p>
+            It is often useful to write this in parametric vector form:
+            <me>
+                \left\{
+                    \begin{pmatrix}
+                        -2\\
+                        0\\
+                        2
+                    \end{pmatrix}
+                    +
+                    t\begin{pmatrix}
+                        -1\\
+                        1\\
+                        0
+                    \end{pmatrix}
+                    \;\middle|\;
+                    t\in\mathbb{R}
+                \right\}.
+            </me>
+        </p>
+    </example>
+
+    <theorem>
+        <title>Number of Solutions from the Row Echelon Form</title>
+        <statement>
+            <p>
+                Consider a linear system and let its augmented coefficient matrix be transformed into row echelon form.
+            </p>
+            <ul>
+                <li><p>If the rightmost column is a pivot column, then the system has no solution.</p></li>
+                <li><p>If the rightmost column is not a pivot column and every variable column is a pivot column, then the system has exactly one solution.</p></li>
+                <li><p>If the rightmost column is not a pivot column and at least one variable column is not a pivot column, then the system has infinitely many solutions.</p></li>
+            </ul>
+        </statement>
+    </theorem>
+
+    <p>
+        These three cases can be remembered by three simple questions.
+    </p>
+    <ul>
+        <li><p>Is there a pivot in the rightmost column? Then the system is inconsistent.</p></li>
+        <li><p>Does every variable column contain a pivot? Then the solution is unique.</p></li>
+        <li><p>Is there a variable column without a pivot? Then there is a free variable, and therefore infinitely many solutions, provided the system is consistent.</p></li>
+    </ul>
+
+    <example>
+        <title>A Zero Row Does Not Automatically Mean Free Variables</title>
+        <p>
+            Consider the matrix
+            <me>
+                \left(
+                \begin{array}{ccc|c}
+                    1 &amp; 2 &amp; 3 &amp; 4\\
+                    0 &amp; 5 &amp; 6 &amp; 7\\
+                    0 &amp; 0 &amp; 8 &amp; 9\\
+                    0 &amp; 0 &amp; 0 &amp; 0
+                \end{array}
+                \right).
+            </me>
+        </p>
+        <p>
+            Although the last row is zero, each variable column contains a pivot. Hence the system has a unique solution.
+        </p>
+    </example>
+
+    <p>
+        We can now summarize the practical procedure for solving a linear system.
+    </p>
+
+    <definition>
+        <title>Summary: Solving a Linear System</title>
+        <statement>
+            <p>
+                To solve a linear system, we proceed as follows.
+            </p>
+            <ol>
+                <li><p>Write down the augmented coefficient matrix.</p></li>
+                <li><p>Use the Gauss algorithm to transform it into row echelon form.</p></li>
+                <li><p>Check whether the system is solvable.</p></li>
+                <li><p>If the system is solvable, determine the basic and free variables.</p></li>
+                <li><p>Find the solution set either by back substitution or by continuing with the Gauss--Jordan method until reduced row echelon form is reached.</p></li>
+            </ol>
+        </statement>
+    </definition>
+
+    <example>
+        <title>Solving a Linear System from Start to Finish</title>
+        <p>
+            Consider the system
+            <me>
+                \begin{aligned}
+                    x_1 + x_2 + x_3 &amp;= 4,\\
+                    2x_1 - x_2 + x_3 &amp;= 1,\\
+                    3x_1 + x_3 &amp;= 5.
+                \end{aligned}
+            </me>
+        </p>
+        <p>
+            Its augmented coefficient matrix is
+            <me>
+                \left(
+                \begin{array}{ccc|c}
+                    1 &amp; 1 &amp; 1 &amp; 4\\
+                    2 &amp; -1 &amp; 1 &amp; 1\\
+                    3 &amp; 0 &amp; 1 &amp; 5
+                \end{array}
+                \right).
+            </me>
+        </p>
+        <p>
+            We eliminate the entries below the first pivot:
+            <me>
+                R_2 \leftarrow R_2 - 2R_1,
+                \qquad
+                R_3 \leftarrow R_3 - 3R_1.
+            </me>
+            This gives
+            <me>
+                \left(
+                \begin{array}{ccc|c}
+                    1 &amp; 1 &amp; 1 &amp; 4\\
+                    0 &amp; -3 &amp; -1 &amp; -7\\
+                    0 &amp; -3 &amp; -2 &amp; -7
+                \end{array}
+                \right).
+            </me>
+        </p>
+        <p>
+            Next, we eliminate the entry below the second pivot:
+            <me>
+                R_3 \leftarrow R_3 - R_2.
+            </me>
+            Hence
+            <me>
+                \left(
+                \begin{array}{ccc|c}
+                    1 &amp; 1 &amp; 1 &amp; 4\\
+                    0 &amp; -3 &amp; -1 &amp; -7\\
+                    0 &amp; 0 &amp; -1 &amp; 0
+                \end{array}
+                \right).
+            </me>
+        </p>
+        <p>
+            The matrix is now in row echelon form, and every variable column contains a pivot. Therefore the system has a unique solution. From the last equation we obtain
+            <me>x_3=0.</me>
+            The second equation gives
+            <me>-3x_2-1\cdot 0=-7 \quad\Rightarrow\quad x_2=\frac{7}{3}.</me>
+            Finally, the first equation yields
+            <me>x_1+\frac{7}{3}+0=4 \quad\Rightarrow\quad x_1=\frac{5}{3}.</me>
+        </p>
+        <p>
+            Thus the solution set is
+            <me>
+                \left\{
+                    \begin{pmatrix}
+                        \frac{5}{3}\\[2pt]
+                        \frac{7}{3}\\[2pt]
+                        0
+                    \end{pmatrix}
+                \right\}.
+            </me>
+        </p>
+    </example>
+
+    <p>
+        Linear systems can also be interpreted in terms of matrices and vectors. This point of view connects the theory of linear systems with vector arithmetic, linear combinations, and later with linear transformations.
+    </p>
+    <p>
+        In particular, a system of equations can be understood as the question whether a given vector can be written as a linear combination of the column vectors of a matrix.
+    </p>
+
+    <definition>
+        <title>Matrix-Vector Form and Vector Form of a Linear System</title>
+        <statement>
+            <p>
+                Let
+                <me>
+                    \left(
+                    \begin{array}{ccc|c}
+                        a_{1,1} &amp; \dots &amp; a_{1,n} &amp; b_1\\
+                        \vdots &amp; &amp; \vdots &amp; \vdots\\
+                        a_{m,1} &amp; \dots &amp; a_{m,n} &amp; b_m
+                    \end{array}
+                    \right)
+                </me>
+                be the augmented coefficient matrix of a linear system.
+            </p>
+            <p>
+                Writing
+                <me>
+                    A =
+                    \begin{pmatrix}
+                        a_{1,1} &amp; \dots &amp; a_{1,n}\\
+                        \vdots &amp; &amp; \vdots\\
+                        a_{m,1} &amp; \dots &amp; a_{m,n}
+                    \end{pmatrix},
+                    \qquad
+                    \mathbf{x} =
+                    \begin{pmatrix}
+                        x_1\\
+                        \vdots\\
+                        x_n
+                    \end{pmatrix},
+                    \qquad
+                    \mathbf{b} =
+                    \begin{pmatrix}
+                        b_1\\
+                        \vdots\\
+                        b_m
+                    \end{pmatrix},
+                </me>
+                the system can be written in <term>matrix-vector form</term> as
+                <me>A\mathbf{x}=\mathbf{b}.</me>
+            </p>
+            <p>
+                If <m>\mathbf{v}_1,\dots,\mathbf{v}_n \in \mathbb{R}^m</m> denote the columns of <m>A</m>, then the same system can also be written in <term>vector form</term> as
+                <me>x_1\mathbf{v}_1 + \dots + x_n\mathbf{v}_n = \mathbf{b}.</me>
+            </p>
+        </statement>
+    </definition>
+
+    <p>
+        The vector form is conceptually very important: solving the system means deciding whether <m>\mathbf{b}</m> can be represented as a linear combination of the column vectors of <m>A</m>, and if so, in which way.
+    </p>
+
+    <example>
+        <title>Testing Linear Independence by a Homogeneous System</title>
+        <p>
+            Consider the vectors
+            <me>
+                \mathbf{v}_1 =
+                \begin{pmatrix}
+                    2\\
+                    3\\
+                    5
+                \end{pmatrix},
+                \qquad
+                \mathbf{v}_2 =
+                \begin{pmatrix}
+                    1\\
+                    1\\
+                    0
+                \end{pmatrix},
+                \qquad
+                \mathbf{v}_3 =
+                \begin{pmatrix}
+                    0\\
+                    1\\
+                    5
+                \end{pmatrix}.
+            </me>
+        </p>
+        <p>
+            To test whether these vectors are linearly independent, we consider the vector equation
+            <me>x_1\mathbf{v}_1 + x_2\mathbf{v}_2 + x_3\mathbf{v}_3 = \mathbf{0}.</me>
+            This leads to the homogeneous linear system
+            <me>
+                \left(
+                \begin{array}{ccc|c}
+                    2 &amp; 1 &amp; 0 &amp; 0\\
+                    3 &amp; 1 &amp; 1 &amp; 0\\
+                    5 &amp; 0 &amp; 5 &amp; 0
+                \end{array}
+                \right).
+            </me>
+        </p>
+        <p>
+            Applying row operations, we obtain a row echelon form with a free variable. Hence the homogeneous system has infinitely many solutions besides the trivial one.
+        </p>
+        <p>
+            Therefore, the vectors <m>\mathbf{v}_1</m>, <m>\mathbf{v}_2</m>, and <m>\mathbf{v}_3</m> are linearly dependent.
+        </p>
+    </example>
+
+    <p>
+        When working with matrices, it is often useful to measure how much independent information they contain. The elimination process already provides exactly the right notion for this purpose.
+    </p>
+    <p>
+        The number of pivots that remain after row reduction tells us how many independent rows or columns are present. This leads to the concept of rank, which later plays a central role in solvability questions and in the structure of solution sets.
+    </p>
+
+    <definition>
+        <title>Rank of a Matrix</title>
+        <statement>
+            <p>
+                Let <m>A</m> be a matrix. The number of pivot elements in a row echelon form of <m>A</m> is called the <term>rank</term> of <m>A</m>.
+            </p>
+        </statement>
+    </definition>
+
+    <example>
+        <title>Determining the Rank</title>
+        <p>
+            Consider the matrices
+            <me>
+                A_1 =
+                \begin{pmatrix}
+                    2 &amp; 3\\
+                    0 &amp; 1\\
+                    0 &amp; 0
+                \end{pmatrix},
+                \qquad
+                A_2 =
+                \begin{pmatrix}
+                    0 &amp; 1 &amp; 1 &amp; 1 &amp; 2\\
+                    0 &amp; 0 &amp; 0 &amp; 1 &amp; 1\\
+                    0 &amp; -3 &amp; -3 &amp; -3 &amp; -6
+                \end{pmatrix},
+            </me>
+            <me>
+                A_3 =
+                \begin{pmatrix}
+                    1 &amp; 2\\
+                    3 &amp; 4
+                \end{pmatrix},
+                \qquad
+                A_4 =
+                \begin{pmatrix}
+                    2 &amp; 1\\
+                    -6 &amp; -3
+                \end{pmatrix}.
+            </me>
+        </p>
+        <p>
+            The matrix <m>A_1</m> already has two pivot elements, so
+            <me>\operatorname{rank}(A_1)=2.</me>
+        </p>
+        <p>
+            For <m>A_2</m>, row reduction leads to a row echelon form with two pivot elements, hence
+            <me>\operatorname{rank}(A_2)=2.</me>
+        </p>
+        <p>
+            Since
+            <me>\det(A_3)=1\cdot 4 - 2\cdot 3 = -2 \neq 0,</me>
+            the two rows are linearly independent, and therefore
+            <me>\operatorname{rank}(A_3)=2.</me>
+        </p>
+        <p>
+            The second row of <m>A_4</m> is equal to <m>-3</m> times the first row, so there is only one pivot. Thus
+            <me>\operatorname{rank}(A_4)=1.</me>
+        </p>
+    </example>
+
+    <exercises>
+        <title>Check Your Understanding</title>
+
+        <exercise>
+            <title>Recognizing a Row Operation</title>
+            <statement>
+                <p>
+                    Which of the following is an elementary row operation?
+                </p>
+            </statement>
+            <choices>
+                <choice>
+                    <statement><p>Replacing a row by the square of that row.</p></statement>
+                    <feedback><p>Incorrect. Squaring a row is not an elementary row operation.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p>Adding a multiple of one row to another row.</p></statement>
+                    <feedback><p>Correct. This is one of the three elementary row operations.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>Deleting a row that contains a zero.</p></statement>
+                    <feedback><p>Incorrect. Deleting a row is not an elementary row operation.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>Replacing every entry in a column by its negative.</p></statement>
+                    <feedback><p>Incorrect. Row operations act on rows, not on entire columns.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise>
+            <title>Is This Row Echelon Form?</title>
+            <statement>
+                <p>
+                    Consider the matrix
+                    <me>
+                        \begin{pmatrix}
+                            1 &amp; 2 &amp; 0 &amp; 1\\
+                            0 &amp; 0 &amp; 3 &amp; -1\\
+                            0 &amp; 4 &amp; 1 &amp; 2
+                        \end{pmatrix}.
+                    </me>
+                    Is this matrix in row echelon form?
+                </p>
+            </statement>
+            <choices>
+                <choice>
+                    <statement><p>Yes.</p></statement>
+                    <feedback><p>Incorrect. In the third row, the first non-zero entry lies to the left of the first non-zero entry in the second row.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p>No.</p></statement>
+                    <feedback><p>Correct. The pivot positions do not move strictly to the right as we go downward.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise>
+            <title>Pivot Columns and Free Variables</title>
+            <statement>
+                <p>
+                    Consider the matrix
+                    <me>
+                        \left(
+                        \begin{array}{cccc|c}
+                            1 &amp; 0 &amp; 2 &amp; 0 &amp; 3\\
+                            0 &amp; 1 &amp; -1 &amp; 4 &amp; 5\\
+                            0 &amp; 0 &amp; 0 &amp; 0 &amp; 0
+                        \end{array}
+                        \right).
+                    </me>
+                    Which variables are free?
+                </p>
+            </statement>
+            <choices>
+                <choice>
+                    <statement><p><m>x_1</m> and <m>x_2</m></p></statement>
+                    <feedback><p>Incorrect. The first and second columns are pivot columns.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p><m>x_3</m> and <m>x_4</m></p></statement>
+                    <feedback><p>Correct. The third and fourth columns are not pivot columns, so the corresponding variables are free.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>Only <m>x_4</m></p></statement>
+                    <feedback><p>Incorrect. The third column is also not a pivot column.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>There are no free variables.</p></statement>
+                    <feedback><p>Incorrect. Not every variable column contains a pivot.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise>
+            <title>Unique Solution or Infinitely Many?</title>
+            <statement>
+                <p>
+                    True or False: If an augmented coefficient matrix in row echelon form has a zero row at the bottom, then the corresponding system always has infinitely many solutions.
+                </p>
+            </statement>
+            <choices>
+                <choice>
+                    <statement><p>True</p></statement>
+                    <feedback><p>Incorrect. A zero row alone does not imply free variables. It may still happen that every variable column contains a pivot.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p>False</p></statement>
+                    <feedback><p>Correct. What matters is whether some variable columns fail to contain pivots.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise>
+            <title>Reading a Reduced Row Echelon Form</title>
+            <statement>
+                <p>
+                    Consider
+                    <me>
+                        \left(
+                        \begin{array}{ccc|c}
+                            1 &amp; 0 &amp; 0 &amp; -2\\
+                            0 &amp; 1 &amp; 0 &amp; 3\\
+                            0 &amp; 0 &amp; 1 &amp; 1
+                        \end{array}
+                        \right).
+                    </me>
+                    What is the solution vector?
+                </p>
+            </statement>
+            <choices>
+                <choice>
+                    <statement><p><m>\begin{pmatrix}2\\-3\\-1\end{pmatrix}</m></p></statement>
+                    <feedback><p>Incorrect. The entries on the right-hand side are read off directly.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p><m>\begin{pmatrix}-2\\3\\1\end{pmatrix}</m></p></statement>
+                    <feedback><p>Correct. In reduced row echelon form, the solution can be read off directly.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p><m>\begin{pmatrix}-2\\1\\3\end{pmatrix}</m></p></statement>
+                    <feedback><p>Incorrect. The order of the coordinates matters.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>The system has no solution.</p></statement>
+                    <feedback><p>Incorrect. There is no contradictory row.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+    </exercises>
 </subsection>
