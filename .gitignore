@@ -6,6 +6,7 @@
 
 # Editor directories and files
 .vscode/
+codechat_config.yaml
 
 # Build, outputs and logs
 logs/
