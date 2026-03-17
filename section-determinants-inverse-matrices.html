@@ -165,11 +165,17 @@ eBookConfig.enable_chatcodes =  false;
 </li>
 <li class="toc-item toc-subsection">
 <div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html#subsec-linear-systems" class="internal"><span class="codenumber">1.1.3</span> <span class="title">Linear Systems and the Gauss--Jordan Method</span></a></div>
-<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html#subsec-linear-systems-44" class="internal"><span class="codenumber">1.1.3</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html#subsec-linear-systems-49" class="internal"><span class="codenumber">1.1.3</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
 </li>
 </ul>
 </li>
-<li class="toc-item toc-section active"><div class="toc-title-box"><a href="section-determinants-inverse-matrices.html" class="internal"><span class="codenumber">1.2</span> <span class="title">Determinants and Inverse Matrices</span></a></div></li>
+<li class="toc-item toc-section contains-active">
+<div class="toc-title-box"><a href="section-determinants-inverse-matrices.html" class="internal"><span class="codenumber">1.2</span> <span class="title">Determinants and Inverse Matrices</span></a></div>
+<ul class="structural toc-item-list active"><li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-determinants-inverse-matrices.html#section-determinants-inverse-matrices-3" class="internal"><span class="codenumber">1.2.1</span> <span class="title">Inverse Matrices</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-determinants-inverse-matrices.html#exercises-inverse-matrices" class="internal"><span class="codenumber">1.2.1</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li></ul>
+</li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="section-eigenvalues-eigenvectors.html" class="internal"><span class="codenumber">1.3</span> <span class="title">Eigenvalues and Eigenvectors</span></a></div></li>
 </ul>
 </li>
@@ -178,9 +184,887 @@ eBookConfig.enable_chatcodes =  false;
 <main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="section" id="section-determinants-inverse-matrices"><h2 class="heading hide-type">
 <span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Determinants and Inverse Matrices</span>
 </h2>
-<div class="para" id="section-determinants-inverse-matrices-2">Placeholder section for determinants and inverse matrices.<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="section-determinants-inverse-matrices-2">In this section, we will see that some matrices can be inverted leading to the matrix algebra. Also, we will learn about the determinant which helps us understand which matrices are invertible.<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" data-description="Section 1.2: Determinants and Inverse Matrices"><a href="#section-determinants-inverse-matrices" title="Copy heading and permalink for Section 1.2: Determinants and Inverse Matrices" aria-label="Copy heading and permalink for Section 1.2: Determinants and Inverse Matrices">🔗</a></div></section></div>
+<section class="subsection" id="section-determinants-inverse-matrices-3"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.2.1</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Inverse Matrices</span>
+</h3>
+<section class="introduction" id="section-determinants-inverse-matrices-3-2"><div class="para" id="section-determinants-inverse-matrices-3-2-1">In elementary algebra, an equation such as <span class="process-math">\(5x=20\)</span> is solved by multiplying both sides by <span class="process-math">\(\frac{1}{5}\text{.}\)</span> In linear algebra, we seek an analogous idea for matrix equations of the form <span class="process-math">\(A\mathbf{x}=\mathbf{b}\text{.}\)</span> This leads to the concept of an inverse matrix.<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="section-determinants-inverse-matrices-3-2-2">Not every matrix can be inverted. In this section, we introduce invertible matrices, compute inverses in simple cases, explain how inverses can be used to solve linear systems, and show how the Gauss--Jordan method can be extended to determine the inverse of a matrix.<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></section><article class="definition definition-like" id="section-determinants-inverse-matrices-3-3"><h4 class="heading">
+<span class="type">Definition</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.2.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Invertible Matrix and Inverse Matrix.</span>
+</h4>
+<div class="para logical" id="section-determinants-inverse-matrices-3-3-2-1">
+<div class="para">Let <span class="process-math">\(A\)</span> be a square matrix of size <span class="process-math">\(n\times n\text{.}\)</span> We say that <span class="process-math">\(A\)</span> is <dfn class="terminology">invertible</dfn> or <dfn class="terminology">regular</dfn> if there exists a matrix <span class="process-math">\(B\)</span> of the same size such that</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-3-2-1-7">
+\begin{equation*}
+AB = BA = I_n,
+\end{equation*}
+</div>
+<div class="para">where <span class="process-math">\(I_n\)</span> denotes the identity matrix</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-3-2-1-9">
+\begin{equation*}
+I_n =
+\begin{pmatrix}
+1 &amp; 0 &amp; \dots &amp; 0\\
+0 &amp; 1 &amp; \dots &amp; 0\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+0 &amp; 0 &amp; \dots &amp; 1
+\end{pmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-3-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para" id="section-determinants-inverse-matrices-3-3-2-2">The matrix <span class="process-math">\(B\)</span> is then called the <dfn class="terminology">inverse matrix</dfn> of <span class="process-math">\(A\)</span> and is denoted by <span class="process-math">\(A^{-1}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-3-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 1.2.1: Invertible Matrix and Inverse Matrix"><a href="#section-determinants-inverse-matrices-3-3" title="Copy heading and permalink for Definition 1.2.1: Invertible Matrix and Inverse Matrix" aria-label="Copy heading and permalink for Definition 1.2.1: Invertible Matrix and Inverse Matrix">🔗</a></div></article><details id="section-determinants-inverse-matrices-3-4" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.2.2</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Checking an Inverse by Multiplication.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para logical" id="section-determinants-inverse-matrices-3-4-2">
+<div class="para">Consider</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-4-2-1">
+\begin{equation*}
+A=
+\begin{pmatrix}
+1 &amp; 2 &amp; 3\\
+0 &amp; 1 &amp; 4\\
+5 &amp; 6 &amp; 0
+\end{pmatrix}.
+\end{equation*}
+</div>
+<div class="para">We claim that</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-4-2-2">
+\begin{equation*}
+A^{-1}=
+\begin{pmatrix}
+-24 &amp; 18 &amp; 5\\
+20 &amp; -15 &amp; -4\\
+-5 &amp; 4 &amp; 1
+\end{pmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-4-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="section-determinants-inverse-matrices-3-4-3">
+<div class="para">To verify this, we compute</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-4-3-1">
+\begin{equation*}
+AA^{-1}
+=
+\begin{pmatrix}
+1 &amp; 2 &amp; 3\\
+0 &amp; 1 &amp; 4\\
+5 &amp; 6 &amp; 0
+\end{pmatrix}
+\begin{pmatrix}
+-24 &amp; 18 &amp; 5\\
+20 &amp; -15 &amp; -4\\
+-5 &amp; 4 &amp; 1
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 0\\
+0 &amp; 0 &amp; 1
+\end{pmatrix}
+= I_3.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-4-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="section-determinants-inverse-matrices-3-4-4">One also checks that <span class="process-math">\(A^{-1}A=I_3\text{.}\)</span> Therefore the given matrix is indeed the inverse of <span class="process-math">\(A\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-4-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 1.2.2: Checking an Inverse by Multiplication"><a href="#section-determinants-inverse-matrices-3-4" title="Copy heading and permalink for Example 1.2.2: Checking an Inverse by Multiplication" aria-label="Copy heading and permalink for Example 1.2.2: Checking an Inverse by Multiplication">🔗</a></div></article></details><div class="para logical" id="section-determinants-inverse-matrices-3-5">
+<div class="para">Remember that the identity matrix <span class="process-math">\(I_n\)</span> plays the same role in matrix multiplication that the number <span class="process-math">\(1\)</span> plays in ordinary multiplication. For every matrix <span class="process-math">\(A \in \mathbb{R}^{n\times n}\)</span> we have</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-5-4">
+\begin{equation*}
+I_nA = AI_n = A,
+\end{equation*}
+</div>
+<div class="para">and for every vector <span class="process-math">\(\mathbf{v}\in\mathbb{R}^n\)</span> we have</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-5-6">
+\begin{equation*}
+I_n\mathbf{v}=\mathbf{v}.
+\end{equation*}
+</div>
+<div class="para">Thus, multiplying by <span class="process-math">\(I_n\)</span> leaves both matrices and vectors unchanged.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="section-determinants-inverse-matrices-3-6">
+<div class="para">If <span class="process-math">\(A\)</span> is invertible and we want to solve</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-6-2">
+\begin{equation*}
+A\mathbf{x}=\mathbf{b},
+\end{equation*}
+</div>
+<div class="para">then multiplying from the left by <span class="process-math">\(A^{-1}\)</span> gives</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-6-4">
+\begin{equation*}
+A^{-1}A\mathbf{x}=A^{-1}\mathbf{b},
+\end{equation*}
+</div>
+<div class="para">and therefore</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-6-5">
+\begin{equation*}
+\mathbf{x}=A^{-1}\mathbf{b}.
+\end{equation*}
+</div>
+<div class="para">Thus, the inverse matrix plays the same role for matrix equations as division by a non-zero number does for scalar equations.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<details id="example-inverse-lgs" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.2.3</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Solving a Linear System with an Inverse Matrix.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para logical" id="example-inverse-lgs-2">
+<div class="para">We illustrate the idea with a simple linear system</div>
+<div class="displaymath process-math" id="example-inverse-lgs-2-1">
+\begin{equation*}
+A\mathbf{u}=\mathbf{v}
+\end{equation*}
+</div>
+<div class="para">with</div>
+<div class="displaymath process-math" id="example-inverse-lgs-2-2">
+\begin{equation*}
+A=
+\begin{pmatrix}
+2 &amp; 1\\
+1 &amp; 1
+\end{pmatrix},
+\qquad
+\mathbf{v}=
+\begin{pmatrix}
+5\\
+3
+\end{pmatrix}.
+\end{equation*}
+</div>
+<div class="para">The inverse of <span class="process-math">\(A\)</span> is</div>
+<div class="displaymath process-math" id="example-inverse-lgs-2-4">
+\begin{equation*}
+A^{-1}=
+\begin{pmatrix}
+1 &amp; -1\\
+-1 &amp; 2
+\end{pmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#example-inverse-lgs-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="example-inverse-lgs-3">
+<div class="para">We postpone the explanation how to compute inverse matrices and simply check that the given matrix is indeed the inverse of <span class="process-math">\(A\text{.}\)</span> We compute</div>
+<div class="displaymath process-math" id="example-inverse-lgs-3-2">
+\begin{equation*}
+AA^{-1}
+=
+\begin{pmatrix}
+2 &amp; 1\\
+1 &amp; 1
+\end{pmatrix}
+\begin{pmatrix}
+1 &amp; -1\\
+-1 &amp; 2
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 &amp; 0\\
+0 &amp; 1
+\end{pmatrix}
+= I_2.
+\end{equation*}
+</div>
+<div class="para">Similarly,</div>
+<div class="displaymath process-math" id="example-inverse-lgs-3-3">
+\begin{equation*}
+A^{-1}A
+=
+\begin{pmatrix}
+1 &amp; -1\\
+-1 &amp; 2
+\end{pmatrix}
+\begin{pmatrix}
+2 &amp; 1\\
+1 &amp; 1
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 &amp; 0\\
+0 &amp; 1
+\end{pmatrix}
+= I_2.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#example-inverse-lgs-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="example-inverse-lgs-4">
+<div class="para">Therefore, we may solve the system by multiplying from the left by <span class="process-math">\(A^{-1}\text{:}\)</span>
+</div>
+<div class="displaymath process-math" id="example-inverse-lgs-4-2">
+\begin{equation*}
+\mathbf{u}=A^{-1}\mathbf{v}
+=
+\begin{pmatrix}
+1 &amp; -1\\
+-1 &amp; 2
+\end{pmatrix}
+\begin{pmatrix}
+5\\
+3
+\end{pmatrix}
+=
+\begin{pmatrix}
+2\\
+1
+\end{pmatrix}.
+\end{equation*}
+</div>
+<div class="para">Hence the solution of the linear system is</div>
+<div class="displaymath process-math" id="example-inverse-lgs-4-3">
+\begin{equation*}
+\mathbf{u}=
+\begin{pmatrix}
+2\\
+1
+\end{pmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#example-inverse-lgs-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 1.2.3: Solving a Linear System with an Inverse Matrix"><a href="#example-inverse-lgs" title="Copy heading and permalink for Example 1.2.3: Solving a Linear System with an Inverse Matrix" aria-label="Copy heading and permalink for Example 1.2.3: Solving a Linear System with an Inverse Matrix">🔗</a></div></article></details><article class="theorem theorem-like" id="section-determinants-inverse-matrices-3-8"><h4 class="heading">
+<span class="type">Theorem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.2.4</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Uniqueness of the Inverse.</span>
+</h4>
+<div class="para" id="section-determinants-inverse-matrices-3-8-2-1">If a square matrix <span class="process-math">\(A\)</span> is invertible, then its inverse is unique.<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-8-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para logical" id="section-determinants-inverse-matrices-3-8-2-2">
+<div class="para">Moreover, to verify that a matrix <span class="process-math">\(B\)</span> is the inverse of <span class="process-math">\(A\text{,}\)</span> it is enough to check one of the equations</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-8-2-2-3">
+\begin{equation*}
+AB=I_n
+\qquad\text{or}\qquad
+BA=I_n.
+\end{equation*}
+</div>
+<div class="para">For square matrices, each of these identities already implies that the other one holds as well.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-8-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Theorem 1.2.4: Uniqueness of the Inverse"><a href="#section-determinants-inverse-matrices-3-8" title="Copy heading and permalink for Theorem 1.2.4: Uniqueness of the Inverse" aria-label="Copy heading and permalink for Theorem 1.2.4: Uniqueness of the Inverse">🔗</a></div></article><details id="section-determinants-inverse-matrices-3-8-3" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h4 class="heading"><span class="type">Proof<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h4></summary><article class="hiddenproof knowl__content"><div class="para logical" id="section-determinants-inverse-matrices-3-8-3-1">
+<div class="para">We first show uniqueness. Assume that <span class="process-math">\(B\)</span> and <span class="process-math">\(C\)</span> both satisfy</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-8-3-1-3">
+\begin{equation*}
+AB=BA=I_n
+\qquad\text{and}\qquad
+AC=CA=I_n.
+\end{equation*}
+</div>
+<div class="para">Then</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-8-3-1-4">
+\begin{equation*}
+B = BI_n = B(AC) = (BA)C = I_nC = C.
+\end{equation*}
+</div>
+<div class="para">Hence the inverse matrix is uniquely determined.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-8-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="section-determinants-inverse-matrices-3-8-3-2">
+<div class="para">Now suppose that <span class="process-math">\(AB=I_n\text{.}\)</span> Then <span class="process-math">\(B\)</span> is a right inverse of <span class="process-math">\(A\text{.}\)</span> For square matrices, this already implies that <span class="process-math">\(A\)</span> is invertible, and therefore the inverse is unique. Since <span class="process-math">\(B\)</span> is an inverse candidate and the inverse is unique, it follows that</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-8-3-2-6">
+\begin{equation*}
+B=A^{-1}.
+\end{equation*}
+</div>
+<div class="para">Consequently,</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-8-3-2-7">
+\begin{equation*}
+BA=A^{-1}A=I_n.
+\end{equation*}
+</div>
+<div class="para">The argument for the case <span class="process-math">\(BA=I_n\)</span> is analogous.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-8-3-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Proof 1.2.4.1"><a href="#section-determinants-inverse-matrices-3-8-3" title="Copy heading and permalink for Proof 1.2.4.1" aria-label="Copy heading and permalink for Proof 1.2.4.1">🔗</a></div></article></details><div class="para" id="section-determinants-inverse-matrices-3-9">At this point, it is natural to ask whether every square matrix is invertible. The answer is no.<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<details id="section-determinants-inverse-matrices-3-10" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.2.5</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">A Matrix That Is Not Invertible.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para logical" id="section-determinants-inverse-matrices-3-10-2">
+<div class="para">Consider</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-10-2-1">
+\begin{equation*}
+A=
+\begin{pmatrix}
+1 &amp; 0\\
+0 &amp; 0
+\end{pmatrix},
+\qquad
+B=
+\begin{pmatrix}
+0 &amp; 0\\
+1 &amp; 0
+\end{pmatrix}.
+\end{equation*}
+</div>
+<div class="para">Then</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-10-2-2">
+\begin{equation*}
+AB=
+\begin{pmatrix}
+0 &amp; 0\\
+0 &amp; 0
+\end{pmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-10-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="section-determinants-inverse-matrices-3-10-3">
+<div class="para">Suppose, for contradiction, that <span class="process-math">\(A\)</span> were invertible. Multiplying the equation <span class="process-math">\(AB=\mathbf{0}\)</span> from the left by <span class="process-math">\(A^{-1}\)</span> would yield</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-10-3-4">
+\begin{equation*}
+B=A^{-1}(AB)=A^{-1}\mathbf{0}=\mathbf{0}.
+\end{equation*}
+</div>
+<div class="para">But this is false, since <span class="process-math">\(B\neq \mathbf{0}\text{.}\)</span> Hence <span class="process-math">\(A\)</span> is not invertible.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-10-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 1.2.5: A Matrix That Is Not Invertible"><a href="#section-determinants-inverse-matrices-3-10" title="Copy heading and permalink for Example 1.2.5: A Matrix That Is Not Invertible" aria-label="Copy heading and permalink for Example 1.2.5: A Matrix That Is Not Invertible">🔗</a></div></article></details><div class="para" id="section-determinants-inverse-matrices-3-11">For <span class="process-math">\(2\times 2\)</span> matrices there is a particularly simple formula for the inverse.<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-11" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="theorem theorem-like" id="section-determinants-inverse-matrices-3-12"><h4 class="heading">
+<span class="type">Theorem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.2.6</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Inverse of a <span class="process-math">\(2\times 2\)</span> Matrix.</span>
+</h4>
+<div class="para logical" id="section-determinants-inverse-matrices-3-12-2-1">
+<div class="para">Let</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-12-2-1-1">
+\begin{equation*}
+A=
+\begin{pmatrix}
+a &amp; b\\
+c &amp; d
+\end{pmatrix}.
+\end{equation*}
+</div>
+<div class="para">Then <span class="process-math">\(A\)</span> is invertible if and only if</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-12-2-1-3">
+\begin{equation*}
+ad-bc \neq 0.
+\end{equation*}
+</div>
+<div class="para">In this case,</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-12-2-1-4">
+\begin{equation*}
+A^{-1}
+=
+\frac{1}{ad-bc}
+\begin{pmatrix}
+d &amp; -b\\
+-c &amp; a
+\end{pmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-12-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Theorem 1.2.6: Inverse of a 2\times 2 Matrix"><a href="#section-determinants-inverse-matrices-3-12" title="Copy heading and permalink for Theorem 1.2.6: Inverse of a 2\times 2 Matrix" aria-label="Copy heading and permalink for Theorem 1.2.6: Inverse of a 2\times 2 Matrix">🔗</a></div></article><details id="section-determinants-inverse-matrices-3-12-3" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h4 class="heading"><span class="type">Proof<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h4></summary><article class="hiddenproof knowl__content"><div class="para logical" id="section-determinants-inverse-matrices-3-12-3-1">
+<div class="para">Consider the matrix</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-12-3-1-1">
+\begin{equation*}
+B=
+\begin{pmatrix}
+d &amp; -b\\
+-c &amp; a
+\end{pmatrix}.
+\end{equation*}
+</div>
+<div class="para">Then</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-12-3-1-2">
+\begin{equation*}
+AB
+=
+\begin{pmatrix}
+a &amp; b\\
+c &amp; d
+\end{pmatrix}
+\begin{pmatrix}
+d &amp; -b\\
+-c &amp; a
+\end{pmatrix}
+=
+\begin{pmatrix}
+ad-bc &amp; 0\\
+0 &amp; ad-bc
+\end{pmatrix}
+=
+(ad-bc)I_2.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-12-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="section-determinants-inverse-matrices-3-12-3-2">
+<div class="para">If <span class="process-math">\(ad-bc\neq 0\text{,}\)</span> dividing by this number gives</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-12-3-2-2">
+\begin{equation*}
+A\left(\frac{1}{ad-bc}B\right)=I_2.
+\end{equation*}
+</div>
+<div class="para">Hence</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-12-3-2-3">
+\begin{equation*}
+A^{-1}=\frac{1}{ad-bc}B.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-12-3-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="section-determinants-inverse-matrices-3-12-3-3">If <span class="process-math">\(ad-bc=0\text{,}\)</span> then <span class="process-math">\(AB=\mathbf{0}\text{.}\)</span> In particular, <span class="process-math">\(A\)</span> cannot have an inverse, because otherwise multiplying by <span class="process-math">\(A^{-1}\)</span> from the left would imply <span class="process-math">\(B=\mathbf{0}\text{,}\)</span> which is impossible unless all entries vanish simultaneously.<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-12-3-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Proof 1.2.6.1"><a href="#section-determinants-inverse-matrices-3-12-3" title="Copy heading and permalink for Proof 1.2.6.1" aria-label="Copy heading and permalink for Proof 1.2.6.1">🔗</a></div></article></details><details id="section-determinants-inverse-matrices-3-13" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.2.7</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Solving a Linear System with the Inverse Matrix (continuation).</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para logical" id="section-determinants-inverse-matrices-3-13-2">
+<div class="para">In <a href="section-determinants-inverse-matrices.html#example-inverse-lgs" class="xref" data-knowl="./knowl/xref/example-inverse-lgs.html" data-reveal-label="Reveal" data-close-label="Close" title="Example 1.2.3: Solving a Linear System with an Inverse Matrix">Example 1.2.3</a> we solved the linear system</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/example-inverse-lgs.html" id="section-determinants-inverse-matrices-3-13-2-2">
+\begin{equation*}
+A\mathbf{u}=\mathbf{v}
+\end{equation*}
+</div>
+<div class="para">with</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/example-inverse-lgs.html" id="section-determinants-inverse-matrices-3-13-2-3">
+\begin{equation*}
+A=
+\begin{pmatrix}
+2 &amp; 1\\
+1 &amp; 1
+\end{pmatrix},
+\qquad
+\mathbf{v}=
+\begin{pmatrix}
+5\\
+3
+\end{pmatrix}.
+\end{equation*}
+</div>
+<div class="para">using the inverse matrix <span class="process-math">\(A^{-1}\text{.}\)</span> With the formula above we can compute</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/example-inverse-lgs.html" id="section-determinants-inverse-matrices-3-13-2-5">
+\begin{equation*}
+A^{-1} = \frac{1}{2\cdot 1 - 1} 
+\begin{pmatrix} 
+1 &amp; -1 \\
+-1 &amp; 2
+\end{pmatrix}
+= 
+\begin{pmatrix} 
+1 &amp; -1 \\
+-1 &amp; 2
+\end{pmatrix},
+\end{equation*}
+</div>
+<div class="para">which conincides with the inverse given above.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-13-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 1.2.7: Solving a Linear System with the Inverse Matrix (continuation)"><a href="#section-determinants-inverse-matrices-3-13" title="Copy heading and permalink for Example 1.2.7: Solving a Linear System with the Inverse Matrix (continuation)" aria-label="Copy heading and permalink for Example 1.2.7: Solving a Linear System with the Inverse Matrix (continuation)">🔗</a></div></article></details><details id="section-determinants-inverse-matrices-3-14" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.2.8</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">An Engineering Interpretation.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para logical" id="section-determinants-inverse-matrices-3-14-2">
+<div class="para">In many engineering applications, a square matrix describes how input quantities produce measured outputs. For instance, in a calibration problem one may have</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-14-2-1">
+\begin{equation*}
+A\mathbf{u}=\mathbf{v},
+\end{equation*}
+</div>
+<div class="para">where <span class="process-math">\(\mathbf{u}\)</span> is the unknown input vector and <span class="process-math">\(\mathbf{v}\)</span> is the measured output vector.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-14-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="section-determinants-inverse-matrices-3-14-3">
+<div class="para">A concrete example arises in electrical engineering. Suppose that two unknown source signals contribute to the voltages measured by two sensors. Each sensor records a weighted combination of the two source signals, because its position and construction determine how strongly it reacts to each source. If <span class="process-math">\(\mathbf{u}\)</span> contains the unknown source intensities and <span class="process-math">\(\mathbf{v}\)</span> the measured sensor voltages, then the relation between sources and measurements can be written in the form</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-14-3-3">
+\begin{equation*}
+A\mathbf{u}=\mathbf{v}.
+\end{equation*}
+</div>
+<div class="para">The entries of the matrix <span class="process-math">\(A\)</span> describe how strongly each source influences each sensor.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-14-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="section-determinants-inverse-matrices-3-14-4">
+<div class="para">If <span class="process-math">\(A\)</span> is invertible, then the source intensities can be reconstructed uniquely from the measurements by</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-14-4-2">
+\begin{equation*}
+\mathbf{u}=A^{-1}\mathbf{v}.
+\end{equation*}
+</div>
+<div class="para">If <span class="process-math">\(A\)</span> is not invertible, then this reconstruction is impossible in general: different source intensities may lead to the same sensor data, or some measurement vectors may not be attainable at all.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-14-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 1.2.8: An Engineering Interpretation"><a href="#section-determinants-inverse-matrices-3-14" title="Copy heading and permalink for Example 1.2.8: An Engineering Interpretation" aria-label="Copy heading and permalink for Example 1.2.8: An Engineering Interpretation">🔗</a></div></article></details><div class="para" id="section-determinants-inverse-matrices-3-15">For larger matrices, explicit formulas for computing the inverse become impractical. Instead, we compute inverses systematically by an extension of the Gauss--Jordan method.<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-15" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="theorem theorem-like" id="section-determinants-inverse-matrices-3-16"><h4 class="heading">
+<span class="type">Theorem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.2.9</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Computing the Inverse by the Gauss-Jordan Method.</span>
+</h4>
+<div class="para logical" id="section-determinants-inverse-matrices-3-16-2-1">
+<div class="para">Let <span class="process-math">\(A\)</span> be an <span class="process-math">\(n\times n\)</span> matrix. Form the augmented matrix</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-16-2-1-3">
+\begin{equation*}
+(A\mid I_n).
+\end{equation*}
+</div>
+<div class="para">Apply elementary row operations until reduced row echelon form is reached.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-16-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para" id="section-determinants-inverse-matrices-3-16-2-2">There are two possible outcomes.<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-16-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ul class="disc" id="section-determinants-inverse-matrices-3-16-2-3">
+<li id="section-determinants-inverse-matrices-3-16-2-3-1">
+<div class="para logical" id="section-determinants-inverse-matrices-3-16-2-3-1-1">
+<div class="para">If the result has the form</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-16-2-3-1-1-1">
+\begin{equation*}
+(I_n\mid B),
+\end{equation*}
+</div>
+<div class="para">then <span class="process-math">\(A\)</span> is invertible and</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-16-2-3-1-1-3">
+\begin{equation*}
+A^{-1}=B.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-16-2-3-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#section-determinants-inverse-matrices-3-16-2-3-1" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="section-determinants-inverse-matrices-3-16-2-3-2">
+<div class="para" id="section-determinants-inverse-matrices-3-16-2-3-2-1">If the left block cannot be transformed into <span class="process-math">\(I_n\text{,}\)</span> then <span class="process-math">\(A\)</span> is not invertible.<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-16-2-3-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#section-determinants-inverse-matrices-3-16-2-3-2" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="autopermalink" data-description="Theorem 1.2.9: Computing the Inverse by the Gauss-Jordan Method"><a href="#section-determinants-inverse-matrices-3-16" title="Copy heading and permalink for Theorem 1.2.9: Computing the Inverse by the Gauss-Jordan Method" aria-label="Copy heading and permalink for Theorem 1.2.9: Computing the Inverse by the Gauss-Jordan Method">🔗</a></div></article><details id="example-gauss-jordan-inverse-3x3" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.2.10</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Computing an Inverse with the Gauß-Jordan Method.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para logical" id="example-gauss-jordan-inverse-3x3-2">
+<div class="para">Consider the matrix</div>
+<div class="displaymath process-math" id="example-gauss-jordan-inverse-3x3-2-1">
+\begin{equation*}
+A=
+\begin{pmatrix}
+1 &amp; 1 &amp; 0\\
+0 &amp; 1 &amp; 1\\
+0 &amp; 0 &amp; 1
+\end{pmatrix}.
+\end{equation*}
+</div>
+<div class="para">We determine its inverse by augmenting <span class="process-math">\(A\)</span> with the identity matrix and applying row operations:</div>
+<div class="displaymath process-math" id="example-gauss-jordan-inverse-3x3-2-3">
+\begin{equation*}
+\left(
+\begin{array}{ccc|ccc}
+1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0\\
+0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1
+\end{array}
+\right).
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#example-gauss-jordan-inverse-3x3-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="example-gauss-jordan-inverse-3x3-3">
+<div class="para">We first eliminate the entry above the pivot in the third column by replacing the second row with <span class="process-math">\(R_2-R_3\text{.}\)</span> This gives</div>
+<div class="displaymath process-math" id="example-gauss-jordan-inverse-3x3-3-2">
+\begin{equation*}
+\left(
+\begin{array}{ccc|ccc}
+1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; -1\\
+0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1
+\end{array}
+\right).
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#example-gauss-jordan-inverse-3x3-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="example-gauss-jordan-inverse-3x3-4">
+<div class="para">Next, we eliminate the entry above the pivot in the second column by replacing the first row with <span class="process-math">\(R_1-R_2\text{.}\)</span> We obtain</div>
+<div class="displaymath process-math" id="example-gauss-jordan-inverse-3x3-4-2">
+\begin{equation*}
+\left(
+\begin{array}{ccc|ccc}
+1 &amp; 0 &amp; 0 &amp; 1 &amp; -1 &amp; 1\\
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; -1\\
+0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1
+\end{array}
+\right).
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#example-gauss-jordan-inverse-3x3-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="example-gauss-jordan-inverse-3x3-5">
+<div class="para">The left block is now the identity matrix. Hence <span class="process-math">\(A\)</span> is invertible, and the right block is the inverse:</div>
+<div class="displaymath process-math" id="example-gauss-jordan-inverse-3x3-5-2">
+\begin{equation*}
+A^{-1}=
+\begin{pmatrix}
+1 &amp; -1 &amp; 1\\
+0 &amp; 1 &amp; -1\\
+0 &amp; 0 &amp; 1
+\end{pmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#example-gauss-jordan-inverse-3x3-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 1.2.10: Computing an Inverse with the Gauß-Jordan Method"><a href="#example-gauss-jordan-inverse-3x3" title="Copy heading and permalink for Example 1.2.10: Computing an Inverse with the Gauß-Jordan Method" aria-label="Copy heading and permalink for Example 1.2.10: Computing an Inverse with the Gauß-Jordan Method">🔗</a></div></article></details><div class="para" id="section-determinants-inverse-matrices-3-18">Invertible matrices are important because they are precisely the matrices for which a system of linear equations can be solved uniquely for every right-hand side. They describe situations in which no information is lost and every output is produced by exactly one input. The following theorem collects several equivalent ways of recognizing this fundamental property and, in particular, makes the connection between invertibility and the solvability of linear systems completely explicit.<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-18" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="theorem theorem-like" id="section-determinants-inverse-matrices-3-19"><h4 class="heading">
+<span class="type">Theorem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.2.11</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Equivalent Characterizations of Invertibility.</span>
+</h4>
+<div class="para logical" id="section-determinants-inverse-matrices-3-19-2-1">
+<div class="para">Let <span class="process-math">\(A\)</span> be an <span class="process-math">\(n\times n\)</span> matrix, and let <span class="process-math">\(\varphi_A:\mathbb{R}^n\to\mathbb{R}^n\)</span> be the linear map defined by</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-19-2-1-4">
+\begin{equation*}
+\varphi_A(\mathbf{v})=A\mathbf{v}.
+\end{equation*}
+</div>
+<div class="para">Then the following statements are equivalent.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-19-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ul class="disc" id="section-determinants-inverse-matrices-3-19-2-2">
+<li id="section-determinants-inverse-matrices-3-19-2-2-1">
+<div class="para" id="section-determinants-inverse-matrices-3-19-2-2-1-1">
+<span class="process-math">\(A\)</span> is invertible.<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-19-2-2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#section-determinants-inverse-matrices-3-19-2-2-1" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="section-determinants-inverse-matrices-3-19-2-2-2">
+<div class="para" id="section-determinants-inverse-matrices-3-19-2-2-2-1">There exists a matrix <span class="process-math">\(B\)</span> such that <span class="process-math">\(AB=I_n\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-19-2-2-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#section-determinants-inverse-matrices-3-19-2-2-2" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="section-determinants-inverse-matrices-3-19-2-2-3">
+<div class="para" id="section-determinants-inverse-matrices-3-19-2-2-3-1">There exists a matrix <span class="process-math">\(B\)</span> such that <span class="process-math">\(BA=I_n\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-19-2-2-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#section-determinants-inverse-matrices-3-19-2-2-3" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="section-determinants-inverse-matrices-3-19-2-2-4">
+<div class="para" id="section-determinants-inverse-matrices-3-19-2-2-4-1">
+<span class="process-math">\(A^T\)</span> is invertible.<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-19-2-2-4-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#section-determinants-inverse-matrices-3-19-2-2-4" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="section-determinants-inverse-matrices-3-19-2-2-5">
+<div class="para" id="section-determinants-inverse-matrices-3-19-2-2-5-1">The columns of <span class="process-math">\(A\)</span> are linearly independent.<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-19-2-2-5-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#section-determinants-inverse-matrices-3-19-2-2-5" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="section-determinants-inverse-matrices-3-19-2-2-6">
+<div class="para" id="section-determinants-inverse-matrices-3-19-2-2-6-1">
+<span class="process-math">\(\operatorname{rank}(A)=n\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-19-2-2-6-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#section-determinants-inverse-matrices-3-19-2-2-6" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="section-determinants-inverse-matrices-3-19-2-2-7">
+<div class="para" id="section-determinants-inverse-matrices-3-19-2-2-7-1">The homogeneous system <span class="process-math">\(A\mathbf{v}=\mathbf{0}\)</span> has only the trivial solution <span class="process-math">\(\mathbf{v}=\mathbf{0}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-19-2-2-7-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#section-determinants-inverse-matrices-3-19-2-2-7" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="section-determinants-inverse-matrices-3-19-2-2-8">
+<div class="para" id="section-determinants-inverse-matrices-3-19-2-2-8-1">For every <span class="process-math">\(\mathbf{w}\in\mathbb{R}^n\text{,}\)</span> the system <span class="process-math">\(A\mathbf{v}=\mathbf{w}\)</span> has a solution.<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-19-2-2-8-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#section-determinants-inverse-matrices-3-19-2-2-8" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="section-determinants-inverse-matrices-3-19-2-2-9">
+<div class="para" id="section-determinants-inverse-matrices-3-19-2-2-9-1">For every <span class="process-math">\(\mathbf{w}\in\mathbb{R}^n\text{,}\)</span> the system <span class="process-math">\(A\mathbf{v}=\mathbf{w}\)</span> has a unique solution.<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-19-2-2-9-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#section-determinants-inverse-matrices-3-19-2-2-9" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="autopermalink" data-description="Theorem 1.2.11: Equivalent Characterizations of Invertibility"><a href="#section-determinants-inverse-matrices-3-19" title="Copy heading and permalink for Theorem 1.2.11: Equivalent Characterizations of Invertibility" aria-label="Copy heading and permalink for Theorem 1.2.11: Equivalent Characterizations of Invertibility">🔗</a></div></article><div class="para" id="section-determinants-inverse-matrices-3-20">Orthogonal matrices form a particularly important class of invertible matrices. They occur naturally whenever coordinates are rotated or reflected, and they are especially convenient because their inverse can be obtained simply by taking the transpose.<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-20" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="definition definition-like" id="section-determinants-inverse-matrices-3-21"><h4 class="heading">
+<span class="type">Definition</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.2.12</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Orthogonal Matrix.</span>
+</h4>
+<div class="para logical" id="section-determinants-inverse-matrices-3-21-2-1">
+<div class="para">A square matrix <span class="process-math">\(A\)</span> is called <dfn class="terminology">orthogonal</dfn> if</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-21-2-1-3">
+\begin{equation*}
+AA^T=I_n.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-21-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 1.2.12: Orthogonal Matrix"><a href="#section-determinants-inverse-matrices-3-21" title="Copy heading and permalink for Definition 1.2.12: Orthogonal Matrix" aria-label="Copy heading and permalink for Definition 1.2.12: Orthogonal Matrix">🔗</a></div></article><div class="para logical" id="section-determinants-inverse-matrices-3-22">
+<div class="para">Orthogonal matrices are a particularly important class of invertible matrices. Indeed, if <span class="process-math">\(AA^T=I_n\text{,}\)</span> then <span class="process-math">\(A^T\)</span> is an inverse of <span class="process-math">\(A\text{,}\)</span> so</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-22-4">
+\begin{equation*}
+A^{-1}=A^T.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-22" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<details id="section-determinants-inverse-matrices-3-23" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.2.13</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">A Rotation Matrix.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para logical" id="section-determinants-inverse-matrices-3-23-2">
+<div class="para">Consider the matrix</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-23-2-1">
+\begin{equation*}
+A=
+\begin{pmatrix}
+\cos\varphi &amp; -\sin\varphi\\
+\sin\varphi &amp; \cos\varphi
+\end{pmatrix}.
+\end{equation*}
+</div>
+<div class="para">Its transpose is</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-23-2-2">
+\begin{equation*}
+A^T=
+\begin{pmatrix}
+\cos\varphi &amp; \sin\varphi\\
+-\sin\varphi &amp; \cos\varphi
+\end{pmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-23-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="section-determinants-inverse-matrices-3-23-3">
+<div class="para">Multiplying the two matrices gives</div>
+<div class="displaymath process-math" id="section-determinants-inverse-matrices-3-23-3-1">
+\begin{equation*}
+AA^T
+=
+\begin{pmatrix}
+\cos^2\varphi+\sin^2\varphi &amp; 0\\
+0 &amp; \cos^2\varphi+\sin^2\varphi
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 &amp; 0\\
+0 &amp; 1
+\end{pmatrix}
+= I_2.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-23-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="section-determinants-inverse-matrices-3-23-4">Hence <span class="process-math">\(A\)</span> is orthogonal. This matrix describes a rotation in the plane. The name rotation matrix comes from the fact that multiplying a vector in the plane by this matrix turns its direction by the angle <span class="process-math">\(\varphi\)</span> while preserving its length. Such matrices play an important role in mechanics, robotics, and computer graphics.<div class="autopermalink" data-description="Paragraph"><a href="#section-determinants-inverse-matrices-3-23-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 1.2.13: A Rotation Matrix"><a href="#section-determinants-inverse-matrices-3-23" title="Copy heading and permalink for Example 1.2.13: A Rotation Matrix" aria-label="Copy heading and permalink for Example 1.2.13: A Rotation Matrix">🔗</a></div></article></details><section class="exercises" id="exercises-inverse-matrices"><h4 class="heading hide-type">
+<span class="type">Exercises</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber"></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Check Your Understanding</span>
+</h4>
+<article class="exercise exercise-like" id="exer-mc-invertible-matrix"><h5 class="heading">
+<span class="codenumber">1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Identifying an Invertible Matrix.</span>
+</h5>
+<div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
+<div class="exercise-statement"><div class="para" id="exer-mc-invertible-matrix-2-1">Which of the following matrices is invertible?<div class="autopermalink" data-description="Paragraph"><a href="#exer-mc-invertible-matrix-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div>
+<ul data-component="multiplechoice" class="exercise-interactives" id="rs-exer-mc-invertible-matrix" data-multipleanswers="false">
+<li data-component="answer" id="rs-exer-mc-invertible-matrix_opt_a"><div class="para" id="exer-mc-invertible-matrix-3-1-1-1"><span class="process-math">\(\begin{pmatrix}
+1 &amp; 2 \\
+2 &amp; 4
+\end{pmatrix}\)</span></div></li>
+<li data-component="feedback" id="rs-exer-mc-invertible-matrix_opt_a"><div class="para" id="exer-mc-invertible-matrix-3-1-2-1">Incorrect. The second row is twice the first row, so the rows are linearly dependent and the matrix is not invertible.</div></li>
+<li data-component="answer" id="rs-exer-mc-invertible-matrix_opt_b" data-correct=""><div class="para" id="exer-mc-invertible-matrix-3-2-1-1"><span class="process-math">\(\begin{pmatrix}
+2 &amp; 1 \\
+1 &amp; 1
+\end{pmatrix}\)</span></div></li>
+<li data-component="feedback" id="rs-exer-mc-invertible-matrix_opt_b"><div class="para" id="exer-mc-invertible-matrix-3-2-2-1">Correct! Its determinant is <span class="process-math">\((2)(1) - (1)(1) = 1\text{,}\)</span> which is not zero, so the matrix is invertible.</div></li>
+<li data-component="answer" id="rs-exer-mc-invertible-matrix_opt_c"><div class="para" id="exer-mc-invertible-matrix-3-3-1-1"><span class="process-math">\(\begin{pmatrix}
+0 &amp; 0 \\
+1 &amp; 3
+\end{pmatrix}\)</span></div></li>
+<li data-component="feedback" id="rs-exer-mc-invertible-matrix_opt_c"><div class="para" id="exer-mc-invertible-matrix-3-3-2-1">Incorrect. This matrix has a zero row, so its determinant is zero and it is not invertible.</div></li>
+<li data-component="answer" id="rs-exer-mc-invertible-matrix_opt_d"><div class="para" id="exer-mc-invertible-matrix-3-4-1-1"><span class="process-math">\(\begin{pmatrix}
+1 &amp; -1 \\
+-2 &amp; 2
+\end{pmatrix}\)</span></div></li>
+<li data-component="feedback" id="rs-exer-mc-invertible-matrix_opt_d"><div class="para" id="exer-mc-invertible-matrix-3-4-2-1">Incorrect. The second row is <span class="process-math">\(-2\)</span> times the first row, so the matrix is not invertible.</div></li>
+</ul>
+</div></div>
+<div class="autopermalink" data-description="Exercise 1.2.1.1: Identifying an Invertible Matrix"><a href="#exer-mc-invertible-matrix" title="Copy heading and permalink for Exercise 1.2.1.1: Identifying an Invertible Matrix" aria-label="Copy heading and permalink for Exercise 1.2.1.1: Identifying an Invertible Matrix">🔗</a></div></article><article class="exercise exercise-like" id="exer-tf-one-sided-inverse"><h5 class="heading">
+<span class="codenumber">2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Checking an Inverse.</span>
+</h5>
+<div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
+<div class="exercise-statement"><div class="para" id="exer-tf-one-sided-inverse-2-1">True or False: For square matrices, if <span class="process-math">\(AB = I_n\text{,}\)</span> then <span class="process-math">\(B\)</span> is the inverse of <span class="process-math">\(A\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#exer-tf-one-sided-inverse-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div>
+<ul data-component="multiplechoice" class="exercise-interactives" id="rs-exer-tf-one-sided-inverse" data-multipleanswers="false">
+<li data-component="answer" id="rs-exer-tf-one-sided-inverse_opt_a" data-correct=""><div class="para" id="exer-tf-one-sided-inverse-3-1-1-1">True</div></li>
+<li data-component="feedback" id="rs-exer-tf-one-sided-inverse_opt_a"><div class="para" id="exer-tf-one-sided-inverse-3-1-2-1">Correct! For square matrices, one of the equations <span class="process-math">\(AB = I_n\)</span> or <span class="process-math">\(BA = I_n\)</span> already implies the other, so <span class="process-math">\(B = A^{-1}\text{.}\)</span>
+</div></li>
+<li data-component="answer" id="rs-exer-tf-one-sided-inverse_opt_b"><div class="para" id="exer-tf-one-sided-inverse-3-2-1-1">False</div></li>
+<li data-component="feedback" id="rs-exer-tf-one-sided-inverse_opt_b"><div class="para" id="exer-tf-one-sided-inverse-3-2-2-1">Incorrect. For square matrices, checking just one of the equations is enough.</div></li>
+</ul>
+</div></div>
+<div class="autopermalink" data-description="Exercise 1.2.1.2: Checking an Inverse"><a href="#exer-tf-one-sided-inverse" title="Copy heading and permalink for Exercise 1.2.1.2: Checking an Inverse" aria-label="Copy heading and permalink for Exercise 1.2.1.2: Checking an Inverse">🔗</a></div></article><article class="exercise exercise-like" id="exer-mc-solve-with-inverse"><h5 class="heading">
+<span class="codenumber">3<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Solving a System with an Inverse Matrix.</span>
+</h5>
+<div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
+<div class="exercise-statement"><div class="para" id="exer-mc-solve-with-inverse-2-1">Suppose <span class="process-math">\(A^{-1} =
+\begin{pmatrix}
+1 &amp; -1 \\
+-1 &amp; 2
+\end{pmatrix}\)</span> and <span class="process-math">\(\mathbf{v} =
+\begin{pmatrix}
+5 \\
+3
+\end{pmatrix}.\)</span> What is the solution of <span class="process-math">\(A\mathbf{u} = \mathbf{v}\text{?}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#exer-mc-solve-with-inverse-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div>
+<ul data-component="multiplechoice" class="exercise-interactives" id="rs-exer-mc-solve-with-inverse" data-multipleanswers="false">
+<li data-component="answer" id="rs-exer-mc-solve-with-inverse_opt_a"><div class="para" id="exer-mc-solve-with-inverse-3-1-1-1"><span class="process-math">\(\mathbf{u} =
+\begin{pmatrix}
+5 \\
+3
+\end{pmatrix}\)</span></div></li>
+<li data-component="feedback" id="rs-exer-mc-solve-with-inverse_opt_a"><div class="para" id="exer-mc-solve-with-inverse-3-1-2-1">Incorrect. The solution is obtained by computing <span class="process-math">\(\mathbf{u} = A^{-1}\mathbf{v}\text{,}\)</span> not by copying the right-hand side.</div></li>
+<li data-component="answer" id="rs-exer-mc-solve-with-inverse_opt_b" data-correct=""><div class="para" id="exer-mc-solve-with-inverse-3-2-1-1"><span class="process-math">\(\mathbf{u} =
+\begin{pmatrix}
+2 \\
+1
+\end{pmatrix}\)</span></div></li>
+<li data-component="feedback" id="rs-exer-mc-solve-with-inverse_opt_b"><div class="para" id="exer-mc-solve-with-inverse-3-2-2-1">Correct! We have <span class="process-math">\(\mathbf{u} = A^{-1}\mathbf{v}
+=
+\begin{pmatrix}
+1 &amp; -1 \\
+-1 &amp; 2
+\end{pmatrix}
+\begin{pmatrix}
+5 \\
+3
+\end{pmatrix}
+=
+\begin{pmatrix}
+2 \\
+1
+\end{pmatrix}.\)</span>
+</div></li>
+<li data-component="answer" id="rs-exer-mc-solve-with-inverse_opt_c"><div class="para" id="exer-mc-solve-with-inverse-3-3-1-1"><span class="process-math">\(\mathbf{u} =
+\begin{pmatrix}
+1 \\
+2
+\end{pmatrix}\)</span></div></li>
+<li data-component="feedback" id="rs-exer-mc-solve-with-inverse_opt_c"><div class="para" id="exer-mc-solve-with-inverse-3-3-2-1">Incorrect. Check the matrix-vector multiplication carefully.</div></li>
+<li data-component="answer" id="rs-exer-mc-solve-with-inverse_opt_d"><div class="para" id="exer-mc-solve-with-inverse-3-4-1-1"><span class="process-math">\(\mathbf{u} =
+\begin{pmatrix}
+8 \\
+1
+\end{pmatrix}\)</span></div></li>
+<li data-component="feedback" id="rs-exer-mc-solve-with-inverse_opt_d"><div class="para" id="exer-mc-solve-with-inverse-3-4-2-1">Incorrect. This is not the result of multiplying <span class="process-math">\(A^{-1}\)</span> by <span class="process-math">\(\mathbf{v}\text{.}\)</span>
+</div></li>
+</ul>
+</div></div>
+<div class="autopermalink" data-description="Exercise 1.2.1.3: Solving a System with an Inverse Matrix"><a href="#exer-mc-solve-with-inverse" title="Copy heading and permalink for Exercise 1.2.1.3: Solving a System with an Inverse Matrix" aria-label="Copy heading and permalink for Exercise 1.2.1.3: Solving a System with an Inverse Matrix">🔗</a></div></article><article class="exercise exercise-like" id="exer-tf-orthogonal-inverse"><h5 class="heading">
+<span class="codenumber">4<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Orthogonal Matrices.</span>
+</h5>
+<div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
+<div class="exercise-statement"><div class="para" id="exer-tf-orthogonal-inverse-2-1">True or False: If a square matrix <span class="process-math">\(A\)</span> satisfies <span class="process-math">\(AA^T = I_n\text{,}\)</span> then <span class="process-math">\(A^{-1} = A^T\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#exer-tf-orthogonal-inverse-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div>
+<ul data-component="multiplechoice" class="exercise-interactives" id="rs-exer-tf-orthogonal-inverse" data-multipleanswers="false">
+<li data-component="answer" id="rs-exer-tf-orthogonal-inverse_opt_a" data-correct=""><div class="para" id="exer-tf-orthogonal-inverse-3-1-1-1">True</div></li>
+<li data-component="feedback" id="rs-exer-tf-orthogonal-inverse_opt_a"><div class="para" id="exer-tf-orthogonal-inverse-3-1-2-1">Correct! This is exactly the defining property of an orthogonal matrix.</div></li>
+<li data-component="answer" id="rs-exer-tf-orthogonal-inverse_opt_b"><div class="para" id="exer-tf-orthogonal-inverse-3-2-1-1">False</div></li>
+<li data-component="feedback" id="rs-exer-tf-orthogonal-inverse_opt_b"><div class="para" id="exer-tf-orthogonal-inverse-3-2-2-1">Incorrect. If <span class="process-math">\(AA^T = I_n\text{,}\)</span> then <span class="process-math">\(A^T\)</span> is the inverse of <span class="process-math">\(A\text{.}\)</span>
+</div></li>
+</ul>
+</div></div>
+<div class="autopermalink" data-description="Exercise 1.2.1.4: Orthogonal Matrices"><a href="#exer-tf-orthogonal-inverse" title="Copy heading and permalink for Exercise 1.2.1.4: Orthogonal Matrices" aria-label="Copy heading and permalink for Exercise 1.2.1.4: Orthogonal Matrices">🔗</a></div></article><article class="exercise exercise-like" id="exer-mc-gauss-jordan-inverse"><h5 class="heading">
+<span class="codenumber">5<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">The Gauß-Jordan Method.</span>
+</h5>
+<div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
+<div class="exercise-statement"><div class="para" id="exer-mc-gauss-jordan-inverse-2-1">When using the Gauß-Jordan method to compute the inverse of a square matrix <span class="process-math">\(A\text{,}\)</span> which augmented matrix do we start with?<div class="autopermalink" data-description="Paragraph"><a href="#exer-mc-gauss-jordan-inverse-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div>
+<ul data-component="multiplechoice" class="exercise-interactives" id="rs-exer-mc-gauss-jordan-inverse" data-multipleanswers="false">
+<li data-component="answer" id="rs-exer-mc-gauss-jordan-inverse_opt_a"><div class="para" id="exer-mc-gauss-jordan-inverse-3-1-1-1"><span class="process-math">\((A \mid A)\)</span></div></li>
+<li data-component="feedback" id="rs-exer-mc-gauss-jordan-inverse_opt_a"><div class="para" id="exer-mc-gauss-jordan-inverse-3-1-2-1">Incorrect. The second block must be the identity matrix.</div></li>
+<li data-component="answer" id="rs-exer-mc-gauss-jordan-inverse_opt_b" data-correct=""><div class="para" id="exer-mc-gauss-jordan-inverse-3-2-1-1"><span class="process-math">\((A \mid I_n)\)</span></div></li>
+<li data-component="feedback" id="rs-exer-mc-gauss-jordan-inverse_opt_b"><div class="para" id="exer-mc-gauss-jordan-inverse-3-2-2-1">Correct! We row reduce <span class="process-math">\((A \mid I_n)\)</span> until the left block becomes <span class="process-math">\(I_n\text{;}\)</span> then the right block is <span class="process-math">\(A^{-1}\text{.}\)</span>
+</div></li>
+<li data-component="answer" id="rs-exer-mc-gauss-jordan-inverse_opt_c"><div class="para" id="exer-mc-gauss-jordan-inverse-3-3-1-1"><span class="process-math">\((I_n \mid A)\)</span></div></li>
+<li data-component="feedback" id="rs-exer-mc-gauss-jordan-inverse_opt_c"><div class="para" id="exer-mc-gauss-jordan-inverse-3-3-2-1">Incorrect. The matrix <span class="process-math">\(A\)</span> must be placed in the left block.</div></li>
+<li data-component="answer" id="rs-exer-mc-gauss-jordan-inverse_opt_d"><div class="para" id="exer-mc-gauss-jordan-inverse-3-4-1-1"><span class="process-math">\((A^T \mid I_n)\)</span></div></li>
+<li data-component="feedback" id="rs-exer-mc-gauss-jordan-inverse_opt_d"><div class="para" id="exer-mc-gauss-jordan-inverse-3-4-2-1">Incorrect. The Gauß-Jordan method starts with <span class="process-math">\(A\text{,}\)</span> not with its transpose.</div></li>
+</ul>
+</div></div>
+<div class="autopermalink" data-description="Exercise 1.2.1.5: The Gauß-Jordan Method"><a href="#exer-mc-gauss-jordan-inverse" title="Copy heading and permalink for Exercise 1.2.1.5: The Gauß-Jordan Method" aria-label="Copy heading and permalink for Exercise 1.2.1.5: The Gauß-Jordan Method">🔗</a></div></article><div class="autopermalink" data-description="Exercises 1.2.1: Check Your Understanding"><a href="#exercises-inverse-matrices" title="Copy heading and permalink for Exercises 1.2.1: Check Your Understanding" aria-label="Copy heading and permalink for Exercises 1.2.1: Check Your Understanding">🔗</a></div></section><div class="autopermalink" data-description="Subsection 1.2.1: Inverse Matrices"><a href="#section-determinants-inverse-matrices-3" title="Copy heading and permalink for Subsection 1.2.1: Inverse Matrices" aria-label="Copy heading and permalink for Subsection 1.2.1: Inverse Matrices">🔗</a></div></section><div class="autopermalink" data-description="Section 1.2: Determinants and Inverse Matrices"><a href="#section-determinants-inverse-matrices" title="Copy heading and permalink for Section 1.2: Determinants and Inverse Matrices" aria-label="Copy heading and permalink for Section 1.2: Determinants and Inverse Matrices">🔗</a></div></section></div>
 <div id="ptx-content-footer" class="ptx-content-footer">
 <a class="previous-button button" href="section-vectors-matrices-linear-systems.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="section-eigenvalues-eigenvectors.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
 </div></main>

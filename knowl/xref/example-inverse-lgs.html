@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: denver                         *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="example example-like"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">1.2.3</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Solving a Linear System with an Inverse Matrix.</span>
+</h4>
+<div class="para logical">
+<div class="para">We illustrate the idea with a simple linear system</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A\mathbf{u}=\mathbf{v}
+\end{equation*}
+</div>
+<div class="para">with</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A=
+\begin{pmatrix}
+2 &amp; 1\\
+1 &amp; 1
+\end{pmatrix},
+\qquad
+\mathbf{v}=
+\begin{pmatrix}
+5\\
+3
+\end{pmatrix}.
+\end{equation*}
+</div>
+<div class="para">The inverse of <span class="process-math">\(A\)</span> is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A^{-1}=
+\begin{pmatrix}
+1 &amp; -1\\
+-1 &amp; 2
+\end{pmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#example-inverse-lgs-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">We postpone the explanation how to compute inverse matrices and simply check that the given matrix is indeed the inverse of <span class="process-math">\(A\text{.}\)</span> We compute</div>
+<div class="displaymath process-math">
+\begin{equation*}
+AA^{-1}
+=
+\begin{pmatrix}
+2 &amp; 1\\
+1 &amp; 1
+\end{pmatrix}
+\begin{pmatrix}
+1 &amp; -1\\
+-1 &amp; 2
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 &amp; 0\\
+0 &amp; 1
+\end{pmatrix}
+= I_2.
+\end{equation*}
+</div>
+<div class="para">Similarly,</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A^{-1}A
+=
+\begin{pmatrix}
+1 &amp; -1\\
+-1 &amp; 2
+\end{pmatrix}
+\begin{pmatrix}
+2 &amp; 1\\
+1 &amp; 1
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 &amp; 0\\
+0 &amp; 1
+\end{pmatrix}
+= I_2.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#example-inverse-lgs-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical">
+<div class="para">Therefore, we may solve the system by multiplying from the left by <span class="process-math">\(A^{-1}\text{:}\)</span>
+</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{u}=A^{-1}\mathbf{v}
+=
+\begin{pmatrix}
+1 &amp; -1\\
+-1 &amp; 2
+\end{pmatrix}
+\begin{pmatrix}
+5\\
+3
+\end{pmatrix}
+=
+\begin{pmatrix}
+2\\
+1
+\end{pmatrix}.
+\end{equation*}
+</div>
+<div class="para">Hence the solution of the linear system is</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\mathbf{u}=
+\begin{pmatrix}
+2\\
+1
+\end{pmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#example-inverse-lgs-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 1.2.3: Solving a Linear System with an Inverse Matrix"><a href="#example-inverse-lgs" title="Copy heading and permalink for Example 1.2.3: Solving a Linear System with an Inverse Matrix" aria-label="Copy heading and permalink for Example 1.2.3: Solving a Linear System with an Inverse Matrix">🔗</a></div></article><span class="incontext"><a class="internal" href="section-determinants-inverse-matrices.html#example-inverse-lgs">in-context</a></span>
+</body>
+</html>
