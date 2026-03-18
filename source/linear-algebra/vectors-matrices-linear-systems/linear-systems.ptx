@@ -6,10 +6,10 @@
             Systems of linear equations occur throughout mathematics, science, and engineering. They arise whenever several unknown quantities are linked by linear relations, for example in balance equations, circuit equations, calibration problems, or interpolation tasks.
         </p>
         <p>
-            Our goal is to solve such systems systematically. The key idea is to replace a given system by simpler equivalent systems whose solution sets remain unchanged. This leads to the Gauss algorithm and, as a further refinement, to the Gauss--Jordan method.
+            Our goal is to solve such systems systematically. The key idea is to replace a given system by simpler equivalent systems whose solution sets remain unchanged. This leads to the Gauss algorithm and, as a further refinement, to the Gauss-Jordan method.
         </p>
         <p>
-            Throughout this section, it is important to distinguish carefully between four different objects. The <term>linear system</term> is the mathematical problem we want to solve. Its <term>augmented coefficient matrix</term> is a compact way of writing this problem. The <term>solution set</term> is the set of all vectors that satisfy the system. Finally, the <term>Gauss</term> and <term>Gauss--Jordan methods</term> are procedures that transform the matrix without changing the solution set of the underlying system.
+            Throughout this section, it is important to distinguish carefully between four different objects. The <term>linear system</term> is the mathematical problem we want to solve. Its <term>augmented coefficient matrix</term> is a compact way of writing this problem. The <term>solution set</term> is the set of all vectors that satisfy the system. Finally, the <term>Gauss</term> and <term>Gauss-Jordan methods</term> are procedures that transform the matrix without changing the solution set of the underlying system.
         </p>
     </introduction>
 
@@ -70,6 +70,48 @@
                 \end{aligned}
             </me>
             is not linear, because the term <m>x_1x_2</m> is a product of unknowns.
+        </p>
+    </example>
+
+    <example>
+        <title>A Solution and a Solution Set</title>
+        <p>
+            Consider the linear system
+            <me>
+                \begin{aligned}
+                    x_1 + x_2 &amp;= 3,\\
+                    x_1 - x_2 &amp;= 1.
+                \end{aligned}
+            </me>
+        </p>
+        <p>
+            The vector
+            <me>
+                \begin{pmatrix}
+                    2\\
+                    1
+                \end{pmatrix}
+            </me>
+            is a <term>solution</term>, because its components satisfy both equations:
+            <me>
+                2+1=3,
+                \qquad
+                2-1=1.
+            </me>
+        </p>
+        <p>
+            In this example, there is only one solution. Therefore the <term>solution set</term> is the set
+            <me>
+                \left\{
+                    \begin{pmatrix}
+                        2\\
+                        1
+                    \end{pmatrix}
+                \right\}.
+            </me>
+        </p>
+        <p>
+            More generally, the solution set of a linear system may contain no vector, exactly one vector, or infinitely many vectors.
         </p>
     </example>
 
@@ -163,7 +205,7 @@
     </example>
 
     <example>
-        <title>The Solution Set Does Not Change Under Row Operations</title>
+        <title>Why Row Operations Preserve the Solution Set</title>
         <p>
             For the original system
             <me>
@@ -198,7 +240,7 @@
                     x_1 + x_2 &amp;= 3.
                 \end{aligned}
             </me>
-            This is the same pair of equations in a different order, so the solution set remains unchanged.
+            This is exactly the same pair of equations, only written in a different order. Therefore the solution set does not change.
         </p>
         <p>
             After multiplying the first row by <m>2</m>, we obtain
@@ -208,7 +250,7 @@
                     2x_1 - x_2 &amp;= 0.
                 \end{aligned}
             </me>
-            Since the first equation is just twice the original first equation, the solution set is again unchanged.
+            The first equation is equivalent to the original first equation, because dividing by <m>2</m> recovers it. Hence the set of solutions is again the same.
         </p>
         <p>
             After replacing the second row by <m>R_2-2R_1</m>, we obtain
@@ -255,6 +297,9 @@
             </ul>
             <p>
                 A matrix is in <term>reduced row echelon form</term> if, in addition, every pivot element is equal to <m>1</m> and is the only non-zero entry in its column.
+            </p>
+            <p>
+                The notions <term>pivot element</term> and <term>pivot position</term> are used only for matrices that are in row echelon form. The pivot position is the position in the matrix at which a pivot element occurs, that is, the row-column position of the first non-zero entry of a non-zero row.
             </p>
         </statement>
     </definition>
@@ -420,7 +465,7 @@
             </me>
         </p>
         <p>
-            This matrix is in row echelon form. Its pivot columns are the first, third, and fourth columns. Therefore <m>x_1</m>, <m>x_3</m>, and <m>x_4</m> are basic variables, while <m>x_2</m> and <m>x_5</m> are free variables.
+            This matrix is in row echelon form. Its pivot columns are the first, third, and fourth columns. We will later use exactly this information to analyze the solution set of the corresponding linear system.
         </p>
     </example>
 
@@ -432,10 +477,10 @@
     </p>
 
     <definition>
-        <title>Gauss--Jordan Method</title>
+        <title>Gauss-Jordan Method</title>
         <statement>
             <p>
-                The <term>Gauss--Jordan method</term> continues the row reduction after the Gauss algorithm until the augmented coefficient matrix is in reduced row echelon form.
+                The <term>Gauss-Jordan method</term> continues the row reduction after the Gauss algorithm until the augmented coefficient matrix is in reduced row echelon form.
             </p>
             <p>
                 Starting from a row echelon form, one begins with the pivot furthest to the bottom right. First, the corresponding row is scaled so that this pivot becomes equal to <m>1</m>. Then all entries above this pivot are eliminated, so that the whole pivot column is cleaned above the pivot. One then moves to the next pivot, again looking from the bottom right toward the upper left, and repeats the same procedure.
@@ -472,7 +517,9 @@
                 \end{array}
                 \right).
             </me>
-            The entries above this pivot are now cleaned. In this case only the second row contains a non-zero entry in that column:
+        </p>
+        <p>
+            We now eliminate the entry above this pivot:
             <me>
                 R_2 \leftarrow R_2 - R_3.
             </me>
@@ -518,61 +565,25 @@
             </me>
         </p>
         <p>
-            Finally, we consider the remaining pivot in the first row and first column. It is already equal to <m>1</m>, and there are no rows above it. Thus the matrix is now in reduced row echelon form.
-        </p>
-        <p>
-            From this form we read off
+            Finally, we consider the remaining pivot in the first row and first column. It is already equal to <m>1</m>, and there are no rows above it. Thus we have reached reduced row echelon form:
             <me>
-                \begin{aligned}
-                    x_1 + 2x_2 + 3x_5 &amp;= \frac{7}{2},\\
-                    x_3 &amp;= -\frac{1}{2},\\
-                    x_4 + 2x_5 &amp;= \frac{9}{2}.
-                \end{aligned}
+                \left(
+                \begin{array}{ccccc|c}
+                    1 &amp; 2 &amp; 0 &amp; 0 &amp; 3 &amp; \frac{7}{2}\\
+                    0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; -\frac{1}{2}\\
+                    0 &amp; 0 &amp; 0 &amp; 1 &amp; 2 &amp; \frac{9}{2}
+                \end{array}
+                \right).
             </me>
-        </p>
-        <p>
-            The variables <m>x_2</m> and <m>x_5</m> are free. Let
-            <me>
-                x_2=s,\qquad x_5=t,\qquad s,t\in\mathbb{R}.
-            </me>
-            Then
-            <me>
-                x_1=\frac{7}{2}-2s-3t,\qquad
-                x_3=-\frac{1}{2},\qquad
-                x_4=\frac{9}{2}-2t.
-            </me>
-        </p>
-        <p>
-            The free variables are not a mere technical leftover. They parametrize the whole solution set. Each choice of <m>s</m> and <m>t</m> produces one solution, and every solution arises in exactly this way.
-        </p>
-        <p>
-            Therefore, the solution set is
-            <me>
-                \left\{
-                    \begin{pmatrix}
-                        \frac{7}{2}-2s-3t\\
-                        s\\
-                        -\frac{1}{2}\\
-                        \frac{9}{2}-2t\\
-                        t
-                    \end{pmatrix}
-                    \in \mathbb{R}^5
-                    \;\middle|\;
-                    s,t\in\mathbb{R}
-                \right\}.
-            </me>
-        </p>
-        <p>
-            If we choose, for instance, <m>s=0</m> and <m>t=0</m>, we obtain one particular solution. But this is only a special solution, not the full solution set.
         </p>
     </example>
 
     <p>
-        The position of the pivots tells us a great deal about the solution behavior of a system. The following examples illustrate the three basic situations.
+        The position of the pivots tells us a great deal about the solvability of a system. We now derive the basic possibilities systematically from row echelon form.
     </p>
 
     <example>
-        <title>No Solution</title>
+        <title>A Pivot in the Augmented Column Means No Solution</title>
         <p>
             Consider the row echelon form
             <me>
@@ -587,12 +598,12 @@
         <p>
             The second row corresponds to the equation
             <me>0=1,</me>
-            which is impossible. Hence the system has no solution.
+            which is impossible. Here the pivot lies in the augmented column, that is, in the rightmost column. Therefore the system is inconsistent and has no solution.
         </p>
     </example>
 
     <example>
-        <title>A Unique Solution</title>
+        <title>If Every Variable Column Has a Pivot, the Solution Is Unique</title>
         <p>
             Consider the row echelon form
             <me>
@@ -606,7 +617,10 @@
             </me>
         </p>
         <p>
-            Every variable column contains a pivot, and the rightmost column does not. Therefore the system has a unique solution. From the last equation we obtain
+            The rightmost column is not a pivot column, so the system is consistent. Moreover, every variable column contains a pivot. Thus each variable is determined by the equations, and no choice remains open.
+        </p>
+        <p>
+            From the last equation we obtain
             <me>x_3=0.</me>
             The second equation then gives
             <me>2x_2+4\cdot 0=1 \quad\Rightarrow\quad x_2=\frac{1}{2},</me>
@@ -614,7 +628,7 @@
             <me>x_1=5.</me>
         </p>
         <p>
-            Thus the solution set is
+            Hence the solution set consists of exactly one vector:
             <me>
                 \left\{
                     \begin{pmatrix}
@@ -637,13 +651,13 @@
                 Variables whose columns are pivot columns are called <term>basic variables</term>. Their values are determined by the equations once the remaining variables have been chosen.
             </p>
             <p>
-                Variables whose columns are not pivot columns are called <term>free variables</term>. They are not fixed by the system and may be chosen freely.
+                Variables whose columns are not pivot columns are called <term>free variables</term>. The system imposes no pivot equation that determines them directly. Therefore they are not restricted by the row echelon structure and may be chosen freely. For this reason, we can introduce parameters for them.
             </p>
         </statement>
     </definition>
 
     <example>
-        <title>Infinitely Many Solutions</title>
+        <title>If Some Variable Columns Have No Pivot, Free Variables Appear</title>
         <p>
             Consider the row echelon form
             <me>
@@ -668,7 +682,9 @@
             <me>x_1+x_2=-2.</me>
         </p>
         <p>
-            Let <m>x_2=t</m> with <m>t\in\mathbb{R}</m>. Then
+            Since <m>x_2</m> is free, the system does not prescribe a fixed value for it. We therefore introduce a parameter and write
+            <me>x_2=t,\qquad t\in\mathbb{R}.</me>
+            Then
             <me>x_1=-2-t,\qquad x_3=2.</me>
         </p>
         <p>
@@ -687,24 +703,7 @@
             </me>
         </p>
         <p>
-            It is often useful to write this in parametric vector form:
-            <me>
-                \left\{
-                    \begin{pmatrix}
-                        -2\\
-                        0\\
-                        2
-                    \end{pmatrix}
-                    +
-                    t\begin{pmatrix}
-                        -1\\
-                        1\\
-                        0
-                    \end{pmatrix}
-                    \;\middle|\;
-                    t\in\mathbb{R}
-                \right\}.
-            </me>
+            Thus one free variable leads to infinitely many solutions.
         </p>
     </example>
 
@@ -748,6 +747,127 @@
         </p>
         <p>
             Although the last row is zero, each variable column contains a pivot. Hence the system has a unique solution.
+        </p>
+    </example>
+
+    <p>
+        Once the solvability question has been answered, there are two standard ways to determine the solution set.
+    </p>
+
+    <example>
+        <title>Determining the Solution Set from Row Echelon Form by Back Substitution</title>
+        <p>
+            Consider the row echelon form
+            <me>
+                \left(
+                \begin{array}{cccc|c}
+                    1 &amp; 2 &amp; 0 &amp; -1 &amp; 3\\
+                    0 &amp; 1 &amp; -3 &amp; 2 &amp; 4\\
+                    0 &amp; 0 &amp; 0 &amp; 5 &amp; 10
+                \end{array}
+                \right).
+            </me>
+        </p>
+        <p>
+            The pivot columns are the first, second, and fourth columns. Hence <m>x_1</m>, <m>x_2</m>, and <m>x_4</m> are basic variables, while <m>x_3</m> is a free variable.
+        </p>
+        <p>
+            We begin with the last non-zero row. From
+            <me>5x_4=10</me>
+            we obtain
+            <me>x_4=2.</me>
+        </p>
+        <p>
+            The second row gives
+            <me>x_2-3x_3+2x_4=4.</me>
+            Since <m>x_3</m> is free, we write
+            <me>x_3=t,\qquad t\in\mathbb{R}.</me>
+            Substituting <m>x_4=2</m> yields
+            <me>x_2-3t+4=4 \quad\Rightarrow\quad x_2=3t.</me>
+        </p>
+        <p>
+            The first row gives
+            <me>x_1+2x_2-x_4=3.</me>
+            Substituting <m>x_2=3t</m> and <m>x_4=2</m>, we obtain
+            <me>x_1+6t-2=3 \quad\Rightarrow\quad x_1=5-6t.</me>
+        </p>
+        <p>
+            Therefore,
+            <me>
+                \left\{
+                    \begin{pmatrix}
+                        5-6t\\
+                        3t\\
+                        t\\
+                        2
+                    \end{pmatrix}
+                    \in \mathbb{R}^4
+                    \;\middle|\;
+                    t\in\mathbb{R}
+                \right\}
+            </me>
+            is the solution set.
+        </p>
+        <p>
+            This procedure is called <term>back substitution</term>: starting with the last pivot equation, we determine the basic variables step by step from bottom to top.
+        </p>
+    </example>
+
+    <example>
+        <title>Determining the Solution Set from Reduced Row Echelon Form by Direct Reading</title>
+        <p>
+            Consider the reduced row echelon form
+            <me>
+                \left(
+                \begin{array}{cccc|c}
+                    1 &amp; 0 &amp; 2 &amp; 0 &amp; 1\\
+                    0 &amp; 1 &amp; -1 &amp; 0 &amp; 3\\
+                    0 &amp; 0 &amp; 0 &amp; 1 &amp; -2
+                \end{array}
+                \right).
+            </me>
+        </p>
+        <p>
+            The pivot columns are the first, second, and fourth columns. Hence <m>x_1</m>, <m>x_2</m>, and <m>x_4</m> are basic variables, while <m>x_3</m> is free.
+        </p>
+        <p>
+            Because the matrix is already in reduced row echelon form, each basic variable is isolated in its own row:
+            <me>
+                \begin{aligned}
+                    x_1+2x_3 &amp;= 1,\\
+                    x_2-x_3 &amp;= 3,\\
+                    x_4 &amp;= -2.
+                \end{aligned}
+            </me>
+        </p>
+        <p>
+            We may therefore read off the solution almost immediately. Let
+            <me>x_3=t,\qquad t\in\mathbb{R}.</me>
+            Then
+            <me>
+                x_1=1-2t,\qquad
+                x_2=3+t,\qquad
+                x_4=-2.
+            </me>
+        </p>
+        <p>
+            Hence the solution set is
+            <me>
+                \left\{
+                    \begin{pmatrix}
+                        1-2t\\
+                        3+t\\
+                        t\\
+                        -2
+                    \end{pmatrix}
+                    \in \mathbb{R}^4
+                    \;\middle|\;
+                    t\in\mathbb{R}
+                \right\}.
+            </me>
+        </p>
+        <p>
+            Compared with general row echelon form, reduced row echelon form has the advantage that the basic variables can be read off directly, without an additional back-substitution step.
         </p>
     </example>
 
@@ -907,6 +1027,68 @@
             </p>
         </statement>
     </definition>
+
+    <example>
+        <title>A Linear System in Matrix-Vector Form</title>
+        <p>
+            Consider the system
+            <me>
+                \begin{aligned}
+                    2x_1 + x_2 - x_3 &amp;= 1,\\
+                    -x_1 + 3x_2 + 2x_3 &amp;= 4.
+                \end{aligned}
+            </me>
+        </p>
+        <p>
+            Its matrix-vector form is
+            <me>
+                \begin{pmatrix}
+                    2 &amp; 1 &amp; -1\\
+                    -1 &amp; 3 &amp; 2
+                \end{pmatrix}
+                \begin{pmatrix}
+                    x_1\\
+                    x_2\\
+                    x_3
+                \end{pmatrix}
+                =
+                \begin{pmatrix}
+                    1\\
+                    4
+                \end{pmatrix}.
+            </me>
+        </p>
+        <p>
+            If we denote the columns of the coefficient matrix by
+            <me>
+                \mathbf{v}_1=
+                \begin{pmatrix}
+                    2\\
+                    -1
+                \end{pmatrix},
+                \qquad
+                \mathbf{v}_2=
+                \begin{pmatrix}
+                    1\\
+                    3
+                \end{pmatrix},
+                \qquad
+                \mathbf{v}_3=
+                \begin{pmatrix}
+                    -1\\
+                    2
+                \end{pmatrix},
+            </me>
+            then the same system can be written in vector form as
+            <me>
+                x_1\mathbf{v}_1+x_2\mathbf{v}_2+x_3\mathbf{v}_3=
+                \begin{pmatrix}
+                    1\\
+                    4
+                \end{pmatrix}.
+            </me>
+        </p>
+    </example>
 
     <p>
         The vector form is conceptually very important: solving the system means deciding whether <m>\mathbf{b}</m> can be represented as a linear combination of the column vectors of <m>A</m>, and if so, in which way.

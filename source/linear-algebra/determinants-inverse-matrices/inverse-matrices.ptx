@@ -1,0 +1,879 @@
+<subsection>
+    <title>Inverse Matrices</title>
+
+    <introduction>
+        <p>
+            In elementary algebra, an equation such as <m>5x=20</m> is solved by multiplying both sides by <m>\frac{1}{5}</m>. In linear algebra, we seek an analogous idea for matrix equations of the form <m>A\mathbf{x}=\mathbf{b}</m>. This leads to the concept of an inverse matrix.
+        </p>
+        <p>
+            Not every matrix can be inverted. In this section, we introduce invertible matrices, compute inverses in simple cases, explain how inverses can be used to solve linear systems, and show how the Gauss--Jordan method can be extended to determine the inverse of a matrix.
+        </p>
+    </introduction>
+
+    <definition>
+        <title>Invertible Matrix and Inverse Matrix</title>
+        <statement>
+            <p>
+                Let <m>A</m> be a square matrix of size <m>n\times n</m>. We say that <m>A</m> is <term>invertible</term> or <term>regular</term> if there exists a matrix <m>B</m> of the same size such that
+                <me>
+                    AB = BA = I_n,
+                </me>
+                where <m>I_n</m> denotes the identity matrix
+                <me>
+                    I_n =
+                    \begin{pmatrix}
+                        1 &amp; 0 &amp; \dots &amp; 0\\
+                        0 &amp; 1 &amp; \dots &amp; 0\\
+                        \vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+                        0 &amp; 0 &amp; \dots &amp; 1
+                    \end{pmatrix}.
+                </me>
+            </p>
+            <p>
+                The matrix <m>B</m> is then called the <term>inverse matrix</term> of <m>A</m> and is denoted by <m>A^{-1}</m>.
+            </p>
+        </statement>
+    </definition>
+
+
+    <example>
+        <title>Checking an Inverse by Multiplication</title>
+        <p>
+            Consider
+            <me>
+                A=
+                \begin{pmatrix}
+                    1 &amp; 2 &amp; 3\\
+                    0 &amp; 1 &amp; 4\\
+                    5 &amp; 6 &amp; 0
+                \end{pmatrix}.
+            </me>
+            We claim that
+            <me>
+                A^{-1}=
+                \begin{pmatrix}
+                    -24 &amp; 18 &amp; 5\\
+                    20 &amp; -15 &amp; -4\\
+                    -5 &amp; 4 &amp; 1
+                \end{pmatrix}.
+            </me>
+        </p>
+        <p>
+            To verify this, we compute
+            <me>
+                AA^{-1}
+                =
+                \begin{pmatrix}
+                    1 &amp; 2 &amp; 3\\
+                    0 &amp; 1 &amp; 4\\
+                    5 &amp; 6 &amp; 0
+                \end{pmatrix}
+                \begin{pmatrix}
+                    -24 &amp; 18 &amp; 5\\
+                    20 &amp; -15 &amp; -4\\
+                    -5 &amp; 4 &amp; 1
+                \end{pmatrix}
+                =
+                \begin{pmatrix}
+                    1 &amp; 0 &amp; 0\\
+                    0 &amp; 1 &amp; 0\\
+                    0 &amp; 0 &amp; 1
+                \end{pmatrix}
+                = I_3.
+            </me>
+        </p>
+        <p>
+            One also checks that <m>A^{-1}A=I_3</m>. Therefore the given matrix is indeed the inverse of <m>A</m>.
+        </p>
+    </example>
+
+    <p>
+        Remember that the identity matrix <m>I_n</m> plays the same role in matrix multiplication that the number <m>1</m> plays in ordinary multiplication. For every matrix <m>A \in \mathbb{R}^{n\times n}</m> we have
+        <me>
+            I_nA = AI_n = A,
+        </me>
+        and for every vector <m>\mathbf{v}\in\mathbb{R}^n</m> we have
+        <me>
+            I_n\mathbf{v}=\mathbf{v}.
+        </me>
+        Thus, multiplying by <m>I_n</m> leaves both matrices and vectors unchanged.
+    </p>
+
+    <p>
+        If <m>A</m> is invertible and we want to solve
+        <me>
+            A\mathbf{x}=\mathbf{b},
+        </me>
+        then multiplying from the left by <m>A^{-1}</m> gives
+        <me>
+            A^{-1}A\mathbf{x}=A^{-1}\mathbf{b},
+        </me>
+        and therefore
+        <me>
+            \mathbf{x}=A^{-1}\mathbf{b}.
+        </me>
+        Thus, the inverse matrix plays the same role for matrix equations as division by a non-zero number does for scalar equations.
+    </p>
+
+    <example xml:id="example-inverse-lgs">
+        <title>Solving a Linear System with an Inverse Matrix</title>
+        <p>
+            We illustrate the idea with a simple linear system
+            <me>
+                A\mathbf{u}=\mathbf{v}
+            </me>
+            with
+            <me>
+                A=
+                \begin{pmatrix}
+                    2 &amp; 1\\
+                    1 &amp; 1
+                \end{pmatrix},
+                \qquad
+                \mathbf{v}=
+                \begin{pmatrix}
+                    5\\
+                    3
+                \end{pmatrix}.
+            </me>
+            The inverse of <m>A</m> is
+            <me>
+                A^{-1}=
+                \begin{pmatrix}
+                    1 &amp; -1\\
+                    -1 &amp; 2
+                \end{pmatrix}.
+            </me>
+        </p>
+        <p>
+            We postpone the explanation how to compute inverse matrices and simply check that the given matrix is indeed the inverse of <m>A</m>. We compute
+            <me>
+                AA^{-1}
+                =
+                \begin{pmatrix}
+                    2 &amp; 1\\
+                    1 &amp; 1
+                \end{pmatrix}
+                \begin{pmatrix}
+                    1 &amp; -1\\
+                    -1 &amp; 2
+                \end{pmatrix}
+                =
+                \begin{pmatrix}
+                    1 &amp; 0\\
+                    0 &amp; 1
+                \end{pmatrix}
+                = I_2.
+            </me>
+            Similarly,
+            <me>
+                A^{-1}A
+                =
+                \begin{pmatrix}
+                    1 &amp; -1\\
+                    -1 &amp; 2
+                \end{pmatrix}
+                \begin{pmatrix}
+                    2 &amp; 1\\
+                    1 &amp; 1
+                \end{pmatrix}
+                =
+                \begin{pmatrix}
+                    1 &amp; 0\\
+                    0 &amp; 1
+                \end{pmatrix}
+                = I_2.
+            </me>
+        </p>
+        <p>
+            Therefore, we may solve the system by multiplying from the left by <m>A^{-1}</m>:
+            <me>
+                \mathbf{u}=A^{-1}\mathbf{v}
+                =
+                \begin{pmatrix}
+                    1 &amp; -1\\
+                    -1 &amp; 2
+                \end{pmatrix}
+                \begin{pmatrix}
+                    5\\
+                    3
+                \end{pmatrix}
+                =
+                \begin{pmatrix}
+                    2\\
+                    1
+                \end{pmatrix}.
+            </me>
+            Hence the solution of the linear system is
+            <me>
+                \mathbf{u}=
+                \begin{pmatrix}
+                    2\\
+                    1
+                \end{pmatrix}.
+            </me>
+        </p>
+    </example>
+
+<theorem>
+    <title>Uniqueness of the Inverse</title>
+    <statement>
+        <p>
+            If a square matrix <m>A</m> is invertible, then its inverse is unique.
+        </p>
+        <p>
+            Moreover, to verify that a matrix <m>B</m> is the inverse of <m>A</m>, it is enough to check one of the equations
+            <me>
+                AB=I_n
+                \qquad\text{or}\qquad
+                BA=I_n.
+            </me>
+            For square matrices, each of these identities already implies that the other one holds as well.
+        </p>
+    </statement>
+    <proof>
+        <p>
+            We first show uniqueness. Assume that <m>B</m> and <m>C</m> both satisfy
+            <me>
+                AB=BA=I_n
+                \qquad\text{and}\qquad
+                AC=CA=I_n.
+            </me>
+            Then
+            <me>
+                B = BI_n = B(AC) = (BA)C = I_nC = C.
+            </me>
+            Hence the inverse matrix is uniquely determined.
+        </p>
+        <p>
+            Now suppose that <m>AB=I_n</m>. Then <m>B</m> is a right inverse of <m>A</m>. For square matrices, this already implies that <m>A</m> is invertible, and therefore the inverse is unique. Since <m>B</m> is an inverse candidate and the inverse is unique, it follows that
+            <me>
+                B=A^{-1}.
+            </me>
+            Consequently,
+            <me>
+                BA=A^{-1}A=I_n.
+            </me>
+            The argument for the case <m>BA=I_n</m> is analogous.
+        </p>
+    </proof>
+</theorem>
+
+
+    <p>
+        At this point, it is natural to ask whether every square matrix is invertible. The answer is no.
+    </p>
+
+    <example>
+        <title>A Matrix That Is Not Invertible</title>
+        <p>
+            Consider
+            <me>
+                A=
+                \begin{pmatrix}
+                    1 &amp; 0\\
+                    0 &amp; 0
+                \end{pmatrix},
+                \qquad
+                B=
+                \begin{pmatrix}
+                    0 &amp; 0\\
+                    1 &amp; 0
+                \end{pmatrix}.
+            </me>
+            Then
+            <me>
+                AB=
+                \begin{pmatrix}
+                    0 &amp; 0\\
+                    0 &amp; 0
+                \end{pmatrix}.
+            </me>
+        </p>
+        <p>
+            Suppose, for contradiction, that <m>A</m> were invertible. Multiplying the equation <m>AB=\mathbf{0}</m> from the left by <m>A^{-1}</m> would yield
+            <me>
+                B=A^{-1}(AB)=A^{-1}\mathbf{0}=\mathbf{0}.
+            </me>
+            But this is false, since <m>B\neq \mathbf{0}</m>. Hence <m>A</m> is not invertible.
+        </p>
+    </example>
+
+    <p>
+        For <m>2\times 2</m> matrices there is a particularly simple formula for the inverse.
+    </p>
+
+    <theorem>
+        <title>Inverse of a <m>2\times 2</m> Matrix</title>
+        <statement>
+            <p>
+                Let
+                <me>
+                    A=
+                    \begin{pmatrix}
+                        a &amp; b\\
+                        c &amp; d
+                    \end{pmatrix}.
+                </me>
+                Then <m>A</m> is invertible if and only if
+                <me>
+                    ad-bc \neq 0.
+                </me>
+                In this case,
+                <me>
+                    A^{-1}
+                    =
+                    \frac{1}{ad-bc}
+                    \begin{pmatrix}
+                        d &amp; -b\\
+                        -c &amp; a
+                    \end{pmatrix}.
+                </me>
+            </p>
+        </statement>
+        <proof>
+            <p>
+                Consider the matrix
+                <me>
+                    B=
+                    \begin{pmatrix}
+                        d &amp; -b\\
+                        -c &amp; a
+                    \end{pmatrix}.
+                </me>
+                Then
+                <me>
+                    AB
+                    =
+                    \begin{pmatrix}
+                        a &amp; b\\
+                        c &amp; d
+                    \end{pmatrix}
+                    \begin{pmatrix}
+                        d &amp; -b\\
+                        -c &amp; a
+                    \end{pmatrix}
+                    =
+                    \begin{pmatrix}
+                        ad-bc &amp; 0\\
+                        0 &amp; ad-bc
+                    \end{pmatrix}
+                    =
+                    (ad-bc)I_2.
+                </me>
+            </p>
+            <p>
+                If <m>ad-bc\neq 0</m>, dividing by this number gives
+                <me>
+                    A\left(\frac{1}{ad-bc}B\right)=I_2.
+                </me>
+                Hence
+                <me>
+                    A^{-1}=\frac{1}{ad-bc}B.
+                </me>
+            </p>
+            <p>
+                If <m>ad-bc=0</m>, then <m>AB=\mathbf{0}</m>. In particular, <m>A</m> cannot have an inverse, because otherwise multiplying by <m>A^{-1}</m> from the left would imply <m>B=\mathbf{0}</m>, which is impossible unless all entries vanish simultaneously.
+            </p>
+        </proof>
+    </theorem>
+
+    <example>
+        <title>Solving a Linear System with the Inverse Matrix (continuation)</title>
+        <p>
+            In <xref ref="example-inverse-lgs"/> we solved the linear system
+            <me>
+                A\mathbf{u}=\mathbf{v}
+            </me>
+            with
+            <me>
+                A=
+                \begin{pmatrix}
+                    2 &amp; 1\\
+                    1 &amp; 1
+                \end{pmatrix},
+                \qquad
+                \mathbf{v}=
+                \begin{pmatrix}
+                    5\\
+                    3
+                \end{pmatrix}.
+            </me>
+            using the inverse matrix <m>A^{-1}</m>. With the formula above we can compute
+            <me>
+                A^{-1} = \frac{1}{2\cdot 1 - 1} 
+                \begin{pmatrix} 
+                    1 &amp; -1 \\
+                    -1 &amp; 2
+                \end{pmatrix}
+                = 
+                \begin{pmatrix} 
+                    1 &amp; -1 \\
+                    -1 &amp; 2
+                \end{pmatrix},
+            </me>
+            which conincides with the inverse given above.
+        </p>
+    </example>
+
+<example>
+    <title>An Engineering Interpretation</title>
+    <p>
+        In many engineering applications, a square matrix describes how input quantities produce measured outputs. For instance, in a calibration problem one may have
+        <me>
+            A\mathbf{u}=\mathbf{v},
+        </me>
+        where <m>\mathbf{u}</m> is the unknown input vector and <m>\mathbf{v}</m> is the measured output vector.
+    </p>
+    <p>
+        A concrete example arises in electrical engineering. Suppose that two unknown source signals contribute to the voltages measured by two sensors. Each sensor records a weighted combination of the two source signals, because its position and construction determine how strongly it reacts to each source. If <m>\mathbf{u}</m> contains the unknown source intensities and <m>\mathbf{v}</m> the measured sensor voltages, then the relation between sources and measurements can be written in the form
+        <me>
+            A\mathbf{u}=\mathbf{v}.
+        </me>
+        The entries of the matrix <m>A</m> describe how strongly each source influences each sensor.
+    </p>
+    <p>
+        If <m>A</m> is invertible, then the source intensities can be reconstructed uniquely from the measurements by
+        <me>
+            \mathbf{u}=A^{-1}\mathbf{v}.
+        </me>
+        If <m>A</m> is not invertible, then this reconstruction is impossible in general: different source intensities may lead to the same sensor data, or some measurement vectors may not be attainable at all.
+    </p>
+</example>
+
+    <p>
+        For larger matrices, explicit formulas for computing the inverse become impractical. Instead, we compute inverses systematically by an extension of the Gauss--Jordan method.
+    </p>
+
+    <theorem>
+        <title>Computing the Inverse by the Gauss-Jordan Method</title>
+        <statement>
+            <p>
+                Let <m>A</m> be an <m>n\times n</m> matrix. Form the augmented matrix
+                <me>
+                    (A\mid I_n).
+                </me>
+                Apply elementary row operations until reduced row echelon form is reached.
+            </p>
+            <p>
+                There are two possible outcomes.
+            </p>
+            <ul>
+                <li>
+                    <p>
+                        If the result has the form
+                        <me>
+                            (I_n\mid B),
+                        </me>
+                        then <m>A</m> is invertible and
+                        <me>
+                            A^{-1}=B.
+                        </me>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        If the left block cannot be transformed into <m>I_n</m>, then <m>A</m> is not invertible.
+                    </p>
+                </li>
+            </ul>
+        </statement>
+    </theorem>
+
+    <example xml:id="example-gauss-jordan-inverse-3x3">
+        <title>Computing an Inverse with the Gauß-Jordan Method</title>
+        <p>
+            Consider the matrix
+            <me>
+                A=
+                \begin{pmatrix}
+                    1 &amp; 1 &amp; 0\\
+                    0 &amp; 1 &amp; 1\\
+                    0 &amp; 0 &amp; 1
+                \end{pmatrix}.
+            </me>
+            We determine its inverse by augmenting <m>A</m> with the identity matrix and applying row operations:
+            <me>
+                \left(
+                \begin{array}{ccc|ccc}
+                    1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0\\
+                    0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0\\
+                    0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1
+                \end{array}
+                \right).
+            </me>
+        </p>
+        <p>
+            We first eliminate the entry above the pivot in the third column by replacing the second row with
+            <m>R_2-R_3</m>. This gives
+            <me>
+                \left(
+                \begin{array}{ccc|ccc}
+                    1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0\\
+                    0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; -1\\
+                    0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1
+                \end{array}
+                \right).
+            </me>
+        </p>
+        <p>
+            Next, we eliminate the entry above the pivot in the second column by replacing the first row with
+            <m>R_1-R_2</m>. We obtain
+            <me>
+                \left(
+                \begin{array}{ccc|ccc}
+                    1 &amp; 0 &amp; 0 &amp; 1 &amp; -1 &amp; 1\\
+                    0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; -1\\
+                    0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1
+                \end{array}
+                \right).
+            </me>
+        </p>
+        <p>
+            The left block is now the identity matrix. Hence <m>A</m> is invertible, and the right block is the inverse:
+            <me>
+                A^{-1}=
+                \begin{pmatrix}
+                    1 &amp; -1 &amp; 1\\
+                    0 &amp; 1 &amp; -1\\
+                    0 &amp; 0 &amp; 1
+                \end{pmatrix}.
+            </me>
+        </p>
+    </example>
+
+    <p>
+        Invertible matrices are important because they are precisely the matrices for which a system of linear equations can be solved uniquely for every right-hand side. They describe situations in which no information is lost and every output is produced by exactly one input. The following theorem collects several equivalent ways of recognizing this fundamental property and, in particular, makes the connection between invertibility and the solvability of linear systems completely explicit.
+    </p>
+
+    <theorem>
+        <title>Equivalent Characterizations of Invertibility</title>
+        <statement>
+            <p>
+                Let <m>A</m> be an <m>n\times n</m> matrix, and let <m>\varphi_A:\mathbb{R}^n\to\mathbb{R}^n</m> be the linear map defined by
+                <me>
+                    \varphi_A(\mathbf{v})=A\mathbf{v}.
+                </me>
+                Then the following statements are equivalent.
+            </p>
+            <ul>
+                <li><p><m>A</m> is invertible.</p></li>
+                <li><p>There exists a matrix <m>B</m> such that <m>AB=I_n</m>.</p></li>
+                <li><p>There exists a matrix <m>B</m> such that <m>BA=I_n</m>.</p></li>
+                <li><p><m>A^T</m> is invertible.</p></li>
+                <li><p>The columns of <m>A</m> are linearly independent.</p></li>
+                <li><p><m>\operatorname{rank}(A)=n</m>.</p></li>
+                <li><p>The homogeneous system <m>A\mathbf{v}=\mathbf{0}</m> has only the trivial solution <m>\mathbf{v}=\mathbf{0}</m>.</p></li>
+                <li><p>For every <m>\mathbf{w}\in\mathbb{R}^n</m>, the system <m>A\mathbf{v}=\mathbf{w}</m> has a solution.</p></li>
+                <li><p>For every <m>\mathbf{w}\in\mathbb{R}^n</m>, the system <m>A\mathbf{v}=\mathbf{w}</m> has a unique solution.</p></li>
+            </ul>
+        </statement>
+    </theorem>
+
+    <p>
+        Orthogonal matrices form a particularly important class of invertible matrices. They occur naturally whenever coordinates are rotated or reflected, and they are especially convenient because their inverse can be obtained simply by taking the transpose.
+    </p>
+
+    <definition>
+        <title>Orthogonal Matrix</title>
+        <statement>
+            <p>
+                A square matrix <m>A</m> is called <term>orthogonal</term> if
+                <me>
+                    AA^T=I_n.
+                </me>
+            </p>
+        </statement>
+    </definition>
+
+    <p>
+        Orthogonal matrices are a particularly important class of invertible matrices. Indeed, if <m>AA^T=I_n</m>, then <m>A^T</m> is an inverse of <m>A</m>, so
+        <me>
+            A^{-1}=A^T.
+        </me>
+    </p>
+
+    <example>
+        <title>A Rotation Matrix</title>
+        <p>
+            Consider the matrix
+            <me>
+                A=
+                \begin{pmatrix}
+                    \cos\varphi &amp; -\sin\varphi\\
+                    \sin\varphi &amp; \cos\varphi
+                \end{pmatrix}.
+            </me>
+            Its transpose is
+            <me>
+                A^T=
+                \begin{pmatrix}
+                    \cos\varphi &amp; \sin\varphi\\
+                    -\sin\varphi &amp; \cos\varphi
+                \end{pmatrix}.
+            </me>
+        </p>
+        <p>
+            Multiplying the two matrices gives
+            <me>
+                AA^T
+                =
+                \begin{pmatrix}
+                    \cos^2\varphi+\sin^2\varphi &amp; 0\\
+                    0 &amp; \cos^2\varphi+\sin^2\varphi
+                \end{pmatrix}
+                =
+                \begin{pmatrix}
+                    1 &amp; 0\\
+                    0 &amp; 1
+                \end{pmatrix}
+                = I_2.
+            </me>
+        </p>
+        <p>
+            Hence <m>A</m> is orthogonal. This matrix describes a rotation in the plane. The name rotation matrix comes from the fact that multiplying a vector in the plane by this matrix turns its direction by the angle <m>\varphi</m> while preserving its length. Such matrices play an important role in mechanics, robotics, and computer graphics.
+        </p>
+    </example>
+
+    <exercises xml:id="exercises-inverse-matrices">
+        <title>Check Your Understanding</title>
+
+        <exercise xml:id="exer-mc-invertible-matrix">
+            <title>Identifying an Invertible Matrix</title>
+            <statement>
+                <p>Which of the following matrices is invertible?</p>
+            </statement>
+            <choices>
+                <choice>
+                    <statement>
+                        <p>
+                            <m>
+                                \begin{pmatrix}
+                                    1 &amp; 2 \\
+                                    2 &amp; 4
+                                \end{pmatrix}
+                            </m>
+                        </p>
+                    </statement>
+                    <feedback>
+                        <p>Incorrect. The second row is twice the first row, so the rows are linearly dependent and the matrix is not invertible.</p>
+                    </feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement>
+                        <p>
+                            <m>
+                                \begin{pmatrix}
+                                    2 &amp; 1 \\
+                                    1 &amp; 1
+                                \end{pmatrix}
+                            </m>
+                        </p>
+                    </statement>
+                    <feedback>
+                        <p>Correct! Its determinant is <m>(2)(1) - (1)(1) = 1</m>, which is not zero, so the matrix is invertible.</p>
+                    </feedback>
+                </choice>
+                <choice>
+                    <statement>
+                        <p>
+                            <m>
+                                \begin{pmatrix}
+                                    0 &amp; 0 \\
+                                    1 &amp; 3
+                                \end{pmatrix}
+                            </m>
+                        </p>
+                    </statement>
+                    <feedback>
+                        <p>Incorrect. This matrix has a zero row, so its determinant is zero and it is not invertible.</p>
+                    </feedback>
+                </choice>
+                <choice>
+                    <statement>
+                        <p>
+                            <m>
+                                \begin{pmatrix}
+                                    1 &amp; -1 \\
+                                    -2 &amp; 2
+                                \end{pmatrix}
+                            </m>
+                        </p>
+                    </statement>
+                    <feedback>
+                        <p>Incorrect. The second row is <m>-2</m> times the first row, so the matrix is not invertible.</p>
+                    </feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise xml:id="exer-tf-one-sided-inverse">
+            <title>Checking an Inverse</title>
+            <statement>
+                <p>True or False: For square matrices, if <m>AB = I_n</m>, then <m>B</m> is the inverse of <m>A</m>.</p>
+            </statement>
+            <choices>
+                <choice correct="yes">
+                    <statement><p>True</p></statement>
+                    <feedback><p>Correct! For square matrices, one of the equations <m>AB = I_n</m> or <m>BA = I_n</m> already implies the other, so <m>B = A^{-1}</m>.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>False</p></statement>
+                    <feedback><p>Incorrect. For square matrices, checking just one of the equations is enough.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise xml:id="exer-mc-solve-with-inverse">
+            <title>Solving a System with an Inverse Matrix</title>
+            <statement>
+                <p>Suppose
+                    <m>
+                        A^{-1} =
+                        \begin{pmatrix}
+                            1 &amp; -1 \\
+                            -1 &amp; 2
+                        \end{pmatrix}
+                    </m>
+                    and
+                    <m>
+                        \mathbf{v} =
+                        \begin{pmatrix}
+                            5 \\
+                            3
+                        \end{pmatrix}.
+                    </m>
+                    What is the solution of <m>A\mathbf{u} = \mathbf{v}</m>?
+                </p>
+            </statement>
+            <choices>
+                <choice>
+                    <statement>
+                        <p>
+                            <m>
+                                \mathbf{u} =
+                                \begin{pmatrix}
+                                    5 \\
+                                    3
+                                \end{pmatrix}
+                            </m>
+                        </p>
+                    </statement>
+                    <feedback>
+                        <p>Incorrect. The solution is obtained by computing <m>\mathbf{u} = A^{-1}\mathbf{v}</m>, not by copying the right-hand side.</p>
+                    </feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement>
+                        <p>
+                            <m>
+                                \mathbf{u} =
+                                \begin{pmatrix}
+                                    2 \\
+                                    1
+                                \end{pmatrix}
+                            </m>
+                        </p>
+                    </statement>
+                    <feedback>
+                        <p>Correct! We have
+                            <m>
+                                \mathbf{u} = A^{-1}\mathbf{v}
+                                =
+                                \begin{pmatrix}
+                                    1 &amp; -1 \\
+                                    -1 &amp; 2
+                                \end{pmatrix}
+                                \begin{pmatrix}
+                                    5 \\
+                                    3
+                                \end{pmatrix}
+                                =
+                                \begin{pmatrix}
+                                    2 \\
+                                    1
+                                \end{pmatrix}.
+                            </m>
+                        </p>
+                    </feedback>
+                </choice>
+                <choice>
+                    <statement>
+                        <p>
+                            <m>
+                                \mathbf{u} =
+                                \begin{pmatrix}
+                                    1 \\
+                                    2
+                                \end{pmatrix}
+                            </m>
+                        </p>
+                    </statement>
+                    <feedback>
+                        <p>Incorrect. Check the matrix-vector multiplication carefully.</p>
+                    </feedback>
+                </choice>
+                <choice>
+                    <statement>
+                        <p>
+                            <m>
+                                \mathbf{u} =
+                                \begin{pmatrix}
+                                    8 \\
+                                    1
+                                \end{pmatrix}
+                            </m>
+                        </p>
+                    </statement>
+                    <feedback>
+                        <p>Incorrect. This is not the result of multiplying <m>A^{-1}</m> by <m>\mathbf{v}</m>.</p>
+                    </feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise xml:id="exer-tf-orthogonal-inverse">
+            <title>Orthogonal Matrices</title>
+            <statement>
+                <p>True or False: If a square matrix <m>A</m> satisfies <m>AA^T = I_n</m>, then <m>A^{-1} = A^T</m>.</p>
+            </statement>
+            <choices>
+                <choice correct="yes">
+                    <statement><p>True</p></statement>
+                    <feedback><p>Correct! This is exactly the defining property of an orthogonal matrix.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>False</p></statement>
+                    <feedback><p>Incorrect. If <m>AA^T = I_n</m>, then <m>A^T</m> is the inverse of <m>A</m>.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise xml:id="exer-mc-gauss-jordan-inverse">
+            <title>The Gauß-Jordan Method</title>
+            <statement>
+                <p>When using the Gauß-Jordan method to compute the inverse of a square matrix <m>A</m>, which augmented matrix do we start with?</p>
+            </statement>
+            <choices>
+                <choice>
+                    <statement><p><m>(A \mid A)</m></p></statement>
+                    <feedback><p>Incorrect. The second block must be the identity matrix.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p><m>(A \mid I_n)</m></p></statement>
+                    <feedback><p>Correct! We row reduce <m>(A \mid I_n)</m> until the left block becomes <m>I_n</m>; then the right block is <m>A^{-1}</m>.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p><m>(I_n \mid A)</m></p></statement>
+                    <feedback><p>Incorrect. The matrix <m>A</m> must be placed in the left block.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p><m>(A^T \mid I_n)</m></p></statement>
+                    <feedback><p>Incorrect. The Gauß-Jordan method starts with <m>A</m>, not with its transpose.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+    </exercises>
+
+
+</subsection>

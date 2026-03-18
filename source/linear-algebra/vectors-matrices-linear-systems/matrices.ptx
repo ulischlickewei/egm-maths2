@@ -194,6 +194,10 @@
       </p>
     </example>
 
+    <p>
+        Matrix multiplication is the most important operation involving matrices. At first sight, its definition may seem somewhat unintuitive. We therefore begin by defining the matrix product and illustrating it with an example. Later, in a range of applications, we will see that this definition is both natural and extremely useful.
+    </p>
+
     <definition xml:id="def-matrix-multiplication">
       <title>Matrix Multiplication</title>
       <statement>
@@ -311,11 +315,16 @@
       <me>
         A=
         \begin{pmatrix}
-          \vline &amp; &amp; \vline \\
           \mathbf{a}_1 &amp; \dots &amp; \mathbf{a}_n \\
-          \vline &amp; &amp; \vline
         \end{pmatrix}
       </me>
+      (for example, if 
+        <m> A = \begin{pmatrix}
+            1 &amp; 2 \\
+            3 &amp;  4
+          \end{pmatrix} </m>, then
+        <m> \mathbf{a}_1 = \begin{pmatrix} 1 \\ 3 \end{pmatrix}</m> and 
+        <m> \mathbf{a}_2 = \begin{pmatrix} 2 \\ 4 \end{pmatrix}</m>)
       and
       <me>
         \mathbf{v}=
@@ -576,6 +585,7 @@
     </example>
   </subsubsection>
 
+  <!--
   <subsubsection xml:id="subsubsec-linear-maps">
     <title>Matrices Define Linear Maps</title>
 
@@ -692,4 +702,5 @@
     </example>
 
   </subsubsection>
+  -->
 </subsection>

@@ -1,7 +1,13 @@
-<section xml:id="section-determinants-inverse-matrices">
+<section xml:id="section-determinants-inverse-matrices" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Determinants and Inverse Matrices</title>
 
-  <p>
-    Placeholder section for determinants and inverse matrices.
-  </p>
+  <introduction>
+    <p>
+      In this section, we will see that some matrices can be inverted leading to the matrix algebra. Also, we will learn about the determinant which helps us understand which matrices are invertible.     
+    </p>
+  </introduction>
+
+  <xi:include href="inverse-matrices.ptx"/>
+  <xi:include href="determinants.ptx"/>
+
 </section>

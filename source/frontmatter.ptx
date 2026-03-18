@@ -28,6 +28,22 @@
     <titlepage-items/>
   </titlepage>
 
+  <preface>
+    <title>Preface</title>
+      <p>
+          These lecture notes accompany the course <em>Mathematics 2</em> and are intended as a structured introduction to central mathematical methods used in engineering sciences. The course builds on prior mathematical knowledge and aims to deepen both technical understanding and mathematical maturity.
+      </p>
+      <p>
+          A central goal of the course is to strengthen the ability to identify questions arising in engineering applications that can be formulated and solved mathematically. For this reason, the presentation emphasizes not only computational techniques, but also clear reasoning, precise language, and the development of coherent mathematical arguments. Students should learn to distinguish assumptions, rules, and conclusions, and to communicate their ideas and solution strategies in a mathematically sound way.
+      </p>
+      <p>
+          The course covers selected topics from linear algebra, differentiation in <m>\mathbb{R}^n</m>, differential equations, and integration in several variables. In particular, we study matrices, systems of linear equations, inverse matrices, determinants, linear maps, eigenvalues, and diagonalization; the foundations and applications of differentiation in higher dimensions; basic methods for differential equations; and the notions of curve integrals, line integrals, and surface and volume integrals over normal domains.
+      </p>
+      <p>
+          Throughout these notes, the focus is on recognizing typical problem structures, applying standard methods reliably, and developing confidence in the use of mathematical tools that are fundamental in engineering practice and in the scientific literature.
+      </p>
+  </preface>  
+
   <colophon xml:id="front-colophon">
     <colophon-items/>
   </colophon>

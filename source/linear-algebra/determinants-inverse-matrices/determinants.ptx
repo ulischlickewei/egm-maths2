@@ -1,0 +1,932 @@
+<subsection>
+    <title>Determinants</title>
+
+    <introduction>
+        <p>
+            We have seen that some square matrices are invertible, others are not. In this section we introduce the determinant of a matrix. This number helps us decide whether a matrix is invertible, and it also has a geometric meaning. In dimension two, the determinant measures an oriented area, and in dimension three, it measures an oriented volume.
+        </p>
+        <p>
+            We begin with determinants of <m>2\times 2</m>- and <m>3\times 3</m>-matrices, where explicit formulas are available. After that, we state the basic properties that characterize determinants for arbitrary square matrices and collect some important calculation rules.
+        </p>
+    </introduction>
+
+    <example>
+        <title>Area of a Parallelogram</title>
+
+        <p>
+            Consider the matrix
+            <me>
+                A=
+                \begin{pmatrix}
+                    {\color{blue}{4}} &amp; {\color{orange}{2}}\\
+                    {\color{red}{-1}} &amp; {\color{green!60!black}{3}}
+                \end{pmatrix}.
+            </me>
+            Its columns are the vectors
+            <me>
+                \mathbf{u}=
+                \begin{pmatrix}
+                    {\color{blue}{4}}\\
+                    {\color{red}{-1}}
+                \end{pmatrix},
+                \qquad
+                \mathbf{v}=
+                \begin{pmatrix}
+                    {\color{orange}{2}}\\
+                    {\color{green!60!black}{3}}
+                \end{pmatrix}.
+            </me>
+            These two vectors span a parallelogram in the plane.
+        </p>
+
+        <p>
+            In the picture below, we translate this parallelogram into a surrounding
+            rectangle. Translation does not change area. The rectangle has width
+            <m>{\color{blue}{4}}+{\color{orange}{2}}</m>
+            and height
+            <m>|{\color{red}{-1}}|+{\color{green!60!black}{3}}</m>.
+            Hence its area is
+            <me>
+                ({\color{blue}{4}}+{\color{orange}{2}})
+                \cdot
+                \bigl(|{\color{red}{-1}}|+{\color{green!60!black}{3}}\bigr).
+            </me>
+        </p>
+
+        <p>
+            The four corner regions are right triangles. Their total area is
+            <me>
+                \frac12\cdot{\color{blue}{4}}\cdot|{\color{red}{-1}}|
+                +
+                \frac12\cdot{\color{orange}{2}}\cdot{\color{green!60!black}{3}}
+                +
+                \frac12\cdot{\color{blue}{4}}\cdot|{\color{red}{-1}}|
+                +
+                \frac12\cdot{\color{orange}{2}}\cdot{\color{green!60!black}{3}}.
+            </me>
+            Therefore the area of the parallelogram is
+            <me>
+                ({\color{blue}{4}}+{\color{orange}{2}})
+                \cdot
+                \bigl(|{\color{red}{-1}}|+{\color{green!60!black}{3}}\bigr)
+                -
+                \left(
+                \frac12\cdot{\color{blue}{4}}\cdot|{\color{red}{-1}}|
+                +
+                \frac12\cdot{\color{orange}{2}}\cdot{\color{green!60!black}{3}}
+                +
+                \frac12\cdot{\color{blue}{4}}\cdot|{\color{red}{-1}}|
+                +
+                \frac12\cdot{\color{orange}{2}}\cdot{\color{green!60!black}{3}}
+                \right).
+            </me>
+        </p>
+
+        <p>
+            Now expand the product:
+            <me>
+                ({\color{blue}{4}}+{\color{orange}{2}})
+                \cdot
+                \bigl(|{\color{red}{-1}}|+{\color{green!60!black}{3}}\bigr)
+                =
+                {\color{blue}{4}}\cdot|{\color{red}{-1}}|
+                +
+                {\color{blue}{4}}\cdot{\color{green!60!black}{3}}
+                +
+                {\color{orange}{2}}\cdot|{\color{red}{-1}}|
+                +
+                {\color{orange}{2}}\cdot{\color{green!60!black}{3}}.
+            </me>
+            So
+            <me>
+                \text{Area}
+                =
+                \left(
+                {\color{blue}{4}}\cdot|{\color{red}{-1}}|
+                +
+                {\color{blue}{4}}\cdot{\color{green!60!black}{3}}
+                +
+                {\color{orange}{2}}\cdot|{\color{red}{-1}}|
+                +
+                {\color{orange}{2}}\cdot{\color{green!60!black}{3}}
+                \right)
+            </me>
+            <me>
+                \qquad
+                -
+                \left(
+                \frac12\cdot{\color{blue}{4}}\cdot|{\color{red}{-1}}|
+                +
+                \frac12\cdot{\color{orange}{2}}\cdot{\color{green!60!black}{3}}
+                +
+                \frac12\cdot{\color{blue}{4}}\cdot|{\color{red}{-1}}|
+                +
+                \frac12\cdot{\color{orange}{2}}\cdot{\color{green!60!black}{3}}
+                \right).
+            </me>
+        </p>
+
+        <p>
+            The two halves of
+            <m>{\color{blue}{4}}\cdot|{\color{red}{-1}}|</m>
+            cancel the full term
+            <m>{\color{blue}{4}}\cdot|{\color{red}{-1}}|</m>,
+            and the two halves of
+            <m>{\color{orange}{2}}\cdot{\color{green!60!black}{3}}</m>
+            cancel the full term
+            <m>{\color{orange}{2}}\cdot{\color{green!60!black}{3}}</m>.
+            Thus only
+            <me>
+                {\color{blue}{4}}\cdot{\color{green!60!black}{3}}
+                +
+                {\color{orange}{2}}\cdot|{\color{red}{-1}}|
+            </me>
+            remains. Hence
+            <me>
+                \text{Area}
+                =
+                {\color{blue}{4}}\cdot{\color{green!60!black}{3}}
+                +
+                {\color{orange}{2}}\cdot|{\color{red}{-1}}|
+                =
+                4\cdot 3+2\cdot 1
+                =
+                14.
+            </me>
+        </p>
+
+        <p>
+            For this matrix, the determinant is
+            <me>
+                \det(A)
+                =
+                {\color{blue}{4}}\cdot{\color{green!60!black}{3}}
+                -
+                {\color{orange}{2}}\cdot{\color{red}{(-1)}}
+                =
+                {\color{blue}{4}}\cdot{\color{green!60!black}{3}}
+                +
+                {\color{orange}{2}}\cdot|{\color{red}{-1}}|
+                =
+                14.
+            </me>
+            Thus the determinant gives the area of the parallelogram spanned by
+            the two column vectors.
+        </p>
+
+        <image xml:id="fig-parallelogram-det-area-cancellation">
+            <caption>A translated copy of the parallelogram spanned by the columns of
+            <m>A</m>, embedded in a rectangle.</caption>
+            <latex-image>
+                \begin{tikzpicture}[scale=0.85, line join=round, line cap=round]
+
+                    % Colors
+                    \definecolor{myblue}{RGB}{31,119,180}
+                    \definecolor{myorange}{RGB}{255,127,14}
+                    \definecolor{mygreen}{RGB}{44,160,44}
+                    \definecolor{myred}{RGB}{214,39,40}
+
+                    % Rectangle corners
+                    \coordinate (BL) at (0,0);
+                    \coordinate (BR) at (6,0);
+                    \coordinate (TR) at (6,4);
+                    \coordinate (TL) at (0,4);
+
+                    % Parallelogram vertices
+                    \coordinate (P) at (4,0);
+                    \coordinate (Q) at (0,1);
+                    \coordinate (R) at (2,4);
+                    \coordinate (S) at (6,3);
+
+                    % Rectangle
+                    \draw[thick] (BL) rectangle (TR);
+
+                    % Corner triangles
+                    \fill[myblue!15]   (0,0) -- (4,0) -- (0,1) -- cycle;
+                    \fill[myorange!15] (0,4) -- (0,1) -- (2,4) -- cycle;
+                    \fill[myblue!15]   (6,4) -- (2,4) -- (6,3) -- cycle;
+                    \fill[myorange!15] (6,0) -- (4,0) -- (6,3) -- cycle;
+
+                    % Parallelogram
+                    \fill[gray!20] (P) -- (Q) -- (R) -- (S) -- cycle;
+                    \draw[very thick] (P) -- (Q) -- (R) -- (S) -- cycle;
+
+                    % Side vectors
+                    \draw[->, very thick, myblue]   (Q) -- node[above, font=\scriptsize] {\color{black}{$\mathbf{u}=\binom{\color{blue}{4}}{\color{red}{-1}}$}} (P);
+                    \draw[->, very thick, myorange] (Q) -- node[right, font=\scriptsize] {\color{black}{$\mathbf{v}=\binom{{\color{orange}{2}}}{\color{green!60!black}{3}}$}} (R);
+
+                    % Width / height labels
+                    \node[font=\scriptsize] at (3,-0.45) {$\color{blue}{4}+\color{orange}{2}=6$};
+                    \node[rotate=90, font=\scriptsize] at (-0.45,2) {$|\color{red}{-1}|+\color{green!60!black}{3}=4$};
+
+                    % Triangle labels
+                    \node[font=\scriptsize] at (1.2,0.25) {$\frac12\!\cdot\! {\color{blue}{4}}\!\cdot\! |{\color{red}{-1}}|=2$};
+                    \node[font=\scriptsize] at (0.8,3.45) {$\frac12\!\cdot\! {\color{orange}{2}}\!\cdot\! {\color{green!60!black}{3}}=3$};
+                    \node[font=\scriptsize] at (5.0,3.70) {$\frac12\!\cdot\! {\color{blue}{4}}\!\cdot\! |{\color{red}{-1}}|=2$};
+                    \node[font=\scriptsize] at (5.2,0.55) {$\frac12\!\cdot\! {\color{orange}{2}}\!\cdot\! {\color{green!60!black}{3}}=3$};
+
+                    % Area label
+                    \node[font=\scriptsize] at (3,2) {$\text{Area}=14$};
+
+                \end{tikzpicture}
+            </latex-image>
+        </image>
+    </example>
+
+    <definition>
+        <title>Determinant of a <m>2\times 2</m>-Matrix</title>
+        <statement>
+            <p>
+                Let
+                <me>
+                    A=
+                    \begin{pmatrix}
+                        a_{11} &amp; a_{12}\\
+                        a_{21} &amp; a_{22}
+                    \end{pmatrix}
+                </me>
+                be a <m>2\times 2</m>-matrix. We define the <term>determinant</term> of <m>A</m> by
+                <me>
+                    \det(A)=a_{11}a_{22}-a_{12}a_{21}.
+                </me>
+            </p>
+            <p>
+                Thus, the determinant of a <m>2\times 2</m>-matrix is the difference of the product of the entries on the main diagonal and the product of the entries on the anti-diagonal.
+            </p>
+            <p>
+                Geometrically, <m>\det(A)</m> computes the oriented area of the parallelogram spanned by the columns of <m>A</m>.
+            </p>
+        </statement>
+    </definition>
+
+    <example>
+        <title>Determinant, Area, and Sign</title>
+        <p>
+            Consider
+            <me>
+                A=
+                \begin{pmatrix}
+                    3 &amp; 1\\
+                    1 &amp; 2
+                \end{pmatrix},
+                \qquad
+                B=
+                \begin{pmatrix}
+                    1 &amp; 3\\
+                    2 &amp; 1
+                \end{pmatrix}.
+            </me>
+            We compute
+            <me>
+                \det(A)=3\cdot 2-1\cdot 1=5,
+                \qquad
+                \det(B)=1\cdot 1-3\cdot 2=-5.
+            </me>
+        </p>
+        <p>
+            The absolute values of the determinants are equal, so the corresponding parallelograms have the same area. The sign distinguishes the orientation. A positive determinant and a negative determinant correspond to opposite orientations of the column vectors.
+        </p>
+    </example>
+
+    <definition>
+        <title>Determinant of a <m>3\times 3</m>-Matrix</title>
+        <statement>
+            <p>
+                Let
+                <me>
+                    A=
+                    \begin{pmatrix}
+                        a_{11} &amp; a_{12} &amp; a_{13}\\
+                        a_{21} &amp; a_{22} &amp; a_{23}\\
+                        a_{31} &amp; a_{32} &amp; a_{33}
+                    \end{pmatrix}
+                </me>
+                be a <m>3\times 3</m>-matrix. Then its determinant is defined by
+                <me>
+                    \det(A)
+                    =
+                    a_{11}a_{22}a_{33}
+                    +a_{12}a_{23}a_{31}
+                    +a_{13}a_{21}a_{32}
+                    -a_{13}a_{22}a_{31}
+                    -a_{11}a_{23}a_{32}
+                    -a_{12}a_{21}a_{33}.
+                </me>
+            </p>
+            <p>
+                This formula can be remembered using <term>Sarrus' rule</term>.
+            </p>
+
+            <figure xml:id="sarrus-rule-diagram">
+                <caption>
+                    A diagram illustrating Sarrus' rule by repeating the first two columns of a 3 by 3 matrix and tracing the three positive (blue) and three negative (red) diagonals.
+                </caption>
+
+                <image width="70%">
+                <latex-image label="sarrus-rule">
+\begin{tikzpicture}[x=1.6cm,y=1.2cm,line cap=round,line join=round]
+
+% entries
+\node (a11) at (0,2) {$a_{11}$};
+\node (a12) at (1,2) {$a_{12}$};
+\node (a13) at (2,2) {$a_{13}$};
+\node (a11b) at (3,2) {$a_{11}$};
+\node (a12b) at (4,2) {$a_{12}$};
+
+\node (a21) at (0,1) {$a_{21}$};
+\node (a22) at (1,1) {$a_{22}$};
+\node (a23) at (2,1) {$a_{23}$};
+\node (a21b) at (3,1) {$a_{21}$};
+\node (a22b) at (4,1) {$a_{22}$};
+
+\node (a31) at (0,0) {$a_{31}$};
+\node (a32) at (1,0) {$a_{32}$};
+\node (a33) at (2,0) {$a_{33}$};
+\node (a31b) at (3,0) {$a_{31}$};
+\node (a32b) at (4,0) {$a_{32}$};
+
+% parentheses
+\draw (-0.45,2.35) .. controls (-0.7,1.7) and (-0.7,0.3) .. (-0.45,-0.35);
+\draw (2.45,2.35) .. controls (2.7,1.7) and (2.7,0.3) .. (2.45,-0.35);
+
+% separator
+%\draw[dashed] (2.5,2.35) -- (2.5,-0.35);
+
+% positive diagonals
+\draw[->,very thick,blue] (a11) -- (a33);
+\draw[->,very thick,blue] (a12) -- (a31b);
+\draw[->,very thick,blue] (a13) -- (a32b);
+
+% negative diagonals
+\draw[->,very thick,red] (a31) -- (a13);
+\draw[->,very thick,red] (a32) -- (a11b);
+\draw[->,very thick,red] (a33) -- (a12b);
+
+\end{tikzpicture}
+                </latex-image>
+                </image>
+            </figure>
+        </statement>
+    </definition>
+
+    <example>
+        <title>Using Sarrus' Rule</title>
+        <p>
+            Let
+            <me>
+                A=
+                \begin{pmatrix}
+                    1 &amp; 0 &amp; 7\\
+                    2 &amp; -3 &amp; 5\\
+                    -1 &amp; -1 &amp; 2
+                \end{pmatrix}.
+            </me>
+            Then
+            <me>
+                \det(A)
+                =
+                1\cdot(-3)\cdot 2
+                +0\cdot 5\cdot (-1)
+                +7\cdot 2\cdot (-1)
+                -7\cdot (-3)\cdot (-1)
+                -1\cdot 5\cdot (-1)
+                -0\cdot 2\cdot 2.
+            </me>
+        </p>
+        <p>
+            Hence
+            <me>
+                \det(A)
+                =
+                -6+0-14-21+5-0
+                =
+                -36.
+            </me>
+        </p>
+    </example>
+
+    <p>
+        Determinants of <m>3\times 3</m>-matrices also have a geometric interpretation. If the columns of a matrix <m>A</m> are the vectors <m>\mathbf{u},\mathbf{v},\mathbf{w}\in\mathbb{R}^3</m>, then <m>\det(A)</m> is the oriented volume of the parallelepiped spanned by <m>\mathbf{u},\mathbf{v},\mathbf{w}</m>.
+    </p>
+        
+    <figure xml:id="parallelepipped">
+        <caption>
+            Visualization of a parallelepiped generated by three vectors
+        </caption>
+
+        <image width="70%">
+            <latex-image label="tikz-parallelepiped">
+
+\begin{tikzpicture}[scale=1.1, line join=round, line cap=round]
+
+  % Define vectors
+  \coordinate (O) at (0,0);
+  \coordinate (U) at (3,0.2);
+  \coordinate (V) at (1.2,1.8);
+  \coordinate (W) at (0.8,2.6);
+
+  % Top vertices
+  \coordinate (UV)  at ($(U)+(V)$);
+  \coordinate (UW)  at ($(U)+(W)$);
+  \coordinate (VW)  at ($(V)+(W)$);
+  \coordinate (UVW) at ($(U)+(V)+(W)$);
+
+  % Filled faces for depth effect
+  \fill[gray!15] (O) -- (U) -- (UV) -- (V) -- cycle;
+  \fill[gray!25] (O) -- (V) -- (VW) -- (W) -- cycle;
+  \fill[gray!10] (O) -- (U) -- (UW) -- (W) -- cycle;
+
+  % Hidden edges
+  \draw[dashed, gray] (W) -- (UW) -- (UVW) -- (VW) -- cycle;
+  \draw[dashed, gray] (V) -- (VW);
+  \draw[dashed, gray] (U) -- (UW);
+
+  % Visible edges
+  \draw[thick] (O) -- (U) -- (UV) -- (V) -- cycle;
+  \draw[thick] (O) -- (W);
+  \draw[thick] (U) -- (UW);
+  \draw[thick] (V) -- (VW);
+  \draw[thick] (UV) -- (UVW);
+  \draw[thick] (W) -- (VW);
+
+  % Vectors
+  \draw[->, very thick, blue]   (O) -- (U) node[midway, below] {$\mathbf{u}$};
+  \draw[->, very thick, red]    (O) -- (V) node[midway, right] {$\mathbf{v}$};
+  \draw[->, very thick, green!60!black] (O) -- (W) node[midway, left] {$\mathbf{w}$};
+
+  % Labels
+  \node[below left] at (O) {$O$};
+  \node[right] at (4,1.1,4) {$\text{oriented volume}=\det(A)$};
+
+\end{tikzpicture}        
+            </latex-image>
+        </image>
+    </figure>
+
+    <example>
+        <title>Volume Change Under a Linear Map</title>
+        <p>
+            In engineering applications, matrices often represent linear transformations of space. If a matrix <m>A</m> maps the unit cube to a parallelepiped, then the factor by which volumes are scaled is <m>\lvert\det(A)\rvert</m>.
+        </p>
+        <p>
+            For example, if <m>\det(A)=2</m>, then every small volume element is doubled. If <m>\det(A)=-2</m>, then the volume is still doubled, but the orientation is reversed.
+        </p>
+    </example>
+
+    <p>
+        In dimensions <m>2</m> and <m>3</m>, the determinant can still be written down by explicit formulas. Beginning with dimension <m>4</m>, however, these formulas become so complicated that they are of little conceptual value. Rather than studying such formulas in general, we take a different point of view: we use the following theorem as the definition of the determinant in arbitrary dimension. It asserts that for every <m>n\in\mathbb{N}</m>, there exists a unique map on <m>n\times n</m>-matrices satisfying the fundamental properties that a determinant should have.
+    </p>
+
+    <theorem>
+        <title>Axiomatic Definition of the Determinant</title>
+        <statement>
+            <p>
+                For every <m>n\in\mathbb{N}</m>, there exists a unique map
+                <me>
+                    \det:\mathbb{R}^{n\times n}\to\mathbb{R}
+                </me>
+                with the following properties.
+            </p>
+            <ol>
+                <li>
+                    <p>
+                        The determinant is <term>multilinear</term>, that is, it is compatible with sums and scalar multiplication in each column.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        The determinant is <term>alternating</term>, that is, interchanging two columns changes the sign.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        The determinant is normalized by
+                        <me>
+                            \det(I_n)=1.
+                        </me>
+                    </p>
+                </li>
+            </ol>
+        </statement>
+    </theorem>
+
+    <p>
+        Beyond theoretically guaranteeing the existence of determinants for matrices of dimension 4 or higher, this theorem also gives us more information on the behaviour of the determinant in small dimensions:
+    </p>
+
+    <example>
+        <title>Scaling a Matrix</title>
+        <p>
+            Let <m>A</m> be a <m>3\times 3</m>-matrix with <m>\det(A)=4</m>. We determine <m>\det(3A)</m>.
+        </p>
+        <p>
+            If the columns of <m>A</m> are <m>\mathbf{u},\mathbf{v},\mathbf{w}</m>, then the columns of <m>3A</m> are <m>3\mathbf{u},3\mathbf{v},3\mathbf{w}</m>. By multilinearity,
+            <me>
+                \det(3A)=\det(3\mathbf{u},3\mathbf{v},3\mathbf{w})=3^3\det(\mathbf{u},\mathbf{v},\mathbf{w})=27\det(A).
+            </me>
+            Therefore
+            <me>
+                \det(3A)=27\cdot 4=108.
+            </me>
+        </p>
+    </example>
+
+    <p>
+        While determinants are cumbersome to compute in general, certain calculation rules make the computation easier in some situations:
+    </p>
+
+    <theorem>
+        <title>Calculation Rules for Determinants</title>
+        <statement>
+            <p>
+                Let <m>A</m> and <m>B</m> be <m>n\times n</m>-matrices.
+            </p>
+            <ul>
+                <li>
+                    <p>
+                        The determinant is multiplicative:
+                        <me>
+                            \det(AB)=\det(A)\det(B).
+                        </me>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        The determinant does not change under transposition:
+                        <me>
+                            \det(A^T)=\det(A).
+                        </me>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        If <m>A</m> is triangular, then its determinant is the product of the diagonal entries:
+                        <me>
+                            \det(A)=a_{11}\cdots a_{nn}.
+                        </me>
+                    </p>
+                </li>
+            </ul>
+        </statement>
+    </theorem>
+
+    <p>
+        These rules are very useful in practice. In particular, the formula for triangular matrices allows us to compute many determinants immediately.
+    </p>
+
+    <example>
+        <title>Determinants of Triangular Matrices</title>
+        <p>
+            For
+            <me>
+                A=
+                \begin{pmatrix}
+                    1 &amp; 2 &amp; 3\\
+                    0 &amp; 7 &amp; 1\\
+                    0 &amp; 0 &amp; 1
+                \end{pmatrix}
+            </me>
+            we have
+            <me>
+                \det(A)=1\cdot 7\cdot 1=7.
+            </me>
+        </p>
+        <p>
+            For
+            <me>
+                B=
+                \begin{pmatrix}
+                    1 &amp; 0 &amp; 0\\
+                    2 &amp; 8 &amp; 0\\
+                    4 &amp; 5 &amp; 3
+                \end{pmatrix}
+            </me>
+            we obtain
+            <me>
+                \det(B)=1\cdot 8\cdot 3=24.
+            </me>
+        </p>
+    </example>
+
+    <p>
+        One has to be careful with sums of matrices. In general,
+        <me>
+            \det(A+B)\neq \det(A)+\det(B).
+        </me>
+        The determinant behaves well with respect to matrix multiplication, but not with respect to matrix addition.
+    </p>
+
+    <theorem>
+        <title>Criteria for a Matrix to be Invertible</title>
+        <statement>
+            <p>
+                Let <m>A</m> be an <m>n\times n</m>-matrix. Then the following statements are equivalent.
+            </p>
+            <ol>
+                <li><p><m>A</m> is invertible.</p></li>
+                <li><p>There exists an <m>n\times n</m>-matrix <m>B</m> with <m>AB=I_n</m>.</p></li>
+                <li><p>There exists an <m>n\times n</m>-matrix <m>B</m> with <m>BA=I_n</m>.</p></li>
+                <li><p><m>A^T</m> is invertible.</p></li>
+                <li><p>The columns of <m>A</m> are linearly independent.</p></li>
+                <li><p><m>\operatorname{rank}(A)=n</m>.</p></li>
+                <li><p>The homogeneous linear system <m>A\mathbf{x}=\mathbf{0}</m> has only the trivial solution.</p></li>
+                <li><p>For every <m>\mathbf{b}\in\mathbb{R}^n</m>, the linear system <m>A\mathbf{x}=\mathbf{b}</m> has a solution.</p></li>
+                <li><p>For every <m>\mathbf{b}\in\mathbb{R}^n</m>, the linear system <m>A\mathbf{x}=\mathbf{b}</m> has a unique solution.</p></li>
+                <li><p><m>\det(A)\neq 0</m>.</p></li>
+            </ol>
+        </statement>
+    </theorem>
+
+    <p>
+        In particular, a square matrix is invertible exactly if its determinant is non-zero. This gives a simple numerical criterion for invertibility.
+    </p>
+
+    <example>
+        <title>Solvability for Arbitrary Right-Hand Sides</title>
+        <p>
+            Consider
+            <me>
+                A=
+                \begin{pmatrix}
+                    1 &amp; 2 &amp; 0\\
+                    a &amp; 1 &amp; 0\\
+                    0 &amp; 0 &amp; 1
+                \end{pmatrix}.
+            </me>
+            We want to determine for which values of <m>a</m> the system
+            <me>
+                A\mathbf{x}=\mathbf{b}
+            </me>
+            has a solution for every <m>\mathbf{b}\in\mathbb{R}^3</m>.
+        </p>
+        <p>
+            By the theorem above, this is equivalent to <m>A</m> being invertible, and hence equivalent to
+            <me>
+                \det(A)\neq 0.
+            </me>
+        </p>
+        <p>
+            We compute
+            <me>
+                \det(A)
+                =
+                1\cdot 1\cdot 1
+                +2\cdot 0\cdot 0
+                +0\cdot a\cdot 0
+                -0\cdot 1\cdot 0
+                -1\cdot 0\cdot 0
+                -2\cdot a\cdot 1
+                =
+                1-2a.
+            </me>
+        </p>
+        <p>
+            Therefore
+            <me>
+                \det(A)\neq 0
+                \quad\Longleftrightarrow\quad
+                1-2a\neq 0
+                \quad\Longleftrightarrow\quad
+                a\neq \frac12.
+            </me>
+            Hence the system <m>A\mathbf{x}=\mathbf{b}</m> has a solution for every right-hand side exactly for
+            <me>
+                a\neq \frac12.
+            </me>
+        </p>
+    </example>
+
+    <theorem>
+        <title>Cramer's Rule for <m>2\times 2</m>-Matrices</title>
+        <statement>
+            <p>
+                Let
+                <me>
+                    A=
+                    \begin{pmatrix}
+                        a_{11} &amp; a_{12}\\
+                        a_{21} &amp; a_{22}
+                    \end{pmatrix}
+                </me>
+                be a <m>2\times 2</m>-matrix with <m>\det(A)\neq 0</m>, and let
+                <me>
+                    \mathbf{b}=
+                    \begin{pmatrix}
+                        b_1\\
+                        b_2
+                    \end{pmatrix}.
+                </me>
+                Then the unique solution of
+                <me>
+                    A\mathbf{x}=\mathbf{b}
+                </me>
+                is given by
+                <me>
+                    \mathbf{x}=
+                    \begin{pmatrix}
+                        x_1\\
+                        x_2
+                    \end{pmatrix}
+                </me>
+                with
+                <me>
+                    x_1=
+                    \frac{
+                        \det\begin{pmatrix}
+                            b_1 &amp; a_{12}\\
+                            b_2 &amp; a_{22}
+                        \end{pmatrix}
+                    }{
+                        \det\begin{pmatrix}
+                            a_{11} &amp; a_{12}\\
+                            a_{21} &amp; a_{22}
+                        \end{pmatrix}
+                    },
+                    \qquad
+                    x_2=
+                    \frac{
+                        \det\begin{pmatrix}
+                            a_{11} &amp; b_1\\
+                            a_{21} &amp; b_2
+                        \end{pmatrix}
+                    }{
+                        \det\begin{pmatrix}
+                            a_{11} &amp; a_{12}\\
+                            a_{21} &amp; a_{22}
+                        \end{pmatrix}
+                    }.
+                </me>
+            </p>
+        </statement>
+    </theorem>
+
+    <p>
+        Cramer's rule gives an explicit solution formula for small systems. For larger systems, Gaussian elimination is usually more efficient.
+    </p>
+
+    <exercises>
+        <title>Check Your Understanding</title>
+
+        <exercise>
+            <statement>
+                <p>
+                    Let
+                    <me>
+                        A=
+                        \begin{pmatrix}
+                            4 &amp; 1\\
+                            2 &amp; 3
+                        \end{pmatrix}.
+                    </me>
+                    What is <m>\det(A)</m>?
+                </p>
+            </statement>
+            <choices>
+                <choice>
+                    <statement><p><m>14</m></p></statement>
+                    <feedback><p>Incorrect. The determinant is not the sum of all entries.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p><m>10</m></p></statement>
+                    <feedback><p>Correct. We have <m>\det(A)=4\cdot 3-1\cdot 2=12-2=10</m>.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p><m>8</m></p></statement>
+                    <feedback><p>Incorrect. Use the rule main diagonal minus anti-diagonal.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p><m>2</m></p></statement>
+                    <feedback><p>Incorrect. Recompute the two products carefully.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise>
+            <statement>
+                <p>
+                    Let
+                    <me>
+                        A=
+                        \begin{pmatrix}
+                            1 &amp; 3\\
+                            2 &amp; 1
+                        \end{pmatrix}.
+                    </me>
+                    Which statement is true?
+                </p>
+            </statement>
+            <choices>
+                <choice>
+                    <statement><p><m>\det(A)=5</m> and the orientation is positive.</p></statement>
+                    <feedback><p>Incorrect. The determinant is negative.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p><m>\det(A)=-5</m> and the area of the parallelogram is <m>5</m>.</p></statement>
+                    <feedback><p>Correct. The absolute value gives the area, while the sign gives the orientation.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p><m>\det(A)=-5</m> and the area of the parallelogram is <m>-5</m>.</p></statement>
+                    <feedback><p>Incorrect. An area is non-negative; the sign refers to orientation.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p><m>\det(A)=1</m> and the area of the parallelogram is <m>1</m>.</p></statement>
+                    <feedback><p>Incorrect. Compute the determinant directly.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise>
+            <statement>
+                <p>
+                    Let <m>A</m> be a <m>3\times 3</m>-matrix with <m>\det(A)=4</m>. What is <m>\det(3A)</m>?
+                </p>
+            </statement>
+            <choices>
+                <choice>
+                    <statement><p><m>12</m></p></statement>
+                    <feedback><p>Incorrect. For a <m>3\times 3</m>-matrix, the determinant scales with the third power.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p><m>108</m></p></statement>
+                    <feedback><p>Correct. We have <m>\det(3A)=3^3\det(A)=27\cdot 4=108</m>.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p><m>36</m></p></statement>
+                    <feedback><p>Incorrect. The factor is <m>27</m>, not <m>9</m>.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>It cannot be determined.</p></statement>
+                    <feedback><p>Incorrect. The determinant rules give enough information.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise>
+            <statement>
+                <p>
+                    For which value of <m>a</m> is the matrix
+                    <me>
+                        \begin{pmatrix}
+                            1 &amp; 2\\
+                            a &amp; 4
+                        \end{pmatrix}
+                    </me>
+                    not invertible?
+                </p>
+            </statement>
+            <choices>
+                <choice>
+                    <statement><p><m>a=1</m></p></statement>
+                    <feedback><p>Incorrect. Set the determinant equal to zero.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p><m>a=2</m></p></statement>
+                    <feedback><p>Correct. We have <m>\det(A)=1\cdot 4-2a=4-2a</m>, so the determinant is zero exactly for <m>a=2</m>.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p><m>a=4</m></p></statement>
+                    <feedback><p>Incorrect. Then the determinant is <m>-4</m>.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>The matrix is invertible for every <m>a</m>.</p></statement>
+                    <feedback><p>Incorrect. A square matrix is not invertible when its determinant is zero.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise>
+            <statement>
+                <p>
+                    Let
+                    <me>
+                        A=
+                        \begin{pmatrix}
+                            2 &amp; -1 &amp; 3\\
+                            0 &amp; 5 &amp; 4\\
+                            0 &amp; 0 &amp; -2
+                        \end{pmatrix}.
+                    </me>
+                    What is <m>\det(A)</m>?
+                </p>
+            </statement>
+            <choices>
+                <choice>
+                    <statement><p><m>20</m></p></statement>
+                    <feedback><p>Incorrect. The matrix is triangular, so multiply all diagonal entries including the sign.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p><m>-10</m></p></statement>
+                    <feedback><p>Incorrect. One diagonal factor is missing.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p><m>-20</m></p></statement>
+                    <feedback><p>Correct. Since <m>A</m> is upper triangular, <m>\det(A)=2\cdot 5\cdot (-2)=-20</m>.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p><m>0</m></p></statement>
+                    <feedback><p>Incorrect. A triangular matrix has determinant zero only if one diagonal entry is zero.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+    </exercises>
+</subsection>
