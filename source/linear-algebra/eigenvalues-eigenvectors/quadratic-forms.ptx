@@ -1,0 +1,728 @@
+<subsection xml:id="subsec-quadratic-forms">
+    <title>Quadratic Forms</title>
+
+    <introduction>
+        <p>
+            A <em>quadratic form</em> is a function that maps a vector to a real number
+            using only squared and mixed products of its components — no linear or constant
+            terms appear. Quadratic forms arise naturally in many contexts: the kinetic energy
+            of a mechanical system, the elastic energy stored in a deformed structure, and
+            the local behaviour of a differentiable function near a critical point are all
+            described by quadratic forms. The key tool for analysing them is the diagonalization
+            of the underlying symmetric matrix.
+        </p>
+    </introduction>
+
+    <definition xml:id="def-quadratic-form">
+        <title>Quadratic Form</title>
+        <statement>
+            <p>
+                A <term>quadratic form</term> is a map
+                <me>
+                    q \colon \R^n \to \R,
+                    \qquad
+                    \mathbf{v} \mapsto \mathbf{v}^\top A \mathbf{v},
+                </me>
+                where <m>A</m> is a symmetric <m>n \times n</m> matrix.
+                The matrix <m>A</m> is called the <term>matrix of the quadratic form</term>.
+            </p>
+        </statement>
+    </definition>
+
+    <remark xml:id="rem-symmetrization">
+        <p>
+            Every quadratic form can be uniquely represented by a symmetric matrix. If a
+            non-symmetric matrix <m>M</m> is given, we can replace it by the symmetric matrix
+            <me>
+                A = \tfrac{1}{2}(M + M^\top)
+            </me>
+            without changing the quadratic form, since
+            <m>\mathbf{v}^\top M \mathbf{v} = \mathbf{v}^\top A \mathbf{v}</m>
+            for all <m>\mathbf{v}</m>.
+        </p>
+    </remark>
+
+    <!-- ADDED: concrete engineering motivation for quadratic forms -->
+    <remark>
+        <p>
+            In engineering, quadratic forms often measure energy. For instance, if
+            <m>\mathbf{x}</m> records two small displacements in a coupled spring system,
+            then the elastic energy can have the form
+            <m>q(\mathbf{x})=\mathbf{x}^\top A\mathbf{x}</m>. Positive definiteness then
+            means that every non-zero displacement stores positive energy, which is exactly
+            what we expect from a stable configuration.
+        </p>
+    </remark>
+
+    <example xml:id="ex-quadratic-form-2x2">
+        <title>Expanding a Quadratic Form</title>
+        <p>
+            Let
+            <me>
+                A = \begin{pmatrix} 1 &amp; 2 \\ 2 &amp; 3 \end{pmatrix}.
+            </me>
+            The associated quadratic form is
+            <md>
+                <mrow>
+                    q_A(\mathbf{x})
+                    &amp;= \begin{pmatrix} x_1 &amp; x_2 \end{pmatrix}
+                       \begin{pmatrix} 1 &amp; 2 \\ 2 &amp; 3 \end{pmatrix}
+                       \begin{pmatrix} x_1 \\ x_2 \end{pmatrix}
+                </mrow>
+                <mrow>
+                    &amp;= \begin{pmatrix} x_1 &amp; x_2 \end{pmatrix}
+                       \begin{pmatrix} x_1 + 2x_2 \\ 2x_1 + 3x_2 \end{pmatrix}
+                </mrow>
+                <mrow>
+                    &amp;= x_1^2 + 4x_1 x_2 + 3x_2^2.
+                </mrow>
+            </md>
+            Observe that the coefficient of the mixed term <m>x_1 x_2</m> is
+            <m>a_{12} + a_{21} = 2 + 2 = 4</m>.
+        </p>
+    </example>
+
+    <definition xml:id="def-definiteness">
+        <title>Definiteness of a Quadratic Form</title>
+        <statement>
+            <p>
+                Let <m>A</m> be a symmetric <m>n \times n</m> matrix with associated
+                quadratic form <m>q(\mathbf{v}) = \mathbf{v}^\top A \mathbf{v}</m>.
+            </p>
+            <ul>
+                <li>
+                    <p>
+                        <m>A</m> is <term>positive definite</term> if
+                        <m>q(\mathbf{v}) \gt 0</m> for all <m>\mathbf{v} \neq \mathbf{0}</m>.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <m>A</m> is <term>positive semidefinite</term> if
+                        <m>q(\mathbf{v}) \geq 0</m> for all <m>\mathbf{v} \neq \mathbf{0}</m>.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <m>A</m> is <term>negative definite</term> if
+                        <m>q(\mathbf{v}) \lt 0</m> for all <m>\mathbf{v} \neq \mathbf{0}</m>.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <m>A</m> is <term>negative semidefinite</term> if
+                        <m>q(\mathbf{v}) \leq 0</m> for all <m>\mathbf{v} \neq \mathbf{0}</m>.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <m>A</m> is <term>indefinite</term> if <m>q</m> takes both
+                        positive and negative values.
+                    </p>
+                </li>
+            </ul>
+        </statement>
+    </definition>
+
+    <example xml:id="ex-definiteness-test">
+        <title>Testing Definiteness by Inspection</title>
+        <p>
+            We test the definiteness of three quadratic forms.
+        </p>
+        <p>
+            (a) <m>q_A(\mathbf{x}) = x_1^2 + 4x_1 x_2 + 3x_2^2</m>.
+            We evaluate at two points:
+            <me>
+                q_A(-1, -2) = 1 + 8 + 12 = 21 \gt 0,
+                \qquad
+                q_A(-3, 2) = 9 - 24 + 12 = -3 \lt 0.
+            </me>
+            Since <m>q_A</m> takes both positive and negative values, it is
+            <em>indefinite</em>.
+        </p>
+        <p>
+            (b) <m>q_B(\mathbf{x}) = 3x_1^2 + 7x_2^2</m>.
+            Since <m>x_1^2, x_2^2 \geq 0</m>, the sum is always non-negative.
+            It is zero only when <m>x_1 = x_2 = 0</m>. Therefore <m>q_B</m> is
+            <em>positive definite</em>.
+        </p>
+        <p>
+            (c) <m>q_D(\mathbf{x}) = x_1^2</m>.
+            Here <m>q_D(0, 1) = 0</m> even though
+            <m>(0, 1)^\top \neq \mathbf{0}</m>. Therefore <m>q_D</m> is
+            <em>positive semidefinite</em>.
+        </p>
+    </example>
+
+    <p>
+        Testing definiteness by trying specific values (as above) is fine for disproving
+        positive definiteness, but not for proving it. The following two theorems give
+        systematic criteria.
+    </p>
+
+    <example xml:id="ex-diagonal-quadratic-forms">
+        <title>Diagonal Quadratic Forms as Model Cases</title>
+        <p>
+            For a diagonal matrix
+            <m>D=\operatorname{diag}(d_1,d_2)</m>, the quadratic form is
+            <me>
+                q_D(\mathbf{x})=d_1x_1^2+d_2x_2^2.
+            </me>
+            In this case, the sign pattern of the coefficients already reveals the geometry.
+        </p>
+        <p>
+            (a) For
+            <m>q_1(x_1,x_2)=4x_1^2+x_2^2</m>, both coefficients are positive, so
+            <m>q_1(\mathbf{x})\gt 0</m> for every non-zero <m>\mathbf{x}</m>. The level line
+            <m>q_1(\mathbf{x})=1</m> is an ellipse.
+        </p>
+        <image width="30%">
+            <latex-image>
+\begin{tikzpicture}[scale=0.9,>=stealth,line cap=round,line join=round]
+    \draw[->,gray!80] (-1.6,0) -- (1.6,0) node[right] {$x_1$};
+    \draw[->,gray!80] (0,-1.4) -- (0,1.4) node[above] {$x_2$};
+    \draw[blue,thick] (0,0) ellipse [x radius=0.5, y radius=1];
+\end{tikzpicture}
+            </latex-image>
+            <caption>
+                The level line <m>4x_1^2+x_2^2=1</m> is an ellipse.
+            </caption>
+        </image>
+        <p>
+            (b) For
+            <m>q_2(x_1,x_2)=4x_1^2-x_2^2</m>, one coefficient is positive and one is
+            negative. Hence the form is indefinite. The level line <m>q_2(\mathbf{x})=1</m>
+            is a hyperbola.
+        </p>
+        <image width="30%">
+            <latex-image>
+\begin{tikzpicture}[scale=0.9,>=stealth,line cap=round,line join=round]
+    \draw[->,gray!80] (-2.2,0) -- (2.2,0) node[right] {$x_1$};
+    \draw[->,gray!80] (0,-2.1) -- (0,2.1) node[above] {$x_2$};
+    \draw[blue,thick,samples=100,domain=0.55:2] plot (\x,{sqrt(4*\x*\x-1)});
+    \draw[blue,thick,samples=100,domain=0.55:2] plot (\x,{-sqrt(4*\x*\x-1)});
+    \draw[blue,thick,samples=100,domain=-2:-0.55] plot (\x,{sqrt(4*\x*\x-1)});
+    \draw[blue,thick,samples=100,domain=-2:-0.55] plot (\x,{-sqrt(4*\x*\x-1)});
+\end{tikzpicture}
+            </latex-image>
+            <caption>
+                The level line <m>4x_1^2-x_2^2=1</m> is a hyperbola.
+            </caption>
+        </image>
+        <p>
+            (c) For
+            <m>q_3(x_1,x_2)=x_1^2</m>, we have <m>q_3(\mathbf{x})\geq 0</m> for all
+            <m>\mathbf{x}</m>, but <m>q_3(0,1)=0</m>. So the form is positive semidefinite.
+            The level set <m>q_3(\mathbf{x})=1</m> consists of two vertical lines.
+        </p>
+        <image width="30%">
+            <latex-image>
+\begin{tikzpicture}[scale=0.9,>=stealth,line cap=round,line join=round]
+    \draw[->,gray!80] (-2.2,0) -- (2.2,0) node[right] {$x_1$};
+    \draw[->,gray!80] (0,-1.8) -- (0,1.8) node[above] {$x_2$};
+    \draw[blue,thick] (-1,-1.6) -- (-1,1.6);
+    \draw[blue,thick] (1,-1.6) -- (1,1.6);
+    \draw[blue,dashed] (0,-1.6) -- (0,1.6);
+\end{tikzpicture}
+            </latex-image>
+            <caption>
+                For <m>x_1^2=1</m>, the level set consists of the lines <m>x_1=\pm 1</m>; the dashed line <m>x_1=0</m> corresponds to the zero level.
+            </caption>
+        </image>
+        <p>
+            These diagonal examples motivate the general criterion below: once a symmetric
+            matrix is orthogonally diagonalized, its quadratic form reduces to exactly this
+            kind of expression.
+        </p>
+    </example>
+
+    <theorem xml:id="thm-definiteness-eigenvalues">
+        <title>Definiteness Criterion via Eigenvalues</title>
+        <statement>
+            <p>
+                Let <m>A</m> be a symmetric <m>n \times n</m> matrix with eigenvalues
+                <m>\lambda_1, \ldots, \lambda_n</m> (all real, by
+                <xref ref="thm-symmetric-diagonalizable"/>).
+            </p>
+            <ul>
+                <li>
+                    <p>
+                        <m>A</m> is positive definite (resp. semidefinite) if and only if
+                        all eigenvalues satisfy <m>\lambda_i \gt 0</m>
+                        (resp. <m>\lambda_i \geq 0</m>).
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <m>A</m> is negative definite (resp. semidefinite) if and only if
+                        all eigenvalues satisfy <m>\lambda_i \lt 0</m>
+                        (resp. <m>\lambda_i \leq 0</m>).
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <m>A</m> is indefinite if and only if there exist both a positive
+                        and a negative eigenvalue.
+                    </p>
+                </li>
+            </ul>
+        </statement>
+        <proof>
+            <p>
+                By <xref ref="thm-symmetric-diagonalizable"/>, there is an orthogonal matrix
+                <m>P</m> and a diagonal matrix
+                <m>D=\operatorname{diag}(\lambda_1,\ldots,\lambda_n)</m> such that
+                <m>A=PDP^\top</m>.
+            </p>
+            <p>
+                Now take any vector <m>\mathbf{x}</m> and write it in the form
+                <m>\mathbf{x}=P\mathbf{y}</m>. Then
+                <me>
+                    \mathbf{x}^\top A\mathbf{x}
+                    =
+                    (P\mathbf{y})^\top A(P\mathbf{y})
+                    =
+                    \mathbf{y}^\top(P^\top A P)\mathbf{y}
+                    =
+                    \mathbf{y}^\top D\mathbf{y}
+                    =
+                    \lambda_1 y_1^2+\cdots+\lambda_n y_n^2.
+                </me>
+                So the sign of the quadratic form is determined entirely by the signs of the
+                eigenvalues.
+            </p>
+            <p>
+                If all eigenvalues are positive, then every term on the right-hand side is
+                non-negative and at least one is positive whenever <m>\mathbf{y}\neq\mathbf{0}</m>,
+                so the quadratic form is positive definite. The semidefinite, negative
+                definite, and negative semidefinite cases are analogous. If there are both
+                positive and negative eigenvalues, then choosing <m>\mathbf{y}</m> along the
+                corresponding coordinate axes produces both positive and negative values, so
+                the form is indefinite.
+            </p>
+        </proof>
+    </theorem>
+
+    <example xml:id="ex-eigenvalue-criterion-positive-definite">
+        <title>Positive Definiteness from Eigenvalues</title>
+        <p>
+            Consider
+            <me>
+                A=\begin{pmatrix}4 &amp; 1\\ 1 &amp; 4\end{pmatrix}.
+            </me>
+            Its characteristic polynomial is
+            <me>
+                p_A(\lambda)
+                =
+                \det\begin{pmatrix}4-\lambda &amp; 1\\ 1 &amp; 4-\lambda\end{pmatrix}
+                =
+                (4-\lambda)^2-1
+                =
+                (\lambda-5)(\lambda-3).
+            </me>
+            So the eigenvalues are <m>5</m> and <m>3</m>, both positive. By the
+            eigenvalue criterion, <m>A</m> is positive definite.
+        </p>
+    </example>
+
+    <example xml:id="ex-eigenvalue-criterion-indefinite">
+        <title>Indefiniteness from Mixed Eigenvalue Signs</title>
+        <p>
+            Consider
+            <me>
+                B=\begin{pmatrix}1 &amp; 2\\ 2 &amp; 1\end{pmatrix}.
+            </me>
+            We compute
+            <me>
+                p_B(\lambda)
+                =
+                \det\begin{pmatrix}1-\lambda &amp; 2\\ 2 &amp; 1-\lambda\end{pmatrix}
+                =
+                (1-\lambda)^2-4
+                =
+                (\lambda-3)(\lambda+1).
+            </me>
+            Thus the eigenvalues are <m>3</m> and <m>-1</m>. Since there is one positive
+            and one negative eigenvalue, the matrix <m>B</m> is indefinite.
+        </p>
+        <p>
+            This agrees with direct values of the quadratic form:
+            <me>
+                q_B(1,1)=6\gt 0,
+                \qquad
+                q_B(1,-1)=-2\lt 0.
+            </me>
+        </p>
+    </example>
+
+    <theorem xml:id="thm-sylvester-criterion">
+        <title>Sylvester's Criterion</title>
+        <statement>
+            <p>
+                Let <m>A</m> be a symmetric <m>n \times n</m> matrix. Denote by <m>A_i</m>
+                the <m>i \times i</m> leading principal submatrix (the submatrix formed by
+                the first <m>i</m> rows and columns of <m>A</m>).
+            </p>
+            <ul>
+                <li>
+                    <p>
+                        <m>A</m> is <em>positive definite</em> if and only if
+                        <me>
+                            \det(A_i) \gt 0 \quad \text{for all } i \in \{1, \ldots, n\}.
+                        </me>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <m>A</m> is <em>negative definite</em> if and only if
+                        <me>
+                            (-1)^i \det(A_i) \gt 0 \quad \text{for all } i \in \{1, \ldots, n\}.
+                        </me>
+                        In other words, the leading principal minors alternate in sign:
+                        <m>\det(A_1) \lt 0</m>, <m>\det(A_2) \gt 0</m>,
+                        <m>\det(A_3) \lt 0</m>, and so on.
+                    </p>
+                </li>
+            </ul>
+        </statement>
+    </theorem>
+
+    <image width="60%">
+        <latex-image>
+\begin{tikzpicture}[scale=0.95, line cap=round, line join=round]
+    \fill[green!10] (0,1) rectangle (3,4);
+    \fill[blue!10] (0,2) rectangle (2,4);
+    \fill[red!12] (0,3) rectangle (1,4);
+    \draw[gray!70] (0,0) grid (4,4);
+    \draw[very thick,green!60!black] (0,1) rectangle (3,4);
+    \draw[very thick,blue!70!black] (0,2) rectangle (2,4);
+    \draw[very thick,red!70!black] (0,3) rectangle (1,4);
+    \node at (0.5,3.5) {$a_{11}$};
+    \node at (1.5,3.5) {$a_{12}$};
+    \node at (2.5,3.5) {$a_{13}$};
+    \node at (3.5,3.5) {$a_{14}$};
+    \node at (0.5,2.5) {$a_{21}$};
+    \node at (1.5,2.5) {$a_{22}$};
+    \node at (2.5,2.5) {$a_{23}$};
+    \node at (3.5,2.5) {$a_{24}$};
+    \node at (0.5,1.5) {$a_{31}$};
+    \node at (1.5,1.5) {$a_{32}$};
+    \node at (2.5,1.5) {$a_{33}$};
+    \node at (3.5,1.5) {$a_{34}$};
+    \node at (0.5,0.5) {$a_{41}$};
+    \node at (1.5,0.5) {$a_{42}$};
+    \node at (2.5,0.5) {$a_{43}$};
+    \node at (3.5,0.5) {$a_{44}$};
+    \node[red!70!black,right] at (4.05,3.5) {$A_1$};
+    \node[blue!70!black,right] at (4.05,2.5) {$A_2$};
+    \node[green!50!black,right] at (4.05,1.5) {$A_3$};
+\end{tikzpicture}
+        </latex-image>
+        <caption>
+            Leading principal submatrices are the successive top-left blocks of the matrix:
+            first <m>A_1</m>, then <m>A_2</m>, then <m>A_3</m>, and so on.
+        </caption>
+    </image>
+
+    <example xml:id="ex-sylvester-positive-definite">
+        <title>Positive Definiteness via Sylvester's Criterion</title>
+        <p>
+            Consider
+            <me>
+                A=\begin{pmatrix}2 &amp; 1\\ 1 &amp; 3\end{pmatrix}.
+            </me>
+            The leading principal submatrices are
+            <me>
+                A_1=\begin{pmatrix}2\end{pmatrix},
+                \qquad
+                A_2=A.
+            </me>
+            Their determinants are
+            <me>
+                \det(A_1)=2\gt 0,
+                \qquad
+                \det(A_2)=2\cdot 3-1\cdot 1=5\gt 0.
+            </me>
+            Since all leading principal minors are positive, <m>A</m> is positive definite.
+        </p>
+    </example>
+
+    <example xml:id="ex-sylvester-negative-definite">
+        <title>Negative Definiteness via Sylvester's Criterion</title>
+        <p>
+            Consider
+            <me>
+                B=\begin{pmatrix}-2 &amp; 1\\ 1 &amp; -3\end{pmatrix}.
+            </me>
+            We compute
+            <me>
+                \det(B_1)=-2\lt 0,
+                \qquad
+                \det(B)=(-2)(-3)-1=5\gt 0.
+            </me>
+            The leading principal minors alternate in sign, so Sylvester's criterion shows
+            that <m>B</m> is negative definite.
+        </p>
+    </example>
+
+    <!-- AUTHOR NOTE: A full proof of Sylvester's criterion is omitted here because it relies on a longer inductive determinant argument than we want to develop in this first pass through the topic. -->
+    <!-- ADDED: explain how students should use Sylvester's criterion -->
+    <remark>
+        <p>
+            In practice, Sylvester's criterion is most useful when the eigenvalues are
+            inconvenient to compute exactly. For a symmetric matrix, it gives a fast test
+            for positive or negative definiteness using only determinants of smaller
+            submatrices.
+        </p>
+    </remark>
+
+    <remark xml:id="rem-local-extrema-forward">
+        <title>Connection to Local Extrema</title>
+        <p>
+            Quadratic forms play a central role in the analysis of local extrema of
+            functions <m>f \colon \R^n \to \R</m>.
+            Near a critical point <m>\mathbf{x}_0</m> (where
+            <m>\operatorname{grad} f(\mathbf{x}_0) = \mathbf{0}</m>),
+            the Taylor expansion gives
+            <me>
+                f(\mathbf{x})
+                \approx f(\mathbf{x}_0)
+                + \tfrac{1}{2}(\mathbf{x} - \mathbf{x}_0)^\top
+                  \operatorname{Hess} f(\mathbf{x}_0)
+                  (\mathbf{x} - \mathbf{x}_0).
+            </me>
+            The second-order term is a quadratic form with the Hessian matrix
+            <m>\operatorname{Hess} f(\mathbf{x}_0)</m>:
+        </p>
+        <ul>
+            <li>
+                <p>
+                    If <m>\operatorname{Hess} f(\mathbf{x}_0)</m> is positive definite,
+                    then <m>\mathbf{x}_0</m> is a strict local minimum.
+                </p>
+            </li>
+            <li>
+                <p>
+                    If <m>\operatorname{Hess} f(\mathbf{x}_0)</m> is negative definite,
+                    then <m>\mathbf{x}_0</m> is a strict local maximum.
+                </p>
+            </li>
+            <li>
+                <p>
+                    If <m>\operatorname{Hess} f(\mathbf{x}_0)</m> is indefinite,
+                    then <m>\mathbf{x}_0</m> is a saddle point.
+                </p>
+            </li>
+        </ul>
+        <p>
+            This connection is developed in detail in Section 2.2
+            (Error Propagation, Taylor Expansion, and Extrema).
+        </p>
+    </remark>
+
+    <remark xml:id="rem-principal-axes">
+        <title>Principal Axes and the Geometry of Quadratic Forms</title>
+        <p>
+            Since the matrix <m>A</m> of a quadratic form is symmetric, it can be
+            diagonalized by an orthogonal matrix: <m>A = PDP^\top</m>.
+            Here we only use the basic idea of changing coordinates; a full general theory
+            of change of basis is not needed yet.
+            Substituting the coordinate change <m>\mathbf{x} = P\mathbf{y}</m>:
+            <me>
+                q(\mathbf{x})
+                = \mathbf{x}^\top A \mathbf{x}
+                = (P\mathbf{y})^\top A (P\mathbf{y})
+                = \mathbf{y}^\top (P^\top A P) \mathbf{y}
+                = \mathbf{y}^\top D \mathbf{y}
+                = \lambda_1 y_1^2 + \cdots + \lambda_n y_n^2.
+            </me>
+            In the new coordinates <m>\mathbf{y}</m>, the quadratic form has
+            <em>no mixed terms</em>. The columns of <m>P</m> (the eigenvectors of <m>A</m>)
+            define the <term>principal axes</term> of the quadratic form.
+        </p>
+        <p>
+            Geometrically, the level sets <m>\{\mathbf{x} \mid q(\mathbf{x}) = c\}</m>
+            are ellipses (positive definite case), hyperbolas (indefinite case), or
+            degenerate shapes in between. The principal axes are exactly the axes of
+            symmetry of these level curves.
+        </p>
+        <image width="45%">
+            <latex-image>
+\begin{tikzpicture}[scale=0.85,>=stealth,line cap=round,line join=round]
+    \draw[->,gray!80] (-3,0) -- (3,0) node[right] {$x_1$};
+    \draw[->,gray!80] (0,-3) -- (0,3) node[above] {$x_2$};
+    \begin{scope}[rotate=30]
+        \draw[blue,thick] (0,0) ellipse [x radius=2.2, y radius=1.1];
+        \draw[red,dashed,thick,->] (-2.7,0) -- (2.7,0) node[right] {$y_1$};
+        \draw[red,dashed,thick,->] (0,-1.8) -- (0,1.8) node[above] {$y_2$};
+    \end{scope}
+\end{tikzpicture}
+            </latex-image>
+            <caption>
+                After an orthogonal change of coordinates, the mixed term disappears and the level curve aligns with the principal axes <m>y_1</m> and <m>y_2</m>.
+            </caption>
+        </image>
+    </remark>
+
+    <exercises xml:id="exercises-quadratic-forms">
+        <!-- ADDED: checkpoint title for consistency with the rest of the chapter -->
+        <title>Check Your Understanding</title>
+
+        <exercise xml:id="exer-expand-quadratic-form">
+            <title>Expand a Quadratic Form</title>
+            <statement>
+                <p>
+                    Let
+                    <me>
+                        A = \begin{pmatrix} 2 &amp; -1 \\ -1 &amp; 3 \end{pmatrix}.
+                    </me>
+                    Write out the quadratic form
+                    <m>q_A(\mathbf{x}) = \mathbf{x}^\top A \mathbf{x}</m>
+                    explicitly as a polynomial in <m>x_1, x_2</m>.
+                </p>
+            </statement>
+            <choices>
+                <choice>
+                    <statement><p><m>2x_1^2- x_1x_2 + 3x_2^2</m></p></statement>
+                    <feedback><p>Incorrect. The mixed term receives contributions from both off-diagonal entries.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p><m>2x_1^2-2x_1x_2+3x_2^2</m></p></statement>
+                    <feedback><p>Correct. The mixed coefficient is <m>a_{12}+a_{21}=-1+(-1)=-2</m>.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p><m>2x_1^2+x_1x_2+3x_2^2</m></p></statement>
+                    <feedback><p>Incorrect. The sign of the mixed term is negative, not positive.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p><m>2x_1^2-2x_2^2+3x_1x_2</m></p></statement>
+                    <feedback><p>Incorrect. The squared terms and mixed term have been combined incorrectly.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise xml:id="exer-definiteness-eigenvalues">
+            <title>Classify by Eigenvalues</title>
+            <statement>
+                <p>
+                    Determine the eigenvalues of
+                    <me>
+                        A = \begin{pmatrix} 3 &amp; 1 \\ 1 &amp; 3 \end{pmatrix}
+                    </me>
+                    and use them to decide whether <m>A</m> is positive definite,
+                    negative definite, or indefinite.
+                </p>
+            </statement>
+            <choices>
+                <choice>
+                    <statement><p>Negative definite</p></statement>
+                    <feedback><p>Incorrect. Both eigenvalues are positive, not negative.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p>Positive definite</p></statement>
+                    <feedback><p>Correct. The eigenvalues are <m>4</m> and <m>2</m>, so both are positive.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>Indefinite</p></statement>
+                    <feedback><p>Incorrect. An indefinite matrix needs both a positive and a negative eigenvalue.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>Negative semidefinite</p></statement>
+                    <feedback><p>Incorrect. The matrix has strictly positive eigenvalues.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise xml:id="exer-sylvester-3x3">
+            <title>Sylvester's Criterion for a <m>3\times 3</m> Matrix</title>
+            <statement>
+                <p>
+                    Apply Sylvester's criterion to determine whether
+                    <me>
+                        A = \begin{pmatrix} 2 &amp; 1 &amp; 0 \\ 1 &amp; 3 &amp; 1 \\ 0 &amp; 1 &amp; 4 \end{pmatrix}
+                    </me>
+                    is positive definite.
+                </p>
+            </statement>
+            <hint>
+                <p>
+                    Compute <m>\det(A_1)</m>, <m>\det(A_2)</m>, and <m>\det(A_3)</m> in turn.
+                </p>
+            </hint>
+            <!-- ADDED: worked solution for the longer checkpoint exercise -->
+            <solution>
+                <p>
+                    The leading principal submatrices are
+                    <me>
+                        A_1=\begin{pmatrix}2\end{pmatrix},
+                        \qquad
+                        A_2=\begin{pmatrix}2 &amp; 1\\ 1 &amp; 3\end{pmatrix},
+                        \qquad
+                        A_3=A.
+                    </me>
+                </p>
+                <p>
+                    Their determinants are
+                    <me>
+                        \det(A_1)=2,
+                        \qquad
+                        \det(A_2)=2\cdot 3-1\cdot 1=5,
+                    </me>
+                    and
+                    <me>
+                        \det(A_3)
+                        =
+                        2\det\begin{pmatrix}3 &amp; 1\\ 1 &amp; 4\end{pmatrix}
+                        -1\det\begin{pmatrix}1 &amp; 1\\ 0 &amp; 4\end{pmatrix}
+                        =2(12-1)-4
+                        =18.
+                    </me>
+                </p>
+                <p>
+                    All three leading principal minors are positive. By Sylvester's criterion,
+                    the matrix is positive definite.
+                </p>
+            </solution>
+        </exercise>
+
+        <exercise xml:id="exer-hessian-classification">
+            <title>Classify a Critical Point</title>
+            <statement>
+                <p>
+                    The function <m>f \colon \R^2 \to \R</m> has a critical
+                    point at the origin with Hessian
+                    <me>
+                        \operatorname{Hess} f(\mathbf{0})
+                        = \begin{pmatrix} 4 &amp; -2 \\ -2 &amp; 1 \end{pmatrix}.
+                    </me>
+                    Is the origin a local minimum, a local maximum, or a saddle point?
+                </p>
+            </statement>
+            <hint>
+                <p>
+                    Use Sylvester's criterion or compute the eigenvalues of the Hessian.
+                </p>
+            </hint>
+            <solution>
+                <p>
+                    Let
+                    <me>
+                        H=\begin{pmatrix}4 &amp; -2\\ -2 &amp; 1\end{pmatrix}.
+                    </me>
+                    We apply Sylvester's criterion. The first leading principal minor is
+                    <m>\det(H_1)=4\gt 0</m>, while
+                    <me>
+                        \det(H)=4\cdot 1-(-2)(-2)=4-4=0.
+                    </me>
+                </p>
+                <p>
+                    So <m>H</m> is not positive definite and not negative definite. In fact,
+                    it is positive semidefinite. Therefore the second-derivative test is
+                    inconclusive here: from the Hessian alone we cannot decide whether the
+                    origin is a local minimum, a local maximum, or a saddle point.
+                </p>
+            </solution>
+        </exercise>
+    </exercises>
+
+</subsection>

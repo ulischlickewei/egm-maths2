@@ -1,0 +1,1152 @@
+<subsection>
+    <title>Eigenvalues and Eigenvectors</title>
+
+    <introduction>
+        <p>
+            When a vector is multiplied by a square matrix, usually both the length and the direction will change. However, for some special non-zero vectors the effect is particularly simple: multiplication by the matrix changes only the size, while the direction remains the same. Such vectors are called eigenvectors, and the corresponding scaling factors are called eigenvalues.
+        </p>
+        <p>
+            Eigenvalues and eigenvectors play an important role in many applications. In mechanics they describe principal modes of deformation or vibration, in electrical engineering they appear in state-space models, and in data science they are used, for example, in principal component analysis. In this section we introduce the basic definitions, explain how eigenvalues can be computed, and discuss some first important examples.
+        </p>
+    </introduction>
+
+    <example>
+        <title>Distinguished Directions of a Matrix</title>
+        <p>
+            Consider the matrix
+            <me>
+                A=
+                \begin{pmatrix}
+                    1 &amp; 0\\
+                    4 &amp; 2
+                \end{pmatrix}
+            </me>
+            and the vectors
+            <me>
+                \mathbf{u}=
+                \begin{pmatrix}
+                    1\\
+                    1
+                \end{pmatrix},
+                \qquad
+                \mathbf{v}=
+                \begin{pmatrix}
+                    1\\
+                    -4
+                \end{pmatrix},
+                \qquad
+                \mathbf{w}=
+                \begin{pmatrix}
+                    0\\
+                    1
+                \end{pmatrix}.
+            </me>
+        </p>
+        <p>
+            We compute
+            <me>
+                A\mathbf{u}
+                =
+                \begin{pmatrix}
+                    1 &amp; 0\\
+                    4 &amp; 2
+                \end{pmatrix}
+                \begin{pmatrix}
+                    1\\
+                    1
+                \end{pmatrix}
+                =
+                \begin{pmatrix}
+                    1\\
+                    6
+                \end{pmatrix},
+            </me>
+            <me>
+                A\mathbf{v}
+                =
+                \begin{pmatrix}
+                    1 &amp; 0\\
+                    4 &amp; 2
+                \end{pmatrix}
+                \begin{pmatrix}
+                    1\\
+                    -4
+                \end{pmatrix}
+                =
+                \begin{pmatrix}
+                    1\\
+                    -4
+                \end{pmatrix}
+                =
+                \mathbf{v},
+            </me>
+            <me>
+                A\mathbf{w}
+                =
+                \begin{pmatrix}
+                    1 &amp; 0\\
+                    4 &amp; 2
+                \end{pmatrix}
+                \begin{pmatrix}
+                    0\\
+                    1
+                \end{pmatrix}
+                =
+                \begin{pmatrix}
+                    0\\
+                    2
+                \end{pmatrix}
+                =
+                2\mathbf{w}.
+            </me>
+        </p>
+        <p>
+            The vector <m>\mathbf{u}</m> changes its direction under multiplication by <m>A</m>. In contrast, <m>\mathbf{v}</m> keeps its direction and even remains unchanged, while <m>\mathbf{w}</m> keeps its direction and is stretched by the factor <m>2</m>. The following graphics visualize these three cases.
+        </p>
+
+        <image width="35%">
+            <latex-image>
+    \begin{tikzpicture}[scale=0.8,>=stealth,line cap=round,line join=round]
+        % grid
+        \draw[step=1cm,very thin,gray!35] (-0.5,-0.5) grid (2.5,6.5);
+
+        % axes
+        \draw[->] (-0.5,0) -- (2.5,0) node[right] {$x$};
+        \draw[->] (0,-0.5) -- (0,6.8) node[above] {$y$};
+
+        % ticks
+        \foreach \x in {1,2}
+            \draw (\x,0.08) -- (\x,-0.08) node[below] {$\x$};
+        \foreach \y in {1,2,3,4,5,6}
+            \draw (0.08,\y) -- (-0.08,\y) node[left] {$\y$};
+
+        % vectors
+        \draw[->,thick,blue] (0,0) -- (1,1) node[above left] {$\mathbf{u}$};
+        \draw[->,thick,red] (0,0) -- (1,6) node[above right] {$A\mathbf{u}$};
+
+        % endpoints
+        \fill[blue] (1,1) circle (2pt);
+        \fill[red] (1,6) circle (2pt);
+    \end{tikzpicture}
+            </latex-image>
+            <caption>
+                The blue vector <m>\mathbf{u}</m> is mapped to the red vector <m>A\mathbf{u}=\begin{pmatrix}1\\6\end{pmatrix}</m>. The direction changes.
+            </caption>
+        </image>
+
+        <image width="35%">
+            <latex-image>
+    \begin{tikzpicture}[scale=0.8,>=stealth,line cap=round,line join=round]
+        % grid
+        \draw[step=1cm,very thin,gray!35] (-0.5,-4.5) grid (2.5,0.5);
+
+        % axes
+        \draw[->] (-0.5,0) -- (2.5,0) node[right] {$x$};
+        \draw[->] (0,-4.8) -- (0,0.8) node[above] {$y$};
+
+        % ticks
+        \foreach \x in {1,2}
+            \draw (\x,0.08) -- (\x,-0.08) node[below] {$\x$};
+        \foreach \y in {-1,-2,-3,-4}
+            \draw (0.08,\y) -- (-0.08,\y) node[left] {$\y$};
+
+        % vectors
+        \draw[->,thick,blue] (0,0) -- (1,-4) node[right] {$\mathbf{v} = \textcolor{red}{A\mathbf{v}}$};
+        \draw[->,thick,red] (0,0) -- (1,-4);
+
+        % endpoint
+        \fill[blue] (1,-4) circle (2pt);
+    \end{tikzpicture}
+            </latex-image>
+            <caption>
+                The vector <m>\mathbf{v}</m> is unchanged by multiplication with <m>A</m>. Hence <m>A\mathbf{v}=\mathbf{v}</m>, so <m>\mathbf{v}</m> is an eigenvector with eigenvalue <m>1</m>.
+            </caption>
+        </image>
+
+        <image width="25%">
+            <latex-image>
+    \begin{tikzpicture}[scale=0.8,>=stealth,line cap=round,line join=round]
+        % grid
+        \draw[step=1cm,very thin,gray!35] (-0.5,-0.5) grid (1.5,2.5);
+
+        % axes
+        \draw[->] (-0.5,0) -- (1.5,0) node[right] {$x$};
+        \draw[->] (0,-0.5) -- (0,2.8) node[above] {$y$};
+
+        % ticks
+        \foreach \x in {1}
+            \draw (\x,0.08) -- (\x,-0.08) node[below] {$\x$};
+        \foreach \y in {1,2}
+            \draw (0.08,\y) -- (-0.08,\y) node[left] {$\y$};
+
+        % vectors
+        \draw[->,thick,blue] (0,0) -- (0,1) node[right] {$\mathbf{w}$};
+        \draw[->,thick,red] (0,0) -- (0,2) node[right] {$A\mathbf{w}$};
+
+        % endpoints
+        \fill[blue] (0,1) circle (2pt);
+        \fill[red] (0,2) circle (2pt);
+    \end{tikzpicture}
+            </latex-image>
+            <caption>
+                The blue vector <m>\mathbf{w}</m> is mapped to the red vector <m>A\mathbf{w}=2\mathbf{w}</m>. The direction stays the same, but the length doubles.
+            </caption>
+        </image>
+
+        <p>
+            These pictures show that some vectors are mapped to scalar multiples of themselves when multiplied by <m>A</m>You. This is exactly the phenomenon captured by the notion of eigenvalues and eigenvectors.
+        </p>
+    </example>  
+
+    <definition>
+        <title>Eigenvalue and Eigenvector</title>
+        <statement>
+            <p>
+                Let <m>A</m> be an <m>n\times n</m>-matrix. A non-zero vector
+                <m>\mathbf{v}\in\R^n</m> is called an <term>eigenvector</term> of <m>A</m> with <term>eigenvalue</term> <m>\lambda\in\R</m> if
+                <me>
+                    A\mathbf{v}=\lambda \mathbf{v}.
+                </me>
+            </p>
+        </statement>
+    </definition>
+
+    <p>
+        The equation <m>A\mathbf{v}=\lambda\mathbf{v}</m> means that multiplication by <m>A</m> has the same effect on <m>\mathbf{v}</m> as multiplication by the scalar <m>\lambda</m>. Hence <m>A</m> sends the vector <m>\mathbf{v}</m> to a vector parallel to <m>\mathbf{v}</m>.
+    </p>
+
+    <example>
+        <title>Two Eigenvectors of a Matrix</title>
+        <p>
+            For the matrix
+            <me>
+                A=
+                \begin{pmatrix}
+                    1 &amp; 0\\
+                    4 &amp; 2
+                \end{pmatrix}
+            </me>
+            from the previous example, we have already seen that
+            <me>
+                A\mathbf{v}=\mathbf{v}=1\mathbf{v}
+                \qquad\text{for}\qquad
+                \mathbf{v}=
+                \begin{pmatrix}
+                    1\\
+                    -4
+                \end{pmatrix},
+            </me>
+            and
+            <me>
+                A\mathbf{w}=2\mathbf{w}
+                \qquad\text{for}\qquad
+                \mathbf{w}=
+                \begin{pmatrix}
+                    0\\
+                    1
+                \end{pmatrix}.
+            </me>
+            Therefore <m>\mathbf{v}</m> is an eigenvector with eigenvalue <m>1</m>, and <m>\mathbf{w}</m> is an eigenvector with eigenvalue <m>2</m>.
+        </p>
+    </example>
+
+    <definition>
+        <title>Eigenspace</title>
+        <statement>
+            <p>
+                Let <m>A</m> be an <m>n\times n</m>-matrix and let <m>\lambda</m> be an eigenvalue of <m>A</m>. The set
+                <me>
+                    H_{\lambda}
+                    =
+                    \left\{
+                        \mathbf{v}\in\R^n \mid A\mathbf{v}=\lambda\mathbf{v}
+                    \right\}
+                </me>
+                is called the <term>eigenspace</term> corresponding to <m>\lambda</m>.
+            </p>
+        </statement>
+    </definition>
+
+    <p>
+        The eigenspace contains all eigenvectors corresponding to <m>\lambda</m> and also the zero vector. The zero vector itself is never an eigenvector, because eigenvectors must be non-zero by definition.
+    </p>
+
+    <example>
+        <title>Testing Whether a Given Vector Is an Eigenvector</title>
+        <p>
+            Consider
+            <me>
+                A=
+                \begin{pmatrix}
+                    2 &amp; -4\\
+                    -1 &amp; -1
+                \end{pmatrix},
+                \qquad
+                \mathbf{v}=
+                \begin{pmatrix}
+                    -4\\
+                    1
+                \end{pmatrix},
+                \qquad
+                \mathbf{w}=
+                \begin{pmatrix}
+                    3\\
+                    1
+                \end{pmatrix}.
+            </me>
+            To test whether a vector is an eigenvector, we multiply it by <m>A</m> and check whether the result is a scalar multiple of the original vector.
+        </p>
+        <p>
+            First,
+            <me>
+                A\mathbf{v}
+                =
+                \begin{pmatrix}
+                    2 &amp; -4\\
+                    -1 &amp; -1
+                \end{pmatrix}
+                \begin{pmatrix}
+                    -4\\
+                    1
+                \end{pmatrix}
+                =
+                \begin{pmatrix}
+                    -12\\
+                    3
+                \end{pmatrix}
+                =
+                3
+                \begin{pmatrix}
+                    -4\\
+                    1
+                \end{pmatrix}
+                =
+                3\mathbf{v}.
+            </me>
+            Hence <m>\mathbf{v}</m> is an eigenvector of <m>A</m> with eigenvalue <m>3</m>.
+        </p>
+        <p>
+            Next,
+            <me>
+                A\mathbf{w}
+                =
+                \begin{pmatrix}
+                    2 &amp; -4\\
+                    -1 &amp; -1
+                \end{pmatrix}
+                \begin{pmatrix}
+                    3\\
+                    1
+                \end{pmatrix}
+                =
+                \begin{pmatrix}
+                    2\\
+                    -4
+                \end{pmatrix}.
+            </me>
+            This vector is not a scalar multiple of
+            <m>\mathbf{w}=\begin{pmatrix}3\\1\end{pmatrix}</m>.
+            Therefore <m>\mathbf{w}</m> is not an eigenvector of <m>A</m>.
+        </p>
+    </example>
+
+    <p>
+        After having studied how to check whether a given vector is an eigenvector 
+        or not of a matrix, we next deal with the question how to find the eigenvectors 
+        to a given eigenvalue. To answer this question we will frame the problem of determining 
+        the eigenspace to a given eigenvalue as a linear system. 
+        This is the content of the following theorem.
+    </p>
+
+    <theorem>
+        <title>Linear System for Eigenvectors</title>
+        <statement>
+            <p>
+                Let <m>A</m> be an <m>n\times n</m>-matrix and let <m>\lambda\in\R</m>. Then the following statements are equivalent.
+            </p>
+            <ul>
+                <li>
+                    <p>
+                        <m>\lambda</m> is an eigenvalue of <m>A</m>.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        The homogeneous linear system
+                        <me>
+                            (A-\lambda I_n)\mathbf{x}=\mathbf{0}
+                        </me>
+                        has a non-trivial solution.
+                    </p>
+                </li>
+            </ul>
+            <p>
+                In this case,
+                <me>
+                    H_{\lambda}
+                    =
+                    \left\{
+                        \mathbf{x}\in\R^n \mid (A-\lambda I_n)\mathbf{x}=\mathbf{0}
+                    \right\}.
+                </me>
+            </p>
+        </statement>
+        <proof>
+            <p>
+                By definition, <m>\lambda</m> is an eigenvalue of <m>A</m> if and only if there exists a non-zero vector <m>\mathbf{v}</m> such that
+                <me>
+                    A\mathbf{v}=\lambda\mathbf{v}.
+                </me>
+                Subtracting <m>\lambda\mathbf{v}</m> from both sides gives
+                <me>
+                    A\mathbf{v}-\lambda\mathbf{v}=\mathbf{0}.
+                </me>
+            </p>
+            <p>
+                Since <m>\lambda\mathbf{v}=\lambda I_n\mathbf{v}</m>, 
+                where <m>I_n=\begin{pmatrix}
+                1 &amp; 0 &amp; \cdots &amp; 0 \\
+                0 &amp; 1 &amp; \ddots &amp; \vdots \\
+                \vdots &amp; \ddots &amp; \ddots &amp; 0 \\
+                0 &amp; \cdots &amp; 0 &amp; 1
+                \end{pmatrix}</m> is the identity matrix,
+                this is equivalent to
+                <me>
+                    (A-\lambda I_n)\mathbf{v}=\mathbf{0}.
+                </me>
+                Thus <m>\lambda</m> is an eigenvalue exactly if the system <m>(A-\lambda I_n)\mathbf{x}=\mathbf{0}</m> has a non-trivial solution. The set of all solutions of this system is precisely the eigenspace <m>H_{\lambda}</m>.
+            </p>
+        </proof>
+    </theorem>
+
+    <p>
+        This theorem is important because it turns an eigenvalue problem into a familiar problem from the previous section: solving a homogeneous linear system.
+    </p>
+
+    <example>
+        <title>Finding the Eigenspace for a Given Eigenvalue</title>
+        <p>
+            Again consider
+            <me>
+                A=
+                \begin{pmatrix}
+                    2 &amp; -4\\
+                    -1 &amp; -1
+                \end{pmatrix}.
+            </me>
+            We show that <m>\lambda=-2</m> is an eigenvalue and determine the corresponding eigenspace.
+        </p>
+        <p>
+            We have to solve
+            <me>
+                (A-(-2)I_2)\mathbf{x}=\mathbf{0},
+            </me>
+            that is,
+            <me>
+                (A+2I_2)\mathbf{x}=\mathbf{0}.
+            </me>
+            Since
+            <me>
+                A+2I_2
+                =
+                \begin{pmatrix}
+                    4 &amp; -4\\
+                    -1 &amp; 1
+                \end{pmatrix},
+            </me>
+            the augmented coefficient matrix is
+            <me>
+                \left(
+                \begin{array}{cc|c}
+                    4 &amp; -4 &amp; 0\\
+                    -1 &amp; 1 &amp; 0
+                \end{array}
+                \right)
+                \sim
+                \left(
+                \begin{array}{cc|c}
+                    1 &amp; -1 &amp; 0\\
+                    0 &amp; 0 &amp; 0
+                \end{array}
+                \right).
+            </me>
+        </p>
+        <p>
+            Hence the system is equivalent to
+            <me>
+                x_1-x_2=0,
+            </me>
+            so <m>x_1=x_2=t</m> with <m>t\in\R</m>. Therefore
+            <me>
+                H_{-2}
+                =
+                \left\{
+                    \begin{pmatrix}
+                        t\\
+                        t
+                    \end{pmatrix}
+                    \;\middle|\;
+                    t\in\R
+                \right\}
+                =
+                \left\{
+                    t
+                    \begin{pmatrix}
+                        1\\
+                        1
+                    \end{pmatrix}
+                    \;\middle|\;
+                    t\in\R
+                \right\}.
+            </me>
+            Every non-zero vector in this eigenspace is an eigenvector corresponding to <m>\lambda=-2</m>.
+        </p>
+    </example>
+
+    <p>
+        The eigenvalue <m>\lambda=0</m> is possible. In that case there exists a non-zero vector <m>\mathbf{v}</m> such that
+        <me>
+            A\mathbf{v}=\mathbf{0}.
+        </me>
+        So <m>0</m> is an eigenvalue exactly if the homogeneous system <m>A\mathbf{x}=\mathbf{0}</m> has a non-trivial solution. By the invertibility criteria from the previous section, this means that <m>A</m> is not invertible.
+    </p>
+
+    <example>
+        <title>Eigenvalues of an Upper Triangular Matrix</title>
+        <p>
+            Consider the upper triangular matrix
+            <me>
+                A=
+                \begin{pmatrix}
+                    1 &amp; 0 &amp; 3\\
+                    0 &amp; 2 &amp; -1\\
+                    0 &amp; 0 &amp; 0
+                \end{pmatrix}.
+            </me>
+            We determine its eigenvalues.
+        </p>
+        <p>
+            The number <m>\lambda</m> is an eigenvalue if and only if the system
+            <me>
+                (A-\lambda I_3)\mathbf{x}=\mathbf{0}
+            </me>
+            has a non-trivial solution. Now
+            <me>
+                A-\lambda I_3
+                =
+                \begin{pmatrix}
+                    1-\lambda &amp; 0 &amp; 3\\
+                    0 &amp; 2-\lambda &amp; -1\\
+                    0 &amp; 0 &amp; -\lambda
+                \end{pmatrix}.
+            </me>
+            This matrix is still upper triangular.
+        </p>
+        <p>
+            For the system to have a non-trivial solution, the matrix <m>A-\lambda I_3</m> must fail to have a pivot in every column. Since the diagonal entries are <m>1-\lambda</m>, <m>2-\lambda</m>, and <m>-\lambda</m>, this happens exactly when at least one of them is zero. Hence
+            <me>
+                \lambda=1,\qquad \lambda=2,\qquad \lambda=0
+            </me>
+            are the eigenvalues of <m>A</m>.
+        </p>
+    </example>
+
+    <theorem>
+        <title>Eigenvalues of Triangular Matrices</title>
+        <statement>
+            <p>
+                Let <m>A</m> be an upper or lower triangular <m>n\times n</m>-matrix. Then the eigenvalues of <m>A</m> are exactly the diagonal entries of <m>A</m>.
+            </p>
+        </statement>
+        <proof>
+            <p>
+                The matrix <m>A-\lambda I_n</m> is again triangular, and its diagonal entries are obtained by subtracting <m>\lambda</m> from the diagonal entries of <m>A</m>. A triangular matrix is invertible exactly if all diagonal entries are non-zero. Therefore <m>A-\lambda I_n</m> is not invertible exactly when one of these diagonal entries is zero. By the previous theorem, this is equivalent to <m>\lambda</m> being an eigenvalue.
+            </p>
+        </proof>
+    </theorem>
+
+    <p>
+        In practice, this theorem is very useful. For triangular matrices the eigenvalues can be read off immediately from the main diagonal, without any further calculation.
+    </p>
+
+    <p>
+        We have seen how to check if a given vector is an eigenvector of a matrix (how?). Also, we have seen how to find the eigenspace corresponding to a given eigenvalue (how?). Next, we will see how to find the eigenvalues of a matrix.
+    </p>
+
+    <theorem>
+        <title>Characteristic Polynomial</title>
+        <statement>
+            <p>
+                Let <m>A</m> be an <m>n\times n</m>-matrix. The polynomial
+                <me>
+                    p_A(\lambda)=\det(A-\lambda I_n)
+                </me>
+                is called the <term>characteristic polynomial</term> of <m>A</m>.
+            </p>
+            <p>
+                A scalar <m>\lambda</m> is an eigenvalue of <m>A</m> if and only if
+                <me>
+                    p_A(\lambda)=0.
+                </me>
+            </p>
+        </statement>
+        <proof>
+            <p>
+                By the theorem on eigenvectors, <m>\lambda</m> is an eigenvalue exactly if the homogeneous system
+                <me>
+                    (A-\lambda I_n)\mathbf{x}=\mathbf{0}
+                </me>
+                has a non-trivial solution. By the invertibility criteria, this is equivalent to <m>A-\lambda I_n</m> not being invertible. For square matrices this happens exactly when
+                <me>
+                    \det(A-\lambda I_n)=0.
+                </me>
+                Hence the zeros of the characteristic polynomial are precisely the eigenvalues of <m>A</m>.
+            </p>
+        </proof>
+    </theorem>
+
+    <!-- ADDED: connect characteristic polynomials to the determinant section -->
+    <remark>
+        <p>
+            This is where the determinant tools from the previous section become essential:
+            to find eigenvalues, we first build the matrix <m>A-\lambda I_n</m> and then
+            compute its determinant. In other words, the new topic of eigenvalues builds
+            directly on the determinant techniques from <xref ref="section-determinants-inverse-matrices"/>.
+        </p>
+    </remark>
+
+    <example>
+        <title>Computing Eigenvalues via the Characteristic Polynomial</title>
+        <p>
+            Consider
+            <me>
+                A=
+                \begin{pmatrix}
+                    2 &amp; 3\\
+                    3 &amp; -6
+                \end{pmatrix}.
+            </me>
+            We determine the eigenvalues of <m>A</m>.
+        </p>
+        <p>
+            The characteristic polynomial is
+            <me>
+                p_A(\lambda)
+                =
+                \det
+                \begin{pmatrix}
+                    2-\lambda &amp; 3\\
+                    3 &amp; -6-\lambda
+                \end{pmatrix}
+                =
+                (2-\lambda)(-6-\lambda)-9.
+            </me>
+            Expanding gives
+            <me>
+                p_A(\lambda)=\lambda^2+4\lambda-21.
+            </me>
+        </p>
+        <p>
+            Therefore the eigenvalues are the zeros of this polynomial:
+            <me>
+                \lambda^2+4\lambda-21=0.
+            </me>
+            Using the quadratic formula, we obtain
+            <me>
+                \lambda_{1,2}
+                =
+                \frac{-4\pm\sqrt{16+84}}{2}
+                =
+                \frac{-4\pm 10}{2}.
+            </me>
+            Hence
+            <me>
+                \lambda_1=3,
+                \qquad
+                \lambda_2=-7.
+            </me>
+        </p>
+    </example>
+
+    <definition>
+        <title>Algebraic and Geometric Multiplicity</title>
+        <statement>
+            <p>
+                Let <m>\lambda_0</m> be an eigenvalue of the matrix <m>A</m>.
+            </p>
+            <p>
+                If the characteristic polynomial contains the factor <m>(\lambda-\lambda_0)^k</m>, but not the factor <m>(\lambda-\lambda_0)^{k+1}</m>, then <m>k</m> is called the <term>algebraic multiplicity</term> of <m>\lambda_0</m>.
+            </p>
+            <p>
+                The <term>geometric multiplicity</term> of <m>\lambda_0</m> is the maximum
+                number of linearly independent vectors in the eigenspace <m>H_{\lambda_0}</m>.
+            </p>
+        </statement>
+    </definition>
+
+    <p>
+        The geometric multiplicity tells us how many linearly independent eigenvectors belong to an eigenvalue. It is always at least <m>1</m> and never larger than the algebraic multiplicity.
+    </p>
+
+    <example>
+        <title>A Repeated Eigenvalue</title>
+        <p>
+            Consider
+            <me>
+                A=
+                \begin{pmatrix}
+                    3 &amp; -18\\
+                    2 &amp; -9
+                \end{pmatrix}.
+            </me>
+            We determine its eigenvalues and eigenvectors.
+        </p>
+        <p>
+            The characteristic polynomial is
+            <me>
+                p_A(\lambda)
+                =
+                \det
+                \begin{pmatrix}
+                    3-\lambda &amp; -18\\
+                    2 &amp; -9-\lambda
+                \end{pmatrix}
+                =
+                (3-\lambda)(-9-\lambda)+36
+                =
+                \lambda^2+6\lambda+9
+                =
+                (\lambda+3)^2.
+            </me>
+            Thus <m>\lambda=-3</m> is the only eigenvalue, and its algebraic multiplicity is <m>2</m>.
+        </p>
+        <p>
+            To find the eigenspace, we solve
+            <me>
+                (A+3I_2)\mathbf{x}=\mathbf{0}.
+            </me>
+            Since
+            <me>
+                A+3I_2
+                =
+                \begin{pmatrix}
+                    6 &amp; -18\\
+                    2 &amp; -6
+                \end{pmatrix}
+                \sim
+                \begin{pmatrix}
+                    1 &amp; -3\\
+                    0 &amp; 0
+                \end{pmatrix},
+            </me>
+            we get the equation
+            <me>
+                x_1-3x_2=0.
+            </me>
+            Hence
+            <me>
+                H_{-3}
+                =
+                \left\{
+                    t
+                    \begin{pmatrix}
+                        3\\
+                        1
+                    \end{pmatrix}
+                    \;\middle|\;
+                    t\in\R
+                \right\}.
+            </me>
+            All eigenvectors in <m>H_{-3}</m> are multiples of
+            <m>\begin{pmatrix}3\\1\end{pmatrix}</m>, so we can extract only one linearly
+            independent eigenvector from this eigenspace. Therefore the geometric
+            multiplicity is <m>1</m>.
+        </p>
+        <p>
+            This example shows that algebraic and geometric multiplicity need not coincide.
+        </p>
+    </example>
+
+    <example>
+        <title>A Rotation Matrix</title>
+        <p>
+            Consider the matrix
+            <me>
+                A=
+                \begin{pmatrix}
+                    0 &amp; -1\\
+                    1 &amp; 0
+                \end{pmatrix},
+            </me>
+            which describes a rotation by <m>\frac{\pi}{2}</m> around the origin in the counter-clockwise direction.
+        </p>
+        <p>
+            Over the real numbers, this matrix has no eigenvectors. Indeed, a rotation by <m>90^\circ</m> changes the direction of every non-zero real vector, so no non-zero vector can satisfy <m>A\mathbf{v}=\lambda\mathbf{v}</m> with <m>\lambda\in\R</m>.
+        </p>
+        <p>
+            Algebraically, the characteristic polynomial is
+            <me>
+                p_A(\lambda)
+                =
+                \det
+                \begin{pmatrix}
+                    -\lambda &amp; -1\\
+                    1 &amp; -\lambda
+                \end{pmatrix}
+                =
+                \lambda^2+1.
+            </me>
+            This polynomial has no real zero, hence <m>A</m> has no real eigenvalue.
+        </p>
+        <p>
+            Over the complex numbers, however, the equation
+            <me>
+                \lambda^2+1=0
+            </me>
+            has the solutions
+            <me>
+                \lambda=i,
+                \qquad
+                \lambda=-i.
+            </me>
+            Thus the matrix has complex eigenvalues. This example illustrates that real matrices need not have real eigenvalues.
+        </p>
+    </example>
+
+    <!-- ADDED: clarify the relevance of the rotation example for later diagonalization -->
+    <remark>
+        <p>
+            This example shows an important limitation: a real matrix need not have enough
+            real eigenvalues and eigenvectors to be diagonalized over <m>\R</m>. When we
+            study diagonalization in the next subsection, we will therefore pay attention
+            to whether the characteristic polynomial actually has real zeros.
+        </p>
+    </remark>
+
+    <example>
+        <title>Engineering Interpretation</title>
+        <p>
+            In many engineering models, a matrix describes how a system transforms states or forces. If <m>\mathbf{v}</m> is an eigenvector, then the action of the matrix on this state is especially simple: the state keeps its direction and is only scaled by <m>\lambda</m>.
+        </p>
+        <p>
+            For example, in a mechanical system an eigenvector may represent a preferred vibration mode, and the corresponding eigenvalue can be related to amplification or damping. In stress analysis, eigenvectors of a symmetric matrix describe principal directions, that is, directions in which no shear component appears. This is one reason why eigenvalues are fundamental in applied mathematics and engineering.
+        </p>
+    </example>
+
+    <theorem>
+        <title>Powers of a Matrix and the Inverse Matrix</title>
+        <statement>
+            <p>
+                Let <m>\mathbf{v}</m> be an eigenvector of <m>A</m> with eigenvalue <m>\lambda</m>.
+            </p>
+            <ul>
+                <li>
+                    <p>
+                        For every <m>k\in\N</m>,
+                        <me>
+                            A^k\mathbf{v}=\lambda^k\mathbf{v}.
+                        </me>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        If <m>A</m> is invertible, then <m>\lambda\neq 0</m> and
+                        <me>
+                            A^{-1}\mathbf{v}=\lambda^{-1}\mathbf{v}.
+                        </me>
+                        Hence <m>\lambda^{-1}</m> is an eigenvalue of <m>A^{-1}</m>.
+                    </p>
+                </li>
+            </ul>
+        </statement>
+        <proof>
+            <p>
+                The first claim follows by repeated application of the relation <m>A\mathbf{v}=\lambda\mathbf{v}</m>. For example,
+                <me>
+                    A^3\mathbf{v}
+                    =
+                    A(A(A\mathbf{v}))
+                    =
+                    A(A(\lambda\mathbf{v}))
+                    =
+                    A(\lambda A\mathbf{v})
+                    =
+                    \lambda A(\lambda\mathbf{v})
+                    =
+                    \lambda^2 A\mathbf{v}
+                    =
+                    \lambda^3\mathbf{v}.
+                </me>
+                The general case is proved in the same way by induction.
+            </p>
+            <p>
+                For the second claim, apply <m>A^{-1}</m> to the equation <m>A\mathbf{v}=\lambda\mathbf{v}</m>. This gives
+                <me>
+                    \mathbf{v}
+                    =
+                    A^{-1}(\lambda\mathbf{v})
+                    =
+                    \lambda A^{-1}\mathbf{v}.
+                </me>
+                Since <m>A</m> is invertible, the eigenvalue <m>\lambda</m> cannot be zero. Dividing by <m>\lambda</m> yields
+                <me>
+                    A^{-1}\mathbf{v}=\lambda^{-1}\mathbf{v}.
+                </me>
+            </p>
+        </proof>
+    </theorem>
+
+    <p>
+        We summarize the procedure for computing eigenvalues and eigenvectors.
+    </p>
+
+    <remark>
+        <title>Procedure for Determining Eigenvalues and Eigenvectors</title>
+        <p>
+            Let <m>A</m> be an <m>n\times n</m>-matrix.
+        </p>
+        <ol>
+            <li>
+                <p>
+                    Compute the characteristic polynomial
+                    <me>
+                        p_A(\lambda)=\det(A-\lambda I_n).
+                    </me>
+                </p>
+            </li>
+            <li>
+                <p>
+                    Determine the zeros of <m>p_A</m>. These are the eigenvalues of <m>A</m>.
+                </p>
+            </li>
+            <li>
+                <p>
+                    For each eigenvalue <m>\lambda_0</m>, solve the homogeneous system
+                    <me>
+                        (A-\lambda_0 I_n)\mathbf{x}=\mathbf{0}
+                    </me>
+                    to obtain the eigenspace <m>H_{\lambda_0}</m>.
+                </p>
+            </li>
+        </ol>
+    </remark>
+
+    <exercises xml:id="exercises-eigenvalues-eigenvectors">
+        <!-- ADDED: checkpoint title for consistency with the rest of the chapter -->
+        <title>Check Your Understanding</title>
+
+        <exercise>
+            <title>Check a Candidate Eigenvalue</title>
+            <statement>
+                <p>
+                    Consider the matrix
+                    <me>
+                        A=
+                        \begin{pmatrix}
+                            6 &amp; -3 &amp; 1\\
+                            3 &amp; 0 &amp; 5\\
+                            2 &amp; 2 &amp; 6
+                        \end{pmatrix}.
+                    </me>
+                    Decide whether <m>5</m> is an eigenvalue of <m>A</m>.
+                </p>
+            </statement>
+            <hint>
+                <p>
+                    Study the homogeneous system <m>(A-5I_3)\mathbf{x}=\mathbf{0}</m>. The value <m>5</m> is an eigenvalue exactly if this system has a non-trivial solution.
+                </p>
+            </hint>
+            <choices>
+                <choice>
+                    <statement><p>Yes, because <m>\det(A-5I_3)=0</m>.</p></statement>
+                    <feedback><p>Incorrect. Computing <m>\det(A-5I_3)</m> gives a non-zero value, so the system has only the trivial solution.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p>No, because <m>A-5I_3</m> is invertible.</p></statement>
+                    <feedback><p>Correct. Since <m>A-5I_3</m> is invertible, the homogeneous system has only the trivial solution, so <m>5</m> is not an eigenvalue.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>Yes, because the trace of <m>A</m> is greater than <m>5</m>.</p></statement>
+                    <feedback><p>Incorrect. The trace alone does not decide whether a number is an eigenvalue.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>No, because <m>5</m> is not a diagonal entry of <m>A</m>.</p></statement>
+                    <feedback><p>Incorrect. That criterion works only for triangular matrices, and this matrix is not triangular.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise>
+            <title>Powers Acting on an Eigenvector</title>
+            <statement>
+                <p>
+                    Let <m>\mathbf{v}</m> be an eigenvector of the matrix <m>A</m> with eigenvalue <m>\lambda</m>. Compute <m>A^4\mathbf{v}</m>.
+                </p>
+            </statement>
+            <choices>
+                <choice>
+                    <statement><p><m>4\lambda\mathbf{v}</m></p></statement>
+                    <feedback><p>Incorrect. Repeated application multiplies by <m>\lambda</m> each time, so the factor is <m>\lambda^4</m>, not <m>4\lambda</m>.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p><m>\lambda^4\mathbf{v}</m></p></statement>
+                    <feedback><p>Correct. Applying <m>A</m> four times multiplies the eigenvector by <m>\lambda</m> four times.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p><m>A^4\lambda\mathbf{v}</m></p></statement>
+                    <feedback><p>Incorrect. The expression can be simplified much further using the eigenvector property.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p><m>\lambda\mathbf{v}^4</m></p></statement>
+                    <feedback><p>Incorrect. Vectors are not exponentiated in this way.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise>
+            <title>Find Eigenvalues and Eigenspaces</title>
+            <statement>
+                <p>
+                    Determine the eigenvalues and eigenspaces of
+                    <me>
+                        A=
+                        \begin{pmatrix}
+                            4 &amp; 1\\
+                            2 &amp; 3
+                        \end{pmatrix}.
+                    </me>
+                </p>
+            </statement>
+            <solution>
+                <p>
+                    We compute the characteristic polynomial:
+                    <me>
+                        p_A(\lambda)
+                        =
+                        \det\begin{pmatrix}4-\lambda &amp; 1\\ 2 &amp; 3-\lambda\end{pmatrix}
+                        =
+                        (4-\lambda)(3-\lambda)-2
+                        =
+                        \lambda^2-7\lambda+10.
+                    </me>
+                    Factoring gives
+                    <me>
+                        p_A(\lambda)=(\lambda-5)(\lambda-2),
+                    </me>
+                    so the eigenvalues are <m>\lambda_1=5</m> and <m>\lambda_2=2</m>.
+                </p>
+                <p>
+                    For <m>\lambda=5</m>, we solve
+                    <me>
+                        (A-5I_2)\mathbf{x}
+                        =
+                        \begin{pmatrix}-1 &amp; 1\\ 2 &amp; -2\end{pmatrix}\mathbf{x}
+                        =\mathbf{0}.
+                    </me>
+                    This gives <m>x_2=x_1</m>, hence
+                    <me>
+                        H_5
+                        =
+                        \left\{
+                            t\begin{pmatrix}1\\1\end{pmatrix}
+                            \;\middle|\;
+                            t\in\R
+                        \right\}.
+                    </me>
+                </p>
+                <p>
+                    For <m>\lambda=2</m>, we solve
+                    <me>
+                        (A-2I_2)\mathbf{x}
+                        =
+                        \begin{pmatrix}2 &amp; 1\\ 2 &amp; 1\end{pmatrix}\mathbf{x}
+                        =\mathbf{0}.
+                    </me>
+                    This gives <m>2x_1+x_2=0</m>, so <m>x_2=-2x_1</m>. Therefore
+                    <me>
+                        H_2
+                        =
+                        \left\{
+                            t\begin{pmatrix}1\\-2\end{pmatrix}
+                            \;\middle|\;
+                            t\in\R
+                        \right\}.
+                    </me>
+                </p>
+            </solution>
+        </exercise>
+
+        <exercise>
+            <title>Interpretation for a Scaling Process</title>
+            <statement>
+                <p>
+                    A matrix <m>A</m> describes one step of a linear discrete-time model. Explain in your own words what it means for a non-zero state vector <m>\mathbf{v}</m> to be an eigenvector of <m>A</m>. What is the effect of repeated application of the model on this state if the corresponding eigenvalue satisfies <m>|\lambda|&lt;1</m>, <m>|\lambda|=1</m>, or <m>|\lambda|&gt;1</m>?
+                </p>
+            </statement>
+            <choices>
+                <choice correct="yes">
+                    <statement><p>The state stays on the same line; it decays for <m>|\lambda|&lt;1</m>, keeps constant magnitude for <m>|\lambda|=1</m>, and grows for <m>|\lambda|&gt;1</m>.</p></statement>
+                    <feedback><p>Correct. Along an eigenvector direction, each step only rescales the state by <m>\lambda</m>.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>The state rotates to a new direction each step; the size behaviour depends only on the trace of <m>A</m>.</p></statement>
+                    <feedback><p>Incorrect. An eigenvector direction is preserved, and the relevant quantity is the eigenvalue, not the trace.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>The state stays fixed whenever <m>\lambda\neq 0</m>.</p></statement>
+                    <feedback><p>Incorrect. The state is fixed only in the special case <m>\lambda=1</m>.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>The state becomes zero after one step whenever <m>|\lambda|&lt;1</m>.</p></statement>
+                    <feedback><p>Incorrect. If <m>|\lambda|&lt;1</m>, the state decays gradually; it does not become zero in one step unless <m>\lambda=0</m>.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise>
+            <title>Repeated Eigenvalue</title>
+            <statement>
+                <p>
+                    Determine the characteristic polynomial, the algebraic multiplicity, and the geometric multiplicity of the eigenvalue of
+                    <me>
+                        A=
+                        \begin{pmatrix}
+                            2 &amp; 1\\
+                            0 &amp; 2
+                        \end{pmatrix}.
+                    </me>
+                </p>
+            </statement>
+            <hint>
+                <p>
+                    First compute <m>p_A(\lambda)</m>, then solve <m>(A-2I_2)\mathbf{x}=\mathbf{0}</m>.
+                </p>
+            </hint>
+            <!-- ADDED: worked solution for the longer checkpoint exercise -->
+            <solution>
+                <p>
+                    We have
+                    <me>
+                        p_A(\lambda)=\det\begin{pmatrix}2-\lambda &amp; 1\\ 0 &amp; 2-\lambda\end{pmatrix}
+                        =(2-\lambda)^2.
+                    </me>
+                    So the only eigenvalue is <m>\lambda=2</m>, with algebraic multiplicity <m>2</m>.
+                </p>
+                <p>
+                    Next we solve
+                    <me>
+                        (A-2I_2)\mathbf{x}
+                        =
+                        \begin{pmatrix}0 &amp; 1\\ 0 &amp; 0\end{pmatrix}\mathbf{x}
+                        =\mathbf{0}.
+                    </me>
+                    This gives <m>x_2=0</m>, while <m>x_1</m> is free. Hence
+                    <me>
+                        H_2=\left\{t\begin{pmatrix}1\\0\end{pmatrix}\;\middle|\; t\in\R\right\},
+                    </me>
+                    so the geometric multiplicity is <m>1</m>.
+                </p>
+            </solution>
+        </exercise>
+    </exercises>
+</subsection>

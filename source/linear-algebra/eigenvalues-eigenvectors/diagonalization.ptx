@@ -1,0 +1,516 @@
+<subsection xml:id="subsec-diagonalization">
+    <title>Diagonalization of Matrices</title>
+
+    <example xml:id="ex-powers-diagonal-matrix">
+        <title>Powers of a Diagonal Matrix</title>
+        <p>
+            Consider the diagonal matrix
+            <me>
+                A = \begin{pmatrix} 5 &amp; 0 \\ 0 &amp; 3 \end{pmatrix}.
+            </me>
+            For any <m>k \in \N</m>, its <m>k</m>-th power is
+            <me>
+                A^k = \begin{pmatrix} 5^k &amp; 0 \\ 0 &amp; 3^k \end{pmatrix}.
+            </me>
+            This follows immediately from matrix multiplication: each diagonal entry is
+            raised to the power <m>k</m> independently.
+        </p>
+    </example>
+
+    <p>
+        The example above shows why diagonal matrices are so attractive: their powers are
+        immediate to compute. This raises a natural question: can we use this simple
+        structure to compute powers of more general matrices?
+    </p>
+
+    <p>
+        The answer is yes, provided the matrix can be <em>diagonalized</em>, that is,
+        written in the form <m>A = PDP^{-1}</m> with an invertible matrix <m>P</m> and
+        a diagonal matrix <m>D</m>. As we will see, the columns of <m>P</m> are
+        eigenvectors of <m>A</m>, and the diagonal entries of <m>D</m> are the
+        corresponding eigenvalues.
+    </p>
+
+    <definition xml:id="def-diagonalizable-matrix">
+        <title>Diagonalizable Matrix</title>
+        <statement>
+            <p>
+                An <m>n \times n</m> matrix <m>A</m> is called <term>diagonalizable</term>
+                if there exists an invertible matrix <m>P</m> and a diagonal matrix <m>D</m>
+                such that
+                <me>
+                    A = P D P^{-1}.
+                </me>
+            </p>
+        </statement>
+    </definition>
+
+    <p>
+        If <m>A = PDP^{-1}</m>, then a simple induction gives
+        <me>
+            A^k = (PDP^{-1})^k = P D^k P^{-1},
+        </me>
+        since the intermediate factors <m>P^{-1}P = I</m> cancel. Computing
+        <m>A^k</m> then reduces to computing <m>D^k</m>, which is trivial.
+    </p>
+
+    <theorem xml:id="thm-diagonalizability-criterion">
+        <title>Criterion for Diagonalizability</title>
+        <statement>
+            <p>
+                Let <m>A</m> be an <m>n \times n</m> matrix.
+            </p>
+            <ol>
+                <li>
+                    <p>
+                        <m>A</m> is diagonalizable if and only if there exist
+                        <m>n</m> linearly independent eigenvectors of <m>A</m>.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        If <m>A = PDP^{-1}</m>, then the columns of <m>P</m> are
+                        linearly independent eigenvectors of <m>A</m>, and the diagonal
+                        entries of <m>D</m> are the corresponding eigenvalues.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        If the characteristic polynomial of <m>A</m> splits into linear
+                        factors over <m>\R</m>, then <m>A</m> is diagonalizable if and
+                        only if for every eigenvalue <m>\lambda_i</m>, its algebraic
+                        multiplicity equals its geometric multiplicity.
+                    </p>
+                </li>
+            </ol>
+        </statement>
+        <proof>
+            <p>
+                For part (1), first assume that <m>A</m> is diagonalizable, so
+                <m>A=PDP^{-1}</m> for some invertible matrix <m>P</m>. Multiplying by
+                <m>P</m> on the right gives <m>AP=PD</m>. If <m>\mathbf{p}_i</m> denotes
+                the <m>i</m>-th column of <m>P</m> and <m>\lambda_i</m> the corresponding
+                diagonal entry of <m>D</m>, then the <m>i</m>-th column of <m>AP=PD</m>
+                reads <m>A\mathbf{p}_i=\lambda_i\mathbf{p}_i</m>. So the columns of <m>P</m>
+                are eigenvectors of <m>A</m>. Because <m>P</m> is invertible, these columns
+                are linearly independent, so we obtain <m>n</m> linearly independent
+                eigenvectors.
+            </p>
+            <p>
+                Conversely, suppose that <m>\mathbf{v}_1,\ldots,\mathbf{v}_n</m> are
+                linearly independent eigenvectors with corresponding eigenvalues
+                <m>\lambda_1,\ldots,\lambda_n</m>. Form the matrix
+                <me>
+                    P=\begin{pmatrix} \mathbf{v}_1 &amp; \cdots &amp; \mathbf{v}_n \end{pmatrix}
+                    \qquad\text{and}\qquad
+                    D=\operatorname{diag}(\lambda_1,\ldots,\lambda_n).
+                </me>
+                Then
+                <me>
+                    AP
+                    =
+                    \begin{pmatrix}
+                        A\mathbf{v}_1 &amp; \cdots &amp; A\mathbf{v}_n
+                    \end{pmatrix}
+                    =
+                    \begin{pmatrix}
+                        \lambda_1\mathbf{v}_1 &amp; \cdots &amp; \lambda_n\mathbf{v}_n
+                    \end{pmatrix}
+                    =
+                    PD.
+                </me>
+                Since the columns of <m>P</m> are linearly independent, <m>P</m> is
+                invertible. Multiplying <m>AP=PD</m> on the right by <m>P^{-1}</m>
+                gives <m>A=PDP^{-1}</m>, so <m>A</m> is diagonalizable.
+            </p>
+            <p>
+                Part (2) follows from the identity <m>AP=PD</m>. If <m>\mathbf{p}_i</m>
+                denotes the <m>i</m>-th column of <m>P</m> and <m>\lambda_i</m> the
+                corresponding diagonal entry of <m>D</m>, then the <m>i</m>-th column of
+                <m>AP=PD</m> reads <m>A\mathbf{p}_i=\lambda_i\mathbf{p}_i</m>. So each
+                column of <m>P</m> is an eigenvector with the matching eigenvalue.
+            </p>
+            <p>
+                For part (3), assume that the characteristic polynomial splits over <m>\R</m>.
+                Then the sum of the algebraic multiplicities of all eigenvalues is <m>n</m>.
+                For each eigenvalue, the geometric multiplicity is at most the algebraic
+                multiplicity. Hence equality for every eigenvalue is equivalent to having a
+                total of <m>n</m> linearly independent eigenvectors. By part (1), this is
+                exactly the condition for diagonalizability.
+            </p>
+        </proof>
+    </theorem>
+
+    <!-- ADDED: clarify the missing hypothesis in the multiplicity criterion -->
+    <remark>
+        <p>
+            The extra hypothesis in part (3) matters. For example, the rotation matrix
+            from the previous subsection has no real eigenvalues, so it cannot be
+            diagonalized over <m>\R</m>.
+        </p>
+    </remark>
+
+    <p>
+        This criterion gives a practical recipe: compute all eigenvalues, determine their
+        algebraic and geometric multiplicities, and check whether the multiplicities match.
+        If they do — and if together we collect <m>n</m> linearly independent eigenvectors —
+        then <m>A</m> is diagonalizable and we can form <m>P</m> and <m>D</m> directly
+        from the eigenvectors and eigenvalues.
+    </p>
+
+    <example xml:id="ex-power-diagonalizable-matrix">
+        <title>Computing a Power via Diagonalization</title>
+        <p>
+            Let
+            <me>
+                A = \begin{pmatrix} 7 &amp; 2 \\ -4 &amp; 1 \end{pmatrix}.
+            </me>
+            We want to compute <m>A^k</m> for arbitrary <m>k \in \N</m>.
+            We are given that <m>A = PDP^{-1}</m> with
+            <me>
+                P = \begin{pmatrix} 1 &amp; 1 \\ -1 &amp; -2 \end{pmatrix},
+                \qquad
+                D = \begin{pmatrix} 5 &amp; 0 \\ 0 &amp; 3 \end{pmatrix}.
+            </me>
+        </p>
+        <p>
+            First, we compute <m>P^{-1}</m> using the <m>2 \times 2</m> inverse formula:
+            <me>
+                \det(P) = 1 \cdot (-2) - 1 \cdot (-1) = -1,
+                \qquad
+                P^{-1} = \frac{1}{-1}
+                \begin{pmatrix} -2 &amp; -1 \\ 1 &amp; 1 \end{pmatrix}
+                = \begin{pmatrix} 2 &amp; 1 \\ -1 &amp; -1 \end{pmatrix}.
+            </me>
+        </p>
+        <p>
+            Now we use <m>A^k = P D^k P^{-1}</m>:
+            <me>
+                A^k
+                = \begin{pmatrix} 1 &amp; 1 \\ -1 &amp; -2 \end{pmatrix}
+                  \begin{pmatrix} 5^k &amp; 0 \\ 0 &amp; 3^k \end{pmatrix}
+                  \begin{pmatrix} 2 &amp; 1 \\ -1 &amp; -1 \end{pmatrix}.
+            </me>
+            Carrying out the multiplications:
+            <me>
+                A^k
+                = \begin{pmatrix} 5^k &amp; 3^k \\ -5^k &amp; -2 \cdot 3^k \end{pmatrix}
+                  \begin{pmatrix} 2 &amp; 1 \\ -1 &amp; -1 \end{pmatrix}
+                = \begin{pmatrix}
+                    2 \cdot 5^k - 3^k &amp; 5^k - 3^k \\
+                    -2 \cdot 5^k + 2 \cdot 3^k &amp; -5^k + 2 \cdot 3^k
+                  \end{pmatrix}.
+            </me>
+        </p>
+    </example>
+
+    <example xml:id="ex-diagonalization-3x3">
+        <title>Diagonalizing a <m>3 \times 3</m> Matrix</title>
+        <p>
+            Find matrices <m>P</m> and <m>D</m> such that <m>B = PDP^{-1}</m>, where
+            <me>
+                B = \begin{pmatrix} 0 &amp; 0 &amp; -2 \\ 1 &amp; 2 &amp; 1 \\ 1 &amp; 0 &amp; 3 \end{pmatrix}.
+            </me>
+        </p>
+        <p>
+            <em>Step 1: Characteristic polynomial.</em>
+            We compute
+            <me>
+                p_B(\lambda)
+                = \det(B - \lambda I)
+                = \det \begin{pmatrix}
+                    -\lambda &amp; 0 &amp; -2 \\
+                    1 &amp; 2-\lambda &amp; 1 \\
+                    1 &amp; 0 &amp; 3-\lambda
+                  \end{pmatrix}.
+            </me>
+            Expanding along the second column (which has two zeros):
+            <me>
+                p_B(\lambda)
+                = (2-\lambda) \det \begin{pmatrix} -\lambda &amp; -2 \\ 1 &amp; 3-\lambda \end{pmatrix}
+                = (2-\lambda)\bigl[-\lambda(3-\lambda)+2\bigr]
+                = (2-\lambda)(\lambda^2 - 3\lambda + 2)
+                = -(\lambda-1)(\lambda-2)^2.
+            </me>
+        </p>
+        <p>
+            <em>Step 2: Eigenvalues.</em>
+            The eigenvalues are <m>\lambda_1 = 1</m> (algebraic multiplicity 1) and
+            <m>\lambda_2 = 2</m> (algebraic multiplicity 2).
+        </p>
+        <p>
+            <em>Step 3: Eigenspaces.</em>
+            For <m>\lambda_1 = 1</m>, we solve <m>(B - I)\mathbf{x} = \mathbf{0}</m>:
+            <me>
+                \begin{pmatrix} -1 &amp; 0 &amp; -2 \\ 1 &amp; 1 &amp; 1 \\ 1 &amp; 0 &amp; 2 \end{pmatrix}
+                \sim
+                \begin{pmatrix} 1 &amp; 0 &amp; 2 \\ 0 &amp; 1 &amp; -1 \\ 0 &amp; 0 &amp; 0 \end{pmatrix}.
+            </me>
+            The free variable is <m>x_3</m>, giving the eigenvector
+            <m>\mathbf{v}_1 = \begin{pmatrix} -2 \\ 1 \\ 1 \end{pmatrix}</m>.
+        </p>
+        <p>
+            For <m>\lambda_2 = 2</m>, we solve <m>(B - 2I)\mathbf{x} = \mathbf{0}</m>:
+            <me>
+                \begin{pmatrix} -2 &amp; 0 &amp; -2 \\ 1 &amp; 0 &amp; 1 \\ 1 &amp; 0 &amp; 1 \end{pmatrix}
+                \sim
+                \begin{pmatrix} 1 &amp; 0 &amp; 1 \\ 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 \end{pmatrix}.
+            </me>
+            The free variables are <m>x_2</m> and <m>x_3</m>, giving two linearly independent
+            eigenvectors
+            <me>
+                \mathbf{v}_2 = \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix},
+                \qquad
+                \mathbf{v}_3 = \begin{pmatrix} -1 \\ 0 \\ 1 \end{pmatrix}.
+            </me>
+            The geometric multiplicity of <m>\lambda_2 = 2</m> is 2, matching the algebraic
+            multiplicity.
+        </p>
+        <p>
+            <em>Conclusion.</em>
+            Since both multiplicities match for every eigenvalue, <m>B</m> is diagonalizable.
+            Placing the eigenvectors as columns of <m>P</m> and the corresponding eigenvalues
+            on the diagonal of <m>D</m>:
+            <me>
+                P = \begin{pmatrix} -2 &amp; 0 &amp; -1 \\ 1 &amp; 1 &amp; 0 \\ 1 &amp; 0 &amp; 1 \end{pmatrix},
+                \qquad
+                D = \begin{pmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; 2 &amp; 0 \\ 0 &amp; 0 &amp; 2 \end{pmatrix}.
+            </me>
+        </p>
+    </example>
+
+    <example xml:id="ex-non-diagonalizable-matrix">
+        <title>A Non-Diagonalizable Matrix</title>
+        <p>
+            Consider
+            <me>
+                C = \begin{pmatrix} 1 &amp; 1 \\ 0 &amp; 1 \end{pmatrix}.
+            </me>
+            The characteristic polynomial is
+            <m>p_C(\lambda) = (1-\lambda)^2</m>,
+            so the only eigenvalue is <m>\lambda = 1</m> with algebraic multiplicity 2.
+        </p>
+        <p>
+            To find the eigenspace, we solve <m>(C - I)\mathbf{x} = \mathbf{0}</m>:
+            <me>
+                \begin{pmatrix} 0 &amp; 1 \\ 0 &amp; 0 \end{pmatrix}
+                \begin{pmatrix} x_1 \\ x_2 \end{pmatrix}
+                = \begin{pmatrix} 0 \\ 0 \end{pmatrix}
+                \implies x_2 = 0.
+            </me>
+            The eigenspace is
+            <me>
+                H_1 = \left\{ t \begin{pmatrix} 1 \\ 0 \end{pmatrix} \;\middle|\; t \in \R \right\},
+            </me>
+            so the eigenspace provides only one linearly independent eigenvector. The geometric multiplicity of <m>\lambda = 1</m> is 1,
+            which is strictly less than the algebraic multiplicity 2.
+            Therefore <m>C</m> is <em>not</em> diagonalizable.
+        </p>
+    </example>
+
+    <theorem xml:id="thm-symmetric-diagonalizable">
+        <title>Diagonalizability of Symmetric Matrices</title>
+        <statement>
+            <p>
+                Let <m>A</m> be a symmetric <m>n \times n</m> matrix (i.e. <m>A^\top = A</m>).
+                Then:
+            </p>
+            <ul>
+                <li>
+                    <p>
+                        <m>A</m> is always diagonalizable.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        There exist <m>n</m> pairwise orthogonal eigenvectors of <m>A</m>.
+                        In particular, <m>A</m> can be diagonalized by an <em>orthogonal</em>
+                        matrix <m>P</m>, meaning <m>P^{-1} = P^\top</m>.
+                    </p>
+                </li>
+            </ul>
+        </statement>
+    </theorem>
+
+    <!-- AUTHOR NOTE: The full proof of this theorem is omitted because it requires the spectral theorem, which is beyond the scope of this course. -->
+    <!-- ADDED: brief explanation of why the theorem is useful before quadratic forms -->
+    <p>
+        This theorem is especially important for quadratic forms (the next subsection)
+        and for applications in mechanics, where the stress and inertia tensors are
+        represented by symmetric matrices.
+    </p>
+
+    <exercises xml:id="exercises-diagonalization">
+        <!-- ADDED: checkpoint title for consistency with the rest of the chapter -->
+        <title>Check Your Understanding</title>
+
+        <exercise xml:id="exer-check-diagonalizable-2x2">
+            <title>Check Diagonalizability</title>
+            <statement>
+                <p>
+                    Determine whether the matrix
+                    <me>
+                        A = \begin{pmatrix} 4 &amp; 1 \\ 0 &amp; 4 \end{pmatrix}
+                    </me>
+                    is diagonalizable. If yes, find <m>P</m> and <m>D</m>.
+                    If no, explain why.
+                </p>
+            </statement>
+            <hint>
+                <p>
+                    Compute the characteristic polynomial and check whether algebraic
+                    and geometric multiplicities agree.
+                </p>
+            </hint>
+            <!-- ADDED: worked solution for the longer checkpoint exercise -->
+            <solution>
+                <p>
+                    The characteristic polynomial is
+                    <me>
+                        p_A(\lambda)=\det\begin{pmatrix}4-\lambda &amp; 1\\ 0 &amp; 4-\lambda\end{pmatrix}
+                        =(4-\lambda)^2.
+                    </me>
+                    So the only eigenvalue is <m>\lambda=4</m>, with algebraic multiplicity <m>2</m>.
+                </p>
+                <p>
+                    To find the eigenspace, solve
+                    <me>
+                        (A-4I_2)\mathbf{x}
+                        =
+                        \begin{pmatrix}0 &amp; 1\\ 0 &amp; 0\end{pmatrix}\mathbf{x}
+                        =\mathbf{0}.
+                    </me>
+                    This gives <m>x_2=0</m>, while <m>x_1</m> is free. Hence
+                    <me>
+                        H_4=\left\{t\begin{pmatrix}1\\0\end{pmatrix}\;\middle|\; t\in\R\right\}.
+                    </me>
+                    The geometric multiplicity is therefore <m>1</m>.
+                </p>
+                <p>
+                    Since the geometric multiplicity is smaller than the algebraic multiplicity, the matrix is not diagonalizable.
+                </p>
+            </solution>
+        </exercise>
+
+        <exercise xml:id="exer-diagonalize-compute-power">
+            <title>Diagonalize and Compute a Power</title>
+            <statement>
+                <p>
+                    Diagonalize the matrix
+                    <me>
+                        A = \begin{pmatrix} 3 &amp; 1 \\ 0 &amp; 2 \end{pmatrix}
+                    </me>
+                    by finding matrices <m>P</m> and <m>D</m> with <m>A=PDP^{-1}</m>.
+                    Then compute <m>A^5</m>.
+                </p>
+            </statement>
+            <hint>
+                <p>
+                    Because <m>A</m> is upper triangular, its eigenvalues are the diagonal
+                    entries. Then determine one eigenvector for each eigenvalue.
+                </p>
+            </hint>
+            <solution>
+                <p>
+                    Since <m>A</m> is upper triangular, its eigenvalues are
+                    <m>\lambda_1=3</m> and <m>\lambda_2=2</m>.
+                </p>
+                <p>
+                    For <m>\lambda=3</m>, we solve
+                    <me>
+                        (A-3I_2)\mathbf{x}
+                        =
+                        \begin{pmatrix}0 &amp; 1\\ 0 &amp; -1\end{pmatrix}\mathbf{x}
+                        =\mathbf{0},
+                    </me>
+                    which gives <m>x_2=0</m>. So we may choose
+                    <me>
+                        \mathbf{v}_1=\begin{pmatrix}1\\0\end{pmatrix}.
+                    </me>
+                </p>
+                <p>
+                    For <m>\lambda=2</m>, we solve
+                    <me>
+                        (A-2I_2)\mathbf{x}
+                        =
+                        \begin{pmatrix}1 &amp; 1\\ 0 &amp; 0\end{pmatrix}\mathbf{x}
+                        =\mathbf{0},
+                    </me>
+                    so <m>x_1=-x_2</m>. We may choose
+                    <me>
+                        \mathbf{v}_2=\begin{pmatrix}1\\-1\end{pmatrix}.
+                    </me>
+                </p>
+                <p>
+                    Hence
+                    <me>
+                        P=\begin{pmatrix}1 &amp; 1\\ 0 &amp; -1\end{pmatrix},
+                        \qquad
+                        D=\begin{pmatrix}3 &amp; 0\\ 0 &amp; 2\end{pmatrix}.
+                    </me>
+                    Since
+                    <me>
+                        P^{-1}=\begin{pmatrix}1 &amp; 1\\ 0 &amp; -1\end{pmatrix},
+                    </me>
+                    we obtain
+                    <me>
+                        A^5=PD^5P^{-1}
+                        =
+                        \begin{pmatrix}1 &amp; 1\\ 0 &amp; -1\end{pmatrix}
+                        \begin{pmatrix}3^5 &amp; 0\\ 0 &amp; 2^5\end{pmatrix}
+                        \begin{pmatrix}1 &amp; 1\\ 0 &amp; -1\end{pmatrix}.
+                    </me>
+                </p>
+                <p>
+                    Since <m>3^5=243</m> and <m>2^5=32</m>,
+                    <me>
+                        A^5
+                        =
+                        \begin{pmatrix}243 &amp; 32\\ 0 &amp; -32\end{pmatrix}
+                        \begin{pmatrix}1 &amp; 1\\ 0 &amp; -1\end{pmatrix}
+                        =
+                        \begin{pmatrix}243 &amp; 211\\ 0 &amp; 32\end{pmatrix}.
+                    </me>
+                </p>
+            </solution>
+        </exercise>
+
+        <exercise xml:id="exer-discrete-population-model">
+            <title>Mode Decomposition in a Discrete Model</title>
+            <statement>
+                <p>
+                    Suppose a discrete-time model satisfies
+                    <me>
+                        A\mathbf{v}_1=1.2\,\mathbf{v}_1,
+                        \qquad
+                        A\mathbf{v}_2=0.8\,\mathbf{v}_2,
+                    </me>
+                    and the initial state is
+                    <me>
+                        \mathbf{x}_0 = 2\mathbf{v}_1-\mathbf{v}_2.
+                    </me>
+                    Which statement about <m>\mathbf{x}_k=A^k\mathbf{x}_0</m> is correct?
+                </p>
+            </statement>
+            <choices>
+                <choice correct="yes">
+                    <statement><p><m>\mathbf{x}_k = 2\cdot 1.2^k\mathbf{v}_1 - 0.8^k\mathbf{v}_2</m>; the <m>\mathbf{v}_1</m>-component grows and the <m>\mathbf{v}_2</m>-component decays.</p></statement>
+                    <feedback><p>Correct. Each eigenvector component is scaled independently by the corresponding power of its eigenvalue.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p><m>\mathbf{x}_k = 2\cdot 0.8^k\mathbf{v}_1 - 1.2^k\mathbf{v}_2</m>; the <m>\mathbf{v}_1</m>-component decays and the <m>\mathbf{v}_2</m>-component grows.</p></statement>
+                    <feedback><p>Incorrect. The eigenvalue <m>1.2</m> belongs to <m>\mathbf{v}_1</m>, and <m>0.8</m> belongs to <m>\mathbf{v}_2</m>.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p><m>\mathbf{x}_k = (1.2\cdot 0.8)^k(2\mathbf{v}_1-\mathbf{v}_2)</m></p></statement>
+                    <feedback><p>Incorrect. The whole vector is not scaled by a single common factor; each eigenvector direction evolves separately.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p><m>\mathbf{x}_k = 2\mathbf{v}_1-\mathbf{v}_2</m> for all <m>k</m>, because eigenvectors do not change under repeated multiplication.</p></statement>
+                    <feedback><p>Incorrect. Eigenvectors keep their direction, but their lengths are multiplied by successive powers of the eigenvalue.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+    </exercises>
+
+</subsection>

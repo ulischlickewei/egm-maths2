@@ -1,7 +1,21 @@
-<section xml:id="section-eigenvalues-eigenvectors">
-  <title>Eigenvalues and Eigenvectors</title>
+<section xml:id="section-eigenvalues-eigenvectors" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Eigenvalues, Diagonalization, and Quadratic Forms</title>
 
-  <p>
-    Placeholder section for eigenvalues and eigenvectors.
-  </p>
+  <introduction>
+    <p>
+      Our final section in Linear Algebra brings together three closely connected ideas.
+      We begin with <em>eigenvalues and eigenvectors</em>, which capture the directions
+      along which a matrix acts by pure scaling. We then use them to <em>diagonalize</em>
+      matrices — a technique that dramatically simplifies the computation of matrix powers.
+      Finally, we study <em>quadratic forms</em>, which describe how a symmetric matrix
+      assigns a real value to each vector. Quadratic forms will reappear in Section 2.2,
+      where they determine whether a critical point of a function is a minimum, a maximum,
+      or a saddle point.
+    </p>
+  </introduction>
+
+  <xi:include href="eigenvalues-eigenvectors.ptx"/>
+  <xi:include href="diagonalization.ptx"/>
+  <xi:include href="quadratic-forms.ptx"/>
+
 </section>
