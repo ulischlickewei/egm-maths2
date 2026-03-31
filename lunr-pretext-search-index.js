@@ -1095,8 +1095,503 @@ var ptx_lunr_docs = [
   "url": "section-eigenvalues-eigenvectors.html",
   "type": "Section",
   "number": "1.3",
-  "title": "Eigenvalues and Eigenvectors",
-  "body": " Eigenvalues and Eigenvectors  Placeholder section for eigenvalues and eigenvectors.  "
+  "title": "Eigenvalues, Diagonalization, and Quadratic Forms",
+  "body": " Eigenvalues, Diagonalization, and Quadratic Forms   Our final section in Linear Algebra brings together three closely connected ideas. We begin with eigenvalues and eigenvectors , which capture the directions along which a matrix acts by pure scaling. We then use them to diagonalize matrices — a technique that dramatically simplifies the computation of matrix powers. Finally, we study quadratic forms , which describe how a symmetric matrix assigns a real value to each vector. Quadratic forms will reappear in Section 2.2, where they determine whether a critical point of a function is a minimum, a maximum, or a saddle point.    Eigenvalues and Eigenvectors   When a vector is multiplied by a square matrix, usually both the length and the direction will change. However, for some special non-zero vectors the effect is particularly simple: multiplication by the matrix changes only the size, while the direction remains the same. Such vectors are called eigenvectors, and the corresponding scaling factors are called eigenvalues.  Eigenvalues and eigenvectors play an important role in many applications. In mechanics they describe principal modes of deformation or vibration, in electrical engineering they appear in state-space models, and in data science they are used, for example, in principal component analysis. In this section we introduce the basic definitions, explain how eigenvalues can be computed, and discuss some first important examples.    Distinguished Directions of a Matrix  Consider the matrix and the vectors   We compute     The vector changes its direction under multiplication by . In contrast, keeps its direction and even remains unchanged, while keeps its direction and is stretched by the factor . The following graphics visualize these three cases.    The blue vector is mapped to the red vector . The direction changes.     The vector is unchanged by multiplication with . Hence , so is an eigenvector with eigenvalue .     The blue vector is mapped to the red vector . The direction stays the same, but the length doubles.   These pictures show that some vectors are mapped to scalar multiples of themselves when multiplied by You. This is exactly the phenomenon captured by the notion of eigenvalues and eigenvectors.    Eigenvalue and Eigenvector   Let be an -matrix. A non-zero vector is called an eigenvector of with eigenvalue  if     The equation means that multiplication by has the same effect on as multiplication by the scalar . Hence sends the vector to a vector parallel to .   Two Eigenvectors of a Matrix  For the matrix from the previous example, we have already seen that and Therefore is an eigenvector with eigenvalue , and is an eigenvector with eigenvalue .    Eigenspace   Let be an -matrix and let be an eigenvalue of . The set is called the eigenspace corresponding to .    The eigenspace contains all eigenvectors corresponding to and also the zero vector. The zero vector itself is never an eigenvector, because eigenvectors must be non-zero by definition.   Testing Whether a Given Vector Is an Eigenvector  Consider To test whether a vector is an eigenvector, we multiply it by and check whether the result is a scalar multiple of the original vector.  First, Hence is an eigenvector of with eigenvalue .  Next, This vector is not a scalar multiple of . Therefore is not an eigenvector of .   After having studied how to check whether a given vector is an eigenvector or not of a matrix, we next deal with the question how to find the eigenvectors to a given eigenvalue. To answer this question we will frame the problem of determining the eigenspace to a given eigenvalue as a linear system. This is the content of the following theorem.   Linear System for Eigenvectors   Let be an -matrix and let . Then the following statements are equivalent.     is an eigenvalue of .    The homogeneous linear system has a non-trivial solution.    In this case,     By definition, is an eigenvalue of if and only if there exists a non-zero vector such that Subtracting from both sides gives   Since , where is the identity matrix, this is equivalent to Thus is an eigenvalue exactly if the system has a non-trivial solution. The set of all solutions of this system is precisely the eigenspace .    This theorem is important because it turns an eigenvalue problem into a familiar problem from the previous section: solving a homogeneous linear system.   Finding the Eigenspace for a Given Eigenvalue  Again consider We show that is an eigenvalue and determine the corresponding eigenspace.  We have to solve that is, Since the augmented coefficient matrix is   Hence the system is equivalent to so with . Therefore Every non-zero vector in this eigenspace is an eigenvector corresponding to .   The eigenvalue is possible. In that case there exists a non-zero vector such that So is an eigenvalue exactly if the homogeneous system has a non-trivial solution. By the invertibility criteria from the previous section, this means that is not invertible.   Eigenvalues of an Upper Triangular Matrix  Consider the upper triangular matrix We determine its eigenvalues.  The number is an eigenvalue if and only if the system has a non-trivial solution. Now This matrix is still upper triangular.  For the system to have a non-trivial solution, the matrix must fail to have a pivot in every column. Since the diagonal entries are , , and , this happens exactly when at least one of them is zero. Hence are the eigenvalues of .    Eigenvalues of Triangular Matrices   Let be an upper or lower triangular -matrix. Then the eigenvalues of are exactly the diagonal entries of .    The matrix is again triangular, and its diagonal entries are obtained by subtracting from the diagonal entries of . A triangular matrix is invertible exactly if all diagonal entries are non-zero. Therefore is not invertible exactly when one of these diagonal entries is zero. By the previous theorem, this is equivalent to being an eigenvalue.    In practice, this theorem is very useful. For triangular matrices the eigenvalues can be read off immediately from the main diagonal, without any further calculation.  We have seen how to check if a given vector is an eigenvector of a matrix (how?). Also, we have seen how to find the eigenspace corresponding to a given eigenvalue (how?). Next, we will see how to find the eigenvalues of a matrix.   Characteristic Polynomial   Let be an -matrix. The polynomial is called the characteristic polynomial of .  A scalar is an eigenvalue of if and only if     By the theorem on eigenvectors, is an eigenvalue exactly if the homogeneous system has a non-trivial solution. By the invertibility criteria, this is equivalent to not being invertible. For square matrices this happens exactly when Hence the zeros of the characteristic polynomial are precisely the eigenvalues of .      This is where the determinant tools from the previous section become essential: to find eigenvalues, we first build the matrix and then compute its determinant. In other words, the new topic of eigenvalues builds directly on the determinant techniques from .    Computing Eigenvalues via the Characteristic Polynomial  Consider We determine the eigenvalues of .  The characteristic polynomial is Expanding gives   Therefore the eigenvalues are the zeros of this polynomial: Using the quadratic formula, we obtain Hence     Algebraic and Geometric Multiplicity   Let be an eigenvalue of the matrix .  If the characteristic polynomial contains the factor , but not the factor , then is called the algebraic multiplicity of .  The geometric multiplicity of is the maximum number of linearly independent vectors in the eigenspace .    The geometric multiplicity tells us how many linearly independent eigenvectors belong to an eigenvalue. It is always at least and never larger than the algebraic multiplicity.   A Repeated Eigenvalue  Consider We determine its eigenvalues and eigenvectors.  The characteristic polynomial is Thus is the only eigenvalue, and its algebraic multiplicity is .  To find the eigenspace, we solve Since we get the equation Hence All eigenvectors in are multiples of , so we can extract only one linearly independent eigenvector from this eigenspace. Therefore the geometric multiplicity is .  This example shows that algebraic and geometric multiplicity need not coincide.    A Rotation Matrix  Consider the matrix which describes a rotation by around the origin in the counter-clockwise direction.  Over the real numbers, this matrix has no eigenvectors. Indeed, a rotation by changes the direction of every non-zero real vector, so no non-zero vector can satisfy with .  Algebraically, the characteristic polynomial is This polynomial has no real zero, hence has no real eigenvalue.  Over the complex numbers, however, the equation has the solutions Thus the matrix has complex eigenvalues. This example illustrates that real matrices need not have real eigenvalues.     This example shows an important limitation: a real matrix need not have enough real eigenvalues and eigenvectors to be diagonalized over . When we study diagonalization in the next subsection, we will therefore pay attention to whether the characteristic polynomial actually has real zeros.    Engineering Interpretation  In many engineering models, a matrix describes how a system transforms states or forces. If is an eigenvector, then the action of the matrix on this state is especially simple: the state keeps its direction and is only scaled by .  For example, in a mechanical system an eigenvector may represent a preferred vibration mode, and the corresponding eigenvalue can be related to amplification or damping. In stress analysis, eigenvectors of a symmetric matrix describe principal directions, that is, directions in which no shear component appears. This is one reason why eigenvalues are fundamental in applied mathematics and engineering.    Powers of a Matrix and the Inverse Matrix   Let be an eigenvector of with eigenvalue .    For every ,     If is invertible, then and Hence is an eigenvalue of .      The first claim follows by repeated application of the relation . For example, The general case is proved in the same way by induction.  For the second claim, apply to the equation . This gives Since is invertible, the eigenvalue cannot be zero. Dividing by yields     We summarize the procedure for computing eigenvalues and eigenvectors.   Procedure for Determining Eigenvalues and Eigenvectors  Let be an -matrix.    Compute the characteristic polynomial     Determine the zeros of . These are the eigenvalues of .    For each eigenvalue , solve the homogeneous system to obtain the eigenspace .       Check Your Understanding   Check a Candidate Eigenvalue   Consider the matrix Decide whether is an eigenvalue of .    Study the homogeneous system . The value is an eigenvalue exactly if this system has a non-trivial solution.     Yes, because .  Incorrect. Computing gives a non-zero value, so the system has only the trivial solution.    No, because is invertible.  Correct. Since is invertible, the homogeneous system has only the trivial solution, so is not an eigenvalue.    Yes, because the trace of is greater than .  Incorrect. The trace alone does not decide whether a number is an eigenvalue.    No, because is not a diagonal entry of .  Incorrect. That criterion works only for triangular matrices, and this matrix is not triangular.      Powers Acting on an Eigenvector   Let be an eigenvector of the matrix with eigenvalue . Compute .      Incorrect. Repeated application multiplies by each time, so the factor is , not .     Correct. Applying four times multiplies the eigenvector by four times.     Incorrect. The expression can be simplified much further using the eigenvector property.     Incorrect. Vectors are not exponentiated in this way.      Find Eigenvalues and Eigenspaces   Determine the eigenvalues and eigenspaces of     We compute the characteristic polynomial: Factoring gives so the eigenvalues are and .  For , we solve This gives , hence   For , we solve This gives , so . Therefore      Interpretation for a Scaling Process   A matrix describes one step of a linear discrete-time model. Explain in your own words what it means for a non-zero state vector to be an eigenvector of . What is the effect of repeated application of the model on this state if the corresponding eigenvalue satisfies , , or ?     The state stays on the same line; it decays for , keeps constant magnitude for , and grows for .  Correct. Along an eigenvector direction, each step only rescales the state by .    The state rotates to a new direction each step; the size behaviour depends only on the trace of .  Incorrect. An eigenvector direction is preserved, and the relevant quantity is the eigenvalue, not the trace.    The state stays fixed whenever .  Incorrect. The state is fixed only in the special case .    The state becomes zero after one step whenever .  Incorrect. If , the state decays gradually; it does not become zero in one step unless .      Repeated Eigenvalue   Determine the characteristic polynomial, the algebraic multiplicity, and the geometric multiplicity of the eigenvalue of     First compute , then solve .     We have So the only eigenvalue is , with algebraic multiplicity .  Next we solve This gives , while is free. Hence so the geometric multiplicity is .       Diagonalization of Matrices   Powers of a Diagonal Matrix  Consider the diagonal matrix For any , its -th power is This follows immediately from matrix multiplication: each diagonal entry is raised to the power independently.   The example above shows why diagonal matrices are so attractive: their powers are immediate to compute. This raises a natural question: can we use this simple structure to compute powers of more general matrices?  The answer is yes, provided the matrix can be diagonalized , that is, written in the form with an invertible matrix and a diagonal matrix . As we will see, the columns of are eigenvectors of , and the diagonal entries of are the corresponding eigenvalues.   Diagonalizable Matrix   An matrix is called diagonalizable if there exists an invertible matrix and a diagonal matrix such that     If , then a simple induction gives since the intermediate factors cancel. Computing then reduces to computing , which is trivial.   Criterion for Diagonalizability   Let be an matrix.     is diagonalizable if and only if there exist linearly independent eigenvectors of .    If , then the columns of are linearly independent eigenvectors of , and the diagonal entries of are the corresponding eigenvalues.    If the characteristic polynomial of splits into linear factors over , then is diagonalizable if and only if for every eigenvalue , its algebraic multiplicity equals its geometric multiplicity.      For part (1), first assume that is diagonalizable, so for some invertible matrix . Multiplying by on the right gives . If denotes the -th column of and the corresponding diagonal entry of , then the -th column of reads . So the columns of are eigenvectors of . Because is invertible, these columns are linearly independent, so we obtain linearly independent eigenvectors.  Conversely, suppose that are linearly independent eigenvectors with corresponding eigenvalues . Form the matrix Then Since the columns of are linearly independent, is invertible. Multiplying on the right by gives , so is diagonalizable.  Part (2) follows from the identity . If denotes the -th column of and the corresponding diagonal entry of , then the -th column of reads . So each column of is an eigenvector with the matching eigenvalue.  For part (3), assume that the characteristic polynomial splits over . Then the sum of the algebraic multiplicities of all eigenvalues is . For each eigenvalue, the geometric multiplicity is at most the algebraic multiplicity. Hence equality for every eigenvalue is equivalent to having a total of linearly independent eigenvectors. By part (1), this is exactly the condition for diagonalizability.      The extra hypothesis in part (3) matters. For example, the rotation matrix from the previous subsection has no real eigenvalues, so it cannot be diagonalized over .   This criterion gives a practical recipe: compute all eigenvalues, determine their algebraic and geometric multiplicities, and check whether the multiplicities match. If they do — and if together we collect linearly independent eigenvectors — then is diagonalizable and we can form and directly from the eigenvectors and eigenvalues.   Computing a Power via Diagonalization  Let We want to compute for arbitrary . We are given that with   First, we compute using the inverse formula:   Now we use : Carrying out the multiplications:     Diagonalizing a Matrix  Find matrices and such that , where    Step 1: Characteristic polynomial. We compute Expanding along the second column (which has two zeros):    Step 2: Eigenvalues. The eigenvalues are (algebraic multiplicity 1) and (algebraic multiplicity 2).   Step 3: Eigenspaces. For , we solve : The free variable is , giving the eigenvector .  For , we solve : The free variables are and , giving two linearly independent eigenvectors The geometric multiplicity of is 2, matching the algebraic multiplicity.   Conclusion. Since both multiplicities match for every eigenvalue, is diagonalizable. Placing the eigenvectors as columns of and the corresponding eigenvalues on the diagonal of :     A Non-Diagonalizable Matrix  Consider The characteristic polynomial is , so the only eigenvalue is with algebraic multiplicity 2.  To find the eigenspace, we solve : The eigenspace is so the eigenspace provides only one linearly independent eigenvector. The geometric multiplicity of is 1, which is strictly less than the algebraic multiplicity 2. Therefore is not diagonalizable.    Diagonalizability of Symmetric Matrices   Let be a symmetric matrix (i.e. ). Then:     is always diagonalizable.    There exist pairwise orthogonal eigenvectors of . In particular, can be diagonalized by an orthogonal matrix , meaning .        This theorem is especially important for quadratic forms (the next subsection) and for applications in mechanics, where the stress and inertia tensors are represented by symmetric matrices.    Check Your Understanding   Check Diagonalizability   Determine whether the matrix is diagonalizable. If yes, find and . If no, explain why.    Compute the characteristic polynomial and check whether algebraic and geometric multiplicities agree.     The characteristic polynomial is So the only eigenvalue is , with algebraic multiplicity .  To find the eigenspace, solve This gives , while is free. Hence The geometric multiplicity is therefore .  Since the geometric multiplicity is smaller than the algebraic multiplicity, the matrix is not diagonalizable.     Diagonalize and Compute a Power   Diagonalize the matrix by finding matrices and with . Then compute .    Because is upper triangular, its eigenvalues are the diagonal entries. Then determine one eigenvector for each eigenvalue.    Since is upper triangular, its eigenvalues are and .  For , we solve which gives . So we may choose   For , we solve so . We may choose   Hence Since we obtain   Since and ,      Mode Decomposition in a Discrete Model   Suppose a discrete-time model satisfies and the initial state is Which statement about is correct?     ; the -component grows and the -component decays.  Correct. Each eigenvector component is scaled independently by the corresponding power of its eigenvalue.    ; the -component decays and the -component grows.  Incorrect. The eigenvalue belongs to , and belongs to .     Incorrect. The whole vector is not scaled by a single common factor; each eigenvector direction evolves separately.    for all , because eigenvectors do not change under repeated multiplication.  Incorrect. Eigenvectors keep their direction, but their lengths are multiplied by successive powers of the eigenvalue.        Quadratic Forms   A quadratic form is a function that maps a vector to a real number using only squared and mixed products of its components — no linear or constant terms appear. Quadratic forms arise naturally in many contexts: the kinetic energy of a mechanical system, the elastic energy stored in a deformed structure, and the local behaviour of a differentiable function near a critical point are all described by quadratic forms. The key tool for analysing them is the diagonalization of the underlying symmetric matrix.    Quadratic Form   A quadratic form is a map where is a symmetric matrix. The matrix is called the matrix of the quadratic form .     Every quadratic form can be uniquely represented by a symmetric matrix. If a non-symmetric matrix is given, we can replace it by the symmetric matrix without changing the quadratic form, since for all .     In engineering, quadratic forms often measure energy. For instance, if records two small displacements in a coupled spring system, then the elastic energy can have the form . Positive definiteness then means that every non-zero displacement stores positive energy, which is exactly what we expect from a stable configuration.    Expanding a Quadratic Form  Let The associated quadratic form is Observe that the coefficient of the mixed term is .    Definiteness of a Quadratic Form   Let be a symmetric matrix with associated quadratic form .     is positive definite if for all .     is positive semidefinite if for all .     is negative definite if for all .     is negative semidefinite if for all .     is indefinite if takes both positive and negative values.       Testing Definiteness by Inspection  We test the definiteness of three quadratic forms.  (a) . We evaluate at two points: Since takes both positive and negative values, it is indefinite .  (b) . Since , the sum is always non-negative. It is zero only when . Therefore is positive definite .  (c) . Here even though . Therefore is positive semidefinite .   Testing definiteness by trying specific values (as above) is fine for disproving positive definiteness, but not for proving it. The following two theorems give systematic criteria.   Diagonal Quadratic Forms as Model Cases  For a diagonal matrix , the quadratic form is In this case, the sign pattern of the coefficients already reveals the geometry.  (a) For , both coefficients are positive, so for every non-zero . The level line is an ellipse.    The level line is an ellipse.   (b) For , one coefficient is positive and one is negative. Hence the form is indefinite. The level line is a hyperbola.    The level line is a hyperbola.   (c) For , we have for all , but . So the form is positive semidefinite. The level set consists of two vertical lines.    For , the level set consists of the lines ; the dashed line corresponds to the zero level.   These diagonal examples motivate the general criterion below: once a symmetric matrix is orthogonally diagonalized, its quadratic form reduces to exactly this kind of expression.    Definiteness Criterion via Eigenvalues   Let be a symmetric matrix with eigenvalues (all real, by ).     is positive definite (resp. semidefinite) if and only if all eigenvalues satisfy (resp. ).     is negative definite (resp. semidefinite) if and only if all eigenvalues satisfy (resp. ).     is indefinite if and only if there exist both a positive and a negative eigenvalue.      By , there is an orthogonal matrix and a diagonal matrix such that .  Now take any vector and write it in the form . Then So the sign of the quadratic form is determined entirely by the signs of the eigenvalues.  If all eigenvalues are positive, then every term on the right-hand side is non-negative and at least one is positive whenever , so the quadratic form is positive definite. The semidefinite, negative definite, and negative semidefinite cases are analogous. If there are both positive and negative eigenvalues, then choosing along the corresponding coordinate axes produces both positive and negative values, so the form is indefinite.     Positive Definiteness from Eigenvalues  Consider Its characteristic polynomial is So the eigenvalues are and , both positive. By the eigenvalue criterion, is positive definite.    Indefiniteness from Mixed Eigenvalue Signs  Consider We compute Thus the eigenvalues are and . Since there is one positive and one negative eigenvalue, the matrix is indefinite.  This agrees with direct values of the quadratic form:     Sylvester's Criterion   Let be a symmetric matrix. Denote by the leading principal submatrix (the submatrix formed by the first rows and columns of ).     is positive definite if and only if      is negative definite if and only if In other words, the leading principal minors alternate in sign: , , , and so on.        Leading principal submatrices are the successive top-left blocks of the matrix: first , then , then , and so on.    Positive Definiteness via Sylvester's Criterion  Consider The leading principal submatrices are Their determinants are Since all leading principal minors are positive, is positive definite.    Negative Definiteness via Sylvester's Criterion  Consider We compute The leading principal minors alternate in sign, so Sylvester's criterion shows that is negative definite.      In practice, Sylvester's criterion is most useful when the eigenvalues are inconvenient to compute exactly. For a symmetric matrix, it gives a fast test for positive or negative definiteness using only determinants of smaller submatrices.    Connection to Local Extrema  Quadratic forms play a central role in the analysis of local extrema of functions . Near a critical point (where ), the Taylor expansion gives The second-order term is a quadratic form with the Hessian matrix :    If is positive definite, then is a strict local minimum.    If is negative definite, then is a strict local maximum.    If is indefinite, then is a saddle point.    This connection is developed in detail in Section 2.2 (Error Propagation, Taylor Expansion, and Extrema).    Principal Axes and the Geometry of Quadratic Forms  Since the matrix of a quadratic form is symmetric, it can be diagonalized by an orthogonal matrix: . Here we only use the basic idea of changing coordinates; a full general theory of change of basis is not needed yet. Substituting the coordinate change : In the new coordinates , the quadratic form has no mixed terms . The columns of (the eigenvectors of ) define the principal axes of the quadratic form.  Geometrically, the level sets are ellipses (positive definite case), hyperbolas (indefinite case), or degenerate shapes in between. The principal axes are exactly the axes of symmetry of these level curves.    After an orthogonal change of coordinates, the mixed term disappears and the level curve aligns with the principal axes and .      Check Your Understanding   Expand a Quadratic Form   Let Write out the quadratic form explicitly as a polynomial in .      Incorrect. The mixed term receives contributions from both off-diagonal entries.     Correct. The mixed coefficient is .     Incorrect. The sign of the mixed term is negative, not positive.     Incorrect. The squared terms and mixed term have been combined incorrectly.      Classify by Eigenvalues   Determine the eigenvalues of and use them to decide whether is positive definite, negative definite, or indefinite.     Negative definite  Incorrect. Both eigenvalues are positive, not negative.    Positive definite  Correct. The eigenvalues are and , so both are positive.    Indefinite  Incorrect. An indefinite matrix needs both a positive and a negative eigenvalue.    Negative semidefinite  Incorrect. The matrix has strictly positive eigenvalues.      Sylvester's Criterion for a Matrix   Apply Sylvester's criterion to determine whether is positive definite.    Compute , , and in turn.     The leading principal submatrices are   Their determinants are and   All three leading principal minors are positive. By Sylvester's criterion, the matrix is positive definite.     Classify a Critical Point   The function has a critical point at the origin with Hessian Is the origin a local minimum, a local maximum, or a saddle point?    Use Sylvester's criterion or compute the eigenvalues of the Hessian.    Let We apply Sylvester's criterion. The first leading principal minor is , while   So is not positive definite and not negative definite. In fact, it is positive semidefinite. Therefore the second-derivative test is inconclusive here: from the Hessian alone we cannot decide whether the origin is a local minimum, a local maximum, or a saddle point.      "
+},
+{
+  "id": "section-eigenvalues-eigenvectors-3-3",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#section-eigenvalues-eigenvectors-3-3",
+  "type": "Example",
+  "number": "1.3.1",
+  "title": "Distinguished Directions of a Matrix.",
+  "body": " Distinguished Directions of a Matrix  Consider the matrix and the vectors   We compute     The vector changes its direction under multiplication by . In contrast, keeps its direction and even remains unchanged, while keeps its direction and is stretched by the factor . The following graphics visualize these three cases.    The blue vector is mapped to the red vector . The direction changes.     The vector is unchanged by multiplication with . Hence , so is an eigenvector with eigenvalue .     The blue vector is mapped to the red vector . The direction stays the same, but the length doubles.   These pictures show that some vectors are mapped to scalar multiples of themselves when multiplied by You. This is exactly the phenomenon captured by the notion of eigenvalues and eigenvectors.  "
+},
+{
+  "id": "section-eigenvalues-eigenvectors-3-4",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#section-eigenvalues-eigenvectors-3-4",
+  "type": "Definition",
+  "number": "1.3.2",
+  "title": "Eigenvalue and Eigenvector.",
+  "body": " Eigenvalue and Eigenvector   Let be an -matrix. A non-zero vector is called an eigenvector of with eigenvalue  if    "
+},
+{
+  "id": "section-eigenvalues-eigenvectors-3-6",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#section-eigenvalues-eigenvectors-3-6",
+  "type": "Example",
+  "number": "1.3.3",
+  "title": "Two Eigenvectors of a Matrix.",
+  "body": " Two Eigenvectors of a Matrix  For the matrix from the previous example, we have already seen that and Therefore is an eigenvector with eigenvalue , and is an eigenvector with eigenvalue .  "
+},
+{
+  "id": "section-eigenvalues-eigenvectors-3-7",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#section-eigenvalues-eigenvectors-3-7",
+  "type": "Definition",
+  "number": "1.3.4",
+  "title": "Eigenspace.",
+  "body": " Eigenspace   Let be an -matrix and let be an eigenvalue of . The set is called the eigenspace corresponding to .   "
+},
+{
+  "id": "section-eigenvalues-eigenvectors-3-9",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#section-eigenvalues-eigenvectors-3-9",
+  "type": "Example",
+  "number": "1.3.5",
+  "title": "Testing Whether a Given Vector Is an Eigenvector.",
+  "body": " Testing Whether a Given Vector Is an Eigenvector  Consider To test whether a vector is an eigenvector, we multiply it by and check whether the result is a scalar multiple of the original vector.  First, Hence is an eigenvector of with eigenvalue .  Next, This vector is not a scalar multiple of . Therefore is not an eigenvector of .  "
+},
+{
+  "id": "section-eigenvalues-eigenvectors-3-11",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#section-eigenvalues-eigenvectors-3-11",
+  "type": "Theorem",
+  "number": "1.3.6",
+  "title": "Linear System for Eigenvectors.",
+  "body": " Linear System for Eigenvectors   Let be an -matrix and let . Then the following statements are equivalent.     is an eigenvalue of .    The homogeneous linear system has a non-trivial solution.    In this case,     By definition, is an eigenvalue of if and only if there exists a non-zero vector such that Subtracting from both sides gives   Since , where is the identity matrix, this is equivalent to Thus is an eigenvalue exactly if the system has a non-trivial solution. The set of all solutions of this system is precisely the eigenspace .   "
+},
+{
+  "id": "section-eigenvalues-eigenvectors-3-13",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#section-eigenvalues-eigenvectors-3-13",
+  "type": "Example",
+  "number": "1.3.7",
+  "title": "Finding the Eigenspace for a Given Eigenvalue.",
+  "body": " Finding the Eigenspace for a Given Eigenvalue  Again consider We show that is an eigenvalue and determine the corresponding eigenspace.  We have to solve that is, Since the augmented coefficient matrix is   Hence the system is equivalent to so with . Therefore Every non-zero vector in this eigenspace is an eigenvector corresponding to .  "
+},
+{
+  "id": "section-eigenvalues-eigenvectors-3-15",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#section-eigenvalues-eigenvectors-3-15",
+  "type": "Example",
+  "number": "1.3.8",
+  "title": "Eigenvalues of an Upper Triangular Matrix.",
+  "body": " Eigenvalues of an Upper Triangular Matrix  Consider the upper triangular matrix We determine its eigenvalues.  The number is an eigenvalue if and only if the system has a non-trivial solution. Now This matrix is still upper triangular.  For the system to have a non-trivial solution, the matrix must fail to have a pivot in every column. Since the diagonal entries are , , and , this happens exactly when at least one of them is zero. Hence are the eigenvalues of .  "
+},
+{
+  "id": "section-eigenvalues-eigenvectors-3-16",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#section-eigenvalues-eigenvectors-3-16",
+  "type": "Theorem",
+  "number": "1.3.9",
+  "title": "Eigenvalues of Triangular Matrices.",
+  "body": " Eigenvalues of Triangular Matrices   Let be an upper or lower triangular -matrix. Then the eigenvalues of are exactly the diagonal entries of .    The matrix is again triangular, and its diagonal entries are obtained by subtracting from the diagonal entries of . A triangular matrix is invertible exactly if all diagonal entries are non-zero. Therefore is not invertible exactly when one of these diagonal entries is zero. By the previous theorem, this is equivalent to being an eigenvalue.   "
+},
+{
+  "id": "section-eigenvalues-eigenvectors-3-19",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#section-eigenvalues-eigenvectors-3-19",
+  "type": "Theorem",
+  "number": "1.3.10",
+  "title": "Characteristic Polynomial.",
+  "body": " Characteristic Polynomial   Let be an -matrix. The polynomial is called the characteristic polynomial of .  A scalar is an eigenvalue of if and only if     By the theorem on eigenvectors, is an eigenvalue exactly if the homogeneous system has a non-trivial solution. By the invertibility criteria, this is equivalent to not being invertible. For square matrices this happens exactly when Hence the zeros of the characteristic polynomial are precisely the eigenvalues of .   "
+},
+{
+  "id": "section-eigenvalues-eigenvectors-3-20",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#section-eigenvalues-eigenvectors-3-20",
+  "type": "Remark",
+  "number": "1.3.11",
+  "title": "",
+  "body": " This is where the determinant tools from the previous section become essential: to find eigenvalues, we first build the matrix and then compute its determinant. In other words, the new topic of eigenvalues builds directly on the determinant techniques from .  "
+},
+{
+  "id": "section-eigenvalues-eigenvectors-3-21",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#section-eigenvalues-eigenvectors-3-21",
+  "type": "Example",
+  "number": "1.3.12",
+  "title": "Computing Eigenvalues via the Characteristic Polynomial.",
+  "body": " Computing Eigenvalues via the Characteristic Polynomial  Consider We determine the eigenvalues of .  The characteristic polynomial is Expanding gives   Therefore the eigenvalues are the zeros of this polynomial: Using the quadratic formula, we obtain Hence   "
+},
+{
+  "id": "section-eigenvalues-eigenvectors-3-22",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#section-eigenvalues-eigenvectors-3-22",
+  "type": "Definition",
+  "number": "1.3.13",
+  "title": "Algebraic and Geometric Multiplicity.",
+  "body": " Algebraic and Geometric Multiplicity   Let be an eigenvalue of the matrix .  If the characteristic polynomial contains the factor , but not the factor , then is called the algebraic multiplicity of .  The geometric multiplicity of is the maximum number of linearly independent vectors in the eigenspace .   "
+},
+{
+  "id": "section-eigenvalues-eigenvectors-3-24",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#section-eigenvalues-eigenvectors-3-24",
+  "type": "Example",
+  "number": "1.3.14",
+  "title": "A Repeated Eigenvalue.",
+  "body": " A Repeated Eigenvalue  Consider We determine its eigenvalues and eigenvectors.  The characteristic polynomial is Thus is the only eigenvalue, and its algebraic multiplicity is .  To find the eigenspace, we solve Since we get the equation Hence All eigenvectors in are multiples of , so we can extract only one linearly independent eigenvector from this eigenspace. Therefore the geometric multiplicity is .  This example shows that algebraic and geometric multiplicity need not coincide.  "
+},
+{
+  "id": "section-eigenvalues-eigenvectors-3-25",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#section-eigenvalues-eigenvectors-3-25",
+  "type": "Example",
+  "number": "1.3.15",
+  "title": "A Rotation Matrix.",
+  "body": " A Rotation Matrix  Consider the matrix which describes a rotation by around the origin in the counter-clockwise direction.  Over the real numbers, this matrix has no eigenvectors. Indeed, a rotation by changes the direction of every non-zero real vector, so no non-zero vector can satisfy with .  Algebraically, the characteristic polynomial is This polynomial has no real zero, hence has no real eigenvalue.  Over the complex numbers, however, the equation has the solutions Thus the matrix has complex eigenvalues. This example illustrates that real matrices need not have real eigenvalues.  "
+},
+{
+  "id": "section-eigenvalues-eigenvectors-3-26",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#section-eigenvalues-eigenvectors-3-26",
+  "type": "Remark",
+  "number": "1.3.16",
+  "title": "",
+  "body": " This example shows an important limitation: a real matrix need not have enough real eigenvalues and eigenvectors to be diagonalized over . When we study diagonalization in the next subsection, we will therefore pay attention to whether the characteristic polynomial actually has real zeros.  "
+},
+{
+  "id": "section-eigenvalues-eigenvectors-3-27",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#section-eigenvalues-eigenvectors-3-27",
+  "type": "Example",
+  "number": "1.3.17",
+  "title": "Engineering Interpretation.",
+  "body": " Engineering Interpretation  In many engineering models, a matrix describes how a system transforms states or forces. If is an eigenvector, then the action of the matrix on this state is especially simple: the state keeps its direction and is only scaled by .  For example, in a mechanical system an eigenvector may represent a preferred vibration mode, and the corresponding eigenvalue can be related to amplification or damping. In stress analysis, eigenvectors of a symmetric matrix describe principal directions, that is, directions in which no shear component appears. This is one reason why eigenvalues are fundamental in applied mathematics and engineering.  "
+},
+{
+  "id": "section-eigenvalues-eigenvectors-3-28",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#section-eigenvalues-eigenvectors-3-28",
+  "type": "Theorem",
+  "number": "1.3.18",
+  "title": "Powers of a Matrix and the Inverse Matrix.",
+  "body": " Powers of a Matrix and the Inverse Matrix   Let be an eigenvector of with eigenvalue .    For every ,     If is invertible, then and Hence is an eigenvalue of .      The first claim follows by repeated application of the relation . For example, The general case is proved in the same way by induction.  For the second claim, apply to the equation . This gives Since is invertible, the eigenvalue cannot be zero. Dividing by yields    "
+},
+{
+  "id": "section-eigenvalues-eigenvectors-3-30",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#section-eigenvalues-eigenvectors-3-30",
+  "type": "Remark",
+  "number": "1.3.19",
+  "title": "Procedure for Determining Eigenvalues and Eigenvectors.",
+  "body": " Procedure for Determining Eigenvalues and Eigenvectors  Let be an -matrix.    Compute the characteristic polynomial     Determine the zeros of . These are the eigenvalues of .    For each eigenvalue , solve the homogeneous system to obtain the eigenspace .    "
+},
+{
+  "id": "exercises-eigenvalues-eigenvectors-2",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#exercises-eigenvalues-eigenvectors-2",
+  "type": "Exercise",
+  "number": "1.3.1.1",
+  "title": "Check a Candidate Eigenvalue.",
+  "body": " Check a Candidate Eigenvalue   Consider the matrix Decide whether is an eigenvalue of .    Study the homogeneous system . The value is an eigenvalue exactly if this system has a non-trivial solution.     Yes, because .  Incorrect. Computing gives a non-zero value, so the system has only the trivial solution.    No, because is invertible.  Correct. Since is invertible, the homogeneous system has only the trivial solution, so is not an eigenvalue.    Yes, because the trace of is greater than .  Incorrect. The trace alone does not decide whether a number is an eigenvalue.    No, because is not a diagonal entry of .  Incorrect. That criterion works only for triangular matrices, and this matrix is not triangular.    "
+},
+{
+  "id": "exercises-eigenvalues-eigenvectors-3",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#exercises-eigenvalues-eigenvectors-3",
+  "type": "Exercise",
+  "number": "1.3.1.2",
+  "title": "Powers Acting on an Eigenvector.",
+  "body": " Powers Acting on an Eigenvector   Let be an eigenvector of the matrix with eigenvalue . Compute .      Incorrect. Repeated application multiplies by each time, so the factor is , not .     Correct. Applying four times multiplies the eigenvector by four times.     Incorrect. The expression can be simplified much further using the eigenvector property.     Incorrect. Vectors are not exponentiated in this way.    "
+},
+{
+  "id": "exercises-eigenvalues-eigenvectors-4",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#exercises-eigenvalues-eigenvectors-4",
+  "type": "Exercise",
+  "number": "1.3.1.3",
+  "title": "Find Eigenvalues and Eigenspaces.",
+  "body": " Find Eigenvalues and Eigenspaces   Determine the eigenvalues and eigenspaces of     We compute the characteristic polynomial: Factoring gives so the eigenvalues are and .  For , we solve This gives , hence   For , we solve This gives , so . Therefore    "
+},
+{
+  "id": "exercises-eigenvalues-eigenvectors-5",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#exercises-eigenvalues-eigenvectors-5",
+  "type": "Exercise",
+  "number": "1.3.1.4",
+  "title": "Interpretation for a Scaling Process.",
+  "body": " Interpretation for a Scaling Process   A matrix describes one step of a linear discrete-time model. Explain in your own words what it means for a non-zero state vector to be an eigenvector of . What is the effect of repeated application of the model on this state if the corresponding eigenvalue satisfies , , or ?     The state stays on the same line; it decays for , keeps constant magnitude for , and grows for .  Correct. Along an eigenvector direction, each step only rescales the state by .    The state rotates to a new direction each step; the size behaviour depends only on the trace of .  Incorrect. An eigenvector direction is preserved, and the relevant quantity is the eigenvalue, not the trace.    The state stays fixed whenever .  Incorrect. The state is fixed only in the special case .    The state becomes zero after one step whenever .  Incorrect. If , the state decays gradually; it does not become zero in one step unless .    "
+},
+{
+  "id": "exercises-eigenvalues-eigenvectors-6",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#exercises-eigenvalues-eigenvectors-6",
+  "type": "Exercise",
+  "number": "1.3.1.5",
+  "title": "Repeated Eigenvalue.",
+  "body": " Repeated Eigenvalue   Determine the characteristic polynomial, the algebraic multiplicity, and the geometric multiplicity of the eigenvalue of     First compute , then solve .     We have So the only eigenvalue is , with algebraic multiplicity .  Next we solve This gives , while is free. Hence so the geometric multiplicity is .   "
+},
+{
+  "id": "ex-powers-diagonal-matrix",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#ex-powers-diagonal-matrix",
+  "type": "Example",
+  "number": "1.3.20",
+  "title": "Powers of a Diagonal Matrix.",
+  "body": " Powers of a Diagonal Matrix  Consider the diagonal matrix For any , its -th power is This follows immediately from matrix multiplication: each diagonal entry is raised to the power independently.  "
+},
+{
+  "id": "def-diagonalizable-matrix",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#def-diagonalizable-matrix",
+  "type": "Definition",
+  "number": "1.3.21",
+  "title": "Diagonalizable Matrix.",
+  "body": " Diagonalizable Matrix   An matrix is called diagonalizable if there exists an invertible matrix and a diagonal matrix such that    "
+},
+{
+  "id": "thm-diagonalizability-criterion",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#thm-diagonalizability-criterion",
+  "type": "Theorem",
+  "number": "1.3.22",
+  "title": "Criterion for Diagonalizability.",
+  "body": " Criterion for Diagonalizability   Let be an matrix.     is diagonalizable if and only if there exist linearly independent eigenvectors of .    If , then the columns of are linearly independent eigenvectors of , and the diagonal entries of are the corresponding eigenvalues.    If the characteristic polynomial of splits into linear factors over , then is diagonalizable if and only if for every eigenvalue , its algebraic multiplicity equals its geometric multiplicity.      For part (1), first assume that is diagonalizable, so for some invertible matrix . Multiplying by on the right gives . If denotes the -th column of and the corresponding diagonal entry of , then the -th column of reads . So the columns of are eigenvectors of . Because is invertible, these columns are linearly independent, so we obtain linearly independent eigenvectors.  Conversely, suppose that are linearly independent eigenvectors with corresponding eigenvalues . Form the matrix Then Since the columns of are linearly independent, is invertible. Multiplying on the right by gives , so is diagonalizable.  Part (2) follows from the identity . If denotes the -th column of and the corresponding diagonal entry of , then the -th column of reads . So each column of is an eigenvector with the matching eigenvalue.  For part (3), assume that the characteristic polynomial splits over . Then the sum of the algebraic multiplicities of all eigenvalues is . For each eigenvalue, the geometric multiplicity is at most the algebraic multiplicity. Hence equality for every eigenvalue is equivalent to having a total of linearly independent eigenvectors. By part (1), this is exactly the condition for diagonalizability.   "
+},
+{
+  "id": "subsec-diagonalization-8",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#subsec-diagonalization-8",
+  "type": "Remark",
+  "number": "1.3.23",
+  "title": "",
+  "body": " The extra hypothesis in part (3) matters. For example, the rotation matrix from the previous subsection has no real eigenvalues, so it cannot be diagonalized over .  "
+},
+{
+  "id": "ex-power-diagonalizable-matrix",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#ex-power-diagonalizable-matrix",
+  "type": "Example",
+  "number": "1.3.24",
+  "title": "Computing a Power via Diagonalization.",
+  "body": " Computing a Power via Diagonalization  Let We want to compute for arbitrary . We are given that with   First, we compute using the inverse formula:   Now we use : Carrying out the multiplications:   "
+},
+{
+  "id": "ex-diagonalization-3x3",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#ex-diagonalization-3x3",
+  "type": "Example",
+  "number": "1.3.25",
+  "title": "Diagonalizing a <span class=\"process-math\">\\(3 \\times 3\\)<\/span> Matrix.",
+  "body": " Diagonalizing a Matrix  Find matrices and such that , where    Step 1: Characteristic polynomial. We compute Expanding along the second column (which has two zeros):    Step 2: Eigenvalues. The eigenvalues are (algebraic multiplicity 1) and (algebraic multiplicity 2).   Step 3: Eigenspaces. For , we solve : The free variable is , giving the eigenvector .  For , we solve : The free variables are and , giving two linearly independent eigenvectors The geometric multiplicity of is 2, matching the algebraic multiplicity.   Conclusion. Since both multiplicities match for every eigenvalue, is diagonalizable. Placing the eigenvectors as columns of and the corresponding eigenvalues on the diagonal of :   "
+},
+{
+  "id": "ex-non-diagonalizable-matrix",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#ex-non-diagonalizable-matrix",
+  "type": "Example",
+  "number": "1.3.26",
+  "title": "A Non-Diagonalizable Matrix.",
+  "body": " A Non-Diagonalizable Matrix  Consider The characteristic polynomial is , so the only eigenvalue is with algebraic multiplicity 2.  To find the eigenspace, we solve : The eigenspace is so the eigenspace provides only one linearly independent eigenvector. The geometric multiplicity of is 1, which is strictly less than the algebraic multiplicity 2. Therefore is not diagonalizable.  "
+},
+{
+  "id": "thm-symmetric-diagonalizable",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#thm-symmetric-diagonalizable",
+  "type": "Theorem",
+  "number": "1.3.27",
+  "title": "Diagonalizability of Symmetric Matrices.",
+  "body": " Diagonalizability of Symmetric Matrices   Let be a symmetric matrix (i.e. ). Then:     is always diagonalizable.    There exist pairwise orthogonal eigenvectors of . In particular, can be diagonalized by an orthogonal matrix , meaning .     "
+},
+{
+  "id": "exer-check-diagonalizable-2x2",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#exer-check-diagonalizable-2x2",
+  "type": "Exercise",
+  "number": "1.3.2.1",
+  "title": "Check Diagonalizability.",
+  "body": " Check Diagonalizability   Determine whether the matrix is diagonalizable. If yes, find and . If no, explain why.    Compute the characteristic polynomial and check whether algebraic and geometric multiplicities agree.     The characteristic polynomial is So the only eigenvalue is , with algebraic multiplicity .  To find the eigenspace, solve This gives , while is free. Hence The geometric multiplicity is therefore .  Since the geometric multiplicity is smaller than the algebraic multiplicity, the matrix is not diagonalizable.   "
+},
+{
+  "id": "exer-diagonalize-compute-power",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#exer-diagonalize-compute-power",
+  "type": "Exercise",
+  "number": "1.3.2.2",
+  "title": "Diagonalize and Compute a Power.",
+  "body": " Diagonalize and Compute a Power   Diagonalize the matrix by finding matrices and with . Then compute .    Because is upper triangular, its eigenvalues are the diagonal entries. Then determine one eigenvector for each eigenvalue.    Since is upper triangular, its eigenvalues are and .  For , we solve which gives . So we may choose   For , we solve so . We may choose   Hence Since we obtain   Since and ,    "
+},
+{
+  "id": "exer-discrete-population-model",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#exer-discrete-population-model",
+  "type": "Exercise",
+  "number": "1.3.2.3",
+  "title": "Mode Decomposition in a Discrete Model.",
+  "body": " Mode Decomposition in a Discrete Model   Suppose a discrete-time model satisfies and the initial state is Which statement about is correct?     ; the -component grows and the -component decays.  Correct. Each eigenvector component is scaled independently by the corresponding power of its eigenvalue.    ; the -component decays and the -component grows.  Incorrect. The eigenvalue belongs to , and belongs to .     Incorrect. The whole vector is not scaled by a single common factor; each eigenvector direction evolves separately.    for all , because eigenvectors do not change under repeated multiplication.  Incorrect. Eigenvectors keep their direction, but their lengths are multiplied by successive powers of the eigenvalue.    "
+},
+{
+  "id": "def-quadratic-form",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#def-quadratic-form",
+  "type": "Definition",
+  "number": "1.3.28",
+  "title": "Quadratic Form.",
+  "body": " Quadratic Form   A quadratic form is a map where is a symmetric matrix. The matrix is called the matrix of the quadratic form .   "
+},
+{
+  "id": "rem-symmetrization",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#rem-symmetrization",
+  "type": "Remark",
+  "number": "1.3.29",
+  "title": "",
+  "body": " Every quadratic form can be uniquely represented by a symmetric matrix. If a non-symmetric matrix is given, we can replace it by the symmetric matrix without changing the quadratic form, since for all .  "
+},
+{
+  "id": "subsec-quadratic-forms-5",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#subsec-quadratic-forms-5",
+  "type": "Remark",
+  "number": "1.3.30",
+  "title": "",
+  "body": " In engineering, quadratic forms often measure energy. For instance, if records two small displacements in a coupled spring system, then the elastic energy can have the form . Positive definiteness then means that every non-zero displacement stores positive energy, which is exactly what we expect from a stable configuration.  "
+},
+{
+  "id": "ex-quadratic-form-2x2",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#ex-quadratic-form-2x2",
+  "type": "Example",
+  "number": "1.3.31",
+  "title": "Expanding a Quadratic Form.",
+  "body": " Expanding a Quadratic Form  Let The associated quadratic form is Observe that the coefficient of the mixed term is .  "
+},
+{
+  "id": "def-definiteness",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#def-definiteness",
+  "type": "Definition",
+  "number": "1.3.32",
+  "title": "Definiteness of a Quadratic Form.",
+  "body": " Definiteness of a Quadratic Form   Let be a symmetric matrix with associated quadratic form .     is positive definite if for all .     is positive semidefinite if for all .     is negative definite if for all .     is negative semidefinite if for all .     is indefinite if takes both positive and negative values.     "
+},
+{
+  "id": "ex-definiteness-test",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#ex-definiteness-test",
+  "type": "Example",
+  "number": "1.3.33",
+  "title": "Testing Definiteness by Inspection.",
+  "body": " Testing Definiteness by Inspection  We test the definiteness of three quadratic forms.  (a) . We evaluate at two points: Since takes both positive and negative values, it is indefinite .  (b) . Since , the sum is always non-negative. It is zero only when . Therefore is positive definite .  (c) . Here even though . Therefore is positive semidefinite .  "
+},
+{
+  "id": "ex-diagonal-quadratic-forms",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#ex-diagonal-quadratic-forms",
+  "type": "Example",
+  "number": "1.3.34",
+  "title": "Diagonal Quadratic Forms as Model Cases.",
+  "body": " Diagonal Quadratic Forms as Model Cases  For a diagonal matrix , the quadratic form is In this case, the sign pattern of the coefficients already reveals the geometry.  (a) For , both coefficients are positive, so for every non-zero . The level line is an ellipse.    The level line is an ellipse.   (b) For , one coefficient is positive and one is negative. Hence the form is indefinite. The level line is a hyperbola.    The level line is a hyperbola.   (c) For , we have for all , but . So the form is positive semidefinite. The level set consists of two vertical lines.    For , the level set consists of the lines ; the dashed line corresponds to the zero level.   These diagonal examples motivate the general criterion below: once a symmetric matrix is orthogonally diagonalized, its quadratic form reduces to exactly this kind of expression.  "
+},
+{
+  "id": "thm-definiteness-eigenvalues",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#thm-definiteness-eigenvalues",
+  "type": "Theorem",
+  "number": "1.3.35",
+  "title": "Definiteness Criterion via Eigenvalues.",
+  "body": " Definiteness Criterion via Eigenvalues   Let be a symmetric matrix with eigenvalues (all real, by ).     is positive definite (resp. semidefinite) if and only if all eigenvalues satisfy (resp. ).     is negative definite (resp. semidefinite) if and only if all eigenvalues satisfy (resp. ).     is indefinite if and only if there exist both a positive and a negative eigenvalue.      By , there is an orthogonal matrix and a diagonal matrix such that .  Now take any vector and write it in the form . Then So the sign of the quadratic form is determined entirely by the signs of the eigenvalues.  If all eigenvalues are positive, then every term on the right-hand side is non-negative and at least one is positive whenever , so the quadratic form is positive definite. The semidefinite, negative definite, and negative semidefinite cases are analogous. If there are both positive and negative eigenvalues, then choosing along the corresponding coordinate axes produces both positive and negative values, so the form is indefinite.   "
+},
+{
+  "id": "ex-eigenvalue-criterion-positive-definite",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#ex-eigenvalue-criterion-positive-definite",
+  "type": "Example",
+  "number": "1.3.36",
+  "title": "Positive Definiteness from Eigenvalues.",
+  "body": " Positive Definiteness from Eigenvalues  Consider Its characteristic polynomial is So the eigenvalues are and , both positive. By the eigenvalue criterion, is positive definite.  "
+},
+{
+  "id": "ex-eigenvalue-criterion-indefinite",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#ex-eigenvalue-criterion-indefinite",
+  "type": "Example",
+  "number": "1.3.37",
+  "title": "Indefiniteness from Mixed Eigenvalue Signs.",
+  "body": " Indefiniteness from Mixed Eigenvalue Signs  Consider We compute Thus the eigenvalues are and . Since there is one positive and one negative eigenvalue, the matrix is indefinite.  This agrees with direct values of the quadratic form:   "
+},
+{
+  "id": "thm-sylvester-criterion",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#thm-sylvester-criterion",
+  "type": "Theorem",
+  "number": "1.3.38",
+  "title": "Sylvester’s Criterion.",
+  "body": " Sylvester's Criterion   Let be a symmetric matrix. Denote by the leading principal submatrix (the submatrix formed by the first rows and columns of ).     is positive definite if and only if      is negative definite if and only if In other words, the leading principal minors alternate in sign: , , , and so on.     "
+},
+{
+  "id": "ex-sylvester-positive-definite",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#ex-sylvester-positive-definite",
+  "type": "Example",
+  "number": "1.3.39",
+  "title": "Positive Definiteness via Sylvester’s Criterion.",
+  "body": " Positive Definiteness via Sylvester's Criterion  Consider The leading principal submatrices are Their determinants are Since all leading principal minors are positive, is positive definite.  "
+},
+{
+  "id": "ex-sylvester-negative-definite",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#ex-sylvester-negative-definite",
+  "type": "Example",
+  "number": "1.3.40",
+  "title": "Negative Definiteness via Sylvester’s Criterion.",
+  "body": " Negative Definiteness via Sylvester's Criterion  Consider We compute The leading principal minors alternate in sign, so Sylvester's criterion shows that is negative definite.  "
+},
+{
+  "id": "subsec-quadratic-forms-18",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#subsec-quadratic-forms-18",
+  "type": "Remark",
+  "number": "1.3.41",
+  "title": "",
+  "body": " In practice, Sylvester's criterion is most useful when the eigenvalues are inconvenient to compute exactly. For a symmetric matrix, it gives a fast test for positive or negative definiteness using only determinants of smaller submatrices.  "
+},
+{
+  "id": "rem-local-extrema-forward",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#rem-local-extrema-forward",
+  "type": "Remark",
+  "number": "1.3.42",
+  "title": "Connection to Local Extrema.",
+  "body": " Connection to Local Extrema  Quadratic forms play a central role in the analysis of local extrema of functions . Near a critical point (where ), the Taylor expansion gives The second-order term is a quadratic form with the Hessian matrix :    If is positive definite, then is a strict local minimum.    If is negative definite, then is a strict local maximum.    If is indefinite, then is a saddle point.    This connection is developed in detail in Section 2.2 (Error Propagation, Taylor Expansion, and Extrema).  "
+},
+{
+  "id": "rem-principal-axes",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#rem-principal-axes",
+  "type": "Remark",
+  "number": "1.3.43",
+  "title": "Principal Axes and the Geometry of Quadratic Forms.",
+  "body": " Principal Axes and the Geometry of Quadratic Forms  Since the matrix of a quadratic form is symmetric, it can be diagonalized by an orthogonal matrix: . Here we only use the basic idea of changing coordinates; a full general theory of change of basis is not needed yet. Substituting the coordinate change : In the new coordinates , the quadratic form has no mixed terms . The columns of (the eigenvectors of ) define the principal axes of the quadratic form.  Geometrically, the level sets are ellipses (positive definite case), hyperbolas (indefinite case), or degenerate shapes in between. The principal axes are exactly the axes of symmetry of these level curves.    After an orthogonal change of coordinates, the mixed term disappears and the level curve aligns with the principal axes and .   "
+},
+{
+  "id": "exer-expand-quadratic-form",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#exer-expand-quadratic-form",
+  "type": "Exercise",
+  "number": "1.3.3.1",
+  "title": "Expand a Quadratic Form.",
+  "body": " Expand a Quadratic Form   Let Write out the quadratic form explicitly as a polynomial in .      Incorrect. The mixed term receives contributions from both off-diagonal entries.     Correct. The mixed coefficient is .     Incorrect. The sign of the mixed term is negative, not positive.     Incorrect. The squared terms and mixed term have been combined incorrectly.    "
+},
+{
+  "id": "exer-definiteness-eigenvalues",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#exer-definiteness-eigenvalues",
+  "type": "Exercise",
+  "number": "1.3.3.2",
+  "title": "Classify by Eigenvalues.",
+  "body": " Classify by Eigenvalues   Determine the eigenvalues of and use them to decide whether is positive definite, negative definite, or indefinite.     Negative definite  Incorrect. Both eigenvalues are positive, not negative.    Positive definite  Correct. The eigenvalues are and , so both are positive.    Indefinite  Incorrect. An indefinite matrix needs both a positive and a negative eigenvalue.    Negative semidefinite  Incorrect. The matrix has strictly positive eigenvalues.    "
+},
+{
+  "id": "exer-sylvester-3x3",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#exer-sylvester-3x3",
+  "type": "Exercise",
+  "number": "1.3.3.3",
+  "title": "Sylvester’s Criterion for a <span class=\"process-math\">\\(3\\times 3\\)<\/span> Matrix.",
+  "body": " Sylvester's Criterion for a Matrix   Apply Sylvester's criterion to determine whether is positive definite.    Compute , , and in turn.     The leading principal submatrices are   Their determinants are and   All three leading principal minors are positive. By Sylvester's criterion, the matrix is positive definite.   "
+},
+{
+  "id": "exer-hessian-classification",
+  "level": "2",
+  "url": "section-eigenvalues-eigenvectors.html#exer-hessian-classification",
+  "type": "Exercise",
+  "number": "1.3.3.4",
+  "title": "Classify a Critical Point.",
+  "body": " Classify a Critical Point   The function has a critical point at the origin with Hessian Is the origin a local minimum, a local maximum, or a saddle point?    Use Sylvester's criterion or compute the eigenvalues of the Hessian.    Let We apply Sylvester's criterion. The first leading principal minor is , while   So is not positive definite and not negative definite. In fact, it is positive semidefinite. Therefore the second-derivative test is inconclusive here: from the Hessian alone we cannot decide whether the origin is a local minimum, a local maximum, or a saddle point.   "
 },
 {
   "id": "backmatter-2",
