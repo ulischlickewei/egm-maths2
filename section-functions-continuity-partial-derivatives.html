@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: denver                         *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Functions, Continuity, and Partial Derivatives</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+<link href="_static/pretext/css/theme.css" rel="stylesheet" type="text/css">
+<script>
+var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
+  "tex": {
+    "inlineMath": [
+      [
+        "\\(",
+        "\\)"
+      ]
+    ],
+    "tags": "none",
+    "tagSide": "right",
+    "tagIndent": ".8em",
+    "packages": {
+      "[+]": [
+        "base",
+        "extpfeil",
+        "ams",
+        "amscd",
+        "color",
+        "newcommand",
+        "knowl"
+      ]
+    }
+  },
+  "options": {
+    "ignoreHtmlClass": "tex2jax_ignore|ignore-math",
+    "processHtmlClass": "process-math"
+  },
+  "chtml": {
+    "scale": 0.98,
+    "mtextInheritFont": true
+  },
+  "loader": {
+    "load": [
+      "input/asciimath",
+      "[tex]/extpfeil",
+      "[tex]/amscd",
+      "[tex]/color",
+      "[tex]/newcommand",
+      "[pretext]/mathjaxknowl3.js"
+    ],
+    "paths": {
+      "pretext": "_static/pretext/js"
+    }
+  },
+  "startup": {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+  }
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="Mathematics 2">
+<meta property="book:author" content="Ulrich Schlickewei">
+<script src="_static/pretext/js/jquery.min.js"></script><script src="_static/pretext/js/pretext.js"></script><script src="_static/pretext/js/pretext_add_on.js?x=1"></script><!--** eBookCongig is necessary to configure interactive       **-->
+<!--** Runestone components to run locally in reader's browser **-->
+<!--** No external communication:                              **-->
+<!--**     log level is 0, Runestone Services are disabled     **-->
+<script type="text/javascript">
+eBookConfig = {};
+eBookConfig.useRunestoneServices = false;
+eBookConfig.host = 'http://127.0.0.1:8000';
+eBookConfig.course = 'PTX_Course_Title_Here';
+eBookConfig.basecourse = 'PTX_Base_Course';
+eBookConfig.isLoggedIn = false;
+eBookConfig.email = '';
+eBookConfig.isInstructor = false;
+eBookConfig.logLevel = 0;
+eBookConfig.username = '';
+eBookConfig.readings = null;
+eBookConfig.activities = null;
+eBookConfig.downloadsEnabled = false;
+eBookConfig.allow_pairs = false;
+eBookConfig.enableScratchAC = false;
+eBookConfig.build_info = "";
+eBookConfig.python3 = null;
+eBookConfig.runestone_version = '7.13.4';
+eBookConfig.jobehost = '';
+eBookConfig.proxyuri_runs = '';
+eBookConfig.proxyuri_files = '';
+eBookConfig.enable_chatcodes =  false;
+</script>
+<!--*** Runestone Services ***-->
+<script src="_static/prefix-runtime.b76b8eace4405b9e.bundle.js"></script><script src="_static/prefix-723.3e6434f80549315a.bundle.js"></script><script src="_static/prefix-runestone.bbf2283c5c1d4f99.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-723.3bccd435914aa0ff.css">
+<link rel="stylesheet" type="text/css" href="_static/prefix-runestone.b12a7b3f0773ebcd.css">
+<script src="_static/pretext/js/lti_iframe_resizer.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/pretext_search.js"></script><script src="_static/pretext/js/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script>
+</head>
+<body id="Mathematics 2" class="pretext book ignore-math">
+<a class="assistive" href="#ptx-content">Skip to main content</a><header id="ptx-masthead" class="ptx-masthead"><div class="ptx-banner"><div class="title-container">
+<h1 class="heading"><a href="egm-maths2.html"><span class="title">Mathematics 2</span> <span class="subtitle">Lecture notes</span></a></h1>
+<p class="byline">Ulrich Schlickewei</p>
+</div></div></header><nav id="ptx-navbar" class="ptx-navbar navbar"><div class="ptx-navbar-contents">
+<button class="toc-toggle button" title="Contents"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5d2;</span><span class="name">Contents</span></button><div class="searchbox">
+<div class="searchwidget"><button id="searchbutton" class="searchbutton button" type="button" title="Search book"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe8b6;</span><span class="name">Search Book</span></button></div>
+<div id="searchresultsplaceholder" class="searchresultsplaceholder" style="display: none">
+<div class="search-results-controls">
+<input aria-label="Search term" id="ptxsearch" class="ptxsearch" type="text" name="terms" placeholder="Search term"><button title="Close search" id="closesearchresults" class="closesearchresults"><span class="material-symbols-outlined">close</span></button>
+</div>
+<h2 class="search-results-heading">Search Results: </h2>
+<div id="searchempty" class="searchempty"><span>No results.</span></div>
+<ol id="searchresults" class="searchresults"></ol>
+</div>
+</div>
+<span class="nav-other-controls"><button id="light-dark-button" class="light-dark-button button" title="Dark Mode"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe51c;</span><span class="name">Dark Mode</span></button></span><span class="treebuttons"><a class="previous-button button" href="chapter-multivariate-differential-calculus.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="up-button button" href="chapter-multivariate-differential-calculus.html" title="Up"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Up</span></a><a class="next-button button" href="backmatter.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a></span>
+</div></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N} \newcommand{\Z}{\mathbb Z} \newcommand{\Q}{\mathbb Q} \newcommand{\R}{\mathbb R}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\)</span></div>
+<div class="ptx-page">
+<div id="ptx-sidebar" class="ptx-sidebar"><nav id="ptx-toc" class="ptx-toc depth3 focused" data-preexpanded-levels="0" data-max-levels="3"><ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-frontmatter">
+<div class="toc-title-box"><a href="egm-maths2-3.html" class="internal"><span class="title">Front Matter</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-preface"><div class="toc-title-box"><a href="egm-maths2-3-3.html" class="internal"><span class="title">Preface</span></a></div></li>
+<li class="toc-item toc-colophon"><div class="toc-title-box"><a href="front-colophon.html" class="internal"><span class="title">Colophon</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="chapter-linear-algebra.html" class="internal"><span class="codenumber">1</span> <span class="title">Linear Algebra</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html" class="internal"><span class="codenumber">1.1</span> <span class="title">Vectors, Matrices and Linear Systems of Equations</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html#subsec-vectors" class="internal"><span class="codenumber">1.1.1</span> <span class="title">Brief reminder: vectors</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html#exercises-vectors-reminder" class="internal"><span class="codenumber">1.1.1</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html#subsec-matrices" class="internal"><span class="codenumber">1.1.2</span> <span class="title">Matrices</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html#subsubsec-matrix-operations" class="internal"><span class="codenumber">1.1.2.1</span> <span class="title">Arithmetic Operations on Matrices</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html#subsubsec-special-matrices" class="internal"><span class="codenumber">1.1.2.2</span> <span class="title">Special Matrices and Laws of Arithmetic</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html#subsec-linear-systems" class="internal"><span class="codenumber">1.1.3</span> <span class="title">Linear Systems and the Gauss--Jordan Method</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html#subsec-linear-systems-49" class="internal"><span class="codenumber">1.1.3</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-determinants-inverse-matrices.html" class="internal"><span class="codenumber">1.2</span> <span class="title">Determinants and Inverse Matrices</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-determinants-inverse-matrices.html#section-determinants-inverse-matrices-3" class="internal"><span class="codenumber">1.2.1</span> <span class="title">Inverse Matrices</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-determinants-inverse-matrices.html#exercises-inverse-matrices" class="internal"><span class="codenumber">1.2.1</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-determinants-inverse-matrices.html#section-determinants-inverse-matrices-4" class="internal"><span class="codenumber">1.2.2</span> <span class="title">Determinants</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-determinants-inverse-matrices.html#section-determinants-inverse-matrices-4-25" class="internal"><span class="codenumber">1.2.2</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-eigenvalues-eigenvectors.html" class="internal"><span class="codenumber">1.3</span> <span class="title">Eigenvalues, Diagonalization, and Quadratic Forms</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-eigenvalues-eigenvectors.html#section-eigenvalues-eigenvectors-3" class="internal"><span class="codenumber">1.3.1</span> <span class="title">Eigenvalues and Eigenvectors</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-eigenvalues-eigenvectors.html#exercises-eigenvalues-eigenvectors" class="internal"><span class="codenumber">1.3.1</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-eigenvalues-eigenvectors.html#subsec-diagonalization" class="internal"><span class="codenumber">1.3.2</span> <span class="title">Diagonalization of Matrices</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-eigenvalues-eigenvectors.html#exercises-diagonalization" class="internal"><span class="codenumber">1.3.2</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-eigenvalues-eigenvectors.html#subsec-quadratic-forms" class="internal"><span class="codenumber">1.3.3</span> <span class="title">Quadratic Forms</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-eigenvalues-eigenvectors.html#exercises-quadratic-forms" class="internal"><span class="codenumber">1.3.3</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter contains-active">
+<div class="toc-title-box"><a href="chapter-multivariate-differential-calculus.html" class="internal"><span class="codenumber">2</span> <span class="title">Multivariate Differential Calculus</span></a></div>
+<ul class="structural toc-item-list contains-active"><li class="toc-item toc-section contains-active">
+<div class="toc-title-box"><a href="section-functions-continuity-partial-derivatives.html" class="internal"><span class="codenumber">2.1</span> <span class="title">Functions, Continuity, and Partial Derivatives</span></a></div>
+<ul class="structural toc-item-list active">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-functions-continuity-partial-derivatives.html#subsec-multivariable-functions" class="internal"><span class="codenumber">2.1.1</span> <span class="title">Functions of Several Variables</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-functions-continuity-partial-derivatives.html#subsec-continuity-multivariate" class="internal"><span class="codenumber">2.1.2</span> <span class="title">Continuity</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-functions-continuity-partial-derivatives.html#subsec-partial-derivatives" class="internal"><span class="codenumber">2.1.3</span> <span class="title">Partial Derivatives, Gradient, and Differentiability</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-functions-continuity-partial-derivatives.html#subsec-higher-order-partial-derivatives" class="internal"><span class="codenumber">2.1.4</span> <span class="title">Higher-Order Partial Derivatives and the Hessian Matrix</span></a></div></li>
+</ul>
+</li></ul>
+</li>
+<li class="toc-item toc-backmatter"><div class="toc-title-box"><a href="backmatter.html" class="internal"><span class="title">Backmatter</span></a></div></li>
+</ul></nav></div>
+<main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="section" id="section-functions-continuity-partial-derivatives"><h2 class="heading hide-type">
+<span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Functions, Continuity, and Partial Derivatives</span>
+</h2>
+<section class="introduction" id="section-functions-continuity-partial-derivatives-2"><div class="para" id="section-functions-continuity-partial-derivatives-2-1">This section extends the core ideas of single-variable calculus — domains, continuity, and differentiation — to functions that depend on several real variables simultaneously. We begin by defining what such functions are and how to describe their graphs and level sets geometrically. We then introduce the sequence-based definition of continuity in <span class="process-math">\(\R^n\)</span> and develop practical tools for proving that built-up functions are continuous. Finally, we study how to differentiate functions of several variables: partial derivatives with respect to individual coordinates, the gradient as the vector of all partial derivatives, total differentiability and the tangent plane, directional derivatives, and the second-order Hessian matrix.<div class="autopermalink" data-description="Paragraph"><a href="#section-functions-continuity-partial-derivatives-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></section><section class="subsection" id="subsec-multivariable-functions"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.1</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Functions of Several Variables</span>
+</h3>
+<section class="introduction" id="subsec-multivariable-functions-2"><div class="para" id="subsec-multivariable-functions-2-1">In mathematics and engineering, many quantities depend simultaneously on several inputs. The temperature at a point in a room is a function of the three position coordinates; the pressure of an ideal gas depends on both its volume and its temperature. This subsection introduces real functions of several variables, discusses how their domains are determined, and explores two ways to visualise them: the graph as a surface in space, and the contour plot via level curves.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-multivariable-functions-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></section><article class="definition definition-like" id="def-multivariable-function"><h4 class="heading">
+<span class="type">Definition</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Real Function of Several Variables.</span>
+</h4>
+<div class="para logical" id="def-multivariable-function-2-1">
+<div class="para">Let <span class="process-math">\(D_f \subset \R^n\text{.}\)</span> A map</div>
+<div class="displaymath process-math" id="def-multivariable-function-2-1-2">
+\begin{equation*}
+f \colon D_f \to \R
+\end{equation*}
+</div>
+<div class="para">is called a <dfn class="terminology">real function of several variables</dfn>. The set <span class="process-math">\(D_f\)</span> is the <dfn class="terminology">domain of definition</dfn> of <span class="process-math">\(f\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#def-multivariable-function-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 2.1.1: Real Function of Several Variables"><a href="#def-multivariable-function" title="Copy heading and permalink for Definition 2.1.1: Real Function of Several Variables" aria-label="Copy heading and permalink for Definition 2.1.1: Real Function of Several Variables">🔗</a></div></article><details id="ex-multivariable-function-basic" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.2</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Two Basic Examples.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para logical" id="ex-multivariable-function-basic-2">
+<ul class="disc" id="ex-multivariable-function-basic-2-1">
+<li id="ex-multivariable-function-basic-2-1-1">
+<div class="para" id="ex-multivariable-function-basic-2-1-1-1">
+<span class="process-math">\(f \colon \R^2 \to \R\text{,}\)</span> <span class="process-math">\(f(x,y) = x \sin y\text{.}\)</span> For instance, <span class="process-math">\(f(1,1) = \sin 1\)</span> and <span class="process-math">\(f\!\left(1, \tfrac{\pi}{2}\right) = 1\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-multivariable-function-basic-2-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#ex-multivariable-function-basic-2-1-1" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="ex-multivariable-function-basic-2-1-2">
+<div class="para logical" id="ex-multivariable-function-basic-2-1-2-1">
+<div class="para">
+<span class="process-math">\(g \colon D_g \to \R\text{,}\)</span> <span class="process-math">\((x_1, x_2, x_3) \mapsto \sqrt{36 - x_1^2 - x_2^2 - x_3^2}\text{.}\)</span> The square root requires a non-negative argument, so</div>
+<div class="displaymath process-math" id="ex-multivariable-function-basic-2-1-2-1-3">
+\begin{equation*}
+D_g = \left\{ (x_1, x_2, x_3) \in \R^3 \;\middle|\; x_1^2 + x_2^2 + x_3^2 \le 36 \right\},
+\end{equation*}
+</div>
+<div class="para">the closed ball of radius <span class="process-math">\(6\)</span> centred at the origin.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-multivariable-function-basic-2-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#ex-multivariable-function-basic-2-1-2" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-multivariable-function-basic-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 2.1.2: Two Basic Examples"><a href="#ex-multivariable-function-basic" title="Copy heading and permalink for Example 2.1.2: Two Basic Examples" aria-label="Copy heading and permalink for Example 2.1.2: Two Basic Examples">🔗</a></div></article></details><details id="ex-multivariable-function-engineering" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.3</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Functions of Several Variables in Engineering and Physics.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para" id="ex-multivariable-function-engineering-2">Multivariable functions appear throughout applied disciplines:<div class="autopermalink" data-description="Paragraph"><a href="#ex-multivariable-function-engineering-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-multivariable-function-engineering-3">
+<ul class="disc" id="ex-multivariable-function-engineering-3-1">
+<li id="ex-multivariable-function-engineering-3-1-1">
+<div class="para" id="ex-multivariable-function-engineering-3-1-1-1">
+<em class="emphasis">Harmonic oscillation:</em> <span class="process-math">\(x(A, \omega, t, \varphi) = A \cos(\omega t + \varphi)\text{,}\)</span> where <span class="process-math">\(A\)</span> is the amplitude, <span class="process-math">\(\omega\)</span> the angular frequency, and <span class="process-math">\(\varphi\)</span> the phase shift.<div class="autopermalink" data-description="Paragraph"><a href="#ex-multivariable-function-engineering-3-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#ex-multivariable-function-engineering-3-1-1" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="ex-multivariable-function-engineering-3-1-2">
+<div class="para" id="ex-multivariable-function-engineering-3-1-2-1">
+<em class="emphasis">Mechanical power:</em> <span class="process-math">\(P(W,t) = W/t\text{,}\)</span> where <span class="process-math">\(W\)</span> is work and <span class="process-math">\(t\)</span> is time.<div class="autopermalink" data-description="Paragraph"><a href="#ex-multivariable-function-engineering-3-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#ex-multivariable-function-engineering-3-1-2" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="ex-multivariable-function-engineering-3-1-3">
+<div class="para" id="ex-multivariable-function-engineering-3-1-3-1">
+<em class="emphasis">Ideal gas law:</em> <span class="process-math">\(p(V,T) = RT/V\text{,}\)</span> expressing pressure as a function of volume and temperature.<div class="autopermalink" data-description="Paragraph"><a href="#ex-multivariable-function-engineering-3-1-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#ex-multivariable-function-engineering-3-1-3" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-multivariable-function-engineering-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 2.1.3: Functions of Several Variables in Engineering and Physics"><a href="#ex-multivariable-function-engineering" title="Copy heading and permalink for Example 2.1.3: Functions of Several Variables in Engineering and Physics" aria-label="Copy heading and permalink for Example 2.1.3: Functions of Several Variables in Engineering and Physics">🔗</a></div></article></details><article class="remark remark-like" id="rem-visualization-multivariable"><h4 class="heading">
+<span class="type">Remark</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.4</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Visualisation of Functions of Two Variables.</span>
+</h4>
+<div class="para" id="rem-visualization-multivariable-2">There are two standard ways to visualise a function <span class="process-math">\(f \colon \R^2 \to \R\text{:}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#rem-visualization-multivariable-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="rem-visualization-multivariable-3">
+<ul class="disc" id="rem-visualization-multivariable-3-1">
+<li id="rem-visualization-multivariable-3-1-1">
+<div class="para logical" id="rem-visualization-multivariable-3-1-1-1">
+<div class="para">The <dfn class="terminology">graph</dfn> is the surface</div>
+<div class="displaymath process-math" id="rem-visualization-multivariable-3-1-1-1-2">
+\begin{equation*}
+G_f = \left\{ (x, y, z) \in \R^3 \mid z = f(x,y) \right\}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#rem-visualization-multivariable-3-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#rem-visualization-multivariable-3-1-1" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="rem-visualization-multivariable-3-1-2">
+<div class="para" id="rem-visualization-multivariable-3-1-2-1">A <dfn class="terminology">contour plot</dfn> displays several <dfn class="terminology">level curves</dfn> <span class="process-math">\(\{(x,y) \mid f(x,y) = c\}\)</span> for chosen constants <span class="process-math">\(c\text{.}\)</span> This is analogous to elevation contour lines on a topographic map.<div class="autopermalink" data-description="Paragraph"><a href="#rem-visualization-multivariable-3-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#rem-visualization-multivariable-3-1-2" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="autopermalink" data-description="Paragraph"><a href="#rem-visualization-multivariable-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="rem-visualization-multivariable-4">We illustrate both visualisation methods with two concrete examples. For the paraboloid <span class="process-math">\(f(x,y)=x^2+y^2\text{,}\)</span> the graph is a bowl-shaped surface and the level curves are circles. For the saddle function <span class="process-math">\(g(x,y)=x^2-y^2\text{,}\)</span> the graph bends upward in one direction and downward in the other, while the level curves are hyperbolas.<div class="autopermalink" data-description="Paragraph"><a href="#rem-visualization-multivariable-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="figure figure-like" id="fig-visualisation-paraboloid-graph"><div class="image-box" style="width: 72%; margin-left: 14%; margin-right: 14%;"><img src="generated/latex-image/fig-visualisation-paraboloid-graph-2.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.5<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Graph of the function <span class="process-math">\(f(x,y)=x^2+y^2\text{.}\)</span><div class="autopermalink" data-description="Figure 2.1.5"><a href="#fig-visualisation-paraboloid-graph" title="Copy heading and permalink for Figure 2.1.5" aria-label="Copy heading and permalink for Figure 2.1.5">🔗</a></div></figcaption></figure><figure class="figure figure-like" id="fig-visualisation-paraboloid-contours"><div class="image-box" style="width: 58%; margin-left: 21%; margin-right: 21%;"><img src="generated/latex-image/fig-visualisation-paraboloid-contours-2.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.6<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Contour plot of <span class="process-math">\(f(x,y)=x^2+y^2\text{;}\)</span> the level curves are circles centred at the origin.<div class="autopermalink" data-description="Figure 2.1.6"><a href="#fig-visualisation-paraboloid-contours" title="Copy heading and permalink for Figure 2.1.6" aria-label="Copy heading and permalink for Figure 2.1.6">🔗</a></div></figcaption></figure><figure class="figure figure-like" id="fig-visualisation-saddle-graph"><div class="image-box" style="width: 72%; margin-left: 14%; margin-right: 14%;"><img src="generated/latex-image/fig-visualisation-saddle-graph-2.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.7<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Graph of the function <span class="process-math">\(g(x,y)=x^2-y^2\text{.}\)</span><div class="autopermalink" data-description="Figure 2.1.7"><a href="#fig-visualisation-saddle-graph" title="Copy heading and permalink for Figure 2.1.7" aria-label="Copy heading and permalink for Figure 2.1.7">🔗</a></div></figcaption></figure><figure class="figure figure-like" id="fig-visualisation-saddle-contours"><div class="image-box" style="width: 62%; margin-left: 19%; margin-right: 19%;"><img src="generated/latex-image/fig-visualisation-saddle-contours-2.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.8<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Contour plot of <span class="process-math">\(g(x,y)=x^2-y^2\text{;}\)</span> positive level curves open along the <span class="process-math">\(x\)</span>-direction and negative level curves along the <span class="process-math">\(y\)</span>-direction.<div class="autopermalink" data-description="Figure 2.1.8"><a href="#fig-visualisation-saddle-contours" title="Copy heading and permalink for Figure 2.1.8" aria-label="Copy heading and permalink for Figure 2.1.8">🔗</a></div></figcaption></figure><div class="autopermalink" data-description="Remark 2.1.4: Visualisation of Functions of Two Variables"><a href="#rem-visualization-multivariable" title="Copy heading and permalink for Remark 2.1.4: Visualisation of Functions of Two Variables" aria-label="Copy heading and permalink for Remark 2.1.4: Visualisation of Functions of Two Variables">🔗</a></div></article><details id="ex-semisphere-graph" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.9</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">The Upper Unit Semi-sphere as a Graph.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para" id="ex-semisphere-graph-2">We investigate the function <span class="process-math">\(f \colon D_f \to \R\)</span> whose graph is the upper hemisphere of the unit sphere.<div class="autopermalink" data-description="Paragraph"><a href="#ex-semisphere-graph-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-semisphere-graph-3">
+<div class="para">The domain must consist of all base points <span class="process-math">\((x,y)\)</span> that lie under the hemisphere:</div>
+<div class="displaymath process-math" id="ex-semisphere-graph-3-2">
+\begin{equation*}
+D_f = \{ (x,y) \in \R^2 \mid x^2 + y^2 \le 1 \}.
+\end{equation*}
+</div>
+<div class="para">For a point <span class="process-math">\((x,y) \in D_f\text{,}\)</span> the height <span class="process-math">\(z \ge 0\)</span> satisfies <span class="process-math">\(x^2 + y^2 + z^2 = 1\text{,}\)</span> giving</div>
+<div class="displaymath process-math" id="ex-semisphere-graph-3-6">
+\begin{equation*}
+f(x,y) = \sqrt{1 - x^2 - y^2}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-semisphere-graph-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="figure figure-like" id="fig-upper-semisphere"><div class="image-box" style="width: 72%; margin-left: 14%; margin-right: 14%;"><img src="generated/latex-image/fig-upper-semisphere-2.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.10<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>The upper unit semi-sphere can be written as the graph of <span class="process-math">\(f(x,y)=\sqrt{1-x^2-y^2}\)</span> over the unit disk.<div class="autopermalink" data-description="Figure 2.1.10"><a href="#fig-upper-semisphere" title="Copy heading and permalink for Figure 2.1.10" aria-label="Copy heading and permalink for Figure 2.1.10">🔗</a></div></figcaption></figure><div class="autopermalink" data-description="Example 2.1.9: The Upper Unit Semi-sphere as a Graph"><a href="#ex-semisphere-graph" title="Copy heading and permalink for Example 2.1.9: The Upper Unit Semi-sphere as a Graph" aria-label="Copy heading and permalink for Example 2.1.9: The Upper Unit Semi-sphere as a Graph">🔗</a></div></article></details><article class="remark remark-like" id="rem-surface-of-revolution"><h4 class="heading">
+<span class="type">Remark</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.11</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Surface of Revolution.</span>
+</h4>
+<div class="para logical" id="rem-surface-of-revolution-2">
+<div class="para">Rotating the graph <span class="process-math">\(z = g(r)\)</span> of a function <span class="process-math">\(g \colon \R_{\ge 0} \to \R\)</span> around the <span class="process-math">\(z\)</span>-axis produces a <dfn class="terminology">surface of revolution</dfn>. In terms of Cartesian coordinates, this surface is the graph of</div>
+<div class="displaymath process-math" id="rem-surface-of-revolution-2-5">
+\begin{equation*}
+f(x,y) = g\!\left(\sqrt{x^2 + y^2}\right).
+\end{equation*}
+</div>
+<div class="para">The function value depends only on the radial distance to the <span class="process-math">\(z\)</span>-axis, which explains the rotational symmetry.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#rem-surface-of-revolution-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Remark 2.1.11: Surface of Revolution"><a href="#rem-surface-of-revolution" title="Copy heading and permalink for Remark 2.1.11: Surface of Revolution" aria-label="Copy heading and permalink for Remark 2.1.11: Surface of Revolution">🔗</a></div></article><details id="ex-surface-of-revolution-simple" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.12</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">A First Surface of Revolution.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para" id="ex-surface-of-revolution-simple-2">Consider the function <span class="process-math">\(g \colon \R_{\ge 0} \to \R\text{,}\)</span> <span class="process-math">\(g(r) = \dfrac{1}{1+r^2}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-surface-of-revolution-simple-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-surface-of-revolution-simple-3">
+<div class="para">Rotating the graph of <span class="process-math">\(g\)</span> around the <span class="process-math">\(z\)</span>-axis yields the surface</div>
+<div class="displaymath process-math" id="ex-surface-of-revolution-simple-3-3">
+\begin{equation*}
+f(x,y) = \frac{1}{1+x^2+y^2}.
+\end{equation*}
+</div>
+<div class="para">This example shows directly how a one-variable function of the radius becomes a function of two variables.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-surface-of-revolution-simple-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="figure figure-like" id="fig-surface-of-revolution-simple"><div class="image-box" style="width: 95%; margin-left: 2.5%; margin-right: 2.5%;"><img src="generated/latex-image/fig-surface-of-revolution-simple-2.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.13<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Left: the profile <span class="process-math">\(z=g(r)=1/(1+r^2)\text{.}\)</span> Right: the corresponding surface of revolution <span class="process-math">\(f(x,y)=1/(1+x^2+y^2)\text{.}\)</span><div class="autopermalink" data-description="Figure 2.1.13"><a href="#fig-surface-of-revolution-simple" title="Copy heading and permalink for Figure 2.1.13" aria-label="Copy heading and permalink for Figure 2.1.13">🔗</a></div></figcaption></figure><div class="autopermalink" data-description="Example 2.1.12: A First Surface of Revolution"><a href="#ex-surface-of-revolution-simple" title="Copy heading and permalink for Example 2.1.12: A First Surface of Revolution" aria-label="Copy heading and permalink for Example 2.1.12: A First Surface of Revolution">🔗</a></div></article></details><details id="ex-surface-of-revolution" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.14</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">A Surface of Revolution as the Graph of a Two-Variable Function.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para" id="ex-surface-of-revolution-2">We investigate the function by first showing that its one-variable profile can be extended continuously at the origin and then by rotating this profile around the <span class="process-math">\(z\)</span>-axis to obtain a surface of revolution.<div class="autopermalink" data-description="Paragraph"><a href="#ex-surface-of-revolution-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="ex-surface-of-revolution-3">Consider <span class="process-math">\(g \colon \R \setminus \{0\} \to \R\text{,}\)</span> <span class="process-math">\(g(x) = \dfrac{\sin(x^2)}{x^2}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-surface-of-revolution-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-surface-of-revolution-4">
+<ol class="decimal" id="ex-surface-of-revolution-4-1">
+<li id="ex-surface-of-revolution-4-1-1">
+<div class="para logical" id="ex-surface-of-revolution-4-1-1-1">
+<div class="para">
+<em class="emphasis">Extending <span class="process-math">\(g\)</span> continuously to all of <span class="process-math">\(\R\text{.}\)</span></em> Using the Taylor series <span class="process-math">\(\sin(u) = u - u^3/6 + \cdots\)</span> with <span class="process-math">\(u = x^2\text{:}\)</span>
+</div>
+<div class="displaymath process-math" id="ex-surface-of-revolution-4-1-1-1-4">
+\begin{equation*}
+g(x) = \frac{\sin(x^2)}{x^2}
+= \frac{x^2 - x^6/6 + \cdots}{x^2}
+= 1 - \frac{x^4}{6} + \cdots
+\;\xrightarrow{x \to 0}\; 1.
+\end{equation*}
+</div>
+<div class="para">Setting <span class="process-math">\(g(0) = 1\)</span> extends <span class="process-math">\(g\)</span> continuously to all of <span class="process-math">\(\R\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-surface-of-revolution-4-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#ex-surface-of-revolution-4-1-1" title="Copy heading and permalink for Item 1" aria-label="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="ex-surface-of-revolution-4-1-2">
+<div class="para logical" id="ex-surface-of-revolution-4-1-2-1">
+<div class="para">
+<em class="emphasis">Describing the surface of revolution.</em> Rotating the graph of <span class="process-math">\(g\)</span> around the <span class="process-math">\(z\)</span>-axis replaces the distance <span class="process-math">\(|x|\)</span> from the axis by the radial distance <span class="process-math">\(r = \sqrt{x^2 + y^2}\text{.}\)</span> The resulting surface is the graph of</div>
+<div class="displaymath process-math" id="ex-surface-of-revolution-4-1-2-1-6">
+\begin{equation*}
+f(x,y) = \frac{\sin(x^2 + y^2)}{x^2 + y^2},
+\qquad (x,y) \ne (0,0),
+\end{equation*}
+</div>
+<div class="para">extended by <span class="process-math">\(f(0,0) = 1\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-surface-of-revolution-4-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#ex-surface-of-revolution-4-1-2" title="Copy heading and permalink for Item 2" aria-label="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-surface-of-revolution-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="figure figure-like" id="fig-surface-of-revolution-sinc"><div class="image-box" style="width: 95%; margin-left: 2.5%; margin-right: 2.5%;"><img src="generated/latex-image/fig-surface-of-revolution-sinc-2.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.15<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Left: the profile <span class="process-math">\(g(x)=\sin(x^2)/x^2\)</span> away from <span class="process-math">\(x=0\text{.}\)</span> Right: the surface obtained by rotation, extended by <span class="process-math">\(f(0,0)=1\text{.}\)</span><div class="autopermalink" data-description="Figure 2.1.15"><a href="#fig-surface-of-revolution-sinc" title="Copy heading and permalink for Figure 2.1.15" aria-label="Copy heading and permalink for Figure 2.1.15">🔗</a></div></figcaption></figure><div class="autopermalink" data-description="Example 2.1.14: A Surface of Revolution as the Graph of a Two-Variable Function"><a href="#ex-surface-of-revolution" title="Copy heading and permalink for Example 2.1.14: A Surface of Revolution as the Graph of a Two-Variable Function" aria-label="Copy heading and permalink for Example 2.1.14: A Surface of Revolution as the Graph of a Two-Variable Function">🔗</a></div></article></details><div class="autopermalink" data-description="Subsection 2.1.1: Functions of Several Variables"><a href="#subsec-multivariable-functions" title="Copy heading and permalink for Subsection 2.1.1: Functions of Several Variables" aria-label="Copy heading and permalink for Subsection 2.1.1: Functions of Several Variables">🔗</a></div></section><section class="subsection" id="subsec-continuity-multivariate"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Continuity</span>
+</h3>
+<section class="introduction" id="subsec-continuity-multivariate-2"><div class="para" id="subsec-continuity-multivariate-2-1">Continuity for a function of several variables means that nearby inputs produce nearby outputs — exactly as in one dimension. The key new feature is that a point <span class="process-math">\(\mathbf{x}_0 \in \R^n\)</span> can be approached from infinitely many directions, and the function must return the same limit along every approach path. We make this precise using sequences, because the same sequence definition used for single-variable limits carries over without change.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-continuity-multivariate-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></section><article class="definition definition-like" id="def-sequence-limit-Rn"><h4 class="heading">
+<span class="type">Definition</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.16</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Limit of a Sequence in <span class="process-math">\(\R^n\)</span>.</span>
+</h4>
+<div class="para logical" id="def-sequence-limit-Rn-2-1">
+<div class="para">Let <span class="process-math">\((\mathbf{x}_m)_{m \in \N}\)</span> be a sequence in <span class="process-math">\(\R^n\)</span> and let <span class="process-math">\(\mathbf{x} \in \R^n\text{.}\)</span> We say that <span class="process-math">\((\mathbf{x}_m)\)</span> <dfn class="terminology">converges to</dfn> <span class="process-math">\(\mathbf{x}\text{,}\)</span> written</div>
+<div class="displaymath process-math" id="def-sequence-limit-Rn-2-1-7">
+\begin{equation*}
+\lim_{m \to \infty} \mathbf{x}_m = \mathbf{x},
+\end{equation*}
+</div>
+<div class="para">if for every <span class="process-math">\(\varepsilon &gt; 0\)</span> there exists <span class="process-math">\(m_0\)</span> such that for all <span class="process-math">\(m \ge m_0\text{:}\)</span>
+</div>
+<div class="displaymath process-math" id="def-sequence-limit-Rn-2-1-11">
+\begin{equation*}
+\| \mathbf{x}_m - \mathbf{x} \| \lt \varepsilon.
+\end{equation*}
+</div>
+<div class="para">Geometrically, <span class="process-math">\(\mathbf{x}_m\)</span> eventually lies inside every open ball of radius <span class="process-math">\(\varepsilon\)</span> centred at <span class="process-math">\(\mathbf{x}\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#def-sequence-limit-Rn-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <figure class="figure figure-like" id="fig-sequence-in-r2"><div class="image-box" style="width: 58%; margin-left: 21%; margin-right: 21%;"><img src="generated/latex-image/fig-sequence-in-r2-2.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.17<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Example of a sequence in <span class="process-math">\(\R^2\text{:}\)</span> the points <span class="process-math">\(\mathbf{x}_m=(1/m,1/m^2)\)</span> approach the limit <span class="process-math">\((0,0)\text{.}\)</span><div class="autopermalink" data-description="Figure 2.1.17"><a href="#fig-sequence-in-r2" title="Copy heading and permalink for Figure 2.1.17" aria-label="Copy heading and permalink for Figure 2.1.17">🔗</a></div></figcaption></figure><div class="autopermalink" data-description="Definition 2.1.16: Limit of a Sequence in \R^n"><a href="#def-sequence-limit-Rn" title="Copy heading and permalink for Definition 2.1.16: Limit of a Sequence in \R^n" aria-label="Copy heading and permalink for Definition 2.1.16: Limit of a Sequence in \R^n">🔗</a></div></article><article class="remark remark-like" id="rem-sequence-componentwise"><h4 class="heading">
+<span class="type">Remark</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.18</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Componentwise Convergence.</span>
+</h4>
+<div class="para" id="rem-sequence-componentwise-2">If <span class="process-math">\((\mathbf{x}_m) = (x_{m,1}, \ldots, x_{m,n})\)</span> is a sequence in <span class="process-math">\(\R^n\text{,}\)</span> then it converges to <span class="process-math">\(\mathbf{x}\)</span> if and only if each coordinate sequence converges: <span class="process-math">\(x_{m,i} \to x_i\)</span> for <span class="process-math">\(i = 1, \ldots, n\text{.}\)</span> This reduces questions about sequences in <span class="process-math">\(\R^n\)</span> to <span class="process-math">\(n\)</span> familiar one-dimensional problems.<div class="autopermalink" data-description="Paragraph"><a href="#rem-sequence-componentwise-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Remark 2.1.18: Componentwise Convergence"><a href="#rem-sequence-componentwise" title="Copy heading and permalink for Remark 2.1.18: Componentwise Convergence" aria-label="Copy heading and permalink for Remark 2.1.18: Componentwise Convergence">🔗</a></div></article><details id="ex-sequence-Rn" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.19</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">A Sequence in <span class="process-math">\(\R^3\)</span>.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para logical" id="ex-sequence-Rn-2">
+<div class="para">The sequence</div>
+<div class="displaymath process-math" id="ex-sequence-Rn-2-1">
+\begin{equation*}
+\mathbf{x}_n = \left(\frac{1}{n},\;
+2 - \frac{3n + 4n^2}{6n^3 + \ln n},\;
+e^{-n}\right)
+\end{equation*}
+</div>
+<div class="para">in <span class="process-math">\(\R^3\)</span> satisfies <span class="process-math">\(\lim_{n \to \infty} \mathbf{x}_n = (0, 2, 0)\text{,}\)</span> since each coordinate converges: <span class="process-math">\(1/n \to 0\text{,}\)</span> <span class="process-math">\((3n + 4n^2)/(6n^3 + \ln n) \to 0\text{,}\)</span> and <span class="process-math">\(e^{-n} \to 0\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-sequence-Rn-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 2.1.19: A Sequence in \R^3"><a href="#ex-sequence-Rn" title="Copy heading and permalink for Example 2.1.19: A Sequence in \R^3" aria-label="Copy heading and permalink for Example 2.1.19: A Sequence in \R^3">🔗</a></div></article></details><article class="definition definition-like" id="def-multivariate-limit"><h4 class="heading">
+<span class="type">Definition</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.20</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Limit of a Multivariate Function.</span>
+</h4>
+<div class="para logical" id="def-multivariate-limit-2-1">
+<div class="para">Let <span class="process-math">\(f \colon D_f \to \R\text{,}\)</span> and let <span class="process-math">\(\mathbf{x}_0\)</span> be an accumulation point of <span class="process-math">\(D_f\text{.}\)</span> We say that <span class="process-math">\(f\)</span> has <dfn class="terminology">limit</dfn> <span class="process-math">\(z_0\)</span> at <span class="process-math">\(\mathbf{x}_0\)</span> if for every sequence <span class="process-math">\((\mathbf{x}_m) \subset D_f \setminus \{\mathbf{x}_0\}\)</span> with <span class="process-math">\(\lim_{m \to \infty} \mathbf{x}_m = \mathbf{x}_0\text{:}\)</span>
+</div>
+<div class="displaymath process-math" id="def-multivariate-limit-2-1-10">
+\begin{equation*}
+\lim_{m \to \infty} f(\mathbf{x}_m) = z_0.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#def-multivariate-limit-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para" id="def-multivariate-limit-2-2">For example, for <span class="process-math">\(f(x,y)=x^2+y^2\)</span> and <span class="process-math">\(\mathbf{x}_0=(0,0)\text{,}\)</span> every sequence approaching the origin has image values approaching <span class="process-math">\(0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#def-multivariate-limit-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <figure class="figure figure-like" id="fig-limit-of-multivariate-function"><div class="image-box" style="width: 62%; margin-left: 19%; margin-right: 19%;"><img src="generated/latex-image/fig-limit-of-multivariate-function-2.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.21<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>The function <span class="process-math">\(f(x,y)=x^2+y^2\)</span> has limit <span class="process-math">\(0\)</span> at <span class="process-math">\((0,0)\text{;}\)</span> different approach sequences in the plane still lead to the same function value limit.<div class="autopermalink" data-description="Figure 2.1.21"><a href="#fig-limit-of-multivariate-function" title="Copy heading and permalink for Figure 2.1.21" aria-label="Copy heading and permalink for Figure 2.1.21">🔗</a></div></figcaption></figure><div class="autopermalink" data-description="Definition 2.1.20: Limit of a Multivariate Function"><a href="#def-multivariate-limit" title="Copy heading and permalink for Definition 2.1.20: Limit of a Multivariate Function" aria-label="Copy heading and permalink for Definition 2.1.20: Limit of a Multivariate Function">🔗</a></div></article><article class="definition definition-like" id="def-multivariate-continuity"><h4 class="heading">
+<span class="type">Definition</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.22</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Continuity of a Function of <span class="process-math">\(n\)</span> Variables.</span>
+</h4>
+<div class="para logical" id="def-multivariate-continuity-2-1">
+<ul class="disc" id="def-multivariate-continuity-2-1-1">
+<li id="def-multivariate-continuity-2-1-1-1">
+<div class="para logical" id="def-multivariate-continuity-2-1-1-1-1">
+<div class="para">A function <span class="process-math">\(f \colon D_f \to \R\)</span> is <dfn class="terminology">continuous at <span class="process-math">\(\mathbf{x}_0 \in D_f\)</span></dfn> if for every sequence <span class="process-math">\((\mathbf{x}_m)\)</span> in <span class="process-math">\(D_f\)</span> with <span class="process-math">\(\lim_{m \to \infty} \mathbf{x}_m = \mathbf{x}_0\text{:}\)</span>
+</div>
+<div class="displaymath process-math" id="def-multivariate-continuity-2-1-1-1-1-6">
+\begin{equation*}
+\lim_{m \to \infty} f(\mathbf{x}_m) = f(\mathbf{x}_0).
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#def-multivariate-continuity-2-1-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#def-multivariate-continuity-2-1-1-1" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="def-multivariate-continuity-2-1-1-2">
+<div class="para" id="def-multivariate-continuity-2-1-1-2-1">A function is <dfn class="terminology">continuous</dfn> if it is continuous at every point of its domain.<div class="autopermalink" data-description="Paragraph"><a href="#def-multivariate-continuity-2-1-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#def-multivariate-continuity-2-1-1-2" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="autopermalink" data-description="Paragraph"><a href="#def-multivariate-continuity-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 2.1.22: Continuity of a Function of n Variables"><a href="#def-multivariate-continuity" title="Copy heading and permalink for Definition 2.1.22: Continuity of a Function of n Variables" aria-label="Copy heading and permalink for Definition 2.1.22: Continuity of a Function of n Variables">🔗</a></div></article><div class="para" id="subsec-continuity-multivariate-8">A key feature of multivariate functions is that continuity requires the same limit along every approach path, not only along coordinate axes. The next example shows how to prove discontinuity by finding two sequences approaching the same point with different limits.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-continuity-multivariate-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="remark remark-like" id="rem-path-test-warning"><h4 class="heading">
+<span class="type">Remark</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.23</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">How Path Tests Can and Cannot Be Used.</span>
+</h4>
+<div class="para" id="rem-path-test-warning-2">If two approach paths give different limiting values, the limit does not exist. However, checking only a few paths can never <em class="emphasis">prove</em> that a limit exists, because there are infinitely many possible ways to approach the point. To prove existence, one needs a general argument, for example by using continuity laws, an estimate, or a theorem.<div class="autopermalink" data-description="Paragraph"><a href="#rem-path-test-warning-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Remark 2.1.23: How Path Tests Can and Cannot Be Used"><a href="#rem-path-test-warning" title="Copy heading and permalink for Remark 2.1.23: How Path Tests Can and Cannot Be Used" aria-label="Copy heading and permalink for Remark 2.1.23: How Path Tests Can and Cannot Be Used">🔗</a></div></article><details id="ex-discontinuity-rational" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.24</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Discontinuity via Two Approach Paths.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para logical" id="ex-discontinuity-rational-2">
+<div class="para">Analyse the continuity of</div>
+<div class="displaymath process-math" id="ex-discontinuity-rational-2-1">
+\begin{equation*}
+f(x,y) = \begin{cases}
+\dfrac{-4x^3 y}{(x^2 + y^2)^2} &amp; (x,y) \ne (0,0), \\[4pt]
+0 &amp; (x,y) = (0,0).
+\end{cases}
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-discontinuity-rational-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="ex-discontinuity-rational-3">For <span class="process-math">\((x,y) \ne (0,0)\text{,}\)</span> the function is a ratio of polynomials with a non-vanishing denominator, hence continuous. At the origin we test two approach paths:<div class="autopermalink" data-description="Paragraph"><a href="#ex-discontinuity-rational-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-discontinuity-rational-4">
+<ul class="disc" id="ex-discontinuity-rational-4-1">
+<li id="ex-discontinuity-rational-4-1-1">
+<div class="para logical" id="ex-discontinuity-rational-4-1-1-1">
+<div class="para">Along the <span class="process-math">\(x\)</span>-axis: <span class="process-math">\(\mathbf{p}_n = (1/n, 0) \to (0,0)\text{.}\)</span>
+</div>
+<div class="displaymath process-math" id="ex-discontinuity-rational-4-1-1-1-3">
+\begin{equation*}
+f(\mathbf{p}_n)
+= \frac{-4(1/n)^3 \cdot 0}{((1/n)^2 + 0)^2} = 0
+\;\longrightarrow\; 0.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-discontinuity-rational-4-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#ex-discontinuity-rational-4-1-1" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="ex-discontinuity-rational-4-1-2">
+<div class="para logical" id="ex-discontinuity-rational-4-1-2-1">
+<div class="para">Along the diagonal: <span class="process-math">\(\mathbf{q}_n = (1/n, 1/n) \to (0,0)\text{.}\)</span>
+</div>
+<div class="displaymath process-math" id="ex-discontinuity-rational-4-1-2-1-2">
+\begin{equation*}
+f(\mathbf{q}_n)
+= \frac{-4(1/n)^3 \cdot (1/n)}{\left((1/n)^2 + (1/n)^2\right)^2}
+= \frac{-4/n^4}{4/n^4} = -1
+\;\longrightarrow\; -1.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-discontinuity-rational-4-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#ex-discontinuity-rational-4-1-2" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-discontinuity-rational-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="ex-discontinuity-rational-5">Since the limits along the two paths differ, <span class="process-math">\(\lim_{\mathbf{x} \to (0,0)} f(\mathbf{x})\)</span> does not exist, and <span class="process-math">\(f\)</span> is not continuous at the origin.<div class="autopermalink" data-description="Paragraph"><a href="#ex-discontinuity-rational-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="figure figure-like" id="fig-two-approach-paths"><div class="image-box" style="width: 58%; margin-left: 21%; margin-right: 21%;"><img src="generated/latex-image/fig-two-approach-paths-2.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.25<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>The two sequences <span class="process-math">\(\mathbf{p}_n=(1/n,0)\)</span> and <span class="process-math">\(\mathbf{q}_n=(1/n,1/n)\)</span> both approach the origin, but they produce different function value limits.<div class="autopermalink" data-description="Figure 2.1.25"><a href="#fig-two-approach-paths" title="Copy heading and permalink for Figure 2.1.25" aria-label="Copy heading and permalink for Figure 2.1.25">🔗</a></div></figcaption></figure><div class="autopermalink" data-description="Example 2.1.24: Discontinuity via Two Approach Paths"><a href="#ex-discontinuity-rational" title="Copy heading and permalink for Example 2.1.24: Discontinuity via Two Approach Paths" aria-label="Copy heading and permalink for Example 2.1.24: Discontinuity via Two Approach Paths">🔗</a></div></article></details><div class="para" id="subsec-continuity-multivariate-11">The following theorem shows that we can build many continuous functions of several variables from continuous functions of one variable by using sums, products, quotients, and compositions.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-continuity-multivariate-11" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="theorem theorem-like" id="thm-laws-of-continuity"><h4 class="heading">
+<span class="type">Theorem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.26</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Laws of Continuity.</span>
+</h4>
+<div class="para logical" id="thm-laws-of-continuity-2-1">
+<ul class="disc" id="thm-laws-of-continuity-2-1-1">
+<li id="thm-laws-of-continuity-2-1-1-1">
+<div class="para" id="thm-laws-of-continuity-2-1-1-1-1">
+<em class="emphasis">Constant functions</em> <span class="process-math">\(f(\mathbf{x}) = c\)</span> are continuous on <span class="process-math">\(\R^n\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-laws-of-continuity-2-1-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#thm-laws-of-continuity-2-1-1-1" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="thm-laws-of-continuity-2-1-1-2">
+<div class="para" id="thm-laws-of-continuity-2-1-1-2-1">
+<em class="emphasis">Coordinate functions</em> <span class="process-math">\(f_i(\mathbf{x}) = x_i\)</span> are continuous on <span class="process-math">\(\R^n\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-laws-of-continuity-2-1-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#thm-laws-of-continuity-2-1-1-2" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="thm-laws-of-continuity-2-1-1-3">
+<div class="para" id="thm-laws-of-continuity-2-1-1-3-1">If <span class="process-math">\(f, g \colon D \subset \R^n \to \R\)</span> are continuous on <span class="process-math">\(D\text{,}\)</span> then so are <span class="process-math">\(f + g\text{,}\)</span> <span class="process-math">\(f - g\text{,}\)</span> and <span class="process-math">\(f \cdot g\text{;}\)</span> and <span class="process-math">\(f/g\)</span> is continuous on <span class="process-math">\(\{\mathbf{x} \in D \mid g(\mathbf{x}) \ne 0\}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-laws-of-continuity-2-1-1-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#thm-laws-of-continuity-2-1-1-3" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="thm-laws-of-continuity-2-1-1-4">
+<div class="para" id="thm-laws-of-continuity-2-1-1-4-1">
+<em class="emphasis">Compositions:</em> if <span class="process-math">\(f \colon D_f \subset \R^n \to \R\)</span> and <span class="process-math">\(g \colon D_g \subset \R \to \R\)</span> are continuous with <span class="process-math">\(f(D_f) \subset D_g\text{,}\)</span> then <span class="process-math">\(g \circ f\)</span> is continuous on <span class="process-math">\(D_f\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-laws-of-continuity-2-1-1-4-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#thm-laws-of-continuity-2-1-1-4" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-laws-of-continuity-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Theorem 2.1.26: Laws of Continuity"><a href="#thm-laws-of-continuity" title="Copy heading and permalink for Theorem 2.1.26: Laws of Continuity" aria-label="Copy heading and permalink for Theorem 2.1.26: Laws of Continuity">🔗</a></div></article><details id="thm-laws-of-continuity-3" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h4 class="heading"><span class="type">Proof<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h4></summary><article class="hiddenproof knowl__content"><div class="para" id="thm-laws-of-continuity-3-1">We use the sequence criterion. Constant and coordinate functions preserve limits of convergent sequences immediately. If <span class="process-math">\(\mathbf{x}_m \to \mathbf{x}_0\)</span> in <span class="process-math">\(D\)</span> and <span class="process-math">\(f(\mathbf{x}_m) \to f(\mathbf{x}_0)\text{,}\)</span> <span class="process-math">\(g(\mathbf{x}_m) \to g(\mathbf{x}_0)\text{,}\)</span> then the usual one-variable limit laws imply <span class="process-math">\((f \pm g)(\mathbf{x}_m) \to (f \pm g)(\mathbf{x}_0)\text{,}\)</span> <span class="process-math">\((fg)(\mathbf{x}_m) \to (fg)(\mathbf{x}_0)\text{,}\)</span> and, provided <span class="process-math">\(g(\mathbf{x}_0) \ne 0\text{,}\)</span> also <span class="process-math">\((f/g)(\mathbf{x}_m) \to (f/g)(\mathbf{x}_0)\text{.}\)</span> For compositions, <span class="process-math">\(\mathbf{x}_m \to \mathbf{x}_0\)</span> implies <span class="process-math">\(f(\mathbf{x}_m) \to f(\mathbf{x}_0)\text{,}\)</span> and continuity of <span class="process-math">\(g\)</span> then gives <span class="process-math">\(g(f(\mathbf{x}_m)) \to g(f(\mathbf{x}_0))\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-laws-of-continuity-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Proof 2.1.26.1"><a href="#thm-laws-of-continuity-3" title="Copy heading and permalink for Proof 2.1.26.1" aria-label="Copy heading and permalink for Proof 2.1.26.1">🔗</a></div></article></details><details id="ex-continuity-product" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.27</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Proving Continuity via the Combination Laws.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para" id="ex-continuity-product-2">Show that <span class="process-math">\(f \colon \R^2 \to \R\text{,}\)</span> <span class="process-math">\(f(x_1, x_2) = x_1 \cdot \sin(x_2)\text{,}\)</span> is continuous.<div class="autopermalink" data-description="Paragraph"><a href="#ex-continuity-product-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="ex-continuity-product-3">Define auxiliary functions <span class="process-math">\(f_1(x_1, x_2) = x_1\)</span> (coordinate function), <span class="process-math">\(f_2(x_1, x_2) = x_2\)</span> (coordinate function), and <span class="process-math">\(f_3(x) = \sin(x)\)</span> (a continuous real function). Then <span class="process-math">\(f = f_1 \cdot (f_3 \circ f_2)\text{.}\)</span> By <a href="section-functions-continuity-partial-derivatives.html#thm-laws-of-continuity" class="xref" data-knowl="./knowl/xref/thm-laws-of-continuity.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 2.1.26: Laws of Continuity">Theorem 2.1.26</a>, the composition <span class="process-math">\(f_3 \circ f_2\)</span> is continuous, and the product of two continuous functions is continuous, so <span class="process-math">\(f\)</span> is continuous on <span class="process-math">\(\R^2\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-continuity-product-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 2.1.27: Proving Continuity via the Combination Laws"><a href="#ex-continuity-product" title="Copy heading and permalink for Example 2.1.27: Proving Continuity via the Combination Laws" aria-label="Copy heading and permalink for Example 2.1.27: Proving Continuity via the Combination Laws">🔗</a></div></article></details><div class="autopermalink" data-description="Subsection 2.1.2: Continuity"><a href="#subsec-continuity-multivariate" title="Copy heading and permalink for Subsection 2.1.2: Continuity" aria-label="Copy heading and permalink for Subsection 2.1.2: Continuity">🔗</a></div></section><section class="subsection" id="subsec-partial-derivatives"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.3</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Partial Derivatives, Gradient, and Differentiability</span>
+</h3>
+<section class="introduction" id="subsec-partial-derivatives-2"><div class="para" id="subsec-partial-derivatives-2-1">For a function of a single variable, the derivative measures the rate of change in the only available direction. For a function of several variables we can still measure rates of change, but now we must specify a direction. The simplest choice is to vary one variable while holding all others fixed: this gives the <em class="emphasis">partial derivative</em>. Collecting all partial derivatives into a single vector yields the <em class="emphasis">gradient</em>, which encodes both the magnitude and direction of steepest increase. When the function can be approximated near a point by a linear function involving the gradient, we call it <em class="emphasis">(totally) differentiable</em> at that point.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-partial-derivatives-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></section><article class="remark remark-like" id="rem-partial-derivative-idea"><h4 class="heading">
+<span class="type">Remark</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.28</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Idea of Partial Differentiation.</span>
+</h4>
+<div class="para logical" id="rem-partial-derivative-idea-2">
+<div class="para">For a single-variable function <span class="process-math">\(z = f(x)\text{,}\)</span> the derivative at <span class="process-math">\(x_0\)</span> is the limit of slopes of secant lines:</div>
+<div class="displaymath process-math" id="rem-partial-derivative-idea-2-3">
+\begin{equation*}
+f'(x_0) = \lim_{h \to 0} \frac{f(x_0 + h) - f(x_0)}{h}.
+\end{equation*}
+</div>
+<div class="para">This generalises to a function <span class="process-math">\(f(x,y)\)</span> of two variables as follows: fix <span class="process-math">\(y = y_0\text{,}\)</span> consider the curve of intersection <span class="process-math">\(z = f(x, y_0)\)</span> in the <span class="process-math">\(xz\)</span>-plane, and compute its slope:</div>
+<div class="displaymath process-math" id="rem-partial-derivative-idea-2-8">
+\begin{equation*}
+\frac{\partial f}{\partial x}(x_0, y_0)
+= \lim_{h \to 0} \frac{f(x_0 + h, y_0) - f(x_0, y_0)}{h}.
+\end{equation*}
+</div>
+<div class="para">This is the <em class="emphasis">partial derivative of <span class="process-math">\(f\)</span> with respect to <span class="process-math">\(x\)</span></em> at <span class="process-math">\((x_0, y_0)\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#rem-partial-derivative-idea-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="figure figure-like" id="fig-partial-derivative-idea"><div class="image-box" style="width: 84%; margin-left: 8%; margin-right: 8%;">
+<img src="generated/latex-image/fig-partial-derivative-idea-2.svg" role="img" class="contained" alt="described in detail following the image" aria-describedby="fig-partial-derivative-idea-2-description"><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="fig-partial-derivative-idea-2-description">Annotated PGF diagram showing the surface <span class="process-math">\(z=f(x,y)\text{,}\)</span> the intersection curve for fixed <span class="process-math">\(y=y_0\text{,}\)</span> the secant slope, and its limiting tangent slope representing <span class="process-math">\(\partial f/\partial x(x_0,y_0)\text{.}\)</span>
+</div></details>
+</div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.29<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>To compute <span class="process-math">\(\partial f/\partial x\)</span> at <span class="process-math">\((x_0,y_0)\text{,}\)</span> we fix <span class="process-math">\(y=y_0\text{,}\)</span> intersect the surface with the vertical plane <span class="process-math">\(y=y_0\text{,}\)</span> and then take the slope of the tangent line to the resulting curve.<div class="autopermalink" data-description="Figure 2.1.29"><a href="#fig-partial-derivative-idea" title="Copy heading and permalink for Figure 2.1.29" aria-label="Copy heading and permalink for Figure 2.1.29">🔗</a></div></figcaption></figure><div class="autopermalink" data-description="Remark 2.1.28: Idea of Partial Differentiation"><a href="#rem-partial-derivative-idea" title="Copy heading and permalink for Remark 2.1.28: Idea of Partial Differentiation" aria-label="Copy heading and permalink for Remark 2.1.28: Idea of Partial Differentiation">🔗</a></div></article><details id="ex-partial-derivative-limit" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.30</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Computing a Partial Derivative from the Definition.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para" id="ex-partial-derivative-limit-2">Let <span class="process-math">\(f(x,y) = x^2 y + 2y\text{.}\)</span> Fix <span class="process-math">\((x_0, y_0)\)</span> and compute <span class="process-math">\(\dfrac{\partial f}{\partial x}\big|_{(x_0,y_0)}\)</span> directly from the limit definition.<div class="autopermalink" data-description="Paragraph"><a href="#ex-partial-derivative-limit-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-partial-derivative-limit-3">
+<div class="para">The slope of the secant through <span class="process-math">\(f(x_0, y_0)\)</span> and <span class="process-math">\(f(x_0 + h, y_0)\)</span> is</div>
+<div class="displaymath process-math" id="ex-partial-derivative-limit-3-3">
+\begin{align*}
+\frac{f(x_0+h, y_0) - f(x_0, y_0)}{h}
+&amp;= \frac{(x_0+h)^2 y_0 + 2y_0 - x_0^2 y_0 - 2y_0}{h}\\
+&amp;= \frac{(x_0^2 + 2hx_0 + h^2)y_0 - x_0^2 y_0}{h}
+= 2x_0 y_0 + h y_0.
+\end{align*}
+</div>
+<div class="para">As <span class="process-math">\(h \to 0\text{,}\)</span> this converges to <span class="process-math">\(2x_0 y_0\text{.}\)</span> Thus</div>
+<div class="displaymath process-math" id="ex-partial-derivative-limit-3-6">
+\begin{equation*}
+\frac{\partial f}{\partial x}\bigg|_{(x_0, y_0)} = 2x_0 y_0.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-partial-derivative-limit-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 2.1.30: Computing a Partial Derivative from the Definition"><a href="#ex-partial-derivative-limit" title="Copy heading and permalink for Example 2.1.30: Computing a Partial Derivative from the Definition" aria-label="Copy heading and permalink for Example 2.1.30: Computing a Partial Derivative from the Definition">🔗</a></div></article></details><article class="definition definition-like" id="def-partial-derivative"><h4 class="heading">
+<span class="type">Definition</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.31</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Partial Derivative; Partially Differentiable Function.</span>
+</h4>
+<div class="para" id="def-partial-derivative-2-1">Let <span class="process-math">\(f \colon U \to \R\)</span> be defined on an open set <span class="process-math">\(U \subset \R^n\text{,}\)</span> let <span class="process-math">\(\mathbf{x}_0 \in U\text{,}\)</span> and let <span class="process-math">\(\mathbf{e}_i = (0, \ldots, 0, 1, 0, \ldots, 0)^\top\)</span> be the <span class="process-math">\(i\)</span>-th standard unit vector of <span class="process-math">\(\R^n\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#def-partial-derivative-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para logical" id="def-partial-derivative-2-2">
+<ul class="disc" id="def-partial-derivative-2-2-1">
+<li id="def-partial-derivative-2-2-1-1">
+<div class="para logical" id="def-partial-derivative-2-2-1-1-1">
+<div class="para">The <dfn class="terminology">partial derivative of <span class="process-math">\(f\)</span> with respect to <span class="process-math">\(x_i\)</span></dfn> at <span class="process-math">\(\mathbf{x}_0\)</span> is</div>
+<div class="displaymath process-math" id="def-partial-derivative-2-2-1-1-1-3">
+\begin{equation*}
+\frac{\partial f}{\partial x_i}(\mathbf{x}_0)
+= \lim_{h \to 0}
+\frac{f(\mathbf{x}_0 + h \mathbf{e}_i) - f(\mathbf{x}_0)}{h}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#def-partial-derivative-2-2-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#def-partial-derivative-2-2-1-1" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="def-partial-derivative-2-2-1-2">
+<div class="para" id="def-partial-derivative-2-2-1-2-1">To <em class="emphasis">compute</em> <span class="process-math">\(\dfrac{\partial f}{\partial x_i}\text{,}\)</span> treat all variables except <span class="process-math">\(x_i\)</span> as constants and differentiate the resulting single-variable function with respect to <span class="process-math">\(x_i\text{.}\)</span> All standard differentiation rules (product rule, chain rule, etc.) apply.<div class="autopermalink" data-description="Paragraph"><a href="#def-partial-derivative-2-2-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#def-partial-derivative-2-2-1-2" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="def-partial-derivative-2-2-1-3">
+<div class="para" id="def-partial-derivative-2-2-1-3-1">We call <span class="process-math">\(f\)</span> <dfn class="terminology">partially differentiable</dfn> on <span class="process-math">\(D \subseteq \R^n\)</span> if all partial derivatives exist at every point of <span class="process-math">\(D\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#def-partial-derivative-2-2-1-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#def-partial-derivative-2-2-1-3" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="autopermalink" data-description="Paragraph"><a href="#def-partial-derivative-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 2.1.31: Partial Derivative; Partially Differentiable Function"><a href="#def-partial-derivative" title="Copy heading and permalink for Definition 2.1.31: Partial Derivative; Partially Differentiable Function" aria-label="Copy heading and permalink for Definition 2.1.31: Partial Derivative; Partially Differentiable Function">🔗</a></div></article><details id="ex-partial-derivatives-exponential" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.32</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Partial Derivatives of a Mixed Exponential.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para" id="ex-partial-derivatives-exponential-2">Compute the partial derivatives of <span class="process-math">\(g(x,y) = x e^{x + y^2} + 2xy^4\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-partial-derivatives-exponential-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-partial-derivatives-exponential-3">
+<div class="displaymath process-math" id="ex-partial-derivatives-exponential-3-1">
+\begin{align*}
+\frac{\partial g}{\partial x}
+&amp;= e^{x+y^2} + x e^{x+y^2} + 2y^4
+= (x+1)e^{x+y^2} + 2y^4,\\
+\frac{\partial g}{\partial y}
+&amp;= 2xy e^{x+y^2} + 8xy^3.
+\end{align*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-partial-derivatives-exponential-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 2.1.32: Partial Derivatives of a Mixed Exponential"><a href="#ex-partial-derivatives-exponential" title="Copy heading and permalink for Example 2.1.32: Partial Derivatives of a Mixed Exponential" aria-label="Copy heading and permalink for Example 2.1.32: Partial Derivatives of a Mixed Exponential">🔗</a></div></article></details><article class="definition definition-like" id="def-gradient"><h4 class="heading">
+<span class="type">Definition</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.33</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Gradient.</span>
+</h4>
+<div class="para logical" id="def-gradient-2-1">
+<div class="para">For a partially differentiable function <span class="process-math">\(f \colon U \to \R\text{,}\)</span> where <span class="process-math">\(U \subset \R^n\text{,}\)</span> the <dfn class="terminology">gradient of <span class="process-math">\(f\)</span></dfn> at <span class="process-math">\(\mathbf{x}\)</span> is the column vector of all partial derivatives:</div>
+<div class="displaymath process-math" id="def-gradient-2-1-5">
+\begin{equation*}
+\nabla f(\mathbf{x})
+= \begin{pmatrix}
+\dfrac{\partial f}{\partial x_1}(\mathbf{x}) \\[4pt]
+\vdots \\[2pt]
+\dfrac{\partial f}{\partial x_n}(\mathbf{x})
+\end{pmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#def-gradient-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 2.1.33: Gradient"><a href="#def-gradient" title="Copy heading and permalink for Definition 2.1.33: Gradient" aria-label="Copy heading and permalink for Definition 2.1.33: Gradient">🔗</a></div></article><details id="ex-gradient-paraboloid" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.34</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Gradient of the Normal Paraboloid.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para" id="ex-gradient-paraboloid-2">Let <span class="process-math">\(f(x,y) = x^2 + y^2\text{.}\)</span> We compute the gradient and then interpret geometrically how it is related to the graph and the level curves of <span class="process-math">\(f\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-gradient-paraboloid-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-gradient-paraboloid-3">
+<div class="displaymath process-math" id="ex-gradient-paraboloid-3-1">
+\begin{equation*}
+\nabla f(x,y)
+= \begin{pmatrix} \partial f/\partial x \\ \partial f/\partial y \end{pmatrix}
+= \begin{pmatrix} 2x \\ 2y \end{pmatrix}.
+\end{equation*}
+</div>
+<div class="para">At every point <span class="process-math">\((x,y)\text{,}\)</span> the gradient points radially outwards from the origin — in the direction of steepest ascent on the paraboloid.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-gradient-paraboloid-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="figure figure-like" id="fig-gradient-paraboloid"><div class="image-box" style="width: 84%; margin-left: 8%; margin-right: 8%;"><img src="generated/latex-image/fig-gradient-paraboloid-2.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.35<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>For the paraboloid <span class="process-math">\(f(x,y)=x^2+y^2\text{,}\)</span> the gradient points radially outwards on the contour plot and corresponds to the direction of steepest ascent on the surface.<div class="autopermalink" data-description="Figure 2.1.35"><a href="#fig-gradient-paraboloid" title="Copy heading and permalink for Figure 2.1.35" aria-label="Copy heading and permalink for Figure 2.1.35">🔗</a></div></figcaption></figure><div class="autopermalink" data-description="Example 2.1.34: Gradient of the Normal Paraboloid"><a href="#ex-gradient-paraboloid" title="Copy heading and permalink for Example 2.1.34: Gradient of the Normal Paraboloid" aria-label="Copy heading and permalink for Example 2.1.34: Gradient of the Normal Paraboloid">🔗</a></div></article></details><article class="remark remark-like" id="rem-tangent-plane"><h4 class="heading">
+<span class="type">Remark</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.36</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Local Linear Approximation and the Tangent Plane.</span>
+</h4>
+<div class="para logical" id="rem-tangent-plane-2">
+<div class="para">For a single-variable function <span class="process-math">\(f \colon \R \to \R\text{,}\)</span> the tangent line at <span class="process-math">\(x_0\)</span> gives the best linear approximation:</div>
+<div class="displaymath process-math" id="rem-tangent-plane-2-3">
+\begin{equation*}
+t_{x_0}(x) = f(x_0) + f'(x_0)(x - x_0).
+\end{equation*}
+</div>
+<div class="para">For a two-variable function <span class="process-math">\(z = f(x,y)\text{,}\)</span> the tangent line is replaced by the <dfn class="terminology">tangent plane</dfn>. Provided the tangent plane exists at <span class="process-math">\(P_0 = (x_0, y_0, f(x_0,y_0))\text{,}\)</span> its equation is</div>
+<div class="displaymath process-math" id="rem-tangent-plane-2-7">
+\begin{equation*}
+t(x,y) = f(x_0,y_0)
++ \frac{\partial f}{\partial x}(x_0,y_0)(x - x_0)
++ \frac{\partial f}{\partial y}(x_0,y_0)(y - y_0)
+= f(x_0,y_0)
++ \nabla f(x_0,y_0)^{\top}
+\begin{pmatrix} x - x_0 \\ y - y_0 \end{pmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#rem-tangent-plane-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="figure figure-like" id="fig-tangent-plane-local-approximation"><div class="image-box" style="width: 76%; margin-left: 12%; margin-right: 12%;"><img src="generated/latex-image/fig-tangent-plane-local-approximation-2.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.37<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>For a concave surface, the tangent plane is easy to distinguish as the plane that best approximates the graph near <span class="process-math">\(P_0\text{.}\)</span><div class="autopermalink" data-description="Figure 2.1.37"><a href="#fig-tangent-plane-local-approximation" title="Copy heading and permalink for Figure 2.1.37" aria-label="Copy heading and permalink for Figure 2.1.37">🔗</a></div></figcaption></figure><div class="autopermalink" data-description="Remark 2.1.36: Local Linear Approximation and the Tangent Plane"><a href="#rem-tangent-plane" title="Copy heading and permalink for Remark 2.1.36: Local Linear Approximation and the Tangent Plane" aria-label="Copy heading and permalink for Remark 2.1.36: Local Linear Approximation and the Tangent Plane">🔗</a></div></article><article class="remark remark-like" id="rem-no-tangent-plane"><h4 class="heading">
+<span class="type">Remark</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.38</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Partial Derivatives Can Exist Without a Tangent Plane.</span>
+</h4>
+<div class="para logical" id="rem-no-tangent-plane-2">
+<div class="para">Existence of all partial derivatives at a point does not guarantee a tangent plane. Consider <span class="process-math">\(f(x,y) = 1 - \min(|x|, |y|)\text{.}\)</span> In the <span class="process-math">\(xz\)</span>-plane (<span class="process-math">\(y = 0\)</span>): <span class="process-math">\(f(x, 0) = 1 - \min(|x|, 0) = 1\text{,}\)</span> so <span class="process-math">\(\partial f / \partial x(0,0) = 0\text{.}\)</span> Likewise <span class="process-math">\(\partial f / \partial y(0,0) = 0\text{.}\)</span>  Along the diagonal <span class="process-math">\((t,t)\)</span> we have <span class="process-math">\(f(t,t) = 1 - |t|\text{,}\)</span> while the candidate tangent plane from the partial derivatives is the constant plane <span class="process-math">\(z = 1\text{.}\)</span> Hence the remainder is <span class="process-math">\(r(t,t) = -|t|\text{,}\)</span> and</div>
+<div class="displaymath process-math" id="rem-no-tangent-plane-2-11">
+\begin{equation*}
+\frac{r(t,t)}{\|(t,t)\|}
+= \frac{-|t|}{\sqrt{2}\,|t|}
+= -\frac{1}{\sqrt{2}}
+\end{equation*}
+</div>
+<div class="para">for <span class="process-math">\(t \ne 0\text{,}\)</span> which does not tend to <span class="process-math">\(0\text{.}\)</span> So <span class="process-math">\(f\)</span> is not differentiable at <span class="process-math">\((0,0)\text{.}\)</span> Yet the graph near the origin cannot be approximated by a plane, because the function behaves differently in oblique directions. Total differentiability is a strictly stronger requirement.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#rem-no-tangent-plane-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="figure figure-like" id="fig-no-tangent-plane"><div class="image-box" style="width: 84%; margin-left: 8%; margin-right: 8%;"><img src="generated/latex-image/fig-no-tangent-plane-2.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.39<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>The function <span class="process-math">\(f(x,y)=1-\min(|x|,|y|)\)</span> has vanishing partial derivatives at the origin, but the graph still has a ridge there and cannot be approximated by a single tangent plane.<div class="autopermalink" data-description="Figure 2.1.39"><a href="#fig-no-tangent-plane" title="Copy heading and permalink for Figure 2.1.39" aria-label="Copy heading and permalink for Figure 2.1.39">🔗</a></div></figcaption></figure><div class="autopermalink" data-description="Remark 2.1.38: Partial Derivatives Can Exist Without a Tangent Plane"><a href="#rem-no-tangent-plane" title="Copy heading and permalink for Remark 2.1.38: Partial Derivatives Can Exist Without a Tangent Plane" aria-label="Copy heading and permalink for Remark 2.1.38: Partial Derivatives Can Exist Without a Tangent Plane">🔗</a></div></article><article class="definition definition-like" id="def-total-differentiability"><h4 class="heading">
+<span class="type">Definition</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.40</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Differentiable Function.</span>
+</h4>
+<div class="para logical" id="def-total-differentiability-2-1">
+<ul class="disc" id="def-total-differentiability-2-1-1"><li id="def-total-differentiability-2-1-1-1">
+<div class="para logical" id="def-total-differentiability-2-1-1-1-1">
+<div class="para">
+<span class="process-math">\(f\)</span> is called <dfn class="terminology">differentiable</dfn> (or <em class="emphasis">totally differentiable</em>) at <span class="process-math">\(\mathbf{x}_0\)</span> if there exists a vector <span class="process-math">\(\nabla f(\mathbf{x}_0)\)</span> such that</div>
+<div class="displaymath process-math" id="def-total-differentiability-2-1-1-1-1-6">
+\begin{equation*}
+f(\mathbf{x})
+= f(\mathbf{x}_0)
++ \nabla f(\mathbf{x}_0)^{\top}(\mathbf{x} - \mathbf{x}_0)
++ r(\mathbf{x} - \mathbf{x}_0),
+\end{equation*}
+</div>
+<div class="para">where the remainder satisfies</div>
+<div class="displaymath process-math" id="def-total-differentiability-2-1-1-1-1-7">
+\begin{equation*}
+\lim_{\mathbf{x} \to \mathbf{x}_0}
+\frac{r(\mathbf{x} - \mathbf{x}_0)}{\|\mathbf{x} - \mathbf{x}_0\|}
+= 0.
+\end{equation*}
+</div>
+<div class="para">This condition formalises mathematically the geometric idea that <span class="process-math">\(f\)</span> can be approximated near <span class="process-math">\(\mathbf{x}_0\)</span> by its tangent plane, because the remainder is negligible compared with the distance to <span class="process-math">\(\mathbf{x}_0\text{.}\)</span> The linear part is the <dfn class="terminology">tangent plane</dfn> <span class="process-math">\(t(\mathbf{x}) = f(\mathbf{x}_0)
++ \nabla f(\mathbf{x}_0)^{\top}(\mathbf{x} - \mathbf{x}_0)\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#def-total-differentiability-2-1-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#def-total-differentiability-2-1-1-1" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li></ul>
+<div class="autopermalink" data-description="Paragraph"><a href="#def-total-differentiability-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 2.1.40: Differentiable Function"><a href="#def-total-differentiability" title="Copy heading and permalink for Definition 2.1.40: Differentiable Function" aria-label="Copy heading and permalink for Definition 2.1.40: Differentiable Function">🔗</a></div></article><article class="theorem theorem-like" id="thm-c1-implies-differentiable"><h4 class="heading">
+<span class="type">Theorem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.41</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Continuously Partially Differentiable Implies Differentiable.</span>
+</h4>
+<div class="para" id="thm-c1-implies-differentiable-2-1">If <span class="process-math">\(f\)</span> is partially differentiable on an open set <span class="process-math">\(U \subset \R^n\)</span> and all partial derivatives are continuous on <span class="process-math">\(U\text{,}\)</span> then <span class="process-math">\(f\)</span> is differentiable on <span class="process-math">\(U\text{.}\)</span> In other words, every <dfn class="terminology"><span class="process-math">\(C^1\)</span></dfn> function is totally differentiable.<div class="autopermalink" data-description="Paragraph"><a href="#thm-c1-implies-differentiable-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Theorem 2.1.41: Continuously Partially Differentiable Implies Differentiable"><a href="#thm-c1-implies-differentiable" title="Copy heading and permalink for Theorem 2.1.41: Continuously Partially Differentiable Implies Differentiable" aria-label="Copy heading and permalink for Theorem 2.1.41: Continuously Partially Differentiable Implies Differentiable">🔗</a></div></article><details id="ex-tangent-plane-rational" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.42</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Tangent Plane and Gradient of a Rational Function.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para" id="ex-tangent-plane-rational-2">Let <span class="process-math">\(f(x,y) = \dfrac{1}{1 + x^2 + y^2}\text{.}\)</span> In the following, we investigate this function step by step: first its domain and level curves, then its gradient. Finally, we will investigate at which points the plane is parallel to the <span class="process-math">\(xy\)</span>-plane.<div class="autopermalink" data-description="Paragraph"><a href="#ex-tangent-plane-rational-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-tangent-plane-rational-3">
+<ol class="decimal" id="ex-tangent-plane-rational-3-1">
+<li id="ex-tangent-plane-rational-3-1-1">
+<div class="para" id="ex-tangent-plane-rational-3-1-1-1">
+<em class="emphasis">Domain.</em> The denominator <span class="process-math">\(1 + x^2 + y^2 \ge 1 &gt; 0\)</span> for all <span class="process-math">\((x,y) \in \R^2\text{,}\)</span> so <span class="process-math">\(D_f = \R^2\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-tangent-plane-rational-3-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#ex-tangent-plane-rational-3-1-1" title="Copy heading and permalink for Item 1" aria-label="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="ex-tangent-plane-rational-3-1-2">
+<div class="para" id="ex-tangent-plane-rational-3-1-2-1">
+<em class="emphasis">Level curves.</em> The level set <span class="process-math">\(f(x,y) = c\)</span> requires <span class="process-math">\(1 + x^2 + y^2 = 1/c\text{,}\)</span> i.e.\ <span class="process-math">\(x^2 + y^2 = 1/c - 1\text{.}\)</span> For <span class="process-math">\(0 \lt c \lt 1\)</span> these are concentric circles around the origin.<div class="autopermalink" data-description="Paragraph"><a href="#ex-tangent-plane-rational-3-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#ex-tangent-plane-rational-3-1-2" title="Copy heading and permalink for Item 2" aria-label="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li id="ex-tangent-plane-rational-3-1-3">
+<div class="para logical" id="ex-tangent-plane-rational-3-1-3-1">
+<div class="para"><em class="emphasis">Gradient.</em></div>
+<div class="displaymath process-math" id="ex-tangent-plane-rational-3-1-3-1-2">
+\begin{align*}
+\frac{\partial f}{\partial x}
+&amp;= -(1 + x^2 + y^2)^{-2} \cdot 2x
+= -\frac{2x}{(1 + x^2 + y^2)^2},\\
+\frac{\partial f}{\partial y}
+&amp;= -\frac{2y}{(1+x^2+y^2)^2}.
+\end{align*}
+</div>
+<div class="para">Thus</div>
+<div class="displaymath process-math" id="ex-tangent-plane-rational-3-1-3-1-3">
+\begin{equation*}
+\nabla f(x,y)
+= -\frac{2}{(1+x^2+y^2)^2}
+\begin{pmatrix} x \\ y \end{pmatrix}.
+\end{equation*}
+</div>
+<div class="para">The gradient points radially towards the origin.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-tangent-plane-rational-3-1-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#ex-tangent-plane-rational-3-1-3" title="Copy heading and permalink for Item 3" aria-label="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+<li id="ex-tangent-plane-rational-3-1-4">
+<div class="para" id="ex-tangent-plane-rational-3-1-4-1">
+<em class="emphasis">Tangent plane parallel to the <span class="process-math">\(xy\)</span>-plane.</em> The tangent plane is parallel to the <span class="process-math">\(xy\)</span>-plane if and only if <span class="process-math">\(\nabla f(x_0, y_0) = \mathbf{0}\text{.}\)</span> From the formula above this forces <span class="process-math">\((x_0, y_0) = (0,0)\text{,}\)</span> the unique critical point. At this point <span class="process-math">\(f(0,0) = 1\text{,}\)</span> so the tangent plane is <span class="process-math">\(z = 1\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-tangent-plane-rational-3-1-4-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 4"><a href="#ex-tangent-plane-rational-3-1-4" title="Copy heading and permalink for Item 4" aria-label="Copy heading and permalink for Item 4">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-tangent-plane-rational-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 2.1.42: Tangent Plane and Gradient of a Rational Function"><a href="#ex-tangent-plane-rational" title="Copy heading and permalink for Example 2.1.42: Tangent Plane and Gradient of a Rational Function" aria-label="Copy heading and permalink for Example 2.1.42: Tangent Plane and Gradient of a Rational Function">🔗</a></div></article></details><details id="ex-linear-approximation-3d" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.43</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Linear Approximation of a Three-Variable Function.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para" id="ex-linear-approximation-3d-2">We now determine the linear approximation of the function <span class="process-math">\(f(x_1, x_2, x_3) = x_1^2 \sin(x_2 - x_3)\)</span> at the point <span class="process-math">\(\mathbf{x}_0 = (1, 0, 1)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-linear-approximation-3d-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-linear-approximation-3d-3">
+<div class="para">First, <span class="process-math">\(f(1,0,1) = \sin(-1)\text{.}\)</span> Then:</div>
+<div class="displaymath process-math" id="ex-linear-approximation-3d-3-2">
+\begin{equation*}
+\nabla f(x_1,x_2,x_3)
+= \begin{pmatrix}
+2x_1 \sin(x_2 - x_3) \\
+x_1^2 \cos(x_2 - x_3) \\
+-x_1^2 \cos(x_2 - x_3)
+\end{pmatrix},
+\qquad
+\nabla f(1,0,1)
+= \begin{pmatrix}
+2\sin(-1) \\ \cos(-1) \\ -\cos(-1)
+\end{pmatrix}.
+\end{equation*}
+</div>
+<div class="para">The tangent plane (linear approximation) is therefore</div>
+<div class="displaymath process-math" id="ex-linear-approximation-3d-3-3">
+\begin{align*}
+t(x_1,x_2,x_3)
+&amp;= \sin(-1)
++ 2\sin(-1)(x_1-1)
++ \cos(-1)\, x_2
+- \cos(-1)(x_3-1).
+\end{align*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-linear-approximation-3d-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 2.1.43: Linear Approximation of a Three-Variable Function"><a href="#ex-linear-approximation-3d" title="Copy heading and permalink for Example 2.1.43: Linear Approximation of a Three-Variable Function" aria-label="Copy heading and permalink for Example 2.1.43: Linear Approximation of a Three-Variable Function">🔗</a></div></article></details><article class="definition definition-like" id="def-directional-derivative"><h4 class="heading">
+<span class="type">Definition</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.44</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Directional Derivative.</span>
+</h4>
+<div class="para" id="def-directional-derivative-2-1">Let <span class="process-math">\(f\)</span> be differentiable at <span class="process-math">\(\mathbf{x}_0\)</span> and let <span class="process-math">\(\mathbf{r} = (r_1, \ldots, r_n)^\top\)</span> be a unit vector (<span class="process-math">\(\|\mathbf{r}\| = 1\)</span>).<div class="autopermalink" data-description="Paragraph"><a href="#def-directional-derivative-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para logical" id="def-directional-derivative-2-2">
+<ul class="disc" id="def-directional-derivative-2-2-1">
+<li id="def-directional-derivative-2-2-1-1">
+<div class="para logical" id="def-directional-derivative-2-2-1-1-1">
+<div class="para">The <dfn class="terminology">directional derivative of <span class="process-math">\(f\)</span> at <span class="process-math">\(\mathbf{x}_0\)</span> in direction <span class="process-math">\(\mathbf{r}\)</span></dfn> is</div>
+<div class="displaymath process-math" id="def-directional-derivative-2-2-1-1-1-2">
+\begin{equation*}
+\frac{\partial f}{\partial \mathbf{r}}(\mathbf{x}_0)
+= \lim_{h \to 0}
+\frac{f(\mathbf{x}_0 + h\mathbf{r}) - f(\mathbf{x}_0)}{h}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#def-directional-derivative-2-2-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#def-directional-derivative-2-2-1-1" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="def-directional-derivative-2-2-1-2">
+<div class="para logical" id="def-directional-derivative-2-2-1-2-1">
+<div class="para">For a differentiable function, the directional derivative equals the dot product of the gradient with <span class="process-math">\(\mathbf{r}\text{:}\)</span>
+</div>
+<div class="displaymath process-math" id="def-directional-derivative-2-2-1-2-1-2">
+\begin{equation*}
+\frac{\partial f}{\partial \mathbf{r}}(\mathbf{x}_0)
+= \nabla f(\mathbf{x}_0) \cdot \mathbf{r}
+= \frac{\partial f}{\partial x_1}(\mathbf{x}_0) r_1
++ \cdots
++ \frac{\partial f}{\partial x_n}(\mathbf{x}_0) r_n.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#def-directional-derivative-2-2-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#def-directional-derivative-2-2-1-2" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="autopermalink" data-description="Paragraph"><a href="#def-directional-derivative-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="figure figure-like" id="fig-directional-derivative"><div class="image-box" style="width: 58%; margin-left: 21%; margin-right: 21%;">
+<img src="generated/latex-image/fig-directional-derivative-2.svg" role="img" class="contained" alt="described in detail following the image" aria-describedby="fig-directional-derivative-2-description"><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="fig-directional-derivative-2-description">PGF diagram of a surface with a point above the domain, a direction vector <span class="process-math">\(\mathbf{r}\)</span> in the base plane, and the corresponding slope on the surface representing the directional derivative.</div></details>
+</div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.45<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>The directional derivative measures the slope of <span class="process-math">\(f\)</span> along the line through <span class="process-math">\(\mathbf{x}_0\)</span> in the direction <span class="process-math">\(\mathbf{r}\text{.}\)</span><div class="autopermalink" data-description="Figure 2.1.45"><a href="#fig-directional-derivative" title="Copy heading and permalink for Figure 2.1.45" aria-label="Copy heading and permalink for Figure 2.1.45">🔗</a></div></figcaption></figure><div class="autopermalink" data-description="Definition 2.1.44: Directional Derivative"><a href="#def-directional-derivative" title="Copy heading and permalink for Definition 2.1.44: Directional Derivative" aria-label="Copy heading and permalink for Definition 2.1.44: Directional Derivative">🔗</a></div></article><details id="ex-directional-derivative" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.46</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Computing a Directional Derivative.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para" id="ex-directional-derivative-2">Let <span class="process-math">\(f(x,y) = x^2 e^{x+2y}\)</span> and <span class="process-math">\((x_0,y_0) = (1,0)\text{.}\)</span> Find the rate of change of <span class="process-math">\(f\)</span> in the direction <span class="process-math">\(\mathbf{v} = \begin{pmatrix} 1 \\ 2 \end{pmatrix}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-directional-derivative-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-directional-derivative-3">
+<ol class="decimal" id="ex-directional-derivative-3-1">
+<li id="ex-directional-derivative-3-1-1">
+<div class="para" id="ex-directional-derivative-3-1-1-1">
+<em class="emphasis">Normalise:</em> <span class="process-math">\(\|\mathbf{v}\| = \sqrt{5}\text{,}\)</span> so <span class="process-math">\(\mathbf{r} = \tfrac{1}{\sqrt{5}} \begin{pmatrix} 1 \\ 2 \end{pmatrix}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-directional-derivative-3-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#ex-directional-derivative-3-1-1" title="Copy heading and permalink for Item 1" aria-label="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="ex-directional-derivative-3-1-2">
+<div class="para logical" id="ex-directional-derivative-3-1-2-1">
+<div class="para"><em class="emphasis">Compute the gradient at <span class="process-math">\((1,0)\text{:}\)</span></em></div>
+<div class="displaymath process-math" id="ex-directional-derivative-3-1-2-1-2">
+\begin{equation*}
+\nabla f(x,y)
+= \begin{pmatrix}
+2x e^{x+2y} + x^2 e^{x+2y} \\
+2x^2 e^{x+2y}
+\end{pmatrix},
+\quad
+\nabla f(1,0)
+= \begin{pmatrix} 3e \\ 2e \end{pmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-directional-derivative-3-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#ex-directional-derivative-3-1-2" title="Copy heading and permalink for Item 2" aria-label="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li id="ex-directional-derivative-3-1-3">
+<div class="para logical" id="ex-directional-derivative-3-1-3-1">
+<div class="para"><em class="emphasis">Directional derivative:</em></div>
+<div class="displaymath process-math" id="ex-directional-derivative-3-1-3-1-2">
+\begin{equation*}
+\frac{\partial f}{\partial \mathbf{r}}(1,0)
+= \nabla f(1,0) \cdot \mathbf{r}
+= \frac{1}{\sqrt{5}}(3e + 4e)
+= \frac{7e}{\sqrt{5}}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-directional-derivative-3-1-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#ex-directional-derivative-3-1-3" title="Copy heading and permalink for Item 3" aria-label="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-directional-derivative-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 2.1.46: Computing a Directional Derivative"><a href="#ex-directional-derivative" title="Copy heading and permalink for Example 2.1.46: Computing a Directional Derivative" aria-label="Copy heading and permalink for Example 2.1.46: Computing a Directional Derivative">🔗</a></div></article></details><article class="remark remark-like" id="rem-gradient-geometry"><h4 class="heading">
+<span class="type">Remark</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.47</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Geometric Meaning of the Gradient.</span>
+</h4>
+<div class="para logical" id="rem-gradient-geometry-2">
+<div class="para">Writing the directional derivative as</div>
+<div class="displaymath process-math" id="rem-gradient-geometry-2-1">
+\begin{equation*}
+\frac{\partial f}{\partial \mathbf{r}}(\mathbf{x}_0)
+= \nabla f(\mathbf{x}_0) \cdot \mathbf{r}
+= \|\nabla f(\mathbf{x}_0)\| \cos\alpha,
+\end{equation*}
+</div>
+<div class="para">where <span class="process-math">\(\alpha\)</span> is the angle between <span class="process-math">\(\nabla f(\mathbf{x}_0)\)</span> and <span class="process-math">\(\mathbf{r}\text{,}\)</span> reveals two important facts:</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#rem-gradient-geometry-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="rem-gradient-geometry-3">
+<ul class="disc" id="rem-gradient-geometry-3-1">
+<li id="rem-gradient-geometry-3-1-1">
+<div class="para" id="rem-gradient-geometry-3-1-1-1">The rate of change is <em class="emphasis">maximised</em> when <span class="process-math">\(\alpha = 0\text{,}\)</span> i.e., when <span class="process-math">\(\mathbf{r}\)</span> is parallel to <span class="process-math">\(\nabla f\text{.}\)</span> Therefore, <em class="emphasis">the gradient points in the direction of steepest ascent</em>.<div class="autopermalink" data-description="Paragraph"><a href="#rem-gradient-geometry-3-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#rem-gradient-geometry-3-1-1" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="rem-gradient-geometry-3-1-2">
+<div class="para" id="rem-gradient-geometry-3-1-2-1">The rate of change is <em class="emphasis">zero</em> when <span class="process-math">\(\alpha = \pi/2\text{.}\)</span> Therefore, <em class="emphasis">level curves are everywhere orthogonal to the gradient</em>.<div class="autopermalink" data-description="Paragraph"><a href="#rem-gradient-geometry-3-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#rem-gradient-geometry-3-1-2" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="autopermalink" data-description="Paragraph"><a href="#rem-gradient-geometry-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="figure figure-like" id="fig-gradient-geometry"><div class="image-box" style="width: 60%; margin-left: 20%; margin-right: 20%;"><img src="generated/latex-image/fig-gradient-geometry-2.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.48<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>The gradient is perpendicular to the level curve through <span class="process-math">\(\mathbf{x}_0\)</span> and points in the direction where the function increases most rapidly.<div class="autopermalink" data-description="Figure 2.1.48"><a href="#fig-gradient-geometry" title="Copy heading and permalink for Figure 2.1.48" aria-label="Copy heading and permalink for Figure 2.1.48">🔗</a></div></figcaption></figure><div class="autopermalink" data-description="Remark 2.1.47: Geometric Meaning of the Gradient"><a href="#rem-gradient-geometry" title="Copy heading and permalink for Remark 2.1.47: Geometric Meaning of the Gradient" aria-label="Copy heading and permalink for Remark 2.1.47: Geometric Meaning of the Gradient">🔗</a></div></article><article class="remark remark-like" id="rem-gradient-descent"><h4 class="heading">
+<span class="type">Remark</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.49</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Application: Gradient Descent in Machine Learning.</span>
+</h4>
+<div class="para logical" id="rem-gradient-descent-2">
+<div class="para">Consider fitting a linear model <span class="process-math">\(g(x) = mx + b\)</span> to data points <span class="process-math">\((x_1, y_1), \ldots, (x_N, y_N)\text{.}\)</span> The mean squared error</div>
+<div class="displaymath process-math" id="rem-gradient-descent-2-3">
+\begin{equation*}
+e(m, b) = \sum_{i=1}^{N} \bigl(y_i - (m x_i + b)\bigr)^2
+\end{equation*}
+</div>
+<div class="para">is a function of two variables <span class="process-math">\(m\)</span> and <span class="process-math">\(b\text{.}\)</span> The <em class="emphasis">gradient descent</em> algorithm iteratively updates <span class="process-math">\((m,b)\)</span> in the direction of <span class="process-math">\(-\nabla e(m,b)\)</span> (steepest descent), reducing the error at each step. This is one of the foundational algorithms in modern machine learning.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#rem-gradient-descent-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="figure figure-like" id="fig-gradient-descent"><div class="image-box" style="width: 64%; margin-left: 18%; margin-right: 18%;"><img src="generated/latex-image/fig-gradient-descent-2.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.50<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Gradient descent follows successive steps in the direction of steepest decrease until it approaches a minimum of the error function.<div class="autopermalink" data-description="Figure 2.1.50"><a href="#fig-gradient-descent" title="Copy heading and permalink for Figure 2.1.50" aria-label="Copy heading and permalink for Figure 2.1.50">🔗</a></div></figcaption></figure><div class="autopermalink" data-description="Remark 2.1.49: Application: Gradient Descent in Machine Learning"><a href="#rem-gradient-descent" title="Copy heading and permalink for Remark 2.1.49: Application: Gradient Descent in Machine Learning" aria-label="Copy heading and permalink for Remark 2.1.49: Application: Gradient Descent in Machine Learning">🔗</a></div></article><div class="autopermalink" data-description="Subsection 2.1.3: Partial Derivatives, Gradient, and Differentiability"><a href="#subsec-partial-derivatives" title="Copy heading and permalink for Subsection 2.1.3: Partial Derivatives, Gradient, and Differentiability" aria-label="Copy heading and permalink for Subsection 2.1.3: Partial Derivatives, Gradient, and Differentiability">🔗</a></div></section><section class="subsection" id="subsec-higher-order-partial-derivatives"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.4</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Higher-Order Partial Derivatives and the Hessian Matrix</span>
+</h3>
+<section class="introduction" id="subsec-higher-order-partial-derivatives-2"><div class="para" id="subsec-higher-order-partial-derivatives-2-1">Just as the derivative of a single-variable function can itself be differentiated to produce the second derivative, the partial derivatives of a multivariate function can be partially differentiated again to produce <em class="emphasis">second-order partial derivatives</em>. There are <span class="process-math">\(n^2\)</span> such derivatives for a function of <span class="process-math">\(n\)</span> variables. A fundamental symmetry result — Schwarz’ theorem — states that the order of differentiation does not matter when the mixed derivatives are continuous. Arranging all second-order partial derivatives into a matrix yields the <em class="emphasis">Hessian matrix</em>, which plays the role of the second derivative in the multivariate setting.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-higher-order-partial-derivatives-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></section><article class="definition definition-like" id="def-higher-order-partial-derivatives"><h4 class="heading">
+<span class="type">Definition</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.51</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Partial Derivatives of Higher Order.</span>
+</h4>
+<div class="para logical" id="def-higher-order-partial-derivatives-2-1">
+<div class="para">Let <span class="process-math">\(f \colon U \to \R\)</span> be partially differentiable on an open set <span class="process-math">\(U \subset \R^n\text{.}\)</span> If the partial derivatives <span class="process-math">\(\dfrac{\partial f}{\partial x_i}(\mathbf{x})\)</span> are themselves partially differentiable, we can form the <dfn class="terminology">second-order partial derivatives</dfn>:</div>
+<div class="displaymath process-math" id="def-higher-order-partial-derivatives-2-1-5">
+\begin{equation*}
+\frac{\partial^2 f}{\partial x_k \, \partial x_i}(\mathbf{x}),
+\qquad i, k = 1, \ldots, n.
+\end{equation*}
+</div>
+<div class="para">Iterating this process gives partial derivatives of any order.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#def-higher-order-partial-derivatives-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 2.1.51: Partial Derivatives of Higher Order"><a href="#def-higher-order-partial-derivatives" title="Copy heading and permalink for Definition 2.1.51: Partial Derivatives of Higher Order" aria-label="Copy heading and permalink for Definition 2.1.51: Partial Derivatives of Higher Order">🔗</a></div></article><details id="ex-higher-order-exponential" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.52</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Second-Order Partial Derivatives.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para" id="ex-higher-order-exponential-2">Compute all second-order partial derivatives of <span class="process-math">\(f(x,y) = x^3 e^{2y}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-higher-order-exponential-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-higher-order-exponential-3">
+<div class="para">First-order partial derivatives:</div>
+<div class="displaymath process-math" id="ex-higher-order-exponential-3-1">
+\begin{equation*}
+\frac{\partial f}{\partial x} = 3x^2 e^{2y},
+\qquad
+\frac{\partial f}{\partial y} = 2x^3 e^{2y}.
+\end{equation*}
+</div>
+<div class="para">Second-order partial derivatives:</div>
+<div class="displaymath process-math" id="ex-higher-order-exponential-3-2">
+\begin{align*}
+\frac{\partial^2 f}{\partial x^2}
+&amp;= \frac{\partial}{\partial x}(3x^2 e^{2y}) = 6x e^{2y},\\
+\frac{\partial^2 f}{\partial y \, \partial x}
+&amp;= \frac{\partial}{\partial y}(3x^2 e^{2y}) = 6x^2 e^{2y},\\
+\frac{\partial^2 f}{\partial x \, \partial y}
+&amp;= \frac{\partial}{\partial x}(2x^3 e^{2y}) = 6x^2 e^{2y},\\
+\frac{\partial^2 f}{\partial y^2}
+&amp;= \frac{\partial}{\partial y}(2x^3 e^{2y}) = 4x^3 e^{2y}.
+\end{align*}
+</div>
+<div class="para">Note that the two mixed partial derivatives are equal: <span class="process-math">\(\partial^2 f / \partial y\,\partial x = \partial^2 f / \partial x\,\partial y\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-higher-order-exponential-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 2.1.52: Second-Order Partial Derivatives"><a href="#ex-higher-order-exponential" title="Copy heading and permalink for Example 2.1.52: Second-Order Partial Derivatives" aria-label="Copy heading and permalink for Example 2.1.52: Second-Order Partial Derivatives">🔗</a></div></article></details><article class="theorem theorem-like" id="thm-schwarz"><h4 class="heading">
+<span class="type">Theorem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.53</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Schwarz’ Theorem (Symmetry of Mixed Partials).</span>
+</h4>
+<div class="para logical" id="thm-schwarz-2-1">
+<div class="para">Let <span class="process-math">\(f \colon U \to \R\)</span> be defined on an open set <span class="process-math">\(U \subset \R^n\text{.}\)</span> Assume that all second-order partial derivatives of <span class="process-math">\(f\)</span> exist and are continuous on <span class="process-math">\(U\text{,}\)</span> and let <span class="process-math">\(\mathbf{x} \in U\text{.}\)</span> Then for all <span class="process-math">\(i, k = 1, \ldots, n\text{:}\)</span>
+</div>
+<div class="displaymath process-math" id="thm-schwarz-2-1-7">
+\begin{equation*}
+\frac{\partial^2 f}{\partial x_k \, \partial x_i}(\mathbf{x})
+= \frac{\partial^2 f}{\partial x_i \, \partial x_k}(\mathbf{x}).
+\end{equation*}
+</div>
+<div class="para">The analogous symmetry holds for partial derivatives of third and higher order.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-schwarz-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Theorem 2.1.53: Schwarz’ Theorem (Symmetry of Mixed Partials)"><a href="#thm-schwarz" title="Copy heading and permalink for Theorem 2.1.53: Schwarz’ Theorem (Symmetry of Mixed Partials)" aria-label="Copy heading and permalink for Theorem 2.1.53: Schwarz’ Theorem (Symmetry of Mixed Partials)">🔗</a></div></article><div class="para" id="subsec-higher-order-partial-derivatives-6">As a consequence, the <span class="process-math">\(n \times n\)</span> matrix of all second-order partial derivatives is <em class="emphasis">symmetric</em> whenever the hypotheses of Schwarz’ theorem are satisfied. This matrix is called the Hessian matrix.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-higher-order-partial-derivatives-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="definition definition-like" id="def-hessian-matrix"><h4 class="heading">
+<span class="type">Definition</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.54</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Hessian Matrix.</span>
+</h4>
+<div class="para logical" id="def-hessian-matrix-2-1">
+<div class="para">Let <span class="process-math">\(f \colon U \to \R\)</span> be defined on an open set <span class="process-math">\(U \subset \R^n\text{,}\)</span> and assume that all second-order partial derivatives of <span class="process-math">\(f\)</span> are continuous on <span class="process-math">\(U\text{.}\)</span> Let <span class="process-math">\(\mathbf{x}_0 \in U\text{.}\)</span> The <dfn class="terminology">Hessian matrix of <span class="process-math">\(f\)</span> at <span class="process-math">\(\mathbf{x}_0\)</span></dfn> is the <span class="process-math">\(n \times n\)</span> matrix of all second-order partial derivatives:</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-schwarz.html" id="def-hessian-matrix-2-1-8">
+\begin{equation*}
+H_f(\mathbf{x}_0)
+= \left( \frac{\partial^2 f}{\partial x_i \, \partial x_j}(\mathbf{x}_0) \right)_{i,j=1}^{n}.
+\end{equation*}
+</div>
+<div class="para">By <a href="section-functions-continuity-partial-derivatives.html#thm-schwarz" class="xref" data-knowl="./knowl/xref/thm-schwarz.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 2.1.53: Schwarz’ Theorem (Symmetry of Mixed Partials)">Theorem 2.1.53</a>, <span class="process-math">\(H_f(\mathbf{x}_0)\)</span> is <em class="emphasis">symmetric</em>.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#def-hessian-matrix-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 2.1.54: Hessian Matrix"><a href="#def-hessian-matrix" title="Copy heading and permalink for Definition 2.1.54: Hessian Matrix" aria-label="Copy heading and permalink for Definition 2.1.54: Hessian Matrix">🔗</a></div></article><details id="ex-hessian-exponential" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.55</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Hessian Matrix of a Two-Variable Function.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para logical" id="ex-hessian-exponential-2">
+<div class="para">For <span class="process-math">\(f(x,y) = x^3 e^{2y}\)</span> (cf.\ <a href="section-functions-continuity-partial-derivatives.html#ex-higher-order-exponential" class="xref" data-knowl="./knowl/xref/ex-higher-order-exponential.html" data-reveal-label="Reveal" data-close-label="Close" title="Example 2.1.52: Second-Order Partial Derivatives">Example 2.1.52</a>):</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/ex-higher-order-exponential.html" id="ex-hessian-exponential-2-3">
+\begin{equation*}
+H_f(x,y)
+= \begin{pmatrix}
+\dfrac{\partial^2 f}{\partial x^2} &amp;
+\dfrac{\partial^2 f}{\partial x \, \partial y} \\[6pt]
+\dfrac{\partial^2 f}{\partial y \, \partial x} &amp;
+\dfrac{\partial^2 f}{\partial y^2}
+\end{pmatrix}
+= \begin{pmatrix}
+6x e^{2y} &amp; 6x^2 e^{2y} \\
+6x^2 e^{2y} &amp; 4x^3 e^{2y}
+\end{pmatrix}.
+\end{equation*}
+</div>
+<div class="para">As predicted by Schwarz’ theorem, this matrix is symmetric.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-hessian-exponential-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 2.1.55: Hessian Matrix of a Two-Variable Function"><a href="#ex-hessian-exponential" title="Copy heading and permalink for Example 2.1.55: Hessian Matrix of a Two-Variable Function" aria-label="Copy heading and permalink for Example 2.1.55: Hessian Matrix of a Two-Variable Function">🔗</a></div></article></details><div class="autopermalink" data-description="Subsection 2.1.4: Higher-Order Partial Derivatives and the Hessian Matrix"><a href="#subsec-higher-order-partial-derivatives" title="Copy heading and permalink for Subsection 2.1.4: Higher-Order Partial Derivatives and the Hessian Matrix" aria-label="Copy heading and permalink for Subsection 2.1.4: Higher-Order Partial Derivatives and the Hessian Matrix">🔗</a></div></section><div class="autopermalink" data-description="Section 2.1: Functions, Continuity, and Partial Derivatives"><a href="#section-functions-continuity-partial-derivatives" title="Copy heading and permalink for Section 2.1: Functions, Continuity, and Partial Derivatives" aria-label="Copy heading and permalink for Section 2.1: Functions, Continuity, and Partial Derivatives">🔗</a></div></section></div>
+<div id="ptx-content-footer" class="ptx-content-footer">
+<a class="previous-button button" href="chapter-multivariate-differential-calculus.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="backmatter.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
+</div></main>
+</div>
+<div id="ptx-page-footer" class="ptx-page-footer">
+<a class="pretext-link" href="https://pretextbook.org" title="PreTeXt"><div class="logo"><svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="338 3000 8772 6866" role="img"><title>PreTeXt logo</title><g style="stroke-width:.025in; stroke:currentColor; fill:none"><polyline points="472,3590 472,9732 " style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,9448 A 4660 4660  0  0  1  8598  9259"></path><path style="stroke-width:174;stroke-linecap:butt;" d="M 4488,9685 A 4228 4228  0  0  0   472  9732"></path><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,3590 A 4241 4241  0  0  1  8598  3496"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,3496  A 4241 4241  0  0  1  4724  3590"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,9259  A 4507 4507  0  0  1  4724  9448"></path><polyline points="5385,4299 4062,8125" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8598,3496 8598,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="850,3496 850,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="4960,9685 4488,9685" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="3070,4582 1889,6141 3070,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="6418,4582 7600,6141 6418,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8976,3590 8976,9732" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><path style="stroke-width:174;stroke-linecap:butt;" d="M 4960,9685 A 4228 4228  0  0  1  8976  9732"></path></g></svg></div></a><a class="runestone-link" href="https://runestone.academy" title="Runestone Academy"><img class="logo" src="https://runestone.academy/runestone/static/images/RAIcon_cropped.png" alt="Runstone Academy logo"></a><a class="mathjax-link" href="https://www.mathjax.org" title="MathJax"><img class="logo" src="https://www.mathjax.org/badge/badge-square-2.png" alt="MathJax logo"></a>
+</div>
+</body>
+</html>

@@ -1594,6 +1594,357 @@ var ptx_lunr_docs = [
   "body": " Classify a Critical Point   The function has a critical point at the origin with Hessian Is the origin a local minimum, a local maximum, or a saddle point?    Use Sylvester's criterion or compute the eigenvalues of the Hessian.    Let We apply Sylvester's criterion. The first leading principal minor is , while   So is not positive definite and not negative definite. In fact, it is positive semidefinite. Therefore the second-derivative test is inconclusive here: from the Hessian alone we cannot decide whether the origin is a local minimum, a local maximum, or a saddle point.   "
 },
 {
+  "id": "section-functions-continuity-partial-derivatives",
+  "level": "1",
+  "url": "section-functions-continuity-partial-derivatives.html",
+  "type": "Section",
+  "number": "2.1",
+  "title": "Functions, Continuity, and Partial Derivatives",
+  "body": " Functions, Continuity, and Partial Derivatives   This section extends the core ideas of single-variable calculus — domains, continuity, and differentiation — to functions that depend on several real variables simultaneously. We begin by defining what such functions are and how to describe their graphs and level sets geometrically. We then introduce the sequence-based definition of continuity in and develop practical tools for proving that built-up functions are continuous. Finally, we study how to differentiate functions of several variables: partial derivatives with respect to individual coordinates, the gradient as the vector of all partial derivatives, total differentiability and the tangent plane, directional derivatives, and the second-order Hessian matrix.    Functions of Several Variables   In mathematics and engineering, many quantities depend simultaneously on several inputs. The temperature at a point in a room is a function of the three position coordinates; the pressure of an ideal gas depends on both its volume and its temperature. This subsection introduces real functions of several variables, discusses how their domains are determined, and explores two ways to visualise them: the graph as a surface in space, and the contour plot via level curves.    Real Function of Several Variables   Let . A map is called a real function of several variables . The set is the domain of definition of .     Two Basic Examples      , . For instance, and .     , . The square root requires a non-negative argument, so the closed ball of radius centred at the origin.       Functions of Several Variables in Engineering and Physics  Multivariable functions appear throughout applied disciplines:      Harmonic oscillation:  , where is the amplitude, the angular frequency, and the phase shift.     Mechanical power:  , where is work and is time.     Ideal gas law:  , expressing pressure as a function of volume and temperature.       Visualisation of Functions of Two Variables  There are two standard ways to visualise a function :     The graph is the surface     A contour plot displays several level curves  for chosen constants . This is analogous to elevation contour lines on a topographic map.     We illustrate both visualisation methods with two concrete examples. For the paraboloid , the graph is a bowl-shaped surface and the level curves are circles. For the saddle function , the graph bends upward in one direction and downward in the other, while the level curves are hyperbolas.   Graph of the function .       Contour plot of ; the level curves are circles centred at the origin.       Graph of the function .       Contour plot of ; positive level curves open along the -direction and negative level curves along the -direction.        The Upper Unit Semi-sphere as a Graph  We investigate the function whose graph is the upper hemisphere of the unit sphere.  The domain must consist of all base points that lie under the hemisphere: For a point , the height satisfies , giving    The upper unit semi-sphere can be written as the graph of over the unit disk.        Surface of Revolution  Rotating the graph of a function around the -axis produces a surface of revolution . In terms of Cartesian coordinates, this surface is the graph of The function value depends only on the radial distance to the -axis, which explains the rotational symmetry.    A First Surface of Revolution  Consider the function , .  Rotating the graph of around the -axis yields the surface This example shows directly how a one-variable function of the radius becomes a function of two variables.   Left: the profile . Right: the corresponding surface of revolution .        A Surface of Revolution as the Graph of a Two-Variable Function  We investigate the function by first showing that its one-variable profile can be extended continuously at the origin and then by rotating this profile around the -axis to obtain a surface of revolution.  Consider , .      Extending continuously to all of . Using the Taylor series with : Setting extends continuously to all of .     Describing the surface of revolution. Rotating the graph of around the -axis replaces the distance from the axis by the radial distance . The resulting surface is the graph of extended by .      Left: the profile away from . Right: the surface obtained by rotation, extended by .         Continuity   Continuity for a function of several variables means that nearby inputs produce nearby outputs — exactly as in one dimension. The key new feature is that a point can be approached from infinitely many directions, and the function must return the same limit along every approach path. We make this precise using sequences, because the same sequence definition used for single-variable limits carries over without change.    Limit of a Sequence in   Let be a sequence in and let . We say that  converges to  , written if for every there exists such that for all : Geometrically, eventually lies inside every open ball of radius centred at .   Example of a sequence in : the points approach the limit .         Componentwise Convergence  If is a sequence in , then it converges to if and only if each coordinate sequence converges: for . This reduces questions about sequences in to familiar one-dimensional problems.    A Sequence in  The sequence in satisfies , since each coordinate converges: , , and .    Limit of a Multivariate Function   Let , and let be an accumulation point of . We say that has limit  at if for every sequence with :   For example, for and , every sequence approaching the origin has image values approaching .   The function has limit at ; different approach sequences in the plane still lead to the same function value limit.         Continuity of a Function of Variables      A function is continuous at if for every sequence in with :     A function is continuous if it is continuous at every point of its domain.       A key feature of multivariate functions is that continuity requires the same limit along every approach path, not only along coordinate axes. The next example shows how to prove discontinuity by finding two sequences approaching the same point with different limits.    How Path Tests Can and Cannot Be Used  If two approach paths give different limiting values, the limit does not exist. However, checking only a few paths can never prove that a limit exists, because there are infinitely many possible ways to approach the point. To prove existence, one needs a general argument, for example by using continuity laws, an estimate, or a theorem.    Discontinuity via Two Approach Paths  Analyse the continuity of   For , the function is a ratio of polynomials with a non-vanishing denominator, hence continuous. At the origin we test two approach paths:     Along the -axis: .     Along the diagonal: .      Since the limits along the two paths differ, does not exist, and is not continuous at the origin.   The two sequences and both approach the origin, but they produce different function value limits.       The following theorem shows that we can build many continuous functions of several variables from continuous functions of one variable by using sums, products, quotients, and compositions.   Laws of Continuity       Constant functions  are continuous on .     Coordinate functions  are continuous on .    If are continuous on , then so are , , and ; and is continuous on .     Compositions: if and are continuous with , then is continuous on .       We use the sequence criterion. Constant and coordinate functions preserve limits of convergent sequences immediately. If in and , , then the usual one-variable limit laws imply , , and, provided , also . For compositions, implies , and continuity of then gives .     Proving Continuity via the Combination Laws  Show that , , is continuous.  Define auxiliary functions (coordinate function), (coordinate function), and (a continuous real function). Then . By , the composition is continuous, and the product of two continuous functions is continuous, so is continuous on .     Partial Derivatives, Gradient, and Differentiability   For a function of a single variable, the derivative measures the rate of change in the only available direction. For a function of several variables we can still measure rates of change, but now we must specify a direction. The simplest choice is to vary one variable while holding all others fixed: this gives the partial derivative . Collecting all partial derivatives into a single vector yields the gradient , which encodes both the magnitude and direction of steepest increase. When the function can be approximated near a point by a linear function involving the gradient, we call it (totally) differentiable at that point.     Idea of Partial Differentiation  For a single-variable function , the derivative at is the limit of slopes of secant lines: This generalises to a function of two variables as follows: fix , consider the curve of intersection in the -plane, and compute its slope: This is the partial derivative of with respect to at .   To compute at , we fix , intersect the surface with the vertical plane , and then take the slope of the tangent line to the resulting curve.    Annotated PGF diagram showing the surface , the intersection curve for fixed , the secant slope, and its limiting tangent slope representing .      Computing a Partial Derivative from the Definition  Let . Fix and compute directly from the limit definition.  The slope of the secant through and is As , this converges to . Thus     Partial Derivative; Partially Differentiable Function   Let be defined on an open set , let , and let be the -th standard unit vector of .     The partial derivative of with respect to at is     To compute  , treat all variables except as constants and differentiate the resulting single-variable function with respect to . All standard differentiation rules (product rule, chain rule, etc.) apply.    We call  partially differentiable on if all partial derivatives exist at every point of .        Partial Derivatives of a Mixed Exponential  Compute the partial derivatives of .        Gradient   For a partially differentiable function , where , the gradient of at is the column vector of all partial derivatives:      Gradient of the Normal Paraboloid  Let . We compute the gradient and then interpret geometrically how it is related to the graph and the level curves of .   At every point , the gradient points radially outwards from the origin — in the direction of steepest ascent on the paraboloid.   For the paraboloid , the gradient points radially outwards on the contour plot and corresponds to the direction of steepest ascent on the surface.         Local Linear Approximation and the Tangent Plane  For a single-variable function , the tangent line at gives the best linear approximation: For a two-variable function , the tangent line is replaced by the tangent plane . Provided the tangent plane exists at , its equation is    For a concave surface, the tangent plane is easy to distinguish as the plane that best approximates the graph near .        Partial Derivatives Can Exist Without a Tangent Plane  Existence of all partial derivatives at a point does not guarantee a tangent plane. Consider . In the -plane ( ): , so . Likewise . Along the diagonal we have , while the candidate tangent plane from the partial derivatives is the constant plane . Hence the remainder is , and for , which does not tend to . So is not differentiable at . Yet the graph near the origin cannot be approximated by a plane, because the function behaves differently in oblique directions. Total differentiability is a strictly stronger requirement.   The function has vanishing partial derivatives at the origin, but the graph still has a ridge there and cannot be approximated by a single tangent plane.        Differentiable Function       is called differentiable (or totally differentiable ) at if there exists a vector such that where the remainder satisfies This condition formalises mathematically the geometric idea that can be approximated near by its tangent plane, because the remainder is negligible compared with the distance to . The linear part is the tangent plane  .        Continuously Partially Differentiable Implies Differentiable   If is partially differentiable on an open set and all partial derivatives are continuous on , then is differentiable on . In other words, every function is totally differentiable.     Tangent Plane and Gradient of a Rational Function  Let . In the following, we investigate this function step by step: first its domain and level curves, then its gradient. Finally, we will investigate at which points the plane is parallel to the -plane.      Domain. The denominator for all , so .     Level curves. The level set requires , i.e.\\ . For these are concentric circles around the origin.     Gradient.  Thus The gradient points radially towards the origin.     Tangent plane parallel to the -plane. The tangent plane is parallel to the -plane if and only if . From the formula above this forces , the unique critical point. At this point , so the tangent plane is .       Linear Approximation of a Three-Variable Function  We now determine the linear approximation of the function at the point .  First, . Then: The tangent plane (linear approximation) is therefore      Directional Derivative   Let be differentiable at and let be a unit vector ( ).     The directional derivative of at in direction is     For a differentiable function, the directional derivative equals the dot product of the gradient with :        The directional derivative measures the slope of along the line through in the direction .    PGF diagram of a surface with a point above the domain, a direction vector in the base plane, and the corresponding slope on the surface representing the directional derivative.      Computing a Directional Derivative  Let and . Find the rate of change of in the direction .      Normalise:  , so .     Compute the gradient at :       Directional derivative:         Geometric Meaning of the Gradient  Writing the directional derivative as where is the angle between and , reveals two important facts:     The rate of change is maximised when , i.e., when is parallel to . Therefore, the gradient points in the direction of steepest ascent .    The rate of change is zero when . Therefore, level curves are everywhere orthogonal to the gradient .      The gradient is perpendicular to the level curve through and points in the direction where the function increases most rapidly.        Application: Gradient Descent in Machine Learning  Consider fitting a linear model to data points . The mean squared error is a function of two variables and . The gradient descent algorithm iteratively updates in the direction of (steepest descent), reducing the error at each step. This is one of the foundational algorithms in modern machine learning.   Gradient descent follows successive steps in the direction of steepest decrease until it approaches a minimum of the error function.         Higher-Order Partial Derivatives and the Hessian Matrix   Just as the derivative of a single-variable function can itself be differentiated to produce the second derivative, the partial derivatives of a multivariate function can be partially differentiated again to produce second-order partial derivatives . There are such derivatives for a function of variables. A fundamental symmetry result — Schwarz' theorem — states that the order of differentiation does not matter when the mixed derivatives are continuous. Arranging all second-order partial derivatives into a matrix yields the Hessian matrix , which plays the role of the second derivative in the multivariate setting.    Partial Derivatives of Higher Order   Let be partially differentiable on an open set . If the partial derivatives are themselves partially differentiable, we can form the second-order partial derivatives : Iterating this process gives partial derivatives of any order.     Second-Order Partial Derivatives  Compute all second-order partial derivatives of .  First-order partial derivatives: Second-order partial derivatives: Note that the two mixed partial derivatives are equal: .    Schwarz' Theorem (Symmetry of Mixed Partials)   Let be defined on an open set . Assume that all second-order partial derivatives of exist and are continuous on , and let . Then for all : The analogous symmetry holds for partial derivatives of third and higher order.    As a consequence, the matrix of all second-order partial derivatives is symmetric whenever the hypotheses of Schwarz' theorem are satisfied. This matrix is called the Hessian matrix.   Hessian Matrix   Let be defined on an open set , and assume that all second-order partial derivatives of are continuous on . Let . The Hessian matrix of at is the matrix of all second-order partial derivatives: By , is symmetric .     Hessian Matrix of a Two-Variable Function  For (cf.\\ ): As predicted by Schwarz' theorem, this matrix is symmetric.    "
+},
+{
+  "id": "def-multivariable-function",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#def-multivariable-function",
+  "type": "Definition",
+  "number": "2.1.1",
+  "title": "Real Function of Several Variables.",
+  "body": " Real Function of Several Variables   Let . A map is called a real function of several variables . The set is the domain of definition of .   "
+},
+{
+  "id": "ex-multivariable-function-basic",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#ex-multivariable-function-basic",
+  "type": "Example",
+  "number": "2.1.2",
+  "title": "Two Basic Examples.",
+  "body": " Two Basic Examples      , . For instance, and .     , . The square root requires a non-negative argument, so the closed ball of radius centred at the origin.     "
+},
+{
+  "id": "ex-multivariable-function-engineering",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#ex-multivariable-function-engineering",
+  "type": "Example",
+  "number": "2.1.3",
+  "title": "Functions of Several Variables in Engineering and Physics.",
+  "body": " Functions of Several Variables in Engineering and Physics  Multivariable functions appear throughout applied disciplines:      Harmonic oscillation:  , where is the amplitude, the angular frequency, and the phase shift.     Mechanical power:  , where is work and is time.     Ideal gas law:  , expressing pressure as a function of volume and temperature.     "
+},
+{
+  "id": "rem-visualization-multivariable",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#rem-visualization-multivariable",
+  "type": "Remark",
+  "number": "2.1.4",
+  "title": "Visualisation of Functions of Two Variables.",
+  "body": " Visualisation of Functions of Two Variables  There are two standard ways to visualise a function :     The graph is the surface     A contour plot displays several level curves  for chosen constants . This is analogous to elevation contour lines on a topographic map.     We illustrate both visualisation methods with two concrete examples. For the paraboloid , the graph is a bowl-shaped surface and the level curves are circles. For the saddle function , the graph bends upward in one direction and downward in the other, while the level curves are hyperbolas.   Graph of the function .       Contour plot of ; the level curves are circles centred at the origin.       Graph of the function .       Contour plot of ; positive level curves open along the -direction and negative level curves along the -direction.      "
+},
+{
+  "id": "ex-semisphere-graph",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#ex-semisphere-graph",
+  "type": "Example",
+  "number": "2.1.9",
+  "title": "The Upper Unit Semi-sphere as a Graph.",
+  "body": " The Upper Unit Semi-sphere as a Graph  We investigate the function whose graph is the upper hemisphere of the unit sphere.  The domain must consist of all base points that lie under the hemisphere: For a point , the height satisfies , giving    The upper unit semi-sphere can be written as the graph of over the unit disk.      "
+},
+{
+  "id": "rem-surface-of-revolution",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#rem-surface-of-revolution",
+  "type": "Remark",
+  "number": "2.1.11",
+  "title": "Surface of Revolution.",
+  "body": " Surface of Revolution  Rotating the graph of a function around the -axis produces a surface of revolution . In terms of Cartesian coordinates, this surface is the graph of The function value depends only on the radial distance to the -axis, which explains the rotational symmetry.  "
+},
+{
+  "id": "ex-surface-of-revolution-simple",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#ex-surface-of-revolution-simple",
+  "type": "Example",
+  "number": "2.1.12",
+  "title": "A First Surface of Revolution.",
+  "body": " A First Surface of Revolution  Consider the function , .  Rotating the graph of around the -axis yields the surface This example shows directly how a one-variable function of the radius becomes a function of two variables.   Left: the profile . Right: the corresponding surface of revolution .      "
+},
+{
+  "id": "ex-surface-of-revolution",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#ex-surface-of-revolution",
+  "type": "Example",
+  "number": "2.1.14",
+  "title": "A Surface of Revolution as the Graph of a Two-Variable Function.",
+  "body": " A Surface of Revolution as the Graph of a Two-Variable Function  We investigate the function by first showing that its one-variable profile can be extended continuously at the origin and then by rotating this profile around the -axis to obtain a surface of revolution.  Consider , .      Extending continuously to all of . Using the Taylor series with : Setting extends continuously to all of .     Describing the surface of revolution. Rotating the graph of around the -axis replaces the distance from the axis by the radial distance . The resulting surface is the graph of extended by .      Left: the profile away from . Right: the surface obtained by rotation, extended by .      "
+},
+{
+  "id": "def-sequence-limit-Rn",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#def-sequence-limit-Rn",
+  "type": "Definition",
+  "number": "2.1.16",
+  "title": "Limit of a Sequence in <span class=\"process-math\">\\(\\R^n\\)<\/span>.",
+  "body": " Limit of a Sequence in   Let be a sequence in and let . We say that  converges to  , written if for every there exists such that for all : Geometrically, eventually lies inside every open ball of radius centred at .   Example of a sequence in : the points approach the limit .       "
+},
+{
+  "id": "rem-sequence-componentwise",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#rem-sequence-componentwise",
+  "type": "Remark",
+  "number": "2.1.18",
+  "title": "Componentwise Convergence.",
+  "body": " Componentwise Convergence  If is a sequence in , then it converges to if and only if each coordinate sequence converges: for . This reduces questions about sequences in to familiar one-dimensional problems.  "
+},
+{
+  "id": "ex-sequence-Rn",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#ex-sequence-Rn",
+  "type": "Example",
+  "number": "2.1.19",
+  "title": "A Sequence in <span class=\"process-math\">\\(\\R^3\\)<\/span>.",
+  "body": " A Sequence in  The sequence in satisfies , since each coordinate converges: , , and .  "
+},
+{
+  "id": "def-multivariate-limit",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#def-multivariate-limit",
+  "type": "Definition",
+  "number": "2.1.20",
+  "title": "Limit of a Multivariate Function.",
+  "body": " Limit of a Multivariate Function   Let , and let be an accumulation point of . We say that has limit  at if for every sequence with :   For example, for and , every sequence approaching the origin has image values approaching .   The function has limit at ; different approach sequences in the plane still lead to the same function value limit.       "
+},
+{
+  "id": "def-multivariate-continuity",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#def-multivariate-continuity",
+  "type": "Definition",
+  "number": "2.1.22",
+  "title": "Continuity of a Function of <span class=\"process-math\">\\(n\\)<\/span> Variables.",
+  "body": " Continuity of a Function of Variables      A function is continuous at if for every sequence in with :     A function is continuous if it is continuous at every point of its domain.      "
+},
+{
+  "id": "rem-path-test-warning",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#rem-path-test-warning",
+  "type": "Remark",
+  "number": "2.1.23",
+  "title": "How Path Tests Can and Cannot Be Used.",
+  "body": " How Path Tests Can and Cannot Be Used  If two approach paths give different limiting values, the limit does not exist. However, checking only a few paths can never prove that a limit exists, because there are infinitely many possible ways to approach the point. To prove existence, one needs a general argument, for example by using continuity laws, an estimate, or a theorem.  "
+},
+{
+  "id": "ex-discontinuity-rational",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#ex-discontinuity-rational",
+  "type": "Example",
+  "number": "2.1.24",
+  "title": "Discontinuity via Two Approach Paths.",
+  "body": " Discontinuity via Two Approach Paths  Analyse the continuity of   For , the function is a ratio of polynomials with a non-vanishing denominator, hence continuous. At the origin we test two approach paths:     Along the -axis: .     Along the diagonal: .      Since the limits along the two paths differ, does not exist, and is not continuous at the origin.   The two sequences and both approach the origin, but they produce different function value limits.      "
+},
+{
+  "id": "thm-laws-of-continuity",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#thm-laws-of-continuity",
+  "type": "Theorem",
+  "number": "2.1.26",
+  "title": "Laws of Continuity.",
+  "body": " Laws of Continuity       Constant functions  are continuous on .     Coordinate functions  are continuous on .    If are continuous on , then so are , , and ; and is continuous on .     Compositions: if and are continuous with , then is continuous on .       We use the sequence criterion. Constant and coordinate functions preserve limits of convergent sequences immediately. If in and , , then the usual one-variable limit laws imply , , and, provided , also . For compositions, implies , and continuity of then gives .   "
+},
+{
+  "id": "ex-continuity-product",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#ex-continuity-product",
+  "type": "Example",
+  "number": "2.1.27",
+  "title": "Proving Continuity via the Combination Laws.",
+  "body": " Proving Continuity via the Combination Laws  Show that , , is continuous.  Define auxiliary functions (coordinate function), (coordinate function), and (a continuous real function). Then . By , the composition is continuous, and the product of two continuous functions is continuous, so is continuous on .  "
+},
+{
+  "id": "rem-partial-derivative-idea",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#rem-partial-derivative-idea",
+  "type": "Remark",
+  "number": "2.1.28",
+  "title": "Idea of Partial Differentiation.",
+  "body": " Idea of Partial Differentiation  For a single-variable function , the derivative at is the limit of slopes of secant lines: This generalises to a function of two variables as follows: fix , consider the curve of intersection in the -plane, and compute its slope: This is the partial derivative of with respect to at .   To compute at , we fix , intersect the surface with the vertical plane , and then take the slope of the tangent line to the resulting curve.    Annotated PGF diagram showing the surface , the intersection curve for fixed , the secant slope, and its limiting tangent slope representing .    "
+},
+{
+  "id": "ex-partial-derivative-limit",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#ex-partial-derivative-limit",
+  "type": "Example",
+  "number": "2.1.30",
+  "title": "Computing a Partial Derivative from the Definition.",
+  "body": " Computing a Partial Derivative from the Definition  Let . Fix and compute directly from the limit definition.  The slope of the secant through and is As , this converges to . Thus   "
+},
+{
+  "id": "def-partial-derivative",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#def-partial-derivative",
+  "type": "Definition",
+  "number": "2.1.31",
+  "title": "Partial Derivative; Partially Differentiable Function.",
+  "body": " Partial Derivative; Partially Differentiable Function   Let be defined on an open set , let , and let be the -th standard unit vector of .     The partial derivative of with respect to at is     To compute  , treat all variables except as constants and differentiate the resulting single-variable function with respect to . All standard differentiation rules (product rule, chain rule, etc.) apply.    We call  partially differentiable on if all partial derivatives exist at every point of .      "
+},
+{
+  "id": "ex-partial-derivatives-exponential",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#ex-partial-derivatives-exponential",
+  "type": "Example",
+  "number": "2.1.32",
+  "title": "Partial Derivatives of a Mixed Exponential.",
+  "body": " Partial Derivatives of a Mixed Exponential  Compute the partial derivatives of .     "
+},
+{
+  "id": "def-gradient",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#def-gradient",
+  "type": "Definition",
+  "number": "2.1.33",
+  "title": "Gradient.",
+  "body": " Gradient   For a partially differentiable function , where , the gradient of at is the column vector of all partial derivatives:    "
+},
+{
+  "id": "ex-gradient-paraboloid",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#ex-gradient-paraboloid",
+  "type": "Example",
+  "number": "2.1.34",
+  "title": "Gradient of the Normal Paraboloid.",
+  "body": " Gradient of the Normal Paraboloid  Let . We compute the gradient and then interpret geometrically how it is related to the graph and the level curves of .   At every point , the gradient points radially outwards from the origin — in the direction of steepest ascent on the paraboloid.   For the paraboloid , the gradient points radially outwards on the contour plot and corresponds to the direction of steepest ascent on the surface.      "
+},
+{
+  "id": "rem-tangent-plane",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#rem-tangent-plane",
+  "type": "Remark",
+  "number": "2.1.36",
+  "title": "Local Linear Approximation and the Tangent Plane.",
+  "body": " Local Linear Approximation and the Tangent Plane  For a single-variable function , the tangent line at gives the best linear approximation: For a two-variable function , the tangent line is replaced by the tangent plane . Provided the tangent plane exists at , its equation is    For a concave surface, the tangent plane is easy to distinguish as the plane that best approximates the graph near .      "
+},
+{
+  "id": "rem-no-tangent-plane",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#rem-no-tangent-plane",
+  "type": "Remark",
+  "number": "2.1.38",
+  "title": "Partial Derivatives Can Exist Without a Tangent Plane.",
+  "body": " Partial Derivatives Can Exist Without a Tangent Plane  Existence of all partial derivatives at a point does not guarantee a tangent plane. Consider . In the -plane ( ): , so . Likewise . Along the diagonal we have , while the candidate tangent plane from the partial derivatives is the constant plane . Hence the remainder is , and for , which does not tend to . So is not differentiable at . Yet the graph near the origin cannot be approximated by a plane, because the function behaves differently in oblique directions. Total differentiability is a strictly stronger requirement.   The function has vanishing partial derivatives at the origin, but the graph still has a ridge there and cannot be approximated by a single tangent plane.      "
+},
+{
+  "id": "def-total-differentiability",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#def-total-differentiability",
+  "type": "Definition",
+  "number": "2.1.40",
+  "title": "Differentiable Function.",
+  "body": " Differentiable Function       is called differentiable (or totally differentiable ) at if there exists a vector such that where the remainder satisfies This condition formalises mathematically the geometric idea that can be approximated near by its tangent plane, because the remainder is negligible compared with the distance to . The linear part is the tangent plane  .      "
+},
+{
+  "id": "thm-c1-implies-differentiable",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#thm-c1-implies-differentiable",
+  "type": "Theorem",
+  "number": "2.1.41",
+  "title": "Continuously Partially Differentiable Implies Differentiable.",
+  "body": " Continuously Partially Differentiable Implies Differentiable   If is partially differentiable on an open set and all partial derivatives are continuous on , then is differentiable on . In other words, every function is totally differentiable.   "
+},
+{
+  "id": "ex-tangent-plane-rational",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#ex-tangent-plane-rational",
+  "type": "Example",
+  "number": "2.1.42",
+  "title": "Tangent Plane and Gradient of a Rational Function.",
+  "body": " Tangent Plane and Gradient of a Rational Function  Let . In the following, we investigate this function step by step: first its domain and level curves, then its gradient. Finally, we will investigate at which points the plane is parallel to the -plane.      Domain. The denominator for all , so .     Level curves. The level set requires , i.e.\\ . For these are concentric circles around the origin.     Gradient.  Thus The gradient points radially towards the origin.     Tangent plane parallel to the -plane. The tangent plane is parallel to the -plane if and only if . From the formula above this forces , the unique critical point. At this point , so the tangent plane is .     "
+},
+{
+  "id": "ex-linear-approximation-3d",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#ex-linear-approximation-3d",
+  "type": "Example",
+  "number": "2.1.43",
+  "title": "Linear Approximation of a Three-Variable Function.",
+  "body": " Linear Approximation of a Three-Variable Function  We now determine the linear approximation of the function at the point .  First, . Then: The tangent plane (linear approximation) is therefore   "
+},
+{
+  "id": "def-directional-derivative",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#def-directional-derivative",
+  "type": "Definition",
+  "number": "2.1.44",
+  "title": "Directional Derivative.",
+  "body": " Directional Derivative   Let be differentiable at and let be a unit vector ( ).     The directional derivative of at in direction is     For a differentiable function, the directional derivative equals the dot product of the gradient with :        The directional derivative measures the slope of along the line through in the direction .    PGF diagram of a surface with a point above the domain, a direction vector in the base plane, and the corresponding slope on the surface representing the directional derivative.    "
+},
+{
+  "id": "ex-directional-derivative",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#ex-directional-derivative",
+  "type": "Example",
+  "number": "2.1.46",
+  "title": "Computing a Directional Derivative.",
+  "body": " Computing a Directional Derivative  Let and . Find the rate of change of in the direction .      Normalise:  , so .     Compute the gradient at :       Directional derivative:       "
+},
+{
+  "id": "rem-gradient-geometry",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#rem-gradient-geometry",
+  "type": "Remark",
+  "number": "2.1.47",
+  "title": "Geometric Meaning of the Gradient.",
+  "body": " Geometric Meaning of the Gradient  Writing the directional derivative as where is the angle between and , reveals two important facts:     The rate of change is maximised when , i.e., when is parallel to . Therefore, the gradient points in the direction of steepest ascent .    The rate of change is zero when . Therefore, level curves are everywhere orthogonal to the gradient .      The gradient is perpendicular to the level curve through and points in the direction where the function increases most rapidly.      "
+},
+{
+  "id": "rem-gradient-descent",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#rem-gradient-descent",
+  "type": "Remark",
+  "number": "2.1.49",
+  "title": "Application: Gradient Descent in Machine Learning.",
+  "body": " Application: Gradient Descent in Machine Learning  Consider fitting a linear model to data points . The mean squared error is a function of two variables and . The gradient descent algorithm iteratively updates in the direction of (steepest descent), reducing the error at each step. This is one of the foundational algorithms in modern machine learning.   Gradient descent follows successive steps in the direction of steepest decrease until it approaches a minimum of the error function.      "
+},
+{
+  "id": "def-higher-order-partial-derivatives",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#def-higher-order-partial-derivatives",
+  "type": "Definition",
+  "number": "2.1.51",
+  "title": "Partial Derivatives of Higher Order.",
+  "body": " Partial Derivatives of Higher Order   Let be partially differentiable on an open set . If the partial derivatives are themselves partially differentiable, we can form the second-order partial derivatives : Iterating this process gives partial derivatives of any order.   "
+},
+{
+  "id": "ex-higher-order-exponential",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#ex-higher-order-exponential",
+  "type": "Example",
+  "number": "2.1.52",
+  "title": "Second-Order Partial Derivatives.",
+  "body": " Second-Order Partial Derivatives  Compute all second-order partial derivatives of .  First-order partial derivatives: Second-order partial derivatives: Note that the two mixed partial derivatives are equal: .  "
+},
+{
+  "id": "thm-schwarz",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#thm-schwarz",
+  "type": "Theorem",
+  "number": "2.1.53",
+  "title": "Schwarz’ Theorem (Symmetry of Mixed Partials).",
+  "body": " Schwarz' Theorem (Symmetry of Mixed Partials)   Let be defined on an open set . Assume that all second-order partial derivatives of exist and are continuous on , and let . Then for all : The analogous symmetry holds for partial derivatives of third and higher order.   "
+},
+{
+  "id": "def-hessian-matrix",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#def-hessian-matrix",
+  "type": "Definition",
+  "number": "2.1.54",
+  "title": "Hessian Matrix.",
+  "body": " Hessian Matrix   Let be defined on an open set , and assume that all second-order partial derivatives of are continuous on . Let . The Hessian matrix of at is the matrix of all second-order partial derivatives: By , is symmetric .   "
+},
+{
+  "id": "ex-hessian-exponential",
+  "level": "2",
+  "url": "section-functions-continuity-partial-derivatives.html#ex-hessian-exponential",
+  "type": "Example",
+  "number": "2.1.55",
+  "title": "Hessian Matrix of a Two-Variable Function.",
+  "body": " Hessian Matrix of a Two-Variable Function  For (cf.\\ ): As predicted by Schwarz' theorem, this matrix is symmetric.  "
+},
+{
   "id": "backmatter-2",
   "level": "1",
   "url": "backmatter-2.html",
