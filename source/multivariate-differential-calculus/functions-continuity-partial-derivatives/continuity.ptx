@@ -1,0 +1,329 @@
+<subsection xml:id="subsec-continuity-multivariate">
+    <title>Continuity</title>
+
+    <introduction>
+        <p>
+            Continuity for a function of several variables means that nearby inputs produce nearby outputs —
+            exactly as in one dimension.
+            The key new feature is that a point <m>\mathbf{x}_0 \in \R^n</m> can be approached from
+            infinitely many directions, and the function must return the same limit along every approach path.
+            We make this precise using sequences, because the same sequence definition used for
+            single-variable limits carries over without change.
+        </p>
+    </introduction>
+
+    <definition xml:id="def-sequence-limit-Rn">
+        <title>Limit of a Sequence in <m>\R^n</m></title>
+        <statement>
+            <p>
+                Let <m>(\mathbf{x}_m)_{m \in \N}</m> be a sequence in <m>\R^n</m>
+                and let <m>\mathbf{x} \in \R^n</m>.
+                We say that <m>(\mathbf{x}_m)</m> <term>converges to</term> <m>\mathbf{x}</m>,
+                written
+                <me>\lim_{m \to \infty} \mathbf{x}_m = \mathbf{x},</me>
+                if for every <m>\varepsilon > 0</m> there exists <m>m_0</m> such that
+                for all <m>m \ge m_0</m>:
+                <me>\| \mathbf{x}_m - \mathbf{x} \| \lt \varepsilon.</me>
+                Geometrically, <m>\mathbf{x}_m</m> eventually lies inside every open ball of radius <m>\varepsilon</m>
+                centred at <m>\mathbf{x}</m>.
+            </p>
+            <figure xml:id="fig-sequence-in-r2">
+                <caption>
+                    Example of a sequence in <m>\R^2</m>: the points <m>\mathbf{x}_m=(1/m,1/m^2)</m> approach the limit <m>(0,0)</m>.
+                </caption>
+                <image width="58%">
+                    <latex-image>
+\begin{tikzpicture}[scale=1.1, >=stealth]
+    \draw[->, gray!70] (-0.2,0) -- (3.1,0) node[right] {$x$};
+    \draw[->, gray!70] (0,-0.2) -- (0,2.4) node[above] {$y$};
+    \foreach \n/\x/\y in {1/2.4/1.9,2/1.2/0.48,3/0.8/0.21,4/0.6/0.12,5/0.48/0.08} {
+        \fill[blue!70!black] (\x,\y) circle (0.06);
+        \node[above right, blue!70!black] at (\x,\y) {\small $\mathbf{x}_{\n}$};
+    }
+    \draw[blue!60, thick, ->] (2.4,1.9) -- (1.2,0.48);
+    \draw[blue!60, thick, ->] (1.2,0.48) -- (0.8,0.21);
+    \draw[blue!60, thick, ->] (0.8,0.21) -- (0.6,0.12);
+    \draw[blue!60, thick, ->] (0.6,0.12) -- (0.48,0.08);
+    \fill[red!70!black] (0,0) circle (0.07);
+    \node[below left, red!70!black] at (0,0) {\small $(0,0)$};
+\end{tikzpicture}
+                    </latex-image>
+                </image>
+            </figure>
+        </statement>
+    </definition>
+
+    <remark xml:id="rem-sequence-componentwise">
+        <title>Componentwise Convergence</title>
+        <p>
+            If <m>(\mathbf{x}_m) = (x_{m,1}, \ldots, x_{m,n})</m> is a sequence in <m>\R^n</m>, then it converges to <m>\mathbf{x}</m>
+            if and only if each coordinate sequence converges:
+            <m>x_{m,i} \to x_i</m> for <m>i = 1, \ldots, n</m>.
+            This reduces questions about sequences in <m>\R^n</m> to <m>n</m> familiar
+            one-dimensional problems.
+        </p>
+    </remark>
+
+    <example xml:id="ex-sequence-Rn">
+        <title>A Sequence in <m>\R^3</m></title>
+        <p>
+            The sequence
+            <me>
+                \mathbf{x}_n = \left(\frac{1}{n},\;
+                2 - \frac{3n + 4n^2}{6n^3 + \ln n},\;
+                e^{-n}\right)
+            </me>
+            in <m>\R^3</m> satisfies
+            <m>\lim_{n \to \infty} \mathbf{x}_n = (0, 2, 0)</m>,
+            since each coordinate converges: <m>1/n \to 0</m>,
+            <m>(3n + 4n^2)/(6n^3 + \ln n) \to 0</m>, and <m>e^{-n} \to 0</m>.
+        </p>
+    </example>
+
+    <definition xml:id="def-multivariate-limit">
+        <title>Limit of a Multivariate Function</title>
+        <statement>
+            <p>
+                Let <m>f \colon D_f \to \R</m>, and let <m>\mathbf{x}_0</m> be an accumulation point of
+                <m>D_f</m>.
+                We say that <m>f</m> has <term>limit</term> <m>z_0</m> at <m>\mathbf{x}_0</m> if for every
+                sequence <m>(\mathbf{x}_m) \subset D_f \setminus \{\mathbf{x}_0\}</m> with
+                <m>\lim_{m \to \infty} \mathbf{x}_m = \mathbf{x}_0</m>:
+                <me>\lim_{m \to \infty} f(\mathbf{x}_m) = z_0.</me>
+            </p>
+            <p>
+                For example, for <m>f(x,y)=x^2+y^2</m> and <m>\mathbf{x}_0=(0,0)</m>, every sequence approaching the origin has image values approaching <m>0</m>.
+            </p>
+            <figure xml:id="fig-limit-of-multivariate-function">
+                <caption>
+                    The function <m>f(x,y)=x^2+y^2</m> has limit <m>0</m> at <m>(0,0)</m>; different approach sequences in the plane still lead to the same function value limit.
+                </caption>
+                <image width="62%">
+                    <latex-image>
+\begin{tikzpicture}[scale=1.05, >=stealth]
+    \draw[->, gray!70] (-2.2,0) -- (2.2,0) node[right] {$x$};
+    \draw[->, gray!70] (0,-2.2) -- (0,2.2) node[above] {$y$};
+    \foreach \r in {0.55,1.1,1.65} {
+        \draw[blue!60!black, thick] (0,0) circle (\r);
+    }
+    \draw[red!70!black, very thick, ->] (1.8,0.9) -- (0.9,0.45);
+    \draw[red!70!black, very thick, ->] (0.9,0.45) -- (0.45,0.225);
+    \fill[red!70!black] (1.8,0.9) circle (0.05);
+    \fill[red!70!black] (0.9,0.45) circle (0.05);
+    \fill[red!70!black] (0.45,0.225) circle (0.05);
+    \node[red!70!black] at (1.6,1.2) {\small $\mathbf{x}_m$};
+    \draw[green!50!black, very thick, ->] (-1.6,1.6) -- (-0.8,0.8);
+    \draw[green!50!black, very thick, ->] (-0.8,0.8) -- (-0.4,0.4);
+    \fill[green!50!black] (-1.6,1.6) circle (0.05);
+    \fill[green!50!black] (-0.8,0.8) circle (0.05);
+    \fill[green!50!black] (-0.4,0.4) circle (0.05);
+    \node[green!50!black] at (-1.45,1.95) {\small $\mathbf{y}_m$};
+    \fill[black] (0,0) circle (0.06);
+    \node[below left] at (0,0) {\small $(0,0)$};
+\end{tikzpicture}
+                    </latex-image>
+                </image>
+            </figure>
+        </statement>
+    </definition>
+
+    <definition xml:id="def-multivariate-continuity">
+        <title>Continuity of a Function of <m>n</m> Variables</title>
+        <statement>
+            <p>
+                <ul>
+                    <li>
+                        <p>
+                            A function <m>f \colon D_f \to \R</m> is
+                            <term>continuous at <m>\mathbf{x}_0 \in D_f</m></term>
+                            if for every sequence <m>(\mathbf{x}_m)</m> in <m>D_f</m> with
+                            <m>\lim_{m \to \infty} \mathbf{x}_m = \mathbf{x}_0</m>:
+                            <me>\lim_{m \to \infty} f(\mathbf{x}_m) = f(\mathbf{x}_0).</me>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            A function is <term>continuous</term> if it is continuous at every point
+                            of its domain.
+                        </p>
+                    </li>
+                </ul>
+            </p>
+        </statement>
+    </definition>
+
+    <p>
+        A key feature of multivariate functions is that continuity requires the same limit along
+        every approach path, not only along coordinate axes.
+        The next example shows how to prove discontinuity by finding two sequences approaching
+        the same point with different limits.
+    </p>
+
+    <!-- ADDED: clarify a common pitfall when checking multivariable limits -->
+    <remark xml:id="rem-path-test-warning">
+        <title>How Path Tests Can and Cannot Be Used</title>
+        <p>
+            If two approach paths give different limiting values, the limit does not exist.
+            However, checking only a few paths can never <em>prove</em> that a limit exists,
+            because there are infinitely many possible ways to approach the point.
+            To prove existence, one needs a general argument, for example by using continuity laws,
+            an estimate, or a theorem.
+        </p>
+    </remark>
+
+    <example xml:id="ex-discontinuity-rational">
+        <title>Discontinuity via Two Approach Paths</title>
+        <p>
+            Analyse the continuity of
+            <me>
+                f(x,y) = \begin{cases}
+                    \dfrac{-4x^3 y}{(x^2 + y^2)^2} &amp; (x,y) \ne (0,0), \\[4pt]
+                    0 &amp; (x,y) = (0,0).
+                \end{cases}
+            </me>
+        </p>
+        <p>
+            For <m>(x,y) \ne (0,0)</m>, the function is a ratio of polynomials with a non-vanishing
+            denominator, hence continuous.
+            At the origin we test two approach paths:
+        </p>
+        <p>
+            <ul>
+                <li>
+                    <p>
+                        Along the <m>x</m>-axis: <m>\mathbf{p}_n = (1/n, 0) \to (0,0)</m>.
+                        <me>
+                            f(\mathbf{p}_n)
+                            = \frac{-4(1/n)^3 \cdot 0}{((1/n)^2 + 0)^2} = 0
+                            \;\longrightarrow\; 0.
+                        </me>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        Along the diagonal: <m>\mathbf{q}_n = (1/n, 1/n) \to (0,0)</m>.
+                        <me>
+                            f(\mathbf{q}_n)
+                            = \frac{-4(1/n)^3 \cdot (1/n)}{\left((1/n)^2 + (1/n)^2\right)^2}
+                            = \frac{-4/n^4}{4/n^4} = -1
+                            \;\longrightarrow\; -1.
+                        </me>
+                    </p>
+                </li>
+            </ul>
+        </p>
+        <p>
+            Since the limits along the two paths differ,
+            <m>\lim_{\mathbf{x} \to (0,0)} f(\mathbf{x})</m> does not exist,
+            and <m>f</m> is not continuous at the origin.
+        </p>
+        <figure xml:id="fig-two-approach-paths">
+            <caption>
+                The two sequences <m>\mathbf{p}_n=(1/n,0)</m> and <m>\mathbf{q}_n=(1/n,1/n)</m> both approach the origin, but they produce different function value limits.
+            </caption>
+            <image width="58%">
+                <latex-image>
+\begin{tikzpicture}[scale=1.15, >=stealth]
+    \draw[->, gray!70] (-0.2,0) -- (3.1,0) node[right] {$x$};
+    \draw[->, gray!70] (0,-0.2) -- (0,3.1) node[above] {$y$};
+    \draw[blue!70!black, very thick, ->] (2.5,0) -- (1.25,0);
+    \draw[blue!70!black, very thick, ->] (1.25,0) -- (0.83,0);
+    \draw[blue!70!black, very thick, ->] (0.83,0) -- (0.63,0);
+    \foreach \x in {2.5,1.25,0.83,0.63} {
+        \fill[blue!70!black] (\x,0) circle (0.05);
+    }
+    \node[blue!70!black] at (2.35,0.28) {\small $\mathbf{p}_n$};
+    \draw[red!70!black, very thick, ->] (2.3,2.3) -- (1.15,1.15);
+    \draw[red!70!black, very thick, ->] (1.15,1.15) -- (0.77,0.77);
+    \draw[red!70!black, very thick, ->] (0.77,0.77) -- (0.58,0.58);
+    \foreach \x in {2.3,1.15,0.77,0.58} {
+        \fill[red!70!black] (\x,\x) circle (0.05);
+    }
+    \node[red!70!black] at (2.55,2.65) {\small $\mathbf{q}_n$};
+    \draw[dashed, gray!60] (0,0) -- (2.7,2.7);
+    \fill[black] (0,0) circle (0.06);
+    \node[below left] at (0,0) {\small $(0,0)$};
+\end{tikzpicture}
+                </latex-image>
+            </image>
+        </figure>
+    </example>
+
+    <p>
+        The following theorem shows that we can build many continuous functions of several variables from continuous functions of one variable by using sums, products, quotients, and compositions.
+    </p>
+
+    <theorem xml:id="thm-laws-of-continuity">
+        <title>Laws of Continuity</title>
+        <statement>
+            <p>
+                <ul>
+                    <li>
+                        <p>
+                            <em>Constant functions</em>
+                            <m>f(\mathbf{x}) = c</m> are continuous on <m>\R^n</m>.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <em>Coordinate functions</em>
+                            <m>f_i(\mathbf{x}) = x_i</m> are continuous on <m>\R^n</m>.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            If <m>f, g \colon D \subset \R^n \to \R</m> are continuous on <m>D</m>,
+                            then so are <m>f + g</m>, <m>f - g</m>, and <m>f \cdot g</m>;
+                            and <m>f/g</m> is continuous on <m>\{\mathbf{x} \in D \mid g(\mathbf{x}) \ne 0\}</m>.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <em>Compositions:</em> if
+                            <m>f \colon D_f \subset \R^n \to \R</m> and
+                            <m>g \colon D_g \subset \R \to \R</m> are continuous
+                            with <m>f(D_f) \subset D_g</m>,
+                            then <m>g \circ f</m> is continuous on <m>D_f</m>.
+                        </p>
+                    </li>
+                </ul>
+            </p>
+        </statement>
+        <proof>
+            <p>
+                We use the sequence criterion.
+                Constant and coordinate functions preserve limits of convergent sequences immediately.
+                If <m>\mathbf{x}_m \to \mathbf{x}_0</m> in <m>D</m> and
+                <m>f(\mathbf{x}_m) \to f(\mathbf{x}_0)</m>, <m>g(\mathbf{x}_m) \to g(\mathbf{x}_0)</m>,
+                then the usual one-variable limit laws imply
+                <m>(f \pm g)(\mathbf{x}_m) \to (f \pm g)(\mathbf{x}_0)</m>,
+                <m>(fg)(\mathbf{x}_m) \to (fg)(\mathbf{x}_0)</m>, and, provided
+                <m>g(\mathbf{x}_0) \ne 0</m>, also
+                <m>(f/g)(\mathbf{x}_m) \to (f/g)(\mathbf{x}_0)</m>.
+                For compositions, <m>\mathbf{x}_m \to \mathbf{x}_0</m> implies
+                <m>f(\mathbf{x}_m) \to f(\mathbf{x}_0)</m>, and continuity of <m>g</m> then gives
+                <m>g(f(\mathbf{x}_m)) \to g(f(\mathbf{x}_0))</m>.
+            </p>
+        </proof>
+    </theorem>
+
+    <example xml:id="ex-continuity-product">
+        <title>Proving Continuity via the Combination Laws</title>
+        <p>
+            Show that <m>f \colon \R^2 \to \R</m>,
+            <m>f(x_1, x_2) = x_1 \cdot \sin(x_2)</m>, is continuous.
+        </p>
+        <p>
+            Define auxiliary functions
+            <m>f_1(x_1, x_2) = x_1</m> (coordinate function),
+            <m>f_2(x_1, x_2) = x_2</m> (coordinate function), and
+            <m>f_3(x) = \sin(x)</m> (a continuous real function).
+            Then <m>f = f_1 \cdot (f_3 \circ f_2)</m>.
+            By <xref ref="thm-laws-of-continuity"/>,
+            the composition <m>f_3 \circ f_2</m> is continuous,
+            and the product of two continuous functions is continuous,
+            so <m>f</m> is continuous on <m>\R^2</m>.
+        </p>
+    </example>
+
+</subsection>

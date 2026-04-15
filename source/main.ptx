@@ -8,6 +8,7 @@
 
     <xi:include href="frontmatter.ptx"/>
     <xi:include href="linear-algebra/chapter.ptx"/>
+    <xi:include href="multivariate-differential-calculus/chapter.ptx"/>
     <xi:include href="backmatter.ptx"/>
   </book>
 </pretext>

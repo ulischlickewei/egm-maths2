@@ -1,0 +1,135 @@
+<subsection xml:id="subsec-higher-order-partial-derivatives">
+    <title>Higher-Order Partial Derivatives and the Hessian Matrix</title>
+
+    <introduction>
+        <p>
+            Just as the derivative of a single-variable function can itself be differentiated
+            to produce the second derivative, the partial derivatives of a multivariate function
+            can be partially differentiated again to produce <em>second-order partial derivatives</em>.
+            There are <m>n^2</m> such derivatives for a function of <m>n</m> variables.
+            A fundamental symmetry result — Schwarz' theorem — states that the order of differentiation
+            does not matter when the mixed derivatives are continuous.
+            Arranging all second-order partial derivatives into a matrix yields the
+            <em>Hessian matrix</em>, which plays the role of the second derivative
+            in the multivariate setting.
+        </p>
+    </introduction>
+
+    <definition xml:id="def-higher-order-partial-derivatives">
+        <title>Partial Derivatives of Higher Order</title>
+        <statement>
+            <p>
+                Let <m>f \colon U \to \R</m> be partially differentiable on an open set
+                <m>U \subset \R^n</m>.
+                If the partial derivatives <m>\dfrac{\partial f}{\partial x_i}(\mathbf{x})</m>
+                are themselves partially differentiable, we can form the
+                <term>second-order partial derivatives</term>:
+                <me>
+                    \frac{\partial^2 f}{\partial x_k \, \partial x_i}(\mathbf{x}),
+                    \qquad i, k = 1, \ldots, n.
+                </me>
+                Iterating this process gives partial derivatives of any order.
+            </p>
+        </statement>
+    </definition>
+
+    <example xml:id="ex-higher-order-exponential">
+        <title>Second-Order Partial Derivatives</title>
+        <p>
+            Compute all second-order partial derivatives of
+            <m>f(x,y) = x^3 e^{2y}</m>.
+        </p>
+        <p>
+            First-order partial derivatives:
+            <me>
+                \frac{\partial f}{\partial x} = 3x^2 e^{2y},
+                \qquad
+                \frac{\partial f}{\partial y} = 2x^3 e^{2y}.
+            </me>
+            Second-order partial derivatives:
+            <md>
+                <mrow>
+                    \frac{\partial^2 f}{\partial x^2}
+                    &amp;= \frac{\partial}{\partial x}(3x^2 e^{2y}) = 6x e^{2y},
+                </mrow>
+                <mrow>
+                    \frac{\partial^2 f}{\partial y \, \partial x}
+                    &amp;= \frac{\partial}{\partial y}(3x^2 e^{2y}) = 6x^2 e^{2y},
+                </mrow>
+                <mrow>
+                    \frac{\partial^2 f}{\partial x \, \partial y}
+                    &amp;= \frac{\partial}{\partial x}(2x^3 e^{2y}) = 6x^2 e^{2y},
+                </mrow>
+                <mrow>
+                    \frac{\partial^2 f}{\partial y^2}
+                    &amp;= \frac{\partial}{\partial y}(2x^3 e^{2y}) = 4x^3 e^{2y}.
+                </mrow>
+            </md>
+            Note that the two mixed partial derivatives are equal:
+            <m>\partial^2 f / \partial y\,\partial x = \partial^2 f / \partial x\,\partial y</m>.
+        </p>
+    </example>
+
+    <theorem xml:id="thm-schwarz">
+        <title>Schwarz' Theorem (Symmetry of Mixed Partials)</title>
+        <statement>
+            <p>
+                Let <m>f \colon U \to \R</m> be defined on an open set <m>U \subset \R^n</m>.
+                Assume that all second-order partial derivatives of <m>f</m> exist and are continuous
+                on <m>U</m>, and let <m>\mathbf{x} \in U</m>.
+                Then for all <m>i, k = 1, \ldots, n</m>:
+                <me>
+                    \frac{\partial^2 f}{\partial x_k \, \partial x_i}(\mathbf{x})
+                    = \frac{\partial^2 f}{\partial x_i \, \partial x_k}(\mathbf{x}).
+                </me>
+                The analogous symmetry holds for partial derivatives of third and higher order.
+            </p>
+        </statement>
+    </theorem>
+
+    <p>
+        As a consequence, the <m>n \times n</m> matrix of all second-order partial derivatives
+        is <em>symmetric</em> whenever the hypotheses of Schwarz' theorem are satisfied.
+        This matrix is called the Hessian matrix.
+    </p>
+
+    <definition xml:id="def-hessian-matrix">
+        <title>Hessian Matrix</title>
+        <statement>
+            <p>
+                Let <m>f \colon U \to \R</m> be defined on an open set <m>U \subset \R^n</m>,
+                and assume that all second-order partial derivatives of <m>f</m> are continuous on <m>U</m>.
+                Let <m>\mathbf{x}_0 \in U</m>.
+                The <term>Hessian matrix of <m>f</m> at <m>\mathbf{x}_0</m></term> is the
+                <m>n \times n</m> matrix of all second-order partial derivatives:
+                <me>
+                    H_f(\mathbf{x}_0)
+                    = \left( \frac{\partial^2 f}{\partial x_i \, \partial x_j}(\mathbf{x}_0) \right)_{i,j=1}^{n}.
+                </me>
+                By <xref ref="thm-schwarz"/>, <m>H_f(\mathbf{x}_0)</m> is <em>symmetric</em>.
+            </p>
+        </statement>
+    </definition>
+
+    <example xml:id="ex-hessian-exponential">
+        <title>Hessian Matrix of a Two-Variable Function</title>
+        <p>
+            For <m>f(x,y) = x^3 e^{2y}</m> (cf.\ <xref ref="ex-higher-order-exponential"/>):
+            <me>
+                H_f(x,y)
+                = \begin{pmatrix}
+                    \dfrac{\partial^2 f}{\partial x^2} &amp;
+                    \dfrac{\partial^2 f}{\partial x \, \partial y} \\[6pt]
+                    \dfrac{\partial^2 f}{\partial y \, \partial x} &amp;
+                    \dfrac{\partial^2 f}{\partial y^2}
+                  \end{pmatrix}
+                = \begin{pmatrix}
+                    6x e^{2y} &amp; 6x^2 e^{2y} \\
+                    6x^2 e^{2y} &amp; 4x^3 e^{2y}
+                  \end{pmatrix}.
+            </me>
+            As predicted by Schwarz' theorem, this matrix is symmetric.
+        </p>
+    </example>
+
+</subsection>

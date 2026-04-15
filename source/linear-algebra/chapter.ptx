@@ -2,7 +2,10 @@
   <title>Linear Algebra</title>
 
   <introduction>
-    <p>Text before the first section.</p>
+    <p>
+      Linear algebra provides the language for describing vectors, matrices, and systems of linear equations.
+      In this chapter we study the algebraic and geometric structure of these objects, develop computational tools such as determinants and inverse matrices, and then use eigenvalues and eigenvectors to analyse linear transformations and quadratic forms.
+    </p>
   </introduction>
 
   <xi:include href="vectors-matrices-linear-systems/section.ptx"/>

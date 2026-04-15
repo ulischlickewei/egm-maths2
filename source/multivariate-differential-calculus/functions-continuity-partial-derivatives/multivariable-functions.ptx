@@ -1,0 +1,418 @@
+<subsection xml:id="subsec-multivariable-functions">
+    <title>Functions of Several Variables</title>
+
+    <introduction>
+        <p>
+            In mathematics and engineering, many quantities depend simultaneously on several inputs.
+            The temperature at a point in a room is a function of the three position coordinates;
+            the pressure of an ideal gas depends on both its volume and its temperature.
+            This subsection introduces real functions of several variables, discusses how their domains are determined, and explores two ways to visualise them: the graph as a surface in space, and the contour plot via level curves.
+        </p>
+    </introduction>
+
+    <definition xml:id="def-multivariable-function">
+        <title>Real Function of Several Variables</title>
+        <statement>
+            <p>
+                Let <m>D_f \subset \R^n</m>. A map
+                <me>f \colon D_f \to \R</me>
+                is called a <term>real function of several variables</term>.
+                The set <m>D_f</m> is the <term>domain of definition</term> of <m>f</m>.
+            </p>
+        </statement>
+    </definition>
+
+    <example xml:id="ex-multivariable-function-basic">
+        <title>Two Basic Examples</title>
+        <p>
+            <ul>
+                <li>
+                    <p>
+                        <m>f \colon \R^2 \to \R</m>, <m>f(x,y) = x \sin y</m>.
+                        For instance, <m>f(1,1) = \sin 1</m> and
+                        <m>f\!\left(1, \tfrac{\pi}{2}\right) = 1</m>.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <m>g \colon D_g \to \R</m>, <m>(x_1, x_2, x_3) \mapsto \sqrt{36 - x_1^2 - x_2^2 - x_3^2}</m>.
+                        The square root requires a non-negative argument, so
+                        <me>
+                            D_g = \left\{ (x_1, x_2, x_3) \in \R^3 \;\middle|\; x_1^2 + x_2^2 + x_3^2 \le 36 \right\},
+                        </me>
+                        the closed ball of radius <m>6</m> centred at the origin.
+                    </p>
+                </li>
+            </ul>
+        </p>
+    </example>
+
+    <example xml:id="ex-multivariable-function-engineering">
+        <title>Functions of Several Variables in Engineering and Physics</title>
+        <p>
+            Multivariable functions appear throughout applied disciplines:
+        </p>
+        <p>
+            <ul>
+                <li>
+                    <p>
+                        <em>Harmonic oscillation:</em>
+                        <m>x(A, \omega, t, \varphi) = A \cos(\omega t + \varphi)</m>,
+                        where <m>A</m> is the amplitude, <m>\omega</m> the angular frequency,
+                        and <m>\varphi</m> the phase shift.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <em>Mechanical power:</em>
+                        <m>P(W,t) = W/t</m>, where <m>W</m> is work and <m>t</m> is time.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <em>Ideal gas law:</em>
+                        <m>p(V,T) = RT/V</m>, expressing pressure as a function of volume and temperature.
+                    </p>
+                </li>
+            </ul>
+        </p>
+    </example>
+
+    <remark xml:id="rem-visualization-multivariable">
+        <title>Visualisation of Functions of Two Variables</title>
+        <p>
+            There are two standard ways to visualise a function <m>f \colon \R^2 \to \R</m>:
+        </p>
+        <p>
+            <ul>
+                <li>
+                    <p>
+                        The <term>graph</term> is the surface
+                        <me>G_f = \left\{ (x, y, z) \in \R^3 \mid z = f(x,y) \right\}.</me>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        A <term>contour plot</term> displays several <term>level curves</term>
+                        <m>\{(x,y) \mid f(x,y) = c\}</m> for chosen constants <m>c</m>.
+                        This is analogous to elevation contour lines on a topographic map.
+                    </p>
+                </li>
+            </ul>
+        </p>
+        <p>
+            We illustrate both visualisation methods with two concrete examples.
+            For the paraboloid <m>f(x,y)=x^2+y^2</m>, the graph is a bowl-shaped surface and the level curves are circles.
+            For the saddle function <m>g(x,y)=x^2-y^2</m>, the graph bends upward in one direction and downward in the other, while the level curves are hyperbolas.
+        </p>
+        <figure xml:id="fig-visualisation-paraboloid-graph">
+            <caption>
+                Graph of the function <m>f(x,y)=x^2+y^2</m>.
+            </caption>
+            <image width="72%">
+                <latex-image>
+\begin{tikzpicture}
+    \begin{axis}[
+        width=8.8cm,
+        height=6.8cm,
+        view={125}{28},
+        domain=-1.5:1.5,
+        domain y=-1.5:1.5,
+        samples=36,
+        samples y=36,
+        colormap/viridis,
+        axis lines=box,
+        xtick=\empty,
+        ytick=\empty,
+        ztick=\empty,
+        enlargelimits=false
+    ]
+        \addplot3[surf, shader=interp] {x^2+y^2};
+    \end{axis}
+\end{tikzpicture}
+                </latex-image>
+            </image>
+        </figure>
+        <figure xml:id="fig-visualisation-paraboloid-contours">
+            <caption>
+                Contour plot of <m>f(x,y)=x^2+y^2</m>; the level curves are circles centred at the origin.
+            </caption>
+            <image width="58%">
+                <latex-image>
+\begin{tikzpicture}[scale=1.2]
+    \draw[->, gray!70] (-2.2,0) -- (2.2,0) node[right] {$x$};
+    \draw[->, gray!70] (0,-2.2) -- (0,2.2) node[above] {$y$};
+    \foreach \r/\lab in {0.55/0.3,1.0/1,1.45/2.1,1.8/3.2} {
+        \draw[blue!70!black, thick] (0,0) circle (\r);
+        \node[blue!70!black] at ({0.72*\r},{0.72*\r}) {\small $\lab$};
+    }
+    \fill[blue!70!black] (0,0) circle (0.05);
+\end{tikzpicture}
+                </latex-image>
+            </image>
+        </figure>
+        <figure xml:id="fig-visualisation-saddle-graph">
+            <caption>
+                Graph of the function <m>g(x,y)=x^2-y^2</m>.
+            </caption>
+            <image width="72%">
+                <latex-image>
+\begin{tikzpicture}
+    \begin{axis}[
+        width=8.8cm,
+        height=6.8cm,
+        view={125}{28},
+        domain=-1.5:1.5,
+        domain y=-1.5:1.5,
+        samples=36,
+        samples y=36,
+        colormap/cool,
+        axis lines=box,
+        xtick=\empty,
+        ytick=\empty,
+        ztick=\empty,
+        enlargelimits=false
+    ]
+        \addplot3[surf, shader=interp] {x^2-y^2};
+    \end{axis}
+\end{tikzpicture}
+                </latex-image>
+            </image>
+        </figure>
+        <figure xml:id="fig-visualisation-saddle-contours">
+            <caption>
+                Contour plot of <m>g(x,y)=x^2-y^2</m>; positive level curves open along the <m>x</m>-direction and negative level curves along the <m>y</m>-direction.
+            </caption>
+            <image width="62%">
+                <latex-image>
+\begin{tikzpicture}[scale=1.15]
+    \draw[->, gray!70] (-2.2,0) -- (2.2,0) node[right] {$x$};
+    \draw[->, gray!70] (0,-2.2) -- (0,2.2) node[above] {$y$};
+    \draw[red!70!black, thick, domain=1.0:1.9, samples=120] plot (\x,{sqrt(\x*\x-1)});
+    \draw[red!70!black, thick, domain=1.0:1.9, samples=120] plot (\x,{-sqrt(\x*\x-1)});
+    \draw[red!70!black, thick, domain=-1.9:-1.0, samples=120] plot (\x,{sqrt(\x*\x-1)});
+    \draw[red!70!black, thick, domain=-1.9:-1.0, samples=120] plot (\x,{-sqrt(\x*\x-1)});
+    \draw[red!70!black, thick, domain=1.55:1.9, samples=120] plot (\x,{sqrt(\x*\x-2.4)});
+    \draw[red!70!black, thick, domain=1.55:1.9, samples=120] plot (\x,{-sqrt(\x*\x-2.4)});
+    \draw[red!70!black, thick, domain=-1.9:-1.55, samples=120] plot (\x,{sqrt(\x*\x-2.4)});
+    \draw[red!70!black, thick, domain=-1.9:-1.55, samples=120] plot (\x,{-sqrt(\x*\x-2.4)});
+    \draw[green!50!black, thick, domain=-1.3:1.3, samples=120] plot ({sqrt(\x*\x+1)},\x);
+    \draw[green!50!black, thick, domain=-1.3:1.3, samples=120] plot ({-sqrt(\x*\x+1)},\x);
+    \draw[green!50!black, thick, domain=-0.7:0.7, samples=120] plot ({sqrt(\x*\x+2.4)},\x);
+    \draw[green!50!black, thick, domain=-0.7:0.7, samples=120] plot ({-sqrt(\x*\x+2.4)},\x);
+    \node[red!70!black] at (1.45,1.65) {\small $c&gt;0$};
+    \node[green!50!black] at (-1.45,1.65) {\small $c&lt;0$};
+\end{tikzpicture}
+                </latex-image>
+            </image>
+        </figure>
+    </remark>
+
+    <example xml:id="ex-semisphere-graph">
+        <title>The Upper Unit Semi-sphere as a Graph</title>
+        <p>
+            We investigate the function <m>f \colon D_f \to \R</m> whose graph is the upper hemisphere of the unit sphere.
+        </p>
+        <p>
+            The domain must consist of all base points <m>(x,y)</m> that lie under the hemisphere:
+            <me>D_f = \{ (x,y) \in \R^2 \mid x^2 + y^2 \le 1 \}.</me>
+            For a point <m>(x,y) \in D_f</m>, the height <m>z \ge 0</m> satisfies <m>x^2 + y^2 + z^2 = 1</m>, giving
+            <me>f(x,y) = \sqrt{1 - x^2 - y^2}.</me>
+        </p>
+        <figure xml:id="fig-upper-semisphere">
+            <caption>
+                The upper unit semi-sphere can be written as the graph of <m>f(x,y)=\sqrt{1-x^2-y^2}</m> over the unit disk.
+            </caption>
+            <image width="72%">
+                <latex-image>
+\begin{tikzpicture}
+    \begin{axis}[
+        width=8.5cm,
+        height=6.2cm,
+        view={130}{24},
+        axis lines=box,
+        xtick=\empty,
+        ytick=\empty,
+        ztick=\empty,
+        enlargelimits=false
+    ]
+        \addplot3[
+            surf,
+            opacity=0.8,
+            domain=0:360,
+            y domain=0:90,
+            samples=26,
+            samples y=16,
+            shader=interp,
+            colormap/bluered
+        ] ({cos(x)*cos(y)},{sin(x)*cos(y)},{sin(y)});
+    \end{axis}
+\end{tikzpicture}
+                </latex-image>
+            </image>
+        </figure>
+    </example>
+
+
+    <remark xml:id="rem-surface-of-revolution">
+        <title>Surface of Revolution</title>
+        <p>
+            Rotating the graph <m>z = g(r)</m> of a function
+            <m>g \colon \R_{\ge 0} \to \R</m> around the <m>z</m>-axis
+            produces a <term>surface of revolution</term>.
+            In terms of Cartesian coordinates, this surface is the graph of
+            <me>f(x,y) = g\!\left(\sqrt{x^2 + y^2}\right).</me>
+            The function value depends only on the radial distance to the <m>z</m>-axis,
+            which explains the rotational symmetry.
+        </p>
+    </remark>
+
+    <example xml:id="ex-surface-of-revolution-simple">
+        <title>A First Surface of Revolution</title>
+        <p>
+            Consider the function
+            <m>g \colon \R_{\ge 0} \to \R</m>, <m>g(r) = \dfrac{1}{1+r^2}</m>.
+        </p>
+        <p>
+            Rotating the graph of <m>g</m> around the <m>z</m>-axis yields the surface
+            <me>f(x,y) = \frac{1}{1+x^2+y^2}.</me>
+            This example shows directly how a one-variable function of the radius becomes a function of two variables.
+        </p>
+        <figure xml:id="fig-surface-of-revolution-simple">
+            <caption>
+                Left: the profile <m>z=g(r)=1/(1+r^2)</m>. Right: the corresponding surface of revolution <m>f(x,y)=1/(1+x^2+y^2)</m>.
+            </caption>
+            <image width="95%">
+                <latex-image>
+\begin{tikzpicture}
+    \begin{scope}
+        \begin{axis}[
+            width=6.1cm,
+            height=5.0cm,
+            xlabel={$r$},
+            ylabel={$z$},
+            xmin=0, xmax=3.2,
+            ymin=0, ymax=1.1,
+            axis lines=left,
+            samples=150,
+            ticks=none
+        ]
+            \addplot[blue, very thick, domain=0:3] {1/(1+x^2)};
+        \end{axis}
+    \end{scope}
+    \begin{scope}[xshift=7.5cm]
+        \begin{axis}[
+            width=6.4cm,
+            height=5.2cm,
+            view={125}{28},
+            domain=-3:3,
+            domain y=-3:3,
+            samples=24,
+            samples y=24,
+            axis lines=box,
+            xtick=\empty,
+            ytick=\empty,
+            ztick=\empty,
+            enlargelimits=false,
+            colormap/viridis
+        ]
+            \addplot3[surf, shader=interp] {1/(1+x^2+y^2)};
+        \end{axis}
+    \end{scope}
+\end{tikzpicture}
+                </latex-image>
+            </image>
+        </figure>
+    </example>
+
+    <example xml:id="ex-surface-of-revolution">
+        <title>A Surface of Revolution as the Graph of a Two-Variable Function</title>
+        <p>
+            We investigate the function by first showing that its one-variable profile can be extended continuously at the origin and then by rotating this profile around the <m>z</m>-axis to obtain a surface of revolution.
+        </p>
+        <p>
+            Consider <m>g \colon \R \setminus \{0\} \to \R</m>,
+            <m>g(x) = \dfrac{\sin(x^2)}{x^2}</m>.
+        </p>
+        <p>
+            <ol>
+                <li>
+                    <p>
+                        <em>Extending <m>g</m> continuously to all of <m>\R</m>.</em>
+                        Using the Taylor series <m>\sin(u) = u - u^3/6 + \cdots</m>
+                        with <m>u = x^2</m>:
+                        <me>
+                            g(x) = \frac{\sin(x^2)}{x^2}
+                                 = \frac{x^2 - x^6/6 + \cdots}{x^2}
+                                 = 1 - \frac{x^4}{6} + \cdots
+                                 \;\xrightarrow{x \to 0}\; 1.
+                        </me>
+                        Setting <m>g(0) = 1</m> extends <m>g</m> continuously to all of <m>\R</m>.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <em>Describing the surface of revolution.</em>
+                        Rotating the graph of <m>g</m> around the <m>z</m>-axis replaces
+                        the distance <m>|x|</m> from the axis by the radial distance
+                        <m>r = \sqrt{x^2 + y^2}</m>.
+                        The resulting surface is the graph of
+                        <me>
+                            f(x,y) = \frac{\sin(x^2 + y^2)}{x^2 + y^2},
+                            \qquad (x,y) \ne (0,0),
+                        </me>
+                        extended by <m>f(0,0) = 1</m>.
+                    </p>
+                </li>
+            </ol>
+        </p>
+        <figure xml:id="fig-surface-of-revolution-sinc">
+            <caption>
+                Left: the profile <m>g(x)=\sin(x^2)/x^2</m> away from <m>x=0</m>. Right: the surface obtained by rotation, extended by <m>f(0,0)=1</m>.
+            </caption>
+            <image width="95%">
+                <latex-image>
+\begin{tikzpicture}
+    \begin{scope}
+        \begin{axis}[
+            width=6.1cm,
+            height=5.0cm,
+            xlabel={$x$},
+            ylabel={$z$},
+            xmin=-3.2, xmax=3.2,
+            ymin=-0.3, ymax=1.1,
+            axis lines=left,
+            samples=200,
+            ticks=none
+        ]
+            \addplot[blue, very thick, domain=-3:-0.1] {sin(deg(x^2))/(x^2)};
+            \addplot[blue, very thick, domain=0.1:3] {sin(deg(x^2))/(x^2)};
+            \addplot[only marks, mark=*, blue] coordinates {(0,1)};
+        \end{axis}
+    \end{scope}
+    \begin{scope}[xshift=7.5cm]
+        \begin{axis}[
+            width=6.4cm,
+            height=5.2cm,
+            view={125}{28},
+            domain=-3:3,
+            domain y=-3:3,
+            samples=30,
+            samples y=30,
+            axis lines=box,
+            xtick=\empty,
+            ytick=\empty,
+            ztick=\empty,
+            enlargelimits=false,
+            colormap/cool
+        ]
+            \addplot3[surf, shader=interp] {((x^2+y^2) &gt; 0.001) * (sin(deg(x^2+y^2))/(x^2+y^2)) + ((x^2+y^2) &lt;= 0.001) * 1};
+        \end{axis}
+    \end{scope}
+\end{tikzpicture}
+                </latex-image>
+            </image>
+        </figure>
+    </example>
+
+</subsection>

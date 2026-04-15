@@ -1,0 +1,17 @@
+<chapter xml:id="chapter-multivariate-differential-calculus" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Multivariate Differential Calculus</title>
+
+  <introduction>
+    <p>
+      This chapter extends differential calculus from functions of one variable to functions of
+      several variables.
+      The central objects are partial derivatives, the gradient, and the Hessian matrix,
+      which together provide the tools for analysing rates of change, approximating functions
+      locally, and locating extrema in higher dimensions.
+    </p>
+  </introduction>
+
+  <xi:include href="functions-continuity-partial-derivatives/section.ptx"/>
+  <!-- <xi:include href="error-propagation-taylor-extrema/section.ptx"/> -->
+
+</chapter>

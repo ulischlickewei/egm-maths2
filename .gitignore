@@ -13,3 +13,4 @@ logs/
 *.log
 output/
 generated-assets/
+.cache/

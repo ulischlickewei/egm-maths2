@@ -1,0 +1,868 @@
+<subsection xml:id="subsec-partial-derivatives">
+    <title>Partial Derivatives, Gradient, and Differentiability</title>
+
+    <introduction>
+        <p>
+            For a function of a single variable, the derivative measures the rate of change in the
+            only available direction.
+            For a function of several variables we can still measure rates of change, but
+            now we must specify a direction.
+            The simplest choice is to vary one variable while holding all others fixed:
+            this gives the <em>partial derivative</em>.
+            Collecting all partial derivatives into a single vector yields the <em>gradient</em>,
+            which encodes both the magnitude and direction of steepest increase.
+            When the function can be approximated near a point by a linear function
+            involving the gradient, we call it <em>(totally) differentiable</em> at that point.
+        </p>
+    </introduction>
+
+    <!-- ─── Partial derivatives ─── -->
+
+    <remark xml:id="rem-partial-derivative-idea">
+        <title>Idea of Partial Differentiation</title>
+        <p>
+            For a single-variable function <m>z = f(x)</m>, the derivative at <m>x_0</m> is the
+            limit of slopes of secant lines:
+            <me>f'(x_0) = \lim_{h \to 0} \frac{f(x_0 + h) - f(x_0)}{h}.</me>
+            This generalises to a function <m>f(x,y)</m> of two variables as follows:
+            fix <m>y = y_0</m>, consider the curve of intersection
+            <m>z = f(x, y_0)</m> in the <m>xz</m>-plane, and compute its slope:
+            <me>
+                \frac{\partial f}{\partial x}(x_0, y_0)
+                = \lim_{h \to 0} \frac{f(x_0 + h, y_0) - f(x_0, y_0)}{h}.
+            </me>
+            This is the <em>partial derivative of <m>f</m> with respect to <m>x</m></em> at
+            <m>(x_0, y_0)</m>.
+        </p>
+        <figure xml:id="fig-partial-derivative-idea">
+            <caption>
+                To compute <m>\partial f/\partial x</m> at <m>(x_0,y_0)</m>, we fix <m>y=y_0</m>, intersect the surface with the vertical plane <m>y=y_0</m>, and then take the slope of the tangent line to the resulting curve.
+            </caption>
+            <image width="84%">
+                <latex-image>
+\begin{tikzpicture}[>=stealth, line join=round, line cap=round]
+    \begin{scope}[x={(1cm,0cm)}, y={(0.82cm,0.42cm)}, z={(0cm,1cm)}]
+        \coordinate (O) at (0,0,0);
+        \coordinate (X) at (5.4,0,0);
+        \coordinate (Y) at (0,3.1,0);
+        \coordinate (Z) at (0,0,4.0);
+
+        \draw[->, thick] (O) -- (X) node[below right] {$x$};
+        \draw[->, thick] (O) -- (Y) node[left] {$y$};
+        \draw[->, thick] (O) -- (Z) node[above] {$z$};
+
+        % Surface mesh
+        \draw[blue!55!black, thick]
+            (0.9,0.5,1.35) .. controls (1.8,0.9,2.0) and (3.3,0.9,1.7) .. (4.8,0.5,0.3);
+        \draw[blue!55!black, thick]
+            (1.0,0.9,1.7) .. controls (1.9,1.2,2.25) and (3.4,1.2,2.0) .. (4.95,0.9,0.7);
+        \draw[blue!55!black, thick]
+            (1.0,1.3,2.0) .. controls (1.8,1.55,2.45) and (3.15,1.55,1.95) .. (4.35,1.3,0.9);
+        \draw[blue!55!black, thick]
+            (1.15,1.9,2.45) .. controls (1.95,2.2,2.95) and (3.35,2.15,2.45) .. (4.75,1.9,1.45);
+        \draw[blue!55!black, thick]
+            (1.35,2.5,2.95) .. controls (2.15,2.8,3.45) and (3.6,2.7,2.95) .. (5.05,2.5,1.95);
+
+        \draw[blue!55!black, thick]
+            (1.0,0.5,1.35) .. controls (1.02,1.05,1.9) and (1.12,1.85,2.5) .. (1.35,2.5,2.95);
+        \draw[blue!55!black, thick]
+            (1.55,0.55,1.6) .. controls (1.6,1.1,2.1) and (1.7,1.95,2.85) .. (1.95,2.55,3.35);
+        \draw[blue!55!black, thick]
+            (2.2,0.62,1.78) .. controls (2.2,1.12,2.2) and (2.3,1.95,2.95) .. (2.55,2.6,3.45);
+        \draw[blue!55!black, thick]
+            (2.85,0.62,1.72) .. controls (2.85,1.12,2.1) and (2.95,1.95,2.8) .. (3.2,2.55,3.28);
+        \draw[blue!55!black, thick]
+            (3.55,0.58,1.42) .. controls (3.55,1.08,1.8) and (3.65,1.9,2.45) .. (3.9,2.5,3.0);
+        \draw[blue!55!black, thick]
+            (4.25,0.5,0.95) .. controls (4.25,1.0,1.35) and (4.38,1.8,2.0) .. (4.7,2.4,2.55);
+
+        % Slice plane and intersection curve
+        \coordinate (A) at (1.0,1.3,0);
+        \coordinate (B) at (4.15,1.3,0);
+        \coordinate (L) at (1.0,1.3,2.0);
+        \coordinate (R) at (4.15,1.3,0.6);
+        \coordinate (COne) at (1.8,1.3,2.45);
+        \coordinate (CTwo) at (3.15,1.3,1.95);
+
+        \path[pattern=north east lines, pattern color=gray!50, fill opacity=0.18]
+            (A) -- (L)
+            .. controls (COne) and (CTwo) .. (R)
+            -- (B) -- cycle;
+        \draw[black, thick] (A) -- (B);
+        \draw[black, thick] (A) -- (L);
+        \draw[red, very thick]
+            (L) .. controls (COne) and (CTwo) .. (R);
+
+        % Key points
+        \coordinate (P) at (2.1664,1.3,2.0904);
+        \coordinate (Q) at (3.1798,1.3,1.5828);
+        \coordinate (Px) at (2.1664,1.3,0);
+        \coordinate (Qx) at (3.1798,1.3,0);
+        \fill (P) circle (1.4pt);
+        \fill (Q) circle (1.4pt);
+        \draw[densely dotted] (Px) -- (P);
+        \draw[densely dotted] (Qx) -- (Q);
+
+        % Tangent and secant
+        \coordinate (TanL) at (0.7,1.3,2.4833);
+        \coordinate (TanR) at (4.55,1.3,1.4501);
+        \draw[green!60!black, very thick] (TanL) -- (TanR);
+        \coordinate (SecL) at (1.35,1.3,2.4994);
+        \coordinate (SecR) at (4.05,1.3,1.1460);
+        \draw[orange!85!black, very thick] (SecL) -- (SecR);
+
+        % Base annotations
+        \node[below] at (Px) {$x_0$};
+        \node[below] at (Qx) {$x_0+h$};
+        \node[left] at (A) {$y_0$};
+
+        % Surface label anchor
+        \coordinate (SurfAnchor) at (4.55,1.65,1.65);
+        \coordinate (CurveAnchor) at (0.78,1.3,1.72);
+        \coordinate (TanAnchor) at (1.55,1.3,2.2559);
+        \coordinate (SecAnchor) at (2.55,1.3,1.86);
+    \end{scope}
+
+    \begin{scope}[x=1cm, y=1cm]
+        \node[draw=green!60!black, dotted, thick, fill=white, inner sep=5pt, align=center] (tanbox) at (2.25,5.9)
+            {Tangent with slope\quad $\dfrac{\partial f}{\partial x}(x_0,y_0)$};
+        \node[draw=orange!85!black, dotted, thick, fill=white, inner sep=6pt, align=center] (secbox) at (6.7,4.95)
+            {Secant line with slope\quad $\dfrac{f(x_0+h,y_0)-f(x_0,y_0)}{h}$};
+        \node[draw=red, dotted, thick, fill=white, inner sep=6pt, align=center] (curvebox) at (-0.7,1.15)
+            {Curve of intersection with $y_0$:\\ $z=f(x,y_0)$};
+        \node[draw=blue!55!black, dotted, thick, fill=white, inner sep=6pt, align=center] (surfbox) at (9.25,2.85)
+            {Area:\\ $z=f(x,y)$};
+
+        \draw[green!60!black, dotted, thick] (tanbox.south) -- (TanAnchor);
+        \draw[orange!85!black, dotted, thick] (secbox.south west) -- (SecAnchor);
+        \draw[red, dotted, thick] (curvebox.east) -- (CurveAnchor);
+        \draw[blue!55!black, dotted, thick] (surfbox.west) -- (SurfAnchor);
+
+        \draw[->, thick] (8.45,5.62) to[out=210,in=20] (6.15,5.8);
+        \node at (8.95,5.83) {$h\to 0$};
+    \end{scope}
+\end{tikzpicture}
+                </latex-image>
+                <description>
+                    Annotated PGF diagram showing the surface <m>z=f(x,y)</m>, the intersection curve for fixed <m>y=y_0</m>, the secant slope, and its limiting tangent slope representing <m>\partial f/\partial x(x_0,y_0)</m>.
+                </description>
+            </image>
+        </figure>
+    </remark>
+
+    <example xml:id="ex-partial-derivative-limit">
+        <title>Computing a Partial Derivative from the Definition</title>
+        <p>
+            Let <m>f(x,y) = x^2 y + 2y</m>.
+            Fix <m>(x_0, y_0)</m> and compute
+            <m>\dfrac{\partial f}{\partial x}\big|_{(x_0,y_0)}</m> directly from the limit definition.
+        </p>
+        <p>
+            The slope of the secant through <m>f(x_0, y_0)</m> and <m>f(x_0 + h, y_0)</m> is
+            <md>
+                <mrow>
+                    \frac{f(x_0+h, y_0) - f(x_0, y_0)}{h}
+                    &amp;= \frac{(x_0+h)^2 y_0 + 2y_0 - x_0^2 y_0 - 2y_0}{h}
+                </mrow>
+                <mrow>
+                    &amp;= \frac{(x_0^2 + 2hx_0 + h^2)y_0 - x_0^2 y_0}{h}
+                    = 2x_0 y_0 + h y_0.
+                </mrow>
+            </md>
+            As <m>h \to 0</m>, this converges to <m>2x_0 y_0</m>.
+            Thus
+            <me>
+                \frac{\partial f}{\partial x}\bigg|_{(x_0, y_0)} = 2x_0 y_0.
+            </me>
+        </p>
+    </example>
+
+    <definition xml:id="def-partial-derivative">
+        <title>Partial Derivative; Partially Differentiable Function</title>
+        <statement>
+            <p>
+                Let <m>f \colon U \to \R</m> be defined on an open set <m>U \subset \R^n</m>, let
+                <m>\mathbf{x}_0 \in U</m>, and let
+                <m>\mathbf{e}_i = (0, \ldots, 0, 1, 0, \ldots, 0)^\top</m>
+                be the <m>i</m>-th standard unit vector of <m>\R^n</m>.
+            </p>
+            <p>
+                <ul>
+                    <li>
+                        <p>
+                            The <term>partial derivative of <m>f</m> with respect to <m>x_i</m></term>
+                            at <m>\mathbf{x}_0</m> is
+                            <me>
+                                \frac{\partial f}{\partial x_i}(\mathbf{x}_0)
+                                = \lim_{h \to 0}
+                                  \frac{f(\mathbf{x}_0 + h \mathbf{e}_i) - f(\mathbf{x}_0)}{h}.
+                            </me>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            To <em>compute</em> <m>\dfrac{\partial f}{\partial x_i}</m>,
+                            treat all variables except <m>x_i</m> as constants and differentiate
+                            the resulting single-variable function with respect to <m>x_i</m>.
+                            All standard differentiation rules (product rule, chain rule, etc.) apply.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            We call <m>f</m> <term>partially differentiable</term> on
+                            <m>D \subseteq \R^n</m> if all partial derivatives exist at every
+                            point of <m>D</m>.
+                        </p>
+                    </li>
+                </ul>
+            </p>
+        </statement>
+    </definition>
+
+    <example xml:id="ex-partial-derivatives-exponential">
+        <title>Partial Derivatives of a Mixed Exponential</title>
+        <p>
+            Compute the partial derivatives of
+            <m>g(x,y) = x e^{x + y^2} + 2xy^4</m>.
+        </p>
+        <p>
+            <md>
+                <mrow>
+                    \frac{\partial g}{\partial x}
+                    &amp;= e^{x+y^2} + x e^{x+y^2} + 2y^4
+                     = (x+1)e^{x+y^2} + 2y^4,
+                </mrow>
+                <mrow>
+                    \frac{\partial g}{\partial y}
+                    &amp;= 2xy e^{x+y^2} + 8xy^3.
+                </mrow>
+            </md>
+        </p>
+    </example>
+
+    <!-- ─── Gradient ─── -->
+
+    <definition xml:id="def-gradient">
+        <title>Gradient</title>
+        <statement>
+            <p>
+                For a partially differentiable function <m>f \colon U \to \R</m>,
+                where <m>U \subset \R^n</m>,
+                the <term>gradient of <m>f</m></term> at <m>\mathbf{x}</m> is the column vector
+                of all partial derivatives:
+                <me>
+                    \nabla f(\mathbf{x})
+                    = \begin{pmatrix}
+                        \dfrac{\partial f}{\partial x_1}(\mathbf{x}) \\[4pt]
+                        \vdots \\[2pt]
+                        \dfrac{\partial f}{\partial x_n}(\mathbf{x})
+                      \end{pmatrix}.
+                </me>
+            </p>
+        </statement>
+    </definition>
+
+    <example xml:id="ex-gradient-paraboloid">
+        <title>Gradient of the Normal Paraboloid</title>
+        <p>
+            Let <m>f(x,y) = x^2 + y^2</m>.
+            We compute the gradient and then interpret geometrically how it is related to the graph and the level curves of <m>f</m>.
+        </p>
+        <p>
+            <me>
+                \nabla f(x,y)
+                = \begin{pmatrix} \partial f/\partial x \\ \partial f/\partial y \end{pmatrix}
+                = \begin{pmatrix} 2x \\ 2y \end{pmatrix}.
+            </me>
+            At every point <m>(x,y)</m>, the gradient points radially outwards from the origin —
+            in the direction of steepest ascent on the paraboloid.
+        </p>
+        <figure xml:id="fig-gradient-paraboloid">
+            <caption>
+                For the paraboloid <m>f(x,y)=x^2+y^2</m>, the gradient points radially outwards on the contour plot and corresponds to the direction of steepest ascent on the surface.
+            </caption>
+            <image width="84%">
+                <latex-image>
+\begin{tikzpicture}
+    \begin{scope}
+        \begin{axis}[
+            width=6.5cm,
+            height=5.8cm,
+            view={125}{28},
+            domain=-1.5:1.5,
+            domain y=-1.5:1.5,
+            samples=34,
+            samples y=34,
+            axis lines=box,
+            xtick=\empty,
+            ytick=\empty,
+            ztick=\empty,
+            enlargelimits=false
+        ]
+            \addplot3[surf, shader=interp, colormap/viridis] {x^2+y^2};
+        \end{axis}
+    \end{scope}
+    \begin{scope}[xshift=7.2cm]
+        \draw[->, gray!70] (-2.1,0) -- (2.1,0) node[right] {$x$};
+        \draw[->, gray!70] (0,-2.1) -- (0,2.1) node[above] {$y$};
+        \foreach \r in {0.55,1.0,1.45,1.8} {
+            \draw[blue!70!black, thick] (0,0) circle (\r);
+        }
+        \foreach \x/\y in {0.8/0.6,-1.1/0.5,-0.6/-1.0,1.2/-0.6} {
+            \draw[->, red!80!black, very thick] (\x,\y) -- ({1.35*\x},{1.35*\y});
+            \fill[red!80!black] (\x,\y) circle (0.05);
+        }
+        \node[red!80!black] at (1.55,1.45) {\small $\nabla f$};
+    \end{scope}
+\end{tikzpicture}
+                </latex-image>
+            </image>
+        </figure>
+    </example>
+
+    <!-- ─── Differentiability ─── -->
+
+    <remark xml:id="rem-tangent-plane">
+        <title>Local Linear Approximation and the Tangent Plane</title>
+        <p>
+            For a single-variable function <m>f \colon \R \to \R</m>, the tangent line at
+            <m>x_0</m> gives the best linear approximation:
+            <me>t_{x_0}(x) = f(x_0) + f'(x_0)(x - x_0).</me>
+            For a two-variable function <m>z = f(x,y)</m>, the tangent line is replaced by the
+            <term>tangent plane</term>.
+            Provided the tangent plane exists at <m>P_0 = (x_0, y_0, f(x_0,y_0))</m>,
+            its equation is
+            <me>
+                t(x,y) = f(x_0,y_0)
+                        + \frac{\partial f}{\partial x}(x_0,y_0)(x - x_0)
+                        + \frac{\partial f}{\partial y}(x_0,y_0)(y - y_0)
+                = f(x_0,y_0)
+                  + \nabla f(x_0,y_0)^{\top}
+                    \begin{pmatrix} x - x_0 \\ y - y_0 \end{pmatrix}.
+            </me>
+        </p>
+        <figure xml:id="fig-tangent-plane-local-approximation">
+            <caption>
+                For a concave surface, the tangent plane is easy to distinguish as the plane that best approximates the graph near <m>P_0</m>.
+            </caption>
+            <image width="76%">
+                <latex-image>
+\begin{tikzpicture}
+    \begin{axis}[
+        width=9.4cm,
+        height=6.8cm,
+        view={128}{24},
+        domain=-1.7:1.7,
+        domain y=-1.5:1.5,
+        samples=13,
+        samples y=13,
+        axis lines=box,
+        xtick=\empty,
+        ytick=\empty,
+        ztick=\empty,
+        enlargelimits=false
+    ]
+        \addplot3[
+            mesh,
+            draw=blue!65!black,
+            very thick
+        ] {3 - 0.45*x^2 - 0.65*y^2};
+        \addplot3[
+            surf,
+            shader=flat,
+            draw=green!60!black,
+            fill=green!35,
+            opacity=0.7,
+            domain=0.05:1.55,
+            domain y=-0.15:1.15,
+            samples=2,
+            samples y=2
+        ] {2.5495 - 0.72*(x-0.8) - 0.65*(y-0.5)};
+        \addplot3[only marks, mark=*, mark size=2.5pt, black] coordinates {(0.8,0.5,2.5495)};
+        \addplot3[dashed, black] coordinates {(0.8,0.5,0) (0.8,0.5,2.5495)};
+        \node at (axis cs:0.8,0.5,2.5495) [above left] {$P_0$};
+    \end{axis}
+\end{tikzpicture}
+                </latex-image>
+            </image>
+        </figure>
+    </remark>
+
+    <remark xml:id="rem-no-tangent-plane">
+        <title>Partial Derivatives Can Exist Without a Tangent Plane</title>
+        <p>
+            Existence of all partial derivatives at a point does not guarantee a tangent plane.
+            Consider <m>f(x,y) = 1 - \min(|x|, |y|)</m>.
+            In the <m>xz</m>-plane (<m>y = 0</m>): <m>f(x, 0) = 1 - \min(|x|, 0) = 1</m>,
+            so <m>\partial f / \partial x(0,0) = 0</m>.
+            Likewise <m>\partial f / \partial y(0,0) = 0</m>.
+            <!-- ADDED: make the failure of differentiability explicit rather than heuristic -->
+            Along the diagonal <m>(t,t)</m> we have
+            <m>f(t,t) = 1 - |t|</m>, while the candidate tangent plane from the partial derivatives is
+            the constant plane <m>z = 1</m>.
+            Hence the remainder is <m>r(t,t) = -|t|</m>, and
+            <me>
+                \frac{r(t,t)}{\|(t,t)\|}
+                = \frac{-|t|}{\sqrt{2}\,|t|}
+                = -\frac{1}{\sqrt{2}}
+            </me>
+            for <m>t \ne 0</m>, which does not tend to <m>0</m>.
+            So <m>f</m> is not differentiable at <m>(0,0)</m>.
+            Yet the graph near the origin cannot be approximated by a plane,
+            because the function behaves differently in oblique directions.
+            Total differentiability is a strictly stronger requirement.
+        </p>
+        <figure xml:id="fig-no-tangent-plane">
+            <caption>
+                The function <m>f(x,y)=1-\min(|x|,|y|)</m> has vanishing partial derivatives at the origin, but the graph still has a ridge there and cannot be approximated by a single tangent plane.
+            </caption>
+            <image width="84%">
+                <latex-image>
+\begin{tikzpicture}
+    \begin{scope}
+        \begin{axis}[
+            width=6.4cm,
+            height=5.8cm,
+            view={125}{28},
+            domain=-0.85:0.85,
+            domain y=-0.85:0.85,
+            samples=35,
+            samples y=35,
+            axis lines=box,
+            xtick=\empty,
+            ytick=\empty,
+            ztick=\empty,
+            enlargelimits=false
+        ]
+            \addplot3[surf, shader=interp, colormap/cool] {1-min(abs(x),abs(y))};
+        \end{axis}
+    \end{scope}
+    \begin{scope}[xshift=7.0cm]
+        \draw[->, gray!70] (-2.2,0) -- (2.2,0) node[right] {$x$};
+        \draw[->, gray!70] (0,-2.2) -- (0,2.2) node[above] {$y$};
+        \foreach \a in {0.45,0.9,1.35,1.8} {
+            \draw[red!75!black, thick] (\a,0) -- (0,\a) -- (-\a,0) -- (0,-\a) -- cycle;
+        }
+        \fill[black] (0,0) circle (0.05);
+        \draw[dashed, gray!70] (-1.9,-1.9) -- (1.9,1.9);
+        \node[gray!70] at (1.55,1.8) {\small $(t,t)$};
+    \end{scope}
+\end{tikzpicture}
+                </latex-image>
+            </image>
+        </figure>
+    </remark>
+
+    <definition xml:id="def-total-differentiability">
+        <title>Differentiable Function</title>
+        <statement>
+            <p>
+                <ul>
+                    <li>
+                        <p>
+                            <m>f</m> is called <term>differentiable</term> (or <em>totally differentiable</em>)
+                            at <m>\mathbf{x}_0</m> if there exists a vector
+                            <m>\nabla f(\mathbf{x}_0)</m> such that
+                            <me>
+                                f(\mathbf{x})
+                                = f(\mathbf{x}_0)
+                                  + \nabla f(\mathbf{x}_0)^{\top}(\mathbf{x} - \mathbf{x}_0)
+                                  + r(\mathbf{x} - \mathbf{x}_0),
+                            </me>
+                            where the remainder satisfies
+                            <me>
+                                \lim_{\mathbf{x} \to \mathbf{x}_0}
+                                \frac{r(\mathbf{x} - \mathbf{x}_0)}{\|\mathbf{x} - \mathbf{x}_0\|}
+                                = 0.
+                            </me>
+                            This condition formalises mathematically the geometric idea that
+                            <m>f</m> can be approximated near <m>\mathbf{x}_0</m> by its tangent plane,
+                            because the remainder is negligible compared with the distance to
+                            <m>\mathbf{x}_0</m>.
+                            The linear part is the <term>tangent plane</term>
+                            <m>t(\mathbf{x}) = f(\mathbf{x}_0)
+                               + \nabla f(\mathbf{x}_0)^{\top}(\mathbf{x} - \mathbf{x}_0)</m>.
+                        </p>
+                    </li>
+                </ul>
+            </p>
+        </statement>
+    </definition>
+
+    <theorem xml:id="thm-c1-implies-differentiable">
+        <title>Continuously Partially Differentiable Implies Differentiable</title>
+        <statement>
+            <p>
+                If <m>f</m> is partially differentiable on an open set <m>U \subset \R^n</m> and all partial derivatives are continuous on <m>U</m>, then <m>f</m> is differentiable on <m>U</m>.
+                In other words, every <term><m>C^1</m></term> function is totally differentiable.
+            </p>
+        </statement>
+    </theorem>
+
+    <example xml:id="ex-tangent-plane-rational">
+        <title>Tangent Plane and Gradient of a Rational Function</title>
+        <p>
+            Let <m>f(x,y) = \dfrac{1}{1 + x^2 + y^2}</m>.
+            In the following, we investigate this function step by step: first its domain and level curves, then its gradient. Finally, we will investigate at which points the plane is parallel to the <m>xy</m>-plane.
+        </p>
+        <p>
+            <ol>
+                <li>
+                    <p>
+                        <em>Domain.</em>
+                        The denominator <m>1 + x^2 + y^2 \ge 1 > 0</m> for all
+                        <m>(x,y) \in \R^2</m>, so <m>D_f = \R^2</m>.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <em>Level curves.</em>
+                        The level set <m>f(x,y) = c</m> requires <m>1 + x^2 + y^2 = 1/c</m>,
+                        i.e.\ <m>x^2 + y^2 = 1/c - 1</m>.
+                        For <m>0 \lt c \lt 1</m> these are concentric circles around the origin.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <em>Gradient.</em>
+                        <md>
+                            <mrow>
+                                \frac{\partial f}{\partial x}
+                                &amp;= -(1 + x^2 + y^2)^{-2} \cdot 2x
+                                 = -\frac{2x}{(1 + x^2 + y^2)^2},
+                            </mrow>
+                            <mrow>
+                                \frac{\partial f}{\partial y}
+                                &amp;= -\frac{2y}{(1+x^2+y^2)^2}.
+                            </mrow>
+                        </md>
+                        Thus
+                        <me>
+                            \nabla f(x,y)
+                            = -\frac{2}{(1+x^2+y^2)^2}
+                              \begin{pmatrix} x \\ y \end{pmatrix}.
+                        </me>
+                        The gradient points radially towards the origin.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <em>Tangent plane parallel to the <m>xy</m>-plane.</em>
+                        The tangent plane is parallel to the <m>xy</m>-plane if and only if
+                        <m>\nabla f(x_0, y_0) = \mathbf{0}</m>.
+                        From the formula above this forces <m>(x_0, y_0) = (0,0)</m>,
+                        the unique critical point.
+                        At this point <m>f(0,0) = 1</m>, so the tangent plane is <m>z = 1</m>.
+                    </p>
+                </li>
+            </ol>
+        </p>
+    </example>
+
+    <example xml:id="ex-linear-approximation-3d">
+        <title>Linear Approximation of a Three-Variable Function</title>
+        <p>
+            We now determine the linear approximation of the function
+            <m>f(x_1, x_2, x_3) = x_1^2 \sin(x_2 - x_3)</m>
+            at the point <m>\mathbf{x}_0 = (1, 0, 1)</m>.
+        </p>
+        <p>
+            First, <m>f(1,0,1) = \sin(-1)</m>.
+            Then:
+            <me>
+                \nabla f(x_1,x_2,x_3)
+                = \begin{pmatrix}
+                    2x_1 \sin(x_2 - x_3) \\
+                    x_1^2 \cos(x_2 - x_3) \\
+                    -x_1^2 \cos(x_2 - x_3)
+                  \end{pmatrix},
+                \qquad
+                \nabla f(1,0,1)
+                = \begin{pmatrix}
+                    2\sin(-1) \\ \cos(-1) \\ -\cos(-1)
+                  \end{pmatrix}.
+            </me>
+            The tangent plane (linear approximation) is therefore
+            <md>
+                <mrow>
+                    t(x_1,x_2,x_3)
+                    &amp;= \sin(-1)
+                       + 2\sin(-1)(x_1-1)
+                       + \cos(-1)\, x_2
+                       - \cos(-1)(x_3-1).
+                </mrow>
+            </md>
+        </p>
+    </example>
+
+    <!-- ─── Directional derivative ─── -->
+
+    <definition xml:id="def-directional-derivative">
+        <title>Directional Derivative</title>
+        <statement>
+            <p>
+                Let <m>f</m> be differentiable at <m>\mathbf{x}_0</m> and let
+                <m>\mathbf{r} = (r_1, \ldots, r_n)^\top</m> be a unit vector
+                (<m>\|\mathbf{r}\| = 1</m>).
+            </p>
+            <p>
+                <ul>
+                    <li>
+                        <p>
+                            The <term>directional derivative of <m>f</m> at <m>\mathbf{x}_0</m>
+                            in direction <m>\mathbf{r}</m></term> is
+                            <me>
+                                \frac{\partial f}{\partial \mathbf{r}}(\mathbf{x}_0)
+                                = \lim_{h \to 0}
+                                  \frac{f(\mathbf{x}_0 + h\mathbf{r}) - f(\mathbf{x}_0)}{h}.
+                            </me>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            For a differentiable function, the directional derivative equals the
+                            dot product of the gradient with <m>\mathbf{r}</m>:
+                            <me>
+                                \frac{\partial f}{\partial \mathbf{r}}(\mathbf{x}_0)
+                                = \nabla f(\mathbf{x}_0) \cdot \mathbf{r}
+                                = \frac{\partial f}{\partial x_1}(\mathbf{x}_0) r_1
+                                  + \cdots
+                                  + \frac{\partial f}{\partial x_n}(\mathbf{x}_0) r_n.
+                            </me>
+                        </p>
+                    </li>
+                </ul>
+            </p>
+        </statement>
+        <figure xml:id="fig-directional-derivative">
+            <caption>
+                The directional derivative measures the slope of <m>f</m> along the line through <m>\mathbf{x}_0</m> in the direction <m>\mathbf{r}</m>.
+            </caption>
+            <image width="58%">
+                <latex-image>
+\begin{tikzpicture}[>=stealth, line join=round, line cap=round]
+    \begin{scope}[x={(1cm,0cm)}, y={(0.82cm,0.42cm)}, z={(0cm,1cm)}]
+        \coordinate (O) at (0,0,0);
+        \coordinate (X) at (4.5,0,0);
+        \coordinate (Y) at (0,3.3,0);
+        \coordinate (Z) at (0,0,3.7);
+
+        \draw[->, thick] (O) -- (X) node[below right] {$x$};
+        \draw[->, thick] (O) -- (Y) node[right] {$y$};
+        \draw[->, thick] (O) -- (Z) node[above] {$z$};
+
+        % Surface patch
+        \coordinate (A) at (0.55,0.95,1.08);
+        \coordinate (B) at (1.75,2.15,2.52);
+        \coordinate (C) at (4.1,2.6,2.05);
+        \coordinate (D) at (3.45,1.1,1.55);
+
+        \fill[magenta!18]
+            (A) .. controls (0.95,1.7,1.95) and (1.35,2.05,2.35) .. (B)
+            .. controls (2.45,2.8,2.55) and (3.4,2.8,2.3) .. (C)
+            .. controls (3.9,2.15,1.95) and (3.65,1.45,1.7) .. (D)
+            .. controls (2.7,0.85,1.35) and (1.45,0.6,1.02) .. cycle;
+        \draw[magenta!85!black, thick]
+            (A) .. controls (0.95,1.7,1.95) and (1.35,2.05,2.35) .. (B)
+            .. controls (2.45,2.8,2.55) and (3.4,2.8,2.3) .. (C)
+            .. controls (3.9,2.15,1.95) and (3.65,1.45,1.7) .. (D)
+            .. controls (2.7,0.85,1.35) and (1.45,0.6,1.02) .. cycle;
+
+        % Point and projected point
+        \coordinate (Pbase) at (2.0,0.95,0);
+        \coordinate (Psurf) at (2.0,0.95,1.72);
+        \fill[magenta!85!black] (Psurf) circle (1.6pt);
+        \fill (Pbase) circle (1.6pt);
+        \draw[densely dotted, magenta!70!black] (Pbase) -- (Psurf);
+
+        % Direction in the base plane
+        \coordinate (Rdir) at (3.45,1.48,0);
+        \draw[->, thick] (Pbase) -- (Rdir);
+        \node[below right] at (Rdir) {$\mathbf{r}$};
+
+        % Directional derivative on the surface
+        \coordinate (Fend) at (3.55,2.2,2.18);
+        \draw[->, magenta!85!black, very thick]
+            (1.45,1.15,1.55) .. controls (2.1,1.45,1.88) and (2.8,1.8,2.05) .. (Fend);
+        \node[above] at (2.85,1.9,2.03) {$\dfrac{\partial f}{\partial \mathbf{r}}$};
+
+        % Guide lines to axes
+        \draw[densely dotted] (Pbase) -- (2.0,0,0);
+        \draw[densely dotted] (Pbase) -- (0,0.95,0);
+        \node[below] at (2.0,0,0) {$x_0$};
+        \node[left] at (0,0.95,0) {$y_0$};
+
+        % Angle alpha in the base plane
+        \draw[thick] (Pbase) ++(0.78,0,0) arc[start angle=0,end angle=48,radius=0.78];
+        \node at (2.72,1.05,0) {$\alpha$};
+    \end{scope}
+
+    \begin{scope}[x=1cm, y=1cm]
+        \node[magenta!85!black] at (0.95,4.2) {$f(x,y)$};
+    \end{scope}
+\end{tikzpicture}
+                </latex-image>
+                <description>
+                    PGF diagram of a surface with a point above the domain, a direction vector <m>\mathbf{r}</m> in the base plane, and the corresponding slope on the surface representing the directional derivative.
+                </description>
+            </image>
+        </figure>
+    </definition>
+
+    <example xml:id="ex-directional-derivative">
+        <title>Computing a Directional Derivative</title>
+        <p>
+            Let <m>f(x,y) = x^2 e^{x+2y}</m> and <m>(x_0,y_0) = (1,0)</m>.
+            Find the rate of change of <m>f</m> in the direction
+            <m>\mathbf{v} = \begin{pmatrix} 1 \\ 2 \end{pmatrix}</m>.
+        </p>
+        <p>
+            <ol>
+                <li>
+                    <p>
+                        <em>Normalise:</em>
+                        <m>\|\mathbf{v}\| = \sqrt{5}</m>, so
+                        <m>\mathbf{r} = \tfrac{1}{\sqrt{5}} \begin{pmatrix} 1 \\ 2 \end{pmatrix}</m>.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <em>Compute the gradient at <m>(1,0)</m>:</em>
+                        <me>
+                            \nabla f(x,y)
+                            = \begin{pmatrix}
+                                2x e^{x+2y} + x^2 e^{x+2y} \\
+                                2x^2 e^{x+2y}
+                              \end{pmatrix},
+                            \quad
+                            \nabla f(1,0)
+                            = \begin{pmatrix} 3e \\ 2e \end{pmatrix}.
+                        </me>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <em>Directional derivative:</em>
+                        <me>
+                            \frac{\partial f}{\partial \mathbf{r}}(1,0)
+                            = \nabla f(1,0) \cdot \mathbf{r}
+                            = \frac{1}{\sqrt{5}}(3e + 4e)
+                            = \frac{7e}{\sqrt{5}}.
+                        </me>
+                    </p>
+                </li>
+            </ol>
+        </p>
+    </example>
+
+    <remark xml:id="rem-gradient-geometry">
+        <title>Geometric Meaning of the Gradient</title>
+        <p>
+            Writing the directional derivative as
+            <me>
+                \frac{\partial f}{\partial \mathbf{r}}(\mathbf{x}_0)
+                = \nabla f(\mathbf{x}_0) \cdot \mathbf{r}
+                = \|\nabla f(\mathbf{x}_0)\| \cos\alpha,
+            </me>
+            where <m>\alpha</m> is the angle between <m>\nabla f(\mathbf{x}_0)</m>
+            and <m>\mathbf{r}</m>, reveals two important facts:
+        </p>
+        <p>
+            <ul>
+                <li>
+                    <p>
+                        The rate of change is <em>maximised</em> when <m>\alpha = 0</m>,
+                        i.e., when <m>\mathbf{r}</m> is parallel to <m>\nabla f</m>.
+                        Therefore, <em>the gradient points in the direction of steepest ascent</em>.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        The rate of change is <em>zero</em> when <m>\alpha = \pi/2</m>.
+                        Therefore, <em>level curves are everywhere orthogonal to the gradient</em>.
+                    </p>
+                </li>
+            </ul>
+        </p>
+        <figure xml:id="fig-gradient-geometry">
+            <caption>
+                The gradient is perpendicular to the level curve through <m>\mathbf{x}_0</m> and points in the direction where the function increases most rapidly.
+            </caption>
+            <image width="60%">
+                <latex-image>
+\begin{tikzpicture}[scale=1.1, >=stealth]
+    \draw[->, gray!70] (-2.2,0) -- (2.3,0) node[right] {$x$};
+    \draw[->, gray!70] (0,-2.1) -- (0,2.2) node[above] {$y$};
+    \foreach \r in {0.6,1.05,1.55} {
+        \draw[blue!70!black, thick] (0,0) circle (\r);
+    }
+    \coordinate (P) at (0.74,0.74);
+    \fill[black] (P) circle (0.06);
+    \node[above right] at (P) {\small $\mathbf{x}_0$};
+    \draw[->, red!80!black, very thick] (P) -- (1.55,1.55);
+    \node[red!80!black] at (1.65,1.75) {\small $\nabla f(\mathbf{x}_0)$};
+    \draw[->, green!50!black, very thick] (P) -- (0.05,1.43);
+    \node[green!50!black] at (-0.1,1.62) {\small tangent};
+    \node[blue!70!black] at (-1.35,1.72) {\small level curves};
+\end{tikzpicture}
+                </latex-image>
+            </image>
+        </figure>
+    </remark>
+
+    <remark xml:id="rem-gradient-descent">
+        <title>Application: Gradient Descent in Machine Learning</title>
+        <p>
+            Consider fitting a linear model <m>g(x) = mx + b</m> to data points
+            <m>(x_1, y_1), \ldots, (x_N, y_N)</m>.
+            The mean squared error
+            <me>
+                e(m, b) = \sum_{i=1}^{N} \bigl(y_i - (m x_i + b)\bigr)^2
+            </me>
+            is a function of two variables <m>m</m> and <m>b</m>.
+            The <em>gradient descent</em> algorithm iteratively updates
+            <m>(m,b)</m> in the direction of <m>-\nabla e(m,b)</m>
+            (steepest descent), reducing the error at each step.
+            This is one of the foundational algorithms in modern machine learning.
+        </p>
+        <figure xml:id="fig-gradient-descent">
+            <caption>
+                Gradient descent follows successive steps in the direction of steepest decrease until it approaches a minimum of the error function.
+            </caption>
+            <image width="64%">
+                <latex-image>
+\begin{tikzpicture}[scale=1.05, >=stealth]
+    \draw[->, gray!70] (-2.3,0) -- (2.5,0) node[right] {$m$};
+    \draw[->, gray!70] (0,-2.2) -- (0,2.4) node[above] {$b$};
+    \draw[blue!70!black, thick, smooth cycle, tension=0.92]
+        plot coordinates {(-1.95,1.2) (-1.2,1.95) (0.15,1.8) (1.25,1.15) (1.8,0.05) (1.45,-1.1) (0.35,-1.55) (-1.0,-1.2) (-1.85,-0.15)};
+    \draw[blue!70!black, thick, smooth cycle, tension=0.92]
+        plot coordinates {(-1.55,1.0) (-0.95,1.55) (0.12,1.43) (0.98,0.92) (1.38,0.02) (1.08,-0.88) (0.28,-1.16) (-0.72,-0.9) (-1.33,-0.12)};
+    \draw[blue!70!black, thick, smooth cycle, tension=0.92]
+        plot coordinates {(-1.12,0.78) (-0.65,1.14) (0.06,1.06) (0.67,0.72) (0.96,0.03) (0.75,-0.62) (0.22,-0.82) (-0.46,-0.64) (-0.93,-0.1)};
+    \draw[blue!70!black, thick, smooth cycle, tension=0.92]
+        plot coordinates {(-0.63,0.5) (-0.28,0.74) (0.07,0.71) (0.38,0.49) (0.55,0.02) (0.44,-0.36) (0.18,-0.46) (-0.15,-0.37) (-0.48,-0.08)};
+    \fill[green!60!black] (0.17,-0.02) circle (0.07);
+    \node[below right] at (0.17,-0.02) {\small minimum};
+    \coordinate (A) at (-1.55,1.32);
+    \coordinate (B) at (-0.92,0.88);
+    \coordinate (C) at (-0.48,0.46);
+    \coordinate (D) at (-0.08,0.14);
+    \coordinate (E) at (0.12,0.01);
+    \draw[->, red!80!black, very thick] (A) -- (B);
+    \draw[->, red!80!black, very thick] (B) -- (C);
+    \draw[->, red!80!black, very thick] (C) -- (D);
+    \draw[->, red!80!black, very thick] (D) -- (E);
+    \fill[red!80!black] (A) circle (0.06);
+    \fill[red!80!black] (B) circle (0.06);
+    \fill[red!80!black] (C) circle (0.06);
+    \fill[red!80!black] (D) circle (0.06);
+    \fill[red!80!black] (E) circle (0.06);
+    \node[red!80!black] at (-1.05,1.68) {\small descent path};
+\end{tikzpicture}
+                </latex-image>
+            </image>
+        </figure>
+    </remark>
+
+</subsection>

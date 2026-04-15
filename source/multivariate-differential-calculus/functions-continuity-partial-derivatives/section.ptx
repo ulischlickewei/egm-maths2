@@ -1,0 +1,26 @@
+<section xml:id="section-functions-continuity-partial-derivatives" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Functions, Continuity, and Partial Derivatives</title>
+
+  <introduction>
+    <p>
+      This section extends the core ideas of single-variable calculus —
+      domains, continuity, and differentiation — to functions that depend on
+      several real variables simultaneously.
+      We begin by defining what such functions are and how to describe their graphs
+      and level sets geometrically.
+      We then introduce the sequence-based definition of continuity in <m>\R^n</m>
+      and develop practical tools for proving that built-up functions are continuous.
+      Finally, we study how to differentiate functions of several variables:
+      partial derivatives with respect to individual coordinates,
+      the gradient as the vector of all partial derivatives,
+      total differentiability and the tangent plane,
+      directional derivatives, and the second-order Hessian matrix.
+    </p>
+  </introduction>
+
+  <xi:include href="multivariable-functions.ptx"/>
+  <xi:include href="continuity.ptx"/>
+  <xi:include href="partial-derivatives.ptx"/>
+  <xi:include href="higher-order-derivatives.ptx"/>
+
+</section>
