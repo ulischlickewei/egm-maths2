@@ -1,0 +1,25 @@
+<section xml:id="section-error-propagation-taylor-extrema" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Error Propagation, Taylor Expansion, and Extrema</title>
+
+  <introduction>
+    <p>
+      This section develops three closely related applications of partial derivatives
+      and the Hessian matrix.
+      We begin with <em>error propagation</em>: using the gradient to bound how
+      measurement uncertainties in the inputs propagate to an uncertainty in a
+      computed output.
+      We then derive and apply the <em>multivariate Taylor expansion</em>,
+      which approximates a smooth function near a given point by a polynomial
+      involving the gradient and the Hessian.
+      Finally, we use the second-order Taylor polynomial to classify
+      <em>local extrema</em>: the Hessian matrix tells us whether a critical point
+      is a local minimum, local maximum, or saddle point.
+    </p>
+  </introduction>
+
+  <xi:include href="error-propagation.ptx"/>
+  <xi:include href="taylor-expansion.ptx"/>
+  <xi:include href="extrema.ptx"/>
+  <xi:include href="check-your-understanding.ptx"/>
+
+</section>

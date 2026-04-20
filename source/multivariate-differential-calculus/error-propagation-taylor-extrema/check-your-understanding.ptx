@@ -1,0 +1,180 @@
+<exercises xml:id="exercises-error-propagation-taylor-extrema">
+    <title>Check Your Understanding</title>
+
+    <exercise xml:id="exer-error-propagation-dominant-term">
+        <title>Interpret an Error Estimate</title>
+        <statement>
+            <p>
+                In the first-order estimate
+                <me>
+                    |\Delta U|
+                    \approx
+                    \left|\frac{\partial U}{\partial x_1}\right||\Delta_1|
+                    + \cdots +
+                    \left|\frac{\partial U}{\partial x_n}\right||\Delta_n|,
+                </me>
+                which input contributes the most to the output uncertainty?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p>The one with the largest product <m>\left|\frac{\partial U}{\partial x_i}\right||\Delta_i|</m>.</p></statement>
+                <feedback><p>Correct. The sensitivity factor and the size of the input uncertainty matter together.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Always the variable with the largest measured value.</p></statement>
+                <feedback><p>Incorrect. A large nominal value alone does not determine the propagated error.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Always the variable with the smallest uncertainty.</p></statement>
+                <feedback><p>Incorrect. A smaller uncertainty usually contributes less, not more.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>All variables contribute equally.</p></statement>
+                <feedback><p>Incorrect. The contribution depends on both sensitivity and uncertainty size.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise xml:id="exer-error-propagation-product">
+        <title>Estimate an Absolute Error</title>
+        <statement>
+            <p>
+                Let
+                <me>
+                    U(x,y)=xy.
+                </me>
+                At the measured point <m>(x_0,y_0)=(2,3)</m>, the uncertainties are
+                <m>|\Delta x|=0.1</m> and <m>|\Delta y|=0.2</m>.
+                Use the first-order formula to estimate the maximal absolute error in <m>U</m>.
+            </p>
+        </statement>
+        <solution>
+            <p>
+                We compute the partial derivatives:
+                <me>
+                    \frac{\partial U}{\partial x}=y,
+                    \qquad
+                    \frac{\partial U}{\partial y}=x.
+                </me>
+                At <m>(2,3)</m>, this gives
+                <me>
+                    \left.\frac{\partial U}{\partial x}\right|_{(2,3)}=3,
+                    \qquad
+                    \left.\frac{\partial U}{\partial y}\right|_{(2,3)}=2.
+                </me>
+            </p>
+            <p>
+                Therefore the first-order absolute error estimate is
+                <me>
+                    |\Delta U|
+                    \approx
+                    |3|\cdot 0.1 + |2|\cdot 0.2
+                    = 0.3 + 0.4
+                    = 0.7.
+                </me>
+                So the estimated maximal absolute error is <m>0.7</m>.
+            </p>
+        </solution>
+    </exercise>
+
+    <exercise xml:id="exer-taylor-polynomial-easy">
+        <title>Second-Order Taylor Polynomial</title>
+        <statement>
+            <p>
+                Determine the second-order Taylor polynomial at the origin for
+                <me>
+                    f(x,y)=e^x+y^2.
+                </me>
+            </p>
+        </statement>
+        <solution>
+            <p>
+                We have
+                <me>
+                    f(0,0)=1.
+                </me>
+                The first-order partial derivatives are
+                <me>
+                    f_x=e^x,
+                    \qquad
+                    f_y=2y,
+                </me>
+                so
+                <me>
+                    \nabla f(0,0)=\begin{pmatrix}1\\0\end{pmatrix}.
+                </me>
+            </p>
+            <p>
+                The second-order partial derivatives are
+                <me>
+                    f_{xx}=e^x,
+                    \qquad
+                    f_{xy}=f_{yx}=0,
+                    \qquad
+                    f_{yy}=2.
+                </me>
+                Hence
+                <me>
+                    H_f(0,0)=
+                    \begin{pmatrix}
+                        1 &amp; 0\\
+                        0 &amp; 2
+                    \end{pmatrix}.
+                </me>
+            </p>
+            <p>
+                Therefore
+                <md>
+                    <mrow>
+                        T_2(x,y)
+                        &amp;=
+                        1 + \begin{pmatrix}1\\0\end{pmatrix}\cdot\begin{pmatrix}x\\y\end{pmatrix}
+                        + \tfrac12
+                        \begin{pmatrix}x &amp; y\end{pmatrix}
+                        \begin{pmatrix}
+                            1 &amp; 0\\
+                            0 &amp; 2
+                        \end{pmatrix}
+                        \begin{pmatrix}x\\y\end{pmatrix}
+                    </mrow>
+                    <mrow>
+                        &amp;= 1 + x + \tfrac12 x^2 + y^2.
+                    </mrow>
+                </md>
+            </p>
+        </solution>
+    </exercise>
+
+    <exercise xml:id="exer-hessian-criterion-saddle">
+        <title>Read the Hessian Criterion</title>
+        <statement>
+            <p>
+                Let <m>(x_0,y_0)</m> be a critical point of a twice continuously differentiable function of two variables.
+                If
+                <me>
+                    \det H_f(x_0,y_0) &lt; 0,
+                </me>
+                what does the Hessian criterion say?
+            </p>
+        </statement>
+        <choices>
+            <choice>
+                <statement><p><m>(x_0,y_0)</m> is a strict local minimum.</p></statement>
+                <feedback><p>Incorrect. A negative determinant means the Hessian is indefinite.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><m>(x_0,y_0)</m> is a strict local maximum.</p></statement>
+                <feedback><p>Incorrect. A strict maximum would require a negative definite Hessian, not just a negative determinant.</p></feedback>
+            </choice>
+            <choice correct="yes">
+                <statement><p><m>(x_0,y_0)</m> is a saddle point.</p></statement>
+                <feedback><p>Correct. In two variables, <m>\det H_f(x_0,y_0) &lt; 0</m> means the quadratic form takes both signs.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>The test is inconclusive.</p></statement>
+                <feedback><p>Incorrect. The test is inconclusive when the determinant is <m>0</m>, not when it is negative.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+</exercises>

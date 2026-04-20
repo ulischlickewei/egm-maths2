@@ -1,0 +1,173 @@
+<subsection xml:id="subsec-error-propagation">
+    <title>Error Propagation</title>
+
+    <introduction>
+        <p>
+            In engineering experiments, every measured quantity carries an uncertainty.
+            When a derived result is computed from several measurements, those individual
+            uncertainties combine to produce an uncertainty in the final result.
+            The gradient provides a systematic tool for quantifying this effect:
+            it linearises the output function around the measured point,
+            turning the problem of estimating the output error into a straightforward
+            evaluation of partial derivatives.
+        </p>
+    </introduction>
+
+    <!-- ─── Concept ─── -->
+
+    <remark xml:id="rem-error-propagation-concept">
+        <title>The Idea of Error Propagation</title>
+        <p>
+            Consider a derived quantity
+            <m>U = U(x_1, \ldots, x_n)</m>
+            computed from <m>n</m> measured variables.
+            Write the true (unknown) input as
+            <m>\mathbf{x} = \mathbf{x}_0 + \Delta\mathbf{x}</m>,
+            where <m>\mathbf{x}_0</m> is the measured (nominal) value and
+            <m>\Delta\mathbf{x} = (\Delta_1, \ldots, \Delta_n)^\top</m>
+            is the measurement uncertainty.
+        </p>
+        <p>
+            The resulting error in <m>U</m> is
+            <me>
+                \Delta U = U(\mathbf{x}_0 + \Delta\mathbf{x}) - U(\mathbf{x}_0).
+            </me>
+            Replacing this difference by its first-order linear approximation
+            (the tangent plane at <m>\mathbf{x}_0</m>, cf.
+            <xref ref="rem-tangent-plane"/>):
+            <me>
+                \Delta U
+                \approx \nabla U(\mathbf{x}_0) \cdot \Delta\mathbf{x}
+                = \frac{\partial U}{\partial x_1}(\mathbf{x}_0)\,\Delta_1
+                  + \cdots
+                  + \frac{\partial U}{\partial x_n}(\mathbf{x}_0)\,\Delta_n.
+            </me>
+            Taking absolute values and applying the triangle inequality to this
+            linear approximation yields the first-order estimate
+            <me>
+                |\Delta U|
+                \approx
+                \left|\frac{\partial U}{\partial x_1}(\mathbf{x}_0)\right| |\Delta_1|
+                + \cdots
+                + \left|\frac{\partial U}{\partial x_n}(\mathbf{x}_0)\right| |\Delta_n|.
+            </me>
+            Each partial derivative acts as a <em>sensitivity factor</em>:
+            it tells us how strongly a small change in <m>x_i</m> affects the output <m>U</m>.
+            The estimate becomes more reliable when the measurement errors are small and
+            higher-order terms can be neglected.
+        </p>
+    </remark>
+
+    <!-- ─── Definition ─── -->
+
+    <definition xml:id="def-error-propagation-bounds">
+        <title>Maximal Absolute and Relative Error</title>
+        <statement>
+            <p>
+                Let <m>U = U(x_1, \ldots, x_n)</m> be differentiable at
+                <m>\mathbf{x}_0 = (x_{1,0}, \ldots, x_{n,0})</m>,
+                and let <m>\Delta_1, \ldots, \Delta_n</m> be small measurement errors.
+                All partial derivatives below are evaluated at <m>\mathbf{x}_0</m>.
+            </p>
+            <p>
+                <ul>
+                    <li>
+                        <p>
+                            <term>Maximal absolute error:</term>
+                            the exact error is
+                            <m>|\Delta U| = |U(\mathbf{x}_0 + \Delta\mathbf{x}) - U(\mathbf{x}_0)|</m>.
+                            Its first-order estimate is
+                        </p>
+                        <me>
+                                \left|\frac{\partial U}{\partial x_1}\right| |\Delta_1|
+                                + \cdots
+                                + \left|\frac{\partial U}{\partial x_n}\right| |\Delta_n|.
+                        </me>
+                    </li>
+                    <li>
+                        <p>
+                            <term>Maximal relative error:</term>
+                            provided <m>U(\mathbf{x}_0) \neq 0</m>, the exact relative error is
+                            <m>\left|\frac{\Delta U}{U}\right|
+                            = \left|\frac{U(\mathbf{x}_0 + \Delta\mathbf{x}) - U(\mathbf{x}_0)}{U(\mathbf{x}_0)}\right|</m>.
+                            Its first-order estimate is
+                        </p>
+                        <me>
+                                \left|\frac{1}{U}\frac{\partial U}{\partial x_1}\right| |\Delta_1|
+                                + \cdots
+                                + \left|\frac{1}{U}\frac{\partial U}{\partial x_n}\right| |\Delta_n|.
+                        </me>
+                    </li>
+                </ul>
+            </p>
+        </statement>
+    </definition>
+
+    <!-- ─── Example ─── -->
+
+    <example xml:id="ex-gravity-error-propagation">
+        <title>Error Propagation in a Free-Fall Experiment</title>
+        <p>
+            A ball is dropped from rest.
+            The height of fall <m>h</m> and the travel time <m>t</m> are measured,
+            and the gravitational acceleration is computed from
+            <m>h = \tfrac{1}{2}gt^2</m>, giving
+            <me>
+                g(h, t) = \frac{2h}{t^2}.
+            </me>
+            The measurements and their uncertainties are
+            <me>
+                h = 800\,\text{mm} \pm 4\,\text{mm},
+                \qquad
+                t = 0.4046\,\text{s} \pm 0.0001\,\text{s}.
+            </me>
+            What is the resulting uncertainty in <m>g</m>?
+        </p>
+        <p>
+            <em>Step 1: partial derivatives of <m>g</m>.</em>
+            <md>
+                <mrow>
+                    \frac{\partial g}{\partial h} = \frac{2}{t^2},
+                    \qquad
+                    \frac{\partial g}{\partial t} = -\frac{4h}{t^3}.
+                </mrow>
+            </md>
+        </p>
+        <p>
+            <em>Step 2: bound the absolute error.</em>
+            Using the error propagation formula with <m>h_0 = 800\,\text{mm}</m>,
+            <m>t_0 = 0.4046\,\text{s}</m>,
+            <m>|\Delta h| = 4\,\text{mm}</m>, and <m>|\Delta t| = 0.0001\,\text{s}</m>:
+            <md>
+                <mrow>
+                    |\Delta g|
+                    &amp;\leq
+                    \left|\frac{2}{(0.4046)^2}\right| \cdot 4
+                    + \left|\frac{-4 \cdot 800}{(0.4046)^3}\right| \cdot 0.0001
+                </mrow>
+                <mrow>
+                    &amp;\approx 53.7\,\frac{\text{mm}}{\text{s}^2}
+                     = 0.0537\,\frac{\text{m}}{\text{s}^2}.
+                </mrow>
+            </md>
+        </p>
+        <p>
+            <em>Result.</em>
+            The nominal value is
+            <m>g_0 = 2 \cdot 0.8 / (0.4046)^2 \approx 9.773\,\text{m}/\text{s}^2</m>,
+            so the estimated gravitational acceleration with its uncertainty is
+            <me>
+                g = (9.773 \pm 0.054)\,\frac{\text{m}}{\text{s}^2}.
+            </me>
+            The dominant contribution comes from the height measurement,
+            since the sensitivity factor <m>|\partial g / \partial h|</m>
+            multiplied by <m>|\Delta h|</m> is substantially larger than the time contribution.
+        </p>
+        <p>
+            This example also shows a practical engineering lesson:
+            improving the precision of the measurement with the largest sensitivity contribution
+            gives the biggest reduction in the final output uncertainty.
+        </p>
+    </example>
+
+</subsection>

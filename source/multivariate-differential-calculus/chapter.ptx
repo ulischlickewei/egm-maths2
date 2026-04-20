@@ -12,6 +12,6 @@
   </introduction>
 
   <xi:include href="functions-continuity-partial-derivatives/section.ptx"/>
-  <!-- <xi:include href="error-propagation-taylor-extrema/section.ptx"/> -->
+  <xi:include href="error-propagation-taylor-extrema/section.ptx"/>
 
 </chapter>

@@ -1,0 +1,522 @@
+<subsection xml:id="subsec-extrema">
+    <title>Local Extrema of Multivariable Functions</title>
+
+    <introduction>
+        <p>
+            One of the central applications of differential calculus is finding where a
+            function attains its largest or smallest values.
+            For a single-variable function <m>f</m>, a necessary condition for a local
+            extremum at <m>x_0</m> is that the tangent line is horizontal: <m>f'(x_0) = 0</m>.
+            The analogous condition in higher dimensions requires that the tangent
+            <em>plane</em> is horizontal, i.e., the gradient vanishes.
+            To distinguish minima, maxima, and saddle points among the critical points,
+            we analyse the second-order Taylor polynomial via the Hessian matrix.
+        </p>
+    </introduction>
+
+    <!-- ─── Definition ─── -->
+
+    <definition xml:id="def-local-extremum">
+        <title>Local Maximum, Minimum, and Extreme Point</title>
+        <statement>
+            <p>
+                Let <m>U \subset \R^n</m> and <m>f \colon U \to \R</m>.
+            </p>
+            <p>
+                <ul>
+                    <li>
+                        <p>
+                            <m>f</m> has a <term>local maximum</term> (respectively
+                            <term>local minimum</term>) at <m>\mathbf{x} \in U</m>
+                            if there exists an open neighbourhood <m>V \subset U</m> of
+                            <m>\mathbf{x}</m> such that
+                            <me>
+                                f(\mathbf{x}) \geq f(\mathbf{y})
+                                \quad \text{(resp. } f(\mathbf{x}) \leq f(\mathbf{y})\text{)}
+                                \quad \forall\, \mathbf{y} \in V.
+                            </me>
+                            If the inequality is strict (<m>\gt</m> resp. <m>\lt</m>),
+                            the extremum is called <term>strict</term> (or <term>isolated</term>).
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <m>\mathbf{x}</m> is a <term>local extreme point</term>
+                            if <m>f</m> has a local maximum or minimum there.
+                        </p>
+                    </li>
+                </ul>
+            </p>
+        </statement>
+    </definition>
+
+    <!-- ─── Necessary condition ─── -->
+
+    <theorem xml:id="thm-necessary-condition-extremum">
+        <title>Necessary Condition for a Local Extremum</title>
+        <statement>
+            <p>
+                Let <m>U \subset \R^n</m> be open and let <m>f \colon U \to \R</m> be partially
+                differentiable at <m>\mathbf{x}_0 \in U</m>.
+                If <m>f</m> has a local extreme point at <m>\mathbf{x}_0</m>, then
+                <me>
+                    \nabla f(\mathbf{x}_0) = \mathbf{0}.
+                </me>
+            </p>
+            <p>
+                A point at which <m>\nabla f(\mathbf{x}_0) = \mathbf{0}</m> is called a
+                <term>critical point</term> of <m>f</m>.
+            </p>
+        </statement>
+        <proof>
+            <p>
+                Fix any coordinate direction <m>\mathbf{e}_i</m> and consider the
+                single-variable function <m>g_i(t) = f(\mathbf{x}_0 + t\mathbf{e}_i)</m>
+                for <m>t</m> close to <m>0</m>.
+                Because <m>\mathbf{x}_0</m> is a local extremum of <m>f</m>,
+                the point <m>t=0</m> is a local extremum of <m>g_i</m>.
+                The single-variable necessary condition therefore gives
+                <m>g_i'(0)=0</m>.
+                But <m>g_i'(0) = \dfrac{\partial f}{\partial x_i}(\mathbf{x}_0)</m>.
+                Since this holds for every <m>i = 1,\ldots,n</m>, all partial derivatives vanish,
+                so <m>\nabla f(\mathbf{x}_0)=\mathbf{0}</m>.
+            </p>
+        </proof>
+    </theorem>
+
+    <remark xml:id="rem-necessary-not-sufficient">
+        <title>Critical Points Need Not Be Extreme Points</title>
+        <p>
+            As in the single-variable case, the vanishing of the gradient is necessary but
+            <em>not sufficient</em> for an extremum.
+            The standard example is the <term>saddle point</term>:
+            for <m>f(x,y) = x^2 - y^2</m>, the origin satisfies
+            <m>\nabla f(0,0) = \mathbf{0}</m>, yet <m>f</m> increases from the origin
+            in the <m>x</m>-direction and decreases in the <m>y</m>-direction,
+            so <m>(0,0)</m> is neither a maximum nor a minimum.
+            To determine the nature of a critical point, we must look at second-order information.
+        </p>
+    </remark>
+
+    <!-- ─── Sufficient condition via Taylor ─── -->
+
+    <remark xml:id="rem-sufficient-condition-taylor">
+        <title>Sufficient Condition via the Taylor Polynomial</title>
+        <p>
+            Let <m>\mathbf{x}_0</m> be a critical point of <m>f</m>, so
+            <m>\nabla f(\mathbf{x}_0) = \mathbf{0}</m>.
+            Applying the second-order Taylor expansion
+            (cf. <xref ref="thm-multivariate-taylor"/>), the linear term vanishes and
+            we obtain
+            <me>
+                f(\mathbf{x})
+                \approx f(\mathbf{x}_0)
+                  + \frac{1}{2}(\mathbf{x}-\mathbf{x}_0)^\top
+                    H_f(\mathbf{x}_0)
+                    (\mathbf{x}-\mathbf{x}_0).
+            </me>
+            The sign of <m>f(\mathbf{x}) - f(\mathbf{x}_0)</m> near <m>\mathbf{x}_0</m>
+            is therefore determined by the quadratic form
+            <m>q(\mathbf{d}) = \mathbf{d}^\top H_f(\mathbf{x}_0)\,\mathbf{d}</m>
+            with <m>\mathbf{d} = \mathbf{x} - \mathbf{x}_0</m>:
+        </p>
+        <p>
+            <ul>
+                <li>
+                    <p>
+                        If <m>q(\mathbf{d}) \gt 0</m> for every nonzero
+                        <m>\mathbf{d} \in \R^n</m>
+                        (i.e., <m>H_f(\mathbf{x}_0)</m> is positive definite),
+                        then <m>f(\mathbf{x}) \gt f(\mathbf{x}_0)</m> for nearby
+                        <m>\mathbf{x} \neq \mathbf{x}_0</m>: <m>f</m> has 
+                        a strict local minimum at <m>\mathbf{x}_0</m>.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        If <m>q(\mathbf{d}) \lt 0</m> for every nonzero
+                        <m>\mathbf{d} \in \R^n</m>
+                        (i.e., <m>H_f(\mathbf{x}_0)</m> is negative definite),
+                        then <m>f(\mathbf{x}) \lt f(\mathbf{x}_0)</m> for nearby
+                        <m>\mathbf{x} \neq \mathbf{x}_0</m>: <m>f</m> has 
+                        a strict local maximum at <m>\mathbf{x}_0</m>.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        If <m>q</m> takes both positive and negative values
+                        (i.e., <m>H_f(\mathbf{x}_0)</m> is indefinite),
+                        then <m>f</m> increases in some directions and decreases in others:
+                        <m>f</m> has a saddle point at <m>\mathbf{x}_0</m>.
+                    </p>
+                </li>
+            </ul>
+        </p>
+        <p>
+            If the Hessian is only semi-definite, the quadratic term alone is not decisive;
+            then higher-order terms must be examined.
+        </p>
+    </remark>
+
+    <!-- ADDED: the source extraction had missing visuals; this contour sketch supplies the needed geometric intuition without inventing uncertain 3D artwork -->
+    <figure xml:id="fig-critical-point-contours">
+        <caption>
+            Contour-line sketches of the three basic quadratic models near a critical point:
+            concentric circles for a minimum, concentric circles with decreasing height for a maximum,
+            and hyperbolas for a saddle point.
+        </caption>
+        <image width="92%">
+            <latex-image label="critical-point-contours">
+\begin{tikzpicture}[scale=0.95, line cap=round, line join=round, >=stealth]
+    % minimum
+    \begin{scope}[shift={(0,0)}]
+        \draw[->,gray!70] (-1.8,0) -- (1.8,0);
+        \draw[->,gray!70] (0,-1.8) -- (0,1.8);
+        \foreach \r in {0.45,0.85,1.25} {
+            \draw[blue!70!black, very thick] (0,0) circle (\r);
+        }
+        \fill[blue!70!black] (0,0) circle (0.05);
+        \node[below] at (0,-2.2) {\small local minimum};
+        \node[above] at (0,2.0) {\small $f(x,y)=x^2+y^2$};
+    \end{scope}
+
+    % maximum
+    \begin{scope}[shift={(5.3,0)}]
+        \draw[->,gray!70] (-1.8,0) -- (1.8,0);
+        \draw[->,gray!70] (0,-1.8) -- (0,1.8);
+        \foreach \r in {0.45,0.85,1.25} {
+            \draw[red!70!black, very thick] (0,0) circle (\r);
+        }
+        \fill[red!70!black] (0,0) circle (0.05);
+        \node[below] at (0,-2.2) {\small local maximum};
+        \node[above] at (0,2.0) {\small $f(x,y)=-(x^2+y^2)$};
+    \end{scope}
+
+    % saddle
+    \begin{scope}[shift={(10.6,0)}]
+        \draw[->,gray!70] (-1.8,0) -- (1.8,0);
+        \draw[->,gray!70] (0,-1.8) -- (0,1.8);
+        \draw[green!50!black, very thick, domain=-1.45:-0.35, samples=80] plot (\x,{sqrt(\x*\x-0.12)});
+        \draw[green!50!black, very thick, domain=0.35:1.45, samples=80] plot (\x,{sqrt(\x*\x-0.12)});
+        \draw[green!50!black, very thick, domain=-1.45:-0.35, samples=80] plot (\x,{-sqrt(\x*\x-0.12)});
+        \draw[green!50!black, very thick, domain=0.35:1.45, samples=80] plot (\x,{-sqrt(\x*\x-0.12)});
+        \draw[green!50!black, very thick, domain=-1.45:-0.55, samples=80] plot (\x,{sqrt(\x*\x+0.35)});
+        \draw[green!50!black, very thick, domain=0.55:1.45, samples=80] plot (\x,{sqrt(\x*\x+0.35)});
+        \draw[green!50!black, very thick, domain=-1.45:-0.55, samples=80] plot (\x,{-sqrt(\x*\x+0.35)});
+        \draw[green!50!black, very thick, domain=0.55:1.45, samples=80] plot (\x,{-sqrt(\x*\x+0.35)});
+        \fill[green!50!black] (0,0) circle (0.05);
+        \node[below] at (0,-2.2) {\small saddle point};
+        \node[above] at (0,2.0) {\small $f(x,y)=x^2-y^2$};
+    \end{scope}
+\end{tikzpicture}
+            </latex-image>
+        </image>
+    </figure>
+
+    <!-- ─── Hessian classification theorem ─── -->
+
+    <theorem xml:id="thm-hessian-classification">
+        <title>Classification of Critical Points via the Hessian</title>
+        <statement>
+            <p>
+                Let <m>f \colon D \to \R</m> be a function of <m>n</m> variables whose
+                second-order partial derivatives exist and are continuous.
+                Let <m>\mathbf{x}_0</m> be a critical point, i.e.,
+                <m>\nabla f(\mathbf{x}_0) = \mathbf{0}</m>.
+                <ul>
+                    <li>
+                        <p>
+                            <m>H_f(\mathbf{x}_0)</m> <em>positive definite</em>
+                            <m>\implies</m>
+                            <m>f</m> has a <term>strict local minimum</term> at <m>\mathbf{x}_0</m>.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <m>H_f(\mathbf{x}_0)</m> <em>negative definite</em>
+                            <m>\implies</m>
+                            <m>f</m> has a <term>strict local maximum</term> at <m>\mathbf{x}_0</m>.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <m>H_f(\mathbf{x}_0)</m> <em>indefinite</em>
+                            <m>\implies</m>
+                            <m>f</m> has a <term>saddle point</term> at <m>\mathbf{x}_0</m>.
+                        </p>
+                    </li>
+                </ul>
+                If <m>H_f(\mathbf{x}_0)</m> is positive or negative semi-definite
+                (but not definite), the test is inconclusive.
+            </p>
+        </statement>
+        <proof>
+            <p>
+                By the second-order Taylor formula,
+                <me>
+                    f(\mathbf{x})
+                    = f(\mathbf{x}_0)
+                    + \frac{1}{2}(\mathbf{x}-\mathbf{x}_0)^\top H_f(\mathbf{x}_0)(\mathbf{x}-\mathbf{x}_0)
+                    + R_2(\mathbf{x}),
+                </me>
+                because the linear term vanishes at a critical point.
+                The remainder satisfies
+                <m>R_2(\mathbf{x}) = o(\|\mathbf{x}-\mathbf{x}_0\|^2)</m>.
+                Hence, for <m>\mathbf{x}</m> sufficiently close to <m>\mathbf{x}_0</m>,
+                the sign of <m>f(\mathbf{x})-f(\mathbf{x}_0)</m> is governed by the quadratic form
+                associated with the Hessian.
+                Positive definiteness gives positivity for every nonzero displacement
+                and therefore a strict local minimum; negative definiteness gives a strict local maximum;
+                and an indefinite Hessian yields nearby directions with both positive and negative change,
+                so the point is a saddle point.
+            </p>
+        </proof>
+    </theorem>
+
+    <!-- ─── R^2 criterion ─── -->
+
+    <theorem xml:id="thm-hessian-criterion-r2">
+        <title>Hessian Determinant Criterion for Functions of Two Variables</title>
+        <statement>
+            <p>
+                For a function <m>f \colon D \to \R</m> of two variables with continuous
+                second-order partial derivatives, let <m>(x_0, y_0)</m> be a critical point.
+                Write
+                <me>
+                    H_f(x_0, y_0)
+                    = \begin{pmatrix}
+                        f_{xx} &amp; f_{xy} \\
+                        f_{yx} &amp; f_{yy}
+                      \end{pmatrix},
+                </me>
+                where <m>f_{xx} = \dfrac{\partial^2 f}{\partial x^2}(x_0,y_0)</m>, etc.
+            </p>
+            <p>
+                <ul>
+                    <li>
+                        <p>
+                            If <m>\det H_f(x_0,y_0) \gt 0</m> and
+                            <m>f_{xx}(x_0,y_0) \gt 0</m>, then <m>(x_0,y_0)</m> is a
+                            <term>strict local minimum</term>.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            If <m>\det H_f(x_0,y_0) \gt 0</m> and
+                            <m>f_{xx}(x_0,y_0) \lt 0</m>, then <m>(x_0,y_0)</m> is a
+                            <term>strict local maximum</term>.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            If <m>\det H_f(x_0,y_0) \lt 0</m>, then <m>(x_0,y_0)</m> is a
+                            <term>saddle point</term>.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            If <m>\det H_f(x_0,y_0) = 0</m>, the criterion is inconclusive.
+                        </p>
+                    </li>
+                </ul>
+            </p>
+        </statement>
+    </theorem>
+
+    <remark xml:id="rem-hessian-r2-practice">
+        <title>Practical Procedure for Two-Variable Extrema</title>
+        <p>
+            To find and classify all local extrema of a smooth function
+            <m>f(x,y)</m>:
+        </p>
+        <p>
+            <ol>
+                <li>
+                    <p>
+                        <em>Find critical points:</em>
+                        solve <m>\nabla f(x,y) = \mathbf{0}</m>,
+                        i.e., both equations
+                        <m>f_x = 0</m> and <m>f_y = 0</m> simultaneously.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <em>Compute the Hessian at each critical point:</em>
+                        calculate <m>f_{xx}</m>, <m>f_{xy}</m>, and <m>f_{yy}</m>
+                        and evaluate at the critical point.
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <em>Apply the determinant criterion</em>
+                        (<xref ref="thm-hessian-criterion-r2"/>):
+                        evaluate <m>\det H_f = f_{xx} f_{yy} - f_{xy}^2</m>
+                        and check the sign of <m>f_{xx}</m> if <m>\det H_f \gt 0</m>.
+                    </p>
+                </li>
+            </ol>
+        </p>
+    </remark>
+
+    <!-- ─── Example 1 ─── -->
+
+    <example xml:id="ex-extrema-exp-cosh">
+        <title>Critical Points of <m>e^{-x^2/2}\cosh(y)</m></title>
+        <p>
+            Consider <m>f(x,y) = e^{-x^2/2} \cosh(y)</m>.
+            Find and classify all local extreme points.
+        </p>
+        <p>
+            <em>Step 1: find critical points.</em>
+            <md>
+                <mrow>
+                    \nabla f(x,y)
+                    = \begin{pmatrix}
+                        -x\,e^{-x^2/2} \cosh(y) \\
+                        e^{-x^2/2} \sinh(y)
+                      \end{pmatrix}
+                    = \begin{pmatrix} 0 \\ 0 \end{pmatrix}.
+                </mrow>
+            </md>
+            Since <m>e^{-x^2/2} \gt 0</m> always and <m>\cosh(y) \geq 1 \gt 0</m> always,
+            the first equation requires <m>x = 0</m>.
+            With <m>x = 0</m>, the second equation becomes <m>\sinh(y) = 0</m>,
+            which holds only for <m>y = 0</m>.
+            The unique critical point is <m>(0,0)</m>.
+        </p>
+        <p>
+            <em>Step 2: Hessian at <m>(0,0)</m>.</em>
+            <md>
+                <mrow>
+                    f_{xx}(x,y) &amp;= (-1 + x^2)\,e^{-x^2/2}\cosh(y),
+                </mrow>
+                <mrow>
+                    f_{xy}(x,y) &amp;= -x\,e^{-x^2/2}\sinh(y),
+                </mrow>
+                <mrow>
+                    f_{yy}(x,y) &amp;= e^{-x^2/2}\cosh(y).
+                </mrow>
+            </md>
+            Evaluating at <m>(0,0)</m>:
+            <me>
+                H_f(0,0)
+                = \begin{pmatrix} -1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}.
+            </me>
+        </p>
+        <p>
+            <em>Step 3: classification.</em>
+            <m>\det H_f(0,0) = (-1)(1) - 0^2 = -1 \lt 0</m>.
+        </p>
+        <p>
+            By <xref ref="thm-hessian-criterion-r2"/>,
+            the function <m>f</m> has a <em>saddle point</em> at <m>(0,0)</m>.
+            The surface rises in the <m>y</m>-direction (where <m>f_{yy} = 1 \gt 0</m>)
+            and falls in the <m>x</m>-direction (where <m>f_{xx} = -1 \lt 0</m>).
+        </p>
+    </example>
+
+    <!-- ─── Example 2 ─── -->
+
+    <example xml:id="ex-extrema-log-function">
+        <title>Critical Points of <m>x(\ln y - 2x)</m></title>
+        <p>
+            Consider <m>f(x,y) = x\,(\ln y - 2x)</m> on the domain
+            <m>\{(x,y) : y \gt 0\}</m>.
+            Find and classify all local extreme points.
+        </p>
+        <p>
+            <em>Step 1: find critical points.</em>
+            <md>
+                <mrow>
+                    \nabla f(x,y)
+                    = \begin{pmatrix}
+                        \ln y - 4x \\[3pt]
+                        x/y
+                      \end{pmatrix}
+                    = \begin{pmatrix} 0 \\ 0 \end{pmatrix}.
+                </mrow>
+            </md>
+            The second equation gives <m>x = 0</m>
+            (since <m>y \gt 0</m>).
+            Substituting into the first equation:
+            <m>\ln y = 0 \implies y = 1</m>.
+            The unique critical point is <m>(0,1)</m>.
+        </p>
+        <p>
+            <em>Step 2: Hessian at <m>(0,1)</m>.</em>
+            <md>
+                <mrow>
+                    f_{xx} = -4, \quad
+                    f_{xy} = \frac{1}{y}, \quad
+                    f_{yy} = -\frac{x}{y^2}.
+                </mrow>
+            </md>
+            Evaluating at <m>(0,1)</m>:
+            <me>
+                H_f(0,1)
+                = \begin{pmatrix} -4 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}.
+            </me>
+        </p>
+        <p>
+            <em>Step 3: classification.</em>
+            <m>\det H_f(0,1) = (-4)(0) - 1^2 = -1 \lt 0</m>.
+        </p>
+        <p>
+            By <xref ref="thm-hessian-criterion-r2"/>,
+            <m>f</m> has a <em>saddle point</em> at <m>(0,1)</m>.
+        </p>
+    </example>
+
+    <!-- ─── Example 3: minimum ─── -->
+
+    <example xml:id="ex-extrema-paraboloid-minimum">
+        <title>Local Minimum of a Paraboloid</title>
+        <p>
+            Consider <m>f(x,y) = x^2 + xy + y^2 + 2x - y</m>.
+            Find and classify all local extreme points.
+        </p>
+        <p>
+            <em>Step 1: find critical points.</em>
+            <md>
+                <mrow>
+                    f_x = 2x + y + 2 = 0,
+                    \qquad
+                    f_y = x + 2y - 1 = 0.
+                </mrow>
+            </md>
+            From the first equation, <m>y = -2x - 2</m>.
+            Substituting into the second:
+            <m>x + 2(-2x-2) - 1 = 0 \implies -3x - 5 = 0 \implies x = -\tfrac{5}{3}</m>.
+            Then <m>y = -2(-\tfrac{5}{3}) - 2 = \tfrac{4}{3}</m>.
+            The unique critical point is
+            <m>\bigl(-\tfrac{5}{3},\tfrac{4}{3}\bigr)</m>.
+        </p>
+        <p>
+            <em>Step 2: Hessian.</em>
+            Since <m>f_{xx} = 2</m>, <m>f_{xy} = 1</m>, <m>f_{yy} = 2</m> are constant:
+            <me>
+                H_f = \begin{pmatrix} 2 &amp; 1 \\ 1 &amp; 2 \end{pmatrix}.
+            </me>
+        </p>
+        <p>
+            <em>Step 3: classification.</em>
+            <m>\det H_f = 4 - 1 = 3 \gt 0</m> and <m>f_{xx} = 2 \gt 0</m>.
+        </p>
+        <p>
+            By <xref ref="thm-hessian-criterion-r2"/>,
+            <m>f</m> has a <term>strict local minimum</term>
+            at <m>\bigl(-\tfrac{5}{3},\tfrac{4}{3}\bigr)</m>.
+        </p>
+    </example>
+
+    <conclusion>
+        <p>
+            The workflow for local extrema is now complete:
+            find the critical points from <m>\nabla f = \mathbf{0}</m>,
+            then use the Hessian to decide whether the second-order Taylor polynomial
+            behaves like a bowl, an upside-down bowl, or a saddle.
+            This gives a direct bridge from local approximation to optimisation.
+        </p>
+    </conclusion>
+
+</subsection>

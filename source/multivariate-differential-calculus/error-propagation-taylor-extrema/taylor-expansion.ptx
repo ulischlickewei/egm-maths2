@@ -1,0 +1,216 @@
+<subsection xml:id="subsec-taylor-expansion">
+    <title>Multivariate Taylor Expansion</title>
+
+    <introduction>
+        <p>
+            In single-variable calculus, the Taylor polynomial provides the best polynomial
+            approximation of a smooth function near a given point.
+            The same idea extends to functions of several variables:
+            the second-order Taylor polynomial replaces the tangent line by a
+            <em>tangent paraboloid</em>, capturing not just the slope but also the curvature
+            of the function near the expansion point.
+            This quadratic approximation is the foundation for the extremum classification
+            developed in <xref ref="subsec-extrema"/>.
+        </p>
+    </introduction>
+
+    <!-- ─── Derivation ─── -->
+
+    <remark xml:id="rem-taylor-derivation">
+        <title>Derivation of the Multivariate Taylor Formula</title>
+        <p>
+            Let <m>f \colon D \to \R</m> with <m>D \subseteq \R^n</m>,
+            and fix a base point <m>\mathbf{x}_0 \in D</m> and a direction
+            <m>\mathbf{v} \in \R^n</m>.
+            Assume that <m>f</m> has continuous second-order partial derivatives near
+            <m>\mathbf{x}_0</m>.
+            Consider the single-variable function
+            <m>h(t) = f(\mathbf{x}_0 + t\mathbf{v})</m>.
+            Applying the univariate second-order Taylor formula to <m>h</m> at <m>t = 0</m>:
+            <me>
+                h(t) = h(0) + h'(0)\,t + \frac{h''(0)}{2}\,t^2 + \mathcal{O}(t^3).
+            </me>
+        </p>
+        <p>
+            We compute the derivatives of <m>h</m> at <m>t = 0</m>.
+        </p>
+        <p>
+            <em>First derivative:</em>
+            By the definition of the directional derivative
+            (cf. <xref ref="def-directional-derivative"/>):
+            <me>
+                h'(0)
+                = \lim_{t \to 0} \frac{f(\mathbf{x}_0 + t\mathbf{v}) - f(\mathbf{x}_0)}{t}
+                = \frac{\partial f}{\partial \mathbf{v}}(\mathbf{x}_0)
+                = \nabla f(\mathbf{x}_0) \cdot \mathbf{v}.
+            </me>
+        </p>
+        <p>
+            <em>Second derivative:</em>
+            Differentiating once more, the chain rule gives
+            <me>
+                h''(0) = \mathbf{v}^\top H_f(\mathbf{x}_0)\, \mathbf{v}
+                = \sum_{i,j=1}^{n} v_i\, \frac{\partial^2 f}{\partial x_i \partial x_j}(\mathbf{x}_0)\, v_j,
+            </me>
+            where <m>H_f(\mathbf{x}_0)</m> is the Hessian matrix at <m>\mathbf{x}_0</m>
+            (cf. <xref ref="def-hessian-matrix"/>).
+            The expression <m>\mathbf{v}^\top H_f(\mathbf{x}_0)\, \mathbf{v}</m> is the
+            quadratic form associated with the Hessian, evaluated at <m>\mathbf{v}</m>.
+        </p>
+        <p>
+            Setting <m>t = 1</m> and writing <m>\mathbf{x} = \mathbf{x}_0 + \mathbf{v}</m>
+            (so <m>\mathbf{v} = \mathbf{x} - \mathbf{x}_0</m>) yields the multivariate
+            Taylor expansion, with a remainder that is small compared with
+            <m>\|\mathbf{x}-\mathbf{x}_0\|^2</m>.
+        </p>
+    </remark>
+
+    <!-- ─── Theorem ─── -->
+
+    <theorem xml:id="thm-multivariate-taylor">
+        <title>Multivariate Taylor Expansion of Order 2</title>
+        <statement>
+            <p>
+                Let <m>f \colon D \to \R</m> be a function of <m>n</m> variables whose
+                second-order partial derivatives exist and are continuous on an open
+                set <m>D \subseteq \R^n</m>.
+                Let <m>\mathbf{x}_0, \mathbf{x} \in D</m> be such that the line segment
+                connecting them lies entirely in <m>D</m>.
+                Then
+                <me>
+                    f(\mathbf{x})
+                    = f(\mathbf{x}_0)
+                        + \nabla f(\mathbf{x}_0) \cdot (\mathbf{x} - \mathbf{x}_0)
+                        + \tfrac{1}{2}(\mathbf{x}-\mathbf{x}_0)^\top
+                          H_f(\mathbf{x}_0)
+                          (\mathbf{x}-\mathbf{x}_0)
+                        + R_2(\mathbf{x}),
+                </me>
+                where the remainder satisfies
+                <me>
+                    \lim_{\mathbf{x} \to \mathbf{x}_0}
+                    \frac{R_2(\mathbf{x})}{\|\mathbf{x} - \mathbf{x}_0\|^2}
+                    = 0.
+                </me>
+            </p>
+            <p>
+                Explicitly, the three terms of the Taylor polynomial are:
+                <ul>
+                    <li>
+                        <p>
+                            <em>Zeroth order:</em>
+                            <m>f(\mathbf{x}_0)</m> — the function value at the expansion point.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <em>First order:</em>
+                            <m>\nabla f(\mathbf{x}_0) \cdot (\mathbf{x} - \mathbf{x}_0)</m>
+                            — the tangent plane correction (linear term).
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <em>Second order:</em>
+                            <m>\tfrac{1}{2}(\mathbf{x}-\mathbf{x}_0)^\top H_f(\mathbf{x}_0)(\mathbf{x}-\mathbf{x}_0)</m>
+                            — the curvature correction (quadratic term).
+                        </p>
+                    </li>
+                </ul>
+            </p>
+        </statement>
+    </theorem>
+
+    <!-- ─── Example ─── -->
+
+    <example xml:id="ex-taylor-exp-two-variables">
+        <title>Taylor Polynomial of <m>e^{x+y^2}</m> at the Origin</title>
+        <p>
+            Determine the second-order Taylor polynomial of
+            <m>f(x,y) = e^{x + y^2}</m> at <m>\mathbf{x}_0 = (0,0)</m>.
+        </p>
+        <p>
+            <em>Step 1: function value.</em>
+            <me>f(0,0) = e^0 = 1.</me>
+        </p>
+        <p>
+            <em>Step 2: gradient at <m>(0,0)</m>.</em>
+            <md>
+                <mrow>
+                    \nabla f(x,y)
+                    = \begin{pmatrix} e^{x+y^2} \\ 2y\,e^{x+y^2} \end{pmatrix},
+                    \qquad
+                    \nabla f(0,0)
+                    = \begin{pmatrix} 1 \\ 0 \end{pmatrix}.
+                </mrow>
+            </md>
+        </p>
+        <p>
+            <em>Step 3: Hessian matrix at <m>(0,0)</m>.</em>
+            The second-order partial derivatives of <m>f</m> are:
+            <md>
+                <mrow>
+                    \frac{\partial^2 f}{\partial x^2}
+                    &amp;= e^{x+y^2},
+                </mrow>
+                <mrow>
+                    \frac{\partial^2 f}{\partial x \partial y}
+                    = \frac{\partial^2 f}{\partial y \partial x}
+                    &amp;= 2y\,e^{x+y^2},
+                </mrow>
+                <mrow>
+                    \frac{\partial^2 f}{\partial y^2}
+                    &amp;= (2 + 4y^2)\,e^{x+y^2}.
+                </mrow>
+            </md>
+            Evaluating at <m>(0,0)</m>:
+            <me>
+                H_f(0,0)
+                = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 2 \end{pmatrix}.
+            </me>
+        </p>
+        <p>
+            <em>Step 4: assemble the Taylor polynomial.</em>
+            <md>
+                <mrow>
+                    f(x,y)
+                    &amp;\approx f(0,0)
+                       + \nabla f(0,0) \cdot \begin{pmatrix} x \\ y \end{pmatrix}
+                       + \tfrac{1}{2}
+                         \begin{pmatrix} x &amp; y \end{pmatrix}
+                         H_f(0,0)
+                         \begin{pmatrix} x \\ y \end{pmatrix}
+                </mrow>
+                <mrow>
+                    &amp;= 1 + x + \tfrac{1}{2}(x^2 + 2y^2).
+                </mrow>
+            </md>
+        </p>
+        <p>
+            The quadratic term <m>\tfrac{1}{2}(x^2 + 2y^2)</m> encodes the curvature
+            of the surface: the factor <m>2</m> on <m>y^2</m> reflects that <m>f</m>
+            curves twice as steeply in the <m>y</m>-direction as in the <m>x</m>-direction
+            near the origin.
+        </p>
+        <p>
+            Since <m>e^{x+y^2} = 1 + x + y^2 + \tfrac{1}{2}x^2 + \text{higher-order terms}</m>,
+            this result also agrees with the familiar single-variable series for <m>e^u</m>
+            after substituting <m>u = x + y^2</m> and discarding all terms of degree at least <m>3</m>.
+        </p>
+    </example>
+
+    <remark xml:id="rem-taylor-as-approximation">
+        <title>The Taylor Polynomial as a Local Approximation</title>
+        <p>
+            Near <m>\mathbf{x}_0</m>, the second-order Taylor polynomial
+            approximates <m>f</m> by a paraboloid: an elliptic paraboloid when
+            <m>H_f(\mathbf{x}_0)</m> is definite (positive or negative), or a
+            hyperbolic paraboloid (saddle shape) when <m>H_f(\mathbf{x}_0)</m> is indefinite.
+            This geometric picture motivates the extremum classification in
+            <xref ref="subsec-extrema"/>: the type of paraboloid that best fits
+            the graph of <m>f</m> at a critical point determines whether that point
+            is a local minimum, maximum, or saddle point.
+        </p>
+    </remark>
+
+</subsection>

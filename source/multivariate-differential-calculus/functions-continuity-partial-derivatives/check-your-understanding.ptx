@@ -1,0 +1,157 @@
+<exercises xml:id="exercises-functions-continuity-partial-derivatives">
+    <title>Check Your Understanding</title>
+
+    <exercise xml:id="exer-domain-semisphere">
+        <title>Recognise the Domain</title>
+        <statement>
+            <p>
+                Consider the function
+                <me>
+                    f(x,y)=\sqrt{4-x^2-y^2}.
+                </me>
+                Which set is its domain?
+            </p>
+        </statement>
+        <choices>
+            <choice>
+                <statement><p>All of <m>\R^2</m></p></statement>
+                <feedback><p>Incorrect. The expression under the square root must be non-negative.</p></feedback>
+            </choice>
+            <choice correct="yes">
+                <statement><p><m>\{(x,y)\in\R^2 \mid x^2+y^2 \le 4\}</m></p></statement>
+                <feedback><p>Correct. The square root requires <m>4-x^2-y^2 \ge 0</m>, which is the closed disk of radius <m>2</m>.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><m>\{(x,y)\in\R^2 \mid x^2+y^2 = 4\}</m></p></statement>
+                <feedback><p>Incorrect. Equality gives only the boundary circle, but interior points are allowed too.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><m>\{(x,y)\in\R^2 \mid x^2+y^2 \ge 4\}</m></p></statement>
+                <feedback><p>Incorrect. Outside the circle, the radicand is negative.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise xml:id="exer-path-test-continuity">
+        <title>Use of a Path Test</title>
+        <statement>
+            <p>
+                Suppose two different paths approaching the same point
+                <m>\mathbf{x}_0</m> produce two different function-value limits.
+                What can you conclude?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p>The limit at <m>\mathbf{x}_0</m> does not exist, so the function is not continuous there.</p></statement>
+                <feedback><p>Correct. Different path limits immediately rule out the existence of a single multivariate limit.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>The function is still continuous if the two paths are straight lines.</p></statement>
+                <feedback><p>Incorrect. Any two approach paths with different limits are enough to disprove continuity.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>The function is continuous if one of the two limits equals <m>f(\mathbf{x}_0)</m>.</p></statement>
+                <feedback><p>Incorrect. Continuity requires all approach paths to give the same limit.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>No conclusion is possible; one must check every path.</p></statement>
+                <feedback><p>Incorrect. A single mismatch already proves that the limit does not exist.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise xml:id="exer-gradient-directional-derivative-basic">
+        <title>Gradient and Directional Derivative</title>
+        <statement>
+            <p>
+                Let
+                <me>
+                    f(x,y)=x^2+xy.
+                </me>
+                Compute the gradient at <m>(1,2)</m> and the directional derivative at that point in the direction
+                <me>
+                    \mathbf{r}=\frac{1}{\sqrt{2}}\begin{pmatrix}1\\1\end{pmatrix}.
+                </me>
+            </p>
+        </statement>
+        <solution>
+            <p>
+                First compute the partial derivatives:
+                <me>
+                    \frac{\partial f}{\partial x}=2x+y,
+                    \qquad
+                    \frac{\partial f}{\partial y}=x.
+                </me>
+                Hence
+                <me>
+                    \nabla f(1,2)
+                    =
+                    \begin{pmatrix}
+                        2\cdot 1 + 2\\
+                        1
+                    \end{pmatrix}
+                    =
+                    \begin{pmatrix}
+                        4\\
+                        1
+                    \end{pmatrix}.
+                </me>
+            </p>
+            <p>
+                The directional derivative is the dot product with the unit vector <m>\mathbf{r}</m>:
+                <me>
+                    \frac{\partial f}{\partial \mathbf{r}}(1,2)
+                    =
+                    \nabla f(1,2)\cdot \mathbf{r}
+                    =
+                    \begin{pmatrix}4\\1\end{pmatrix}
+                    \cdot
+                    \frac{1}{\sqrt{2}}\begin{pmatrix}1\\1\end{pmatrix}
+                    =
+                    \frac{5}{\sqrt{2}}.
+                </me>
+            </p>
+        </solution>
+    </exercise>
+
+    <exercise xml:id="exer-hessian-basic">
+        <title>Compute a Hessian Matrix</title>
+        <statement>
+            <p>
+                Compute the Hessian matrix of
+                <me>
+                    f(x,y)=x^2+xy+y^2.
+                </me>
+            </p>
+        </statement>
+        <solution>
+            <p>
+                The first-order partial derivatives are
+                <me>
+                    \frac{\partial f}{\partial x}=2x+y,
+                    \qquad
+                    \frac{\partial f}{\partial y}=x+2y.
+                </me>
+                Differentiating again gives
+                <me>
+                    f_{xx}=2,
+                    \qquad
+                    f_{xy}=1,
+                    \qquad
+                    f_{yx}=1,
+                    \qquad
+                    f_{yy}=2.
+                </me>
+                Therefore
+                <me>
+                    H_f(x,y)=
+                    \begin{pmatrix}
+                        2 &amp; 1\\
+                        1 &amp; 2
+                    \end{pmatrix}.
+                </me>
+            </p>
+        </solution>
+    </exercise>
+</exercises>

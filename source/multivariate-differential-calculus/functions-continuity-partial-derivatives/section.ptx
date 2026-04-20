@@ -22,5 +22,6 @@
   <xi:include href="continuity.ptx"/>
   <xi:include href="partial-derivatives.ptx"/>
   <xi:include href="higher-order-derivatives.ptx"/>
+  <xi:include href="check-your-understanding.ptx"/>
 
 </section>
