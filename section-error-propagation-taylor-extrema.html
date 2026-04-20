@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: denver                         *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Error Propagation, Taylor Expansion, and Extrema</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+<link href="_static/pretext/css/theme.css" rel="stylesheet" type="text/css">
+<script>
+var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
+  "tex": {
+    "inlineMath": [
+      [
+        "\\(",
+        "\\)"
+      ]
+    ],
+    "tags": "none",
+    "tagSide": "right",
+    "tagIndent": ".8em",
+    "packages": {
+      "[+]": [
+        "base",
+        "extpfeil",
+        "ams",
+        "amscd",
+        "color",
+        "newcommand",
+        "knowl"
+      ]
+    }
+  },
+  "options": {
+    "ignoreHtmlClass": "tex2jax_ignore|ignore-math",
+    "processHtmlClass": "process-math"
+  },
+  "chtml": {
+    "scale": 0.98,
+    "mtextInheritFont": true
+  },
+  "loader": {
+    "load": [
+      "input/asciimath",
+      "[tex]/extpfeil",
+      "[tex]/amscd",
+      "[tex]/color",
+      "[tex]/newcommand",
+      "[pretext]/mathjaxknowl3.js"
+    ],
+    "paths": {
+      "pretext": "_static/pretext/js"
+    }
+  },
+  "startup": {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+  }
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="Mathematics 2">
+<meta property="book:author" content="Ulrich Schlickewei">
+<script src="_static/pretext/js/jquery.min.js"></script><script src="_static/pretext/js/pretext.js"></script><script src="_static/pretext/js/pretext_add_on.js?x=1"></script><!--** eBookCongig is necessary to configure interactive       **-->
+<!--** Runestone components to run locally in reader's browser **-->
+<!--** No external communication:                              **-->
+<!--**     log level is 0, Runestone Services are disabled     **-->
+<script type="text/javascript">
+eBookConfig = {};
+eBookConfig.useRunestoneServices = false;
+eBookConfig.host = 'http://127.0.0.1:8000';
+eBookConfig.course = 'PTX_Course_Title_Here';
+eBookConfig.basecourse = 'PTX_Base_Course';
+eBookConfig.isLoggedIn = false;
+eBookConfig.email = '';
+eBookConfig.isInstructor = false;
+eBookConfig.logLevel = 0;
+eBookConfig.username = '';
+eBookConfig.readings = null;
+eBookConfig.activities = null;
+eBookConfig.downloadsEnabled = false;
+eBookConfig.allow_pairs = false;
+eBookConfig.enableScratchAC = false;
+eBookConfig.build_info = "";
+eBookConfig.python3 = null;
+eBookConfig.runestone_version = '7.13.5';
+eBookConfig.jobehost = '';
+eBookConfig.proxyuri_runs = '';
+eBookConfig.proxyuri_files = '';
+eBookConfig.enable_chatcodes =  false;
+</script>
+<!--*** Runestone Services ***-->
+<script src="_static/prefix-runtime.52176322e2c1dde5.bundle.js"></script><script src="_static/prefix-723.3e6434f80549315a.bundle.js"></script><script src="_static/prefix-runestone.bbf2283c5c1d4f99.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-723.3bccd435914aa0ff.css">
+<link rel="stylesheet" type="text/css" href="_static/prefix-runestone.b12a7b3f0773ebcd.css">
+<script src="_static/pretext/js/lti_iframe_resizer.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/pretext_search.js"></script><script src="_static/pretext/js/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script>
+</head>
+<body id="Mathematics 2" class="pretext book ignore-math">
+<a class="assistive" href="#ptx-content">Skip to main content</a><header id="ptx-masthead" class="ptx-masthead"><div class="ptx-banner"><div class="title-container">
+<h1 class="heading"><a href="egm-maths2.html"><span class="title">Mathematics 2</span> <span class="subtitle">Lecture notes</span></a></h1>
+<p class="byline">Ulrich Schlickewei</p>
+</div></div></header><nav id="ptx-navbar" class="ptx-navbar navbar"><div class="ptx-navbar-contents">
+<button class="toc-toggle button" title="Contents"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5d2;</span><span class="name">Contents</span></button><div class="searchbox">
+<div class="searchwidget"><button id="searchbutton" class="searchbutton button" type="button" title="Search book"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe8b6;</span><span class="name">Search Book</span></button></div>
+<div id="searchresultsplaceholder" class="searchresultsplaceholder" style="display: none">
+<div class="search-results-controls">
+<input aria-label="Search term" id="ptxsearch" class="ptxsearch" type="text" name="terms" placeholder="Search term"><button title="Close search" id="closesearchresults" class="closesearchresults"><span class="material-symbols-outlined">close</span></button>
+</div>
+<h2 class="search-results-heading">Search Results: </h2>
+<div id="searchempty" class="searchempty"><span>No results.</span></div>
+<ol id="searchresults" class="searchresults"></ol>
+</div>
+</div>
+<span class="nav-other-controls"><button id="light-dark-button" class="light-dark-button button" title="Dark Mode"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe51c;</span><span class="name">Dark Mode</span></button></span><span class="treebuttons"><a class="previous-button button" href="section-functions-continuity-partial-derivatives.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="up-button button" href="chapter-multivariate-differential-calculus.html" title="Up"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Up</span></a><a class="next-button button" href="backmatter.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a></span>
+</div></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N} \newcommand{\Z}{\mathbb Z} \newcommand{\Q}{\mathbb Q} \newcommand{\R}{\mathbb R}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\)</span></div>
+<div class="ptx-page">
+<div id="ptx-sidebar" class="ptx-sidebar"><nav id="ptx-toc" class="ptx-toc depth3 focused" data-preexpanded-levels="0" data-max-levels="3"><ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-frontmatter">
+<div class="toc-title-box"><a href="egm-maths2-3.html" class="internal"><span class="title">Front Matter</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-preface"><div class="toc-title-box"><a href="egm-maths2-3-3.html" class="internal"><span class="title">Preface</span></a></div></li>
+<li class="toc-item toc-colophon"><div class="toc-title-box"><a href="front-colophon.html" class="internal"><span class="title">Colophon</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="chapter-linear-algebra.html" class="internal"><span class="codenumber">1</span> <span class="title">Linear Algebra</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html" class="internal"><span class="codenumber">1.1</span> <span class="title">Vectors, Matrices and Linear Systems of Equations</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html#subsec-vectors" class="internal"><span class="codenumber">1.1.1</span> <span class="title">Brief reminder: vectors</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html#exercises-vectors-reminder" class="internal"><span class="codenumber">1.1.1</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html#subsec-matrices" class="internal"><span class="codenumber">1.1.2</span> <span class="title">Matrices</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html#subsubsec-matrix-operations" class="internal"><span class="codenumber">1.1.2.1</span> <span class="title">Arithmetic Operations on Matrices</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html#subsubsec-special-matrices" class="internal"><span class="codenumber">1.1.2.2</span> <span class="title">Special Matrices and Laws of Arithmetic</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html#subsec-linear-systems" class="internal"><span class="codenumber">1.1.3</span> <span class="title">Linear Systems and the Gauss--Jordan Method</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html#subsec-linear-systems-49" class="internal"><span class="codenumber">1.1.3</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-determinants-inverse-matrices.html" class="internal"><span class="codenumber">1.2</span> <span class="title">Determinants and Inverse Matrices</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-determinants-inverse-matrices.html#section-determinants-inverse-matrices-3" class="internal"><span class="codenumber">1.2.1</span> <span class="title">Inverse Matrices</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-determinants-inverse-matrices.html#exercises-inverse-matrices" class="internal"><span class="codenumber">1.2.1</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-determinants-inverse-matrices.html#section-determinants-inverse-matrices-4" class="internal"><span class="codenumber">1.2.2</span> <span class="title">Determinants</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-determinants-inverse-matrices.html#section-determinants-inverse-matrices-4-25" class="internal"><span class="codenumber">1.2.2</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-eigenvalues-eigenvectors.html" class="internal"><span class="codenumber">1.3</span> <span class="title">Eigenvalues, Diagonalization, and Quadratic Forms</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-eigenvalues-eigenvectors.html#section-eigenvalues-eigenvectors-3" class="internal"><span class="codenumber">1.3.1</span> <span class="title">Eigenvalues and Eigenvectors</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-eigenvalues-eigenvectors.html#exercises-eigenvalues-eigenvectors" class="internal"><span class="codenumber">1.3.1</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-eigenvalues-eigenvectors.html#subsec-diagonalization" class="internal"><span class="codenumber">1.3.2</span> <span class="title">Diagonalization of Matrices</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-eigenvalues-eigenvectors.html#exercises-diagonalization" class="internal"><span class="codenumber">1.3.2</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-eigenvalues-eigenvectors.html#subsec-quadratic-forms" class="internal"><span class="codenumber">1.3.3</span> <span class="title">Quadratic Forms</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-eigenvalues-eigenvectors.html#exercises-quadratic-forms" class="internal"><span class="codenumber">1.3.3</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter contains-active">
+<div class="toc-title-box"><a href="chapter-multivariate-differential-calculus.html" class="internal"><span class="codenumber">2</span> <span class="title">Multivariate Differential Calculus</span></a></div>
+<ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-functions-continuity-partial-derivatives.html" class="internal"><span class="codenumber">2.1</span> <span class="title">Functions, Continuity, and Partial Derivatives</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-functions-continuity-partial-derivatives.html#subsec-multivariable-functions" class="internal"><span class="codenumber">2.1.1</span> <span class="title">Functions of Several Variables</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-functions-continuity-partial-derivatives.html#subsec-continuity-multivariate" class="internal"><span class="codenumber">2.1.2</span> <span class="title">Continuity</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-functions-continuity-partial-derivatives.html#subsec-partial-derivatives" class="internal"><span class="codenumber">2.1.3</span> <span class="title">Partial Derivatives, Gradient, and Differentiability</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-functions-continuity-partial-derivatives.html#subsec-higher-order-partial-derivatives" class="internal"><span class="codenumber">2.1.4</span> <span class="title">Higher-Order Partial Derivatives and the Hessian Matrix</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-functions-continuity-partial-derivatives.html#exercises-functions-continuity-partial-derivatives" class="internal"><span class="codenumber">2.1.5</span> <span class="title">Check Your Understanding</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section contains-active">
+<div class="toc-title-box"><a href="section-error-propagation-taylor-extrema.html" class="internal"><span class="codenumber">2.2</span> <span class="title">Error Propagation, Taylor Expansion, and Extrema</span></a></div>
+<ul class="structural toc-item-list active">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-error-propagation-taylor-extrema.html#subsec-error-propagation" class="internal"><span class="codenumber">2.2.1</span> <span class="title">Error Propagation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-error-propagation-taylor-extrema.html#subsec-taylor-expansion" class="internal"><span class="codenumber">2.2.2</span> <span class="title">Multivariate Taylor Expansion</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-error-propagation-taylor-extrema.html#subsec-extrema" class="internal"><span class="codenumber">2.2.3</span> <span class="title">Local Extrema of Multivariable Functions</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-error-propagation-taylor-extrema.html#exercises-error-propagation-taylor-extrema" class="internal"><span class="codenumber">2.2.4</span> <span class="title">Check Your Understanding</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-backmatter"><div class="toc-title-box"><a href="backmatter.html" class="internal"><span class="title">Backmatter</span></a></div></li>
+</ul></nav></div>
+<main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="section" id="section-error-propagation-taylor-extrema"><h2 class="heading hide-type">
+<span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Error Propagation, Taylor Expansion, and Extrema</span>
+</h2>
+<section class="introduction" id="section-error-propagation-taylor-extrema-2"><div class="para" id="section-error-propagation-taylor-extrema-2-1">This section develops three closely related applications of partial derivatives and the Hessian matrix. We begin with <em class="emphasis">error propagation</em>: using the gradient to bound how measurement uncertainties in the inputs propagate to an uncertainty in a computed output. We then derive and apply the <em class="emphasis">multivariate Taylor expansion</em>, which approximates a smooth function near a given point by a polynomial involving the gradient and the Hessian. Finally, we use the second-order Taylor polynomial to classify <em class="emphasis">local extrema</em>: the Hessian matrix tells us whether a critical point is a local minimum, local maximum, or saddle point.<div class="autopermalink" data-description="Paragraph"><a href="#section-error-propagation-taylor-extrema-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></section><section class="subsection" id="subsec-error-propagation"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.2.1</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Error Propagation</span>
+</h3>
+<section class="introduction" id="subsec-error-propagation-2"><div class="para" id="subsec-error-propagation-2-1">In engineering experiments, every measured quantity carries an uncertainty. When a derived result is computed from several measurements, those individual uncertainties combine to produce an uncertainty in the final result. The gradient provides a systematic tool for quantifying this effect: it linearises the output function around the measured point, turning the problem of estimating the output error into a straightforward evaluation of partial derivatives.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-error-propagation-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></section><article class="remark remark-like" id="rem-error-propagation-concept"><h4 class="heading">
+<span class="type">Remark</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.2.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">The Idea of Error Propagation.</span>
+</h4>
+<div class="para" id="rem-error-propagation-concept-2">Consider a derived quantity <span class="process-math">\(U = U(x_1, \ldots, x_n)\)</span> computed from <span class="process-math">\(n\)</span> measured variables. Write the true (unknown) input as <span class="process-math">\(\mathbf{x} = \mathbf{x}_0 + \Delta\mathbf{x}\text{,}\)</span> where <span class="process-math">\(\mathbf{x}_0\)</span> is the measured (nominal) value and <span class="process-math">\(\Delta\mathbf{x} = (\Delta_1, \ldots, \Delta_n)^\top\)</span> is the measurement uncertainty.<div class="autopermalink" data-description="Paragraph"><a href="#rem-error-propagation-concept-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="rem-error-propagation-concept-3">
+<div class="para">The resulting error in <span class="process-math">\(U\)</span> is</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/rem-tangent-plane.html" id="rem-error-propagation-concept-3-2">
+\begin{equation*}
+\Delta U = U(\mathbf{x}_0 + \Delta\mathbf{x}) - U(\mathbf{x}_0).
+\end{equation*}
+</div>
+<div class="para">Replacing this difference by its first-order linear approximation (the tangent plane at <span class="process-math">\(\mathbf{x}_0\text{,}\)</span> cf. <a href="section-functions-continuity-partial-derivatives.html#rem-tangent-plane" class="xref" data-knowl="./knowl/xref/rem-tangent-plane.html" data-reveal-label="Reveal" data-close-label="Close" title="Remark 2.1.36: Local Linear Approximation and the Tangent Plane">Remark 2.1.36</a>):</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/rem-tangent-plane.html" id="rem-error-propagation-concept-3-5">
+\begin{equation*}
+\Delta U
+\approx \nabla U(\mathbf{x}_0) \cdot \Delta\mathbf{x}
+= \frac{\partial U}{\partial x_1}(\mathbf{x}_0)\,\Delta_1
++ \cdots
++ \frac{\partial U}{\partial x_n}(\mathbf{x}_0)\,\Delta_n.
+\end{equation*}
+</div>
+<div class="para">Taking absolute values and applying the triangle inequality to this linear approximation yields the first-order estimate</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/rem-tangent-plane.html" id="rem-error-propagation-concept-3-6">
+\begin{equation*}
+|\Delta U|
+\approx
+\left|\frac{\partial U}{\partial x_1}(\mathbf{x}_0)\right| |\Delta_1|
++ \cdots
++ \left|\frac{\partial U}{\partial x_n}(\mathbf{x}_0)\right| |\Delta_n|.
+\end{equation*}
+</div>
+<div class="para">Each partial derivative acts as a <em class="emphasis">sensitivity factor</em>: it tells us how strongly a small change in <span class="process-math">\(x_i\)</span> affects the output <span class="process-math">\(U\text{.}\)</span> The estimate becomes more reliable when the measurement errors are small and higher-order terms can be neglected.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#rem-error-propagation-concept-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Remark 2.2.1: The Idea of Error Propagation"><a href="#rem-error-propagation-concept" title="Copy heading and permalink for Remark 2.2.1: The Idea of Error Propagation" aria-label="Copy heading and permalink for Remark 2.2.1: The Idea of Error Propagation">🔗</a></div></article><article class="definition definition-like" id="def-error-propagation-bounds"><h4 class="heading">
+<span class="type">Definition</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.2.2</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Maximal Absolute and Relative Error.</span>
+</h4>
+<div class="para" id="def-error-propagation-bounds-2-1">Let <span class="process-math">\(U = U(x_1, \ldots, x_n)\)</span> be differentiable at <span class="process-math">\(\mathbf{x}_0 = (x_{1,0}, \ldots, x_{n,0})\text{,}\)</span> and let <span class="process-math">\(\Delta_1, \ldots, \Delta_n\)</span> be small measurement errors. All partial derivatives below are evaluated at <span class="process-math">\(\mathbf{x}_0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#def-error-propagation-bounds-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para logical" id="def-error-propagation-bounds-2-2">
+<ul class="disc" id="def-error-propagation-bounds-2-2-1">
+<li id="def-error-propagation-bounds-2-2-1-1">
+<div class="para" id="def-error-propagation-bounds-2-2-1-1-1">
+<dfn class="terminology">Maximal absolute error:</dfn> the exact error is <span class="process-math">\(|\Delta U| = |U(\mathbf{x}_0 + \Delta\mathbf{x}) - U(\mathbf{x}_0)|\text{.}\)</span> Its first-order estimate is<div class="autopermalink" data-description="Paragraph"><a href="#def-error-propagation-bounds-2-2-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="displaymath process-math" id="def-error-propagation-bounds-2-2-1-1-2">
+\begin{equation*}
+\left|\frac{\partial U}{\partial x_1}\right| |\Delta_1|
++ \cdots
++ \left|\frac{\partial U}{\partial x_n}\right| |\Delta_n|.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Item"><a href="#def-error-propagation-bounds-2-2-1-1" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="def-error-propagation-bounds-2-2-1-2">
+<div class="para" id="def-error-propagation-bounds-2-2-1-2-1">
+<dfn class="terminology">Maximal relative error:</dfn> provided <span class="process-math">\(U(\mathbf{x}_0) \neq 0\text{,}\)</span> the exact relative error is <span class="process-math">\(\left|\frac{\Delta U}{U}\right|
+= \left|\frac{U(\mathbf{x}_0 + \Delta\mathbf{x}) - U(\mathbf{x}_0)}{U(\mathbf{x}_0)}\right|\text{.}\)</span> Its first-order estimate is<div class="autopermalink" data-description="Paragraph"><a href="#def-error-propagation-bounds-2-2-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="displaymath process-math" id="def-error-propagation-bounds-2-2-1-2-2">
+\begin{equation*}
+\left|\frac{1}{U}\frac{\partial U}{\partial x_1}\right| |\Delta_1|
++ \cdots
++ \left|\frac{1}{U}\frac{\partial U}{\partial x_n}\right| |\Delta_n|.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Item"><a href="#def-error-propagation-bounds-2-2-1-2" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="autopermalink" data-description="Paragraph"><a href="#def-error-propagation-bounds-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 2.2.2: Maximal Absolute and Relative Error"><a href="#def-error-propagation-bounds" title="Copy heading and permalink for Definition 2.2.2: Maximal Absolute and Relative Error" aria-label="Copy heading and permalink for Definition 2.2.2: Maximal Absolute and Relative Error">🔗</a></div></article><details id="ex-gravity-error-propagation" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.2.3</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Error Propagation in a Free-Fall Experiment.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para logical" id="ex-gravity-error-propagation-2">
+<div class="para">A ball is dropped from rest. The height of fall <span class="process-math">\(h\)</span> and the travel time <span class="process-math">\(t\)</span> are measured, and the gravitational acceleration is computed from <span class="process-math">\(h = \tfrac{1}{2}gt^2\text{,}\)</span> giving</div>
+<div class="displaymath process-math" id="ex-gravity-error-propagation-2-4">
+\begin{equation*}
+g(h, t) = \frac{2h}{t^2}.
+\end{equation*}
+</div>
+<div class="para">The measurements and their uncertainties are</div>
+<div class="displaymath process-math" id="ex-gravity-error-propagation-2-5">
+\begin{equation*}
+h = 800\,\text{mm} \pm 4\,\text{mm},
+\qquad
+t = 0.4046\,\text{s} \pm 0.0001\,\text{s}.
+\end{equation*}
+</div>
+<div class="para">What is the resulting uncertainty in <span class="process-math">\(g\text{?}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-gravity-error-propagation-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-gravity-error-propagation-3">
+<div class="para"><em class="emphasis">Step 1: partial derivatives of <span class="process-math">\(g\text{.}\)</span></em></div>
+<div class="displaymath process-math" id="ex-gravity-error-propagation-3-2">
+\begin{gather*}
+\frac{\partial g}{\partial h} = \frac{2}{t^2},
+\qquad
+\frac{\partial g}{\partial t} = -\frac{4h}{t^3}.
+\end{gather*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-gravity-error-propagation-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-gravity-error-propagation-4">
+<div class="para">
+<em class="emphasis">Step 2: bound the absolute error.</em> Using the error propagation formula with <span class="process-math">\(h_0 = 800\,\text{mm}\text{,}\)</span> <span class="process-math">\(t_0 = 0.4046\,\text{s}\text{,}\)</span> <span class="process-math">\(|\Delta h| = 4\,\text{mm}\text{,}\)</span> and <span class="process-math">\(|\Delta t| = 0.0001\,\text{s}\text{:}\)</span>
+</div>
+<div class="displaymath process-math" id="ex-gravity-error-propagation-4-6">
+\begin{align*}
+|\Delta g|
+&amp;\leq
+\left|\frac{2}{(0.4046)^2}\right| \cdot 4
++ \left|\frac{-4 \cdot 800}{(0.4046)^3}\right| \cdot 0.0001\\
+&amp;\approx 53.7\,\frac{\text{mm}}{\text{s}^2}
+= 0.0537\,\frac{\text{m}}{\text{s}^2}.
+\end{align*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-gravity-error-propagation-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-gravity-error-propagation-5">
+<div class="para">
+<em class="emphasis">Result.</em> The nominal value is <span class="process-math">\(g_0 = 2 \cdot 0.8 / (0.4046)^2 \approx 9.773\,\text{m}/\text{s}^2\text{,}\)</span> so the estimated gravitational acceleration with its uncertainty is</div>
+<div class="displaymath process-math" id="ex-gravity-error-propagation-5-3">
+\begin{equation*}
+g = (9.773 \pm 0.054)\,\frac{\text{m}}{\text{s}^2}.
+\end{equation*}
+</div>
+<div class="para">The dominant contribution comes from the height measurement, since the sensitivity factor <span class="process-math">\(|\partial g / \partial h|\)</span> multiplied by <span class="process-math">\(|\Delta h|\)</span> is substantially larger than the time contribution.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-gravity-error-propagation-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="ex-gravity-error-propagation-6">This example also shows a practical engineering lesson: improving the precision of the measurement with the largest sensitivity contribution gives the biggest reduction in the final output uncertainty.<div class="autopermalink" data-description="Paragraph"><a href="#ex-gravity-error-propagation-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 2.2.3: Error Propagation in a Free-Fall Experiment"><a href="#ex-gravity-error-propagation" title="Copy heading and permalink for Example 2.2.3: Error Propagation in a Free-Fall Experiment" aria-label="Copy heading and permalink for Example 2.2.3: Error Propagation in a Free-Fall Experiment">🔗</a></div></article></details><div class="autopermalink" data-description="Subsection 2.2.1: Error Propagation"><a href="#subsec-error-propagation" title="Copy heading and permalink for Subsection 2.2.1: Error Propagation" aria-label="Copy heading and permalink for Subsection 2.2.1: Error Propagation">🔗</a></div></section><section class="subsection" id="subsec-taylor-expansion"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.2.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Multivariate Taylor Expansion</span>
+</h3>
+<section class="introduction" id="subsec-taylor-expansion-2"><div class="para" id="subsec-taylor-expansion-2-1">In single-variable calculus, the Taylor polynomial provides the best polynomial approximation of a smooth function near a given point. The same idea extends to functions of several variables: the second-order Taylor polynomial replaces the tangent line by a <em class="emphasis">tangent paraboloid</em>, capturing not just the slope but also the curvature of the function near the expansion point. This quadratic approximation is the foundation for the extremum classification developed in <a href="section-error-propagation-taylor-extrema.html#subsec-extrema" class="internal" title="Subsection 2.2.3: Local Extrema of Multivariable Functions">Subsection 2.2.3</a>.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-taylor-expansion-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></section><article class="remark remark-like" id="rem-taylor-derivation"><h4 class="heading">
+<span class="type">Remark</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.2.4</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Derivation of the Multivariate Taylor Formula.</span>
+</h4>
+<div class="para logical" id="rem-taylor-derivation-2">
+<div class="para">Let <span class="process-math">\(f \colon D \to \R\)</span> with <span class="process-math">\(D \subseteq \R^n\text{,}\)</span> and fix a base point <span class="process-math">\(\mathbf{x}_0 \in D\)</span> and a direction <span class="process-math">\(\mathbf{v} \in \R^n\text{.}\)</span> Assume that <span class="process-math">\(f\)</span> has continuous second-order partial derivatives near <span class="process-math">\(\mathbf{x}_0\text{.}\)</span> Consider the single-variable function <span class="process-math">\(h(t) = f(\mathbf{x}_0 + t\mathbf{v})\text{.}\)</span> Applying the univariate second-order Taylor formula to <span class="process-math">\(h\)</span> at <span class="process-math">\(t = 0\text{:}\)</span>
+</div>
+<div class="displaymath process-math" id="rem-taylor-derivation-2-10">
+\begin{equation*}
+h(t) = h(0) + h'(0)\,t + \frac{h''(0)}{2}\,t^2 + \mathcal{O}(t^3).
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#rem-taylor-derivation-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="rem-taylor-derivation-3">We compute the derivatives of <span class="process-math">\(h\)</span> at <span class="process-math">\(t = 0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#rem-taylor-derivation-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="rem-taylor-derivation-4">
+<div class="para">
+<em class="emphasis">First derivative:</em> By the definition of the directional derivative (cf. <a href="section-functions-continuity-partial-derivatives.html#def-directional-derivative" class="xref" data-knowl="./knowl/xref/def-directional-derivative.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 2.1.44: Directional Derivative">Definition 2.1.44</a>):</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-directional-derivative.html" id="rem-taylor-derivation-4-3">
+\begin{equation*}
+h'(0)
+= \lim_{t \to 0} \frac{f(\mathbf{x}_0 + t\mathbf{v}) - f(\mathbf{x}_0)}{t}
+= \frac{\partial f}{\partial \mathbf{v}}(\mathbf{x}_0)
+= \nabla f(\mathbf{x}_0) \cdot \mathbf{v}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#rem-taylor-derivation-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="rem-taylor-derivation-5">
+<div class="para">
+<em class="emphasis">Second derivative:</em> Differentiating once more, the chain rule gives</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/def-hessian-matrix.html" id="rem-taylor-derivation-5-2">
+\begin{equation*}
+h''(0) = \mathbf{v}^\top H_f(\mathbf{x}_0)\, \mathbf{v}
+= \sum_{i,j=1}^{n} v_i\, \frac{\partial^2 f}{\partial x_i \partial x_j}(\mathbf{x}_0)\, v_j,
+\end{equation*}
+</div>
+<div class="para">where <span class="process-math">\(H_f(\mathbf{x}_0)\)</span> is the Hessian matrix at <span class="process-math">\(\mathbf{x}_0\)</span> (cf. <a href="section-functions-continuity-partial-derivatives.html#def-hessian-matrix" class="xref" data-knowl="./knowl/xref/def-hessian-matrix.html" data-reveal-label="Reveal" data-close-label="Close" title="Definition 2.1.54: Hessian Matrix">Definition 2.1.54</a>). The expression <span class="process-math">\(\mathbf{v}^\top H_f(\mathbf{x}_0)\, \mathbf{v}\)</span> is the quadratic form associated with the Hessian, evaluated at <span class="process-math">\(\mathbf{v}\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#rem-taylor-derivation-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="rem-taylor-derivation-6">Setting <span class="process-math">\(t = 1\)</span> and writing <span class="process-math">\(\mathbf{x} = \mathbf{x}_0 + \mathbf{v}\)</span> (so <span class="process-math">\(\mathbf{v} = \mathbf{x} - \mathbf{x}_0\)</span>) yields the multivariate Taylor expansion, with a remainder that is small compared with <span class="process-math">\(\|\mathbf{x}-\mathbf{x}_0\|^2\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#rem-taylor-derivation-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Remark 2.2.4: Derivation of the Multivariate Taylor Formula"><a href="#rem-taylor-derivation" title="Copy heading and permalink for Remark 2.2.4: Derivation of the Multivariate Taylor Formula" aria-label="Copy heading and permalink for Remark 2.2.4: Derivation of the Multivariate Taylor Formula">🔗</a></div></article><article class="theorem theorem-like" id="thm-multivariate-taylor"><h4 class="heading">
+<span class="type">Theorem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.2.5</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Multivariate Taylor Expansion of Order 2.</span>
+</h4>
+<div class="para logical" id="thm-multivariate-taylor-2-1">
+<div class="para">Let <span class="process-math">\(f \colon D \to \R\)</span> be a function of <span class="process-math">\(n\)</span> variables whose second-order partial derivatives exist and are continuous on an open set <span class="process-math">\(D \subseteq \R^n\text{.}\)</span> Let <span class="process-math">\(\mathbf{x}_0, \mathbf{x} \in D\)</span> be such that the line segment connecting them lies entirely in <span class="process-math">\(D\text{.}\)</span> Then</div>
+<div class="displaymath process-math" id="thm-multivariate-taylor-2-1-6">
+\begin{equation*}
+f(\mathbf{x})
+= f(\mathbf{x}_0)
++ \nabla f(\mathbf{x}_0) \cdot (\mathbf{x} - \mathbf{x}_0)
++ \tfrac{1}{2}(\mathbf{x}-\mathbf{x}_0)^\top
+H_f(\mathbf{x}_0)
+(\mathbf{x}-\mathbf{x}_0)
++ R_2(\mathbf{x}),
+\end{equation*}
+</div>
+<div class="para">where the remainder satisfies</div>
+<div class="displaymath process-math" id="thm-multivariate-taylor-2-1-7">
+\begin{equation*}
+\lim_{\mathbf{x} \to \mathbf{x}_0}
+\frac{R_2(\mathbf{x})}{\|\mathbf{x} - \mathbf{x}_0\|^2}
+= 0.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-multivariate-taylor-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para logical" id="thm-multivariate-taylor-2-2">
+<div class="para">Explicitly, the three terms of the Taylor polynomial are:</div>
+<ul class="disc" id="thm-multivariate-taylor-2-2-1">
+<li id="thm-multivariate-taylor-2-2-1-1">
+<div class="para" id="thm-multivariate-taylor-2-2-1-1-1">
+<em class="emphasis">Zeroth order:</em> <span class="process-math">\(f(\mathbf{x}_0)\)</span> — the function value at the expansion point.<div class="autopermalink" data-description="Paragraph"><a href="#thm-multivariate-taylor-2-2-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#thm-multivariate-taylor-2-2-1-1" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="thm-multivariate-taylor-2-2-1-2">
+<div class="para" id="thm-multivariate-taylor-2-2-1-2-1">
+<em class="emphasis">First order:</em> <span class="process-math">\(\nabla f(\mathbf{x}_0) \cdot (\mathbf{x} - \mathbf{x}_0)\)</span> — the tangent plane correction (linear term).<div class="autopermalink" data-description="Paragraph"><a href="#thm-multivariate-taylor-2-2-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#thm-multivariate-taylor-2-2-1-2" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="thm-multivariate-taylor-2-2-1-3">
+<div class="para" id="thm-multivariate-taylor-2-2-1-3-1">
+<em class="emphasis">Second order:</em> <span class="process-math">\(\tfrac{1}{2}(\mathbf{x}-\mathbf{x}_0)^\top H_f(\mathbf{x}_0)(\mathbf{x}-\mathbf{x}_0)\)</span> — the curvature correction (quadratic term).<div class="autopermalink" data-description="Paragraph"><a href="#thm-multivariate-taylor-2-2-1-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#thm-multivariate-taylor-2-2-1-3" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-multivariate-taylor-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Theorem 2.2.5: Multivariate Taylor Expansion of Order 2"><a href="#thm-multivariate-taylor" title="Copy heading and permalink for Theorem 2.2.5: Multivariate Taylor Expansion of Order 2" aria-label="Copy heading and permalink for Theorem 2.2.5: Multivariate Taylor Expansion of Order 2">🔗</a></div></article><details id="ex-taylor-exp-two-variables" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.2.6</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Taylor Polynomial of <span class="process-math">\(e^{x+y^2}\)</span> at the Origin.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para" id="ex-taylor-exp-two-variables-2">Determine the second-order Taylor polynomial of <span class="process-math">\(f(x,y) = e^{x + y^2}\)</span> at <span class="process-math">\(\mathbf{x}_0 = (0,0)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-taylor-exp-two-variables-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-taylor-exp-two-variables-3">
+<div class="para"><em class="emphasis">Step 1: function value.</em></div>
+<div class="displaymath process-math" id="ex-taylor-exp-two-variables-3-2">
+\begin{equation*}
+f(0,0) = e^0 = 1.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-taylor-exp-two-variables-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-taylor-exp-two-variables-4">
+<div class="para"><em class="emphasis">Step 2: gradient at <span class="process-math">\((0,0)\text{.}\)</span></em></div>
+<div class="displaymath process-math" id="ex-taylor-exp-two-variables-4-2">
+\begin{gather*}
+\nabla f(x,y)
+= \begin{pmatrix} e^{x+y^2} \\ 2y\,e^{x+y^2} \end{pmatrix},
+\qquad
+\nabla f(0,0)
+= \begin{pmatrix} 1 \\ 0 \end{pmatrix}.
+\end{gather*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-taylor-exp-two-variables-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-taylor-exp-two-variables-5">
+<div class="para">
+<em class="emphasis">Step 3: Hessian matrix at <span class="process-math">\((0,0)\text{.}\)</span></em> The second-order partial derivatives of <span class="process-math">\(f\)</span> are:</div>
+<div class="displaymath process-math" id="ex-taylor-exp-two-variables-5-3">
+\begin{align*}
+\frac{\partial^2 f}{\partial x^2}
+&amp;= e^{x+y^2},\\
+\frac{\partial^2 f}{\partial x \partial y}
+= \frac{\partial^2 f}{\partial y \partial x}
+&amp;= 2y\,e^{x+y^2},\\
+\frac{\partial^2 f}{\partial y^2}
+&amp;= (2 + 4y^2)\,e^{x+y^2}.
+\end{align*}
+</div>
+<div class="para">Evaluating at <span class="process-math">\((0,0)\text{:}\)</span>
+</div>
+<div class="displaymath process-math" id="ex-taylor-exp-two-variables-5-5">
+\begin{equation*}
+H_f(0,0)
+= \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 2 \end{pmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-taylor-exp-two-variables-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-taylor-exp-two-variables-6">
+<div class="para"><em class="emphasis">Step 4: assemble the Taylor polynomial.</em></div>
+<div class="displaymath process-math" id="ex-taylor-exp-two-variables-6-2">
+\begin{align*}
+f(x,y)
+&amp;\approx f(0,0)
++ \nabla f(0,0) \cdot \begin{pmatrix} x \\ y \end{pmatrix}
++ \tfrac{1}{2}
+\begin{pmatrix} x &amp; y \end{pmatrix}
+H_f(0,0)
+\begin{pmatrix} x \\ y \end{pmatrix}\\
+&amp;= 1 + x + \tfrac{1}{2}(x^2 + 2y^2).
+\end{align*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-taylor-exp-two-variables-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="ex-taylor-exp-two-variables-7">The quadratic term <span class="process-math">\(\tfrac{1}{2}(x^2 + 2y^2)\)</span> encodes the curvature of the surface: the factor <span class="process-math">\(2\)</span> on <span class="process-math">\(y^2\)</span> reflects that <span class="process-math">\(f\)</span> curves twice as steeply in the <span class="process-math">\(y\)</span>-direction as in the <span class="process-math">\(x\)</span>-direction near the origin.<div class="autopermalink" data-description="Paragraph"><a href="#ex-taylor-exp-two-variables-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="ex-taylor-exp-two-variables-8">Since <span class="process-math">\(e^{x+y^2} = 1 + x + y^2 + \tfrac{1}{2}x^2 + \text{higher-order terms}\text{,}\)</span> this result also agrees with the familiar single-variable series for <span class="process-math">\(e^u\)</span> after substituting <span class="process-math">\(u = x + y^2\)</span> and discarding all terms of degree at least <span class="process-math">\(3\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-taylor-exp-two-variables-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 2.2.6: Taylor Polynomial of e^{x+y^2} at the Origin"><a href="#ex-taylor-exp-two-variables" title="Copy heading and permalink for Example 2.2.6: Taylor Polynomial of e^{x+y^2} at the Origin" aria-label="Copy heading and permalink for Example 2.2.6: Taylor Polynomial of e^{x+y^2} at the Origin">🔗</a></div></article></details><article class="remark remark-like" id="rem-taylor-as-approximation"><h4 class="heading">
+<span class="type">Remark</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.2.7</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">The Taylor Polynomial as a Local Approximation.</span>
+</h4>
+<div class="para" id="rem-taylor-as-approximation-2">Near <span class="process-math">\(\mathbf{x}_0\text{,}\)</span> the second-order Taylor polynomial approximates <span class="process-math">\(f\)</span> by a paraboloid: an elliptic paraboloid when <span class="process-math">\(H_f(\mathbf{x}_0)\)</span> is definite (positive or negative), or a hyperbolic paraboloid (saddle shape) when <span class="process-math">\(H_f(\mathbf{x}_0)\)</span> is indefinite. This geometric picture motivates the extremum classification in <a href="section-error-propagation-taylor-extrema.html#subsec-extrema" class="internal" title="Subsection 2.2.3: Local Extrema of Multivariable Functions">Subsection 2.2.3</a>: the type of paraboloid that best fits the graph of <span class="process-math">\(f\)</span> at a critical point determines whether that point is a local minimum, maximum, or saddle point.<div class="autopermalink" data-description="Paragraph"><a href="#rem-taylor-as-approximation-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Remark 2.2.7: The Taylor Polynomial as a Local Approximation"><a href="#rem-taylor-as-approximation" title="Copy heading and permalink for Remark 2.2.7: The Taylor Polynomial as a Local Approximation" aria-label="Copy heading and permalink for Remark 2.2.7: The Taylor Polynomial as a Local Approximation">🔗</a></div></article><div class="autopermalink" data-description="Subsection 2.2.2: Multivariate Taylor Expansion"><a href="#subsec-taylor-expansion" title="Copy heading and permalink for Subsection 2.2.2: Multivariate Taylor Expansion" aria-label="Copy heading and permalink for Subsection 2.2.2: Multivariate Taylor Expansion">🔗</a></div></section><section class="subsection" id="subsec-extrema"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.2.3</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Local Extrema of Multivariable Functions</span>
+</h3>
+<section class="introduction" id="subsec-extrema-2"><div class="para" id="subsec-extrema-2-1">One of the central applications of differential calculus is finding where a function attains its largest or smallest values. For a single-variable function <span class="process-math">\(f\text{,}\)</span> a necessary condition for a local extremum at <span class="process-math">\(x_0\)</span> is that the tangent line is horizontal: <span class="process-math">\(f'(x_0) = 0\text{.}\)</span> The analogous condition in higher dimensions requires that the tangent <em class="emphasis">plane</em> is horizontal, i.e., the gradient vanishes. To distinguish minima, maxima, and saddle points among the critical points, we analyse the second-order Taylor polynomial via the Hessian matrix.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-extrema-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></section><article class="definition definition-like" id="def-local-extremum"><h4 class="heading">
+<span class="type">Definition</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.2.8</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Local Maximum, Minimum, and Extreme Point.</span>
+</h4>
+<div class="para" id="def-local-extremum-2-1">Let <span class="process-math">\(U \subset \R^n\)</span> and <span class="process-math">\(f \colon U \to \R\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#def-local-extremum-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para logical" id="def-local-extremum-2-2">
+<ul class="disc" id="def-local-extremum-2-2-1">
+<li id="def-local-extremum-2-2-1-1">
+<div class="para logical" id="def-local-extremum-2-2-1-1-1">
+<div class="para">
+<span class="process-math">\(f\)</span> has a <dfn class="terminology">local maximum</dfn> (respectively <dfn class="terminology">local minimum</dfn>) at <span class="process-math">\(\mathbf{x} \in U\)</span> if there exists an open neighbourhood <span class="process-math">\(V \subset U\)</span> of <span class="process-math">\(\mathbf{x}\)</span> such that</div>
+<div class="displaymath process-math" id="def-local-extremum-2-2-1-1-1-7">
+\begin{equation*}
+f(\mathbf{x}) \geq f(\mathbf{y})
+\quad \text{(resp. } f(\mathbf{x}) \leq f(\mathbf{y})\text{)}
+\quad \forall\, \mathbf{y} \in V.
+\end{equation*}
+</div>
+<div class="para">If the inequality is strict (<span class="process-math">\(\gt\)</span> resp. <span class="process-math">\(\lt\)</span>), the extremum is called <dfn class="terminology">strict</dfn> (or <dfn class="terminology">isolated</dfn>).</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#def-local-extremum-2-2-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#def-local-extremum-2-2-1-1" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="def-local-extremum-2-2-1-2">
+<div class="para" id="def-local-extremum-2-2-1-2-1">
+<span class="process-math">\(\mathbf{x}\)</span> is a <dfn class="terminology">local extreme point</dfn> if <span class="process-math">\(f\)</span> has a local maximum or minimum there.<div class="autopermalink" data-description="Paragraph"><a href="#def-local-extremum-2-2-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#def-local-extremum-2-2-1-2" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="autopermalink" data-description="Paragraph"><a href="#def-local-extremum-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 2.2.8: Local Maximum, Minimum, and Extreme Point"><a href="#def-local-extremum" title="Copy heading and permalink for Definition 2.2.8: Local Maximum, Minimum, and Extreme Point" aria-label="Copy heading and permalink for Definition 2.2.8: Local Maximum, Minimum, and Extreme Point">🔗</a></div></article><article class="theorem theorem-like" id="thm-necessary-condition-extremum"><h4 class="heading">
+<span class="type">Theorem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.2.9</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Necessary Condition for a Local Extremum.</span>
+</h4>
+<div class="para logical" id="thm-necessary-condition-extremum-2-1">
+<div class="para">Let <span class="process-math">\(U \subset \R^n\)</span> be open and let <span class="process-math">\(f \colon U \to \R\)</span> be partially differentiable at <span class="process-math">\(\mathbf{x}_0 \in U\text{.}\)</span> If <span class="process-math">\(f\)</span> has a local extreme point at <span class="process-math">\(\mathbf{x}_0\text{,}\)</span> then</div>
+<div class="displaymath process-math" id="thm-necessary-condition-extremum-2-1-6">
+\begin{equation*}
+\nabla f(\mathbf{x}_0) = \mathbf{0}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-necessary-condition-extremum-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para" id="thm-necessary-condition-extremum-2-2">A point at which <span class="process-math">\(\nabla f(\mathbf{x}_0) = \mathbf{0}\)</span> is called a <dfn class="terminology">critical point</dfn> of <span class="process-math">\(f\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-necessary-condition-extremum-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Theorem 2.2.9: Necessary Condition for a Local Extremum"><a href="#thm-necessary-condition-extremum" title="Copy heading and permalink for Theorem 2.2.9: Necessary Condition for a Local Extremum" aria-label="Copy heading and permalink for Theorem 2.2.9: Necessary Condition for a Local Extremum">🔗</a></div></article><details id="thm-necessary-condition-extremum-3" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h4 class="heading"><span class="type">Proof<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h4></summary><article class="hiddenproof knowl__content"><div class="para" id="thm-necessary-condition-extremum-3-1">Fix any coordinate direction <span class="process-math">\(\mathbf{e}_i\)</span> and consider the single-variable function <span class="process-math">\(g_i(t) = f(\mathbf{x}_0 + t\mathbf{e}_i)\)</span> for <span class="process-math">\(t\)</span> close to <span class="process-math">\(0\text{.}\)</span> Because <span class="process-math">\(\mathbf{x}_0\)</span> is a local extremum of <span class="process-math">\(f\text{,}\)</span> the point <span class="process-math">\(t=0\)</span> is a local extremum of <span class="process-math">\(g_i\text{.}\)</span> The single-variable necessary condition therefore gives <span class="process-math">\(g_i'(0)=0\text{.}\)</span> But <span class="process-math">\(g_i'(0) = \dfrac{\partial f}{\partial x_i}(\mathbf{x}_0)\text{.}\)</span> Since this holds for every <span class="process-math">\(i = 1,\ldots,n\text{,}\)</span> all partial derivatives vanish, so <span class="process-math">\(\nabla f(\mathbf{x}_0)=\mathbf{0}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-necessary-condition-extremum-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Proof 2.2.9.1"><a href="#thm-necessary-condition-extremum-3" title="Copy heading and permalink for Proof 2.2.9.1" aria-label="Copy heading and permalink for Proof 2.2.9.1">🔗</a></div></article></details><article class="remark remark-like" id="rem-necessary-not-sufficient"><h4 class="heading">
+<span class="type">Remark</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.2.10</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Critical Points Need Not Be Extreme Points.</span>
+</h4>
+<div class="para" id="rem-necessary-not-sufficient-2">As in the single-variable case, the vanishing of the gradient is necessary but <em class="emphasis">not sufficient</em> for an extremum. The standard example is the <dfn class="terminology">saddle point</dfn>: for <span class="process-math">\(f(x,y) = x^2 - y^2\text{,}\)</span> the origin satisfies <span class="process-math">\(\nabla f(0,0) = \mathbf{0}\text{,}\)</span> yet <span class="process-math">\(f\)</span> increases from the origin in the <span class="process-math">\(x\)</span>-direction and decreases in the <span class="process-math">\(y\)</span>-direction, so <span class="process-math">\((0,0)\)</span> is neither a maximum nor a minimum. To determine the nature of a critical point, we must look at second-order information.<div class="autopermalink" data-description="Paragraph"><a href="#rem-necessary-not-sufficient-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Remark 2.2.10: Critical Points Need Not Be Extreme Points"><a href="#rem-necessary-not-sufficient" title="Copy heading and permalink for Remark 2.2.10: Critical Points Need Not Be Extreme Points" aria-label="Copy heading and permalink for Remark 2.2.10: Critical Points Need Not Be Extreme Points">🔗</a></div></article><article class="remark remark-like" id="rem-sufficient-condition-taylor"><h4 class="heading">
+<span class="type">Remark</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.2.11</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Sufficient Condition via the Taylor Polynomial.</span>
+</h4>
+<div class="para logical" id="rem-sufficient-condition-taylor-2">
+<div class="para">Let <span class="process-math">\(\mathbf{x}_0\)</span> be a critical point of <span class="process-math">\(f\text{,}\)</span> so <span class="process-math">\(\nabla f(\mathbf{x}_0) = \mathbf{0}\text{.}\)</span> Applying the second-order Taylor expansion (cf. <a href="section-error-propagation-taylor-extrema.html#thm-multivariate-taylor" class="xref" data-knowl="./knowl/xref/thm-multivariate-taylor.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 2.2.5: Multivariate Taylor Expansion of Order 2">Theorem 2.2.5</a>), the linear term vanishes and we obtain</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-multivariate-taylor.html" id="rem-sufficient-condition-taylor-2-5">
+\begin{equation*}
+f(\mathbf{x})
+\approx f(\mathbf{x}_0)
++ \frac{1}{2}(\mathbf{x}-\mathbf{x}_0)^\top
+H_f(\mathbf{x}_0)
+(\mathbf{x}-\mathbf{x}_0).
+\end{equation*}
+</div>
+<div class="para">The sign of <span class="process-math">\(f(\mathbf{x}) - f(\mathbf{x}_0)\)</span> near <span class="process-math">\(\mathbf{x}_0\)</span> is therefore determined by the quadratic form <span class="process-math">\(q(\mathbf{d}) = \mathbf{d}^\top H_f(\mathbf{x}_0)\,\mathbf{d}\)</span> with <span class="process-math">\(\mathbf{d} = \mathbf{x} - \mathbf{x}_0\text{:}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#rem-sufficient-condition-taylor-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="rem-sufficient-condition-taylor-3">
+<ul class="disc" id="rem-sufficient-condition-taylor-3-1">
+<li id="rem-sufficient-condition-taylor-3-1-1">
+<div class="para" id="rem-sufficient-condition-taylor-3-1-1-1">If <span class="process-math">\(q(\mathbf{d}) \gt 0\)</span> for every nonzero <span class="process-math">\(\mathbf{d} \in \R^n\)</span> (i.e., <span class="process-math">\(H_f(\mathbf{x}_0)\)</span> is positive definite), then <span class="process-math">\(f(\mathbf{x}) \gt f(\mathbf{x}_0)\)</span> for nearby <span class="process-math">\(\mathbf{x} \neq \mathbf{x}_0\text{:}\)</span> <span class="process-math">\(f\)</span> has a strict local minimum at <span class="process-math">\(\mathbf{x}_0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#rem-sufficient-condition-taylor-3-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#rem-sufficient-condition-taylor-3-1-1" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="rem-sufficient-condition-taylor-3-1-2">
+<div class="para" id="rem-sufficient-condition-taylor-3-1-2-1">If <span class="process-math">\(q(\mathbf{d}) \lt 0\)</span> for every nonzero <span class="process-math">\(\mathbf{d} \in \R^n\)</span> (i.e., <span class="process-math">\(H_f(\mathbf{x}_0)\)</span> is negative definite), then <span class="process-math">\(f(\mathbf{x}) \lt f(\mathbf{x}_0)\)</span> for nearby <span class="process-math">\(\mathbf{x} \neq \mathbf{x}_0\text{:}\)</span> <span class="process-math">\(f\)</span> has a strict local maximum at <span class="process-math">\(\mathbf{x}_0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#rem-sufficient-condition-taylor-3-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#rem-sufficient-condition-taylor-3-1-2" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="rem-sufficient-condition-taylor-3-1-3">
+<div class="para" id="rem-sufficient-condition-taylor-3-1-3-1">If <span class="process-math">\(q\)</span> takes both positive and negative values (i.e., <span class="process-math">\(H_f(\mathbf{x}_0)\)</span> is indefinite), then <span class="process-math">\(f\)</span> increases in some directions and decreases in others: <span class="process-math">\(f\)</span> has a saddle point at <span class="process-math">\(\mathbf{x}_0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#rem-sufficient-condition-taylor-3-1-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#rem-sufficient-condition-taylor-3-1-3" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="autopermalink" data-description="Paragraph"><a href="#rem-sufficient-condition-taylor-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="rem-sufficient-condition-taylor-4">If the Hessian is only semi-definite, the quadratic term alone is not decisive; then higher-order terms must be examined.<div class="autopermalink" data-description="Paragraph"><a href="#rem-sufficient-condition-taylor-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Remark 2.2.11: Sufficient Condition via the Taylor Polynomial"><a href="#rem-sufficient-condition-taylor" title="Copy heading and permalink for Remark 2.2.11: Sufficient Condition via the Taylor Polynomial" aria-label="Copy heading and permalink for Remark 2.2.11: Sufficient Condition via the Taylor Polynomial">🔗</a></div></article><figure class="figure figure-like" id="fig-critical-point-contours"><div class="image-box" style="width: 92%; margin-left: 4%; margin-right: 4%;"><img src="generated/latex-image/critical-point-contours.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.2.12<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Contour-line sketches of the three basic quadratic models near a critical point: concentric circles for a minimum, concentric circles with decreasing height for a maximum, and hyperbolas for a saddle point.<div class="autopermalink" data-description="Figure 2.2.12"><a href="#fig-critical-point-contours" title="Copy heading and permalink for Figure 2.2.12" aria-label="Copy heading and permalink for Figure 2.2.12">🔗</a></div></figcaption></figure><article class="theorem theorem-like" id="thm-hessian-classification"><h4 class="heading">
+<span class="type">Theorem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.2.13</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Classification of Critical Points via the Hessian.</span>
+</h4>
+<div class="para logical" id="thm-hessian-classification-2-1">
+<div class="para">Let <span class="process-math">\(f \colon D \to \R\)</span> be a function of <span class="process-math">\(n\)</span> variables whose second-order partial derivatives exist and are continuous. Let <span class="process-math">\(\mathbf{x}_0\)</span> be a critical point, i.e., <span class="process-math">\(\nabla f(\mathbf{x}_0) = \mathbf{0}\text{.}\)</span>
+</div>
+<ul class="disc" id="thm-hessian-classification-2-1-5">
+<li id="thm-hessian-classification-2-1-5-1">
+<div class="para" id="thm-hessian-classification-2-1-5-1-1">
+<span class="process-math">\(H_f(\mathbf{x}_0)\)</span> <em class="emphasis">positive definite</em> <span class="process-math">\(\implies\)</span> <span class="process-math">\(f\)</span> has a <dfn class="terminology">strict local minimum</dfn> at <span class="process-math">\(\mathbf{x}_0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-hessian-classification-2-1-5-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#thm-hessian-classification-2-1-5-1" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="thm-hessian-classification-2-1-5-2">
+<div class="para" id="thm-hessian-classification-2-1-5-2-1">
+<span class="process-math">\(H_f(\mathbf{x}_0)\)</span> <em class="emphasis">negative definite</em> <span class="process-math">\(\implies\)</span> <span class="process-math">\(f\)</span> has a <dfn class="terminology">strict local maximum</dfn> at <span class="process-math">\(\mathbf{x}_0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-hessian-classification-2-1-5-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#thm-hessian-classification-2-1-5-2" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="thm-hessian-classification-2-1-5-3">
+<div class="para" id="thm-hessian-classification-2-1-5-3-1">
+<span class="process-math">\(H_f(\mathbf{x}_0)\)</span> <em class="emphasis">indefinite</em> <span class="process-math">\(\implies\)</span> <span class="process-math">\(f\)</span> has a <dfn class="terminology">saddle point</dfn> at <span class="process-math">\(\mathbf{x}_0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-hessian-classification-2-1-5-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#thm-hessian-classification-2-1-5-3" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="para">If <span class="process-math">\(H_f(\mathbf{x}_0)\)</span> is positive or negative semi-definite (but not definite), the test is inconclusive.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-hessian-classification-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Theorem 2.2.13: Classification of Critical Points via the Hessian"><a href="#thm-hessian-classification" title="Copy heading and permalink for Theorem 2.2.13: Classification of Critical Points via the Hessian" aria-label="Copy heading and permalink for Theorem 2.2.13: Classification of Critical Points via the Hessian">🔗</a></div></article><details id="thm-hessian-classification-3" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h4 class="heading"><span class="type">Proof<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h4></summary><article class="hiddenproof knowl__content"><div class="para logical" id="thm-hessian-classification-3-1">
+<div class="para">By the second-order Taylor formula,</div>
+<div class="displaymath process-math" id="thm-hessian-classification-3-1-1">
+\begin{equation*}
+f(\mathbf{x})
+= f(\mathbf{x}_0)
++ \frac{1}{2}(\mathbf{x}-\mathbf{x}_0)^\top H_f(\mathbf{x}_0)(\mathbf{x}-\mathbf{x}_0)
++ R_2(\mathbf{x}),
+\end{equation*}
+</div>
+<div class="para">because the linear term vanishes at a critical point. The remainder satisfies <span class="process-math">\(R_2(\mathbf{x}) = o(\|\mathbf{x}-\mathbf{x}_0\|^2)\text{.}\)</span> Hence, for <span class="process-math">\(\mathbf{x}\)</span> sufficiently close to <span class="process-math">\(\mathbf{x}_0\text{,}\)</span> the sign of <span class="process-math">\(f(\mathbf{x})-f(\mathbf{x}_0)\)</span> is governed by the quadratic form associated with the Hessian. Positive definiteness gives positivity for every nonzero displacement and therefore a strict local minimum; negative definiteness gives a strict local maximum; and an indefinite Hessian yields nearby directions with both positive and negative change, so the point is a saddle point.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-hessian-classification-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Proof 2.2.13.1"><a href="#thm-hessian-classification-3" title="Copy heading and permalink for Proof 2.2.13.1" aria-label="Copy heading and permalink for Proof 2.2.13.1">🔗</a></div></article></details><article class="theorem theorem-like" id="thm-hessian-criterion-r2"><h4 class="heading">
+<span class="type">Theorem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.2.14</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Hessian Determinant Criterion for Functions of Two Variables.</span>
+</h4>
+<div class="para logical" id="thm-hessian-criterion-r2-2-1">
+<div class="para">For a function <span class="process-math">\(f \colon D \to \R\)</span> of two variables with continuous second-order partial derivatives, let <span class="process-math">\((x_0, y_0)\)</span> be a critical point. Write</div>
+<div class="displaymath process-math" id="thm-hessian-criterion-r2-2-1-3">
+\begin{equation*}
+H_f(x_0, y_0)
+= \begin{pmatrix}
+f_{xx} &amp; f_{xy} \\
+f_{yx} &amp; f_{yy}
+\end{pmatrix},
+\end{equation*}
+</div>
+<div class="para">where <span class="process-math">\(f_{xx} = \dfrac{\partial^2 f}{\partial x^2}(x_0,y_0)\text{,}\)</span> etc.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-hessian-criterion-r2-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para logical" id="thm-hessian-criterion-r2-2-2">
+<ul class="disc" id="thm-hessian-criterion-r2-2-2-1">
+<li id="thm-hessian-criterion-r2-2-2-1-1">
+<div class="para" id="thm-hessian-criterion-r2-2-2-1-1-1">If <span class="process-math">\(\det H_f(x_0,y_0) \gt 0\)</span> and <span class="process-math">\(f_{xx}(x_0,y_0) \gt 0\text{,}\)</span> then <span class="process-math">\((x_0,y_0)\)</span> is a <dfn class="terminology">strict local minimum</dfn>.<div class="autopermalink" data-description="Paragraph"><a href="#thm-hessian-criterion-r2-2-2-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#thm-hessian-criterion-r2-2-2-1-1" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="thm-hessian-criterion-r2-2-2-1-2">
+<div class="para" id="thm-hessian-criterion-r2-2-2-1-2-1">If <span class="process-math">\(\det H_f(x_0,y_0) \gt 0\)</span> and <span class="process-math">\(f_{xx}(x_0,y_0) \lt 0\text{,}\)</span> then <span class="process-math">\((x_0,y_0)\)</span> is a <dfn class="terminology">strict local maximum</dfn>.<div class="autopermalink" data-description="Paragraph"><a href="#thm-hessian-criterion-r2-2-2-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#thm-hessian-criterion-r2-2-2-1-2" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="thm-hessian-criterion-r2-2-2-1-3">
+<div class="para" id="thm-hessian-criterion-r2-2-2-1-3-1">If <span class="process-math">\(\det H_f(x_0,y_0) \lt 0\text{,}\)</span> then <span class="process-math">\((x_0,y_0)\)</span> is a <dfn class="terminology">saddle point</dfn>.<div class="autopermalink" data-description="Paragraph"><a href="#thm-hessian-criterion-r2-2-2-1-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#thm-hessian-criterion-r2-2-2-1-3" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="thm-hessian-criterion-r2-2-2-1-4">
+<div class="para" id="thm-hessian-criterion-r2-2-2-1-4-1">If <span class="process-math">\(\det H_f(x_0,y_0) = 0\text{,}\)</span> the criterion is inconclusive.<div class="autopermalink" data-description="Paragraph"><a href="#thm-hessian-criterion-r2-2-2-1-4-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#thm-hessian-criterion-r2-2-2-1-4" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-hessian-criterion-r2-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Theorem 2.2.14: Hessian Determinant Criterion for Functions of Two Variables"><a href="#thm-hessian-criterion-r2" title="Copy heading and permalink for Theorem 2.2.14: Hessian Determinant Criterion for Functions of Two Variables" aria-label="Copy heading and permalink for Theorem 2.2.14: Hessian Determinant Criterion for Functions of Two Variables">🔗</a></div></article><article class="remark remark-like" id="rem-hessian-r2-practice"><h4 class="heading">
+<span class="type">Remark</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.2.15</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Practical Procedure for Two-Variable Extrema.</span>
+</h4>
+<div class="para" id="rem-hessian-r2-practice-2">To find and classify all local extrema of a smooth function <span class="process-math">\(f(x,y)\text{:}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#rem-hessian-r2-practice-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="rem-hessian-r2-practice-3">
+<ol class="decimal" id="rem-hessian-r2-practice-3-1">
+<li id="rem-hessian-r2-practice-3-1-1">
+<div class="para" id="rem-hessian-r2-practice-3-1-1-1">
+<em class="emphasis">Find critical points:</em> solve <span class="process-math">\(\nabla f(x,y) = \mathbf{0}\text{,}\)</span> i.e., both equations <span class="process-math">\(f_x = 0\)</span> and <span class="process-math">\(f_y = 0\)</span> simultaneously.<div class="autopermalink" data-description="Paragraph"><a href="#rem-hessian-r2-practice-3-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#rem-hessian-r2-practice-3-1-1" title="Copy heading and permalink for Item 1" aria-label="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="rem-hessian-r2-practice-3-1-2">
+<div class="para" id="rem-hessian-r2-practice-3-1-2-1">
+<em class="emphasis">Compute the Hessian at each critical point:</em> calculate <span class="process-math">\(f_{xx}\text{,}\)</span> <span class="process-math">\(f_{xy}\text{,}\)</span> and <span class="process-math">\(f_{yy}\)</span> and evaluate at the critical point.<div class="autopermalink" data-description="Paragraph"><a href="#rem-hessian-r2-practice-3-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#rem-hessian-r2-practice-3-1-2" title="Copy heading and permalink for Item 2" aria-label="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li id="rem-hessian-r2-practice-3-1-3">
+<div class="para" id="rem-hessian-r2-practice-3-1-3-1">
+<em class="emphasis">Apply the determinant criterion</em> (<a href="section-error-propagation-taylor-extrema.html#thm-hessian-criterion-r2" class="xref" data-knowl="./knowl/xref/thm-hessian-criterion-r2.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 2.2.14: Hessian Determinant Criterion for Functions of Two Variables">Theorem 2.2.14</a>): evaluate <span class="process-math">\(\det H_f = f_{xx} f_{yy} - f_{xy}^2\)</span> and check the sign of <span class="process-math">\(f_{xx}\)</span> if <span class="process-math">\(\det H_f \gt 0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#rem-hessian-r2-practice-3-1-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#rem-hessian-r2-practice-3-1-3" title="Copy heading and permalink for Item 3" aria-label="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Paragraph"><a href="#rem-hessian-r2-practice-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Remark 2.2.15: Practical Procedure for Two-Variable Extrema"><a href="#rem-hessian-r2-practice" title="Copy heading and permalink for Remark 2.2.15: Practical Procedure for Two-Variable Extrema" aria-label="Copy heading and permalink for Remark 2.2.15: Practical Procedure for Two-Variable Extrema">🔗</a></div></article><details id="ex-extrema-exp-cosh" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.2.16</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Critical Points of <span class="process-math">\(e^{-x^2/2}\cosh(y)\)</span>.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para" id="ex-extrema-exp-cosh-2">Consider <span class="process-math">\(f(x,y) = e^{-x^2/2} \cosh(y)\text{.}\)</span> Find and classify all local extreme points.<div class="autopermalink" data-description="Paragraph"><a href="#ex-extrema-exp-cosh-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-extrema-exp-cosh-3">
+<div class="para"><em class="emphasis">Step 1: find critical points.</em></div>
+<div class="displaymath process-math" id="ex-extrema-exp-cosh-3-2">
+\begin{gather*}
+\nabla f(x,y)
+= \begin{pmatrix}
+-x\,e^{-x^2/2} \cosh(y) \\
+e^{-x^2/2} \sinh(y)
+\end{pmatrix}
+= \begin{pmatrix} 0 \\ 0 \end{pmatrix}.
+\end{gather*}
+</div>
+<div class="para">Since <span class="process-math">\(e^{-x^2/2} \gt 0\)</span> always and <span class="process-math">\(\cosh(y) \geq 1 \gt 0\)</span> always, the first equation requires <span class="process-math">\(x = 0\text{.}\)</span> With <span class="process-math">\(x = 0\text{,}\)</span> the second equation becomes <span class="process-math">\(\sinh(y) = 0\text{,}\)</span> which holds only for <span class="process-math">\(y = 0\text{.}\)</span> The unique critical point is <span class="process-math">\((0,0)\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-extrema-exp-cosh-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-extrema-exp-cosh-4">
+<div class="para"><em class="emphasis">Step 2: Hessian at <span class="process-math">\((0,0)\text{.}\)</span></em></div>
+<div class="displaymath process-math" id="ex-extrema-exp-cosh-4-2">
+\begin{align*}
+f_{xx}(x,y) &amp;= (-1 + x^2)\,e^{-x^2/2}\cosh(y),\\
+f_{xy}(x,y) &amp;= -x\,e^{-x^2/2}\sinh(y),\\
+f_{yy}(x,y) &amp;= e^{-x^2/2}\cosh(y).
+\end{align*}
+</div>
+<div class="para">Evaluating at <span class="process-math">\((0,0)\text{:}\)</span>
+</div>
+<div class="displaymath process-math" id="ex-extrema-exp-cosh-4-4">
+\begin{equation*}
+H_f(0,0)
+= \begin{pmatrix} -1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-extrema-exp-cosh-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="ex-extrema-exp-cosh-5">
+<em class="emphasis">Step 3: classification.</em> <span class="process-math">\(\det H_f(0,0) = (-1)(1) - 0^2 = -1 \lt 0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-extrema-exp-cosh-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="ex-extrema-exp-cosh-6">By <a href="section-error-propagation-taylor-extrema.html#thm-hessian-criterion-r2" class="xref" data-knowl="./knowl/xref/thm-hessian-criterion-r2.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 2.2.14: Hessian Determinant Criterion for Functions of Two Variables">Theorem 2.2.14</a>, the function <span class="process-math">\(f\)</span> has a <em class="emphasis">saddle point</em> at <span class="process-math">\((0,0)\text{.}\)</span> The surface rises in the <span class="process-math">\(y\)</span>-direction (where <span class="process-math">\(f_{yy} = 1 \gt 0\)</span>) and falls in the <span class="process-math">\(x\)</span>-direction (where <span class="process-math">\(f_{xx} = -1 \lt 0\)</span>).<div class="autopermalink" data-description="Paragraph"><a href="#ex-extrema-exp-cosh-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 2.2.16: Critical Points of e^{-x^2/2}\cosh(y)"><a href="#ex-extrema-exp-cosh" title="Copy heading and permalink for Example 2.2.16: Critical Points of e^{-x^2/2}\cosh(y)" aria-label="Copy heading and permalink for Example 2.2.16: Critical Points of e^{-x^2/2}\cosh(y)">🔗</a></div></article></details><details id="ex-extrema-log-function" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.2.17</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Critical Points of <span class="process-math">\(x(\ln y - 2x)\)</span>.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para" id="ex-extrema-log-function-2">Consider <span class="process-math">\(f(x,y) = x\,(\ln y - 2x)\)</span> on the domain <span class="process-math">\(\{(x,y) : y \gt 0\}\text{.}\)</span> Find and classify all local extreme points.<div class="autopermalink" data-description="Paragraph"><a href="#ex-extrema-log-function-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-extrema-log-function-3">
+<div class="para"><em class="emphasis">Step 1: find critical points.</em></div>
+<div class="displaymath process-math" id="ex-extrema-log-function-3-2">
+\begin{gather*}
+\nabla f(x,y)
+= \begin{pmatrix}
+\ln y - 4x \\[3pt]
+x/y
+\end{pmatrix}
+= \begin{pmatrix} 0 \\ 0 \end{pmatrix}.
+\end{gather*}
+</div>
+<div class="para">The second equation gives <span class="process-math">\(x = 0\)</span> (since <span class="process-math">\(y \gt 0\)</span>). Substituting into the first equation: <span class="process-math">\(\ln y = 0 \implies y = 1\text{.}\)</span> The unique critical point is <span class="process-math">\((0,1)\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-extrema-log-function-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-extrema-log-function-4">
+<div class="para"><em class="emphasis">Step 2: Hessian at <span class="process-math">\((0,1)\text{.}\)</span></em></div>
+<div class="displaymath process-math" id="ex-extrema-log-function-4-2">
+\begin{gather*}
+f_{xx} = -4, \quad
+f_{xy} = \frac{1}{y}, \quad
+f_{yy} = -\frac{x}{y^2}.
+\end{gather*}
+</div>
+<div class="para">Evaluating at <span class="process-math">\((0,1)\text{:}\)</span>
+</div>
+<div class="displaymath process-math" id="ex-extrema-log-function-4-4">
+\begin{equation*}
+H_f(0,1)
+= \begin{pmatrix} -4 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-extrema-log-function-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="ex-extrema-log-function-5">
+<em class="emphasis">Step 3: classification.</em> <span class="process-math">\(\det H_f(0,1) = (-4)(0) - 1^2 = -1 \lt 0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-extrema-log-function-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="ex-extrema-log-function-6">By <a href="section-error-propagation-taylor-extrema.html#thm-hessian-criterion-r2" class="xref" data-knowl="./knowl/xref/thm-hessian-criterion-r2.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 2.2.14: Hessian Determinant Criterion for Functions of Two Variables">Theorem 2.2.14</a>, <span class="process-math">\(f\)</span> has a <em class="emphasis">saddle point</em> at <span class="process-math">\((0,1)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-extrema-log-function-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 2.2.17: Critical Points of x(\ln y - 2x)"><a href="#ex-extrema-log-function" title="Copy heading and permalink for Example 2.2.17: Critical Points of x(\ln y - 2x)" aria-label="Copy heading and permalink for Example 2.2.17: Critical Points of x(\ln y - 2x)">🔗</a></div></article></details><details id="ex-extrema-paraboloid-minimum" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.2.18</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Local Minimum of a Paraboloid.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para" id="ex-extrema-paraboloid-minimum-2">Consider <span class="process-math">\(f(x,y) = x^2 + xy + y^2 + 2x - y\text{.}\)</span> Find and classify all local extreme points.<div class="autopermalink" data-description="Paragraph"><a href="#ex-extrema-paraboloid-minimum-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-extrema-paraboloid-minimum-3">
+<div class="para"><em class="emphasis">Step 1: find critical points.</em></div>
+<div class="displaymath process-math" id="ex-extrema-paraboloid-minimum-3-2">
+\begin{gather*}
+f_x = 2x + y + 2 = 0,
+\qquad
+f_y = x + 2y - 1 = 0.
+\end{gather*}
+</div>
+<div class="para">From the first equation, <span class="process-math">\(y = -2x - 2\text{.}\)</span> Substituting into the second: <span class="process-math">\(x + 2(-2x-2) - 1 = 0 \implies -3x - 5 = 0 \implies x = -\tfrac{5}{3}\text{.}\)</span> Then <span class="process-math">\(y = -2(-\tfrac{5}{3}) - 2 = \tfrac{4}{3}\text{.}\)</span> The unique critical point is <span class="process-math">\(\bigl(-\tfrac{5}{3},\tfrac{4}{3}\bigr)\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-extrema-paraboloid-minimum-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-extrema-paraboloid-minimum-4">
+<div class="para">
+<em class="emphasis">Step 2: Hessian.</em> Since <span class="process-math">\(f_{xx} = 2\text{,}\)</span> <span class="process-math">\(f_{xy} = 1\text{,}\)</span> <span class="process-math">\(f_{yy} = 2\)</span> are constant:</div>
+<div class="displaymath process-math" id="ex-extrema-paraboloid-minimum-4-5">
+\begin{equation*}
+H_f = \begin{pmatrix} 2 &amp; 1 \\ 1 &amp; 2 \end{pmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-extrema-paraboloid-minimum-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="ex-extrema-paraboloid-minimum-5">
+<em class="emphasis">Step 3: classification.</em> <span class="process-math">\(\det H_f = 4 - 1 = 3 \gt 0\)</span> and <span class="process-math">\(f_{xx} = 2 \gt 0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-extrema-paraboloid-minimum-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="ex-extrema-paraboloid-minimum-6">By <a href="section-error-propagation-taylor-extrema.html#thm-hessian-criterion-r2" class="xref" data-knowl="./knowl/xref/thm-hessian-criterion-r2.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 2.2.14: Hessian Determinant Criterion for Functions of Two Variables">Theorem 2.2.14</a>, <span class="process-math">\(f\)</span> has a <dfn class="terminology">strict local minimum</dfn> at <span class="process-math">\(\bigl(-\tfrac{5}{3},\tfrac{4}{3}\bigr)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-extrema-paraboloid-minimum-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 2.2.18: Local Minimum of a Paraboloid"><a href="#ex-extrema-paraboloid-minimum" title="Copy heading and permalink for Example 2.2.18: Local Minimum of a Paraboloid" aria-label="Copy heading and permalink for Example 2.2.18: Local Minimum of a Paraboloid">🔗</a></div></article></details><section class="conclusion" id="subsec-extrema-14"><div class="para" id="subsec-extrema-14-1">The workflow for local extrema is now complete: find the critical points from <span class="process-math">\(\nabla f = \mathbf{0}\text{,}\)</span> then use the Hessian to decide whether the second-order Taylor polynomial behaves like a bowl, an upside-down bowl, or a saddle. This gives a direct bridge from local approximation to optimisation.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-extrema-14-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></section><div class="autopermalink" data-description="Subsection 2.2.3: Local Extrema of Multivariable Functions"><a href="#subsec-extrema" title="Copy heading and permalink for Subsection 2.2.3: Local Extrema of Multivariable Functions" aria-label="Copy heading and permalink for Subsection 2.2.3: Local Extrema of Multivariable Functions">🔗</a></div></section><section class="exercises" id="exercises-error-propagation-taylor-extrema"><h3 class="heading hide-type">
+<span class="type">Exercises</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.2.4</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Check Your Understanding</span>
+</h3>
+<article class="exercise exercise-like" id="exer-error-propagation-dominant-term"><h4 class="heading">
+<span class="codenumber">1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Interpret an Error Estimate.</span>
+</h4>
+<div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
+<div class="exercise-statement"><div class="para logical" id="exer-error-propagation-dominant-term-2-1">
+<div class="para">In the first-order estimate</div>
+<div class="displaymath process-math" id="exer-error-propagation-dominant-term-2-1-1">
+\begin{equation*}
+|\Delta U|
+\approx
+\left|\frac{\partial U}{\partial x_1}\right||\Delta_1|
++ \cdots +
+\left|\frac{\partial U}{\partial x_n}\right||\Delta_n|,
+\end{equation*}
+</div>
+<div class="para">which input contributes the most to the output uncertainty?</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#exer-error-propagation-dominant-term-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div>
+<ul data-component="multiplechoice" class="exercise-interactives" id="rs-exer-error-propagation-dominant-term" data-multipleanswers="false">
+<li data-component="answer" id="rs-exer-error-propagation-dominant-term_opt_a" data-correct=""><div class="para" id="exer-error-propagation-dominant-term-3-1-1-1">The one with the largest product <span class="process-math">\(\left|\frac{\partial U}{\partial x_i}\right||\Delta_i|\text{.}\)</span>
+</div></li>
+<li data-component="feedback" id="rs-exer-error-propagation-dominant-term_opt_a"><div class="para" id="exer-error-propagation-dominant-term-3-1-2-1">Correct. The sensitivity factor and the size of the input uncertainty matter together.</div></li>
+<li data-component="answer" id="rs-exer-error-propagation-dominant-term_opt_b"><div class="para" id="exer-error-propagation-dominant-term-3-2-1-1">Always the variable with the largest measured value.</div></li>
+<li data-component="feedback" id="rs-exer-error-propagation-dominant-term_opt_b"><div class="para" id="exer-error-propagation-dominant-term-3-2-2-1">Incorrect. A large nominal value alone does not determine the propagated error.</div></li>
+<li data-component="answer" id="rs-exer-error-propagation-dominant-term_opt_c"><div class="para" id="exer-error-propagation-dominant-term-3-3-1-1">Always the variable with the smallest uncertainty.</div></li>
+<li data-component="feedback" id="rs-exer-error-propagation-dominant-term_opt_c"><div class="para" id="exer-error-propagation-dominant-term-3-3-2-1">Incorrect. A smaller uncertainty usually contributes less, not more.</div></li>
+<li data-component="answer" id="rs-exer-error-propagation-dominant-term_opt_d"><div class="para" id="exer-error-propagation-dominant-term-3-4-1-1">All variables contribute equally.</div></li>
+<li data-component="feedback" id="rs-exer-error-propagation-dominant-term_opt_d"><div class="para" id="exer-error-propagation-dominant-term-3-4-2-1">Incorrect. The contribution depends on both sensitivity and uncertainty size.</div></li>
+</ul>
+</div></div>
+<div class="autopermalink" data-description="Exercise 2.2.4.1: Interpret an Error Estimate"><a href="#exer-error-propagation-dominant-term" title="Copy heading and permalink for Exercise 2.2.4.1: Interpret an Error Estimate" aria-label="Copy heading and permalink for Exercise 2.2.4.1: Interpret an Error Estimate">🔗</a></div></article><article class="exercise exercise-like" id="exer-error-propagation-product"><h4 class="heading">
+<span class="codenumber">2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Estimate an Absolute Error.</span>
+</h4>
+<div class="para logical" id="exer-error-propagation-product-2-1">
+<div class="para">Let</div>
+<div class="displaymath process-math" id="exer-error-propagation-product-2-1-1">
+\begin{equation*}
+U(x,y)=xy.
+\end{equation*}
+</div>
+<div class="para">At the measured point <span class="process-math">\((x_0,y_0)=(2,3)\text{,}\)</span> the uncertainties are <span class="process-math">\(|\Delta x|=0.1\)</span> and <span class="process-math">\(|\Delta y|=0.2\text{.}\)</span> Use the first-order formula to estimate the maximal absolute error in <span class="process-math">\(U\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#exer-error-propagation-product-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="exer-error-propagation-product-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="exer-error-propagation-product-3-1">
+<div class="para">We compute the partial derivatives:</div>
+<div class="displaymath process-math" id="exer-error-propagation-product-3-1-1">
+\begin{equation*}
+\frac{\partial U}{\partial x}=y,
+\qquad
+\frac{\partial U}{\partial y}=x.
+\end{equation*}
+</div>
+<div class="para">At <span class="process-math">\((2,3)\text{,}\)</span> this gives</div>
+<div class="displaymath process-math" id="exer-error-propagation-product-3-1-3">
+\begin{equation*}
+\left.\frac{\partial U}{\partial x}\right|_{(2,3)}=3,
+\qquad
+\left.\frac{\partial U}{\partial y}\right|_{(2,3)}=2.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#exer-error-propagation-product-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="exer-error-propagation-product-3-2">
+<div class="para">Therefore the first-order absolute error estimate is</div>
+<div class="displaymath process-math" id="exer-error-propagation-product-3-2-1">
+\begin{equation*}
+|\Delta U|
+\approx
+|3|\cdot 0.1 + |2|\cdot 0.2
+= 0.3 + 0.4
+= 0.7.
+\end{equation*}
+</div>
+<div class="para">So the estimated maximal absolute error is <span class="process-math">\(0.7\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#exer-error-propagation-product-3-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 2.2.4.2.1"><a href="#exer-error-propagation-product-3" title="Copy heading and permalink for Solution 2.2.4.2.1" aria-label="Copy heading and permalink for Solution 2.2.4.2.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Exercise 2.2.4.2: Estimate an Absolute Error"><a href="#exer-error-propagation-product" title="Copy heading and permalink for Exercise 2.2.4.2: Estimate an Absolute Error" aria-label="Copy heading and permalink for Exercise 2.2.4.2: Estimate an Absolute Error">🔗</a></div></article><article class="exercise exercise-like" id="exer-taylor-polynomial-easy"><h4 class="heading">
+<span class="codenumber">3<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Second-Order Taylor Polynomial.</span>
+</h4>
+<div class="para logical" id="exer-taylor-polynomial-easy-2-1">
+<div class="para">Determine the second-order Taylor polynomial at the origin for</div>
+<div class="displaymath process-math" id="exer-taylor-polynomial-easy-2-1-1">
+\begin{equation*}
+f(x,y)=e^x+y^2.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#exer-taylor-polynomial-easy-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="exer-taylor-polynomial-easy-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="exer-taylor-polynomial-easy-3-1">
+<div class="para">We have</div>
+<div class="displaymath process-math" id="exer-taylor-polynomial-easy-3-1-1">
+\begin{equation*}
+f(0,0)=1.
+\end{equation*}
+</div>
+<div class="para">The first-order partial derivatives are</div>
+<div class="displaymath process-math" id="exer-taylor-polynomial-easy-3-1-2">
+\begin{equation*}
+f_x=e^x,
+\qquad
+f_y=2y,
+\end{equation*}
+</div>
+<div class="para">so</div>
+<div class="displaymath process-math" id="exer-taylor-polynomial-easy-3-1-3">
+\begin{equation*}
+\nabla f(0,0)=\begin{pmatrix}1\\0\end{pmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#exer-taylor-polynomial-easy-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="exer-taylor-polynomial-easy-3-2">
+<div class="para">The second-order partial derivatives are</div>
+<div class="displaymath process-math" id="exer-taylor-polynomial-easy-3-2-1">
+\begin{equation*}
+f_{xx}=e^x,
+\qquad
+f_{xy}=f_{yx}=0,
+\qquad
+f_{yy}=2.
+\end{equation*}
+</div>
+<div class="para">Hence</div>
+<div class="displaymath process-math" id="exer-taylor-polynomial-easy-3-2-2">
+\begin{equation*}
+H_f(0,0)=
+\begin{pmatrix}
+1 &amp; 0\\
+0 &amp; 2
+\end{pmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#exer-taylor-polynomial-easy-3-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="exer-taylor-polynomial-easy-3-3">
+<div class="para">Therefore</div>
+<div class="displaymath process-math" id="exer-taylor-polynomial-easy-3-3-1">
+\begin{align*}
+T_2(x,y)
+&amp;=
+1 + \begin{pmatrix}1\\0\end{pmatrix}\cdot\begin{pmatrix}x\\y\end{pmatrix}
++ \tfrac12
+\begin{pmatrix}x &amp; y\end{pmatrix}
+\begin{pmatrix}
+1 &amp; 0\\
+0 &amp; 2
+\end{pmatrix}
+\begin{pmatrix}x\\y\end{pmatrix}\\
+&amp;= 1 + x + \tfrac12 x^2 + y^2.
+\end{align*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#exer-taylor-polynomial-easy-3-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 2.2.4.3.1"><a href="#exer-taylor-polynomial-easy-3" title="Copy heading and permalink for Solution 2.2.4.3.1" aria-label="Copy heading and permalink for Solution 2.2.4.3.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Exercise 2.2.4.3: Second-Order Taylor Polynomial"><a href="#exer-taylor-polynomial-easy" title="Copy heading and permalink for Exercise 2.2.4.3: Second-Order Taylor Polynomial" aria-label="Copy heading and permalink for Exercise 2.2.4.3: Second-Order Taylor Polynomial">🔗</a></div></article><article class="exercise exercise-like" id="exer-hessian-criterion-saddle"><h4 class="heading">
+<span class="codenumber">4<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Read the Hessian Criterion.</span>
+</h4>
+<div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
+<div class="exercise-statement"><div class="para logical" id="exer-hessian-criterion-saddle-2-1">
+<div class="para">Let <span class="process-math">\((x_0,y_0)\)</span> be a critical point of a twice continuously differentiable function of two variables. If</div>
+<div class="displaymath process-math" id="exer-hessian-criterion-saddle-2-1-2">
+\begin{equation*}
+\det H_f(x_0,y_0) &lt; 0,
+\end{equation*}
+</div>
+<div class="para">what does the Hessian criterion say?</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#exer-hessian-criterion-saddle-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div>
+<ul data-component="multiplechoice" class="exercise-interactives" id="rs-exer-hessian-criterion-saddle" data-multipleanswers="false">
+<li data-component="answer" id="rs-exer-hessian-criterion-saddle_opt_a"><div class="para" id="exer-hessian-criterion-saddle-3-1-1-1">
+<span class="process-math">\((x_0,y_0)\)</span> is a strict local minimum.</div></li>
+<li data-component="feedback" id="rs-exer-hessian-criterion-saddle_opt_a"><div class="para" id="exer-hessian-criterion-saddle-3-1-2-1">Incorrect. A negative determinant means the Hessian is indefinite.</div></li>
+<li data-component="answer" id="rs-exer-hessian-criterion-saddle_opt_b"><div class="para" id="exer-hessian-criterion-saddle-3-2-1-1">
+<span class="process-math">\((x_0,y_0)\)</span> is a strict local maximum.</div></li>
+<li data-component="feedback" id="rs-exer-hessian-criterion-saddle_opt_b"><div class="para" id="exer-hessian-criterion-saddle-3-2-2-1">Incorrect. A strict maximum would require a negative definite Hessian, not just a negative determinant.</div></li>
+<li data-component="answer" id="rs-exer-hessian-criterion-saddle_opt_c" data-correct=""><div class="para" id="exer-hessian-criterion-saddle-3-3-1-1">
+<span class="process-math">\((x_0,y_0)\)</span> is a saddle point.</div></li>
+<li data-component="feedback" id="rs-exer-hessian-criterion-saddle_opt_c"><div class="para" id="exer-hessian-criterion-saddle-3-3-2-1">Correct. In two variables, <span class="process-math">\(\det H_f(x_0,y_0) &lt; 0\)</span> means the quadratic form takes both signs.</div></li>
+<li data-component="answer" id="rs-exer-hessian-criterion-saddle_opt_d"><div class="para" id="exer-hessian-criterion-saddle-3-4-1-1">The test is inconclusive.</div></li>
+<li data-component="feedback" id="rs-exer-hessian-criterion-saddle_opt_d"><div class="para" id="exer-hessian-criterion-saddle-3-4-2-1">Incorrect. The test is inconclusive when the determinant is <span class="process-math">\(0\text{,}\)</span> not when it is negative.</div></li>
+</ul>
+</div></div>
+<div class="autopermalink" data-description="Exercise 2.2.4.4: Read the Hessian Criterion"><a href="#exer-hessian-criterion-saddle" title="Copy heading and permalink for Exercise 2.2.4.4: Read the Hessian Criterion" aria-label="Copy heading and permalink for Exercise 2.2.4.4: Read the Hessian Criterion">🔗</a></div></article><div class="autopermalink" data-description="Exercises 2.2.4: Check Your Understanding"><a href="#exercises-error-propagation-taylor-extrema" title="Copy heading and permalink for Exercises 2.2.4: Check Your Understanding" aria-label="Copy heading and permalink for Exercises 2.2.4: Check Your Understanding">🔗</a></div></section><div class="autopermalink" data-description="Section 2.2: Error Propagation, Taylor Expansion, and Extrema"><a href="#section-error-propagation-taylor-extrema" title="Copy heading and permalink for Section 2.2: Error Propagation, Taylor Expansion, and Extrema" aria-label="Copy heading and permalink for Section 2.2: Error Propagation, Taylor Expansion, and Extrema">🔗</a></div></section></div>
+<div id="ptx-content-footer" class="ptx-content-footer">
+<a class="previous-button button" href="section-functions-continuity-partial-derivatives.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="backmatter.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
+</div></main>
+</div>
+<div id="ptx-page-footer" class="ptx-page-footer">
+<a class="pretext-link" href="https://pretextbook.org" title="PreTeXt"><div class="logo"><svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="338 3000 8772 6866" role="img"><title>PreTeXt logo</title><g style="stroke-width:.025in; stroke:currentColor; fill:none"><polyline points="472,3590 472,9732 " style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,9448 A 4660 4660  0  0  1  8598  9259"></path><path style="stroke-width:174;stroke-linecap:butt;" d="M 4488,9685 A 4228 4228  0  0  0   472  9732"></path><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,3590 A 4241 4241  0  0  1  8598  3496"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,3496  A 4241 4241  0  0  1  4724  3590"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,9259  A 4507 4507  0  0  1  4724  9448"></path><polyline points="5385,4299 4062,8125" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8598,3496 8598,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="850,3496 850,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="4960,9685 4488,9685" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="3070,4582 1889,6141 3070,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="6418,4582 7600,6141 6418,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8976,3590 8976,9732" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><path style="stroke-width:174;stroke-linecap:butt;" d="M 4960,9685 A 4228 4228  0  0  1  8976  9732"></path></g></svg></div></a><a class="runestone-link" href="https://runestone.academy" title="Runestone Academy"><img class="logo" src="https://runestone.academy/runestone/static/images/RAIcon_cropped.png" alt="Runstone Academy logo"></a><a class="mathjax-link" href="https://www.mathjax.org" title="MathJax"><img class="logo" src="https://www.mathjax.org/badge/badge-square-2.png" alt="MathJax logo"></a>
+</div>
+</body>
+</html>
