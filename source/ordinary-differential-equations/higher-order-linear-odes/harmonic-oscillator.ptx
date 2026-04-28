@@ -1,0 +1,463 @@
+<subsection xml:id="subsec-harmonic-oscillator">
+  <title>Application: The Harmonic Oscillator</title>
+
+  <introduction>
+    <p>
+      The techniques developed in this section apply immediately to one of the
+      most important mechanical systems in engineering: the
+      <term>mass-spring-damper</term> system (also called the
+      <em>harmonic oscillator</em>).
+      Beyond its direct engineering relevance — suspension systems, vibration
+      isolation, earthquake engineering — it is the canonical model for any
+      physical system exhibiting oscillatory behaviour near an equilibrium.
+    </p>
+  </introduction>
+
+  <!-- ─── Physical setup ─── -->
+
+  <example xml:id="ex-spring-pendulum-setup">
+    <title>The Mass-Spring-Damper System</title>
+    <p>
+      A mass <m>m > 0</m> is attached to a fixed support by a spring
+      (stiffness <m>k > 0</m>) and a viscous damper (damping coefficient
+      <m>\alpha \geq 0</m>).  The mass can move vertically; let <m>y(t)</m>
+      denote its displacement from the natural rest position.
+    </p>
+    <figure xml:id="fig-spring-damper-diagram">
+      <caption>
+        Schematic of the mass-spring-damper system.
+        The mass <m>m</m> hangs from a spring (stiffness <m>k</m>) and a
+        damper (coefficient <m>\alpha</m>) in parallel.
+        Positive <m>y</m> points downward.
+      </caption>
+      <image xml:id="image-spring-damper-diagram" width="40%">
+        <latex-image>
+          \begin{tikzpicture}[
+            spring/.style={decorate,
+              decoration={coil, aspect=0.4, segment length=5pt,
+                          amplitude=5pt}},
+            damper/.style={thick},
+            thick
+          ]
+            % Fixed wall (top)
+            \fill[gray!40] (-1.5,4) rectangle (1.5,4.2);
+            \draw[thick] (-1.5,4) -- (1.5,4);
+
+            % Spring (left)
+            \draw[spring] (-0.8,4) -- (-0.8,1.5);
+            \node[left] at (-1.05, 2.75) {$k$};
+
+            % Damper (right): box style
+            \draw[thick] (0.8,4) -- (0.8,3.0);
+            \draw[thick] (0.55,3.0) rectangle (1.05, 2.2);
+            \draw[thick] (0.8,2.2) -- (0.8,1.5);
+            \node[right] at (1.1, 2.6) {$\alpha$};
+
+            % Mass block
+            \fill[blue!20] (-0.5,1.0) rectangle (0.5,1.5);
+            \draw[thick] (-0.5,1.0) rectangle (0.5,1.5);
+            \node at (0, 1.25) {$m$};
+
+            % Spring connects to mass
+            \draw[thick] (-0.8,1.5) -- (-0.5,1.25);
+            \draw[thick] (0.8,1.5)  -- (0.5,1.25);
+
+            % Rest position indicator
+            \draw[dashed, gray] (-0.7,1.25) -- (1.3,1.25);
+            \node[right, gray] at (1.3,1.25) {\small rest};
+
+            % Displacement arrow
+            \draw[latex-latex, red!80!black, thick] (0.65, 0.2) -- (0.65,1.0);
+            \node[right, red!80!black] at (0.7, 0.6) {$y(t)$};
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+    </figure>
+    <p>
+      Newton's second law gives
+      <me>
+        m\, y''(t) = -k\, y(t) - \alpha\, y'(t) + F(t),
+      </me>
+      which, after dividing by <m>m</m> and rearranging, becomes
+      <men xml:id="eq-harmonic-oscillator">
+        y''(t) + \underbrace{\frac{\alpha}{m}}_{2\beta}\, y'(t)
+        + \underbrace{\frac{k}{m}}_{\omega_0^2}\, y(t)
+        = \frac{F(t)}{m}.
+      </men>
+      Physical reasoning constrains the parameters:
+      <m>2\beta = \alpha/m \geq 0</m> (damping is non-negative) and
+      <m>\omega_0^2 = k/m > 0</m> (the spring always restores).
+      Here <m>\omega_0</m> is called the <term>natural frequency</term>.
+    </p>
+  </example>
+
+  <!-- ─── Free oscillation: homogeneous ODE ─── -->
+
+  <remark xml:id="rem-harmonic-solution-strategy">
+    <title>Solution Strategy</title>
+    <p>
+      The harmonic oscillator is the concrete place where the abstract theory
+      of this section comes together.  First we solve the homogeneous equation
+      (<m>F=0</m>) to understand the system's free motion.  Then we add a
+      particular solution for the forced case (<m>F \neq 0</m>), exactly as in
+      <xref ref="alg-undetermined-coefficients"/>, to describe how an external
+      excitation changes that motion.
+    </p>
+  </remark>
+
+  <!-- ─── Case 1a: undamped ─── -->
+
+  <theorem xml:id="thm-undamped-free-oscillation">
+    <title>Case 1a — Free Undamped Oscillation (<m>\beta = 0</m>)</title>
+    <statement>
+      <p>
+        With no damping (<m>\beta = 0</m>), equation
+        <xref ref="eq-harmonic-oscillator"/> with <m>F = 0</m> reduces to
+        <me>
+          y''(t) + \omega_0^2\, y(t) = 0.
+        </me>
+        The characteristic polynomial <m>P(\lambda) = \lambda^2 + \omega_0^2</m>
+        has the purely imaginary roots <m>\lambda_{1,2} = \pm i\omega_0</m>.
+        The general solution is
+        <me>
+          y(t) = C_1 \cos(\omega_0 t) + C_2 \sin(\omega_0 t).
+        </me>
+        The system oscillates at frequency <m>\omega_0</m>
+        with constant amplitude — no decay, no growth.
+      </p>
+    </statement>
+  </theorem>
+
+  <figure xml:id="fig-undamped-oscillation">
+    <caption>
+      Free undamped oscillation: a pure sinusoid at frequency
+      <m>\omega_0</m> with period <m>T = 2\pi/\omega_0</m>.
+      The amplitude never changes.
+    </caption>
+    <image xml:id="image-undamped-oscillation" width="65%">
+      <latex-image>
+        \begin{tikzpicture}
+          \begin{axis}[
+            width=9cm, height=5cm,
+            xlabel={$t$}, ylabel={$y(t)$},
+            xmin=0, xmax=6.5, ymin=-1.5, ymax=1.8,
+            axis lines=left,
+            xtick={3.14159, 6.28318},
+            xticklabels={$\pi/\omega_0$, $2\pi/\omega_0$},
+            ytick={-1,0,1},
+            samples=200, smooth
+          ]
+            \addplot[thick, blue, domain=0:6.5] {cos(deg(x))};
+            \draw[dashed, gray] (axis cs:0,1) -- (axis cs:6.5,1);
+            \draw[dashed, gray] (axis cs:0,-1) -- (axis cs:6.5,-1);
+            \draw[latex-latex, gray!70!black] (axis cs:0,1.4) -- (axis cs:6.28,1.4);
+            \node[above] at (axis cs:3.14,1.4) {\small$T = 2\pi/\omega_0$};
+          \end{axis}
+        \end{tikzpicture}
+      </latex-image>
+    </image>
+  </figure>
+
+  <!-- ─── Case 1b: damped ─── -->
+
+  <theorem xml:id="thm-damped-free-oscillation">
+    <title>Case 1b — Free Damped Oscillation (<m>\beta > 0</m>)</title>
+    <statement>
+      <p>
+        With positive damping, the characteristic polynomial
+        <m>P(\lambda) = \lambda^2 + 2\beta\lambda + \omega_0^2</m>
+        has discriminant <m>\Delta = \beta^2 - \omega_0^2</m>.
+        Three qualitatively different behaviours arise.
+      </p>
+      <p>
+        <em>Case 1b.i — Underdamped (<m>\beta^2 \lt \omega_0^2</m>).</em>
+        Roots: <m>\lambda_{1,2} = -\beta \pm i\omega_d</m> where
+        <m>\omega_d = \sqrt{\omega_0^2 - \beta^2} > 0</m>
+        is the <term>damped natural frequency</term>.
+        General solution:
+        <me>
+          y(t) = e^{-\beta t}\!\left(C_1\cos(\omega_d t)
+                 + C_2\sin(\omega_d t)\right).
+        </me>
+        The system oscillates with exponentially decreasing amplitude.
+      </p>
+      <p>
+        <em>Case 1b.ii — Critically damped (<m>\beta^2 = \omega_0^2</m>).</em>
+        Double root <m>\lambda_0 = -\beta</m>.
+        General solution:
+        <me>
+          y(t) = C_1\, e^{-\beta t} + C_2\, t\, e^{-\beta t}.
+        </me>
+        The system returns to rest as fast as possible without
+        oscillating — the <em>aperiodic limit case</em>.
+      </p>
+      <p>
+        <em>Case 1b.iii — Overdamped (<m>\beta^2 > \omega_0^2</m>).</em>
+        Two distinct real roots
+        <m>\lambda_{1,2} = -\beta \pm \sqrt{\beta^2 - \omega_0^2}</m>
+        (both negative, since <m>\sqrt{\beta^2 - \omega_0^2} \lt \beta</m>).
+        General solution:
+        <me>
+          y(t) = C_1\, e^{\lambda_1 t} + C_2\, e^{\lambda_2 t}.
+        </me>
+        The system decays to rest without oscillating,
+        but more slowly than in the critically damped case.
+      </p>
+    </statement>
+  </theorem>
+
+  <figure xml:id="fig-damped-oscillation-cases">
+    <caption>
+      The three qualitatively different responses of a free damped
+      harmonic oscillator, plotted for
+      <m>\omega_0 = 1</m> and initial conditions <m>y(0) = 1</m>,
+      <m>y'(0) = 0</m>.
+      Underdamped (<m>\beta = 0.2</m>): oscillatory decay.
+      Critically damped (<m>\beta = 1</m>): fastest non-oscillatory return.
+      Overdamped (<m>\beta = 1.5</m>): slow non-oscillatory decay.
+    </caption>
+    <image xml:id="image-damped-oscillation-cases" width="70%">
+      <latex-image>
+        \begin{tikzpicture}
+          \begin{axis}[
+            width=10cm, height=6cm,
+            xlabel={$t$}, ylabel={$y(t)$},
+            xmin=0, xmax=10, ymin=-0.6, ymax=1.1,
+            axis lines=left,
+            ytick={0,1},
+            xtick={0,2,4,6,8,10},
+            legend pos=north east,
+            legend style={font=\small},
+            samples=300, smooth
+          ]
+            % Underdamped: beta=0.2, omega_0=1, omega_d=sqrt(1-0.04)=0.98
+            \addplot[thick, blue, domain=0:10]
+              {exp(-0.2*x)*(cos(deg(0.98*x))
+               + (0.2/0.98)*sin(deg(0.98*x)))};
+            \addlegendentry{Underdamped ($\beta{=}0.2$)}
+            % Critically damped: beta=1, y=(1+t)e^{-t}
+            \addplot[thick, red!80!black, domain=0:10]
+              {(1+x)*exp(-x)};
+            \addlegendentry{Critical ($\beta{=}1$)}
+            % Overdamped: beta=1.5, lambda1=-0.268, lambda2=-2.732
+            % y(0)=1, y'(0)=0 => C1+C2=1, -0.268C1-2.732C2=0
+            % C2 = -0.268/(2.464) * C1 ... let me compute properly
+            % lambda1 = -1.5 + sqrt(2.25-1) = -1.5+1.118=-0.382
+            % lambda2 = -1.5 - 1.118 = -2.618
+            % C1+C2=1; -0.382 C1 - 2.618 C2 = 0 => C1 = 2.618 C2 / 0.382 = 6.85 C2
+            % 6.85 C2 + C2 = 1 => C2 = 0.127, C1 = 0.873
+            \addplot[thick, green!60!black, domain=0:10]
+              {0.873*exp(-0.382*x) + 0.127*exp(-2.618*x)};
+            \addlegendentry{Overdamped ($\beta{=}1.5$)}
+            \draw[dashed, gray] (axis cs:0,0) -- (axis cs:10,0);
+          \end{axis}
+        \end{tikzpicture}
+      </latex-image>
+    </image>
+  </figure>
+
+  <!-- ─── Case 2: forced oscillation and resonance ─── -->
+
+  <theorem xml:id="thm-forced-oscillation">
+    <title>Case 2 — Forced Oscillation and Resonance</title>
+    <statement>
+      <p>
+        Now consider an external sinusoidal force
+        <m>F(t) = F_0 \sin(\omega t)</m> applied to a damped oscillator
+        (<m>\beta \geq 0</m>).
+        Using the method of undetermined coefficients with ansatz
+        <m>y_p(t) = B_1\cos(\omega t) + B_2\sin(\omega t)</m>
+        (valid whenever <m>\beta > 0</m> or <m>\omega \neq \omega_0</m>),
+        substitution into <xref ref="eq-harmonic-oscillator"/> gives
+        <md>
+          <mrow>
+            (\omega_0^2 - \omega^2) B_1 + 2\beta\omega B_2 \amp= 0,
+          </mrow>
+          <mrow>
+            -2\beta\omega B_1 + (\omega_0^2 - \omega^2) B_2
+            \amp= \frac{F_0}{m}.
+          </mrow>
+        </md>
+      </p>
+      <!-- ADDED: short coefficient derivation makes the amplitude and phase formulas transparent -->
+      <p>
+        Solving this linear system yields
+        <md>
+          <mrow>
+            B_1 \amp=
+            -\frac{F_0}{m}\,
+            \frac{2\beta\omega}{(\omega_0^2 - \omega^2)^2 + 4\beta^2\omega^2},
+          </mrow>
+          <mrow>
+            B_2 \amp=
+            \frac{F_0}{m}\,
+            \frac{\omega_0^2 - \omega^2}{(\omega_0^2 - \omega^2)^2 + 4\beta^2\omega^2}.
+          </mrow>
+        </md>
+        Hence the particular solution can be rewritten in amplitude-phase form as
+        <me>
+          y_p(t)
+          = \frac{F_0/m}{\sqrt{(\omega_0^2 - \omega^2)^2 + 4\beta^2\omega^2}}
+            \sin\!\bigl(\omega t - \varphi(\omega)\bigr),
+        </me>
+        where the <term>phase shift</term> <m>\varphi(\omega)</m> satisfies
+        <m>\tan\varphi = 2\beta\omega/(\omega_0^2 - \omega^2)</m>.
+      </p>
+      <p>
+        The <term>amplitude of the steady-state response</term> is
+        <me>
+          A(\omega)
+          = \frac{F_0/m}{\sqrt{(\omega_0^2 - \omega^2)^2 + 4\beta^2\omega^2}}.
+        </me>
+        When <m>\beta</m> is small and <m>\omega \approx \omega_0</m>,
+        the denominator is small and <m>A(\omega)</m> becomes very large —
+        this is the <term>resonance</term> phenomenon.
+      </p>
+      <p>
+        In the undamped case <m>\beta = 0</m> with driving frequency
+        <m>\omega = \omega_0</m>, the method of undetermined coefficients
+        requires the resonance ansatz
+        <m>y_p(t) = t\bigl(B_1\cos(\omega_0 t) + B_2\sin(\omega_0 t)\bigr)</m>,
+        and the amplitude grows linearly without bound.
+      </p>
+    </statement>
+  </theorem>
+
+  <figure xml:id="fig-resonance-amplitude-curve">
+    <caption>
+      Frequency response of the amplitude <m>A(\omega)</m> for fixed
+      <m>F_0 = m = 1</m>, <m>\omega_0 = 1</m> and several damping values.
+      As <m>\beta \to 0</m> the resonance peak at <m>\omega \approx \omega_0</m>
+      becomes sharper and taller; for <m>\beta = 0</m> it diverges.
+    </caption>
+    <image xml:id="image-resonance-amplitude-curve" width="70%">
+      <latex-image>
+        \begin{tikzpicture}
+          \begin{axis}[
+            width=10cm, height=6cm,
+            xlabel={Driving frequency $\omega$},
+            ylabel={Amplitude $A(\omega)$},
+            xmin=0, xmax=3, ymin=0, ymax=6.5,
+            axis lines=left,
+            ytick={0,1,2,3,4,5,6},
+            xtick={0,0.5,1,1.5,2,2.5,3},
+            xticklabels={$0$, , $\omega_0$, , $2\omega_0$, , $3\omega_0$},
+            legend pos=north east,
+            legend style={font=\small},
+            samples=300, smooth, thick
+          ]
+            % beta=0.1
+            \addplot[blue, domain=0:0.85, restrict y to domain=0:6.5]
+              {1/sqrt((1-x^2)^2 + 4*0.01*x^2)};
+            \addplot[blue, domain=0.88:3, restrict y to domain=0:6.5]
+              {1/sqrt((1-x^2)^2 + 4*0.01*x^2)};
+            \addlegendentry{$\beta=0.1$}
+            % beta=0.3
+            \addplot[red!70!black, domain=0:3, restrict y to domain=0:6.5]
+              {1/sqrt((1-x^2)^2 + 4*0.09*x^2)};
+            \addlegendentry{$\beta=0.3$}
+            % beta=0.7
+            \addplot[green!60!black, domain=0:3, restrict y to domain=0:6.5]
+              {1/sqrt((1-x^2)^2 + 4*0.49*x^2)};
+            \addlegendentry{$\beta=0.7$}
+            % beta=1 (overdamped - no peak)
+            \addplot[orange, domain=0:3, restrict y to domain=0:6.5]
+              {1/sqrt((1-x^2)^2 + 4*1*x^2)};
+            \addlegendentry{$\beta=1.0$}
+            % Mark omega_0
+            \draw[dashed, gray] (axis cs:1,0) -- (axis cs:1,6.5);
+          \end{axis}
+        \end{tikzpicture}
+      </latex-image>
+    </image>
+  </figure>
+
+  <remark xml:id="rem-reading-frequency-response">
+    <title>How to Read the Frequency-Response Graph</title>
+    <p>
+      For a fixed damping value <m>\beta</m>, the graph of <m>A(\omega)</m>
+      tells us which driving frequencies are dangerous: tall peaks mean that a
+      small periodic force can produce a large steady-state oscillation.
+    </p>
+    <p>
+      The peak is highest near <m>\omega = \omega_0</m> when damping is weak.
+      Increasing damping lowers and broadens the peak, which is why damping is
+      an effective engineering tool for suppressing resonance.
+    </p>
+  </remark>
+
+  <remark xml:id="rem-resonance-catastrophe">
+    <title>Resonance in Engineering: The Tacoma Narrows Bridge</title>
+    <p>
+      Resonance is not merely a mathematical curiosity.
+      When an external excitation is close to the natural frequency of a
+      structure, even moderate forcing can produce catastrophically large
+      oscillations.
+      A famous historical example is the Tacoma Narrows Bridge
+      (Washington State, USA, 1940), which collapsed just four months after
+      opening due to aerodynamic forces that matched the bridge's natural
+      frequency.
+      Modern structural engineering avoids resonance by careful tuning of
+      natural frequencies away from expected excitation spectra, and by
+      deliberately introducing damping (e.g.\ tuned mass dampers in
+      skyscrapers).
+    </p>
+  </remark>
+
+  <exercises xml:id="exercises-harmonic-oscillator-check">
+    <title>Check Your Understanding</title>
+
+    <exercise xml:id="exer-harmonic-resonance-concept">
+      <title>Recognise Resonance</title>
+      <statement>
+        <p>
+          When is resonance most likely to occur in a forced oscillator?
+        </p>
+      </statement>
+      <choices>
+        <choice correct="yes">
+          <statement><p>When the driving frequency is close to the natural frequency and damping is small</p></statement>
+          <feedback><p>Correct. Then the steady-state amplitude can become very large.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p>When the damping is extremely large</p></statement>
+          <feedback><p>Incorrect. Strong damping suppresses resonance peaks.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p>Whenever the forcing term is zero</p></statement>
+          <feedback><p>Incorrect. With no forcing, there is no forced resonance.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p>Only when the natural frequency is zero</p></statement>
+          <feedback><p>Incorrect. Resonance is tied to matching frequencies, not to a zero natural frequency.</p></feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+    <exercise xml:id="exer-harmonic-undamped-general-solution">
+      <title>Free Undamped Oscillation</title>
+      <statement>
+        <p>
+          Solve the homogeneous ODE
+          <me>
+            y''+4y=0.
+          </me>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The characteristic equation is
+          <me>
+            \lambda^2+4=0,
+          </me>
+          so the roots are <m>\lambda=\pm 2i</m>. Therefore the general solution is
+          <me>
+            y(t)=C_1\cos(2t)+C_2\sin(2t),
+            \qquad C_1,C_2\in\R.
+          </me>
+        </p>
+      </solution>
+    </exercise>
+  </exercises>
+
+</subsection>

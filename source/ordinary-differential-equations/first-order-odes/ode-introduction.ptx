@@ -1,0 +1,332 @@
+<subsection xml:id="subsec-ode-introduction">
+  <title>Ordinary Differential Equations and Their Solutions</title>
+
+  <introduction>
+    <p>
+      Many processes in engineering and the natural sciences are most naturally
+      described not by an explicit formula for an unknown quantity, but by a
+      relationship between that quantity and its rates of change.
+      Such a relationship is called a <em>differential equation</em>.
+      In this section we define ordinary differential equations (ODEs),
+      clarify what it means to <em>solve</em> one, and introduce the
+      distinction between general and particular solutions.
+    </p>
+  </introduction>
+
+  <!-- ─── Motivating Example ─── -->
+
+  <example xml:id="ex-population-growth-motivation">
+    <title>Population Growth: A Motivating Example</title>
+    <p>
+      We model the growth of a population (for example, a colony of bacteria).
+    </p>
+    <p>
+      <em>(a) Simple proportional growth.</em>
+      In the simplest case, the growth rate is proportional to the current
+      population size.  Let <m>p(t)</m> denote the population at time <m>t</m>.
+      This assumption translates directly into the equation
+      <me>
+        p'(t) = k \, p(t),
+      </me>
+      where <m>k</m> is the proportionality constant.
+      The unknown is the <em>function</em> <m>p</m>; the equation involves both
+      <m>p</m> and its derivative <m>p'</m>.
+      This is a <em>first-order ordinary differential equation</em>, and its
+      solutions describe exponential growth: <m>p(t) = p_0 \, e^{kt}</m>.
+    </p>
+    <figure xml:id="fig-exponential-growth">
+      <caption>
+        Exponential growth <m>p(t) = p_0\, e^{kt}</m> for <m>k > 0</m>
+        with initial population <m>p_0</m>.
+      </caption>
+      <image xml:id="image-exponential-growth" width="60%">
+        <latex-image>
+          \begin{tikzpicture}
+            \begin{axis}[
+              width=8cm, height=6cm,
+              xlabel={$t$}, ylabel={$p(t)$},
+              xmin=0, xmax=3, ymin=0, ymax=5.5,
+              axis lines=left,
+              xtick={0}, ytick={1},
+              yticklabels={$p_0$},
+              xticklabels={$0$},
+              samples=120, smooth
+            ]
+              \addplot[thick, blue, domain=0:3] {exp(0.7*x)};
+              \draw[dashed, gray] (axis cs:0,1) -- (axis cs:0.01,1);
+              \node[right] at (axis cs:2.4,4.5) {$p_0 e^{kt}$};
+            \end{axis}
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+    </figure>
+    <p>
+      <em>(b) Logistic growth.</em>
+      A more realistic model assumes that the population approaches a maximum
+      value <m>p_{\max} = 1</m> (normalised to <m>100\%</m>).
+      The growth rate is proportional both to the current population
+      <em>and</em> to the remaining capacity <m>1 - p(t)</m>:
+      <me>
+        p'(t) = k \, p(t) \, (1 - p(t)).
+      </me>
+      This is again a first-order ODE, but its solutions exhibit an S-shaped
+      (sigmoidal) curve: slow initial growth, rapid growth near <m>p = 0.5</m>,
+      and levelling off as <m>p \to 1</m>.
+    </p>
+    <figure xml:id="fig-logistic-growth">
+      <caption>
+        Logistic growth: the solution rises from <m>p_0</m> and approaches
+        the carrying capacity <m>p_{\max} = 1</m> asymptotically.
+      </caption>
+      <image xml:id="image-logistic-growth" width="60%">
+        <latex-image>
+          \begin{tikzpicture}
+            \begin{axis}[
+              width=8cm, height=6cm,
+              xlabel={$t$}, ylabel={$p(t)$},
+              xmin=0, xmax=8, ymin=0, ymax=1.3,
+              axis lines=left,
+              ytick={0, 0.2, 1},
+              yticklabels={$0$, $p_0$, $p_{\max}$},
+              samples=200, smooth
+            ]
+              \addplot[thick, blue, domain=0:8] {1/(1+4*exp(-x))};
+              \addplot[dashed, gray, domain=0:8] {1};
+              \node[right] at (axis cs:6.8,1.07) {$p_{\max}$};
+              \node[above right] at (axis cs:3.5,0.72) {$p(t)$};
+            \end{axis}
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+    </figure>
+  </example>
+
+  <!-- ─── Definition of ODE ─── -->
+
+  <definition xml:id="def-ode">
+    <title>Ordinary Differential Equation</title>
+    <statement>
+      <p>
+        An <term>ordinary differential equation (ODE) of order <m>n</m></term>
+        is an equation in an unknown function <m>y = y(t)</m> of a single real
+        variable <m>t</m> in which the function and its derivatives up to
+        order <m>n</m> appear:
+        <me>
+          y^{(n)}(t) = f\!\bigl(t,\, y(t),\, y'(t),\, \ldots,\,
+          y^{(n-1)}(t)\bigr).
+        </me>
+      </p>
+    </statement>
+  </definition>
+
+  <remark xml:id="rem-ode-ordinary">
+    <title>Why <q>Ordinary</q>?</title>
+    <p>
+      This definition describes an <em>explicit</em> ODE: the highest derivative
+      <m>y^{(n)}</m> is isolated on the left.
+      All ODEs in this section have this form.
+    </p>
+    <p>
+      The qualifier <q>ordinary</q> signals that the unknown function depends on a
+      <em>single</em> variable.
+      By contrast, a <em>partial</em> differential equation (PDE) involves an
+      unknown function of several variables (e.g.\ temperature <m>u(x, t)</m>),
+      with partial derivatives in each variable.
+      The heat equation and the wave equation are classical PDEs and belong to
+      more advanced courses.
+    </p>
+  </remark>
+
+  <example xml:id="ex-ode-order-examples">
+    <title>Examples of ODEs and Their Orders</title>
+    <p>
+      <ul>
+        <li>
+          <p>
+            <m>p'(t) = k \, p(t) \, (1 - p(t))</m> is an ODE of <em>order 1</em>.
+          </p>
+        </li>
+        <li>
+          <p>
+            <m>y''(t) = 2 y'(t) - 7 y(t) + 14</m> is an ODE of <em>order 2</em>.
+          </p>
+        </li>
+      </ul>
+    </p>
+  </example>
+
+  <!-- ─── Solutions ─── -->
+
+  <example xml:id="ex-free-fall">
+    <title>Free Fall: Solving by Integration</title>
+    <p>
+      The position <m>y(t)</m> of a mass in free fall with constant downward
+      acceleration <m>g</m> satisfies Newton's second law:
+      <me>
+        y''(t) = g.
+      </me>
+      This is a second-order ODE.  Because the right-hand side does not involve
+      <m>y</m> or <m>y'</m>, we can solve it by integrating twice:
+      <md>
+        <mrow>
+          \int y''(t)\, dt \amp= \int g\, dt
+          \quad \Rightarrow \quad
+          y'(t) = g t + C_1,
+        </mrow>
+        <mrow>
+          \int y'(t)\, dt \amp= \int (g t + C_1)\, dt
+          \quad \Rightarrow \quad
+          y(t) = \tfrac{1}{2} g t^2 + C_1 t + C_2.
+        </mrow>
+      </md>
+      The <em>general solution</em> <m>y(t) = \frac{1}{2} g t^2 + C_1 t + C_2</m>
+      contains two free constants <m>C_1, C_2 \in \R</m>, reflecting the fact
+      that the ODE has order 2.
+    </p>
+    <p>
+      To determine <m>C_1</m> and <m>C_2</m> one supplies additional conditions:
+      <ul>
+        <li>
+          <p>
+            <em>Initial value problem (IVP):</em> specify <m>y(t_0)</m> and
+            <m>y'(t_0)</m>.
+            For example, <m>y(0) = 0</m> gives <m>C_2 = 0</m> and
+            <m>y'(0) = 0</m> gives <m>C_1 = 0</m>,
+            yielding <m>y(t) = \frac{1}{2} g t^2</m>.
+          </p>
+        </li>
+        <li>
+          <p>
+            <em>Boundary value problem (BVP):</em> specify <m>y(t_0)</m> and
+            <m>y(t_1)</m> at two different times.
+          </p>
+        </li>
+      </ul>
+    </p>
+  </example>
+
+  <definition xml:id="def-ode-solution">
+    <title>Solution of an ODE; General and Particular Solutions</title>
+    <statement>
+      <p>
+        A <term>solution</term> of the ODE
+        <m>y^{(n)}(t) = f\bigl(t, y(t), \ldots, y^{(n-1)}(t)\bigr)</m>
+        is an <m>n</m>-times differentiable function <m>y = y(t)</m> that
+        satisfies the equation for all <m>t</m> in its domain.
+        <ul>
+          <li>
+            <p>
+              For the standard solvable families studied in this course, the
+              <term>general solution</term> of an order-<m>n</m> ODE contains
+              <m>n</m> arbitrary constants (constants of integration).
+            </p>
+          </li>
+          <li>
+            <p>
+              A <term>particular solution</term> contains no free parameters;
+              it is obtained by imposing <m>n</m> initial or boundary conditions.
+            </p>
+          </li>
+        </ul>
+      </p>
+    </statement>
+  </definition>
+
+  <example xml:id="ex-verify-solution">
+    <title>Verifying a Solution</title>
+    <p>
+      Which of the following functions satisfies <m>y'' + y = -\sin x</m>?
+    </p>
+    <p>
+      (A) <m>f_A(x) = \sin x</m> <m>\quad</m>
+      (B) <m>f_B(x) = \tfrac{1}{2} x \sin x</m> <m>\quad</m>
+      (C) <m>f_C(x) = \cos x</m> <m>\quad</m>
+      (D) <m>f_D(x) = \tfrac{1}{2} x \cos x</m>
+    </p>
+    <p>
+      <em>Answer.</em>
+      We verify option (D): let <m>y = \tfrac{1}{2} x \cos x</m>.
+      <md>
+        <mrow>
+          y' \amp= \tfrac{1}{2}\cos x - \tfrac{1}{2} x \sin x,
+        </mrow>
+        <mrow>
+          y'' \amp= -\tfrac{1}{2}\sin x - \tfrac{1}{2}\sin x
+                   - \tfrac{1}{2} x \cos x
+                = -\sin x - \tfrac{1}{2} x \cos x.
+        </mrow>
+      </md>
+      Hence
+      <me>
+        y'' + y
+        = -\sin x - \tfrac{1}{2} x \cos x + \tfrac{1}{2} x \cos x
+        = -\sin x. \quad \checkmark
+      </me>
+      Options (A), (B), (C) can be verified to fail by a similar computation.
+    </p>
+  </example>
+
+  <exercises xml:id="exercises-ode-introduction-check">
+    <title>Check Your Understanding</title>
+
+    <exercise xml:id="exer-ode-intro-order">
+      <title>Recognise the Order</title>
+      <statement>
+        <p>
+          What is the order of the differential equation
+          <me>
+            y'''+2y=t?
+          </me>
+        </p>
+      </statement>
+      <choices>
+        <choice>
+          <statement><p>First order</p></statement>
+          <feedback><p>Incorrect. The highest derivative is not <m>y'</m>.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p>Second order</p></statement>
+          <feedback><p>Incorrect. The equation contains a third derivative.</p></feedback>
+        </choice>
+        <choice correct="yes">
+          <statement><p>Third order</p></statement>
+          <feedback><p>Correct. The highest derivative appearing is <m>y'''</m>.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p>It has no order because the right-hand side is <m>t</m>.</p></statement>
+          <feedback><p>Incorrect. The order depends only on the highest derivative of the unknown function.</p></feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+    <exercise xml:id="exer-ode-intro-verify">
+      <title>Verify a Candidate Solution</title>
+      <statement>
+        <p>
+          Verify that
+          <me>
+            y(t)=e^{2t}
+          </me>
+          solves the ODE
+          <me>
+            y'=2y.
+          </me>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Differentiate:
+          <me>
+            y'(t)=2e^{2t}.
+          </me>
+          On the other hand,
+          <me>
+            2y(t)=2e^{2t}.
+          </me>
+          Hence <m>y'(t)=2y(t)</m> for all <m>t</m>, so the function is indeed a solution.
+        </p>
+      </solution>
+    </exercise>
+  </exercises>
+
+</subsection>

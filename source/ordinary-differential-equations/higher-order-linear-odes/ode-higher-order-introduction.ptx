@@ -1,0 +1,264 @@
+<subsection xml:id="subsec-higher-order-introduction">
+  <title>Linear ODEs of Higher Order</title>
+
+  <introduction>
+    <p>
+      In Section 3-1 we developed systematic solution methods for first-order
+      ODEs.  Many physical and engineering phenomena, however, require
+      higher-order equations.
+      A vibrating spring, the bending of a structural beam, or the current
+      in an RLC circuit all give rise naturally to <em>second-order</em> (or
+      higher) differential equations.
+    </p>
+    <p>
+      This section focuses on the most tractable and practically important
+      subclass: <em>linear ODEs with constant coefficients</em>.
+      For this class a complete algorithmic solution procedure exists, based
+      on factoring a polynomial (the <em>characteristic polynomial</em>) and
+      reading off the solutions from its roots.
+    </p>
+  </introduction>
+
+  <!-- ─── Engineering motivation ─── -->
+
+  <example xml:id="ex-higher-order-motivation">
+    <title>Higher-Order ODEs in Engineering</title>
+    <p>
+      Two classical engineering models immediately lead to higher-order linear
+      ODEs with constant coefficients.
+      <ol>
+        <li>
+          <p>
+            <em>Harmonic oscillator (mass-spring-damper).</em>
+            A mass <m>m</m> attached to a spring of stiffness <m>k</m> and a
+            damper of coefficient <m>\alpha</m> satisfies
+            <me>
+              m\, y''(t) + \alpha\, y'(t) + k\, y(t) = F(t),
+            </me>
+            where <m>y(t)</m> is the displacement from rest and <m>F(t)</m>
+            is an external force.
+            This is a second-order linear ODE with constant coefficients.
+          </p>
+        </li>
+        <li>
+          <p>
+            <em>Elastic beam bending.</em>
+            Under a distributed transverse load <m>q(x)</m>, the deflection
+            <m>w(x)</m> of a homogeneous beam with bending stiffness
+            <m>EI</m> satisfies
+            <me>
+              E\, I\, w''''(x) = q(x).
+            </me>
+            This is a <em>fourth-order</em> linear ODE.
+          </p>
+        </li>
+      </ol>
+    </p>
+    <p>
+      Both examples share the structural feature we will exploit: the unknown
+      function and all its derivatives appear only <em>linearly</em>, and the
+      coefficients are <em>constant</em>.
+    </p>
+  </example>
+
+  <!-- ─── Definition: Linear ODE of order n ─── -->
+
+  <definition xml:id="def-linear-ode-order-n">
+    <title>Linear ODE of Order <m>n</m></title>
+    <statement>
+      <p>
+        An ODE of order <m>n</m> is <term>linear</term> if it can be written as
+        <me>
+          y^{(n)}(t) + a_{n-1}(t)\, y^{(n-1)}(t) + \cdots
+          + a_1(t)\, y'(t) + a_0(t)\, y(t) = f(t),
+        </me>
+        where the <term>coefficient functions</term> <m>a_0(t), \ldots, a_{n-1}(t)</m>
+        and the <term>right-hand side</term> <m>f(t)</m> are given.
+        The unknown function <m>y(t)</m> and its derivatives appear only to the
+        first power and are never multiplied together or nested inside nonlinear
+        functions.
+      </p>
+      <p>
+        Important special cases:
+        <ul>
+          <li>
+            <p>
+              <term>Constant coefficients:</term>
+              all <m>a_i(t) = a_i</m> are constants.
+            </p>
+          </li>
+          <li>
+            <p>
+              <term>Homogeneous:</term> <m>f(t) = 0</m> for all <m>t</m>.
+            </p>
+          </li>
+          <li>
+            <p>
+              <term>Inhomogeneous:</term> <m>f(t) \not\equiv 0</m>.
+            </p>
+          </li>
+        </ul>
+      </p>
+    </statement>
+  </definition>
+
+  <remark xml:id="rem-linearity-meaning">
+    <title>What Linearity Rules Out</title>
+    <p>
+      The linearity condition says that <m>y</m> never appears inside a
+      nonlinear expression.  Terms such as <m>y^2(t)</m>, <m>\sin(y(t))</m>,
+      <m>\sqrt{y(t)}</m>, or <m>y(t)\, y'(t)</m> all violate linearity.
+      By contrast, coefficients like <m>\sin(t)</m> or <m>e^{t}</m>
+      are fine, because they depend only on the <em>independent variable</em>
+      <m>t</m>, not on the unknown <m>y</m>.
+    </p>
+  </remark>
+
+  <!-- ─── Classification example ─── -->
+
+  <example xml:id="ex-higher-order-classification">
+    <title>Classifying Higher-Order ODEs</title>
+    <p>
+      Determine for each ODE: is it linear?  If so, is it homogeneous?
+      Does it have constant coefficients?
+      <ol>
+        <li>
+          <p>
+            <m>4\, y'''(t) + e^2\, y''(t) + \sin(t)\, y'(t) + \sqrt{y(t)} = 0.</m>
+          </p>
+        </li>
+        <li>
+          <p>
+            <m>y''''(t) + e^2\, y''(t) + \pi\, y'(t) + y(t) = e^{-t}.</m>
+          </p>
+        </li>
+        <li>
+          <p>
+            <m>y'''(t) - \sin(2t)\, y''(t) + \pi\, y'(t) + y(t) = 0.</m>
+          </p>
+        </li>
+      </ol>
+    </p>
+    <p>
+      <em>Classification.</em>
+      <ol>
+        <li>
+          <p>
+            <em>Not linear:</em> the term <m>\sqrt{y(t)}</m> is a nonlinear
+            function of <m>y</m>.
+          </p>
+        </li>
+        <li>
+          <p>
+            <em>Linear, not homogeneous, constant coefficients:</em>
+            all derivatives of <m>y</m> appear linearly; <m>f(t) = e^{-t} \neq 0</m>;
+            the coefficients <m>1, e^2, \pi, 1</m> do not depend on <m>t</m>.
+          </p>
+        </li>
+        <li>
+          <p>
+            <em>Linear, homogeneous, non-constant coefficients:</em>
+            <m>f(t) = 0</m>, but the coefficient <m>-\sin(2t)</m> of
+            <m>y''</m> depends on <m>t</m>.
+          </p>
+        </li>
+      </ol>
+    </p>
+    <p>
+      The solution methods developed in this section apply to cases like (2):
+      linear, with constant coefficients.
+    </p>
+  </example>
+
+  <!-- ─── Overview figure: classification summary ─── -->
+
+  <figure xml:id="fig-higher-order-classification-tree">
+    <caption>
+      Classification of higher-order ODEs.  This section treats the shaded
+      class: linear, constant-coefficient ODEs — the most algorithmically
+      accessible family.
+    </caption>
+    <image xml:id="image-higher-order-classification-tree" width="70%">
+      <latex-image>
+        \begin{tikzpicture}[
+          node distance=1.1cm and 2.2cm,
+          box/.style={draw, rounded corners, minimum width=3.2cm,
+                      minimum height=0.75cm, align=center, font=\small},
+          shade/.style={fill=blue!12},
+          arr/.style={->, thick}
+        ]
+          \node[box] (all) {All ODEs of order \(n\)};
+          \node[box, below left=of all]  (nonlin) {Nonlinear};
+          \node[box, below right=of all] (lin)    {Linear};
+          \node[box, below left=of lin]  (vcoef)  {Variable\\coefficients};
+          \node[box, below right=of lin, shade] (ccoef)
+              {Constant\\coefficients};
+          \node[box, below left=of ccoef]  (inhom) {Inhomogeneous};
+          \node[box, below right=of ccoef] (hom)   {Homogeneous};
+          \draw[arr] (all) -- (nonlin);
+          \draw[arr] (all) -- (lin);
+          \draw[arr] (lin) -- (vcoef);
+          \draw[arr] (lin) -- (ccoef);
+          \draw[arr] (ccoef) -- (inhom);
+          \draw[arr] (ccoef) -- (hom);
+        \end{tikzpicture}
+      </latex-image>
+    </image>
+  </figure>
+
+  <exercises xml:id="exercises-higher-order-introduction-check">
+    <title>Check Your Understanding</title>
+
+    <exercise xml:id="exer-higher-order-classify-equation">
+      <title>Classify the Equation</title>
+      <statement>
+        <p>
+          Consider
+          <me>
+            y'''-2y''+y=\cos t.
+          </me>
+          Which description is correct?
+        </p>
+      </statement>
+      <choices>
+        <choice correct="yes">
+          <statement><p>Third-order, linear, inhomogeneous, with constant coefficients</p></statement>
+          <feedback><p>Correct. The coefficients of <m>y''', y'', y</m> are constants, and the right-hand side is nonzero.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p>Third-order, nonlinear, homogeneous</p></statement>
+          <feedback><p>Incorrect. The equation is linear, and it is not homogeneous because of <m>\cos t</m>.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p>Second-order, linear, homogeneous</p></statement>
+          <feedback><p>Incorrect. The highest derivative is third order.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p>First-order, nonlinear, with variable coefficients</p></statement>
+          <feedback><p>Incorrect. None of those labels fits this equation.</p></feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+    <exercise xml:id="exer-higher-order-associated-homogeneous">
+      <title>Associated Homogeneous Equation</title>
+      <statement>
+        <p>
+          Write down the associated homogeneous equation for
+          <me>
+            y''+3y'=e^t.
+          </me>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The associated homogeneous equation is obtained by replacing the right-hand side by <m>0</m>:
+          <me>
+            y''+3y'=0.
+          </me>
+        </p>
+      </solution>
+    </exercise>
+  </exercises>
+
+</subsection>

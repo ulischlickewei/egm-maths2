@@ -1,0 +1,396 @@
+<subsection xml:id="subsec-homogeneous-higher-order">
+  <title>Homogeneous Linear ODEs with Constant Coefficients</title>
+
+  <introduction>
+    <p>
+      We now develop a complete solution procedure for homogeneous linear ODEs
+      with constant coefficients:
+      <me>
+        y^{(n)}(t) + a_{n-1}\, y^{(n-1)}(t) + \cdots + a_1\, y'(t) + a_0\, y(t) = 0.
+      </me>
+      The key idea is that exponential trial functions <m>y(t) = e^{\lambda t}</m>
+      lead naturally to a polynomial in <m>\lambda</m> — the <em>characteristic
+      polynomial</em>.  Its roots determine the entire solution space.
+    </p>
+  </introduction>
+
+  <!-- ─── Motivating case study ─── -->
+
+  <example xml:id="ex-motivating-case-study">
+    <title>Motivating Case Study</title>
+    <p>
+      Consider the homogeneous third-order ODE
+      <me>
+        y'''(t) - 3y''(t) + 4y'(t) - 2y(t) = 0.
+      </me>
+      We guess a solution of the form <m>y(t) = e^{\lambda t}</m>.
+      Computing derivatives: <m>y' = \lambda e^{\lambda t}</m>,
+      <m>y'' = \lambda^2 e^{\lambda t}</m>, <m>y''' = \lambda^3 e^{\lambda t}</m>.
+      Substituting into the ODE and dividing by <m>e^{\lambda t} \neq 0</m>:
+      <me>
+        \lambda^3 - 3\lambda^2 + 4\lambda - 2 = 0.
+      </me>
+      This algebraic equation — the characteristic polynomial evaluated at
+      <m>\lambda</m> — must be satisfied.  Once we find its roots, we can
+      read off the solutions to the ODE.
+    </p>
+  </example>
+
+  <!-- ─── Characteristic polynomial ─── -->
+
+  <definition xml:id="def-characteristic-polynomial">
+    <title>Characteristic Polynomial</title>
+    <statement>
+      <p>
+        The <term>characteristic polynomial</term> of the homogeneous linear
+        ODE with constant coefficients
+        <me>
+          y^{(n)}(t) + a_{n-1}\, y^{(n-1)}(t) + \cdots + a_1\, y'(t)
+          + a_0\, y(t) = 0
+        </me>
+        is the degree-<m>n</m> polynomial
+        <me>
+          P(\lambda) = \lambda^n + a_{n-1}\, \lambda^{n-1}
+          + \cdots + a_1\, \lambda + a_0.
+        </me>
+        The ODE and its characteristic polynomial are obtained from each other
+        by the formal substitution <m>y^{(k)}(t) \;\longleftrightarrow\; \lambda^k</m>.
+      </p>
+    </statement>
+  </definition>
+
+  <remark xml:id="rem-fundamental-theorem">
+    <title>Counting the Roots</title>
+    <p>
+      By the fundamental theorem of algebra, every polynomial of degree
+      <m>n</m> over the complex numbers has exactly <m>n</m> roots counted with
+      multiplicity.
+      Each root of <m>P</m> contributes one or more linearly independent
+      solutions to the ODE, and together they span the entire solution space
+      (which has dimension <m>n</m>).
+    </p>
+  </remark>
+
+  <!-- ─── Main theorem: roots → solutions ─── -->
+
+  <theorem xml:id="thm-solutions-from-roots">
+    <title>Solutions from the Roots of the Characteristic Polynomial</title>
+    <statement>
+      <p>
+        Let <m>P(\lambda)</m> be the characteristic polynomial of a
+        homogeneous linear ODE with constant coefficients, and let
+        <m>\lambda_0</m> be a root of <m>P</m>.
+      </p>
+      <p>
+        <em>Case 1 — simple real root.</em>
+        If <m>\lambda_0 \in \R</m> is a simple root, then
+        <me>
+          y(t) = e^{\lambda_0 t}
+        </me>
+        is a solution.
+      </p>
+      <p>
+        <em>Case 2 — simple pair of complex conjugate roots.</em>
+        If <m>\lambda_0 = \alpha + i\beta</m> and
+        <m>\overline{\lambda_0} = \alpha - i\beta</m>
+        (with <m>\alpha, \beta \in \R</m>, <m>\beta \neq 0</m>) are simple roots,
+        then the two real solutions
+        <me>
+          y_1(t) = e^{\alpha t}\cos(\beta t), \qquad
+          y_2(t) = e^{\alpha t}\sin(\beta t)
+        </me>
+        are linearly independent solutions.
+        They arise as the real and imaginary parts of the complex solution
+        <m>e^{\lambda_0 t} = e^{\alpha t}(\cos\beta t + i\sin\beta t)</m>.
+      </p>
+      <p>
+        <em>Case 3 — root of multiplicity <m>k \geq 2</m>.</em>
+        <ul>
+          <li>
+            <p>
+              <em>Case 3a — real root <m>\lambda_0 \in \R</m> of multiplicity <m>k</m>.</em>
+              The <m>k</m> linearly independent solutions are
+              <me>
+                e^{\lambda_0 t},\quad t\, e^{\lambda_0 t},\quad \ldots,\quad
+                t^{k-1} e^{\lambda_0 t}.
+              </me>
+            </p>
+          </li>
+          <li>
+            <p>
+              <em>Case 3b — complex root <m>\lambda_0 = \alpha + i\beta</m> of multiplicity <m>k</m>.</em>
+              Conjugacy forces <m>\overline{\lambda_0}</m> to also be a root of
+              multiplicity <m>k</m>.
+              The <m>2k</m> linearly independent real solutions are
+              <md>
+                <mrow>
+                  e^{\alpha t}\cos(\beta t),\quad \amp e^{\alpha t}\sin(\beta t),
+                </mrow>
+                <mrow>
+                  t\, e^{\alpha t}\cos(\beta t),\quad \amp t\, e^{\alpha t}\sin(\beta t),
+                </mrow>
+                <mrow>
+                  \vdots\quad\amp\vdots
+                </mrow>
+                <mrow>
+                  t^{k-1} e^{\alpha t}\cos(\beta t),\quad \amp
+                  t^{k-1} e^{\alpha t}\sin(\beta t).
+                </mrow>
+              </md>
+            </p>
+          </li>
+        </ul>
+      </p>
+    </statement>
+  </theorem>
+
+  <!-- ─── Roots-to-solutions visual ─── -->
+
+  <figure xml:id="fig-roots-to-solutions">
+    <caption>
+      Summary: how the type of a root of the characteristic polynomial
+      determines the corresponding fundamental solutions.
+      The multiplicity <m>k</m> of each root is matched by exactly
+      <m>k</m> linearly independent solutions (or <m>2k</m> for complex pairs).
+    </caption>
+    <image xml:id="image-roots-to-solutions" width="80%">
+      <latex-image>
+        \begin{tikzpicture}[
+          node distance=0.5cm and 0.3cm,
+          hdr/.style={draw, fill=gray!20, minimum width=3.6cm,
+                      minimum height=0.7cm, align=center, font=\small\bfseries},
+          cell/.style={draw, minimum width=3.6cm, minimum height=1.2cm,
+                       align=center, font=\small},
+          cellb/.style={draw, minimum width=3.6cm, minimum height=1.9cm,
+                        align=center, font=\small}
+        ]
+          \node[hdr] (h1) {Root of \(P(\lambda)\)};
+          \node[hdr, right=0cm of h1] (h2) {Fundamental solution(s)};
+
+          \node[cell, below=0cm of h1] (r1)
+              {\(\lambda_0 \in \R\), simple};
+          \node[cell, right=0cm of r1] (s1)
+              {\(e^{\lambda_0 t}\)};
+
+          \node[cell, below=0cm of r1] (r2)
+              {\(\lambda_0 = \alpha \pm i\beta\), simple};
+          \node[cell, right=0cm of r2] (s2)
+              {\(e^{\alpha t}\!\cos\beta t\),\\ \(e^{\alpha t}\!\sin\beta t\)};
+
+          \node[cellb, below=0cm of r2] (r3)
+              {\(\lambda_0 \in \R\),\\ multiplicity \(k\)};
+          \node[cellb, right=0cm of r3] (s3)
+              {\(e^{\lambda_0 t},\; t e^{\lambda_0 t},\;\ldots,\; t^{k-1}e^{\lambda_0 t}\)};
+
+          \node[cellb, below=0cm of r3] (r4)
+              {\(\lambda_0 = \alpha \pm i\beta\),\\ multiplicity \(k\)};
+          \node[cellb, right=0cm of r4] (s4)
+              {\(t^j e^{\alpha t}\!\cos\beta t\),\\ \(t^j e^{\alpha t}\!\sin\beta t\),\\ \(j = 0,1,\ldots,k{-}1\)};
+        \end{tikzpicture}
+      </latex-image>
+    </image>
+  </figure>
+
+  <!-- ─── General solution theorem ─── -->
+
+  <theorem xml:id="thm-general-solution-homogeneous">
+    <title>General Solution of the Homogeneous Linear ODE</title>
+    <statement>
+      <p>
+        Apply <xref ref="thm-solutions-from-roots"/> to each of the <m>n</m>
+        roots of the characteristic polynomial (counted with multiplicity) of
+        the homogeneous linear ODE with constant coefficients of order <m>n</m>.
+        This yields <m>n</m> linearly independent solutions
+        <m>y_1(t), \ldots, y_n(t)</m>.
+        The <term>general solution</term> is
+        <me>
+          y(t) = C_1\, y_1(t) + C_2\, y_2(t) + \cdots + C_n\, y_n(t),
+          \qquad C_1, \ldots, C_n \in \R.
+        </me>
+        Initial conditions (e.g.\ values of <m>y(t_0), y'(t_0), \ldots,
+        y^{(n-1)}(t_0)</m>) pin down the constants <m>C_i</m>.
+      </p>
+    </statement>
+  </theorem>
+
+  <!-- ─── Worked examples ─── -->
+
+  <example xml:id="ex-homogeneous-double-real-root">
+    <title>Homogeneous ODE — Double Real Root</title>
+    <p>
+      Find the general solution of <m>y''(t) - 2y'(t) + y(t) = 0</m>.
+    </p>
+    <p>
+      <em>Solution.</em>
+      The characteristic polynomial is
+      <me>
+        P(\lambda) = \lambda^2 - 2\lambda + 1 = (\lambda - 1)^2.
+      </me>
+      The root <m>\lambda_0 = 1</m> has multiplicity <m>2</m> (Case 3a).
+      The two fundamental solutions are
+      <me>
+        y_1(t) = e^t, \qquad y_2(t) = t\, e^t.
+      </me>
+      The general solution is
+      <me>
+        y(t) = C_1\, e^t + C_2\, t\, e^t, \qquad C_1, C_2 \in \R.
+      </me>
+    </p>
+  </example>
+
+  <example xml:id="ex-homogeneous-complex-roots">
+    <title>Homogeneous ODE — Simple Complex Conjugate Roots</title>
+    <p>
+      Find the general solution of <m>y''(t) - 2y'(t) + 5y(t) = 0</m>.
+    </p>
+    <p>
+      <em>Solution.</em>
+      The characteristic polynomial is <m>P(\lambda) = \lambda^2 - 2\lambda + 5</m>.
+      Using the quadratic formula:
+      <me>
+        \lambda_{1,2} = \frac{2 \pm \sqrt{4 - 20}}{2} = 1 \pm 2i.
+      </me>
+      Thus <m>\alpha = 1</m>, <m>\beta = 2</m> (Case 2).
+      The two fundamental solutions are
+      <me>
+        y_1(t) = e^t \cos(2t), \qquad y_2(t) = e^t \sin(2t).
+      </me>
+      The general solution is
+      <me>
+        y(t) = e^t\!\left(C_1 \cos(2t) + C_2 \sin(2t)\right),
+        \qquad C_1, C_2 \in \R.
+      </me>
+    </p>
+  </example>
+
+  <example xml:id="ex-homogeneous-third-order-mixed">
+    <title>Homogeneous ODE of Order 3 — Mixed Roots</title>
+    <p>
+      Find the general solution of
+      <m>y'''(t) - y''(t) + y'(t) - y(t) = 0</m>
+      given that <m>\lambda = 1</m> is a root.
+    </p>
+    <p>
+      <em>Solution.</em>
+      The characteristic polynomial is
+      <m>P(\lambda) = \lambda^3 - \lambda^2 + \lambda - 1</m>.
+      Since <m>\lambda = 1</m> is a root, we factor out <m>(\lambda - 1)</m>
+      by polynomial division:
+      <me>
+        P(\lambda) = (\lambda - 1)(\lambda^2 + 1).
+      </me>
+      The roots of <m>\lambda^2 + 1 = 0</m> are <m>\lambda_{2,3} = \pm i</m>
+      (i.e.\ <m>\alpha = 0</m>, <m>\beta = 1</m>).
+      Applying Cases 1 and 2:
+      <me>
+        y_1(t) = e^t, \quad y_2(t) = \cos(t), \quad y_3(t) = \sin(t).
+      </me>
+      The general solution is
+      <me>
+        y(t) = C_1\, e^t + C_2 \cos(t) + C_3 \sin(t),
+        \qquad C_1, C_2, C_3 \in \R.
+      </me>
+    </p>
+  </example>
+
+  <!-- ─── Algorithmic summary ─── -->
+
+  <!-- ADDED: more robust PreTeXt container for the step-by-step solution workflow -->
+  <assemblage xml:id="alg-solve-homogeneous">
+    <title>Solving a Homogeneous Linear ODE with Constant Coefficients</title>
+    <p>
+      Use the following checklist each time you solve a homogeneous linear ODE
+      with constant coefficients.
+    </p>
+    <ol>
+      <li>
+        <p>
+          <em>Write down the characteristic polynomial</em>
+          <m>P(\lambda)</m> by replacing each <m>y^{(k)}</m> by
+          <m>\lambda^k</m>.
+        </p>
+      </li>
+      <li>
+        <p>
+          <em>Find all roots</em> of <m>P(\lambda) = 0</m>,
+          noting each root's multiplicity.
+        </p>
+      </li>
+      <li>
+        <p>
+          <em>Assign fundamental solutions</em> using
+          <xref ref="thm-solutions-from-roots"/>:
+          one function per simple real root, two functions per simple
+          complex conjugate pair, <m>k</m> functions per real root of
+          multiplicity <m>k</m>, <m>2k</m> functions per complex pair of
+          multiplicity <m>k</m>.
+        </p>
+      </li>
+      <li>
+        <p>
+          <em>Write the general solution</em> as their linear combination
+          with free constants <m>C_1, \ldots, C_n</m>.
+        </p>
+      </li>
+    </ol>
+  </assemblage>
+
+  <exercises xml:id="exercises-homogeneous-higher-order-check">
+    <title>Check Your Understanding</title>
+
+    <exercise xml:id="exer-homogeneous-general-solution-from-roots">
+      <title>General Solution from Characteristic Roots</title>
+      <statement>
+        <p>
+          Suppose the characteristic polynomial of a homogeneous linear ODE has the two roots
+          <m>\lambda_1=1</m> and <m>\lambda_2=-2</m>.
+          What is the general solution?
+        </p>
+      </statement>
+      <choices>
+        <choice correct="yes">
+          <statement><p><m>y(t)=C_1e^t+C_2e^{-2t}</m></p></statement>
+          <feedback><p>Correct. Each simple real root contributes one exponential solution.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p><m>y(t)=C_1\cos t+C_2\sin(2t)</m></p></statement>
+          <feedback><p>Incorrect. Trigonometric terms arise from complex roots, not from two real roots.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p><m>y(t)=C_1te^t+C_2e^{-2t}</m></p></statement>
+          <feedback><p>Incorrect. The factor <m>t</m> appears only for repeated roots.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p><m>y(t)=C_1e^{t-2t}</m></p></statement>
+          <feedback><p>Incorrect. The two fundamental solutions must appear independently.</p></feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+    <exercise xml:id="exer-homogeneous-solve-simple-constant-coeff">
+      <title>Solve a Simple Homogeneous ODE</title>
+      <statement>
+        <p>
+          Solve
+          <me>
+            y''-3y'+2y=0.
+          </me>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The characteristic polynomial is
+          <me>
+            \lambda^2-3\lambda+2=(\lambda-1)(\lambda-2).
+          </me>
+          So the roots are <m>1</m> and <m>2</m>. Therefore the general solution is
+          <me>
+            y(t)=C_1e^t+C_2e^{2t},
+            \qquad C_1,C_2\in\R.
+          </me>
+        </p>
+      </solution>
+    </exercise>
+  </exercises>
+
+</subsection>

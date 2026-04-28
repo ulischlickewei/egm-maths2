@@ -1,0 +1,26 @@
+<section xml:id="section-first-order-odes" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>First-Order ODEs</title>
+
+  <introduction>
+    <p>
+      An ordinary differential equation (ODE) relates an unknown function to
+      its derivatives.
+      This section develops the theory and solution methods for first-order
+      ODEs, the most fundamental class.
+      We begin by defining ODEs and clarifying what a solution is.
+      We then study how to extract qualitative information from an ODE without
+      solving it, using slope fields and sign arguments.
+      Finally, we treat the two main solvable classes in full: separable ODEs
+      (solved by integrating both sides after separating variables) and linear
+      first-order ODEs (solved by the variation-of-constants formula).
+      Throughout, engineering applications — population models, RC circuits —
+      illustrate each concept.
+    </p>
+  </introduction>
+
+  <xi:include href="ode-introduction.ptx"/>
+  <xi:include href="qualitative-analysis.ptx"/>
+  <xi:include href="separable-odes.ptx"/>
+  <xi:include href="linear-first-order-odes.ptx"/>
+
+</section>

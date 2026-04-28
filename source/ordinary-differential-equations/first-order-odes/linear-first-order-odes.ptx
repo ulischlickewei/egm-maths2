@@ -1,0 +1,423 @@
+<subsection xml:id="subsec-linear-first-order-odes">
+  <title>Linear First-Order ODEs</title>
+
+  <introduction>
+    <p>
+      A first-order ODE is <em>linear</em> when <m>y</m> and <m>y'</m> appear
+      only to the first power and are never multiplied together or fed into
+      nonlinear functions.
+      Linear ODEs arise throughout engineering: RC circuits, mixing problems,
+      Newton's law of cooling, and many more.
+      Their key feature is that an explicit general solution formula always
+      exists, derived by a technique called <em>variation of constants</em>.
+    </p>
+  </introduction>
+
+  <!-- ─── Definition ─── -->
+
+  <definition xml:id="def-linear-first-order-ode">
+    <title>Linear First-Order ODE; Homogeneous and Inhomogeneous</title>
+    <statement>
+      <p>
+        A first-order ODE is <term>linear</term> if it can be written as
+        <me>
+          y'(t) + a(t)\, y(t) = b(t),
+        </me>
+        where <m>a(t)</m> and <m>b(t)</m> are given functions of <m>t</m>.
+        <ul>
+          <li>
+            <p>
+              If <m>b(t) = 0</m>, the ODE is <term>homogeneous</term>.
+              Every homogeneous linear first-order ODE is also separable.
+            </p>
+          </li>
+          <li>
+            <p>
+              If <m>b(t) \neq 0</m>, the ODE is <term>inhomogeneous</term>.
+            </p>
+          </li>
+        </ul>
+      </p>
+    </statement>
+  </definition>
+
+  <!-- ─── Classification example ─── -->
+
+  <example xml:id="ex-linear-ode-classification">
+    <title>Classifying Linear ODEs</title>
+    <p>
+      <ol>
+        <li>
+          <p>
+            <m>y'(t) + e^{4t} y(t) = y(t)</m>,
+            equivalently <m>y' + (e^{4t} - 1)y = 0</m>.
+            <em>Linear, homogeneous</em>:
+            <m>a(t) = e^{4t} - 1</m>, <m>b(t) = 0</m>.
+          </p>
+        </li>
+        <li>
+          <p>
+            <m>y'(t) + \sin(4t \cdot y(t)) = 0</m>.
+            <em>Not linear</em>: <m>y</m> appears as the argument of
+            <m>\sin</m>.
+          </p>
+        </li>
+        <li>
+          <p>
+            <m>y'(t) + t\, y(t) = t^4</m>.
+            <em>Linear, inhomogeneous</em>:
+            <m>a(t) = t</m>, <m>b(t) = t^4</m>.
+          </p>
+        </li>
+      </ol>
+    </p>
+  </example>
+
+  <!-- ─── Homogeneous theorem ─── -->
+
+  <theorem xml:id="thm-homogeneous-linear-ode">
+    <title>General Solution of the Homogeneous Linear First-Order ODE</title>
+    <statement>
+      <p>
+        Let <m>A(t)</m> be an antiderivative of <m>a(t)</m>,
+        i.e. <m>A'(t) = a(t)</m>.
+        The <em>general solution</em> of the homogeneous ODE
+        <m>y'(t) + a(t)\, y(t) = 0</m> is
+        <me>
+          y(t) = C\, e^{-A(t)}, \qquad C \in \R.
+        </me>
+      </p>
+    </statement>
+    <proof>
+      <p>
+        The homogeneous ODE is separable: for <m>y \neq 0</m>,
+        <m>y'/y = -a(t)</m>.
+        Integrating: <m>\ln|y| = -A(t) + \text{const}</m>,
+        so <m>|y| = e^{-A(t)+\text{const}}</m>.
+        Absorbing the sign and the constant into <m>C</m> gives
+        <m>y(t) = C e^{-A(t)}</m>,
+        and the zero solution corresponds to <m>C = 0</m>.
+      </p>
+    </proof>
+  </theorem>
+
+  <!-- ─── Discharging capacitor ─── -->
+
+  <example xml:id="ex-discharging-capacitor">
+    <title>Discharging a Capacitor (RC Circuit)</title>
+    <p>
+      An RC series circuit consists of a resistor with resistance <m>R</m>
+      and a capacitor with capacitance <m>C</m> connected in a loop.
+      When the capacitor is pre-charged to voltage <m>U_0</m> at time
+      <m>t = 0</m> and the circuit is closed with no external source,
+      the capacitor voltage <m>U(t)</m> satisfies
+      <me>
+        U'(t) + \frac{1}{RC}\, U(t) = 0.
+      </me>
+      This is a homogeneous linear first-order ODE with the constant
+      coefficient <m>a = \frac{1}{RC}</m>.
+    </p>
+    <figure xml:id="fig-rc-discharge">
+      <caption>
+        RC series circuit: a resistor <m>R</m> and capacitor <m>C</m>
+        in a closed loop.  No external voltage source is present.
+      </caption>
+      <image xml:id="image-rc-discharge" width="40%">
+        <latex-image>
+          \begin{tikzpicture}[thick, font=\small]
+            % Outer rectangle: circuit loop
+            \draw (0,0) rectangle (4,2.5);
+            % Capacitor symbol on the bottom edge (centre)
+            \draw (1.5,0) -- (1.8,0);
+            \draw[line width=2.5pt] (1.8,-0.18) -- (1.8,0.18);
+            \draw[line width=2.5pt] (2.2,-0.18) -- (2.2,0.18);
+            \draw (2.2,0) -- (2.5,0);
+            \node[below] at (2,0) {$C$};
+            % Resistor symbol on the top edge (centre)
+            \draw (1.3,2.5) -- (1.5,2.5);
+            \draw (1.5,2.3) rectangle (2.5,2.7);
+            \draw (2.5,2.5) -- (2.7,2.5);
+            \node[above] at (2,2.7) {$R$};
+            % Switch on left edge
+            \filldraw (0,1.1) circle (1.5pt);
+            \filldraw (0,1.5) circle (1.5pt);
+            \draw (0,1.1) -- (0.25,1.45);
+            \node[left] at (0,1.3) {SW};
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+    </figure>
+    <p>
+      With <m>A(t) = \frac{t}{RC}</m>, the theorem gives
+      <me>
+        U(t) = C_1\, e^{-t/(RC)}.
+      </me>
+      Applying the initial condition <m>U(0) = U_0</m> yields <m>C_1 = U_0</m>.
+      The particular solution is
+      <me>
+        U(t) = U_0\, e^{-t/(RC)},
+      </me>
+      describing exponential decay with time constant <m>\tau = RC</m>.
+    </p>
+  </example>
+
+  <!-- ─── Variation of constants ─── -->
+
+  <p>
+    Next, we turn from homogeneous equations to inhomogeneous linear ODEs of
+    first order.
+  </p>
+
+  <theorem xml:id="thm-variation-of-constants">
+    <title>Variation of Constants</title>
+    <statement>
+      <p>
+        Fix a point <m>t_0</m> in the interval of interest and set
+        <me>
+          A(t) = \int_{t_0}^{t} a(s)\,ds.
+        </me>
+        The <em>general solution</em> of the inhomogeneous linear ODE
+        <m>y'(t) + a(t)\, y(t) = b(t)</m> is
+        <me>
+          y(t) = e^{-A(t)}
+          \left(C + \int_{t_0}^{t} e^{A(s)} b(s)\,ds\right),
+          \qquad C \in \R.
+        </me>
+      </p>
+    </statement>
+  </theorem>
+
+  <remark xml:id="rem-solution-structure">
+    <title>Structure of the General Solution</title>
+    <p>
+      The formula above decomposes naturally into two parts:
+      <me>
+        y(t) = \underbrace{C\, e^{-A(t)}}_{y_h(t)}
+             + \underbrace{e^{-A(t)}
+                 \int_{t_0}^{t} e^{A(s)} b(s)\,ds}_{y_p(t)}.
+      </me>
+      <ul>
+        <li>
+          <p>
+            <m>y_h(t) = C\, e^{-A(t)}</m> is the <em>general solution of the
+            corresponding homogeneous ODE</em>; it contains the free constant
+            <m>C</m>.
+          </p>
+        </li>
+        <li>
+          <p>
+            <m>y_p(t) = e^{-A(t)}
+            \int_{t_0}^{t} e^{A(s)} b(s)\,ds</m> is a
+            <em>particular solution</em>
+            of the inhomogeneous ODE.
+          </p>
+        </li>
+      </ul>
+      This additive structure — general homogeneous solution plus a particular
+      inhomogeneous solution — recurs in Section 3-2 for higher-order linear
+      ODEs.
+    </p>
+  </remark>
+
+  <proof>
+    <title>Derivation of Variation of Constants</title>
+    <p>
+      The general homogeneous solution is <m>y_h = C e^{-A(t)}</m>.
+      We <q>vary the constant</q> by replacing <m>C</m> with an unknown
+      function <m>u(t)</m>:
+      <me>
+        y(t) = u(t)\, e^{-A(t)}.
+      </me>
+      Differentiating and substituting into
+      <m>y' + a(t) y = b(t)</m>:
+      <md>
+        <mrow>
+          y'(t)
+          \amp= u'(t)\, e^{-A(t)} + u(t)\cdot(-a(t))\, e^{-A(t)},
+        </mrow>
+        <mrow>
+          y' + a(t) y
+          \amp= u'(t)\, e^{-A(t)}
+               - a(t) u(t) e^{-A(t)}
+               + a(t) u(t) e^{-A(t)}
+           = u'(t)\, e^{-A(t)}.
+        </mrow>
+      </md>
+      The two <m>a(t)</m>-terms cancel, leaving
+      <m>u'(t)\, e^{-A(t)} = b(t)</m>, i.e.
+      <me>
+        u'(t) = b(t)\, e^{A(t)}.
+      </me>
+      Integrating from <m>t_0</m> to <m>t</m> gives
+      <me>
+        u(t) = C + \int_{t_0}^{t} b(s)\, e^{A(s)}\,ds.
+      </me>
+      Substituting back gives the stated formula.
+    </p>
+  </proof>
+
+  <!-- ─── Charging capacitor ─── -->
+
+  <example xml:id="ex-charging-capacitor">
+    <title>Charging a Capacitor (RC Circuit with Voltage Source)</title>
+    <p>
+      Now assume the capacitor is uncharged at <m>t = 0</m> and a constant
+      voltage source <m>U_0</m> is switched in.
+      The governing ODE becomes inhomogeneous:
+      <me>
+        U'(t) + \frac{1}{RC}\, U(t) = \frac{U_0}{RC}.
+      </me>
+    </p>
+    <figure xml:id="fig-rc-charge">
+      <caption>
+        RC circuit with a constant voltage source <m>U_0</m>:
+        the capacitor charges from 0 towards <m>U_0</m>.
+      </caption>
+      <image xml:id="image-rc-charge" width="40%">
+        <latex-image>
+          \begin{tikzpicture}[thick, font=\small]
+            \draw (0,0) rectangle (4,2.5);
+            % Capacitor
+            \draw (1.5,0) -- (1.8,0);
+            \draw[line width=2.5pt] (1.8,-0.18) -- (1.8,0.18);
+            \draw[line width=2.5pt] (2.2,-0.18) -- (2.2,0.18);
+            \draw (2.2,0) -- (2.5,0);
+            \node[below] at (2,0) {$C$};
+            % Resistor
+            \draw (1.3,2.5) -- (1.5,2.5);
+            \draw (1.5,2.3) rectangle (2.5,2.7);
+            \draw (2.5,2.5) -- (2.7,2.5);
+            \node[above] at (2,2.7) {$R$};
+            % Voltage source on left edge
+            \draw (0,0.8) circle (0.3);
+            \node at (0,0.8) {\scriptsize$+$};
+            \node[left] at (-0.35,0.8) {$U_0$};
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+    </figure>
+    <p>
+      We apply variation of constants with <m>t_0=0</m>,
+      <m>a(t) = \frac{1}{RC}</m>,
+      <m>A(t) = \int_0^t \frac{1}{RC}\,ds = \frac{t}{RC}</m>,
+      <m>b(t) = \frac{U_0}{RC}</m>:
+      <me>
+        \int_0^t \frac{U_0}{RC}\, e^{s/RC}\,ds
+        = U_0\bigl(e^{t/RC}-1\bigr).
+      </me>
+      Hence
+      <me>
+        U(t) = e^{-t/RC}\left(C_1 + U_0\bigl(e^{t/RC}-1\bigr)\right)
+             = U_0 + (C_1-U_0)\, e^{-t/RC}.
+      </me>
+      Applying <m>U(0) = 0</m>: <m>C_1 = 0</m>.
+      The particular solution is
+      <me>
+        U(t) = U_0\!\left(1 - e^{-t/(RC)}\right),
+      </me>
+      an exponential rise from <m>0</m> towards the source voltage <m>U_0</m>
+      with the same time constant <m>\tau = RC</m>.
+    </p>
+    <figure xml:id="fig-capacitor-voltage">
+      <caption>
+        Capacitor voltage during charging:
+        exponential approach from 0 to <m>U_0</m>.
+        The time constant <m>\tau = RC</m> governs the speed.
+      </caption>
+      <image xml:id="image-capacitor-voltage" width="65%">
+        <latex-image>
+          \begin{tikzpicture}
+            \begin{axis}[
+              width=9cm, height=5.5cm,
+              xlabel={$t/RC$}, ylabel={$U(t)/U_0$},
+              xmin=0, xmax=5, ymin=0, ymax=1.25,
+              axis lines=left,
+              ytick={0, 1},
+              yticklabels={$0$, $U_0$},
+              samples=120, smooth
+            ]
+              \addplot[thick, blue, domain=0:5] {1 - exp(-x)};
+              \addplot[dashed, gray, domain=0:5] {1};
+              \addplot[dotted, gray] coordinates {(1,0)(1,0.632)};
+              \addplot[dotted, gray] coordinates {(0,0.632)(1,0.632)};
+              \node[right] at (axis cs:4.6,1.06) {$U_0$};
+              \node[below right] at (axis cs:1.05,0) {$\tau$};
+              \node[right] at (axis cs:2.2,0.55)
+                {$U_0(1-e^{-t/RC})$};
+            \end{axis}
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+    </figure>
+    <p>
+      After one time constant <m>t = \tau = RC</m>, the voltage has reached
+      <m>U(RC) = U_0(1 - e^{-1}) \approx 0.63\, U_0</m>,
+      a useful rule of thumb in circuit design.
+    </p>
+  </example>
+
+  <exercises xml:id="exercises-linear-first-order-odes-check">
+    <title>Check Your Understanding</title>
+
+    <exercise xml:id="exer-linear-first-order-identify">
+      <title>Identify a Linear First-Order ODE</title>
+      <statement>
+        <p>
+          Which equation is a linear first-order ODE?
+        </p>
+      </statement>
+      <choices>
+        <choice correct="yes">
+          <statement><p><m>y'+2t\,y=\sin t</m></p></statement>
+          <feedback><p>Correct. It has the form <m>y'+a(t)y=b(t)</m>.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p><m>y'+y^2=0</m></p></statement>
+          <feedback><p>Incorrect. The term <m>y^2</m> makes the equation nonlinear.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p><m>yy'+t=0</m></p></statement>
+          <feedback><p>Incorrect. The product <m>yy'</m> is nonlinear.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p><m>y''+y=0</m></p></statement>
+          <feedback><p>Incorrect. This equation is second order.</p></feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+    <exercise xml:id="exer-linear-first-order-homogeneous-solution">
+      <title>Solve a Homogeneous Linear ODE</title>
+      <statement>
+        <p>
+          Solve
+          <me>
+            y'+y=0.
+          </me>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          This is a homogeneous linear first-order ODE. Rewriting gives
+          <me>
+            y'=-y.
+          </me>
+          Separating variables,
+          <me>
+            \frac{1}{y}\,dy = -dt.
+          </me>
+          Integration yields
+          <me>
+            \ln|y|=-t+C.
+          </me>
+          Hence
+          <me>
+            y(t)=Ce^{-t},
+            \qquad C\in\R.
+          </me>
+        </p>
+      </solution>
+    </exercise>
+  </exercises>
+
+</subsection>

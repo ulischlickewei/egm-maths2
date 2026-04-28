@@ -1,0 +1,300 @@
+<subsection xml:id="subsec-qualitative-analysis">
+  <title>Qualitative Analysis and Slope Fields</title>
+
+  <introduction>
+    <p>
+      Before solving an ODE analytically, it is valuable to understand the
+      <em>qualitative</em> behaviour of its solutions: where are they increasing
+      or decreasing?  Are they bounded?  Do they level off?
+      Visualising the <em>slope field</em> of an ODE makes these questions
+      accessible without integration and reveals structure that guides the
+      analytic work.
+    </p>
+  </introduction>
+
+  <!-- ─── Graphical exclusion ─── -->
+
+  <example xml:id="ex-graphical-exclusion">
+    <title>Excluding Functions as Solutions by Graph Shape</title>
+    <p>
+      Consider the ODE
+      <me>
+        y'(t) = e^{t}(y - 1)^{2}.
+      </me>
+      We explain why certain graph shapes are incompatible with being a
+      solution.
+    </p>
+    <!-- ADDED: schematic figure makes the exclusion arguments visually concrete without relying on unreadable slide artwork -->
+    <figure xml:id="fig-graphical-exclusion">
+      <caption>
+        Two graph shapes excluded by the ODE <m>y'(t) = e^t (y-1)^2</m>:
+        a local maximum would require negative slope, and a transversal
+        crossing of the line <m>y=1</m> would require nonzero slope at the
+        crossing point.
+      </caption>
+      <image xml:id="image-graphical-exclusion" width="78%">
+        <latex-image>
+          \begin{tikzpicture}[font=\small]
+            \begin{scope}
+              \begin{axis}[
+                width=5.8cm, height=4.8cm,
+                xmin=-2.2, xmax=2.2, ymin=0, ymax=2.4,
+                axis lines=left,
+                xlabel={$t$}, ylabel={$y$},
+                xtick=\empty, ytick={1},
+                yticklabels={$1$}
+              ]
+                \addplot[dashed, gray, domain=-2.2:2.2] {1};
+                \addplot[thick, blue, domain=-1.8:1.8, samples=120]
+                  {-0.45*x^2 + 2.0};
+                \node[align=center] at (axis cs:0,-0.35)
+                  {not possible:\\would need $y'&lt;0$ nearby};
+              \end{axis}
+            \end{scope}
+            \begin{scope}[xshift=6.7cm]
+              \begin{axis}[
+                width=5.8cm, height=4.8cm,
+                xmin=-2.2, xmax=2.2, ymin=0, ymax=2.4,
+                axis lines=left,
+                xlabel={$t$}, ylabel={$y$},
+                xtick=\empty, ytick={1},
+                yticklabels={$1$}
+              ]
+                \addplot[dashed, gray, domain=-2.2:2.2] {1};
+                \addplot[thick, blue, domain=-1.7:1.7] {0.42*x + 1};
+                \fill (axis cs:0,1) circle (1.3pt);
+                \node[align=center] at (axis cs:0,-0.35)
+                  {not possible:\\at $y=1$, the ODE forces $y'=0$};
+              \end{axis}
+            \end{scope}
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+    </figure>
+    <p>
+      <ul>
+        <li>
+          <p>
+            <em>A function with a local maximum</em> has a region of negative
+            slope.  But for any solution of this ODE we have
+            <m>y'(t) = e^t(y-1)^2 \geq 0</m> everywhere
+            (since <m>e^t > 0</m> and <m>(y-1)^2 \geq 0</m>).
+            A negative slope is impossible.
+          </p>
+        </li>
+        <li>
+          <p>
+            <em>An increasing function that crosses <m>y = 1</m>.</em>
+            At any point where <m>y(t_0) = 1</m>, the ODE gives
+            <m>y'(t_0) = e^{t_0}(1-1)^2 = 0</m>.
+            A solution must have slope zero whenever it reaches <m>y = 1</m>;
+            a transversal increasing crossing is impossible.
+          </p>
+        </li>
+      </ul>
+    </p>
+    <p>
+      These observations illustrate a powerful principle: the ODE itself tells
+      us the slope at every point on the solution curve, giving direct
+      constraints on the graph without integration.
+    </p>
+  </example>
+
+  <!-- ─── Identify ODE from graph ─── -->
+
+  <example xml:id="ex-identify-ode-from-graph">
+    <title>Identifying an ODE from the Shape of Its Solution</title>
+    <p>
+      Suppose we observe a bell-shaped solution curve <m>y = y(x)</m> with
+      a single peak at <m>x = 0</m>.  Which of the following ODEs is consistent
+      with this behaviour?
+    </p>
+    <figure xml:id="fig-bell-shaped-solution">
+      <caption>
+        A bell-shaped candidate solution curve with a single horizontal
+        tangent at the peak <m>x=0</m>.
+      </caption>
+      <image xml:id="image-bell-shaped-solution" width="55%">
+        <latex-image>
+          \begin{tikzpicture}
+            \begin{axis}[
+              width=8cm, height=5cm,
+              xmin=-2.8, xmax=2.8, ymin=-0.1, ymax=1.25,
+              axis lines=left,
+              xlabel={$x$}, ylabel={$y$},
+              xtick={-2,-1,0,1,2},
+              ytick={1},
+              yticklabels={$1$},
+              domain=-2.5:2.5,
+              samples=160
+            ]
+              \addplot[thick, blue] {exp(-x^2)};
+              \draw[dashed, gray] (axis cs:0,0) -- (axis cs:0,1);
+              \draw[dashed, gray] (axis cs:-0.55,1) -- (axis cs:0.55,1);
+              \fill (axis cs:0,1) circle (1.4pt);
+              \node[above] at (axis cs:0,1.03) {peak: $y'(0)=0$};
+              \node[right] at (axis cs:1.35,0.22) {$y=e^{-x^2}$};
+            \end{axis}
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+    </figure>
+    <p>
+      (A) <m>y' = 1 + xy</m> <m>\quad</m>
+      (B) <m>y' = -2xy</m> <m>\quad</m>
+      (C) <m>y' = 1 - 2xy</m>
+    </p>
+    <p>
+      <em>Answer.</em>
+      At the peak, the slope must be zero: <m>y'(0) = 0</m>.
+      <ul>
+        <li>
+          <p>
+            (A): <m>y'(0) = 1 + 0 \cdot y(0) = 1 \neq 0</m>.
+            Ruled out.
+          </p>
+        </li>
+        <li>
+          <p>
+            (B): <m>y'(0) = -2 \cdot 0 \cdot y(0) = 0</m>.
+            Consistent with a peak at <m>x = 0</m>.
+          </p>
+        </li>
+        <li>
+          <p>
+            (C): <m>y'(0) = 1 - 0 = 1 \neq 0</m>.
+            Ruled out.
+          </p>
+        </li>
+      </ul>
+      Only equation (B) <m>y' = -2xy</m> is consistent.
+      Indeed, <m>y(x) = e^{-x^2}</m> solves (B) and has the described bell shape.
+    </p>
+  </example>
+
+  <!-- ─── Slope fields ─── -->
+
+  <remark xml:id="rem-slope-field">
+    <title>Slope Fields</title>
+    <p>
+      For a first-order ODE <m>y'(t) = f(t, y(t))</m>,
+      the <term>slope field</term> (or <em>direction field</em>) is drawn by
+      placing a short line segment at each point <m>(t, y)</m> with slope
+      <m>f(t, y)</m>.
+      Any solution curve through an initial point <m>(t_0, y_0)</m> is tangent
+      to the slope field everywhere it passes — so sketching a solution amounts
+      to <q>flowing along</q> the arrows from <m>(t_0, y_0)</m>.
+    </p>
+    <figure xml:id="fig-slope-field">
+      <caption>
+        Slope field for <m>y'(t) = \frac{1}{2}ty</m> with two particular
+        solutions (starting from <m>y(0)=1</m> and <m>y(0)=-1</m>).
+        The solutions <m>y(t) = \pm e^{t^2/4}</m> follow the arrows and
+        never intersect, reflecting uniqueness of the initial value problem.
+      </caption>
+      <image xml:id="image-slope-field" width="70%">
+        <latex-image>
+          \begin{tikzpicture}[font=\small]
+            \path[use as bounding box] (-3.35,-3.35) rectangle (4.4,3.35);
+
+            \draw[step=0.5, very thin, gray!25] (-3,-3) grid (3,3);
+            \draw[->, thick] (-3.2,0) -- (3.2,0) node[right] {$t$};
+            \draw[->, thick] (0,-3.2) -- (0,3.2) node[above] {$y$};
+
+            \foreach \x in {-2,-1,1,2} {
+              \draw (\x,0.08) -- (\x,-0.08) node[below] {\small $\x$};
+            }
+            \foreach \y in {-2,-1,1,2} {
+              \draw (0.08,\y) -- (-0.08,\y) node[left] {\small $\y$};
+            }
+
+            \begin{scope}
+              \clip (-3.25,-3.25) rectangle (3.25,3.25);
+              \foreach \xcoord in {-3,-2.5,...,3} {
+                \foreach \ycoord in {-3,-2.5,...,3} {
+                  \pgfmathsetmacro{\slope}{0.5*\xcoord*\ycoord}
+                  \pgfmathsetmacro{\dx}{0.16/sqrt(1 + \slope*\slope)}
+                  \pgfmathsetmacro{\dy}{\slope*\dx}
+                  \draw[->, gray!55, thin]
+                    (\xcoord-\dx,\ycoord-\dy) -- (\xcoord+\dx,\ycoord+\dy);
+                }
+              }
+
+              \draw[thick, blue, domain=-2:2, smooth, samples=150]
+                plot (\x,{exp((\x*\x)/4)});
+              \draw[thick, blue!70, dashed, domain=-2:2, smooth, samples=150]
+                plot (\x,{-exp((\x*\x)/4)});
+            \end{scope}
+
+            \node[right] at (2.0,2.6) {$y=e^{t^2/4}$};
+            \node[right] at (2.0,-2.6) {$y=-e^{t^2/4}$};
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+    </figure>
+    <p>
+      Observe that the two solution curves never cross.
+      This is not a coincidence: for a first-order ODE with a sufficiently
+      regular right-hand side, the initial value uniquely determines the
+      solution (Picard–Lindelöf theorem, proved in more advanced courses).
+    </p>
+  </remark>
+
+  <exercises xml:id="exercises-qualitative-analysis-check">
+    <title>Check Your Understanding</title>
+
+    <exercise xml:id="exer-qualitative-equilibria">
+      <title>Equilibrium Solutions</title>
+      <statement>
+        <p>
+          Consider the ODE
+          <me>
+            y'=y(1-y).
+          </me>
+          Which constant solutions are equilibrium solutions?
+        </p>
+      </statement>
+      <choices>
+        <choice>
+          <statement><p>Only <m>y\equiv 0</m></p></statement>
+          <feedback><p>Incorrect. There is another constant value that also makes the right-hand side zero.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p>Only <m>y\equiv 1</m></p></statement>
+          <feedback><p>Incorrect. Both factors of <m>y(1-y)</m> matter.</p></feedback>
+        </choice>
+        <choice correct="yes">
+          <statement><p><m>y\equiv 0</m> and <m>y\equiv 1</m></p></statement>
+          <feedback><p>Correct. Both constant values make <m>y(1-y)=0</m>.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p>There are no equilibrium solutions.</p></statement>
+          <feedback><p>Incorrect. Equilibria occur when the right-hand side vanishes.</p></feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+    <exercise xml:id="exer-qualitative-slope-at-point">
+      <title>Read Off a Slope</title>
+      <statement>
+        <p>
+          For the ODE
+          <me>
+            y'=t-y,
+          </me>
+          what is the slope of a solution curve at the point <m>(t,y)=(0,2)</m>?
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Substitute <m>t=0</m> and <m>y=2</m> into the right-hand side:
+          <me>
+            y'=0-2=-2.
+          </me>
+          So the solution curve has slope <m>-2</m> at that point.
+        </p>
+      </solution>
+    </exercise>
+  </exercises>
+
+</subsection>

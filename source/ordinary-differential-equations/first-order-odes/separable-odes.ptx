@@ -1,0 +1,283 @@
+<subsection xml:id="subsec-separable-odes">
+  <title>Separable ODEs</title>
+
+  <introduction>
+    <p>
+      The simplest first-order ODEs that can be solved by explicit integration
+      are the <em>separable</em> ones: the right-hand side factors into a
+      function of <m>y</m> alone times a function of <m>t</m> alone.
+      This structure lets us move all <m>y</m>-dependent terms to one side
+      and all <m>t</m>-dependent terms to the other before integrating.
+    </p>
+  </introduction>
+
+  <!-- ─── Definition ─── -->
+
+  <definition xml:id="def-separable-ode">
+    <title>Separable ODE</title>
+    <statement>
+      <p>
+        A first-order ODE is <term>separable</term> if it can be written in
+        the form
+        <me>
+          y'(t) = g(y) \cdot h(t)
+        </me>
+        for functions <m>g</m> (depending only on <m>y</m>) and <m>h</m>
+        (depending only on <m>t</m>).
+      </p>
+    </statement>
+  </definition>
+
+  <!-- ─── Identification examples ─── -->
+
+  <example xml:id="ex-separable-identification">
+    <title>Identifying Separable ODEs</title>
+    <p>
+      <ol>
+        <li>
+          <p>
+            <m>t\, y'(t) = \dfrac{y(t)}{t^2}</m>,
+            equivalently <m>y' = y \cdot t^{-3}</m>.
+            <em>Separable</em> with <m>g(y) = y</m> and <m>h(t) = t^{-3}</m>.
+          </p>
+        </li>
+        <li>
+          <p>
+            <m>t^2 y'(t) = \sin(y(t) + t)</m>.
+            <em>Not separable</em>: <m>y</m> and <m>t</m> appear together
+            inside <m>\sin</m> and cannot be factored apart.
+          </p>
+        </li>
+        <li>
+          <p>
+            <m>y'(t) = e^{t + y(t)}</m>.
+            <em>Separable</em>: <m>e^{t+y} = e^t \cdot e^y</m>,
+            so <m>g(y) = e^y</m> and <m>h(t) = e^t</m>.
+          </p>
+        </li>
+        <li>
+          <p>
+            <m>\sqrt{t}\, y'(t) = (y(t))^2 + t</m>.
+            <em>Not separable</em>: the sum <m>y^2 + t</m> cannot be
+            written as a product of a <m>y</m>-function and a
+            <m>t</m>-function.
+          </p>
+        </li>
+      </ol>
+    </p>
+  </example>
+
+  <!-- ─── Method ─── -->
+
+  <theorem xml:id="thm-separation-of-variables">
+    <title>Method of Separation of Variables</title>
+    <statement>
+      <p>
+        To solve the separable ODE <m>y'(t) = g(y) \cdot h(t)</m>:
+      </p>
+      <p>
+        <ol>
+          <li>
+            <p>
+              <em>Separate variables</em> (assuming <m>g(y) \neq 0</m>):
+              <me>
+                \frac{y'(t)}{g(y(t))} = h(t).
+              </me>
+            </p>
+          </li>
+          <li>
+            <p>
+              <em>Integrate both sides</em> using the substitution
+              <m>u = y(t)</m>, <m>du = y'(t)\, dt</m>:
+              <me>
+                \int \frac{1}{g(u)}\, du = \int h(t)\, dt + C,
+                \qquad C \in \R.
+              </me>
+            </p>
+          </li>
+          <li>
+            <p>
+              <em>Solve for <m>y(t)</m></em> from the equation
+              <m>\displaystyle\int \frac{1}{g(u)}\, du = \int h(t)\, dt + C</m>.
+            </p>
+          </li>
+          <li>
+            <p>
+              <em>Check constant solutions.</em>
+              Determine all constants <m>c</m> for which <m>g(c) = 0</m>
+              (these were excluded in Step 1) and add the corresponding
+              constant solutions <m>y(t) \equiv c</m> if they are not
+              already included in the general solution.
+            </p>
+          </li>
+        </ol>
+      </p>
+    </statement>
+  </theorem>
+
+  <!-- ─── Exponential growth worked example ─── -->
+
+  <example xml:id="ex-separation-exponential-growth">
+    <title>Solving the Exponential Growth ODE</title>
+    <p>
+      Solve <m>p'(t) = k\, p(t)</m> for <m>k \in \R</m>.
+    </p>
+    <p>
+      <em>Step 1: Separate variables</em> (for <m>p(t) \neq 0</m>):
+      <me>
+        \frac{p'(t)}{p(t)} = k.
+      </me>
+    </p>
+    <p>
+      <em>Step 2: Integrate both sides.</em>
+      With the substitution <m>u = p(t)</m>:
+      <md>
+        <mrow>
+          \int \frac{1}{u}\, du \amp= \int k\, dt + C
+        </mrow>
+        <mrow>
+          \ln|p(t)| \amp= kt + C.
+        </mrow>
+      </md>
+    </p>
+    <p>
+      <em>Step 3: Solve for <m>p(t)</m>.</em>
+      Applying the exponential function:
+      <me>
+        |p(t)| = e^{kt + C} = e^C \cdot e^{kt}.
+      </me>
+      Writing <m>A = \pm e^C</m>, we can absorb both the sign and the positive
+      factor <m>e^C</m> into a single nonzero constant and obtain
+      <me>
+        p(t) = A \, e^{kt}, \qquad A \in \R \setminus \{0\}.
+      </me>
+    </p>
+    <p>
+      <em>Step 4: Check constant solutions.</em>
+      The constant function <m>p(t) \equiv 0</m> satisfies
+      <m>0' = 0 = k \cdot 0</m>, so it is also a solution.
+      Including it (corresponding to <m>A = 0</m>) gives the
+      <em>general solution</em>:
+      <me>
+        p(t) = C\, e^{kt}, \qquad C \in \R.
+      </me>
+    </p>
+  </example>
+
+  <!-- ─── Logistic growth ─── -->
+
+  <example xml:id="ex-separation-logistic-growth">
+    <title>Solving the Logistic Growth ODE</title>
+    <p>
+      Consider the logistic model
+      <me>
+        p'(t) = k\, p(t)\!\left(1 - \frac{p(t)}{p_{\max}}\right),
+        \qquad k > 0,\quad 0 \leq p(t) \leq p_{\max}.
+      </me>
+      This is separable with
+      <m>g(p) = p\!\left(1 - p/p_{\max}\right)</m> and
+      <m>h(t) = k</m>.
+    </p>
+    <p>
+      For the special case <m>p_{\max} = 1</m>, <m>k = 1</m>,
+      a partial-fraction decomposition gives
+      <me>
+        \frac{1}{p(1-p)} = \frac{1}{p} + \frac{1}{1-p}.
+      </me>
+      Integrating the separated equation:
+      <me>
+        \ln|p| - \ln|1 - p| = t + C
+        \quad \Longrightarrow \quad
+        \frac{p}{1 - p} = A e^{t}, \quad A = e^C.
+      </me>
+      Solving for <m>p</m>:
+      <me>
+        p(t) = \frac{A e^{t}}{1 + A e^{t}} = \frac{1}{1 + B e^{-t}},
+        \qquad B = A^{-1}.
+      </me>
+      This is the logistic (sigmoid) function.
+      As <m>t \to +\infty</m> it approaches <m>1 = p_{\max}</m>;
+      as <m>t \to -\infty</m> it approaches 0.
+      This confirms the S-shaped behaviour shown in
+      <xref ref="fig-logistic-growth"/>.
+    </p>
+    <p>
+      <!-- ADDED: include the equilibrium solutions and the parameter form used in applications -->
+      The same separation method with general <m>k</m> and <m>p_{\max}</m>
+      leads to the engineering form
+      <me>
+        p(t) = \frac{p_{\max}}{1 + B e^{-kt}},
+      </me>
+      where <m>B</m> is determined by the initial value.
+      In addition, the constant functions <m>p(t) \equiv 0</m> and
+      <m>p(t) \equiv p_{\max}</m> are equilibrium solutions because they make
+      the right-hand side vanish.
+    </p>
+  </example>
+
+  <exercises xml:id="exercises-separable-odes-check">
+    <title>Check Your Understanding</title>
+
+    <exercise xml:id="exer-separable-identify-simple">
+      <title>Identify a Separable ODE</title>
+      <statement>
+        <p>
+          Which of the following differential equations is separable?
+        </p>
+      </statement>
+      <choices>
+        <choice correct="yes">
+          <statement><p><m>y'=2t\,y</m></p></statement>
+          <feedback><p>Correct. It can be written as <m>\frac{1}{y}\,dy = 2t\,dt</m>.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p><m>y'+y=t\)</m></p></statement>
+          <feedback><p>Incorrect. This is linear, but not already in separated form.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p><m>y''+y=0</m></p></statement>
+          <feedback><p>Incorrect. This is not even a first-order ODE.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p><m>y'=t+y</m></p></statement>
+          <feedback><p>Incorrect. The variables do not separate into a product of a function of <m>t</m> and a function of <m>y</m>.</p></feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+    <exercise xml:id="exer-separable-solve-growth">
+      <title>Solve a Simple Separable ODE</title>
+      <statement>
+        <p>
+          Solve the initial value problem
+          <me>
+            y'=2t\,y,
+            \qquad
+            y(0)=3.
+          </me>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Separate variables:
+          <me>
+            \frac{1}{y}\,dy = 2t\,dt.
+          </me>
+          Integrating gives
+          <me>
+            \ln|y| = t^2 + C.
+          </me>
+          Exponentiating,
+          <me>
+            y = C_1 e^{t^2}.
+          </me>
+          Using <m>y(0)=3</m> yields <m>C_1=3</m>. Therefore
+          <me>
+            y(t)=3e^{t^2}.
+          </me>
+        </p>
+      </solution>
+    </exercise>
+  </exercises>
+
+</subsection>

@@ -1,0 +1,386 @@
+<subsection xml:id="subsec-inhomogeneous-higher-order">
+  <title>Inhomogeneous Linear ODEs — Method of Undetermined Coefficients</title>
+
+  <introduction>
+    <p>
+      We now turn to the <em>inhomogeneous</em> linear ODE with constant
+      coefficients:
+      <me>
+        y^{(n)}(t) + a_{n-1}\, y^{(n-1)}(t) + \cdots + a_1\, y'(t)
+        + a_0\, y(t) = f(t), \qquad f(t) \not\equiv 0.
+      </me>
+      The crucial structural fact is the <em>superposition principle</em>:
+      the general solution is the sum of the general homogeneous solution
+      (which we already know how to find) and <em>any</em> particular
+      solution of the inhomogeneous equation.
+    </p>
+  </introduction>
+
+  <!-- ─── Superposition principle ─── -->
+
+  <theorem xml:id="thm-superposition-principle">
+    <title>Superposition Principle</title>
+    <statement>
+      <p>
+        Let <m>y_p(t)</m> be any particular solution of the inhomogeneous ODE
+        <me>
+          y^{(n)} + a_{n-1} y^{(n-1)} + \cdots + a_0 y = f(t).
+        </me>
+        Let <m>y_h(t) = C_1 y_1(t) + \cdots + C_n y_n(t)</m> be the general
+        solution of the corresponding <em>homogeneous</em> ODE (i.e.\ with
+        <m>f \equiv 0</m>).
+        Then the <term>general solution of the inhomogeneous ODE</term> is
+        <me>
+          y(t) = y_h(t) + y_p(t),
+        </me>
+        and every solution of the inhomogeneous ODE has this form for some
+        choice of <m>C_1, \ldots, C_n \in \R</m>.
+      </p>
+    </statement>
+  </theorem>
+
+  <!-- ─── Three-step method ─── -->
+
+  <!-- ADDED: checklist format makes the workflow explicit and avoids fragile algorithm markup -->
+  <assemblage xml:id="alg-undetermined-coefficients">
+    <title>Method of Undetermined Coefficients</title>
+    <p>
+      For the forcing terms covered in this section, use the following
+      three-step workflow.
+    </p>
+    <ol>
+      <li>
+        <p>
+          <em>Solve the homogeneous ODE.</em>
+          Find <m>y_h(t) = C_1 y_1(t) + \cdots + C_n y_n(t)</m> using the
+          characteristic polynomial (see
+          <xref ref="alg-solve-homogeneous"/>).
+        </p>
+      </li>
+      <li>
+        <p>
+          <em>Guess the form of a particular solution <m>y_p(t)</m></em>
+          based on the right-hand side <m>f(t)</m>, using the table
+          in <xref ref="thm-undetermined-coefficient-guesses"/>.
+          Then substitute <m>y_p</m> into the ODE and solve for the
+          undetermined coefficients.
+        </p>
+      </li>
+      <li>
+        <p>
+          <em>Write the general solution:</em>
+          <m>y(t) = y_h(t) + y_p(t)</m>.
+          Apply initial conditions to determine <m>C_1, \ldots, C_n</m>.
+        </p>
+      </li>
+    </ol>
+  </assemblage>
+
+  <!-- ─── Guess table ─── -->
+
+  <theorem xml:id="thm-undetermined-coefficient-guesses">
+    <title>Educated Guesses for the Particular Solution</title>
+    <statement>
+      <p>
+        Let <m>P(\lambda)</m> be the characteristic polynomial of the
+        homogeneous ODE.
+        The following table gives the standard ansatz for <m>y_p(t)</m>
+        depending on the form of <m>f(t)</m>.
+        In each row, <m>k</m> denotes the multiplicity of the relevant
+        frequency as a root of <m>P</m> (set <m>k = 0</m> if it is not a
+        root).
+      </p>
+      <tabular halign="left" top="medium">
+        <col right="medium"/>
+        <col right="medium"/>
+        <col/>
+        <row header="yes" bottom="medium">
+          <cell>Right-hand side <m>f(t)</m></cell>
+          <cell>Ansatz for <m>y_p(t)</m></cell>
+          <cell>Resonance condition</cell>
+        </row>
+        <row bottom="minor">
+          <cell>Polynomial <m>\displaystyle\sum_{j=0}^{m} A_j t^j</m></cell>
+          <cell><m>t^k \displaystyle\sum_{j=0}^{m} B_j t^j</m></cell>
+          <cell><m>k = \text{mult. of } 0</m> as root</cell>
+        </row>
+        <row bottom="minor">
+          <cell><m>A\, e^{\alpha t}</m></cell>
+          <cell><m>B\, t^k e^{\alpha t}</m></cell>
+          <cell><m>k = \text{mult. of } \alpha</m> as root</cell>
+        </row>
+        <row bottom="minor">
+          <cell><m>A_1 \cos(\beta t) + A_2 \sin(\beta t)</m></cell>
+          <cell><m>t^k\!\left(B_1 \cos(\beta t) + B_2 \sin(\beta t)\right)</m></cell>
+          <cell><m>k = \text{mult. of } i\beta</m> as root</cell>
+        </row>
+        <row bottom="medium">
+          <cell><m>e^{\alpha t}\!\left(A_1 \cos\beta t + A_2\sin\beta t\right)</m></cell>
+          <cell><m>t^k e^{\alpha t}\!\left(B_1\cos\beta t + B_2\sin\beta t\right)</m></cell>
+          <cell><m>k = \text{mult. of } \alpha{+}i\beta</m> as root</cell>
+        </row>
+      </tabular>
+    </statement>
+  </theorem>
+
+  <remark xml:id="rem-guessing-method-scope">
+    <title>Scope of the Guessing Method</title>
+    <p>
+      The method of undetermined coefficients works well when the forcing term
+      <m>f(t)</m> is built from polynomials, exponentials, sines, cosines, or
+      finite sums and products of these functions.  It is not a universal
+      method for arbitrary right-hand sides such as <m>\ln t</m> or
+      <m>\tan t</m>.
+    </p>
+    <p>
+      That scope restriction is useful to keep in mind: in this section we
+      deliberately stay within the constant-coefficient setting where the
+      forcing term suggests a manageable ansatz.
+    </p>
+  </remark>
+
+  <remark xml:id="rem-resonance-explanation">
+    <title>Why the Resonance Factor <m>t^k</m>?</title>
+    <p>
+      If the frequency of the right-hand side <m>f(t)</m> coincides with a
+      root of the characteristic polynomial, the <q>naive</q> guess is itself
+      a solution of the homogeneous ODE and therefore yields zero when
+      substituted — it cannot absorb the forcing.
+      Multiplying by <m>t^k</m> breaks the degeneracy: the adjusted
+      guess is no longer in the homogeneous solution space.
+    </p>
+    <p>
+      This phenomenon has a physical counterpart: when a driving force
+      matches the natural frequency of an undamped oscillator the amplitude
+      grows without bound (resonance).
+    </p>
+  </remark>
+
+  <!-- ─── Worked example 1: polynomial RHS ─── -->
+
+  <example xml:id="ex-inhomogeneous-polynomial-rhs">
+    <title>Inhomogeneous ODE — Polynomial Right-Hand Side</title>
+    <p>
+      Find the general solution of
+      <m>y''(t) - 2y'(t) + y(t) = t^2 + 4</m>.
+    </p>
+    <p>
+      <em>Step 1 — Homogeneous solution.</em>
+      We found earlier (<xref ref="ex-homogeneous-double-real-root"/>)
+      that the characteristic polynomial is
+      <m>P(\lambda) = (\lambda - 1)^2</m>
+      and the general homogeneous solution is
+      <me>
+        y_h(t) = C_1\, e^t + C_2\, t\, e^t.
+      </me>
+    </p>
+    <p>
+      <em>Step 2 — Particular solution.</em>
+      The right-hand side is a polynomial of degree 2.
+      Check for resonance: <m>P(0) = (0-1)^2 = 1 \neq 0</m>, so
+      <m>\lambda = 0</m> is not a root and <m>k = 0</m>.
+      Ansatz: <m>y_p(t) = B_0 + B_1 t + B_2 t^2</m>.
+    </p>
+    <p>
+      Compute the derivatives and substitute into the left-hand side:
+      <md>
+        <mrow>y_p'(t) \amp= B_1 + 2B_2 t,</mrow>
+        <mrow>y_p''(t) \amp= 2B_2.</mrow>
+      </md>
+      <md>
+        <mrow>
+          y_p'' - 2y_p' + y_p
+          \amp= 2B_2 - 2(B_1 + 2B_2 t) + (B_0 + B_1 t + B_2 t^2)
+        </mrow>
+        <mrow>
+          \amp= (B_0 - 2B_1 + 2B_2)
+               + (-4B_2 + B_1)\, t
+               + B_2\, t^2.
+        </mrow>
+      </md>
+      Equating coefficients with <m>f(t) = t^2 + 4 = 4 + 0\cdot t + 1\cdot t^2</m>:
+      <md>
+        <mrow>B_2 \amp= 1,</mrow>
+        <mrow>-4B_2 + B_1 \amp= 0 \;\Rightarrow\; B_1 = 4,</mrow>
+        <mrow>B_0 - 2B_1 + 2B_2 \amp= 4 \;\Rightarrow\; B_0 = 10.</mrow>
+      </md>
+      Thus <m>y_p(t) = 10 + 4t + t^2</m>.
+    </p>
+    <p>
+      <em>Step 3 — General solution.</em>
+      <me>
+        y(t) = C_1\, e^t + C_2\, t\, e^t + t^2 + 4t + 10,
+        \qquad C_1, C_2 \in \R.
+      </me>
+    </p>
+  </example>
+
+  <!-- ─── Worked example 2: resonance with exponential ─── -->
+
+  <example xml:id="ex-inhomogeneous-exponential-resonance">
+    <title>Inhomogeneous ODE — Resonance with Exponential Forcing</title>
+    <p>
+      Find the general solution of
+      <m>y''(t) + 6y'(t) + 9y(t) = 3e^{-3t}</m>.
+    </p>
+    <p>
+      <em>Step 1 — Homogeneous solution.</em>
+      <m>P(\lambda) = \lambda^2 + 6\lambda + 9 = (\lambda + 3)^2</m>.
+      Root <m>\lambda_0 = -3</m> has multiplicity 2, so
+      <me>
+        y_h(t) = C_1\, e^{-3t} + C_2\, t\, e^{-3t}.
+      </me>
+    </p>
+    <p>
+      <em>Step 2 — Particular solution.</em>
+      The right-hand side is <m>f(t) = 3\, e^{-3t}</m>, so
+      <m>\alpha = -3</m>.
+      Since <m>\lambda = -3</m> is a root of <m>P</m> of multiplicity
+      <m>k = 2</m>, we use the resonance ansatz
+      <m>y_p(t) = B\, t^2 e^{-3t}</m>.
+    </p>
+    <p>
+      Compute derivatives (using the product rule twice):
+      <md>
+        <mrow>y_p' \amp= B(2t - 3t^2) e^{-3t},</mrow>
+        <mrow>y_p'' \amp= B(2 - 12t + 9t^2) e^{-3t}.</mrow>
+      </md>
+      Substituting into the ODE:
+      <md>
+        <mrow>
+          y_p'' + 6y_p' + 9y_p
+          \amp= B e^{-3t}\!\left[(2 - 12t + 9t^2)
+               + 6(2t - 3t^2) + 9t^2\right]
+        </mrow>
+        <mrow>
+          \amp= B e^{-3t}\!\left[2 + 0\cdot t + 0\cdot t^2\right]
+            = 2B\, e^{-3t}.
+        </mrow>
+      </md>
+      Setting <m>2B = 3</m> gives <m>B = \tfrac{3}{2}</m>.
+    </p>
+    <p>
+      <em>Step 3 — General solution.</em>
+      <me>
+        y(t) = C_1\, e^{-3t} + C_2\, t\, e^{-3t}
+               + \tfrac{3}{2}\, t^2 e^{-3t},
+        \qquad C_1, C_2 \in \R.
+      </me>
+    </p>
+  </example>
+
+  <!-- ─── Worked example 3: complex exponential forcing ─── -->
+
+  <example xml:id="ex-inhomogeneous-complex-exponential-forcing">
+    <title>Inhomogeneous ODE — Exponentially Modulated Oscillation</title>
+    <p>
+      Find the general solution of
+      <m>y''(t) + 2y'(t) + 5y(t) = e^{-3t}\sin(2t)</m>.
+    </p>
+    <p>
+      <em>Step 1 — Homogeneous solution.</em>
+      <m>P(\lambda) = \lambda^2 + 2\lambda + 5</m>.
+      Roots: <m>\lambda_{1,2} = -1 \pm 2i</m>.
+      <me>
+        y_h(t) = e^{-t}\!\left(C_1 \cos(2t) + C_2 \sin(2t)\right).
+      </me>
+    </p>
+    <p>
+      <em>Step 2 — Particular solution.</em>
+      The right-hand side has <m>\alpha = -3</m>, <m>\beta = 2</m>.
+      The complex frequency <m>\alpha + i\beta = -3 + 2i</m> is
+      <em>not</em> a root of <m>P</m> (since the roots are <m>-1 \pm 2i</m>),
+      so <m>k = 0</m> and the ansatz is
+      <me>
+        y_p(t) = e^{-3t}\!\left(B_1 \cos(2t) + B_2 \sin(2t)\right).
+      </me>
+    </p>
+    <p>
+      Let <m>u(t) = B_1\cos(2t) + B_2\sin(2t)</m>.  After computing
+      <m>y_p''+ 2y_p' + 5y_p</m> via the product rule and comparing
+      coefficients with <m>e^{-3t}\sin(2t)</m>, one obtains the system
+      <md>
+        <mrow>-3 B_1 + 2 B_2 \amp= 0,</mrow>
+        <mrow>-2 B_1 - 3 B_2 \amp= 1.</mrow>
+      </md>
+      Solving: <m>B_1 = -\tfrac{2}{13}</m>, <m>B_2 = -\tfrac{3}{13}</m>.
+    </p>
+    <p>
+      <em>Step 3 — General solution.</em>
+      <me>
+        y(t) = e^{-t}\!\left(C_1\cos 2t + C_2\sin 2t\right)
+               - \tfrac{e^{-3t}}{13}\!\left(2\cos 2t + 3\sin 2t\right),
+        \quad C_1, C_2 \in \R.
+      </me>
+    </p>
+  </example>
+
+  <exercises xml:id="exercises-inhomogeneous-higher-order-check">
+    <title>Check Your Understanding</title>
+
+    <exercise xml:id="exer-inhomogeneous-guess-polynomial">
+      <title>Choose an Ansatz</title>
+      <statement>
+        <p>
+          For the ODE
+          <me>
+            y''-y=t,
+          </me>
+          which ansatz is appropriate for a particular solution?
+        </p>
+      </statement>
+      <choices>
+        <choice correct="yes">
+          <statement><p><m>y_p(t)=At+B</m></p></statement>
+          <feedback><p>Correct. A polynomial right-hand side of degree <m>1</m> suggests a polynomial ansatz of degree <m>1</m>.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p><m>y_p(t)=Ae^t</m></p></statement>
+          <feedback><p>Incorrect. The forcing term is polynomial, not exponential.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p><m>y_p(t)=A\cos t + B\sin t</m></p></statement>
+          <feedback><p>Incorrect. Trigonometric ansatzes are used for sinusoidal forcing.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p><m>y_p(t)=At\,e^t</m></p></statement>
+          <feedback><p>Incorrect. There is no exponential forcing here.</p></feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+    <exercise xml:id="exer-inhomogeneous-resonance-exp">
+      <title>Find a Particular Solution in a Resonance Case</title>
+      <statement>
+        <p>
+          Find one particular solution of
+          <me>
+            y''-2y'+y=e^t.
+          </me>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The homogeneous characteristic polynomial is
+          <me>
+            (\lambda-1)^2,
+          </me>
+          so <m>e^t</m> is already a homogeneous solution. We therefore use the resonance ansatz
+          <me>
+            y_p(t)=At^2e^t.
+          </me>
+          Substituting gives
+          <me>
+            y_p''-2y_p'+y_p=2Ae^t.
+          </me>
+          To match the right-hand side <m>e^t</m>, we choose <m>2A=1</m>, hence <m>A=\tfrac12</m>.
+          Thus one particular solution is
+          <me>
+            y_p(t)=\tfrac12 t^2 e^t.
+          </me>
+        </p>
+      </solution>
+    </exercise>
+  </exercises>
+
+</subsection>

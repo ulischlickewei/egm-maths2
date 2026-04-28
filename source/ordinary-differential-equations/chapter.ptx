@@ -1,0 +1,27 @@
+<chapter xml:id="chapter-ordinary-differential-equations" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Ordinary Differential Equations</title>
+
+  <introduction>
+    <p>
+      An ordinary differential equation (ODE) is an equation that relates an
+      unknown function of a single variable to one or more of its derivatives.
+      ODEs are the central mathematical tool for modelling dynamic processes:
+      population growth, electrical circuits, mechanical vibrations, heat
+      transfer, and countless other phenomena in engineering and the sciences.
+    </p>
+    <p>
+      This chapter develops systematic solution methods for the two most
+      important classes of ODEs encountered in a first engineering course.
+      Section 3-1 treats <em>first-order ODEs</em>: we study separable
+      equations (solved by separating variables and integrating) and linear
+      first-order equations (solved by variation of constants).
+      Section 3-2 extends these ideas to <em>higher-order linear ODEs</em>,
+      with constant coefficients, covering the characteristic equation,
+      the superposition principle, and the method of undetermined coefficients.
+    </p>
+  </introduction>
+
+  <xi:include href="first-order-odes/section.ptx"/>
+  <!-- <xi:include href="higher-order-linear-odes/section.ptx"/> -->
+
+</chapter>
