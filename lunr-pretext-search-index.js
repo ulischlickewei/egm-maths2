@@ -2188,6 +2188,294 @@ var ptx_lunr_docs = [
   "body": " Read the Hessian Criterion   Let be a critical point of a twice continuously differentiable function of two variables. If what does the Hessian criterion say?     is a strict local minimum.  Incorrect. A negative determinant means the Hessian is indefinite.    is a strict local maximum.  Incorrect. A strict maximum would require a negative definite Hessian, not just a negative determinant.    is a saddle point.  Correct. In two variables, means the quadratic form takes both signs.    The test is inconclusive.  Incorrect. The test is inconclusive when the determinant is , not when it is negative.    "
 },
 {
+  "id": "section-first-order-odes",
+  "level": "1",
+  "url": "section-first-order-odes.html",
+  "type": "Section",
+  "number": "3.1",
+  "title": "First-Order ODEs",
+  "body": " First-Order ODEs   An ordinary differential equation (ODE) relates an unknown function to its derivatives. This section develops the theory and solution methods for first-order ODEs, the most fundamental class. We begin by defining ODEs and clarifying what a solution is. We then study how to extract qualitative information from an ODE without solving it, using slope fields and sign arguments. Finally, we treat the two main solvable classes in full: separable ODEs (solved by integrating both sides after separating variables) and linear first-order ODEs (solved by the variation-of-constants formula). Throughout, engineering applications — population models, RC circuits — illustrate each concept.    Ordinary Differential Equations and Their Solutions   Many processes in engineering and the natural sciences are most naturally described not by an explicit formula for an unknown quantity, but by a relationship between that quantity and its rates of change. Such a relationship is called a differential equation . In this section we define ordinary differential equations (ODEs), clarify what it means to solve one, and introduce the distinction between general and particular solutions.     Population Growth: A Motivating Example  We model the growth of a population (for example, a colony of bacteria).   (a) Simple proportional growth. In the simplest case, the growth rate is proportional to the current population size. Let denote the population at time . This assumption translates directly into the equation where is the proportionality constant. The unknown is the function  ; the equation involves both and its derivative . This is a first-order ordinary differential equation , and its solutions describe exponential growth: .   Exponential growth for with initial population .       (b) Logistic growth. A more realistic model assumes that the population approaches a maximum value (normalised to ). The growth rate is proportional both to the current population and to the remaining capacity : This is again a first-order ODE, but its solutions exhibit an S-shaped (sigmoidal) curve: slow initial growth, rapid growth near , and levelling off as .   Logistic growth: the solution rises from and approaches the carrying capacity asymptotically.         Ordinary Differential Equation   An ordinary differential equation (ODE) of order is an equation in an unknown function of a single real variable in which the function and its derivatives up to order appear:      Why Ordinary ?  This definition describes an explicit ODE: the highest derivative is isolated on the left. All ODEs in this section have this form.  The qualifier ordinary signals that the unknown function depends on a single variable. By contrast, a partial differential equation (PDE) involves an unknown function of several variables (e.g.\\ temperature ), with partial derivatives in each variable. The heat equation and the wave equation are classical PDEs and belong to more advanced courses.    Examples of ODEs and Their Orders      is an ODE of order 1 .     is an ODE of order 2 .        Free Fall: Solving by Integration  The position of a mass in free fall with constant downward acceleration satisfies Newton's second law: This is a second-order ODE. Because the right-hand side does not involve or , we can solve it by integrating twice: The general solution  contains two free constants , reflecting the fact that the ODE has order 2.  To determine and one supplies additional conditions:    Initial value problem (IVP): specify and . For example, gives and gives , yielding .     Boundary value problem (BVP): specify and at two different times.       Solution of an ODE; General and Particular Solutions   A solution of the ODE is an -times differentiable function that satisfies the equation for all in its domain.   For the standard solvable families studied in this course, the general solution of an order- ODE contains arbitrary constants (constants of integration).    A particular solution contains no free parameters; it is obtained by imposing initial or boundary conditions.        Verifying a Solution  Which of the following functions satisfies ?  (A)  (B)  (C)  (D)    Answer. We verify option (D): let . Hence Options (A), (B), (C) can be verified to fail by a similar computation.    Check Your Understanding   Recognise the Order   What is the order of the differential equation      First order  Incorrect. The highest derivative is not .    Second order  Incorrect. The equation contains a third derivative.    Third order  Correct. The highest derivative appearing is .    It has no order because the right-hand side is .  Incorrect. The order depends only on the highest derivative of the unknown function.      Verify a Candidate Solution   Verify that solves the ODE     Differentiate: On the other hand, Hence for all , so the function is indeed a solution.       Qualitative Analysis and Slope Fields   Before solving an ODE analytically, it is valuable to understand the qualitative behaviour of its solutions: where are they increasing or decreasing? Are they bounded? Do they level off? Visualising the slope field of an ODE makes these questions accessible without integration and reveals structure that guides the analytic work.     Excluding Functions as Solutions by Graph Shape  Consider the ODE We explain why certain graph shapes are incompatible with being a solution.    Two graph shapes excluded by the ODE : a local maximum would require negative slope, and a transversal crossing of the line would require nonzero slope at the crossing point.          A function with a local maximum has a region of negative slope. But for any solution of this ODE we have everywhere (since and ). A negative slope is impossible.     An increasing function that crosses . At any point where , the ODE gives . A solution must have slope zero whenever it reaches ; a transversal increasing crossing is impossible.     These observations illustrate a powerful principle: the ODE itself tells us the slope at every point on the solution curve, giving direct constraints on the graph without integration.     Identifying an ODE from the Shape of Its Solution  Suppose we observe a bell-shaped solution curve with a single peak at . Which of the following ODEs is consistent with this behaviour?   A bell-shaped candidate solution curve with a single horizontal tangent at the peak .      (A)  (B)  (C)    Answer. At the peak, the slope must be zero: .   (A): . Ruled out.    (B): . Consistent with a peak at .    (C): . Ruled out.   Only equation (B) is consistent. Indeed, solves (B) and has the described bell shape.     Slope Fields  For a first-order ODE , the slope field (or direction field ) is drawn by placing a short line segment at each point with slope . Any solution curve through an initial point is tangent to the slope field everywhere it passes — so sketching a solution amounts to flowing along the arrows from .   Slope field for with two particular solutions (starting from and ). The solutions follow the arrows and never intersect, reflecting uniqueness of the initial value problem.      Observe that the two solution curves never cross. This is not a coincidence: for a first-order ODE with a sufficiently regular right-hand side, the initial value uniquely determines the solution (Picard–Lindelöf theorem, proved in more advanced courses).    Check Your Understanding   Equilibrium Solutions   Consider the ODE Which constant solutions are equilibrium solutions?     Only  Incorrect. There is another constant value that also makes the right-hand side zero.    Only  Incorrect. Both factors of matter.    and  Correct. Both constant values make .    There are no equilibrium solutions.  Incorrect. Equilibria occur when the right-hand side vanishes.      Read Off a Slope   For the ODE what is the slope of a solution curve at the point ?    Substitute and into the right-hand side: So the solution curve has slope at that point.       Separable ODEs   The simplest first-order ODEs that can be solved by explicit integration are the separable ones: the right-hand side factors into a function of alone times a function of alone. This structure lets us move all -dependent terms to one side and all -dependent terms to the other before integrating.     Separable ODE   A first-order ODE is separable if it can be written in the form for functions (depending only on ) and (depending only on ).      Identifying Separable ODEs      , equivalently . Separable with and .     . Not separable : and appear together inside and cannot be factored apart.     . Separable : , so and .     . Not separable : the sum cannot be written as a product of a -function and a -function.        Method of Separation of Variables   To solve the separable ODE :      Separate variables (assuming ):      Integrate both sides using the substitution , :      Solve for from the equation .     Check constant solutions. Determine all constants for which (these were excluded in Step 1) and add the corresponding constant solutions if they are not already included in the general solution.         Solving the Exponential Growth ODE  Solve for .   Step 1: Separate variables (for ):    Step 2: Integrate both sides. With the substitution :    Step 3: Solve for . Applying the exponential function: Writing , we can absorb both the sign and the positive factor into a single nonzero constant and obtain    Step 4: Check constant solutions. The constant function satisfies , so it is also a solution. Including it (corresponding to ) gives the general solution :      Solving the Logistic Growth ODE  Consider the logistic model This is separable with and .  For the special case , , a partial-fraction decomposition gives Integrating the separated equation: Solving for : This is the logistic (sigmoid) function. As it approaches ; as it approaches 0. This confirms the S-shaped behaviour shown in .   The same separation method with general and leads to the engineering form where is determined by the initial value. In addition, the constant functions and are equilibrium solutions because they make the right-hand side vanish.    Check Your Understanding   Identify a Separable ODE   Which of the following differential equations is separable?      Correct. It can be written as .     Incorrect. This is linear, but not already in separated form.     Incorrect. This is not even a first-order ODE.     Incorrect. The variables do not separate into a product of a function of and a function of .      Solve a Simple Separable ODE   Solve the initial value problem     Separate variables: Integrating gives Exponentiating, Using yields . Therefore        Linear First-Order ODEs   A first-order ODE is linear when and appear only to the first power and are never multiplied together or fed into nonlinear functions. Linear ODEs arise throughout engineering: RC circuits, mixing problems, Newton's law of cooling, and many more. Their key feature is that an explicit general solution formula always exists, derived by a technique called variation of constants .     Linear First-Order ODE; Homogeneous and Inhomogeneous   A first-order ODE is linear if it can be written as where and are given functions of .   If , the ODE is homogeneous . Every homogeneous linear first-order ODE is also separable.    If , the ODE is inhomogeneous .         Classifying Linear ODEs      , equivalently . Linear, homogeneous : , .     . Not linear : appears as the argument of .     . Linear, inhomogeneous : , .        General Solution of the Homogeneous Linear First-Order ODE   Let be an antiderivative of , i.e. . The general solution of the homogeneous ODE is     The homogeneous ODE is separable: for , . Integrating: , so . Absorbing the sign and the constant into gives , and the zero solution corresponds to .      Discharging a Capacitor (RC Circuit)  An RC series circuit consists of a resistor with resistance and a capacitor with capacitance connected in a loop. When the capacitor is pre-charged to voltage at time and the circuit is closed with no external source, the capacitor voltage satisfies This is a homogeneous linear first-order ODE with the constant coefficient .   RC series circuit: a resistor and capacitor in a closed loop. No external voltage source is present.      With , the theorem gives Applying the initial condition yields . The particular solution is describing exponential decay with time constant .    Next, we turn from homogeneous equations to inhomogeneous linear ODEs of first order.   Variation of Constants   Fix a point in the interval of interest and set The general solution of the inhomogeneous linear ODE is      Structure of the General Solution  The formula above decomposes naturally into two parts:     is the general solution of the corresponding homogeneous ODE ; it contains the free constant .     is a particular solution of the inhomogeneous ODE.   This additive structure — general homogeneous solution plus a particular inhomogeneous solution — recurs in Section 3-2 for higher-order linear ODEs.    Derivation of Variation of Constants  The general homogeneous solution is . We vary the constant by replacing with an unknown function : Differentiating and substituting into : The two -terms cancel, leaving , i.e. Integrating from to gives Substituting back gives the stated formula.     Charging a Capacitor (RC Circuit with Voltage Source)  Now assume the capacitor is uncharged at and a constant voltage source is switched in. The governing ODE becomes inhomogeneous:    RC circuit with a constant voltage source : the capacitor charges from 0 towards .      We apply variation of constants with , , , : Hence Applying : . The particular solution is an exponential rise from towards the source voltage with the same time constant .   Capacitor voltage during charging: exponential approach from 0 to . The time constant governs the speed.      After one time constant , the voltage has reached , a useful rule of thumb in circuit design.    Check Your Understanding   Identify a Linear First-Order ODE   Which equation is a linear first-order ODE?      Correct. It has the form .     Incorrect. The term makes the equation nonlinear.     Incorrect. The product is nonlinear.     Incorrect. This equation is second order.      Solve a Homogeneous Linear ODE   Solve     This is a homogeneous linear first-order ODE. Rewriting gives Separating variables, Integration yields Hence       "
+},
+{
+  "id": "ex-population-growth-motivation",
+  "level": "2",
+  "url": "section-first-order-odes.html#ex-population-growth-motivation",
+  "type": "Example",
+  "number": "3.1.1",
+  "title": "Population Growth: A Motivating Example.",
+  "body": " Population Growth: A Motivating Example  We model the growth of a population (for example, a colony of bacteria).   (a) Simple proportional growth. In the simplest case, the growth rate is proportional to the current population size. Let denote the population at time . This assumption translates directly into the equation where is the proportionality constant. The unknown is the function  ; the equation involves both and its derivative . This is a first-order ordinary differential equation , and its solutions describe exponential growth: .   Exponential growth for with initial population .       (b) Logistic growth. A more realistic model assumes that the population approaches a maximum value (normalised to ). The growth rate is proportional both to the current population and to the remaining capacity : This is again a first-order ODE, but its solutions exhibit an S-shaped (sigmoidal) curve: slow initial growth, rapid growth near , and levelling off as .   Logistic growth: the solution rises from and approaches the carrying capacity asymptotically.      "
+},
+{
+  "id": "def-ode",
+  "level": "2",
+  "url": "section-first-order-odes.html#def-ode",
+  "type": "Definition",
+  "number": "3.1.4",
+  "title": "Ordinary Differential Equation.",
+  "body": " Ordinary Differential Equation   An ordinary differential equation (ODE) of order is an equation in an unknown function of a single real variable in which the function and its derivatives up to order appear:    "
+},
+{
+  "id": "rem-ode-ordinary",
+  "level": "2",
+  "url": "section-first-order-odes.html#rem-ode-ordinary",
+  "type": "Remark",
+  "number": "3.1.5",
+  "title": "Why “Ordinary”?",
+  "body": " Why Ordinary ?  This definition describes an explicit ODE: the highest derivative is isolated on the left. All ODEs in this section have this form.  The qualifier ordinary signals that the unknown function depends on a single variable. By contrast, a partial differential equation (PDE) involves an unknown function of several variables (e.g.\\ temperature ), with partial derivatives in each variable. The heat equation and the wave equation are classical PDEs and belong to more advanced courses.  "
+},
+{
+  "id": "ex-ode-order-examples",
+  "level": "2",
+  "url": "section-first-order-odes.html#ex-ode-order-examples",
+  "type": "Example",
+  "number": "3.1.6",
+  "title": "Examples of ODEs and Their Orders.",
+  "body": " Examples of ODEs and Their Orders      is an ODE of order 1 .     is an ODE of order 2 .     "
+},
+{
+  "id": "ex-free-fall",
+  "level": "2",
+  "url": "section-first-order-odes.html#ex-free-fall",
+  "type": "Example",
+  "number": "3.1.7",
+  "title": "Free Fall: Solving by Integration.",
+  "body": " Free Fall: Solving by Integration  The position of a mass in free fall with constant downward acceleration satisfies Newton's second law: This is a second-order ODE. Because the right-hand side does not involve or , we can solve it by integrating twice: The general solution  contains two free constants , reflecting the fact that the ODE has order 2.  To determine and one supplies additional conditions:    Initial value problem (IVP): specify and . For example, gives and gives , yielding .     Boundary value problem (BVP): specify and at two different times.     "
+},
+{
+  "id": "def-ode-solution",
+  "level": "2",
+  "url": "section-first-order-odes.html#def-ode-solution",
+  "type": "Definition",
+  "number": "3.1.8",
+  "title": "Solution of an ODE; General and Particular Solutions.",
+  "body": " Solution of an ODE; General and Particular Solutions   A solution of the ODE is an -times differentiable function that satisfies the equation for all in its domain.   For the standard solvable families studied in this course, the general solution of an order- ODE contains arbitrary constants (constants of integration).    A particular solution contains no free parameters; it is obtained by imposing initial or boundary conditions.      "
+},
+{
+  "id": "ex-verify-solution",
+  "level": "2",
+  "url": "section-first-order-odes.html#ex-verify-solution",
+  "type": "Example",
+  "number": "3.1.9",
+  "title": "Verifying a Solution.",
+  "body": " Verifying a Solution  Which of the following functions satisfies ?  (A)  (B)  (C)  (D)    Answer. We verify option (D): let . Hence Options (A), (B), (C) can be verified to fail by a similar computation.  "
+},
+{
+  "id": "exer-ode-intro-order",
+  "level": "2",
+  "url": "section-first-order-odes.html#exer-ode-intro-order",
+  "type": "Exercise",
+  "number": "3.1.1.1",
+  "title": "Recognise the Order.",
+  "body": " Recognise the Order   What is the order of the differential equation      First order  Incorrect. The highest derivative is not .    Second order  Incorrect. The equation contains a third derivative.    Third order  Correct. The highest derivative appearing is .    It has no order because the right-hand side is .  Incorrect. The order depends only on the highest derivative of the unknown function.    "
+},
+{
+  "id": "exer-ode-intro-verify",
+  "level": "2",
+  "url": "section-first-order-odes.html#exer-ode-intro-verify",
+  "type": "Exercise",
+  "number": "3.1.1.2",
+  "title": "Verify a Candidate Solution.",
+  "body": " Verify a Candidate Solution   Verify that solves the ODE     Differentiate: On the other hand, Hence for all , so the function is indeed a solution.   "
+},
+{
+  "id": "ex-graphical-exclusion",
+  "level": "2",
+  "url": "section-first-order-odes.html#ex-graphical-exclusion",
+  "type": "Example",
+  "number": "3.1.10",
+  "title": "Excluding Functions as Solutions by Graph Shape.",
+  "body": " Excluding Functions as Solutions by Graph Shape  Consider the ODE We explain why certain graph shapes are incompatible with being a solution.    Two graph shapes excluded by the ODE : a local maximum would require negative slope, and a transversal crossing of the line would require nonzero slope at the crossing point.          A function with a local maximum has a region of negative slope. But for any solution of this ODE we have everywhere (since and ). A negative slope is impossible.     An increasing function that crosses . At any point where , the ODE gives . A solution must have slope zero whenever it reaches ; a transversal increasing crossing is impossible.     These observations illustrate a powerful principle: the ODE itself tells us the slope at every point on the solution curve, giving direct constraints on the graph without integration.  "
+},
+{
+  "id": "ex-identify-ode-from-graph",
+  "level": "2",
+  "url": "section-first-order-odes.html#ex-identify-ode-from-graph",
+  "type": "Example",
+  "number": "3.1.12",
+  "title": "Identifying an ODE from the Shape of Its Solution.",
+  "body": " Identifying an ODE from the Shape of Its Solution  Suppose we observe a bell-shaped solution curve with a single peak at . Which of the following ODEs is consistent with this behaviour?   A bell-shaped candidate solution curve with a single horizontal tangent at the peak .      (A)  (B)  (C)    Answer. At the peak, the slope must be zero: .   (A): . Ruled out.    (B): . Consistent with a peak at .    (C): . Ruled out.   Only equation (B) is consistent. Indeed, solves (B) and has the described bell shape.  "
+},
+{
+  "id": "rem-slope-field",
+  "level": "2",
+  "url": "section-first-order-odes.html#rem-slope-field",
+  "type": "Remark",
+  "number": "3.1.14",
+  "title": "Slope Fields.",
+  "body": " Slope Fields  For a first-order ODE , the slope field (or direction field ) is drawn by placing a short line segment at each point with slope . Any solution curve through an initial point is tangent to the slope field everywhere it passes — so sketching a solution amounts to flowing along the arrows from .   Slope field for with two particular solutions (starting from and ). The solutions follow the arrows and never intersect, reflecting uniqueness of the initial value problem.      Observe that the two solution curves never cross. This is not a coincidence: for a first-order ODE with a sufficiently regular right-hand side, the initial value uniquely determines the solution (Picard–Lindelöf theorem, proved in more advanced courses).  "
+},
+{
+  "id": "exer-qualitative-equilibria",
+  "level": "2",
+  "url": "section-first-order-odes.html#exer-qualitative-equilibria",
+  "type": "Exercise",
+  "number": "3.1.2.1",
+  "title": "Equilibrium Solutions.",
+  "body": " Equilibrium Solutions   Consider the ODE Which constant solutions are equilibrium solutions?     Only  Incorrect. There is another constant value that also makes the right-hand side zero.    Only  Incorrect. Both factors of matter.    and  Correct. Both constant values make .    There are no equilibrium solutions.  Incorrect. Equilibria occur when the right-hand side vanishes.    "
+},
+{
+  "id": "exer-qualitative-slope-at-point",
+  "level": "2",
+  "url": "section-first-order-odes.html#exer-qualitative-slope-at-point",
+  "type": "Exercise",
+  "number": "3.1.2.2",
+  "title": "Read Off a Slope.",
+  "body": " Read Off a Slope   For the ODE what is the slope of a solution curve at the point ?    Substitute and into the right-hand side: So the solution curve has slope at that point.   "
+},
+{
+  "id": "def-separable-ode",
+  "level": "2",
+  "url": "section-first-order-odes.html#def-separable-ode",
+  "type": "Definition",
+  "number": "3.1.16",
+  "title": "Separable ODE.",
+  "body": " Separable ODE   A first-order ODE is separable if it can be written in the form for functions (depending only on ) and (depending only on ).   "
+},
+{
+  "id": "ex-separable-identification",
+  "level": "2",
+  "url": "section-first-order-odes.html#ex-separable-identification",
+  "type": "Example",
+  "number": "3.1.17",
+  "title": "Identifying Separable ODEs.",
+  "body": " Identifying Separable ODEs      , equivalently . Separable with and .     . Not separable : and appear together inside and cannot be factored apart.     . Separable : , so and .     . Not separable : the sum cannot be written as a product of a -function and a -function.     "
+},
+{
+  "id": "thm-separation-of-variables",
+  "level": "2",
+  "url": "section-first-order-odes.html#thm-separation-of-variables",
+  "type": "Theorem",
+  "number": "3.1.18",
+  "title": "Method of Separation of Variables.",
+  "body": " Method of Separation of Variables   To solve the separable ODE :      Separate variables (assuming ):      Integrate both sides using the substitution , :      Solve for from the equation .     Check constant solutions. Determine all constants for which (these were excluded in Step 1) and add the corresponding constant solutions if they are not already included in the general solution.      "
+},
+{
+  "id": "ex-separation-exponential-growth",
+  "level": "2",
+  "url": "section-first-order-odes.html#ex-separation-exponential-growth",
+  "type": "Example",
+  "number": "3.1.19",
+  "title": "Solving the Exponential Growth ODE.",
+  "body": " Solving the Exponential Growth ODE  Solve for .   Step 1: Separate variables (for ):    Step 2: Integrate both sides. With the substitution :    Step 3: Solve for . Applying the exponential function: Writing , we can absorb both the sign and the positive factor into a single nonzero constant and obtain    Step 4: Check constant solutions. The constant function satisfies , so it is also a solution. Including it (corresponding to ) gives the general solution :   "
+},
+{
+  "id": "ex-separation-logistic-growth",
+  "level": "2",
+  "url": "section-first-order-odes.html#ex-separation-logistic-growth",
+  "type": "Example",
+  "number": "3.1.20",
+  "title": "Solving the Logistic Growth ODE.",
+  "body": " Solving the Logistic Growth ODE  Consider the logistic model This is separable with and .  For the special case , , a partial-fraction decomposition gives Integrating the separated equation: Solving for : This is the logistic (sigmoid) function. As it approaches ; as it approaches 0. This confirms the S-shaped behaviour shown in .   The same separation method with general and leads to the engineering form where is determined by the initial value. In addition, the constant functions and are equilibrium solutions because they make the right-hand side vanish.  "
+},
+{
+  "id": "exer-separable-identify-simple",
+  "level": "2",
+  "url": "section-first-order-odes.html#exer-separable-identify-simple",
+  "type": "Exercise",
+  "number": "3.1.3.1",
+  "title": "Identify a Separable ODE.",
+  "body": " Identify a Separable ODE   Which of the following differential equations is separable?      Correct. It can be written as .     Incorrect. This is linear, but not already in separated form.     Incorrect. This is not even a first-order ODE.     Incorrect. The variables do not separate into a product of a function of and a function of .    "
+},
+{
+  "id": "exer-separable-solve-growth",
+  "level": "2",
+  "url": "section-first-order-odes.html#exer-separable-solve-growth",
+  "type": "Exercise",
+  "number": "3.1.3.2",
+  "title": "Solve a Simple Separable ODE.",
+  "body": " Solve a Simple Separable ODE   Solve the initial value problem     Separate variables: Integrating gives Exponentiating, Using yields . Therefore    "
+},
+{
+  "id": "def-linear-first-order-ode",
+  "level": "2",
+  "url": "section-first-order-odes.html#def-linear-first-order-ode",
+  "type": "Definition",
+  "number": "3.1.21",
+  "title": "Linear First-Order ODE; Homogeneous and Inhomogeneous.",
+  "body": " Linear First-Order ODE; Homogeneous and Inhomogeneous   A first-order ODE is linear if it can be written as where and are given functions of .   If , the ODE is homogeneous . Every homogeneous linear first-order ODE is also separable.    If , the ODE is inhomogeneous .      "
+},
+{
+  "id": "ex-linear-ode-classification",
+  "level": "2",
+  "url": "section-first-order-odes.html#ex-linear-ode-classification",
+  "type": "Example",
+  "number": "3.1.22",
+  "title": "Classifying Linear ODEs.",
+  "body": " Classifying Linear ODEs      , equivalently . Linear, homogeneous : , .     . Not linear : appears as the argument of .     . Linear, inhomogeneous : , .     "
+},
+{
+  "id": "thm-homogeneous-linear-ode",
+  "level": "2",
+  "url": "section-first-order-odes.html#thm-homogeneous-linear-ode",
+  "type": "Theorem",
+  "number": "3.1.23",
+  "title": "General Solution of the Homogeneous Linear First-Order ODE.",
+  "body": " General Solution of the Homogeneous Linear First-Order ODE   Let be an antiderivative of , i.e. . The general solution of the homogeneous ODE is     The homogeneous ODE is separable: for , . Integrating: , so . Absorbing the sign and the constant into gives , and the zero solution corresponds to .   "
+},
+{
+  "id": "ex-discharging-capacitor",
+  "level": "2",
+  "url": "section-first-order-odes.html#ex-discharging-capacitor",
+  "type": "Example",
+  "number": "3.1.24",
+  "title": "Discharging a Capacitor (RC Circuit).",
+  "body": " Discharging a Capacitor (RC Circuit)  An RC series circuit consists of a resistor with resistance and a capacitor with capacitance connected in a loop. When the capacitor is pre-charged to voltage at time and the circuit is closed with no external source, the capacitor voltage satisfies This is a homogeneous linear first-order ODE with the constant coefficient .   RC series circuit: a resistor and capacitor in a closed loop. No external voltage source is present.      With , the theorem gives Applying the initial condition yields . The particular solution is describing exponential decay with time constant .  "
+},
+{
+  "id": "thm-variation-of-constants",
+  "level": "2",
+  "url": "section-first-order-odes.html#thm-variation-of-constants",
+  "type": "Theorem",
+  "number": "3.1.26",
+  "title": "Variation of Constants.",
+  "body": " Variation of Constants   Fix a point in the interval of interest and set The general solution of the inhomogeneous linear ODE is    "
+},
+{
+  "id": "rem-solution-structure",
+  "level": "2",
+  "url": "section-first-order-odes.html#rem-solution-structure",
+  "type": "Remark",
+  "number": "3.1.27",
+  "title": "Structure of the General Solution.",
+  "body": " Structure of the General Solution  The formula above decomposes naturally into two parts:     is the general solution of the corresponding homogeneous ODE ; it contains the free constant .     is a particular solution of the inhomogeneous ODE.   This additive structure — general homogeneous solution plus a particular inhomogeneous solution — recurs in Section 3-2 for higher-order linear ODEs.  "
+},
+{
+  "id": "subsec-linear-first-order-odes-10",
+  "level": "2",
+  "url": "section-first-order-odes.html#subsec-linear-first-order-odes-10",
+  "type": "Proof",
+  "number": "3.1.4.1",
+  "title": "Derivation of Variation of Constants.",
+  "body": " Derivation of Variation of Constants  The general homogeneous solution is . We vary the constant by replacing with an unknown function : Differentiating and substituting into : The two -terms cancel, leaving , i.e. Integrating from to gives Substituting back gives the stated formula.  "
+},
+{
+  "id": "ex-charging-capacitor",
+  "level": "2",
+  "url": "section-first-order-odes.html#ex-charging-capacitor",
+  "type": "Example",
+  "number": "3.1.28",
+  "title": "Charging a Capacitor (RC Circuit with Voltage Source).",
+  "body": " Charging a Capacitor (RC Circuit with Voltage Source)  Now assume the capacitor is uncharged at and a constant voltage source is switched in. The governing ODE becomes inhomogeneous:    RC circuit with a constant voltage source : the capacitor charges from 0 towards .      We apply variation of constants with , , , : Hence Applying : . The particular solution is an exponential rise from towards the source voltage with the same time constant .   Capacitor voltage during charging: exponential approach from 0 to . The time constant governs the speed.      After one time constant , the voltage has reached , a useful rule of thumb in circuit design.  "
+},
+{
+  "id": "exer-linear-first-order-identify",
+  "level": "2",
+  "url": "section-first-order-odes.html#exer-linear-first-order-identify",
+  "type": "Exercise",
+  "number": "3.1.4.1",
+  "title": "Identify a Linear First-Order ODE.",
+  "body": " Identify a Linear First-Order ODE   Which equation is a linear first-order ODE?      Correct. It has the form .     Incorrect. The term makes the equation nonlinear.     Incorrect. The product is nonlinear.     Incorrect. This equation is second order.    "
+},
+{
+  "id": "exer-linear-first-order-homogeneous-solution",
+  "level": "2",
+  "url": "section-first-order-odes.html#exer-linear-first-order-homogeneous-solution",
+  "type": "Exercise",
+  "number": "3.1.4.2",
+  "title": "Solve a Homogeneous Linear ODE.",
+  "body": " Solve a Homogeneous Linear ODE   Solve     This is a homogeneous linear first-order ODE. Rewriting gives Separating variables, Integration yields Hence    "
+},
+{
   "id": "backmatter-2",
   "level": "1",
   "url": "backmatter-2.html",
