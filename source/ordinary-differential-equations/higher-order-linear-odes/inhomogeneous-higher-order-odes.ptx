@@ -45,86 +45,125 @@
   <assemblage xml:id="alg-undetermined-coefficients">
     <title>Method of Undetermined Coefficients</title>
     <p>
-      For the forcing terms covered in this section, use the following
-      three-step workflow.
+      Building upon the superposition principle (<xref ref="thm-superposition-principle"/>),
+      we do not need to find all solutions of the inhomogeneous ODE from scratch.
+      Since we already know how to solve the underlying homogeneous ODE, 
+      in order to solve an inhomogeneous ODE, it is enough to find one 
+      particular solution <m>y_p</m> satisfying the
+      equation with the given right-hand side <m>f(t)</m>; then the full
+      solution is <m>y=y_h+y_p</m>.
     </p>
-    <ol>
-      <li>
-        <p>
-          <em>Solve the homogeneous ODE.</em>
-          Find <m>y_h(t) = C_1 y_1(t) + \cdots + C_n y_n(t)</m> using the
-          characteristic polynomial (see
-          <xref ref="alg-solve-homogeneous"/>).
-        </p>
-      </li>
-      <li>
-        <p>
-          <em>Guess the form of a particular solution <m>y_p(t)</m></em>
-          based on the right-hand side <m>f(t)</m>, using the table
-          in <xref ref="thm-undetermined-coefficient-guesses"/>.
-          Then substitute <m>y_p</m> into the ODE and solve for the
-          undetermined coefficients.
-        </p>
-      </li>
-      <li>
-        <p>
-          <em>Write the general solution:</em>
-          <m>y(t) = y_h(t) + y_p(t)</m>.
-          Apply initial conditions to determine <m>C_1, \ldots, C_n</m>.
-        </p>
-      </li>
-    </ol>
+    <p>
+      The <term>method of undetermined coefficients</term> is one possible way
+      to find such a particular solution.  Its guiding intuition is that a
+      linear physical system often responds to an external excitation with an
+      answer of the same basic structure: a polynomial input suggests a
+      polynomial response, an exponential input suggests an exponential
+      response, and a sinusoidal input suggests a combination of sine and
+      cosine.  We therefore write down a trial function with that structure,
+      leave some coefficients unknown, substitute the trial function into the
+      ODE, and determine the unknown coefficients algebraically.
+    </p>
+    <p>
+      This leads to the following three-step method for solving an inhomogeneous linear ODE with constant coefficients.
+    </p>
+    <p>
+      <em>Step 1 — Solve the homogeneous ODE.</em>
+      Find <m>y_h(t) = C_1 y_1(t) + \cdots + C_n y_n(t)</m> using the
+      characteristic polynomial.  The root-to-solution translation is
+      given by <xref ref="thm-solutions-from-roots"/>, and the form of
+      the full homogeneous solution is given by
+      <xref ref="thm-general-solution-homogeneous"/>.
+    </p>
+    <p>
+      <em>Step 2 — Choose a trial function for one particular solution <m>y_p(t)</m>.</em>
+      Use the table in <xref ref="thm-undetermined-coefficient-guesses"/>.
+      First write the natural trial function suggested by <m>f(t)</m>.  Then check
+      whether that same shape already appears among the homogeneous
+      solutions.  If it does, multiply the whole trial function by the required
+      power of <m>t</m>; this resonance correction is explained in
+      <xref ref="rem-resonance-explanation"/>.  Finally substitute
+      <m>y_p</m> into the ODE and solve for the unknown constants in the
+      trial function.
+    </p>
+    <p>
+      <em>Step 3 — Use superposition to write the general solution.</em>
+      By <xref ref="thm-superposition-principle"/>,
+      <m>y(t) = y_h(t) + y_p(t)</m>.
+      Apply initial conditions to determine <m>C_1, \ldots, C_n</m>.
+    </p>
   </assemblage>
 
-  <!-- ─── Guess table ─── -->
+  <!-- ─── Trial-function table ─── -->
 
   <theorem xml:id="thm-undetermined-coefficient-guesses">
-    <title>Educated Guesses for the Particular Solution</title>
+    <title>Trial Functions for the Particular Solution</title>
     <statement>
       <p>
-        Let <m>P(\lambda)</m> be the characteristic polynomial of the
-        homogeneous ODE.
-        The following table gives the standard ansatz for <m>y_p(t)</m>
-        depending on the form of <m>f(t)</m>.
-        In each row, <m>k</m> denotes the multiplicity of the relevant
-        frequency as a root of <m>P</m> (set <m>k = 0</m> if it is not a
-        root).
+        Consider an inhomogeneous linear ODE with constant coefficients
+        <me>
+          y^{(n)}(t)+a_{n-1}y^{(n-1)}(t)+\cdots+a_1y'(t)+a_0y(t)=f(t),
+        </me>
+        and let
+        <me>
+          P(\lambda)=\lambda^n+a_{n-1}\lambda^{n-1}
+          +\cdots+a_1\lambda+a_0
+        </me>
+        be the characteristic polynomial of the associated homogeneous ODE.
+        The following table gives the standard trial function for <m>y_p(t)</m>.
+        The constants named <m>A</m> or <m>A_j</m> are known from the given
+        right-hand side; the constants named <m>B</m> or <m>B_j</m> are unknown
+        and will be determined by substitution.
       </p>
-      <tabular halign="left" top="medium">
+      <p>
+        In the table, the <q>root to check</q> is the complex number
+        that represents the same exponential or oscillating shape as the
+        forcing term.  If that number is a root of <m>P</m> with multiplicity
+        <m>k</m>, multiply the natural trial function by <m>t^k</m>.  If it is not a
+        root, use <m>k=0</m>, so no extra factor of <m>t</m> is added.
+      </p>
+      <tabular halign="left" top="medium" bottom="medium">
         <col right="medium"/>
         <col right="medium"/>
         <col/>
         <row header="yes" bottom="medium">
           <cell>Right-hand side <m>f(t)</m></cell>
-          <cell>Ansatz for <m>y_p(t)</m></cell>
-          <cell>Resonance condition</cell>
+          <cell>Root to check</cell>
+          <cell>Trial function for <m>y_p(t)</m></cell>
         </row>
         <row bottom="minor">
           <cell>Polynomial <m>\displaystyle\sum_{j=0}^{m} A_j t^j</m></cell>
-          <cell><m>t^k \displaystyle\sum_{j=0}^{m} B_j t^j</m></cell>
-          <cell><m>k = \text{mult. of } 0</m> as root</cell>
+          <cell><m>0</m></cell>
+          <cell><m>t^k\displaystyle\sum_{j=0}^{m} B_j t^j</m></cell>
         </row>
         <row bottom="minor">
-          <cell><m>A\, e^{\alpha t}</m></cell>
-          <cell><m>B\, t^k e^{\alpha t}</m></cell>
-          <cell><m>k = \text{mult. of } \alpha</m> as root</cell>
+          <cell><m>Ae^{\alpha t}</m></cell>
+          <cell><m>\alpha</m></cell>
+          <cell><m>B\,t^k e^{\alpha t}</m></cell>
         </row>
         <row bottom="minor">
-          <cell><m>A_1 \cos(\beta t) + A_2 \sin(\beta t)</m></cell>
-          <cell><m>t^k\!\left(B_1 \cos(\beta t) + B_2 \sin(\beta t)\right)</m></cell>
-          <cell><m>k = \text{mult. of } i\beta</m> as root</cell>
+          <cell><m>A_1\cos(\beta t)+A_2\sin(\beta t)</m></cell>
+          <cell><m>i\beta</m> and <m>-i\beta</m></cell>
+          <cell><m>t^k\!\left(B_1\cos(\beta t)+B_2\sin(\beta t)\right)</m></cell>
         </row>
         <row bottom="medium">
-          <cell><m>e^{\alpha t}\!\left(A_1 \cos\beta t + A_2\sin\beta t\right)</m></cell>
-          <cell><m>t^k e^{\alpha t}\!\left(B_1\cos\beta t + B_2\sin\beta t\right)</m></cell>
-          <cell><m>k = \text{mult. of } \alpha{+}i\beta</m> as root</cell>
+          <cell><m>e^{\alpha t}\!\left(A_1\cos(\beta t)+A_2\sin(\beta t)\right)</m></cell>
+          <cell><m>\alpha+i\beta</m> and <m>\alpha-i\beta</m></cell>
+          <cell><m>t^k e^{\alpha t}\!\left(B_1\cos(\beta t)+B_2\sin(\beta t)\right)</m></cell>
         </row>
       </tabular>
+      <p>
+        For a sum of several forcing terms, choose one trial function for each
+        term and add those trial functions together.  If the ODE has real coefficients,
+        complex conjugate roots have the same multiplicity, so checking one
+        member of a conjugate pair determines the same value of <m>k</m> for
+        the other.
+      </p>
     </statement>
   </theorem>
 
   <remark xml:id="rem-guessing-method-scope">
-    <title>Scope of the Guessing Method</title>
+    <title>Scope of the Method</title>
     <p>
       The method of undetermined coefficients works well when the forcing term
       <m>f(t)</m> is built from polynomials, exponentials, sines, cosines, or
@@ -135,19 +174,21 @@
     <p>
       That scope restriction is useful to keep in mind: in this section we
       deliberately stay within the constant-coefficient setting where the
-      forcing term suggests a manageable ansatz.
+      forcing term suggests a manageable trial function.
     </p>
   </remark>
 
   <remark xml:id="rem-resonance-explanation">
     <title>Why the Resonance Factor <m>t^k</m>?</title>
     <p>
-      If the frequency of the right-hand side <m>f(t)</m> coincides with a
-      root of the characteristic polynomial, the <q>naive</q> guess is itself
-      a solution of the homogeneous ODE and therefore yields zero when
-      substituted — it cannot absorb the forcing.
-      Multiplying by <m>t^k</m> breaks the degeneracy: the adjusted
-      guess is no longer in the homogeneous solution space.
+      The case <m>k \gt 0</m> is called <term>resonance</term>.  Algebraically,
+      it means that the natural trial function for <m>y_p</m> overlaps with a solution
+      of the associated homogeneous ODE.  If we try that overlapping trial function,
+      the homogeneous left-hand side either becomes zero or loses exactly the
+      shape we need, so it cannot produce the required forcing term.
+      Multiplying by <m>t</m> moves the trial function to the next related function
+      shape; if the same characteristic root occurs <m>k</m> times, we must
+      move <m>k</m> steps and multiply by <m>t^k</m>.
     </p>
     <p>
       This phenomenon has a physical counterpart: when a driving force
@@ -179,7 +220,7 @@
       The right-hand side is a polynomial of degree 2.
       Check for resonance: <m>P(0) = (0-1)^2 = 1 \neq 0</m>, so
       <m>\lambda = 0</m> is not a root and <m>k = 0</m>.
-      Ansatz: <m>y_p(t) = B_0 + B_1 t + B_2 t^2</m>.
+      Trial function: <m>y_p(t) = B_0 + B_1 t + B_2 t^2</m>.
     </p>
     <p>
       Compute the derivatives and substitute into the left-hand side:
@@ -236,7 +277,7 @@
       The right-hand side is <m>f(t) = 3\, e^{-3t}</m>, so
       <m>\alpha = -3</m>.
       Since <m>\lambda = -3</m> is a root of <m>P</m> of multiplicity
-      <m>k = 2</m>, we use the resonance ansatz
+      <m>k = 2</m>, we use the resonance trial function
       <m>y_p(t) = B\, t^2 e^{-3t}</m>.
     </p>
     <p>
@@ -290,7 +331,7 @@
       The right-hand side has <m>\alpha = -3</m>, <m>\beta = 2</m>.
       The complex frequency <m>\alpha + i\beta = -3 + 2i</m> is
       <em>not</em> a root of <m>P</m> (since the roots are <m>-1 \pm 2i</m>),
-      so <m>k = 0</m> and the ansatz is
+      so <m>k = 0</m> and the trial function is
       <me>
         y_p(t) = e^{-3t}\!\left(B_1 \cos(2t) + B_2 \sin(2t)\right).
       </me>
@@ -319,32 +360,32 @@
     <title>Check Your Understanding</title>
 
     <exercise xml:id="exer-inhomogeneous-guess-polynomial">
-      <title>Choose an Ansatz</title>
+      <title>Choose a Trial Function</title>
       <statement>
         <p>
           For the ODE
           <me>
-            y''-y=t,
+            y''-y=\sin t,
           </me>
-          which ansatz is appropriate for a particular solution?
+          which trial function is appropriate for a particular solution?
         </p>
       </statement>
       <choices>
         <choice correct="yes">
+          <statement><p><m>y_p(t)=A\cos t+B\sin t</m></p></statement>
+          <feedback><p>Correct. A sine forcing generally requires both sine and cosine terms, because derivatives of sine and cosine produce each other.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p><m>y_p(t)=A\sin t</m></p></statement>
+          <feedback><p>Incorrect. This is the common incomplete trial function: after differentiating, cosine terms can appear, so both sine and cosine should be included.</p></feedback>
+        </choice>
+        <choice>
           <statement><p><m>y_p(t)=At+B</m></p></statement>
-          <feedback><p>Correct. A polynomial right-hand side of degree <m>1</m> suggests a polynomial ansatz of degree <m>1</m>.</p></feedback>
+          <feedback><p>Incorrect. Polynomial trial functions are used for polynomial forcing terms, not sinusoidal forcing.</p></feedback>
         </choice>
         <choice>
           <statement><p><m>y_p(t)=Ae^t</m></p></statement>
-          <feedback><p>Incorrect. The forcing term is polynomial, not exponential.</p></feedback>
-        </choice>
-        <choice>
-          <statement><p><m>y_p(t)=A\cos t + B\sin t</m></p></statement>
-          <feedback><p>Incorrect. Trigonometric ansatzes are used for sinusoidal forcing.</p></feedback>
-        </choice>
-        <choice>
-          <statement><p><m>y_p(t)=At\,e^t</m></p></statement>
-          <feedback><p>Incorrect. There is no exponential forcing here.</p></feedback>
+          <feedback><p>Incorrect. Exponential trial functions are used for exponential forcing terms.</p></feedback>
         </choice>
       </choices>
     </exercise>
@@ -365,7 +406,7 @@
           <me>
             (\lambda-1)^2,
           </me>
-          so <m>e^t</m> is already a homogeneous solution. We therefore use the resonance ansatz
+          so <m>e^t</m> is already a homogeneous solution. We therefore use the resonance trial function
           <me>
             y_p(t)=At^2e^t.
           </me>

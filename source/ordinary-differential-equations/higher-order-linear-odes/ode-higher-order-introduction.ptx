@@ -26,34 +26,147 @@
     <p>
       Two classical engineering models immediately lead to higher-order linear
       ODEs with constant coefficients.
-      <ol>
-        <li>
-          <p>
-            <em>Harmonic oscillator (mass-spring-damper).</em>
-            A mass <m>m</m> attached to a spring of stiffness <m>k</m> and a
-            damper of coefficient <m>\alpha</m> satisfies
-            <me>
-              m\, y''(t) + \alpha\, y'(t) + k\, y(t) = F(t),
-            </me>
-            where <m>y(t)</m> is the displacement from rest and <m>F(t)</m>
-            is an external force.
-            This is a second-order linear ODE with constant coefficients.
-          </p>
-        </li>
-        <li>
-          <p>
-            <em>Elastic beam bending.</em>
-            Under a distributed transverse load <m>q(x)</m>, the deflection
-            <m>w(x)</m> of a homogeneous beam with bending stiffness
-            <m>EI</m> satisfies
-            <me>
-              E\, I\, w''''(x) = q(x).
-            </me>
-            This is a <em>fourth-order</em> linear ODE.
-          </p>
-        </li>
-      </ol>
     </p>
+    <ol>
+      <li>
+        <p>
+          <em>Harmonic oscillator (mass-spring-damper).</em>
+          A mass <m>m</m> attached to a spring of stiffness <m>k</m> and a
+          damper of coefficient <m>\alpha</m> satisfies
+          <me>
+            m\, y''(t) + \alpha\, y'(t) + k\, y(t) = F(t),
+          </me>
+          where <m>y(t)</m> is the displacement from rest and <m>F(t)</m>
+          is an external force.
+          This is a second-order linear ODE with constant coefficients.
+        </p>
+      </li>
+      <li>
+        <p>
+          <em>Elastic beam bending.</em>
+          Under a distributed transverse load <m>q(x)</m>, the deflection
+          <m>w(x)</m> of a homogeneous beam with bending stiffness
+          <m>EI</m> satisfies
+          <me>
+            E\, I\, w''''(x) = q(x).
+          </me>
+          This is a <em>fourth-order</em> linear ODE.
+        </p>
+      </li>
+    </ol>
+    <figure xml:id="fig-higher-order-mass-spring-visual">
+      <caption>
+        A mass-spring-damper model.  The restoring spring force, damping force,
+        and external input combine to produce a second-order equation for the
+        displacement <m>y(t)</m>.
+      </caption>
+      <image xml:id="image-higher-order-mass-spring-visual" width="72%">
+        <latex-image>
+          \begin{tikzpicture}[
+            scale=0.95,
+            spring/.style={decorate,
+              decoration={coil, aspect=0.45, segment length=5pt,
+                          amplitude=5pt}},
+            axis/.style={->, thick, gray!70},
+            force/.style={->, very thick, red!75!black},
+            every node/.style={font=\small}
+          ]
+            \begin{scope}[shift={(-2.35,0)}]
+              % Fixed support
+              \fill[gray!25] (-1.25,2.65) rectangle (1.25,2.9);
+              \foreach \x in {-1.15,-0.85,...,1.15}
+                \draw[gray!55] (\x,2.65) -- (\x+0.18,2.9);
+              \draw[thick] (-1.25,2.65) -- (1.25,2.65);
+
+              % Spring above the liquid cylinder
+              \draw[spring, thick] (0,2.65) -- (0,1.05);
+              \node[right] at (0.22,1.88) {$k$};
+              \draw[thick] (0,1.05) -- (0,0.62);
+
+              % Cylinder with viscous liquid
+              \fill[cyan!18] (-0.95,-1.25) rectangle (0.95,0.82);
+              \draw[cyan!55!black, thick] (-0.95,0.82) -- (-0.95,-1.25);
+              \draw[cyan!55!black, thick] (0.95,0.82) -- (0.95,-1.25);
+              \draw[cyan!55!black, thick] (-0.95,-1.25)
+                arc[start angle=180,end angle=360,x radius=0.95,y radius=0.18];
+              \draw[cyan!55!black, thick] (-0.95,0.82)
+                arc[start angle=180,end angle=360,x radius=0.95,y radius=0.18];
+              \draw[cyan!55!black, dashed] (0.95,0.82)
+                arc[start angle=0,end angle=180,x radius=0.95,y radius=0.18];
+              \node[cyan!45!black] at (0,-0.95) {viscous liquid};
+              \node[cyan!45!black, right] at (0.95,-0.2) {$\alpha$};
+
+              % Mass moving inside the liquid
+              \fill[blue!20] (-0.48,-0.05) rectangle (0.48,0.58);
+              \draw[very thick, blue!65!black] (-0.48,-0.05) rectangle (0.48,0.58);
+              \node at (0,0.26) {$m$};
+
+              % External force and displacement
+              \draw[force] (0.6,0.26) -- (0.6,-0.75)
+                node[midway, right] {$F(t)$};
+              \draw[dashed, gray!70] (-1.2,0.26) -- (1.25,0.26);
+              \node[left, gray!70] at (-1.2,0.26) {rest};
+              \draw[axis] (1.35,0.82) -- (1.35,-1.25) node[below] {$y$};
+              \draw[->, thick, blue!70!black] (1.6,0.26) -- (1.6,-0.65)
+                node[midway, right] {$y(t)$};
+            \end{scope}
+
+            \begin{scope}[shift={(3.15,0.15)}]
+              \draw[axis] (0,0) -- (3.15,0) node[right] {$t$};
+              \draw[axis] (0,-0.75) -- (0,1.25) node[above] {$y(t)$};
+              \draw[blue!65!black, very thick, domain=0:3.0, samples=120]
+                plot (\x,{0.95*exp(-0.55*\x)*cos(5.2*\x r)});
+              \draw[dashed, gray!55] (0,0) -- (3.05,0);
+              \node[align=center] at (1.55,-1.08)
+                {typical damped\\response};
+            \end{scope}
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+    </figure>
+    <figure xml:id="fig-higher-order-beam-visual">
+      <caption>
+        Beam bending under a distributed load.  The fourth derivative appears
+        because curvature and internal bending moments must be differentiated
+        to balance the transverse load.
+      </caption>
+      <image xml:id="image-higher-order-beam-visual" width="78%">
+        <latex-image>
+          \begin{tikzpicture}[
+            scale=0.95,
+            load/.style={->, very thick, red!75!black},
+            beam/.style={line width=4pt, blue!65!black},
+            every node/.style={font=\small}
+          ]
+            \draw[beam] (-3.7,0) -- (3.7,0);
+            \draw[blue!35, line width=7pt, opacity=0.35]
+              plot[smooth, domain=-3.7:3.7, samples=120]
+              (\x, {-0.43*(1-(\x/3.7)^2)});
+            \draw[blue!70!black, very thick]
+              plot[smooth, domain=-3.7:3.7, samples=120]
+              (\x, {-0.43*(1-(\x/3.7)^2)});
+
+            \foreach \x in {-3.1,-2.45,...,3.1}
+              \draw[load] (\x,1.55) -- (\x,0.22);
+            \draw[red!75!black, thick] (-3.35,1.55) -- (3.35,1.55);
+            \node[red!75!black, above] at (0,1.65) {distributed load $q(x)$};
+
+            \draw[thick] (-3.7,0) -- (-4.05,-0.75) -- (-3.35,-0.75) -- cycle;
+            \draw[thick] (3.7,0) -- (3.35,-0.75) -- (4.05,-0.75) -- cycle;
+            \draw[gray!70] (-4.25,-0.75) -- (-3.15,-0.75);
+            \draw[gray!70] (3.15,-0.75) -- (4.25,-0.75);
+
+            \draw[->, thick, gray!70] (-4.25,-1.15) -- (4.25,-1.15)
+              node[right] {$x$};
+            \draw[dashed, gray!65] (0,0) -- (0,-0.43);
+            \draw[latex-latex, thick, green!45!black] (0,0) -- (0,-0.43)
+              node[midway, right] {$w(x)$};
+            \node[blue!65!black, below] at (0,-0.88) {deflected shape};
+            \node[above, blue!65!black] at (2.85,0.18) {$EI$};
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+    </figure>
     <p>
       Both examples share the structural feature we will exploit: the unknown
       function and all its derivatives appear only <em>linearly</em>, and the

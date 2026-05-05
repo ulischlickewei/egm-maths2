@@ -71,6 +71,23 @@
     </p>
   </remark>
 
+  <p xml:id="par-complex-roots-real-solutions">
+      <em>Why complex roots produce sine and cosine.</em>
+      Even when the ODE has real coefficients, it is useful to temporarily
+      allow complex-valued trial solutions.  If
+      <m>\lambda=\alpha+i\beta</m> is a complex root, then
+      <me>
+        e^{\lambda t}
+        = e^{(\alpha+i\beta)t}
+        = e^{\alpha t}\bigl(\cos(\beta t)+i\sin(\beta t)\bigr).
+      </me>
+      The real part <m>e^{\alpha t}\cos(\beta t)</m> and the imaginary part
+      <m>e^{\alpha t}\sin(\beta t)</m> are real-valued solutions of the same
+      homogeneous ODE.  This is why oscillating sine and cosine terms appear
+      whenever the characteristic polynomial has a complex conjugate pair of
+      roots.
+  </p>
+
   <!-- ─── Main theorem: roots → solutions ─── -->
 
   <theorem xml:id="thm-solutions-from-roots">
@@ -100,8 +117,6 @@
           y_2(t) = e^{\alpha t}\sin(\beta t)
         </me>
         are linearly independent solutions.
-        They arise as the real and imaginary parts of the complex solution
-        <m>e^{\lambda_0 t} = e^{\alpha t}(\cos\beta t + i\sin\beta t)</m>.
       </p>
       <p>
         <em>Case 3 — root of multiplicity <m>k \geq 2</m>.</em>
@@ -144,6 +159,31 @@
     </statement>
   </theorem>
 
+  <p xml:id="par-repeated-roots-t-factors">
+      <em>Where the factors <m>t, t^2, \ldots</m> come from.</em>
+      Write the differential operator on the left-hand side as
+      <m>L=P(D)</m>, where <m>D</m> means differentiation with respect to
+      <m>t</m>.  If <m>\lambda_0</m> is a root of multiplicity <m>k</m>, then
+      the characteristic polynomial contains the factor
+      <m>(\lambda-\lambda_0)^k</m>.  Correspondingly, the differential
+      operator contains the factor <m>(D-\lambda_0)^k</m>.
+  </p>
+  <p>
+      Now observe the first step:
+      <me>
+        (D-\lambda_0)\bigl(t\,e^{\lambda_0 t}\bigr)
+        = e^{\lambda_0 t}.
+      </me>
+      Applying <m>(D-\lambda_0)</m> a second time gives zero.  More generally,
+      each factor <m>t^j e^{\lambda_0 t}</m> is killed after applying
+      <m>(D-\lambda_0)</m> exactly <m>j+1</m> times.  Therefore, if the root
+      has multiplicity <m>k</m>, the functions
+      <m>e^{\lambda_0 t}, t e^{\lambda_0 t}, \ldots,
+      t^{k-1}e^{\lambda_0 t}</m> all solve the ODE.
+      The powers of <m>t</m> are thus not a trick: they record how many times
+      the same root occurs in the characteristic polynomial.
+  </p>
+
   <!-- ─── Roots-to-solutions visual ─── -->
 
   <figure xml:id="fig-roots-to-solutions">
@@ -157,57 +197,110 @@
       <latex-image>
         \begin{tikzpicture}[
           node distance=0.5cm and 0.3cm,
-          hdr/.style={draw, fill=gray!20, minimum width=3.6cm,
-                      minimum height=0.7cm, align=center, font=\small\bfseries},
-          cell/.style={draw, minimum width=3.6cm, minimum height=1.2cm,
-                       align=center, font=\small},
-          cellb/.style={draw, minimum width=3.6cm, minimum height=1.9cm,
-                        align=center, font=\small}
+          hdrleft/.style={draw, fill=gray!20, minimum width=3.9cm,
+                      text width=3.45cm, minimum height=0.7cm,
+                      align=center, font=\small\bfseries, inner sep=4pt},
+          hdrright/.style={draw, fill=gray!20, minimum width=5.15cm,
+                      text width=4.7cm, minimum height=0.7cm,
+                      align=center, font=\small\bfseries, inner sep=4pt},
+          cellleft/.style={draw, minimum width=3.9cm, text width=3.45cm,
+                       minimum height=1.2cm, align=center,
+                       font=\small, inner sep=4pt},
+          cellright/.style={draw, minimum width=5.15cm, text width=4.7cm,
+                       minimum height=1.2cm, align=center,
+                       font=\small, inner sep=4pt},
+          cellleftb/.style={draw, minimum width=3.9cm, text width=3.45cm,
+                        minimum height=1.95cm, align=center,
+                        font=\small, inner sep=4pt},
+          cellrightb/.style={draw, minimum width=5.15cm, text width=4.7cm,
+                        minimum height=1.95cm, align=center,
+                        font=\small, inner sep=4pt}
         ]
-          \node[hdr] (h1) {Root of \(P(\lambda)\)};
-          \node[hdr, right=0cm of h1] (h2) {Fundamental solution(s)};
+          \node[hdrleft] (h1) {Root of \(P(\lambda)\)};
+          \node[hdrright, right=0cm of h1] (h2) {Fundamental solution(s)};
 
-          \node[cell, below=0cm of h1] (r1)
+          \node[cellleft, below=0cm of h1] (r1)
               {\(\lambda_0 \in \R\), simple};
-          \node[cell, right=0cm of r1] (s1)
+          \node[cellright, right=0cm of r1] (s1)
               {\(e^{\lambda_0 t}\)};
 
-          \node[cell, below=0cm of r1] (r2)
+          \node[cellleft, below=0cm of r1] (r2)
               {\(\lambda_0 = \alpha \pm i\beta\), simple};
-          \node[cell, right=0cm of r2] (s2)
+          \node[cellright, right=0cm of r2] (s2)
               {\(e^{\alpha t}\!\cos\beta t\),\\ \(e^{\alpha t}\!\sin\beta t\)};
 
-          \node[cellb, below=0cm of r2] (r3)
+          \node[cellleftb, below=0cm of r2] (r3)
               {\(\lambda_0 \in \R\),\\ multiplicity \(k\)};
-          \node[cellb, right=0cm of r3] (s3)
+          \node[cellrightb, right=0cm of r3] (s3)
               {\(e^{\lambda_0 t},\; t e^{\lambda_0 t},\;\ldots,\; t^{k-1}e^{\lambda_0 t}\)};
 
-          \node[cellb, below=0cm of r3] (r4)
+          \node[cellleftb, below=0cm of r3] (r4)
               {\(\lambda_0 = \alpha \pm i\beta\),\\ multiplicity \(k\)};
-          \node[cellb, right=0cm of r4] (s4)
+          \node[cellrightb, right=0cm of r4] (s4)
               {\(t^j e^{\alpha t}\!\cos\beta t\),\\ \(t^j e^{\alpha t}\!\sin\beta t\),\\ \(j = 0,1,\ldots,k{-}1\)};
         \end{tikzpicture}
       </latex-image>
     </image>
   </figure>
 
+  <p xml:id="par-homogeneous-scaled-sums">
+        <em>Principle: adding and scaling homogeneous solutions.</em>
+        Suppose <m>y_1(t),\ldots,y_r(t)</m> are solutions of the homogeneous
+        linear ODE
+        <me>
+          y^{(n)} + a_{n-1}y^{(n-1)}+\cdots+a_1y'+a_0y=0.
+        </me>
+        Choose real numbers <m>C_1,\ldots,C_r</m>, multiply each solution
+        <m>y_j</m> by its chosen number <m>C_j</m>, and add the results:
+        <me>
+          y(t)=C_1y_1(t)+\cdots+C_ry_r(t).
+        </me>
+        Then this new function <m>y(t)</m> is again a solution of the same
+        homogeneous ODE.  Such a sum is called a <term>linear combination</term>
+        of the functions <m>y_1,\ldots,y_r</m>.
+  </p>
+  <p>
+        <em>Proof.</em>
+        Let <m>L[y]</m> denote the left-hand side of the ODE:
+        <m>L[y]=y^{(n)}+a_{n-1}y^{(n-1)}+\cdots+a_1y'+a_0y</m>.
+        Differentiation respects scaling and addition, so
+        <me>
+          L[C_1y_1+\cdots+C_ry_r]
+          = C_1L[y_1]+\cdots+C_rL[y_r].
+        </me>
+        Since each <m>y_j</m> solves the homogeneous ODE, each
+        <m>L[y_j]</m> is zero.  Hence
+        <me>
+          L[y]=C_1\cdot0+\cdots+C_r\cdot0=0,
+        </me>
+        so <m>y(t)</m> is again a solution.
+  </p>
+
   <!-- ─── General solution theorem ─── -->
 
   <theorem xml:id="thm-general-solution-homogeneous">
-    <title>General Solution of the Homogeneous Linear ODE</title>
+    <title>General Solution of Homogeneous Linear ODEs</title>
     <statement>
       <p>
-        Apply <xref ref="thm-solutions-from-roots"/> to each of the <m>n</m>
-        roots of the characteristic polynomial (counted with multiplicity) of
-        the homogeneous linear ODE with constant coefficients of order <m>n</m>.
-        This yields <m>n</m> linearly independent solutions
-        <m>y_1(t), \ldots, y_n(t)</m>.
+        Consider the homogeneous linear ODE with constant coefficients
+        <me>
+          y^{(n)}(t)+a_{n-1}y^{(n-1)}(t)+\cdots+a_1y'(t)+a_0y(t)=0,
+        </me>
+        and let
+        <me>
+          P(\lambda)=\lambda^n+a_{n-1}\lambda^{n-1}
+          +\cdots+a_1\lambda+a_0
+        </me>
+        be its characteristic polynomial.
+        Applying <xref ref="thm-solutions-from-roots"/> to all roots of
+        <m>P</m>, counted with multiplicity, yields <m>n</m> linearly
+        independent solutions <m>y_1(t), \ldots, y_n(t)</m>.
         The <term>general solution</term> is
         <me>
           y(t) = C_1\, y_1(t) + C_2\, y_2(t) + \cdots + C_n\, y_n(t),
           \qquad C_1, \ldots, C_n \in \R.
         </me>
-        Initial conditions (e.g.\ values of <m>y(t_0), y'(t_0), \ldots,
+        Initial conditions (e.g. values of <m>y(t_0), y'(t_0), \ldots,
         y^{(n-1)}(t_0)</m>) pin down the constants <m>C_i</m>.
       </p>
     </statement>
@@ -280,7 +373,7 @@
         P(\lambda) = (\lambda - 1)(\lambda^2 + 1).
       </me>
       The roots of <m>\lambda^2 + 1 = 0</m> are <m>\lambda_{2,3} = \pm i</m>
-      (i.e.\ <m>\alpha = 0</m>, <m>\beta = 1</m>).
+      (i.e. <m>\alpha = 0</m>, <m>\beta = 1</m>).
       Applying Cases 1 and 2:
       <me>
         y_1(t) = e^t, \quad y_2(t) = \cos(t), \quad y_3(t) = \sin(t).
@@ -292,48 +385,6 @@
       </me>
     </p>
   </example>
-
-  <!-- ─── Algorithmic summary ─── -->
-
-  <!-- ADDED: more robust PreTeXt container for the step-by-step solution workflow -->
-  <assemblage xml:id="alg-solve-homogeneous">
-    <title>Solving a Homogeneous Linear ODE with Constant Coefficients</title>
-    <p>
-      Use the following checklist each time you solve a homogeneous linear ODE
-      with constant coefficients.
-    </p>
-    <ol>
-      <li>
-        <p>
-          <em>Write down the characteristic polynomial</em>
-          <m>P(\lambda)</m> by replacing each <m>y^{(k)}</m> by
-          <m>\lambda^k</m>.
-        </p>
-      </li>
-      <li>
-        <p>
-          <em>Find all roots</em> of <m>P(\lambda) = 0</m>,
-          noting each root's multiplicity.
-        </p>
-      </li>
-      <li>
-        <p>
-          <em>Assign fundamental solutions</em> using
-          <xref ref="thm-solutions-from-roots"/>:
-          one function per simple real root, two functions per simple
-          complex conjugate pair, <m>k</m> functions per real root of
-          multiplicity <m>k</m>, <m>2k</m> functions per complex pair of
-          multiplicity <m>k</m>.
-        </p>
-      </li>
-      <li>
-        <p>
-          <em>Write the general solution</em> as their linear combination
-          with free constants <m>C_1, \ldots, C_n</m>.
-        </p>
-      </li>
-    </ol>
-  </assemblage>
 
   <exercises xml:id="exercises-homogeneous-higher-order-check">
     <title>Check Your Understanding</title>

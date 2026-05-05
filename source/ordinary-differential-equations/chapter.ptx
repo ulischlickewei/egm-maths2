@@ -22,6 +22,6 @@
   </introduction>
 
   <xi:include href="first-order-odes/section.ptx"/>
-  <!-- <xi:include href="higher-order-linear-odes/section.ptx"/> -->
+  <xi:include href="higher-order-linear-odes/section.ptx"/>
 
 </chapter>
