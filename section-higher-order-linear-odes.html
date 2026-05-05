@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: denver                         *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Higher-Order Linear ODEs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+<link href="_static/pretext/css/theme.css" rel="stylesheet" type="text/css">
+<script>
+var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
+  "tex": {
+    "inlineMath": [
+      [
+        "\\(",
+        "\\)"
+      ]
+    ],
+    "tags": "none",
+    "tagSide": "right",
+    "tagIndent": ".8em",
+    "packages": {
+      "[+]": [
+        "base",
+        "extpfeil",
+        "ams",
+        "amscd",
+        "color",
+        "newcommand",
+        "knowl"
+      ]
+    }
+  },
+  "options": {
+    "ignoreHtmlClass": "tex2jax_ignore|ignore-math",
+    "processHtmlClass": "process-math"
+  },
+  "chtml": {
+    "scale": 0.98,
+    "mtextInheritFont": true
+  },
+  "loader": {
+    "load": [
+      "input/asciimath",
+      "[tex]/extpfeil",
+      "[tex]/amscd",
+      "[tex]/color",
+      "[tex]/newcommand",
+      "[pretext]/mathjaxknowl3.js"
+    ],
+    "paths": {
+      "pretext": "_static/pretext/js"
+    }
+  },
+  "startup": {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+  }
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="Mathematics 2">
+<meta property="book:author" content="Ulrich Schlickewei">
+<script src="_static/pretext/js/jquery.min.js"></script><script src="_static/pretext/js/pretext.js"></script><script src="_static/pretext/js/pretext_add_on.js?x=1"></script><!--** eBookCongig is necessary to configure interactive       **-->
+<!--** Runestone components to run locally in reader's browser **-->
+<!--** No external communication:                              **-->
+<!--**     log level is 0, Runestone Services are disabled     **-->
+<script type="text/javascript">
+eBookConfig = {};
+eBookConfig.useRunestoneServices = false;
+eBookConfig.host = 'http://127.0.0.1:8000';
+eBookConfig.course = 'PTX_Course_Title_Here';
+eBookConfig.basecourse = 'PTX_Base_Course';
+eBookConfig.isLoggedIn = false;
+eBookConfig.email = '';
+eBookConfig.isInstructor = false;
+eBookConfig.logLevel = 0;
+eBookConfig.username = '';
+eBookConfig.readings = null;
+eBookConfig.activities = null;
+eBookConfig.downloadsEnabled = false;
+eBookConfig.allow_pairs = false;
+eBookConfig.enableScratchAC = false;
+eBookConfig.build_info = "";
+eBookConfig.python3 = null;
+eBookConfig.runestone_version = '7.13.5';
+eBookConfig.jobehost = '';
+eBookConfig.proxyuri_runs = '';
+eBookConfig.proxyuri_files = '';
+eBookConfig.enable_chatcodes =  false;
+</script>
+<!--*** Runestone Services ***-->
+<script src="_static/prefix-runtime.52176322e2c1dde5.bundle.js"></script><script src="_static/prefix-723.3e6434f80549315a.bundle.js"></script><script src="_static/prefix-runestone.bbf2283c5c1d4f99.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-723.3bccd435914aa0ff.css">
+<link rel="stylesheet" type="text/css" href="_static/prefix-runestone.b12a7b3f0773ebcd.css">
+<script src="_static/pretext/js/lti_iframe_resizer.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/pretext_search.js"></script><script src="_static/pretext/js/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script>
+</head>
+<body id="Mathematics 2" class="pretext book ignore-math">
+<a class="assistive" href="#ptx-content">Skip to main content</a><header id="ptx-masthead" class="ptx-masthead"><div class="ptx-banner"><div class="title-container">
+<h1 class="heading"><a href="egm-maths2.html"><span class="title">Mathematics 2</span> <span class="subtitle">Lecture notes</span></a></h1>
+<p class="byline">Ulrich Schlickewei</p>
+</div></div></header><nav id="ptx-navbar" class="ptx-navbar navbar"><div class="ptx-navbar-contents">
+<button class="toc-toggle button" title="Contents"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5d2;</span><span class="name">Contents</span></button><div class="searchbox">
+<div class="searchwidget"><button id="searchbutton" class="searchbutton button" type="button" title="Search book"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe8b6;</span><span class="name">Search Book</span></button></div>
+<div id="searchresultsplaceholder" class="searchresultsplaceholder" style="display: none">
+<div class="search-results-controls">
+<input aria-label="Search term" id="ptxsearch" class="ptxsearch" type="text" name="terms" placeholder="Search term"><button title="Close search" id="closesearchresults" class="closesearchresults"><span class="material-symbols-outlined">close</span></button>
+</div>
+<h2 class="search-results-heading">Search Results: </h2>
+<div id="searchempty" class="searchempty"><span>No results.</span></div>
+<ol id="searchresults" class="searchresults"></ol>
+</div>
+</div>
+<span class="nav-other-controls"><button id="light-dark-button" class="light-dark-button button" title="Dark Mode"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe51c;</span><span class="name">Dark Mode</span></button></span><span class="treebuttons"><a class="previous-button button" href="section-first-order-odes.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="up-button button" href="chapter-ordinary-differential-equations.html" title="Up"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Up</span></a><a class="next-button button" href="backmatter.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a></span>
+</div></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N} \newcommand{\Z}{\mathbb Z} \newcommand{\Q}{\mathbb Q} \newcommand{\R}{\mathbb R}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\)</span></div>
+<div class="ptx-page">
+<div id="ptx-sidebar" class="ptx-sidebar"><nav id="ptx-toc" class="ptx-toc depth3 focused" data-preexpanded-levels="0" data-max-levels="3"><ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-frontmatter">
+<div class="toc-title-box"><a href="egm-maths2-3.html" class="internal"><span class="title">Front Matter</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-preface"><div class="toc-title-box"><a href="egm-maths2-3-3.html" class="internal"><span class="title">Preface</span></a></div></li>
+<li class="toc-item toc-colophon"><div class="toc-title-box"><a href="front-colophon.html" class="internal"><span class="title">Colophon</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="chapter-linear-algebra.html" class="internal"><span class="codenumber">1</span> <span class="title">Linear Algebra</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html" class="internal"><span class="codenumber">1.1</span> <span class="title">Vectors, Matrices and Linear Systems of Equations</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html#subsec-vectors" class="internal"><span class="codenumber">1.1.1</span> <span class="title">Brief reminder: vectors</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html#exercises-vectors-reminder" class="internal"><span class="codenumber">1.1.1</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html#subsec-matrices" class="internal"><span class="codenumber">1.1.2</span> <span class="title">Matrices</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html#subsubsec-matrix-operations" class="internal"><span class="codenumber">1.1.2.1</span> <span class="title">Arithmetic Operations on Matrices</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html#subsubsec-special-matrices" class="internal"><span class="codenumber">1.1.2.2</span> <span class="title">Special Matrices and Laws of Arithmetic</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html#subsec-linear-systems" class="internal"><span class="codenumber">1.1.3</span> <span class="title">Linear Systems and the Gauss--Jordan Method</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html#subsec-linear-systems-49" class="internal"><span class="codenumber">1.1.3</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-determinants-inverse-matrices.html" class="internal"><span class="codenumber">1.2</span> <span class="title">Determinants and Inverse Matrices</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-determinants-inverse-matrices.html#section-determinants-inverse-matrices-3" class="internal"><span class="codenumber">1.2.1</span> <span class="title">Inverse Matrices</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-determinants-inverse-matrices.html#exercises-inverse-matrices" class="internal"><span class="codenumber">1.2.1</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-determinants-inverse-matrices.html#section-determinants-inverse-matrices-4" class="internal"><span class="codenumber">1.2.2</span> <span class="title">Determinants</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-determinants-inverse-matrices.html#section-determinants-inverse-matrices-4-25" class="internal"><span class="codenumber">1.2.2</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-eigenvalues-eigenvectors.html" class="internal"><span class="codenumber">1.3</span> <span class="title">Eigenvalues, Diagonalization, and Quadratic Forms</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-eigenvalues-eigenvectors.html#section-eigenvalues-eigenvectors-3" class="internal"><span class="codenumber">1.3.1</span> <span class="title">Eigenvalues and Eigenvectors</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-eigenvalues-eigenvectors.html#exercises-eigenvalues-eigenvectors" class="internal"><span class="codenumber">1.3.1</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-eigenvalues-eigenvectors.html#subsec-diagonalization" class="internal"><span class="codenumber">1.3.2</span> <span class="title">Diagonalization of Matrices</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-eigenvalues-eigenvectors.html#exercises-diagonalization" class="internal"><span class="codenumber">1.3.2</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-eigenvalues-eigenvectors.html#subsec-quadratic-forms" class="internal"><span class="codenumber">1.3.3</span> <span class="title">Quadratic Forms</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-eigenvalues-eigenvectors.html#exercises-quadratic-forms" class="internal"><span class="codenumber">1.3.3</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="chapter-multivariate-differential-calculus.html" class="internal"><span class="codenumber">2</span> <span class="title">Multivariate Differential Calculus</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-functions-continuity-partial-derivatives.html" class="internal"><span class="codenumber">2.1</span> <span class="title">Functions, Continuity, and Partial Derivatives</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-functions-continuity-partial-derivatives.html#subsec-multivariable-functions" class="internal"><span class="codenumber">2.1.1</span> <span class="title">Functions of Several Variables</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-functions-continuity-partial-derivatives.html#subsec-continuity-multivariate" class="internal"><span class="codenumber">2.1.2</span> <span class="title">Continuity</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-functions-continuity-partial-derivatives.html#subsec-partial-derivatives" class="internal"><span class="codenumber">2.1.3</span> <span class="title">Partial Derivatives, Gradient, and Differentiability</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-functions-continuity-partial-derivatives.html#subsec-higher-order-partial-derivatives" class="internal"><span class="codenumber">2.1.4</span> <span class="title">Higher-Order Partial Derivatives and the Hessian Matrix</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-functions-continuity-partial-derivatives.html#exercises-functions-continuity-partial-derivatives" class="internal"><span class="codenumber">2.1.5</span> <span class="title">Check Your Understanding</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-error-propagation-taylor-extrema.html" class="internal"><span class="codenumber">2.2</span> <span class="title">Error Propagation, Taylor Expansion, and Extrema</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-error-propagation-taylor-extrema.html#subsec-error-propagation" class="internal"><span class="codenumber">2.2.1</span> <span class="title">Error Propagation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-error-propagation-taylor-extrema.html#subsec-taylor-expansion" class="internal"><span class="codenumber">2.2.2</span> <span class="title">Multivariate Taylor Expansion</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-error-propagation-taylor-extrema.html#subsec-extrema" class="internal"><span class="codenumber">2.2.3</span> <span class="title">Local Extrema of Multivariable Functions</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-error-propagation-taylor-extrema.html#exercises-error-propagation-taylor-extrema" class="internal"><span class="codenumber">2.2.4</span> <span class="title">Check Your Understanding</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter contains-active">
+<div class="toc-title-box"><a href="chapter-ordinary-differential-equations.html" class="internal"><span class="codenumber">3</span> <span class="title">Ordinary Differential Equations</span></a></div>
+<ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-first-order-odes.html" class="internal"><span class="codenumber">3.1</span> <span class="title">First-Order ODEs</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-first-order-odes.html#subsec-ode-introduction" class="internal"><span class="codenumber">3.1.1</span> <span class="title">Ordinary Differential Equations and Their Solutions</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-first-order-odes.html#exercises-ode-introduction-check" class="internal"><span class="codenumber">3.1.1</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-first-order-odes.html#subsec-qualitative-analysis" class="internal"><span class="codenumber">3.1.2</span> <span class="title">Qualitative Analysis and Slope Fields</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-first-order-odes.html#exercises-qualitative-analysis-check" class="internal"><span class="codenumber">3.1.2</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-first-order-odes.html#subsec-separable-odes" class="internal"><span class="codenumber">3.1.3</span> <span class="title">Separable ODEs</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-first-order-odes.html#exercises-separable-odes-check" class="internal"><span class="codenumber">3.1.3</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-first-order-odes.html#subsec-linear-first-order-odes" class="internal"><span class="codenumber">3.1.4</span> <span class="title">Linear First-Order ODEs</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-first-order-odes.html#exercises-linear-first-order-odes-check" class="internal"><span class="codenumber">3.1.4</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-section contains-active">
+<div class="toc-title-box"><a href="section-higher-order-linear-odes.html" class="internal"><span class="codenumber">3.2</span> <span class="title">Higher-Order Linear ODEs</span></a></div>
+<ul class="structural toc-item-list active">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-higher-order-linear-odes.html#subsec-higher-order-introduction" class="internal"><span class="codenumber">3.2.1</span> <span class="title">Linear ODEs of Higher Order</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-higher-order-linear-odes.html#exercises-higher-order-introduction-check" class="internal"><span class="codenumber">3.2.1</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-higher-order-linear-odes.html#subsec-homogeneous-higher-order" class="internal"><span class="codenumber">3.2.2</span> <span class="title">Homogeneous Linear ODEs with Constant Coefficients</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-higher-order-linear-odes.html#exercises-homogeneous-higher-order-check" class="internal"><span class="codenumber">3.2.2</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-higher-order-linear-odes.html#subsec-inhomogeneous-higher-order" class="internal"><span class="codenumber">3.2.3</span> <span class="title">Inhomogeneous Linear ODEs — Method of Undetermined Coefficients</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-higher-order-linear-odes.html#exercises-inhomogeneous-higher-order-check" class="internal"><span class="codenumber">3.2.3</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-higher-order-linear-odes.html#subsec-harmonic-oscillator" class="internal"><span class="codenumber">3.2.4</span> <span class="title">Application: The Harmonic Oscillator</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-higher-order-linear-odes.html#exercises-harmonic-oscillator-check" class="internal"><span class="codenumber">3.2.4</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-backmatter"><div class="toc-title-box"><a href="backmatter.html" class="internal"><span class="title">Backmatter</span></a></div></li>
+</ul></nav></div>
+<main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="section" id="section-higher-order-linear-odes"><h2 class="heading hide-type">
+<span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Higher-Order Linear ODEs</span>
+</h2>
+<section class="introduction" id="section-higher-order-linear-odes-2"><div class="para" id="section-higher-order-linear-odes-2-1">Section 3-1 developed systematic solution methods for first-order ODEs. Many engineering models, however, require higher derivatives: a vibrating mass-spring-damper, the deflection of a loaded beam, and the current in an RLC circuit all yield second- (or higher-) order differential equations.<div class="autopermalink" data-description="Paragraph"><a href="#section-higher-order-linear-odes-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="section-higher-order-linear-odes-2-2">This section treats the most important subclass: <em class="emphasis">linear ODEs with constant coefficients</em>. We begin by defining the class and identifying its structural features, then develop the <em class="emphasis">characteristic polynomial method</em> for the homogeneous case (Section 3-2.1–3-2.2). For the inhomogeneous case we use the <em class="emphasis">method of undetermined coefficients</em> (Section 3-2.3), whose guessing strategy is completely determined by the form of the right-hand side. The section closes with the <em class="emphasis">harmonic oscillator</em> (Section 3-2.4), the central application that unifies all three sub-topics: the free response uses the homogeneous theory, the forced response uses undetermined coefficients, and the resonance phenomenon illustrates why the distinction between natural frequency and driving frequency matters critically in engineering design.<div class="autopermalink" data-description="Paragraph"><a href="#section-higher-order-linear-odes-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></section><section class="subsection" id="subsec-higher-order-introduction"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.1</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Linear ODEs of Higher Order</span>
+</h3>
+<section class="introduction" id="subsec-higher-order-introduction-2"><div class="para" id="subsec-higher-order-introduction-2-1">In Section 3-1 we developed systematic solution methods for first-order ODEs.  Many physical and engineering phenomena, however, require higher-order equations. A vibrating spring, the bending of a structural beam, or the current in an RLC circuit all give rise naturally to <em class="emphasis">second-order</em> (or higher) differential equations.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-higher-order-introduction-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="subsec-higher-order-introduction-2-2">This section focuses on the most tractable and practically important subclass: <em class="emphasis">linear ODEs with constant coefficients</em>. For this class a complete algorithmic solution procedure exists, based on factoring a polynomial (the <em class="emphasis">characteristic polynomial</em>) and reading off the solutions from its roots.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-higher-order-introduction-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></section><details id="ex-higher-order-motivation" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Higher-Order ODEs in Engineering.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para" id="ex-higher-order-motivation-2">Two classical engineering models immediately lead to higher-order linear ODEs with constant coefficients.<div class="autopermalink" data-description="Paragraph"><a href="#ex-higher-order-motivation-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<ol class="decimal" id="ex-higher-order-motivation-3">
+<li id="ex-higher-order-motivation-3-1">
+<div class="para logical" id="ex-higher-order-motivation-3-1-1">
+<div class="para">
+<em class="emphasis">Harmonic oscillator (mass-spring-damper).</em> A mass <span class="process-math">\(m\)</span> attached to a spring of stiffness <span class="process-math">\(k\)</span> and a damper of coefficient <span class="process-math">\(\alpha\)</span> satisfies</div>
+<div class="displaymath process-math" id="ex-higher-order-motivation-3-1-1-5">
+\begin{equation*}
+m\, y''(t) + \alpha\, y'(t) + k\, y(t) = F(t),
+\end{equation*}
+</div>
+<div class="para">where <span class="process-math">\(y(t)\)</span> is the displacement from rest and <span class="process-math">\(F(t)\)</span> is an external force. This is a second-order linear ODE with constant coefficients.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-higher-order-motivation-3-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#ex-higher-order-motivation-3-1" title="Copy heading and permalink for Item 1" aria-label="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="ex-higher-order-motivation-3-2">
+<div class="para logical" id="ex-higher-order-motivation-3-2-1">
+<div class="para">
+<em class="emphasis">Elastic beam bending.</em> Under a distributed transverse load <span class="process-math">\(q(x)\text{,}\)</span> the deflection <span class="process-math">\(w(x)\)</span> of a homogeneous beam with bending stiffness <span class="process-math">\(EI\)</span> satisfies</div>
+<div class="displaymath process-math" id="ex-higher-order-motivation-3-2-1-5">
+\begin{equation*}
+E\, I\, w''''(x) = q(x).
+\end{equation*}
+</div>
+<div class="para">This is a <em class="emphasis">fourth-order</em> linear ODE.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-higher-order-motivation-3-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#ex-higher-order-motivation-3-2" title="Copy heading and permalink for Item 2" aria-label="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+</ol>
+<figure class="figure figure-like" id="fig-higher-order-mass-spring-visual"><div class="image-box" style="width: 72%; margin-left: 14%; margin-right: 14%;"><img src="generated/latex-image/image-higher-order-mass-spring-visual.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>A mass-spring-damper model.  The restoring spring force, damping force, and external input combine to produce a second-order equation for the displacement <span class="process-math">\(y(t)\text{.}\)</span><div class="autopermalink" data-description="Figure 3.2.2"><a href="#fig-higher-order-mass-spring-visual" title="Copy heading and permalink for Figure 3.2.2" aria-label="Copy heading and permalink for Figure 3.2.2">🔗</a></div></figcaption></figure><figure class="figure figure-like" id="fig-higher-order-beam-visual"><div class="image-box" style="width: 78%; margin-left: 11%; margin-right: 11%;"><img src="generated/latex-image/image-higher-order-beam-visual.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.3<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Beam bending under a distributed load.  The fourth derivative appears because curvature and internal bending moments must be differentiated to balance the transverse load.<div class="autopermalink" data-description="Figure 3.2.3"><a href="#fig-higher-order-beam-visual" title="Copy heading and permalink for Figure 3.2.3" aria-label="Copy heading and permalink for Figure 3.2.3">🔗</a></div></figcaption></figure><div class="para" id="ex-higher-order-motivation-6">Both examples share the structural feature we will exploit: the unknown function and all its derivatives appear only <em class="emphasis">linearly</em>, and the coefficients are <em class="emphasis">constant</em>.<div class="autopermalink" data-description="Paragraph"><a href="#ex-higher-order-motivation-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 3.2.1: Higher-Order ODEs in Engineering"><a href="#ex-higher-order-motivation" title="Copy heading and permalink for Example 3.2.1: Higher-Order ODEs in Engineering" aria-label="Copy heading and permalink for Example 3.2.1: Higher-Order ODEs in Engineering">🔗</a></div></article></details><article class="definition definition-like" id="def-linear-ode-order-n"><h4 class="heading">
+<span class="type">Definition</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.4</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Linear ODE of Order <span class="process-math">\(n\)</span>.</span>
+</h4>
+<div class="para logical" id="def-linear-ode-order-n-2-1">
+<div class="para">An ODE of order <span class="process-math">\(n\)</span> is <dfn class="terminology">linear</dfn> if it can be written as</div>
+<div class="displaymath process-math" id="def-linear-ode-order-n-2-1-3">
+\begin{equation*}
+y^{(n)}(t) + a_{n-1}(t)\, y^{(n-1)}(t) + \cdots
++ a_1(t)\, y'(t) + a_0(t)\, y(t) = f(t),
+\end{equation*}
+</div>
+<div class="para">where the <dfn class="terminology">coefficient functions</dfn> <span class="process-math">\(a_0(t), \ldots, a_{n-1}(t)\)</span> and the <dfn class="terminology">right-hand side</dfn> <span class="process-math">\(f(t)\)</span> are given. The unknown function <span class="process-math">\(y(t)\)</span> and its derivatives appear only to the first power and are never multiplied together or nested inside nonlinear functions.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#def-linear-ode-order-n-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para logical" id="def-linear-ode-order-n-2-2">
+<div class="para">Important special cases:</div>
+<ul class="disc" id="def-linear-ode-order-n-2-2-1">
+<li id="def-linear-ode-order-n-2-2-1-1">
+<div class="para" id="def-linear-ode-order-n-2-2-1-1-1">
+<dfn class="terminology">Constant coefficients:</dfn> all <span class="process-math">\(a_i(t) = a_i\)</span> are constants.<div class="autopermalink" data-description="Paragraph"><a href="#def-linear-ode-order-n-2-2-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#def-linear-ode-order-n-2-2-1-1" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="def-linear-ode-order-n-2-2-1-2">
+<div class="para" id="def-linear-ode-order-n-2-2-1-2-1">
+<dfn class="terminology">Homogeneous:</dfn> <span class="process-math">\(f(t) = 0\)</span> for all <span class="process-math">\(t\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#def-linear-ode-order-n-2-2-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#def-linear-ode-order-n-2-2-1-2" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="def-linear-ode-order-n-2-2-1-3">
+<div class="para" id="def-linear-ode-order-n-2-2-1-3-1">
+<dfn class="terminology">Inhomogeneous:</dfn> <span class="process-math">\(f(t) \not\equiv 0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#def-linear-ode-order-n-2-2-1-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#def-linear-ode-order-n-2-2-1-3" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="autopermalink" data-description="Paragraph"><a href="#def-linear-ode-order-n-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 3.2.4: Linear ODE of Order n"><a href="#def-linear-ode-order-n" title="Copy heading and permalink for Definition 3.2.4: Linear ODE of Order n" aria-label="Copy heading and permalink for Definition 3.2.4: Linear ODE of Order n">🔗</a></div></article><article class="remark remark-like" id="rem-linearity-meaning"><h4 class="heading">
+<span class="type">Remark</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.5</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">What Linearity Rules Out.</span>
+</h4>
+<div class="para" id="rem-linearity-meaning-2">The linearity condition says that <span class="process-math">\(y\)</span> never appears inside a nonlinear expression.  Terms such as <span class="process-math">\(y^2(t)\text{,}\)</span> <span class="process-math">\(\sin(y(t))\text{,}\)</span> <span class="process-math">\(\sqrt{y(t)}\text{,}\)</span> or <span class="process-math">\(y(t)\, y'(t)\)</span> all violate linearity. By contrast, coefficients like <span class="process-math">\(\sin(t)\)</span> or <span class="process-math">\(e^{t}\)</span> are fine, because they depend only on the <em class="emphasis">independent variable</em> <span class="process-math">\(t\text{,}\)</span> not on the unknown <span class="process-math">\(y\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#rem-linearity-meaning-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Remark 3.2.5: What Linearity Rules Out"><a href="#rem-linearity-meaning" title="Copy heading and permalink for Remark 3.2.5: What Linearity Rules Out" aria-label="Copy heading and permalink for Remark 3.2.5: What Linearity Rules Out">🔗</a></div></article><details id="ex-higher-order-classification" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.6</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Classifying Higher-Order ODEs.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para logical" id="ex-higher-order-classification-2">
+<div class="para">Determine for each ODE: is it linear?  If so, is it homogeneous? Does it have constant coefficients?</div>
+<ol class="decimal" id="ex-higher-order-classification-2-1">
+<li id="ex-higher-order-classification-2-1-1">
+<div class="para" id="ex-higher-order-classification-2-1-1-1">
+<span class="process-math">\(\displaystyle 4\, y'''(t) + e^2\, y''(t) + \sin(t)\, y'(t) + \sqrt{y(t)} = 0.\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-higher-order-classification-2-1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#ex-higher-order-classification-2-1-1" title="Copy heading and permalink for Item 1" aria-label="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="ex-higher-order-classification-2-1-2">
+<div class="para" id="ex-higher-order-classification-2-1-2-1">
+<span class="process-math">\(\displaystyle y''''(t) + e^2\, y''(t) + \pi\, y'(t) + y(t) = e^{-t}.\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-higher-order-classification-2-1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#ex-higher-order-classification-2-1-2" title="Copy heading and permalink for Item 2" aria-label="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li id="ex-higher-order-classification-2-1-3">
+<div class="para" id="ex-higher-order-classification-2-1-3-1">
+<span class="process-math">\(\displaystyle y'''(t) - \sin(2t)\, y''(t) + \pi\, y'(t) + y(t) = 0.\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-higher-order-classification-2-1-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#ex-higher-order-classification-2-1-3" title="Copy heading and permalink for Item 3" aria-label="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-higher-order-classification-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-higher-order-classification-3">
+<div class="para"><em class="emphasis">Classification.</em></div>
+<ol class="decimal" id="ex-higher-order-classification-3-2">
+<li id="ex-higher-order-classification-3-2-1">
+<div class="para" id="ex-higher-order-classification-3-2-1-1">
+<em class="emphasis">Not linear:</em> the term <span class="process-math">\(\sqrt{y(t)}\)</span> is a nonlinear function of <span class="process-math">\(y\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-higher-order-classification-3-2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#ex-higher-order-classification-3-2-1" title="Copy heading and permalink for Item 1" aria-label="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="ex-higher-order-classification-3-2-2">
+<div class="para" id="ex-higher-order-classification-3-2-2-1">
+<em class="emphasis">Linear, not homogeneous, constant coefficients:</em> all derivatives of <span class="process-math">\(y\)</span> appear linearly; <span class="process-math">\(f(t) = e^{-t} \neq 0\text{;}\)</span> the coefficients <span class="process-math">\(1, e^2, \pi, 1\)</span> do not depend on <span class="process-math">\(t\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-higher-order-classification-3-2-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#ex-higher-order-classification-3-2-2" title="Copy heading and permalink for Item 2" aria-label="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li id="ex-higher-order-classification-3-2-3">
+<div class="para" id="ex-higher-order-classification-3-2-3-1">
+<em class="emphasis">Linear, homogeneous, non-constant coefficients:</em> <span class="process-math">\(f(t) = 0\text{,}\)</span> but the coefficient <span class="process-math">\(-\sin(2t)\)</span> of <span class="process-math">\(y''\)</span> depends on <span class="process-math">\(t\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-higher-order-classification-3-2-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#ex-higher-order-classification-3-2-3" title="Copy heading and permalink for Item 3" aria-label="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-higher-order-classification-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="ex-higher-order-classification-4">The solution methods developed in this section apply to cases like (2): linear, with constant coefficients.<div class="autopermalink" data-description="Paragraph"><a href="#ex-higher-order-classification-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 3.2.6: Classifying Higher-Order ODEs"><a href="#ex-higher-order-classification" title="Copy heading and permalink for Example 3.2.6: Classifying Higher-Order ODEs" aria-label="Copy heading and permalink for Example 3.2.6: Classifying Higher-Order ODEs">🔗</a></div></article></details><figure class="figure figure-like" id="fig-higher-order-classification-tree"><div class="image-box" style="width: 70%; margin-left: 15%; margin-right: 15%;"><img src="generated/latex-image/image-higher-order-classification-tree.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.7<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Classification of higher-order ODEs.  This section treats the shaded class: linear, constant-coefficient ODEs — the most algorithmically accessible family.<div class="autopermalink" data-description="Figure 3.2.7"><a href="#fig-higher-order-classification-tree" title="Copy heading and permalink for Figure 3.2.7" aria-label="Copy heading and permalink for Figure 3.2.7">🔗</a></div></figcaption></figure><section class="exercises" id="exercises-higher-order-introduction-check"><h4 class="heading hide-type">
+<span class="type">Exercises</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber"></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Check Your Understanding</span>
+</h4>
+<article class="exercise exercise-like" id="exer-higher-order-classify-equation"><h5 class="heading">
+<span class="codenumber">1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Classify the Equation.</span>
+</h5>
+<div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
+<div class="exercise-statement"><div class="para logical" id="exer-higher-order-classify-equation-2-1">
+<div class="para">Consider</div>
+<div class="displaymath process-math" id="exer-higher-order-classify-equation-2-1-1">
+\begin{equation*}
+y'''-2y''+y=\cos t.
+\end{equation*}
+</div>
+<div class="para">Which description is correct?</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#exer-higher-order-classify-equation-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div>
+<ul data-component="multiplechoice" class="exercise-interactives" id="rs-exer-higher-order-classify-equation" data-multipleanswers="false">
+<li data-component="answer" id="rs-exer-higher-order-classify-equation_opt_a" data-correct=""><div class="para" id="exer-higher-order-classify-equation-3-1-1-1">Third-order, linear, inhomogeneous, with constant coefficients</div></li>
+<li data-component="feedback" id="rs-exer-higher-order-classify-equation_opt_a"><div class="para" id="exer-higher-order-classify-equation-3-1-2-1">Correct. The coefficients of <span class="process-math">\(y''', y'', y\)</span> are constants, and the right-hand side is nonzero.</div></li>
+<li data-component="answer" id="rs-exer-higher-order-classify-equation_opt_b"><div class="para" id="exer-higher-order-classify-equation-3-2-1-1">Third-order, nonlinear, homogeneous</div></li>
+<li data-component="feedback" id="rs-exer-higher-order-classify-equation_opt_b"><div class="para" id="exer-higher-order-classify-equation-3-2-2-1">Incorrect. The equation is linear, and it is not homogeneous because of <span class="process-math">\(\cos t\text{.}\)</span>
+</div></li>
+<li data-component="answer" id="rs-exer-higher-order-classify-equation_opt_c"><div class="para" id="exer-higher-order-classify-equation-3-3-1-1">Second-order, linear, homogeneous</div></li>
+<li data-component="feedback" id="rs-exer-higher-order-classify-equation_opt_c"><div class="para" id="exer-higher-order-classify-equation-3-3-2-1">Incorrect. The highest derivative is third order.</div></li>
+<li data-component="answer" id="rs-exer-higher-order-classify-equation_opt_d"><div class="para" id="exer-higher-order-classify-equation-3-4-1-1">First-order, nonlinear, with variable coefficients</div></li>
+<li data-component="feedback" id="rs-exer-higher-order-classify-equation_opt_d"><div class="para" id="exer-higher-order-classify-equation-3-4-2-1">Incorrect. None of those labels fits this equation.</div></li>
+</ul>
+</div></div>
+<div class="autopermalink" data-description="Exercise 3.2.1.1: Classify the Equation"><a href="#exer-higher-order-classify-equation" title="Copy heading and permalink for Exercise 3.2.1.1: Classify the Equation" aria-label="Copy heading and permalink for Exercise 3.2.1.1: Classify the Equation">🔗</a></div></article><article class="exercise exercise-like" id="exer-higher-order-associated-homogeneous"><h5 class="heading">
+<span class="codenumber">2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Associated Homogeneous Equation.</span>
+</h5>
+<div class="para logical" id="exer-higher-order-associated-homogeneous-2-1">
+<div class="para">Write down the associated homogeneous equation for</div>
+<div class="displaymath process-math" id="exer-higher-order-associated-homogeneous-2-1-1">
+\begin{equation*}
+y''+3y'=e^t.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#exer-higher-order-associated-homogeneous-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="exer-higher-order-associated-homogeneous-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="exer-higher-order-associated-homogeneous-3-1">
+<div class="para">The associated homogeneous equation is obtained by replacing the right-hand side by <span class="process-math">\(0\text{:}\)</span>
+</div>
+<div class="displaymath process-math" id="exer-higher-order-associated-homogeneous-3-1-2">
+\begin{equation*}
+y''+3y'=0.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#exer-higher-order-associated-homogeneous-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 3.2.1.2.1"><a href="#exer-higher-order-associated-homogeneous-3" title="Copy heading and permalink for Solution 3.2.1.2.1" aria-label="Copy heading and permalink for Solution 3.2.1.2.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Exercise 3.2.1.2: Associated Homogeneous Equation"><a href="#exer-higher-order-associated-homogeneous" title="Copy heading and permalink for Exercise 3.2.1.2: Associated Homogeneous Equation" aria-label="Copy heading and permalink for Exercise 3.2.1.2: Associated Homogeneous Equation">🔗</a></div></article><div class="autopermalink" data-description="Exercises 3.2.1: Check Your Understanding"><a href="#exercises-higher-order-introduction-check" title="Copy heading and permalink for Exercises 3.2.1: Check Your Understanding" aria-label="Copy heading and permalink for Exercises 3.2.1: Check Your Understanding">🔗</a></div></section><div class="autopermalink" data-description="Subsection 3.2.1: Linear ODEs of Higher Order"><a href="#subsec-higher-order-introduction" title="Copy heading and permalink for Subsection 3.2.1: Linear ODEs of Higher Order" aria-label="Copy heading and permalink for Subsection 3.2.1: Linear ODEs of Higher Order">🔗</a></div></section><section class="subsection" id="subsec-homogeneous-higher-order"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Homogeneous Linear ODEs with Constant Coefficients</span>
+</h3>
+<section class="introduction" id="subsec-homogeneous-higher-order-2"><div class="para logical" id="subsec-homogeneous-higher-order-2-1">
+<div class="para">We now develop a complete solution procedure for homogeneous linear ODEs with constant coefficients:</div>
+<div class="displaymath process-math" id="subsec-homogeneous-higher-order-2-1-1">
+\begin{equation*}
+y^{(n)}(t) + a_{n-1}\, y^{(n-1)}(t) + \cdots + a_1\, y'(t) + a_0\, y(t) = 0.
+\end{equation*}
+</div>
+<div class="para">The key idea is that exponential trial functions <span class="process-math">\(y(t) = e^{\lambda t}\)</span> lead naturally to a polynomial in <span class="process-math">\(\lambda\)</span> — the <em class="emphasis">characteristic polynomial</em>.  Its roots determine the entire solution space.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#subsec-homogeneous-higher-order-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></section><details id="ex-motivating-case-study" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.8</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Motivating Case Study.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para logical" id="ex-motivating-case-study-2">
+<div class="para">Consider the homogeneous third-order ODE</div>
+<div class="displaymath process-math" id="ex-motivating-case-study-2-1">
+\begin{equation*}
+y'''(t) - 3y''(t) + 4y'(t) - 2y(t) = 0.
+\end{equation*}
+</div>
+<div class="para">We guess a solution of the form <span class="process-math">\(y(t) = e^{\lambda t}\text{.}\)</span> Computing derivatives: <span class="process-math">\(y' = \lambda e^{\lambda t}\text{,}\)</span> <span class="process-math">\(y'' = \lambda^2 e^{\lambda t}\text{,}\)</span> <span class="process-math">\(y''' = \lambda^3 e^{\lambda t}\text{.}\)</span> Substituting into the ODE and dividing by <span class="process-math">\(e^{\lambda t} \neq 0\text{:}\)</span>
+</div>
+<div class="displaymath process-math" id="ex-motivating-case-study-2-7">
+\begin{equation*}
+\lambda^3 - 3\lambda^2 + 4\lambda - 2 = 0.
+\end{equation*}
+</div>
+<div class="para">This algebraic equation — the characteristic polynomial evaluated at <span class="process-math">\(\lambda\)</span> — must be satisfied.  Once we find its roots, we can read off the solutions to the ODE.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-motivating-case-study-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 3.2.8: Motivating Case Study"><a href="#ex-motivating-case-study" title="Copy heading and permalink for Example 3.2.8: Motivating Case Study" aria-label="Copy heading and permalink for Example 3.2.8: Motivating Case Study">🔗</a></div></article></details><article class="definition definition-like" id="def-characteristic-polynomial"><h4 class="heading">
+<span class="type">Definition</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.9</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Characteristic Polynomial.</span>
+</h4>
+<div class="para logical" id="def-characteristic-polynomial-2-1">
+<div class="para">The <dfn class="terminology">characteristic polynomial</dfn> of the homogeneous linear ODE with constant coefficients</div>
+<div class="displaymath process-math" id="def-characteristic-polynomial-2-1-2">
+\begin{equation*}
+y^{(n)}(t) + a_{n-1}\, y^{(n-1)}(t) + \cdots + a_1\, y'(t)
++ a_0\, y(t) = 0
+\end{equation*}
+</div>
+<div class="para">is the degree-<span class="process-math">\(n\)</span> polynomial</div>
+<div class="displaymath process-math" id="def-characteristic-polynomial-2-1-4">
+\begin{equation*}
+P(\lambda) = \lambda^n + a_{n-1}\, \lambda^{n-1}
++ \cdots + a_1\, \lambda + a_0.
+\end{equation*}
+</div>
+<div class="para">The ODE and its characteristic polynomial are obtained from each other by the formal substitution <span class="process-math">\(y^{(k)}(t) \;\longleftrightarrow\; \lambda^k\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#def-characteristic-polynomial-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 3.2.9: Characteristic Polynomial"><a href="#def-characteristic-polynomial" title="Copy heading and permalink for Definition 3.2.9: Characteristic Polynomial" aria-label="Copy heading and permalink for Definition 3.2.9: Characteristic Polynomial">🔗</a></div></article><article class="remark remark-like" id="rem-fundamental-theorem"><h4 class="heading">
+<span class="type">Remark</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.10</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Counting the Roots.</span>
+</h4>
+<div class="para" id="rem-fundamental-theorem-2">By the fundamental theorem of algebra, every polynomial of degree <span class="process-math">\(n\)</span> over the complex numbers has exactly <span class="process-math">\(n\)</span> roots counted with multiplicity. Each root of <span class="process-math">\(P\)</span> contributes one or more linearly independent solutions to the ODE, and together they span the entire solution space (which has dimension <span class="process-math">\(n\)</span>).<div class="autopermalink" data-description="Paragraph"><a href="#rem-fundamental-theorem-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Remark 3.2.10: Counting the Roots"><a href="#rem-fundamental-theorem" title="Copy heading and permalink for Remark 3.2.10: Counting the Roots" aria-label="Copy heading and permalink for Remark 3.2.10: Counting the Roots">🔗</a></div></article><div class="para logical" id="par-complex-roots-real-solutions">
+<div class="para">
+<em class="emphasis">Why complex roots produce sine and cosine.</em> Even when the ODE has real coefficients, it is useful to temporarily allow complex-valued trial solutions.  If <span class="process-math">\(\lambda=\alpha+i\beta\)</span> is a complex root, then</div>
+<div class="displaymath process-math" id="par-complex-roots-real-solutions-3">
+\begin{equation*}
+e^{\lambda t}
+= e^{(\alpha+i\beta)t}
+= e^{\alpha t}\bigl(\cos(\beta t)+i\sin(\beta t)\bigr).
+\end{equation*}
+</div>
+<div class="para">The real part <span class="process-math">\(e^{\alpha t}\cos(\beta t)\)</span> and the imaginary part <span class="process-math">\(e^{\alpha t}\sin(\beta t)\)</span> are real-valued solutions of the same homogeneous ODE.  This is why oscillating sine and cosine terms appear whenever the characteristic polynomial has a complex conjugate pair of roots.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#par-complex-roots-real-solutions" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="theorem theorem-like" id="thm-solutions-from-roots"><h4 class="heading">
+<span class="type">Theorem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.11</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Solutions from the Roots of the Characteristic Polynomial.</span>
+</h4>
+<div class="para" id="thm-solutions-from-roots-2-1">Let <span class="process-math">\(P(\lambda)\)</span> be the characteristic polynomial of a homogeneous linear ODE with constant coefficients, and let <span class="process-math">\(\lambda_0\)</span> be a root of <span class="process-math">\(P\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#thm-solutions-from-roots-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para logical" id="thm-solutions-from-roots-2-2">
+<div class="para">
+<em class="emphasis">Case 1 — simple real root.</em> If <span class="process-math">\(\lambda_0 \in \R\)</span> is a simple root, then</div>
+<div class="displaymath process-math" id="thm-solutions-from-roots-2-2-3">
+\begin{equation*}
+y(t) = e^{\lambda_0 t}
+\end{equation*}
+</div>
+<div class="para">is a solution.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-solutions-from-roots-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para logical" id="thm-solutions-from-roots-2-3">
+<div class="para">
+<em class="emphasis">Case 2 — simple pair of complex conjugate roots.</em> If <span class="process-math">\(\lambda_0 = \alpha + i\beta\)</span> and <span class="process-math">\(\overline{\lambda_0} = \alpha - i\beta\)</span> (with <span class="process-math">\(\alpha, \beta \in \R\text{,}\)</span> <span class="process-math">\(\beta \neq 0\)</span>) are simple roots, then the two real solutions</div>
+<div class="displaymath process-math" id="thm-solutions-from-roots-2-3-6">
+\begin{equation*}
+y_1(t) = e^{\alpha t}\cos(\beta t), \qquad
+y_2(t) = e^{\alpha t}\sin(\beta t)
+\end{equation*}
+</div>
+<div class="para">are linearly independent solutions.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-solutions-from-roots-2-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para logical" id="thm-solutions-from-roots-2-4">
+<div class="para"><em class="emphasis">Case 3 — root of multiplicity <span class="process-math">\(k \geq 2\text{.}\)</span></em></div>
+<ul class="disc" id="thm-solutions-from-roots-2-4-2">
+<li id="thm-solutions-from-roots-2-4-2-1">
+<div class="para logical" id="thm-solutions-from-roots-2-4-2-1-1">
+<div class="para">
+<em class="emphasis">Case 3a — real root <span class="process-math">\(\lambda_0 \in \R\)</span> of multiplicity <span class="process-math">\(k\text{.}\)</span></em> The <span class="process-math">\(k\)</span> linearly independent solutions are</div>
+<div class="displaymath process-math" id="thm-solutions-from-roots-2-4-2-1-1-3">
+\begin{equation*}
+e^{\lambda_0 t},\quad t\, e^{\lambda_0 t},\quad \ldots,\quad
+t^{k-1} e^{\lambda_0 t}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-solutions-from-roots-2-4-2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#thm-solutions-from-roots-2-4-2-1" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="thm-solutions-from-roots-2-4-2-2">
+<div class="para logical" id="thm-solutions-from-roots-2-4-2-2-1">
+<div class="para">
+<em class="emphasis">Case 3b — complex root <span class="process-math">\(\lambda_0 = \alpha + i\beta\)</span> of multiplicity <span class="process-math">\(k\text{.}\)</span></em> Conjugacy forces <span class="process-math">\(\overline{\lambda_0}\)</span> to also be a root of multiplicity <span class="process-math">\(k\text{.}\)</span> The <span class="process-math">\(2k\)</span> linearly independent real solutions are</div>
+<div class="displaymath process-math" id="thm-solutions-from-roots-2-4-2-2-1-5">
+\begin{align*}
+e^{\alpha t}\cos(\beta t),\quad \amp e^{\alpha t}\sin(\beta t),\\
+t\, e^{\alpha t}\cos(\beta t),\quad \amp t\, e^{\alpha t}\sin(\beta t),\\
+\vdots\quad\amp\vdots\\
+t^{k-1} e^{\alpha t}\cos(\beta t),\quad \amp
+t^{k-1} e^{\alpha t}\sin(\beta t).
+\end{align*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-solutions-from-roots-2-4-2-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#thm-solutions-from-roots-2-4-2-2" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-solutions-from-roots-2-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Theorem 3.2.11: Solutions from the Roots of the Characteristic Polynomial"><a href="#thm-solutions-from-roots" title="Copy heading and permalink for Theorem 3.2.11: Solutions from the Roots of the Characteristic Polynomial" aria-label="Copy heading and permalink for Theorem 3.2.11: Solutions from the Roots of the Characteristic Polynomial">🔗</a></div></article><div class="para" id="par-repeated-roots-t-factors">
+<em class="emphasis">Where the factors <span class="process-math">\(t, t^2, \ldots\)</span> come from.</em> Write the differential operator on the left-hand side as <span class="process-math">\(L=P(D)\text{,}\)</span> where <span class="process-math">\(D\)</span> means differentiation with respect to <span class="process-math">\(t\text{.}\)</span>  If <span class="process-math">\(\lambda_0\)</span> is a root of multiplicity <span class="process-math">\(k\text{,}\)</span> then the characteristic polynomial contains the factor <span class="process-math">\((\lambda-\lambda_0)^k\text{.}\)</span>  Correspondingly, the differential operator contains the factor <span class="process-math">\((D-\lambda_0)^k\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#par-repeated-roots-t-factors" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="subsec-homogeneous-higher-order-9">
+<div class="para">Now observe the first step:</div>
+<div class="displaymath process-math" id="subsec-homogeneous-higher-order-9-1">
+\begin{equation*}
+(D-\lambda_0)\bigl(t\,e^{\lambda_0 t}\bigr)
+= e^{\lambda_0 t}.
+\end{equation*}
+</div>
+<div class="para">Applying <span class="process-math">\((D-\lambda_0)\)</span> a second time gives zero.  More generally, each factor <span class="process-math">\(t^j e^{\lambda_0 t}\)</span> is killed after applying <span class="process-math">\((D-\lambda_0)\)</span> exactly <span class="process-math">\(j+1\)</span> times.  Therefore, if the root has multiplicity <span class="process-math">\(k\text{,}\)</span> the functions <span class="process-math">\(e^{\lambda_0 t}, t e^{\lambda_0 t}, \ldots,
+t^{k-1}e^{\lambda_0 t}\)</span> all solve the ODE. The powers of <span class="process-math">\(t\)</span> are thus not a trick: they record how many times the same root occurs in the characteristic polynomial.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#subsec-homogeneous-higher-order-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="figure figure-like" id="fig-roots-to-solutions"><div class="image-box" style="width: 80%; margin-left: 10%; margin-right: 10%;"><img src="generated/latex-image/image-roots-to-solutions.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.12<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Summary: how the type of a root of the characteristic polynomial determines the corresponding fundamental solutions. The multiplicity <span class="process-math">\(k\)</span> of each root is matched by exactly <span class="process-math">\(k\)</span> linearly independent solutions (or <span class="process-math">\(2k\)</span> for complex pairs).<div class="autopermalink" data-description="Figure 3.2.12"><a href="#fig-roots-to-solutions" title="Copy heading and permalink for Figure 3.2.12" aria-label="Copy heading and permalink for Figure 3.2.12">🔗</a></div></figcaption></figure><div class="para logical" id="par-homogeneous-scaled-sums">
+<div class="para">
+<em class="emphasis">Principle: adding and scaling homogeneous solutions.</em> Suppose <span class="process-math">\(y_1(t),\ldots,y_r(t)\)</span> are solutions of the homogeneous linear ODE</div>
+<div class="displaymath process-math" id="par-homogeneous-scaled-sums-3">
+\begin{equation*}
+y^{(n)} + a_{n-1}y^{(n-1)}+\cdots+a_1y'+a_0y=0.
+\end{equation*}
+</div>
+<div class="para">Choose real numbers <span class="process-math">\(C_1,\ldots,C_r\text{,}\)</span> multiply each solution <span class="process-math">\(y_j\)</span> by its chosen number <span class="process-math">\(C_j\text{,}\)</span> and add the results:</div>
+<div class="displaymath process-math" id="par-homogeneous-scaled-sums-7">
+\begin{equation*}
+y(t)=C_1y_1(t)+\cdots+C_ry_r(t).
+\end{equation*}
+</div>
+<div class="para">Then this new function <span class="process-math">\(y(t)\)</span> is again a solution of the same homogeneous ODE.  Such a sum is called a <dfn class="terminology">linear combination</dfn> of the functions <span class="process-math">\(y_1,\ldots,y_r\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#par-homogeneous-scaled-sums" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="subsec-homogeneous-higher-order-12">
+<div class="para">
+<em class="emphasis">Proof.</em> Let <span class="process-math">\(L[y]\)</span> denote the left-hand side of the ODE: <span class="process-math">\(L[y]=y^{(n)}+a_{n-1}y^{(n-1)}+\cdots+a_1y'+a_0y\text{.}\)</span> Differentiation respects scaling and addition, so</div>
+<div class="displaymath process-math" id="subsec-homogeneous-higher-order-12-4">
+\begin{equation*}
+L[C_1y_1+\cdots+C_ry_r]
+= C_1L[y_1]+\cdots+C_rL[y_r].
+\end{equation*}
+</div>
+<div class="para">Since each <span class="process-math">\(y_j\)</span> solves the homogeneous ODE, each <span class="process-math">\(L[y_j]\)</span> is zero.  Hence</div>
+<div class="displaymath process-math" id="subsec-homogeneous-higher-order-12-7">
+\begin{equation*}
+L[y]=C_1\cdot0+\cdots+C_r\cdot0=0,
+\end{equation*}
+</div>
+<div class="para">so <span class="process-math">\(y(t)\)</span> is again a solution.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#subsec-homogeneous-higher-order-12" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="theorem theorem-like" id="thm-general-solution-homogeneous"><h4 class="heading">
+<span class="type">Theorem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.13</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">General Solution of Homogeneous Linear ODEs.</span>
+</h4>
+<div class="para logical" id="thm-general-solution-homogeneous-2-1">
+<div class="para">Consider the homogeneous linear ODE with constant coefficients</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-solutions-from-roots.html" id="thm-general-solution-homogeneous-2-1-1">
+\begin{equation*}
+y^{(n)}(t)+a_{n-1}y^{(n-1)}(t)+\cdots+a_1y'(t)+a_0y(t)=0,
+\end{equation*}
+</div>
+<div class="para">and let</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-solutions-from-roots.html" id="thm-general-solution-homogeneous-2-1-2">
+\begin{equation*}
+P(\lambda)=\lambda^n+a_{n-1}\lambda^{n-1}
++\cdots+a_1\lambda+a_0
+\end{equation*}
+</div>
+<div class="para">be its characteristic polynomial. Applying <a href="section-higher-order-linear-odes.html#thm-solutions-from-roots" class="xref" data-knowl="./knowl/xref/thm-solutions-from-roots.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.2.11: Solutions from the Roots of the Characteristic Polynomial">Theorem 3.2.11</a> to all roots of <span class="process-math">\(P\text{,}\)</span> counted with multiplicity, yields <span class="process-math">\(n\)</span> linearly independent solutions <span class="process-math">\(y_1(t), \ldots, y_n(t)\text{.}\)</span> The <dfn class="terminology">general solution</dfn> is</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/thm-solutions-from-roots.html" id="thm-general-solution-homogeneous-2-1-8">
+\begin{equation*}
+y(t) = C_1\, y_1(t) + C_2\, y_2(t) + \cdots + C_n\, y_n(t),
+\qquad C_1, \ldots, C_n \in \R.
+\end{equation*}
+</div>
+<div class="para">Initial conditions (e.g. values of <span class="process-math">\(y(t_0), y'(t_0), \ldots,
+y^{(n-1)}(t_0)\)</span>) pin down the constants <span class="process-math">\(C_i\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-general-solution-homogeneous-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Theorem 3.2.13: General Solution of Homogeneous Linear ODEs"><a href="#thm-general-solution-homogeneous" title="Copy heading and permalink for Theorem 3.2.13: General Solution of Homogeneous Linear ODEs" aria-label="Copy heading and permalink for Theorem 3.2.13: General Solution of Homogeneous Linear ODEs">🔗</a></div></article><details id="ex-homogeneous-double-real-root" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.14</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Homogeneous ODE — Double Real Root.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para" id="ex-homogeneous-double-real-root-2">Find the general solution of <span class="process-math">\(y''(t) - 2y'(t) + y(t) = 0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-homogeneous-double-real-root-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-homogeneous-double-real-root-3">
+<div class="para">
+<em class="emphasis">Solution.</em> The characteristic polynomial is</div>
+<div class="displaymath process-math" id="ex-homogeneous-double-real-root-3-2">
+\begin{equation*}
+P(\lambda) = \lambda^2 - 2\lambda + 1 = (\lambda - 1)^2.
+\end{equation*}
+</div>
+<div class="para">The root <span class="process-math">\(\lambda_0 = 1\)</span> has multiplicity <span class="process-math">\(2\)</span> (Case 3a). The two fundamental solutions are</div>
+<div class="displaymath process-math" id="ex-homogeneous-double-real-root-3-5">
+\begin{equation*}
+y_1(t) = e^t, \qquad y_2(t) = t\, e^t.
+\end{equation*}
+</div>
+<div class="para">The general solution is</div>
+<div class="displaymath process-math" id="ex-homogeneous-double-real-root-3-6">
+\begin{equation*}
+y(t) = C_1\, e^t + C_2\, t\, e^t, \qquad C_1, C_2 \in \R.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-homogeneous-double-real-root-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 3.2.14: Homogeneous ODE — Double Real Root"><a href="#ex-homogeneous-double-real-root" title="Copy heading and permalink for Example 3.2.14: Homogeneous ODE — Double Real Root" aria-label="Copy heading and permalink for Example 3.2.14: Homogeneous ODE — Double Real Root">🔗</a></div></article></details><details id="ex-homogeneous-complex-roots" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.15</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Homogeneous ODE — Simple Complex Conjugate Roots.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para" id="ex-homogeneous-complex-roots-2">Find the general solution of <span class="process-math">\(y''(t) - 2y'(t) + 5y(t) = 0\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-homogeneous-complex-roots-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-homogeneous-complex-roots-3">
+<div class="para">
+<em class="emphasis">Solution.</em> The characteristic polynomial is <span class="process-math">\(P(\lambda) = \lambda^2 - 2\lambda + 5\text{.}\)</span> Using the quadratic formula:</div>
+<div class="displaymath process-math" id="ex-homogeneous-complex-roots-3-3">
+\begin{equation*}
+\lambda_{1,2} = \frac{2 \pm \sqrt{4 - 20}}{2} = 1 \pm 2i.
+\end{equation*}
+</div>
+<div class="para">Thus <span class="process-math">\(\alpha = 1\text{,}\)</span> <span class="process-math">\(\beta = 2\)</span> (Case 2). The two fundamental solutions are</div>
+<div class="displaymath process-math" id="ex-homogeneous-complex-roots-3-6">
+\begin{equation*}
+y_1(t) = e^t \cos(2t), \qquad y_2(t) = e^t \sin(2t).
+\end{equation*}
+</div>
+<div class="para">The general solution is</div>
+<div class="displaymath process-math" id="ex-homogeneous-complex-roots-3-7">
+\begin{equation*}
+y(t) = e^t\!\left(C_1 \cos(2t) + C_2 \sin(2t)\right),
+\qquad C_1, C_2 \in \R.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-homogeneous-complex-roots-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 3.2.15: Homogeneous ODE — Simple Complex Conjugate Roots"><a href="#ex-homogeneous-complex-roots" title="Copy heading and permalink for Example 3.2.15: Homogeneous ODE — Simple Complex Conjugate Roots" aria-label="Copy heading and permalink for Example 3.2.15: Homogeneous ODE — Simple Complex Conjugate Roots">🔗</a></div></article></details><details id="ex-homogeneous-third-order-mixed" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.16</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Homogeneous ODE of Order 3 — Mixed Roots.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para" id="ex-homogeneous-third-order-mixed-2">Find the general solution of <span class="process-math">\(y'''(t) - y''(t) + y'(t) - y(t) = 0\)</span> given that <span class="process-math">\(\lambda = 1\)</span> is a root.<div class="autopermalink" data-description="Paragraph"><a href="#ex-homogeneous-third-order-mixed-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-homogeneous-third-order-mixed-3">
+<div class="para">
+<em class="emphasis">Solution.</em> The characteristic polynomial is <span class="process-math">\(P(\lambda) = \lambda^3 - \lambda^2 + \lambda - 1\text{.}\)</span> Since <span class="process-math">\(\lambda = 1\)</span> is a root, we factor out <span class="process-math">\((\lambda - 1)\)</span> by polynomial division:</div>
+<div class="displaymath process-math" id="ex-homogeneous-third-order-mixed-3-5">
+\begin{equation*}
+P(\lambda) = (\lambda - 1)(\lambda^2 + 1).
+\end{equation*}
+</div>
+<div class="para">The roots of <span class="process-math">\(\lambda^2 + 1 = 0\)</span> are <span class="process-math">\(\lambda_{2,3} = \pm i\)</span> (i.e. <span class="process-math">\(\alpha = 0\text{,}\)</span> <span class="process-math">\(\beta = 1\)</span>). Applying Cases 1 and 2:</div>
+<div class="displaymath process-math" id="ex-homogeneous-third-order-mixed-3-10">
+\begin{equation*}
+y_1(t) = e^t, \quad y_2(t) = \cos(t), \quad y_3(t) = \sin(t).
+\end{equation*}
+</div>
+<div class="para">The general solution is</div>
+<div class="displaymath process-math" id="ex-homogeneous-third-order-mixed-3-11">
+\begin{equation*}
+y(t) = C_1\, e^t + C_2 \cos(t) + C_3 \sin(t),
+\qquad C_1, C_2, C_3 \in \R.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-homogeneous-third-order-mixed-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 3.2.16: Homogeneous ODE of Order 3 — Mixed Roots"><a href="#ex-homogeneous-third-order-mixed" title="Copy heading and permalink for Example 3.2.16: Homogeneous ODE of Order 3 — Mixed Roots" aria-label="Copy heading and permalink for Example 3.2.16: Homogeneous ODE of Order 3 — Mixed Roots">🔗</a></div></article></details><section class="exercises" id="exercises-homogeneous-higher-order-check"><h4 class="heading hide-type">
+<span class="type">Exercises</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber"></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Check Your Understanding</span>
+</h4>
+<article class="exercise exercise-like" id="exer-homogeneous-general-solution-from-roots"><h5 class="heading">
+<span class="codenumber">1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">General Solution from Characteristic Roots.</span>
+</h5>
+<div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
+<div class="exercise-statement"><div class="para" id="exer-homogeneous-general-solution-from-roots-2-1">Suppose the characteristic polynomial of a homogeneous linear ODE has the two roots <span class="process-math">\(\lambda_1=1\)</span> and <span class="process-math">\(\lambda_2=-2\text{.}\)</span> What is the general solution?<div class="autopermalink" data-description="Paragraph"><a href="#exer-homogeneous-general-solution-from-roots-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div>
+<ul data-component="multiplechoice" class="exercise-interactives" id="rs-exer-homogeneous-general-solution-from-roots" data-multipleanswers="false">
+<li data-component="answer" id="rs-exer-homogeneous-general-solution-from-roots_opt_a" data-correct=""><div class="para" id="exer-homogeneous-general-solution-from-roots-3-1-1-1"><span class="process-math">\(y(t)=C_1e^t+C_2e^{-2t}\)</span></div></li>
+<li data-component="feedback" id="rs-exer-homogeneous-general-solution-from-roots_opt_a"><div class="para" id="exer-homogeneous-general-solution-from-roots-3-1-2-1">Correct. Each simple real root contributes one exponential solution.</div></li>
+<li data-component="answer" id="rs-exer-homogeneous-general-solution-from-roots_opt_b"><div class="para" id="exer-homogeneous-general-solution-from-roots-3-2-1-1"><span class="process-math">\(y(t)=C_1\cos t+C_2\sin(2t)\)</span></div></li>
+<li data-component="feedback" id="rs-exer-homogeneous-general-solution-from-roots_opt_b"><div class="para" id="exer-homogeneous-general-solution-from-roots-3-2-2-1">Incorrect. Trigonometric terms arise from complex roots, not from two real roots.</div></li>
+<li data-component="answer" id="rs-exer-homogeneous-general-solution-from-roots_opt_c"><div class="para" id="exer-homogeneous-general-solution-from-roots-3-3-1-1"><span class="process-math">\(y(t)=C_1te^t+C_2e^{-2t}\)</span></div></li>
+<li data-component="feedback" id="rs-exer-homogeneous-general-solution-from-roots_opt_c"><div class="para" id="exer-homogeneous-general-solution-from-roots-3-3-2-1">Incorrect. The factor <span class="process-math">\(t\)</span> appears only for repeated roots.</div></li>
+<li data-component="answer" id="rs-exer-homogeneous-general-solution-from-roots_opt_d"><div class="para" id="exer-homogeneous-general-solution-from-roots-3-4-1-1"><span class="process-math">\(y(t)=C_1e^{t-2t}\)</span></div></li>
+<li data-component="feedback" id="rs-exer-homogeneous-general-solution-from-roots_opt_d"><div class="para" id="exer-homogeneous-general-solution-from-roots-3-4-2-1">Incorrect. The two fundamental solutions must appear independently.</div></li>
+</ul>
+</div></div>
+<div class="autopermalink" data-description="Exercise 3.2.2.1: General Solution from Characteristic Roots"><a href="#exer-homogeneous-general-solution-from-roots" title="Copy heading and permalink for Exercise 3.2.2.1: General Solution from Characteristic Roots" aria-label="Copy heading and permalink for Exercise 3.2.2.1: General Solution from Characteristic Roots">🔗</a></div></article><article class="exercise exercise-like" id="exer-homogeneous-solve-simple-constant-coeff"><h5 class="heading">
+<span class="codenumber">2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Solve a Simple Homogeneous ODE.</span>
+</h5>
+<div class="para logical" id="exer-homogeneous-solve-simple-constant-coeff-2-1">
+<div class="para">Solve</div>
+<div class="displaymath process-math" id="exer-homogeneous-solve-simple-constant-coeff-2-1-1">
+\begin{equation*}
+y''-3y'+2y=0.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#exer-homogeneous-solve-simple-constant-coeff-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="exer-homogeneous-solve-simple-constant-coeff-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="exer-homogeneous-solve-simple-constant-coeff-3-1">
+<div class="para">The characteristic polynomial is</div>
+<div class="displaymath process-math" id="exer-homogeneous-solve-simple-constant-coeff-3-1-1">
+\begin{equation*}
+\lambda^2-3\lambda+2=(\lambda-1)(\lambda-2).
+\end{equation*}
+</div>
+<div class="para">So the roots are <span class="process-math">\(1\)</span> and <span class="process-math">\(2\text{.}\)</span> Therefore the general solution is</div>
+<div class="displaymath process-math" id="exer-homogeneous-solve-simple-constant-coeff-3-1-4">
+\begin{equation*}
+y(t)=C_1e^t+C_2e^{2t},
+\qquad C_1,C_2\in\R.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#exer-homogeneous-solve-simple-constant-coeff-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 3.2.2.2.1"><a href="#exer-homogeneous-solve-simple-constant-coeff-3" title="Copy heading and permalink for Solution 3.2.2.2.1" aria-label="Copy heading and permalink for Solution 3.2.2.2.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Exercise 3.2.2.2: Solve a Simple Homogeneous ODE"><a href="#exer-homogeneous-solve-simple-constant-coeff" title="Copy heading and permalink for Exercise 3.2.2.2: Solve a Simple Homogeneous ODE" aria-label="Copy heading and permalink for Exercise 3.2.2.2: Solve a Simple Homogeneous ODE">🔗</a></div></article><div class="autopermalink" data-description="Exercises 3.2.2: Check Your Understanding"><a href="#exercises-homogeneous-higher-order-check" title="Copy heading and permalink for Exercises 3.2.2: Check Your Understanding" aria-label="Copy heading and permalink for Exercises 3.2.2: Check Your Understanding">🔗</a></div></section><div class="autopermalink" data-description="Subsection 3.2.2: Homogeneous Linear ODEs with Constant Coefficients"><a href="#subsec-homogeneous-higher-order" title="Copy heading and permalink for Subsection 3.2.2: Homogeneous Linear ODEs with Constant Coefficients" aria-label="Copy heading and permalink for Subsection 3.2.2: Homogeneous Linear ODEs with Constant Coefficients">🔗</a></div></section><section class="subsection" id="subsec-inhomogeneous-higher-order"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.3</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Inhomogeneous Linear ODEs — Method of Undetermined Coefficients</span>
+</h3>
+<section class="introduction" id="subsec-inhomogeneous-higher-order-2"><div class="para logical" id="subsec-inhomogeneous-higher-order-2-1">
+<div class="para">We now turn to the <em class="emphasis">inhomogeneous</em> linear ODE with constant coefficients:</div>
+<div class="displaymath process-math" id="subsec-inhomogeneous-higher-order-2-1-2">
+\begin{equation*}
+y^{(n)}(t) + a_{n-1}\, y^{(n-1)}(t) + \cdots + a_1\, y'(t)
++ a_0\, y(t) = f(t), \qquad f(t) \not\equiv 0.
+\end{equation*}
+</div>
+<div class="para">The crucial structural fact is the <em class="emphasis">superposition principle</em>: the general solution is the sum of the general homogeneous solution (which we already know how to find) and <em class="emphasis">any</em> particular solution of the inhomogeneous equation.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#subsec-inhomogeneous-higher-order-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></section><article class="theorem theorem-like" id="thm-superposition-principle"><h4 class="heading">
+<span class="type">Theorem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.17</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Superposition Principle.</span>
+</h4>
+<div class="para logical" id="thm-superposition-principle-2-1">
+<div class="para">Let <span class="process-math">\(y_p(t)\)</span> be any particular solution of the inhomogeneous ODE</div>
+<div class="displaymath process-math" id="thm-superposition-principle-2-1-2">
+\begin{equation*}
+y^{(n)} + a_{n-1} y^{(n-1)} + \cdots + a_0 y = f(t).
+\end{equation*}
+</div>
+<div class="para">Let <span class="process-math">\(y_h(t) = C_1 y_1(t) + \cdots + C_n y_n(t)\)</span> be the general solution of the corresponding <em class="emphasis">homogeneous</em> ODE (i.e.\ with <span class="process-math">\(f \equiv 0\)</span>). Then the <dfn class="terminology">general solution of the inhomogeneous ODE</dfn> is</div>
+<div class="displaymath process-math" id="thm-superposition-principle-2-1-7">
+\begin{equation*}
+y(t) = y_h(t) + y_p(t),
+\end{equation*}
+</div>
+<div class="para">and every solution of the inhomogeneous ODE has this form for some choice of <span class="process-math">\(C_1, \ldots, C_n \in \R\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-superposition-principle-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Theorem 3.2.17: Superposition Principle"><a href="#thm-superposition-principle" title="Copy heading and permalink for Theorem 3.2.17: Superposition Principle" aria-label="Copy heading and permalink for Theorem 3.2.17: Superposition Principle">🔗</a></div></article><article class="assemblage assemblage-like" id="alg-undetermined-coefficients"><h4 class="heading"><span class="title">Method of Undetermined Coefficients.</span></h4>
+<div class="para" id="alg-undetermined-coefficients-2">Building upon the superposition principle (<a href="section-higher-order-linear-odes.html#thm-superposition-principle" class="xref" data-knowl="./knowl/xref/thm-superposition-principle.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.2.17: Superposition Principle">Theorem 3.2.17</a>), we do not need to find all solutions of the inhomogeneous ODE from scratch. Since we already know how to solve the underlying homogeneous ODE, in order to solve an inhomogeneous ODE, it is enough to find one particular solution <span class="process-math">\(y_p\)</span> satisfying the equation with the given right-hand side <span class="process-math">\(f(t)\text{;}\)</span> then the full solution is <span class="process-math">\(y=y_h+y_p\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#alg-undetermined-coefficients-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="alg-undetermined-coefficients-3">The <dfn class="terminology">method of undetermined coefficients</dfn> is one possible way to find such a particular solution.  Its guiding intuition is that a linear physical system often responds to an external excitation with an answer of the same basic structure: a polynomial input suggests a polynomial response, an exponential input suggests an exponential response, and a sinusoidal input suggests a combination of sine and cosine.  We therefore write down a trial function with that structure, leave some coefficients unknown, substitute the trial function into the ODE, and determine the unknown coefficients algebraically.<div class="autopermalink" data-description="Paragraph"><a href="#alg-undetermined-coefficients-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="alg-undetermined-coefficients-4">This leads to the following three-step method for solving an inhomogeneous linear ODE with constant coefficients.<div class="autopermalink" data-description="Paragraph"><a href="#alg-undetermined-coefficients-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="alg-undetermined-coefficients-5">
+<em class="emphasis">Step 1 — Solve the homogeneous ODE.</em> Find <span class="process-math">\(y_h(t) = C_1 y_1(t) + \cdots + C_n y_n(t)\)</span> using the characteristic polynomial.  The root-to-solution translation is given by <a href="section-higher-order-linear-odes.html#thm-solutions-from-roots" class="xref" data-knowl="./knowl/xref/thm-solutions-from-roots.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.2.11: Solutions from the Roots of the Characteristic Polynomial">Theorem 3.2.11</a>, and the form of the full homogeneous solution is given by <a href="section-higher-order-linear-odes.html#thm-general-solution-homogeneous" class="xref" data-knowl="./knowl/xref/thm-general-solution-homogeneous.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.2.13: General Solution of Homogeneous Linear ODEs">Theorem 3.2.13</a>.<div class="autopermalink" data-description="Paragraph"><a href="#alg-undetermined-coefficients-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="alg-undetermined-coefficients-6">
+<em class="emphasis">Step 2 — Choose a trial function for one particular solution <span class="process-math">\(y_p(t)\text{.}\)</span></em> Use the table in <a href="section-higher-order-linear-odes.html#thm-undetermined-coefficient-guesses" class="xref" data-knowl="./knowl/xref/thm-undetermined-coefficient-guesses.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.2.18: Trial Functions for the Particular Solution">Theorem 3.2.18</a>. First write the natural trial function suggested by <span class="process-math">\(f(t)\text{.}\)</span>  Then check whether that same shape already appears among the homogeneous solutions.  If it does, multiply the whole trial function by the required power of <span class="process-math">\(t\text{;}\)</span> this resonance correction is explained in <a href="section-higher-order-linear-odes.html#rem-resonance-explanation" class="xref" data-knowl="./knowl/xref/rem-resonance-explanation.html" data-reveal-label="Reveal" data-close-label="Close" title="Remark 3.2.20: Why the Resonance Factor t^k">Remark 3.2.20</a>.  Finally substitute <span class="process-math">\(y_p\)</span> into the ODE and solve for the unknown constants in the trial function.<div class="autopermalink" data-description="Paragraph"><a href="#alg-undetermined-coefficients-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="alg-undetermined-coefficients-7">
+<em class="emphasis">Step 3 — Use superposition to write the general solution.</em> By <a href="section-higher-order-linear-odes.html#thm-superposition-principle" class="xref" data-knowl="./knowl/xref/thm-superposition-principle.html" data-reveal-label="Reveal" data-close-label="Close" title="Theorem 3.2.17: Superposition Principle">Theorem 3.2.17</a>, <span class="process-math">\(y(t) = y_h(t) + y_p(t)\text{.}\)</span> Apply initial conditions to determine <span class="process-math">\(C_1, \ldots, C_n\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#alg-undetermined-coefficients-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Assemblage: Method of Undetermined Coefficients"><a href="#alg-undetermined-coefficients" title="Copy heading and permalink for Assemblage: Method of Undetermined Coefficients" aria-label="Copy heading and permalink for Assemblage: Method of Undetermined Coefficients">🔗</a></div></article><article class="theorem theorem-like" id="thm-undetermined-coefficient-guesses"><h4 class="heading">
+<span class="type">Theorem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.18</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Trial Functions for the Particular Solution.</span>
+</h4>
+<div class="para logical" id="thm-undetermined-coefficient-guesses-2-1">
+<div class="para">Consider an inhomogeneous linear ODE with constant coefficients</div>
+<div class="displaymath process-math" id="thm-undetermined-coefficient-guesses-2-1-1">
+\begin{equation*}
+y^{(n)}(t)+a_{n-1}y^{(n-1)}(t)+\cdots+a_1y'(t)+a_0y(t)=f(t),
+\end{equation*}
+</div>
+<div class="para">and let</div>
+<div class="displaymath process-math" id="thm-undetermined-coefficient-guesses-2-1-2">
+\begin{equation*}
+P(\lambda)=\lambda^n+a_{n-1}\lambda^{n-1}
++\cdots+a_1\lambda+a_0
+\end{equation*}
+</div>
+<div class="para">be the characteristic polynomial of the associated homogeneous ODE. The following table gives the standard trial function for <span class="process-math">\(y_p(t)\text{.}\)</span> The constants named <span class="process-math">\(A\)</span> or <span class="process-math">\(A_j\)</span> are known from the given right-hand side; the constants named <span class="process-math">\(B\)</span> or <span class="process-math">\(B_j\)</span> are unknown and will be determined by substitution.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-undetermined-coefficient-guesses-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para" id="thm-undetermined-coefficient-guesses-2-2">In the table, the “root to check” is the complex number that represents the same exponential or oscillating shape as the forcing term.  If that number is a root of <span class="process-math">\(P\)</span> with multiplicity <span class="process-math">\(k\text{,}\)</span> multiply the natural trial function by <span class="process-math">\(t^k\text{.}\)</span>  If it is not a root, use <span class="process-math">\(k=0\text{,}\)</span> so no extra factor of <span class="process-math">\(t\)</span> is added.<div class="autopermalink" data-description="Paragraph"><a href="#thm-undetermined-coefficient-guesses-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="tabular-box natural-width"><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="l m b2 r2 l0 t2 lines">Right-hand side <span class="process-math">\(f(t)\)</span>
+</th>
+<th scope="col" class="l m b2 r2 l0 t2 lines">Root to check</th>
+<th scope="col" class="l m b2 r0 l0 t2 lines">Trial function for <span class="process-math">\(y_p(t)\)</span>
+</th>
+</tr>
+<tr>
+<td class="l m b1 r2 l0 t0 lines">Polynomial <span class="process-math">\(\displaystyle\sum_{j=0}^{m} A_j t^j\)</span>
+</td>
+<td class="l m b1 r2 l0 t0 lines"><span class="process-math">\(0\)</span></td>
+<td class="l m b1 r0 l0 t0 lines"><span class="process-math">\(t^k\displaystyle\sum_{j=0}^{m} B_j t^j\)</span></td>
+</tr>
+<tr>
+<td class="l m b1 r2 l0 t0 lines"><span class="process-math">\(Ae^{\alpha t}\)</span></td>
+<td class="l m b1 r2 l0 t0 lines"><span class="process-math">\(\alpha\)</span></td>
+<td class="l m b1 r0 l0 t0 lines"><span class="process-math">\(B\,t^k e^{\alpha t}\)</span></td>
+</tr>
+<tr>
+<td class="l m b1 r2 l0 t0 lines"><span class="process-math">\(A_1\cos(\beta t)+A_2\sin(\beta t)\)</span></td>
+<td class="l m b1 r2 l0 t0 lines">
+<span class="process-math">\(i\beta\)</span> and <span class="process-math">\(-i\beta\)</span>
+</td>
+<td class="l m b1 r0 l0 t0 lines"><span class="process-math">\(t^k\!\left(B_1\cos(\beta t)+B_2\sin(\beta t)\right)\)</span></td>
+</tr>
+<tr>
+<td class="l m b2 r2 l0 t0 lines"><span class="process-math">\(e^{\alpha t}\!\left(A_1\cos(\beta t)+A_2\sin(\beta t)\right)\)</span></td>
+<td class="l m b2 r2 l0 t0 lines">
+<span class="process-math">\(\alpha+i\beta\)</span> and <span class="process-math">\(\alpha-i\beta\)</span>
+</td>
+<td class="l m b2 r0 l0 t0 lines"><span class="process-math">\(t^k e^{\alpha t}\!\left(B_1\cos(\beta t)+B_2\sin(\beta t)\right)\)</span></td>
+</tr>
+</table></div> <div class="para" id="thm-undetermined-coefficient-guesses-2-4">For a sum of several forcing terms, choose one trial function for each term and add those trial functions together.  If the ODE has real coefficients, complex conjugate roots have the same multiplicity, so checking one member of a conjugate pair determines the same value of <span class="process-math">\(k\)</span> for the other.<div class="autopermalink" data-description="Paragraph"><a href="#thm-undetermined-coefficient-guesses-2-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Theorem 3.2.18: Trial Functions for the Particular Solution"><a href="#thm-undetermined-coefficient-guesses" title="Copy heading and permalink for Theorem 3.2.18: Trial Functions for the Particular Solution" aria-label="Copy heading and permalink for Theorem 3.2.18: Trial Functions for the Particular Solution">🔗</a></div></article><article class="remark remark-like" id="rem-guessing-method-scope"><h4 class="heading">
+<span class="type">Remark</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.19</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Scope of the Method.</span>
+</h4>
+<div class="para" id="rem-guessing-method-scope-2">The method of undetermined coefficients works well when the forcing term <span class="process-math">\(f(t)\)</span> is built from polynomials, exponentials, sines, cosines, or finite sums and products of these functions.  It is not a universal method for arbitrary right-hand sides such as <span class="process-math">\(\ln t\)</span> or <span class="process-math">\(\tan t\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#rem-guessing-method-scope-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="rem-guessing-method-scope-3">That scope restriction is useful to keep in mind: in this section we deliberately stay within the constant-coefficient setting where the forcing term suggests a manageable trial function.<div class="autopermalink" data-description="Paragraph"><a href="#rem-guessing-method-scope-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Remark 3.2.19: Scope of the Method"><a href="#rem-guessing-method-scope" title="Copy heading and permalink for Remark 3.2.19: Scope of the Method" aria-label="Copy heading and permalink for Remark 3.2.19: Scope of the Method">🔗</a></div></article><article class="remark remark-like" id="rem-resonance-explanation"><h4 class="heading">
+<span class="type">Remark</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.20</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Why the Resonance Factor <span class="process-math">\(t^k\text{?}\)</span></span>
+</h4>
+<div class="para" id="rem-resonance-explanation-2">The case <span class="process-math">\(k \gt 0\)</span> is called <dfn class="terminology">resonance</dfn>.  Algebraically, it means that the natural trial function for <span class="process-math">\(y_p\)</span> overlaps with a solution of the associated homogeneous ODE.  If we try that overlapping trial function, the homogeneous left-hand side either becomes zero or loses exactly the shape we need, so it cannot produce the required forcing term. Multiplying by <span class="process-math">\(t\)</span> moves the trial function to the next related function shape; if the same characteristic root occurs <span class="process-math">\(k\)</span> times, we must move <span class="process-math">\(k\)</span> steps and multiply by <span class="process-math">\(t^k\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#rem-resonance-explanation-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="rem-resonance-explanation-3">This phenomenon has a physical counterpart: when a driving force matches the natural frequency of an undamped oscillator the amplitude grows without bound (resonance).<div class="autopermalink" data-description="Paragraph"><a href="#rem-resonance-explanation-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Remark 3.2.20: Why the Resonance Factor t^k"><a href="#rem-resonance-explanation" title="Copy heading and permalink for Remark 3.2.20: Why the Resonance Factor t^k" aria-label="Copy heading and permalink for Remark 3.2.20: Why the Resonance Factor t^k">🔗</a></div></article><details id="ex-inhomogeneous-polynomial-rhs" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.21</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Inhomogeneous ODE — Polynomial Right-Hand Side.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para" id="ex-inhomogeneous-polynomial-rhs-2">Find the general solution of <span class="process-math">\(y''(t) - 2y'(t) + y(t) = t^2 + 4\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-inhomogeneous-polynomial-rhs-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-inhomogeneous-polynomial-rhs-3">
+<div class="para">
+<em class="emphasis">Step 1 — Homogeneous solution.</em> We found earlier (<a href="section-higher-order-linear-odes.html#ex-homogeneous-double-real-root" class="xref" data-knowl="./knowl/xref/ex-homogeneous-double-real-root.html" data-reveal-label="Reveal" data-close-label="Close" title="Example 3.2.14: Homogeneous ODE — Double Real Root">Example 3.2.14</a>) that the characteristic polynomial is <span class="process-math">\(P(\lambda) = (\lambda - 1)^2\)</span> and the general homogeneous solution is</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/ex-homogeneous-double-real-root.html" id="ex-inhomogeneous-polynomial-rhs-3-4">
+\begin{equation*}
+y_h(t) = C_1\, e^t + C_2\, t\, e^t.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-inhomogeneous-polynomial-rhs-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="ex-inhomogeneous-polynomial-rhs-4">
+<em class="emphasis">Step 2 — Particular solution.</em> The right-hand side is a polynomial of degree 2. Check for resonance: <span class="process-math">\(P(0) = (0-1)^2 = 1 \neq 0\text{,}\)</span> so <span class="process-math">\(\lambda = 0\)</span> is not a root and <span class="process-math">\(k = 0\text{.}\)</span> Trial function: <span class="process-math">\(y_p(t) = B_0 + B_1 t + B_2 t^2\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-inhomogeneous-polynomial-rhs-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-inhomogeneous-polynomial-rhs-5">
+<div class="para">Compute the derivatives and substitute into the left-hand side:</div>
+<div class="displaymath process-math" id="ex-inhomogeneous-polynomial-rhs-5-1">
+\begin{align*}
+y_p'(t) \amp= B_1 + 2B_2 t,\\
+y_p''(t) \amp= 2B_2.
+\end{align*}
+</div>
+<div class="displaymath process-math" id="ex-inhomogeneous-polynomial-rhs-5-2">
+\begin{align*}
+y_p'' - 2y_p' + y_p
+\amp= 2B_2 - 2(B_1 + 2B_2 t) + (B_0 + B_1 t + B_2 t^2)\\
+\amp= (B_0 - 2B_1 + 2B_2)
++ (-4B_2 + B_1)\, t
++ B_2\, t^2.
+\end{align*}
+</div>
+<div class="para">Equating coefficients with <span class="process-math">\(f(t) = t^2 + 4 = 4 + 0\cdot t + 1\cdot t^2\text{:}\)</span>
+</div>
+<div class="displaymath process-math" id="ex-inhomogeneous-polynomial-rhs-5-4">
+\begin{align*}
+B_2 \amp= 1,\\
+-4B_2 + B_1 \amp= 0 \;\Rightarrow\; B_1 = 4,\\
+B_0 - 2B_1 + 2B_2 \amp= 4 \;\Rightarrow\; B_0 = 10.
+\end{align*}
+</div>
+<div class="para">Thus <span class="process-math">\(y_p(t) = 10 + 4t + t^2\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-inhomogeneous-polynomial-rhs-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-inhomogeneous-polynomial-rhs-6">
+<div class="para"><em class="emphasis">Step 3 — General solution.</em></div>
+<div class="displaymath process-math" id="ex-inhomogeneous-polynomial-rhs-6-2">
+\begin{equation*}
+y(t) = C_1\, e^t + C_2\, t\, e^t + t^2 + 4t + 10,
+\qquad C_1, C_2 \in \R.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-inhomogeneous-polynomial-rhs-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 3.2.21: Inhomogeneous ODE — Polynomial Right-Hand Side"><a href="#ex-inhomogeneous-polynomial-rhs" title="Copy heading and permalink for Example 3.2.21: Inhomogeneous ODE — Polynomial Right-Hand Side" aria-label="Copy heading and permalink for Example 3.2.21: Inhomogeneous ODE — Polynomial Right-Hand Side">🔗</a></div></article></details><details id="ex-inhomogeneous-exponential-resonance" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.22</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Inhomogeneous ODE — Resonance with Exponential Forcing.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para" id="ex-inhomogeneous-exponential-resonance-2">Find the general solution of <span class="process-math">\(y''(t) + 6y'(t) + 9y(t) = 3e^{-3t}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-inhomogeneous-exponential-resonance-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-inhomogeneous-exponential-resonance-3">
+<div class="para">
+<em class="emphasis">Step 1 — Homogeneous solution.</em> <span class="process-math">\(P(\lambda) = \lambda^2 + 6\lambda + 9 = (\lambda + 3)^2\text{.}\)</span> Root <span class="process-math">\(\lambda_0 = -3\)</span> has multiplicity 2, so</div>
+<div class="displaymath process-math" id="ex-inhomogeneous-exponential-resonance-3-4">
+\begin{equation*}
+y_h(t) = C_1\, e^{-3t} + C_2\, t\, e^{-3t}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-inhomogeneous-exponential-resonance-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="ex-inhomogeneous-exponential-resonance-4">
+<em class="emphasis">Step 2 — Particular solution.</em> The right-hand side is <span class="process-math">\(f(t) = 3\, e^{-3t}\text{,}\)</span> so <span class="process-math">\(\alpha = -3\text{.}\)</span> Since <span class="process-math">\(\lambda = -3\)</span> is a root of <span class="process-math">\(P\)</span> of multiplicity <span class="process-math">\(k = 2\text{,}\)</span> we use the resonance trial function <span class="process-math">\(y_p(t) = B\, t^2 e^{-3t}\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-inhomogeneous-exponential-resonance-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-inhomogeneous-exponential-resonance-5">
+<div class="para">Compute derivatives (using the product rule twice):</div>
+<div class="displaymath process-math" id="ex-inhomogeneous-exponential-resonance-5-1">
+\begin{align*}
+y_p' \amp= B(2t - 3t^2) e^{-3t},\\
+y_p'' \amp= B(2 - 12t + 9t^2) e^{-3t}.
+\end{align*}
+</div>
+<div class="para">Substituting into the ODE:</div>
+<div class="displaymath process-math" id="ex-inhomogeneous-exponential-resonance-5-2">
+\begin{align*}
+y_p'' + 6y_p' + 9y_p
+\amp= B e^{-3t}\!\left[(2 - 12t + 9t^2)
++ 6(2t - 3t^2) + 9t^2\right]\\
+\amp= B e^{-3t}\!\left[2 + 0\cdot t + 0\cdot t^2\right]
+= 2B\, e^{-3t}.
+\end{align*}
+</div>
+<div class="para">Setting <span class="process-math">\(2B = 3\)</span> gives <span class="process-math">\(B = \tfrac{3}{2}\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-inhomogeneous-exponential-resonance-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-inhomogeneous-exponential-resonance-6">
+<div class="para"><em class="emphasis">Step 3 — General solution.</em></div>
+<div class="displaymath process-math" id="ex-inhomogeneous-exponential-resonance-6-2">
+\begin{equation*}
+y(t) = C_1\, e^{-3t} + C_2\, t\, e^{-3t}
++ \tfrac{3}{2}\, t^2 e^{-3t},
+\qquad C_1, C_2 \in \R.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-inhomogeneous-exponential-resonance-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 3.2.22: Inhomogeneous ODE — Resonance with Exponential Forcing"><a href="#ex-inhomogeneous-exponential-resonance" title="Copy heading and permalink for Example 3.2.22: Inhomogeneous ODE — Resonance with Exponential Forcing" aria-label="Copy heading and permalink for Example 3.2.22: Inhomogeneous ODE — Resonance with Exponential Forcing">🔗</a></div></article></details><details id="ex-inhomogeneous-complex-exponential-forcing" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.23</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Inhomogeneous ODE — Exponentially Modulated Oscillation.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para" id="ex-inhomogeneous-complex-exponential-forcing-2">Find the general solution of <span class="process-math">\(y''(t) + 2y'(t) + 5y(t) = e^{-3t}\sin(2t)\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-inhomogeneous-complex-exponential-forcing-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-inhomogeneous-complex-exponential-forcing-3">
+<div class="para">
+<em class="emphasis">Step 1 — Homogeneous solution.</em> <span class="process-math">\(P(\lambda) = \lambda^2 + 2\lambda + 5\text{.}\)</span> Roots: <span class="process-math">\(\lambda_{1,2} = -1 \pm 2i\text{.}\)</span>
+</div>
+<div class="displaymath process-math" id="ex-inhomogeneous-complex-exponential-forcing-3-4">
+\begin{equation*}
+y_h(t) = e^{-t}\!\left(C_1 \cos(2t) + C_2 \sin(2t)\right).
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-inhomogeneous-complex-exponential-forcing-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-inhomogeneous-complex-exponential-forcing-4">
+<div class="para">
+<em class="emphasis">Step 2 — Particular solution.</em> The right-hand side has <span class="process-math">\(\alpha = -3\text{,}\)</span> <span class="process-math">\(\beta = 2\text{.}\)</span> The complex frequency <span class="process-math">\(\alpha + i\beta = -3 + 2i\)</span> is <em class="emphasis">not</em> a root of <span class="process-math">\(P\)</span> (since the roots are <span class="process-math">\(-1 \pm 2i\)</span>), so <span class="process-math">\(k = 0\)</span> and the trial function is</div>
+<div class="displaymath process-math" id="ex-inhomogeneous-complex-exponential-forcing-4-9">
+\begin{equation*}
+y_p(t) = e^{-3t}\!\left(B_1 \cos(2t) + B_2 \sin(2t)\right).
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-inhomogeneous-complex-exponential-forcing-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-inhomogeneous-complex-exponential-forcing-5">
+<div class="para">Let <span class="process-math">\(u(t) = B_1\cos(2t) + B_2\sin(2t)\text{.}\)</span>  After computing <span class="process-math">\(y_p''+ 2y_p' + 5y_p\)</span> via the product rule and comparing coefficients with <span class="process-math">\(e^{-3t}\sin(2t)\text{,}\)</span> one obtains the system</div>
+<div class="displaymath process-math" id="ex-inhomogeneous-complex-exponential-forcing-5-4">
+\begin{align*}
+-3 B_1 + 2 B_2 \amp= 0,\\
+-2 B_1 - 3 B_2 \amp= 1.
+\end{align*}
+</div>
+<div class="para">Solving: <span class="process-math">\(B_1 = -\tfrac{2}{13}\text{,}\)</span> <span class="process-math">\(B_2 = -\tfrac{3}{13}\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-inhomogeneous-complex-exponential-forcing-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-inhomogeneous-complex-exponential-forcing-6">
+<div class="para"><em class="emphasis">Step 3 — General solution.</em></div>
+<div class="displaymath process-math" id="ex-inhomogeneous-complex-exponential-forcing-6-2">
+\begin{equation*}
+y(t) = e^{-t}\!\left(C_1\cos 2t + C_2\sin 2t\right)
+- \tfrac{e^{-3t}}{13}\!\left(2\cos 2t + 3\sin 2t\right),
+\quad C_1, C_2 \in \R.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-inhomogeneous-complex-exponential-forcing-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 3.2.23: Inhomogeneous ODE — Exponentially Modulated Oscillation"><a href="#ex-inhomogeneous-complex-exponential-forcing" title="Copy heading and permalink for Example 3.2.23: Inhomogeneous ODE — Exponentially Modulated Oscillation" aria-label="Copy heading and permalink for Example 3.2.23: Inhomogeneous ODE — Exponentially Modulated Oscillation">🔗</a></div></article></details><section class="exercises" id="exercises-inhomogeneous-higher-order-check"><h4 class="heading hide-type">
+<span class="type">Exercises</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber"></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Check Your Understanding</span>
+</h4>
+<article class="exercise exercise-like" id="exer-inhomogeneous-guess-polynomial"><h5 class="heading">
+<span class="codenumber">1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Choose a Trial Function.</span>
+</h5>
+<div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
+<div class="exercise-statement"><div class="para logical" id="exer-inhomogeneous-guess-polynomial-2-1">
+<div class="para">For the ODE</div>
+<div class="displaymath process-math" id="exer-inhomogeneous-guess-polynomial-2-1-1">
+\begin{equation*}
+y''-y=\sin t,
+\end{equation*}
+</div>
+<div class="para">which trial function is appropriate for a particular solution?</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#exer-inhomogeneous-guess-polynomial-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div>
+<ul data-component="multiplechoice" class="exercise-interactives" id="rs-exer-inhomogeneous-guess-polynomial" data-multipleanswers="false">
+<li data-component="answer" id="rs-exer-inhomogeneous-guess-polynomial_opt_a" data-correct=""><div class="para" id="exer-inhomogeneous-guess-polynomial-3-1-1-1"><span class="process-math">\(y_p(t)=A\cos t+B\sin t\)</span></div></li>
+<li data-component="feedback" id="rs-exer-inhomogeneous-guess-polynomial_opt_a"><div class="para" id="exer-inhomogeneous-guess-polynomial-3-1-2-1">Correct. A sine forcing generally requires both sine and cosine terms, because derivatives of sine and cosine produce each other.</div></li>
+<li data-component="answer" id="rs-exer-inhomogeneous-guess-polynomial_opt_b"><div class="para" id="exer-inhomogeneous-guess-polynomial-3-2-1-1"><span class="process-math">\(y_p(t)=A\sin t\)</span></div></li>
+<li data-component="feedback" id="rs-exer-inhomogeneous-guess-polynomial_opt_b"><div class="para" id="exer-inhomogeneous-guess-polynomial-3-2-2-1">Incorrect. This is the common incomplete trial function: after differentiating, cosine terms can appear, so both sine and cosine should be included.</div></li>
+<li data-component="answer" id="rs-exer-inhomogeneous-guess-polynomial_opt_c"><div class="para" id="exer-inhomogeneous-guess-polynomial-3-3-1-1"><span class="process-math">\(y_p(t)=At+B\)</span></div></li>
+<li data-component="feedback" id="rs-exer-inhomogeneous-guess-polynomial_opt_c"><div class="para" id="exer-inhomogeneous-guess-polynomial-3-3-2-1">Incorrect. Polynomial trial functions are used for polynomial forcing terms, not sinusoidal forcing.</div></li>
+<li data-component="answer" id="rs-exer-inhomogeneous-guess-polynomial_opt_d"><div class="para" id="exer-inhomogeneous-guess-polynomial-3-4-1-1"><span class="process-math">\(y_p(t)=Ae^t\)</span></div></li>
+<li data-component="feedback" id="rs-exer-inhomogeneous-guess-polynomial_opt_d"><div class="para" id="exer-inhomogeneous-guess-polynomial-3-4-2-1">Incorrect. Exponential trial functions are used for exponential forcing terms.</div></li>
+</ul>
+</div></div>
+<div class="autopermalink" data-description="Exercise 3.2.3.1: Choose a Trial Function"><a href="#exer-inhomogeneous-guess-polynomial" title="Copy heading and permalink for Exercise 3.2.3.1: Choose a Trial Function" aria-label="Copy heading and permalink for Exercise 3.2.3.1: Choose a Trial Function">🔗</a></div></article><article class="exercise exercise-like" id="exer-inhomogeneous-resonance-exp"><h5 class="heading">
+<span class="codenumber">2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Find a Particular Solution in a Resonance Case.</span>
+</h5>
+<div class="para logical" id="exer-inhomogeneous-resonance-exp-2-1">
+<div class="para">Find one particular solution of</div>
+<div class="displaymath process-math" id="exer-inhomogeneous-resonance-exp-2-1-1">
+\begin{equation*}
+y''-2y'+y=e^t.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#exer-inhomogeneous-resonance-exp-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="exer-inhomogeneous-resonance-exp-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="exer-inhomogeneous-resonance-exp-3-1">
+<div class="para">The homogeneous characteristic polynomial is</div>
+<div class="displaymath process-math" id="exer-inhomogeneous-resonance-exp-3-1-1">
+\begin{equation*}
+(\lambda-1)^2,
+\end{equation*}
+</div>
+<div class="para">so <span class="process-math">\(e^t\)</span> is already a homogeneous solution. We therefore use the resonance trial function</div>
+<div class="displaymath process-math" id="exer-inhomogeneous-resonance-exp-3-1-3">
+\begin{equation*}
+y_p(t)=At^2e^t.
+\end{equation*}
+</div>
+<div class="para">Substituting gives</div>
+<div class="displaymath process-math" id="exer-inhomogeneous-resonance-exp-3-1-4">
+\begin{equation*}
+y_p''-2y_p'+y_p=2Ae^t.
+\end{equation*}
+</div>
+<div class="para">To match the right-hand side <span class="process-math">\(e^t\text{,}\)</span> we choose <span class="process-math">\(2A=1\text{,}\)</span> hence <span class="process-math">\(A=\tfrac12\text{.}\)</span> Thus one particular solution is</div>
+<div class="displaymath process-math" id="exer-inhomogeneous-resonance-exp-3-1-8">
+\begin{equation*}
+y_p(t)=\tfrac12 t^2 e^t.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#exer-inhomogeneous-resonance-exp-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 3.2.3.2.1"><a href="#exer-inhomogeneous-resonance-exp-3" title="Copy heading and permalink for Solution 3.2.3.2.1" aria-label="Copy heading and permalink for Solution 3.2.3.2.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Exercise 3.2.3.2: Find a Particular Solution in a Resonance Case"><a href="#exer-inhomogeneous-resonance-exp" title="Copy heading and permalink for Exercise 3.2.3.2: Find a Particular Solution in a Resonance Case" aria-label="Copy heading and permalink for Exercise 3.2.3.2: Find a Particular Solution in a Resonance Case">🔗</a></div></article><div class="autopermalink" data-description="Exercises 3.2.3: Check Your Understanding"><a href="#exercises-inhomogeneous-higher-order-check" title="Copy heading and permalink for Exercises 3.2.3: Check Your Understanding" aria-label="Copy heading and permalink for Exercises 3.2.3: Check Your Understanding">🔗</a></div></section><div class="autopermalink" data-description="Subsection 3.2.3: Inhomogeneous Linear ODEs — Method of Undetermined Coefficients"><a href="#subsec-inhomogeneous-higher-order" title="Copy heading and permalink for Subsection 3.2.3: Inhomogeneous Linear ODEs — Method of Undetermined Coefficients" aria-label="Copy heading and permalink for Subsection 3.2.3: Inhomogeneous Linear ODEs — Method of Undetermined Coefficients">🔗</a></div></section><section class="subsection" id="subsec-harmonic-oscillator"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.4</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Application: The Harmonic Oscillator</span>
+</h3>
+<section class="introduction" id="subsec-harmonic-oscillator-2"><div class="para" id="subsec-harmonic-oscillator-2-1">The techniques developed in this section apply immediately to one of the most important mechanical systems in engineering: the <dfn class="terminology">mass-spring-damper</dfn> system (also called the <em class="emphasis">harmonic oscillator</em>). Beyond its direct engineering relevance — suspension systems, vibration isolation, earthquake engineering — it is the canonical model for any physical system exhibiting oscillatory behaviour near an equilibrium.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-harmonic-oscillator-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></section><details id="ex-spring-pendulum-setup" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.24</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">The Mass-Spring-Damper System.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para" id="ex-spring-pendulum-setup-2">A mass <span class="process-math">\(m &gt; 0\)</span> is attached to a fixed support by a spring (stiffness <span class="process-math">\(k &gt; 0\)</span>) and a viscous damper (damping coefficient <span class="process-math">\(\alpha \geq 0\)</span>).  The mass can move vertically; let <span class="process-math">\(y(t)\)</span> denote its displacement from the natural rest position.<div class="autopermalink" data-description="Paragraph"><a href="#ex-spring-pendulum-setup-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="figure figure-like" id="fig-spring-damper-diagram"><div class="image-box" style="width: 40%; margin-left: 30%; margin-right: 30%;"><img src="generated/latex-image/image-spring-damper-diagram.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.25<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Schematic of the mass-spring-damper system. The mass <span class="process-math">\(m\)</span> hangs from a spring (stiffness <span class="process-math">\(k\)</span>) and moves through a viscous liquid (damping coefficient <span class="process-math">\(\alpha\)</span>). Positive <span class="process-math">\(y\)</span> points downward.<div class="autopermalink" data-description="Figure 3.2.25"><a href="#fig-spring-damper-diagram" title="Copy heading and permalink for Figure 3.2.25" aria-label="Copy heading and permalink for Figure 3.2.25">🔗</a></div></figcaption></figure><div class="para logical" id="ex-spring-pendulum-setup-4">
+<div class="para">Newton’s second law gives</div>
+<div class="displaymath process-math" id="ex-spring-pendulum-setup-4-1">
+\begin{equation*}
+m\, y''(t) = -k\, y(t) - \alpha\, y'(t) + F(t),
+\end{equation*}
+</div>
+<div class="para">which, after dividing by <span class="process-math">\(m\)</span> and rearranging, becomes</div>
+<div class="displaymath process-math" id="eq-harmonic-oscillator">
+\begin{equation}
+y''(t) + \underbrace{\frac{\alpha}{m}}_{2\beta}\, y'(t)
++ \underbrace{\frac{k}{m}}_{\omega_0^2}\, y(t)
+= \frac{F(t)}{m}.\tag{3.2.1}
+\end{equation}
+</div>
+<div class="para">Physical reasoning constrains the parameters: <span class="process-math">\(2\beta = \alpha/m \geq 0\)</span> (damping is non-negative) and <span class="process-math">\(\omega_0^2 = k/m &gt; 0\)</span> (the spring always restores). Here <span class="process-math">\(\omega_0\)</span> is called the <dfn class="terminology">natural frequency</dfn>.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-spring-pendulum-setup-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 3.2.24: The Mass-Spring-Damper System"><a href="#ex-spring-pendulum-setup" title="Copy heading and permalink for Example 3.2.24: The Mass-Spring-Damper System" aria-label="Copy heading and permalink for Example 3.2.24: The Mass-Spring-Damper System">🔗</a></div></article></details><article class="remark remark-like" id="rem-harmonic-solution-strategy"><h4 class="heading">
+<span class="type">Remark</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.26</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Solution Strategy.</span>
+</h4>
+<div class="para" id="rem-harmonic-solution-strategy-2">The harmonic oscillator is the concrete place where the abstract theory of this section comes together.  First we solve the homogeneous equation (<span class="process-math">\(F=0\)</span>) to understand the system’s free motion.  Then we add a particular solution for the forced case (<span class="process-math">\(F \neq 0\)</span>), exactly as in <a href="section-higher-order-linear-odes.html#alg-undetermined-coefficients" class="xref" data-knowl="./knowl/xref/alg-undetermined-coefficients.html" data-reveal-label="Reveal" data-close-label="Close" title="Assemblage: Method of Undetermined Coefficients">Method of Undetermined Coefficients</a>, to describe how an external excitation changes that motion.<div class="autopermalink" data-description="Paragraph"><a href="#rem-harmonic-solution-strategy-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Remark 3.2.26: Solution Strategy"><a href="#rem-harmonic-solution-strategy" title="Copy heading and permalink for Remark 3.2.26: Solution Strategy" aria-label="Copy heading and permalink for Remark 3.2.26: Solution Strategy">🔗</a></div></article><article class="theorem theorem-like" id="thm-undamped-free-oscillation"><h4 class="heading">
+<span class="type">Theorem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.27</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Case 1a — Free Undamped Oscillation (<span class="process-math">\(\beta = 0\)</span>).</span>
+</h4>
+<div class="para logical" id="thm-undamped-free-oscillation-2-1">
+<div class="para">With no damping (<span class="process-math">\(\beta = 0\)</span>), equation <a href="section-higher-order-linear-odes.html#eq-harmonic-oscillator" class="xref" data-knowl="./knowl/xref/eq-harmonic-oscillator.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 3.2.1">(3.2.1)</a> with <span class="process-math">\(F = 0\)</span> reduces to</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/eq-harmonic-oscillator.html" id="thm-undamped-free-oscillation-2-1-4">
+\begin{equation*}
+y''(t) + \omega_0^2\, y(t) = 0.
+\end{equation*}
+</div>
+<div class="para">The characteristic polynomial <span class="process-math">\(P(\lambda) = \lambda^2 + \omega_0^2\)</span> has the purely imaginary roots <span class="process-math">\(\lambda_{1,2} = \pm i\omega_0\text{.}\)</span> The general solution is</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/eq-harmonic-oscillator.html" id="thm-undamped-free-oscillation-2-1-7">
+\begin{equation*}
+y(t) = C_1 \cos(\omega_0 t) + C_2 \sin(\omega_0 t).
+\end{equation*}
+</div>
+<div class="para">The system oscillates at frequency <span class="process-math">\(\omega_0\)</span> with constant amplitude — no decay, no growth.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-undamped-free-oscillation-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Theorem 3.2.27: Case 1a — Free Undamped Oscillation (\beta = 0)"><a href="#thm-undamped-free-oscillation" title="Copy heading and permalink for Theorem 3.2.27: Case 1a — Free Undamped Oscillation (\beta = 0)" aria-label="Copy heading and permalink for Theorem 3.2.27: Case 1a — Free Undamped Oscillation (\beta = 0)">🔗</a></div></article><figure class="figure figure-like" id="fig-undamped-oscillation"><div class="image-box" style="width: 65%; margin-left: 17.5%; margin-right: 17.5%;"><img src="generated/latex-image/image-undamped-oscillation.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.28<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Free undamped oscillation: a pure sinusoid at frequency <span class="process-math">\(\omega_0\)</span> with period <span class="process-math">\(T = 2\pi/\omega_0\text{.}\)</span> The amplitude never changes.<div class="autopermalink" data-description="Figure 3.2.28"><a href="#fig-undamped-oscillation" title="Copy heading and permalink for Figure 3.2.28" aria-label="Copy heading and permalink for Figure 3.2.28">🔗</a></div></figcaption></figure><article class="theorem theorem-like" id="thm-damped-free-oscillation"><h4 class="heading">
+<span class="type">Theorem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.29</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Case 1b — Free Damped Oscillation (<span class="process-math">\(\beta &gt; 0\)</span>).</span>
+</h4>
+<div class="para" id="thm-damped-free-oscillation-2-1">With positive damping, the characteristic polynomial <span class="process-math">\(P(\lambda) = \lambda^2 + 2\beta\lambda + \omega_0^2\)</span> has discriminant <span class="process-math">\(\Delta = \beta^2 - \omega_0^2\text{.}\)</span> Three qualitatively different behaviours arise.<div class="autopermalink" data-description="Paragraph"><a href="#thm-damped-free-oscillation-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para logical" id="thm-damped-free-oscillation-2-2">
+<div class="para">
+<em class="emphasis">Case 1b.i — Underdamped (<span class="process-math">\(\beta^2 \lt \omega_0^2\)</span>).</em> Roots: <span class="process-math">\(\lambda_{1,2} = -\beta \pm i\omega_d\)</span> where <span class="process-math">\(\omega_d = \sqrt{\omega_0^2 - \beta^2} &gt; 0\)</span> is the <dfn class="terminology">damped natural frequency</dfn>. General solution:</div>
+<div class="displaymath process-math" id="thm-damped-free-oscillation-2-2-5">
+\begin{equation*}
+y(t) = e^{-\beta t}\!\left(C_1\cos(\omega_d t)
++ C_2\sin(\omega_d t)\right).
+\end{equation*}
+</div>
+<div class="para">The system oscillates with exponentially decreasing amplitude.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-damped-free-oscillation-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para logical" id="thm-damped-free-oscillation-2-3">
+<div class="para">
+<em class="emphasis">Case 1b.ii — Critically damped (<span class="process-math">\(\beta^2 = \omega_0^2\)</span>).</em> Double root <span class="process-math">\(\lambda_0 = -\beta\text{.}\)</span> General solution:</div>
+<div class="displaymath process-math" id="thm-damped-free-oscillation-2-3-3">
+\begin{equation*}
+y(t) = C_1\, e^{-\beta t} + C_2\, t\, e^{-\beta t}.
+\end{equation*}
+</div>
+<div class="para">The system returns to rest as fast as possible without oscillating — the <em class="emphasis">aperiodic limit case</em>.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-damped-free-oscillation-2-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para logical" id="thm-damped-free-oscillation-2-4">
+<div class="para">
+<em class="emphasis">Case 1b.iii — Overdamped (<span class="process-math">\(\beta^2 &gt; \omega_0^2\)</span>).</em> Two distinct real roots <span class="process-math">\(\lambda_{1,2} = -\beta \pm \sqrt{\beta^2 - \omega_0^2}\)</span> (both negative, since <span class="process-math">\(\sqrt{\beta^2 - \omega_0^2} \lt \beta\)</span>). General solution:</div>
+<div class="displaymath process-math" id="thm-damped-free-oscillation-2-4-4">
+\begin{equation*}
+y(t) = C_1\, e^{\lambda_1 t} + C_2\, e^{\lambda_2 t}.
+\end{equation*}
+</div>
+<div class="para">The system decays to rest without oscillating, but more slowly than in the critically damped case.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-damped-free-oscillation-2-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Theorem 3.2.29: Case 1b — Free Damped Oscillation (\beta &gt; 0)"><a href="#thm-damped-free-oscillation" title="Copy heading and permalink for Theorem 3.2.29: Case 1b — Free Damped Oscillation (\beta &gt; 0)" aria-label="Copy heading and permalink for Theorem 3.2.29: Case 1b — Free Damped Oscillation (\beta &gt; 0)">🔗</a></div></article><figure class="figure figure-like" id="fig-damped-oscillation-cases"><div class="image-box" style="width: 70%; margin-left: 15%; margin-right: 15%;"><img src="generated/latex-image/image-damped-oscillation-cases.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.30<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>The three qualitatively different responses of a free damped harmonic oscillator, plotted for <span class="process-math">\(\omega_0 = 1\)</span> and initial conditions <span class="process-math">\(y(0) = 1\text{,}\)</span> <span class="process-math">\(y'(0) = 0\text{.}\)</span> Underdamped (<span class="process-math">\(\beta = 0.2\)</span>): oscillatory decay. Critically damped (<span class="process-math">\(\beta = 1\)</span>): fastest non-oscillatory return. Overdamped (<span class="process-math">\(\beta = 1.5\)</span>): slow non-oscillatory decay.<div class="autopermalink" data-description="Figure 3.2.30"><a href="#fig-damped-oscillation-cases" title="Copy heading and permalink for Figure 3.2.30" aria-label="Copy heading and permalink for Figure 3.2.30">🔗</a></div></figcaption></figure><article class="theorem theorem-like" id="thm-forced-oscillation"><h4 class="heading">
+<span class="type">Theorem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.31</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Case 2 — Forced Oscillation and Resonance.</span>
+</h4>
+<div class="para logical" id="thm-forced-oscillation-2-1">
+<div class="para">Now consider an external sinusoidal force <span class="process-math">\(F(t) = F_0 \sin(\omega t)\)</span> applied to a damped oscillator (<span class="process-math">\(\beta \geq 0\)</span>). Using the method of undetermined coefficients with trial function <span class="process-math">\(y_p(t) = B_1\cos(\omega t) + B_2\sin(\omega t)\)</span> (valid whenever <span class="process-math">\(\beta &gt; 0\)</span> or <span class="process-math">\(\omega \neq \omega_0\)</span>), substitution into <a href="section-higher-order-linear-odes.html#eq-harmonic-oscillator" class="xref" data-knowl="./knowl/xref/eq-harmonic-oscillator.html" data-reveal-label="Reveal" data-close-label="Close" title="Equation 3.2.1">(3.2.1)</a> gives</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/eq-harmonic-oscillator.html" id="thm-forced-oscillation-2-1-7">
+\begin{align*}
+(\omega_0^2 - \omega^2) B_1 + 2\beta\omega B_2 \amp= 0,\\
+-2\beta\omega B_1 + (\omega_0^2 - \omega^2) B_2
+\amp= \frac{F_0}{m}.
+\end{align*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-forced-oscillation-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>  <div class="para logical" id="thm-forced-oscillation-2-2">
+<div class="para">Solving this linear system yields</div>
+<div class="displaymath process-math" id="thm-forced-oscillation-2-2-1">
+\begin{align*}
+B_1 \amp=
+-\frac{F_0}{m}\,
+\frac{2\beta\omega}{(\omega_0^2 - \omega^2)^2 + 4\beta^2\omega^2},\\
+B_2 \amp=
+\frac{F_0}{m}\,
+\frac{\omega_0^2 - \omega^2}{(\omega_0^2 - \omega^2)^2 + 4\beta^2\omega^2}.
+\end{align*}
+</div>
+<div class="para">Hence the particular solution can be rewritten in amplitude-phase form as</div>
+<div class="displaymath process-math" id="thm-forced-oscillation-2-2-2">
+\begin{equation*}
+y_p(t)
+= \frac{F_0/m}{\sqrt{(\omega_0^2 - \omega^2)^2 + 4\beta^2\omega^2}}
+\sin\!\bigl(\omega t - \varphi(\omega)\bigr),
+\end{equation*}
+</div>
+<div class="para">where the <dfn class="terminology">phase shift</dfn> <span class="process-math">\(\varphi(\omega)\)</span> satisfies <span class="process-math">\(\tan\varphi = 2\beta\omega/(\omega_0^2 - \omega^2)\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-forced-oscillation-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para logical" id="thm-forced-oscillation-2-3">
+<div class="para">The <dfn class="terminology">amplitude of the steady-state response</dfn> is</div>
+<div class="displaymath process-math" id="thm-forced-oscillation-2-3-2">
+\begin{equation*}
+A(\omega)
+= \frac{F_0/m}{\sqrt{(\omega_0^2 - \omega^2)^2 + 4\beta^2\omega^2}}.
+\end{equation*}
+</div>
+<div class="para">When <span class="process-math">\(\beta\)</span> is small and <span class="process-math">\(\omega \approx \omega_0\text{,}\)</span> the denominator is small and <span class="process-math">\(A(\omega)\)</span> becomes very large — this is the <dfn class="terminology">resonance</dfn> phenomenon.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-forced-oscillation-2-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para" id="thm-forced-oscillation-2-4">In the undamped case <span class="process-math">\(\beta = 0\)</span> with driving frequency <span class="process-math">\(\omega = \omega_0\text{,}\)</span> the method of undetermined coefficients requires the resonance trial function <span class="process-math">\(y_p(t) = t\bigl(B_1\cos(\omega_0 t) + B_2\sin(\omega_0 t)\bigr)\text{,}\)</span> and the amplitude grows linearly without bound.<div class="autopermalink" data-description="Paragraph"><a href="#thm-forced-oscillation-2-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Theorem 3.2.31: Case 2 — Forced Oscillation and Resonance"><a href="#thm-forced-oscillation" title="Copy heading and permalink for Theorem 3.2.31: Case 2 — Forced Oscillation and Resonance" aria-label="Copy heading and permalink for Theorem 3.2.31: Case 2 — Forced Oscillation and Resonance">🔗</a></div></article><figure class="figure figure-like" id="fig-resonance-amplitude-curve"><div class="image-box" style="width: 70%; margin-left: 15%; margin-right: 15%;"><img src="generated/latex-image/image-resonance-amplitude-curve.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.32<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Frequency response of the amplitude <span class="process-math">\(A(\omega)\)</span> for fixed <span class="process-math">\(F_0 = m = 1\text{,}\)</span> <span class="process-math">\(\omega_0 = 1\)</span> and several damping values. As <span class="process-math">\(\beta \to 0\)</span> the resonance peak at <span class="process-math">\(\omega \approx \omega_0\)</span> becomes sharper and taller; for <span class="process-math">\(\beta = 0\)</span> it diverges.<div class="autopermalink" data-description="Figure 3.2.32"><a href="#fig-resonance-amplitude-curve" title="Copy heading and permalink for Figure 3.2.32" aria-label="Copy heading and permalink for Figure 3.2.32">🔗</a></div></figcaption></figure><article class="remark remark-like" id="rem-reading-frequency-response"><h4 class="heading">
+<span class="type">Remark</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.33</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">How to Read the Frequency-Response Graph.</span>
+</h4>
+<div class="para" id="rem-reading-frequency-response-2">For a fixed damping value <span class="process-math">\(\beta\text{,}\)</span> the graph of <span class="process-math">\(A(\omega)\)</span> tells us which driving frequencies are dangerous: tall peaks mean that a small periodic force can produce a large steady-state oscillation.<div class="autopermalink" data-description="Paragraph"><a href="#rem-reading-frequency-response-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="rem-reading-frequency-response-3">The peak is highest near <span class="process-math">\(\omega = \omega_0\)</span> when damping is weak. Increasing damping lowers and broadens the peak, which is why damping is an effective engineering tool for suppressing resonance.<div class="autopermalink" data-description="Paragraph"><a href="#rem-reading-frequency-response-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Remark 3.2.33: How to Read the Frequency-Response Graph"><a href="#rem-reading-frequency-response" title="Copy heading and permalink for Remark 3.2.33: How to Read the Frequency-Response Graph" aria-label="Copy heading and permalink for Remark 3.2.33: How to Read the Frequency-Response Graph">🔗</a></div></article><article class="remark remark-like" id="rem-resonance-catastrophe"><h4 class="heading">
+<span class="type">Remark</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.34</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Resonance in Engineering: The Tacoma Narrows Bridge.</span>
+</h4>
+<div class="para" id="rem-resonance-catastrophe-2">Resonance is not merely a mathematical curiosity. When an external excitation is close to the natural frequency of a structure, even moderate forcing can produce catastrophically large oscillations. A famous historical example is the Tacoma Narrows Bridge (Washington State, USA, 1940), which collapsed just four months after opening due to aerodynamic forces that matched the bridge’s natural frequency. Modern structural engineering avoids resonance by careful tuning of natural frequencies away from expected excitation spectra, and by deliberately introducing damping (e.g.\ tuned mass dampers in skyscrapers).<div class="autopermalink" data-description="Paragraph"><a href="#rem-resonance-catastrophe-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Remark 3.2.34: Resonance in Engineering: The Tacoma Narrows Bridge"><a href="#rem-resonance-catastrophe" title="Copy heading and permalink for Remark 3.2.34: Resonance in Engineering: The Tacoma Narrows Bridge" aria-label="Copy heading and permalink for Remark 3.2.34: Resonance in Engineering: The Tacoma Narrows Bridge">🔗</a></div></article><section class="exercises" id="exercises-harmonic-oscillator-check"><h4 class="heading hide-type">
+<span class="type">Exercises</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber"></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Check Your Understanding</span>
+</h4>
+<article class="exercise exercise-like" id="exer-harmonic-resonance-concept"><h5 class="heading">
+<span class="codenumber">1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Recognise Resonance.</span>
+</h5>
+<div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
+<div class="exercise-statement"><div class="para" id="exer-harmonic-resonance-concept-2-1">When is resonance most likely to occur in a forced oscillator?<div class="autopermalink" data-description="Paragraph"><a href="#exer-harmonic-resonance-concept-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div>
+<ul data-component="multiplechoice" class="exercise-interactives" id="rs-exer-harmonic-resonance-concept" data-multipleanswers="false">
+<li data-component="answer" id="rs-exer-harmonic-resonance-concept_opt_a" data-correct=""><div class="para" id="exer-harmonic-resonance-concept-3-1-1-1">When the driving frequency is close to the natural frequency and damping is small</div></li>
+<li data-component="feedback" id="rs-exer-harmonic-resonance-concept_opt_a"><div class="para" id="exer-harmonic-resonance-concept-3-1-2-1">Correct. Then the steady-state amplitude can become very large.</div></li>
+<li data-component="answer" id="rs-exer-harmonic-resonance-concept_opt_b"><div class="para" id="exer-harmonic-resonance-concept-3-2-1-1">When the damping is extremely large</div></li>
+<li data-component="feedback" id="rs-exer-harmonic-resonance-concept_opt_b"><div class="para" id="exer-harmonic-resonance-concept-3-2-2-1">Incorrect. Strong damping suppresses resonance peaks.</div></li>
+<li data-component="answer" id="rs-exer-harmonic-resonance-concept_opt_c"><div class="para" id="exer-harmonic-resonance-concept-3-3-1-1">Whenever the forcing term is zero</div></li>
+<li data-component="feedback" id="rs-exer-harmonic-resonance-concept_opt_c"><div class="para" id="exer-harmonic-resonance-concept-3-3-2-1">Incorrect. With no forcing, there is no forced resonance.</div></li>
+<li data-component="answer" id="rs-exer-harmonic-resonance-concept_opt_d"><div class="para" id="exer-harmonic-resonance-concept-3-4-1-1">Only when the natural frequency is zero</div></li>
+<li data-component="feedback" id="rs-exer-harmonic-resonance-concept_opt_d"><div class="para" id="exer-harmonic-resonance-concept-3-4-2-1">Incorrect. Resonance is tied to matching frequencies, not to a zero natural frequency.</div></li>
+</ul>
+</div></div>
+<div class="autopermalink" data-description="Exercise 3.2.4.1: Recognise Resonance"><a href="#exer-harmonic-resonance-concept" title="Copy heading and permalink for Exercise 3.2.4.1: Recognise Resonance" aria-label="Copy heading and permalink for Exercise 3.2.4.1: Recognise Resonance">🔗</a></div></article><article class="exercise exercise-like" id="exer-harmonic-undamped-general-solution"><h5 class="heading">
+<span class="codenumber">2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Free Undamped Oscillation.</span>
+</h5>
+<div class="para logical" id="exer-harmonic-undamped-general-solution-2-1">
+<div class="para">Solve the homogeneous ODE</div>
+<div class="displaymath process-math" id="exer-harmonic-undamped-general-solution-2-1-1">
+\begin{equation*}
+y''+4y=0.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#exer-harmonic-undamped-general-solution-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="exer-harmonic-undamped-general-solution-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="exer-harmonic-undamped-general-solution-3-1">
+<div class="para">The characteristic equation is</div>
+<div class="displaymath process-math" id="exer-harmonic-undamped-general-solution-3-1-1">
+\begin{equation*}
+\lambda^2+4=0,
+\end{equation*}
+</div>
+<div class="para">so the roots are <span class="process-math">\(\lambda=\pm 2i\text{.}\)</span> Therefore the general solution is</div>
+<div class="displaymath process-math" id="exer-harmonic-undamped-general-solution-3-1-3">
+\begin{equation*}
+y(t)=C_1\cos(2t)+C_2\sin(2t),
+\qquad C_1,C_2\in\R.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#exer-harmonic-undamped-general-solution-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 3.2.4.2.1"><a href="#exer-harmonic-undamped-general-solution-3" title="Copy heading and permalink for Solution 3.2.4.2.1" aria-label="Copy heading and permalink for Solution 3.2.4.2.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Exercise 3.2.4.2: Free Undamped Oscillation"><a href="#exer-harmonic-undamped-general-solution" title="Copy heading and permalink for Exercise 3.2.4.2: Free Undamped Oscillation" aria-label="Copy heading and permalink for Exercise 3.2.4.2: Free Undamped Oscillation">🔗</a></div></article><div class="autopermalink" data-description="Exercises 3.2.4: Check Your Understanding"><a href="#exercises-harmonic-oscillator-check" title="Copy heading and permalink for Exercises 3.2.4: Check Your Understanding" aria-label="Copy heading and permalink for Exercises 3.2.4: Check Your Understanding">🔗</a></div></section><div class="autopermalink" data-description="Subsection 3.2.4: Application: The Harmonic Oscillator"><a href="#subsec-harmonic-oscillator" title="Copy heading and permalink for Subsection 3.2.4: Application: The Harmonic Oscillator" aria-label="Copy heading and permalink for Subsection 3.2.4: Application: The Harmonic Oscillator">🔗</a></div></section><div class="autopermalink" data-description="Section 3.2: Higher-Order Linear ODEs"><a href="#section-higher-order-linear-odes" title="Copy heading and permalink for Section 3.2: Higher-Order Linear ODEs" aria-label="Copy heading and permalink for Section 3.2: Higher-Order Linear ODEs">🔗</a></div></section></div>
+<div id="ptx-content-footer" class="ptx-content-footer">
+<a class="previous-button button" href="section-first-order-odes.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="backmatter.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
+</div></main>
+</div>
+<div id="ptx-page-footer" class="ptx-page-footer">
+<a class="pretext-link" href="https://pretextbook.org" title="PreTeXt"><div class="logo"><svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="338 3000 8772 6866" role="img"><title>PreTeXt logo</title><g style="stroke-width:.025in; stroke:currentColor; fill:none"><polyline points="472,3590 472,9732 " style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,9448 A 4660 4660  0  0  1  8598  9259"></path><path style="stroke-width:174;stroke-linecap:butt;" d="M 4488,9685 A 4228 4228  0  0  0   472  9732"></path><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,3590 A 4241 4241  0  0  1  8598  3496"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,3496  A 4241 4241  0  0  1  4724  3590"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,9259  A 4507 4507  0  0  1  4724  9448"></path><polyline points="5385,4299 4062,8125" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8598,3496 8598,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="850,3496 850,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="4960,9685 4488,9685" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="3070,4582 1889,6141 3070,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="6418,4582 7600,6141 6418,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8976,3590 8976,9732" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><path style="stroke-width:174;stroke-linecap:butt;" d="M 4960,9685 A 4228 4228  0  0  1  8976  9732"></path></g></svg></div></a><a class="runestone-link" href="https://runestone.academy" title="Runestone Academy"><img class="logo" src="https://runestone.academy/runestone/static/images/RAIcon_cropped.png" alt="Runstone Academy logo"></a><a class="mathjax-link" href="https://www.mathjax.org" title="MathJax"><img class="logo" src="https://www.mathjax.org/badge/badge-square-2.png" alt="MathJax logo"></a>
+</div>
+</body>
+</html>

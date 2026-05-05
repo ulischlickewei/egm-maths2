@@ -2476,6 +2476,393 @@ var ptx_lunr_docs = [
   "body": " Solve a Homogeneous Linear ODE   Solve     This is a homogeneous linear first-order ODE. Rewriting gives Separating variables, Integration yields Hence    "
 },
 {
+  "id": "section-higher-order-linear-odes",
+  "level": "1",
+  "url": "section-higher-order-linear-odes.html",
+  "type": "Section",
+  "number": "3.2",
+  "title": "Higher-Order Linear ODEs",
+  "body": " Higher-Order Linear ODEs   Section 3-1 developed systematic solution methods for first-order ODEs. Many engineering models, however, require higher derivatives: a vibrating mass-spring-damper, the deflection of a loaded beam, and the current in an RLC circuit all yield second- (or higher-) order differential equations.  This section treats the most important subclass: linear ODEs with constant coefficients . We begin by defining the class and identifying its structural features, then develop the characteristic polynomial method for the homogeneous case (Section 3-2.1–3-2.2). For the inhomogeneous case we use the method of undetermined coefficients (Section 3-2.3), whose guessing strategy is completely determined by the form of the right-hand side. The section closes with the harmonic oscillator (Section 3-2.4), the central application that unifies all three sub-topics: the free response uses the homogeneous theory, the forced response uses undetermined coefficients, and the resonance phenomenon illustrates why the distinction between natural frequency and driving frequency matters critically in engineering design.    Linear ODEs of Higher Order   In Section 3-1 we developed systematic solution methods for first-order ODEs. Many physical and engineering phenomena, however, require higher-order equations. A vibrating spring, the bending of a structural beam, or the current in an RLC circuit all give rise naturally to second-order (or higher) differential equations.  This section focuses on the most tractable and practically important subclass: linear ODEs with constant coefficients . For this class a complete algorithmic solution procedure exists, based on factoring a polynomial (the characteristic polynomial ) and reading off the solutions from its roots.     Higher-Order ODEs in Engineering  Two classical engineering models immediately lead to higher-order linear ODEs with constant coefficients.     Harmonic oscillator (mass-spring-damper). A mass attached to a spring of stiffness and a damper of coefficient satisfies where is the displacement from rest and is an external force. This is a second-order linear ODE with constant coefficients.     Elastic beam bending. Under a distributed transverse load , the deflection of a homogeneous beam with bending stiffness satisfies This is a fourth-order linear ODE.     A mass-spring-damper model. The restoring spring force, damping force, and external input combine to produce a second-order equation for the displacement .       Beam bending under a distributed load. The fourth derivative appears because curvature and internal bending moments must be differentiated to balance the transverse load.      Both examples share the structural feature we will exploit: the unknown function and all its derivatives appear only linearly , and the coefficients are constant .     Linear ODE of Order   An ODE of order is linear if it can be written as where the coefficient functions  and the right-hand side  are given. The unknown function and its derivatives appear only to the first power and are never multiplied together or nested inside nonlinear functions.  Important special cases:    Constant coefficients: all are constants.     Homogeneous:  for all .     Inhomogeneous:  .        What Linearity Rules Out  The linearity condition says that never appears inside a nonlinear expression. Terms such as , , , or all violate linearity. By contrast, coefficients like or are fine, because they depend only on the independent variable  , not on the unknown .     Classifying Higher-Order ODEs  Determine for each ODE: is it linear? If so, is it homogeneous? Does it have constant coefficients?                    Classification.     Not linear: the term is a nonlinear function of .     Linear, not homogeneous, constant coefficients: all derivatives of appear linearly; ; the coefficients do not depend on .     Linear, homogeneous, non-constant coefficients:  , but the coefficient of depends on .     The solution methods developed in this section apply to cases like (2): linear, with constant coefficients.     Classification of higher-order ODEs. This section treats the shaded class: linear, constant-coefficient ODEs — the most algorithmically accessible family.       Check Your Understanding   Classify the Equation   Consider Which description is correct?     Third-order, linear, inhomogeneous, with constant coefficients  Correct. The coefficients of are constants, and the right-hand side is nonzero.    Third-order, nonlinear, homogeneous  Incorrect. The equation is linear, and it is not homogeneous because of .    Second-order, linear, homogeneous  Incorrect. The highest derivative is third order.    First-order, nonlinear, with variable coefficients  Incorrect. None of those labels fits this equation.      Associated Homogeneous Equation   Write down the associated homogeneous equation for     The associated homogeneous equation is obtained by replacing the right-hand side by :        Homogeneous Linear ODEs with Constant Coefficients   We now develop a complete solution procedure for homogeneous linear ODEs with constant coefficients: The key idea is that exponential trial functions lead naturally to a polynomial in — the characteristic polynomial . Its roots determine the entire solution space.     Motivating Case Study  Consider the homogeneous third-order ODE We guess a solution of the form . Computing derivatives: , , . Substituting into the ODE and dividing by : This algebraic equation — the characteristic polynomial evaluated at — must be satisfied. Once we find its roots, we can read off the solutions to the ODE.     Characteristic Polynomial   The characteristic polynomial of the homogeneous linear ODE with constant coefficients is the degree- polynomial The ODE and its characteristic polynomial are obtained from each other by the formal substitution .     Counting the Roots  By the fundamental theorem of algebra, every polynomial of degree over the complex numbers has exactly roots counted with multiplicity. Each root of contributes one or more linearly independent solutions to the ODE, and together they span the entire solution space (which has dimension ).    Why complex roots produce sine and cosine. Even when the ODE has real coefficients, it is useful to temporarily allow complex-valued trial solutions. If is a complex root, then The real part and the imaginary part are real-valued solutions of the same homogeneous ODE. This is why oscillating sine and cosine terms appear whenever the characteristic polynomial has a complex conjugate pair of roots.    Solutions from the Roots of the Characteristic Polynomial   Let be the characteristic polynomial of a homogeneous linear ODE with constant coefficients, and let be a root of .   Case 1 — simple real root. If is a simple root, then is a solution.   Case 2 — simple pair of complex conjugate roots. If and (with , ) are simple roots, then the two real solutions are linearly independent solutions.   Case 3 — root of multiplicity .     Case 3a — real root of multiplicity . The linearly independent solutions are      Case 3b — complex root of multiplicity . Conjugacy forces to also be a root of multiplicity . The linearly independent real solutions are         Where the factors come from. Write the differential operator on the left-hand side as , where means differentiation with respect to . If is a root of multiplicity , then the characteristic polynomial contains the factor . Correspondingly, the differential operator contains the factor .  Now observe the first step: Applying a second time gives zero. More generally, each factor is killed after applying exactly times. Therefore, if the root has multiplicity , the functions all solve the ODE. The powers of are thus not a trick: they record how many times the same root occurs in the characteristic polynomial.    Summary: how the type of a root of the characteristic polynomial determines the corresponding fundamental solutions. The multiplicity of each root is matched by exactly linearly independent solutions (or for complex pairs).       Principle: adding and scaling homogeneous solutions. Suppose are solutions of the homogeneous linear ODE Choose real numbers , multiply each solution by its chosen number , and add the results: Then this new function is again a solution of the same homogeneous ODE. Such a sum is called a linear combination of the functions .   Proof. Let denote the left-hand side of the ODE: . Differentiation respects scaling and addition, so Since each solves the homogeneous ODE, each is zero. Hence so is again a solution.    General Solution of Homogeneous Linear ODEs   Consider the homogeneous linear ODE with constant coefficients and let be its characteristic polynomial. Applying to all roots of , counted with multiplicity, yields linearly independent solutions . The general solution is Initial conditions (e.g. values of ) pin down the constants .      Homogeneous ODE — Double Real Root  Find the general solution of .   Solution. The characteristic polynomial is The root has multiplicity (Case 3a). The two fundamental solutions are The general solution is     Homogeneous ODE — Simple Complex Conjugate Roots  Find the general solution of .   Solution. The characteristic polynomial is . Using the quadratic formula: Thus , (Case 2). The two fundamental solutions are The general solution is     Homogeneous ODE of Order 3 — Mixed Roots  Find the general solution of given that is a root.   Solution. The characteristic polynomial is . Since is a root, we factor out by polynomial division: The roots of are (i.e. , ). Applying Cases 1 and 2: The general solution is     Check Your Understanding   General Solution from Characteristic Roots   Suppose the characteristic polynomial of a homogeneous linear ODE has the two roots and . What is the general solution?      Correct. Each simple real root contributes one exponential solution.     Incorrect. Trigonometric terms arise from complex roots, not from two real roots.     Incorrect. The factor appears only for repeated roots.     Incorrect. The two fundamental solutions must appear independently.      Solve a Simple Homogeneous ODE   Solve     The characteristic polynomial is So the roots are and . Therefore the general solution is        Inhomogeneous Linear ODEs — Method of Undetermined Coefficients   We now turn to the inhomogeneous linear ODE with constant coefficients: The crucial structural fact is the superposition principle : the general solution is the sum of the general homogeneous solution (which we already know how to find) and any particular solution of the inhomogeneous equation.     Superposition Principle   Let be any particular solution of the inhomogeneous ODE Let be the general solution of the corresponding homogeneous ODE (i.e.\\ with ). Then the general solution of the inhomogeneous ODE is and every solution of the inhomogeneous ODE has this form for some choice of .       Method of Undetermined Coefficients  Building upon the superposition principle ( ), we do not need to find all solutions of the inhomogeneous ODE from scratch. Since we already know how to solve the underlying homogeneous ODE, in order to solve an inhomogeneous ODE, it is enough to find one particular solution satisfying the equation with the given right-hand side ; then the full solution is .  The method of undetermined coefficients is one possible way to find such a particular solution. Its guiding intuition is that a linear physical system often responds to an external excitation with an answer of the same basic structure: a polynomial input suggests a polynomial response, an exponential input suggests an exponential response, and a sinusoidal input suggests a combination of sine and cosine. We therefore write down a trial function with that structure, leave some coefficients unknown, substitute the trial function into the ODE, and determine the unknown coefficients algebraically.  This leads to the following three-step method for solving an inhomogeneous linear ODE with constant coefficients.   Step 1 — Solve the homogeneous ODE. Find using the characteristic polynomial. The root-to-solution translation is given by , and the form of the full homogeneous solution is given by .   Step 2 — Choose a trial function for one particular solution . Use the table in . First write the natural trial function suggested by . Then check whether that same shape already appears among the homogeneous solutions. If it does, multiply the whole trial function by the required power of ; this resonance correction is explained in . Finally substitute into the ODE and solve for the unknown constants in the trial function.   Step 3 — Use superposition to write the general solution. By , . Apply initial conditions to determine .     Trial Functions for the Particular Solution   Consider an inhomogeneous linear ODE with constant coefficients and let be the characteristic polynomial of the associated homogeneous ODE. The following table gives the standard trial function for . The constants named or are known from the given right-hand side; the constants named or are unknown and will be determined by substitution.  In the table, the root to check is the complex number that represents the same exponential or oscillating shape as the forcing term. If that number is a root of with multiplicity , multiply the natural trial function by . If it is not a root, use , so no extra factor of is added.       Right-hand side  Root to check  Trial function for    Polynomial            and      and     For a sum of several forcing terms, choose one trial function for each term and add those trial functions together. If the ODE has real coefficients, complex conjugate roots have the same multiplicity, so checking one member of a conjugate pair determines the same value of for the other.     Scope of the Method  The method of undetermined coefficients works well when the forcing term is built from polynomials, exponentials, sines, cosines, or finite sums and products of these functions. It is not a universal method for arbitrary right-hand sides such as or .  That scope restriction is useful to keep in mind: in this section we deliberately stay within the constant-coefficient setting where the forcing term suggests a manageable trial function.    Why the Resonance Factor ?  The case is called resonance . Algebraically, it means that the natural trial function for overlaps with a solution of the associated homogeneous ODE. If we try that overlapping trial function, the homogeneous left-hand side either becomes zero or loses exactly the shape we need, so it cannot produce the required forcing term. Multiplying by moves the trial function to the next related function shape; if the same characteristic root occurs times, we must move steps and multiply by .  This phenomenon has a physical counterpart: when a driving force matches the natural frequency of an undamped oscillator the amplitude grows without bound (resonance).     Inhomogeneous ODE — Polynomial Right-Hand Side  Find the general solution of .   Step 1 — Homogeneous solution. We found earlier ( ) that the characteristic polynomial is and the general homogeneous solution is    Step 2 — Particular solution. The right-hand side is a polynomial of degree 2. Check for resonance: , so is not a root and . Trial function: .  Compute the derivatives and substitute into the left-hand side:  Equating coefficients with : Thus .   Step 3 — General solution.       Inhomogeneous ODE — Resonance with Exponential Forcing  Find the general solution of .   Step 1 — Homogeneous solution.  . Root has multiplicity 2, so    Step 2 — Particular solution. The right-hand side is , so . Since is a root of of multiplicity , we use the resonance trial function .  Compute derivatives (using the product rule twice): Substituting into the ODE: Setting gives .   Step 3 — General solution.       Inhomogeneous ODE — Exponentially Modulated Oscillation  Find the general solution of .   Step 1 — Homogeneous solution.  . Roots: .    Step 2 — Particular solution. The right-hand side has , . The complex frequency is not a root of (since the roots are ), so and the trial function is   Let . After computing via the product rule and comparing coefficients with , one obtains the system Solving: , .   Step 3 — General solution.      Check Your Understanding   Choose a Trial Function   For the ODE which trial function is appropriate for a particular solution?      Correct. A sine forcing generally requires both sine and cosine terms, because derivatives of sine and cosine produce each other.     Incorrect. This is the common incomplete trial function: after differentiating, cosine terms can appear, so both sine and cosine should be included.     Incorrect. Polynomial trial functions are used for polynomial forcing terms, not sinusoidal forcing.     Incorrect. Exponential trial functions are used for exponential forcing terms.      Find a Particular Solution in a Resonance Case   Find one particular solution of     The homogeneous characteristic polynomial is so is already a homogeneous solution. We therefore use the resonance trial function Substituting gives To match the right-hand side , we choose , hence . Thus one particular solution is        Application: The Harmonic Oscillator   The techniques developed in this section apply immediately to one of the most important mechanical systems in engineering: the mass-spring-damper system (also called the harmonic oscillator ). Beyond its direct engineering relevance — suspension systems, vibration isolation, earthquake engineering — it is the canonical model for any physical system exhibiting oscillatory behaviour near an equilibrium.     The Mass-Spring-Damper System  A mass is attached to a fixed support by a spring (stiffness ) and a viscous damper (damping coefficient ). The mass can move vertically; let denote its displacement from the natural rest position.   Schematic of the mass-spring-damper system. The mass hangs from a spring (stiffness ) and moves through a viscous liquid (damping coefficient ). Positive points downward.      Newton's second law gives which, after dividing by and rearranging, becomes Physical reasoning constrains the parameters: (damping is non-negative) and (the spring always restores). Here is called the natural frequency .     Solution Strategy  The harmonic oscillator is the concrete place where the abstract theory of this section comes together. First we solve the homogeneous equation ( ) to understand the system's free motion. Then we add a particular solution for the forced case ( ), exactly as in , to describe how an external excitation changes that motion.     Case 1a — Free Undamped Oscillation ( )   With no damping ( ), equation with reduces to The characteristic polynomial has the purely imaginary roots . The general solution is The system oscillates at frequency with constant amplitude — no decay, no growth.     Free undamped oscillation: a pure sinusoid at frequency with period . The amplitude never changes.        Case 1b — Free Damped Oscillation ( )   With positive damping, the characteristic polynomial has discriminant . Three qualitatively different behaviours arise.   Case 1b.i — Underdamped ( ). Roots: where is the damped natural frequency . General solution: The system oscillates with exponentially decreasing amplitude.   Case 1b.ii — Critically damped ( ). Double root . General solution: The system returns to rest as fast as possible without oscillating — the aperiodic limit case .   Case 1b.iii — Overdamped ( ). Two distinct real roots (both negative, since ). General solution: The system decays to rest without oscillating, but more slowly than in the critically damped case.     The three qualitatively different responses of a free damped harmonic oscillator, plotted for and initial conditions , . Underdamped ( ): oscillatory decay. Critically damped ( ): fastest non-oscillatory return. Overdamped ( ): slow non-oscillatory decay.        Case 2 — Forced Oscillation and Resonance   Now consider an external sinusoidal force applied to a damped oscillator ( ). Using the method of undetermined coefficients with trial function (valid whenever or ), substitution into gives    Solving this linear system yields Hence the particular solution can be rewritten in amplitude-phase form as where the phase shift  satisfies .  The amplitude of the steady-state response is When is small and , the denominator is small and becomes very large — this is the resonance phenomenon.  In the undamped case with driving frequency , the method of undetermined coefficients requires the resonance trial function , and the amplitude grows linearly without bound.     Frequency response of the amplitude for fixed , and several damping values. As the resonance peak at becomes sharper and taller; for it diverges.       How to Read the Frequency-Response Graph  For a fixed damping value , the graph of tells us which driving frequencies are dangerous: tall peaks mean that a small periodic force can produce a large steady-state oscillation.  The peak is highest near when damping is weak. Increasing damping lowers and broadens the peak, which is why damping is an effective engineering tool for suppressing resonance.    Resonance in Engineering: The Tacoma Narrows Bridge  Resonance is not merely a mathematical curiosity. When an external excitation is close to the natural frequency of a structure, even moderate forcing can produce catastrophically large oscillations. A famous historical example is the Tacoma Narrows Bridge (Washington State, USA, 1940), which collapsed just four months after opening due to aerodynamic forces that matched the bridge's natural frequency. Modern structural engineering avoids resonance by careful tuning of natural frequencies away from expected excitation spectra, and by deliberately introducing damping (e.g.\\ tuned mass dampers in skyscrapers).    Check Your Understanding   Recognise Resonance   When is resonance most likely to occur in a forced oscillator?     When the driving frequency is close to the natural frequency and damping is small  Correct. Then the steady-state amplitude can become very large.    When the damping is extremely large  Incorrect. Strong damping suppresses resonance peaks.    Whenever the forcing term is zero  Incorrect. With no forcing, there is no forced resonance.    Only when the natural frequency is zero  Incorrect. Resonance is tied to matching frequencies, not to a zero natural frequency.      Free Undamped Oscillation   Solve the homogeneous ODE     The characteristic equation is so the roots are . Therefore the general solution is       "
+},
+{
+  "id": "ex-higher-order-motivation",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#ex-higher-order-motivation",
+  "type": "Example",
+  "number": "3.2.1",
+  "title": "Higher-Order ODEs in Engineering.",
+  "body": " Higher-Order ODEs in Engineering  Two classical engineering models immediately lead to higher-order linear ODEs with constant coefficients.     Harmonic oscillator (mass-spring-damper). A mass attached to a spring of stiffness and a damper of coefficient satisfies where is the displacement from rest and is an external force. This is a second-order linear ODE with constant coefficients.     Elastic beam bending. Under a distributed transverse load , the deflection of a homogeneous beam with bending stiffness satisfies This is a fourth-order linear ODE.     A mass-spring-damper model. The restoring spring force, damping force, and external input combine to produce a second-order equation for the displacement .       Beam bending under a distributed load. The fourth derivative appears because curvature and internal bending moments must be differentiated to balance the transverse load.      Both examples share the structural feature we will exploit: the unknown function and all its derivatives appear only linearly , and the coefficients are constant .  "
+},
+{
+  "id": "def-linear-ode-order-n",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#def-linear-ode-order-n",
+  "type": "Definition",
+  "number": "3.2.4",
+  "title": "Linear ODE of Order <span class=\"process-math\">\\(n\\)<\/span>.",
+  "body": " Linear ODE of Order   An ODE of order is linear if it can be written as where the coefficient functions  and the right-hand side  are given. The unknown function and its derivatives appear only to the first power and are never multiplied together or nested inside nonlinear functions.  Important special cases:    Constant coefficients: all are constants.     Homogeneous:  for all .     Inhomogeneous:  .      "
+},
+{
+  "id": "rem-linearity-meaning",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#rem-linearity-meaning",
+  "type": "Remark",
+  "number": "3.2.5",
+  "title": "What Linearity Rules Out.",
+  "body": " What Linearity Rules Out  The linearity condition says that never appears inside a nonlinear expression. Terms such as , , , or all violate linearity. By contrast, coefficients like or are fine, because they depend only on the independent variable  , not on the unknown .  "
+},
+{
+  "id": "ex-higher-order-classification",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#ex-higher-order-classification",
+  "type": "Example",
+  "number": "3.2.6",
+  "title": "Classifying Higher-Order ODEs.",
+  "body": " Classifying Higher-Order ODEs  Determine for each ODE: is it linear? If so, is it homogeneous? Does it have constant coefficients?                    Classification.     Not linear: the term is a nonlinear function of .     Linear, not homogeneous, constant coefficients: all derivatives of appear linearly; ; the coefficients do not depend on .     Linear, homogeneous, non-constant coefficients:  , but the coefficient of depends on .     The solution methods developed in this section apply to cases like (2): linear, with constant coefficients.  "
+},
+{
+  "id": "fig-higher-order-classification-tree",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#fig-higher-order-classification-tree",
+  "type": "Figure",
+  "number": "3.2.7",
+  "title": "",
+  "body": " Classification of higher-order ODEs. This section treats the shaded class: linear, constant-coefficient ODEs — the most algorithmically accessible family.     "
+},
+{
+  "id": "exer-higher-order-classify-equation",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#exer-higher-order-classify-equation",
+  "type": "Exercise",
+  "number": "3.2.1.1",
+  "title": "Classify the Equation.",
+  "body": " Classify the Equation   Consider Which description is correct?     Third-order, linear, inhomogeneous, with constant coefficients  Correct. The coefficients of are constants, and the right-hand side is nonzero.    Third-order, nonlinear, homogeneous  Incorrect. The equation is linear, and it is not homogeneous because of .    Second-order, linear, homogeneous  Incorrect. The highest derivative is third order.    First-order, nonlinear, with variable coefficients  Incorrect. None of those labels fits this equation.    "
+},
+{
+  "id": "exer-higher-order-associated-homogeneous",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#exer-higher-order-associated-homogeneous",
+  "type": "Exercise",
+  "number": "3.2.1.2",
+  "title": "Associated Homogeneous Equation.",
+  "body": " Associated Homogeneous Equation   Write down the associated homogeneous equation for     The associated homogeneous equation is obtained by replacing the right-hand side by :    "
+},
+{
+  "id": "ex-motivating-case-study",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#ex-motivating-case-study",
+  "type": "Example",
+  "number": "3.2.8",
+  "title": "Motivating Case Study.",
+  "body": " Motivating Case Study  Consider the homogeneous third-order ODE We guess a solution of the form . Computing derivatives: , , . Substituting into the ODE and dividing by : This algebraic equation — the characteristic polynomial evaluated at — must be satisfied. Once we find its roots, we can read off the solutions to the ODE.  "
+},
+{
+  "id": "def-characteristic-polynomial",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#def-characteristic-polynomial",
+  "type": "Definition",
+  "number": "3.2.9",
+  "title": "Characteristic Polynomial.",
+  "body": " Characteristic Polynomial   The characteristic polynomial of the homogeneous linear ODE with constant coefficients is the degree- polynomial The ODE and its characteristic polynomial are obtained from each other by the formal substitution .   "
+},
+{
+  "id": "rem-fundamental-theorem",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#rem-fundamental-theorem",
+  "type": "Remark",
+  "number": "3.2.10",
+  "title": "Counting the Roots.",
+  "body": " Counting the Roots  By the fundamental theorem of algebra, every polynomial of degree over the complex numbers has exactly roots counted with multiplicity. Each root of contributes one or more linearly independent solutions to the ODE, and together they span the entire solution space (which has dimension ).  "
+},
+{
+  "id": "thm-solutions-from-roots",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#thm-solutions-from-roots",
+  "type": "Theorem",
+  "number": "3.2.11",
+  "title": "Solutions from the Roots of the Characteristic Polynomial.",
+  "body": " Solutions from the Roots of the Characteristic Polynomial   Let be the characteristic polynomial of a homogeneous linear ODE with constant coefficients, and let be a root of .   Case 1 — simple real root. If is a simple root, then is a solution.   Case 2 — simple pair of complex conjugate roots. If and (with , ) are simple roots, then the two real solutions are linearly independent solutions.   Case 3 — root of multiplicity .     Case 3a — real root of multiplicity . The linearly independent solutions are      Case 3b — complex root of multiplicity . Conjugacy forces to also be a root of multiplicity . The linearly independent real solutions are       "
+},
+{
+  "id": "fig-roots-to-solutions",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#fig-roots-to-solutions",
+  "type": "Figure",
+  "number": "3.2.12",
+  "title": "",
+  "body": " Summary: how the type of a root of the characteristic polynomial determines the corresponding fundamental solutions. The multiplicity of each root is matched by exactly linearly independent solutions (or for complex pairs).     "
+},
+{
+  "id": "par-homogeneous-scaled-sums",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#par-homogeneous-scaled-sums",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "linear combination "
+},
+{
+  "id": "thm-general-solution-homogeneous",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#thm-general-solution-homogeneous",
+  "type": "Theorem",
+  "number": "3.2.13",
+  "title": "General Solution of Homogeneous Linear ODEs.",
+  "body": " General Solution of Homogeneous Linear ODEs   Consider the homogeneous linear ODE with constant coefficients and let be its characteristic polynomial. Applying to all roots of , counted with multiplicity, yields linearly independent solutions . The general solution is Initial conditions (e.g. values of ) pin down the constants .   "
+},
+{
+  "id": "ex-homogeneous-double-real-root",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#ex-homogeneous-double-real-root",
+  "type": "Example",
+  "number": "3.2.14",
+  "title": "Homogeneous ODE — Double Real Root.",
+  "body": " Homogeneous ODE — Double Real Root  Find the general solution of .   Solution. The characteristic polynomial is The root has multiplicity (Case 3a). The two fundamental solutions are The general solution is   "
+},
+{
+  "id": "ex-homogeneous-complex-roots",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#ex-homogeneous-complex-roots",
+  "type": "Example",
+  "number": "3.2.15",
+  "title": "Homogeneous ODE — Simple Complex Conjugate Roots.",
+  "body": " Homogeneous ODE — Simple Complex Conjugate Roots  Find the general solution of .   Solution. The characteristic polynomial is . Using the quadratic formula: Thus , (Case 2). The two fundamental solutions are The general solution is   "
+},
+{
+  "id": "ex-homogeneous-third-order-mixed",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#ex-homogeneous-third-order-mixed",
+  "type": "Example",
+  "number": "3.2.16",
+  "title": "Homogeneous ODE of Order 3 — Mixed Roots.",
+  "body": " Homogeneous ODE of Order 3 — Mixed Roots  Find the general solution of given that is a root.   Solution. The characteristic polynomial is . Since is a root, we factor out by polynomial division: The roots of are (i.e. , ). Applying Cases 1 and 2: The general solution is   "
+},
+{
+  "id": "exer-homogeneous-general-solution-from-roots",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#exer-homogeneous-general-solution-from-roots",
+  "type": "Exercise",
+  "number": "3.2.2.1",
+  "title": "General Solution from Characteristic Roots.",
+  "body": " General Solution from Characteristic Roots   Suppose the characteristic polynomial of a homogeneous linear ODE has the two roots and . What is the general solution?      Correct. Each simple real root contributes one exponential solution.     Incorrect. Trigonometric terms arise from complex roots, not from two real roots.     Incorrect. The factor appears only for repeated roots.     Incorrect. The two fundamental solutions must appear independently.    "
+},
+{
+  "id": "exer-homogeneous-solve-simple-constant-coeff",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#exer-homogeneous-solve-simple-constant-coeff",
+  "type": "Exercise",
+  "number": "3.2.2.2",
+  "title": "Solve a Simple Homogeneous ODE.",
+  "body": " Solve a Simple Homogeneous ODE   Solve     The characteristic polynomial is So the roots are and . Therefore the general solution is    "
+},
+{
+  "id": "thm-superposition-principle",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#thm-superposition-principle",
+  "type": "Theorem",
+  "number": "3.2.17",
+  "title": "Superposition Principle.",
+  "body": " Superposition Principle   Let be any particular solution of the inhomogeneous ODE Let be the general solution of the corresponding homogeneous ODE (i.e.\\ with ). Then the general solution of the inhomogeneous ODE is and every solution of the inhomogeneous ODE has this form for some choice of .   "
+},
+{
+  "id": "alg-undetermined-coefficients-3",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#alg-undetermined-coefficients-3",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "method of undetermined coefficients "
+},
+{
+  "id": "thm-undetermined-coefficient-guesses",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#thm-undetermined-coefficient-guesses",
+  "type": "Theorem",
+  "number": "3.2.18",
+  "title": "Trial Functions for the Particular Solution.",
+  "body": " Trial Functions for the Particular Solution   Consider an inhomogeneous linear ODE with constant coefficients and let be the characteristic polynomial of the associated homogeneous ODE. The following table gives the standard trial function for . The constants named or are known from the given right-hand side; the constants named or are unknown and will be determined by substitution.  In the table, the root to check is the complex number that represents the same exponential or oscillating shape as the forcing term. If that number is a root of with multiplicity , multiply the natural trial function by . If it is not a root, use , so no extra factor of is added.       Right-hand side  Root to check  Trial function for    Polynomial            and      and     For a sum of several forcing terms, choose one trial function for each term and add those trial functions together. If the ODE has real coefficients, complex conjugate roots have the same multiplicity, so checking one member of a conjugate pair determines the same value of for the other.   "
+},
+{
+  "id": "rem-guessing-method-scope",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#rem-guessing-method-scope",
+  "type": "Remark",
+  "number": "3.2.19",
+  "title": "Scope of the Method.",
+  "body": " Scope of the Method  The method of undetermined coefficients works well when the forcing term is built from polynomials, exponentials, sines, cosines, or finite sums and products of these functions. It is not a universal method for arbitrary right-hand sides such as or .  That scope restriction is useful to keep in mind: in this section we deliberately stay within the constant-coefficient setting where the forcing term suggests a manageable trial function.  "
+},
+{
+  "id": "rem-resonance-explanation",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#rem-resonance-explanation",
+  "type": "Remark",
+  "number": "3.2.20",
+  "title": "Why the Resonance Factor <span class=\"process-math\">\\(t^k\\text{?}\\)<\/span>",
+  "body": " Why the Resonance Factor ?  The case is called resonance . Algebraically, it means that the natural trial function for overlaps with a solution of the associated homogeneous ODE. If we try that overlapping trial function, the homogeneous left-hand side either becomes zero or loses exactly the shape we need, so it cannot produce the required forcing term. Multiplying by moves the trial function to the next related function shape; if the same characteristic root occurs times, we must move steps and multiply by .  This phenomenon has a physical counterpart: when a driving force matches the natural frequency of an undamped oscillator the amplitude grows without bound (resonance).  "
+},
+{
+  "id": "ex-inhomogeneous-polynomial-rhs",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#ex-inhomogeneous-polynomial-rhs",
+  "type": "Example",
+  "number": "3.2.21",
+  "title": "Inhomogeneous ODE — Polynomial Right-Hand Side.",
+  "body": " Inhomogeneous ODE — Polynomial Right-Hand Side  Find the general solution of .   Step 1 — Homogeneous solution. We found earlier ( ) that the characteristic polynomial is and the general homogeneous solution is    Step 2 — Particular solution. The right-hand side is a polynomial of degree 2. Check for resonance: , so is not a root and . Trial function: .  Compute the derivatives and substitute into the left-hand side:  Equating coefficients with : Thus .   Step 3 — General solution.    "
+},
+{
+  "id": "ex-inhomogeneous-exponential-resonance",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#ex-inhomogeneous-exponential-resonance",
+  "type": "Example",
+  "number": "3.2.22",
+  "title": "Inhomogeneous ODE — Resonance with Exponential Forcing.",
+  "body": " Inhomogeneous ODE — Resonance with Exponential Forcing  Find the general solution of .   Step 1 — Homogeneous solution.  . Root has multiplicity 2, so    Step 2 — Particular solution. The right-hand side is , so . Since is a root of of multiplicity , we use the resonance trial function .  Compute derivatives (using the product rule twice): Substituting into the ODE: Setting gives .   Step 3 — General solution.    "
+},
+{
+  "id": "ex-inhomogeneous-complex-exponential-forcing",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#ex-inhomogeneous-complex-exponential-forcing",
+  "type": "Example",
+  "number": "3.2.23",
+  "title": "Inhomogeneous ODE — Exponentially Modulated Oscillation.",
+  "body": " Inhomogeneous ODE — Exponentially Modulated Oscillation  Find the general solution of .   Step 1 — Homogeneous solution.  . Roots: .    Step 2 — Particular solution. The right-hand side has , . The complex frequency is not a root of (since the roots are ), so and the trial function is   Let . After computing via the product rule and comparing coefficients with , one obtains the system Solving: , .   Step 3 — General solution.    "
+},
+{
+  "id": "exer-inhomogeneous-guess-polynomial",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#exer-inhomogeneous-guess-polynomial",
+  "type": "Exercise",
+  "number": "3.2.3.1",
+  "title": "Choose a Trial Function.",
+  "body": " Choose a Trial Function   For the ODE which trial function is appropriate for a particular solution?      Correct. A sine forcing generally requires both sine and cosine terms, because derivatives of sine and cosine produce each other.     Incorrect. This is the common incomplete trial function: after differentiating, cosine terms can appear, so both sine and cosine should be included.     Incorrect. Polynomial trial functions are used for polynomial forcing terms, not sinusoidal forcing.     Incorrect. Exponential trial functions are used for exponential forcing terms.    "
+},
+{
+  "id": "exer-inhomogeneous-resonance-exp",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#exer-inhomogeneous-resonance-exp",
+  "type": "Exercise",
+  "number": "3.2.3.2",
+  "title": "Find a Particular Solution in a Resonance Case.",
+  "body": " Find a Particular Solution in a Resonance Case   Find one particular solution of     The homogeneous characteristic polynomial is so is already a homogeneous solution. We therefore use the resonance trial function Substituting gives To match the right-hand side , we choose , hence . Thus one particular solution is    "
+},
+{
+  "id": "subsec-harmonic-oscillator-2-1",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#subsec-harmonic-oscillator-2-1",
+  "type": "Paragraph (with a defined term)",
+  "number": "",
+  "title": "",
+  "body": "mass-spring-damper "
+},
+{
+  "id": "ex-spring-pendulum-setup",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#ex-spring-pendulum-setup",
+  "type": "Example",
+  "number": "3.2.24",
+  "title": "The Mass-Spring-Damper System.",
+  "body": " The Mass-Spring-Damper System  A mass is attached to a fixed support by a spring (stiffness ) and a viscous damper (damping coefficient ). The mass can move vertically; let denote its displacement from the natural rest position.   Schematic of the mass-spring-damper system. The mass hangs from a spring (stiffness ) and moves through a viscous liquid (damping coefficient ). Positive points downward.      Newton's second law gives which, after dividing by and rearranging, becomes Physical reasoning constrains the parameters: (damping is non-negative) and (the spring always restores). Here is called the natural frequency .  "
+},
+{
+  "id": "rem-harmonic-solution-strategy",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#rem-harmonic-solution-strategy",
+  "type": "Remark",
+  "number": "3.2.26",
+  "title": "Solution Strategy.",
+  "body": " Solution Strategy  The harmonic oscillator is the concrete place where the abstract theory of this section comes together. First we solve the homogeneous equation ( ) to understand the system's free motion. Then we add a particular solution for the forced case ( ), exactly as in , to describe how an external excitation changes that motion.  "
+},
+{
+  "id": "thm-undamped-free-oscillation",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#thm-undamped-free-oscillation",
+  "type": "Theorem",
+  "number": "3.2.27",
+  "title": "Case 1a — Free Undamped Oscillation (<span class=\"process-math\">\\(\\beta = 0\\)<\/span>).",
+  "body": " Case 1a — Free Undamped Oscillation ( )   With no damping ( ), equation with reduces to The characteristic polynomial has the purely imaginary roots . The general solution is The system oscillates at frequency with constant amplitude — no decay, no growth.   "
+},
+{
+  "id": "fig-undamped-oscillation",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#fig-undamped-oscillation",
+  "type": "Figure",
+  "number": "3.2.28",
+  "title": "",
+  "body": " Free undamped oscillation: a pure sinusoid at frequency with period . The amplitude never changes.     "
+},
+{
+  "id": "thm-damped-free-oscillation",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#thm-damped-free-oscillation",
+  "type": "Theorem",
+  "number": "3.2.29",
+  "title": "Case 1b — Free Damped Oscillation (<span class=\"process-math\">\\(\\beta &gt; 0\\)<\/span>).",
+  "body": " Case 1b — Free Damped Oscillation ( )   With positive damping, the characteristic polynomial has discriminant . Three qualitatively different behaviours arise.   Case 1b.i — Underdamped ( ). Roots: where is the damped natural frequency . General solution: The system oscillates with exponentially decreasing amplitude.   Case 1b.ii — Critically damped ( ). Double root . General solution: The system returns to rest as fast as possible without oscillating — the aperiodic limit case .   Case 1b.iii — Overdamped ( ). Two distinct real roots (both negative, since ). General solution: The system decays to rest without oscillating, but more slowly than in the critically damped case.   "
+},
+{
+  "id": "fig-damped-oscillation-cases",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#fig-damped-oscillation-cases",
+  "type": "Figure",
+  "number": "3.2.30",
+  "title": "",
+  "body": " The three qualitatively different responses of a free damped harmonic oscillator, plotted for and initial conditions , . Underdamped ( ): oscillatory decay. Critically damped ( ): fastest non-oscillatory return. Overdamped ( ): slow non-oscillatory decay.     "
+},
+{
+  "id": "thm-forced-oscillation",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#thm-forced-oscillation",
+  "type": "Theorem",
+  "number": "3.2.31",
+  "title": "Case 2 — Forced Oscillation and Resonance.",
+  "body": " Case 2 — Forced Oscillation and Resonance   Now consider an external sinusoidal force applied to a damped oscillator ( ). Using the method of undetermined coefficients with trial function (valid whenever or ), substitution into gives    Solving this linear system yields Hence the particular solution can be rewritten in amplitude-phase form as where the phase shift  satisfies .  The amplitude of the steady-state response is When is small and , the denominator is small and becomes very large — this is the resonance phenomenon.  In the undamped case with driving frequency , the method of undetermined coefficients requires the resonance trial function , and the amplitude grows linearly without bound.   "
+},
+{
+  "id": "fig-resonance-amplitude-curve",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#fig-resonance-amplitude-curve",
+  "type": "Figure",
+  "number": "3.2.32",
+  "title": "",
+  "body": " Frequency response of the amplitude for fixed , and several damping values. As the resonance peak at becomes sharper and taller; for it diverges.     "
+},
+{
+  "id": "rem-reading-frequency-response",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#rem-reading-frequency-response",
+  "type": "Remark",
+  "number": "3.2.33",
+  "title": "How to Read the Frequency-Response Graph.",
+  "body": " How to Read the Frequency-Response Graph  For a fixed damping value , the graph of tells us which driving frequencies are dangerous: tall peaks mean that a small periodic force can produce a large steady-state oscillation.  The peak is highest near when damping is weak. Increasing damping lowers and broadens the peak, which is why damping is an effective engineering tool for suppressing resonance.  "
+},
+{
+  "id": "rem-resonance-catastrophe",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#rem-resonance-catastrophe",
+  "type": "Remark",
+  "number": "3.2.34",
+  "title": "Resonance in Engineering: The Tacoma Narrows Bridge.",
+  "body": " Resonance in Engineering: The Tacoma Narrows Bridge  Resonance is not merely a mathematical curiosity. When an external excitation is close to the natural frequency of a structure, even moderate forcing can produce catastrophically large oscillations. A famous historical example is the Tacoma Narrows Bridge (Washington State, USA, 1940), which collapsed just four months after opening due to aerodynamic forces that matched the bridge's natural frequency. Modern structural engineering avoids resonance by careful tuning of natural frequencies away from expected excitation spectra, and by deliberately introducing damping (e.g.\\ tuned mass dampers in skyscrapers).  "
+},
+{
+  "id": "exer-harmonic-resonance-concept",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#exer-harmonic-resonance-concept",
+  "type": "Exercise",
+  "number": "3.2.4.1",
+  "title": "Recognise Resonance.",
+  "body": " Recognise Resonance   When is resonance most likely to occur in a forced oscillator?     When the driving frequency is close to the natural frequency and damping is small  Correct. Then the steady-state amplitude can become very large.    When the damping is extremely large  Incorrect. Strong damping suppresses resonance peaks.    Whenever the forcing term is zero  Incorrect. With no forcing, there is no forced resonance.    Only when the natural frequency is zero  Incorrect. Resonance is tied to matching frequencies, not to a zero natural frequency.    "
+},
+{
+  "id": "exer-harmonic-undamped-general-solution",
+  "level": "2",
+  "url": "section-higher-order-linear-odes.html#exer-harmonic-undamped-general-solution",
+  "type": "Exercise",
+  "number": "3.2.4.2",
+  "title": "Free Undamped Oscillation.",
+  "body": " Free Undamped Oscillation   Solve the homogeneous ODE     The characteristic equation is so the roots are . Therefore the general solution is    "
+},
+{
   "id": "backmatter-2",
   "level": "1",
   "url": "backmatter-2.html",
