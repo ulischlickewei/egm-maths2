@@ -1,0 +1,629 @@
+<subsection xml:id="subsec-vectorial-line-integrals">
+  <title>Line Integrals of Vector Fields</title>
+
+  <introduction>
+    <p>
+      We now integrate a vector field along a curve.  The key difference from
+      scalar line integrals is that we take the <em>dot product</em> of the
+      field with the tangent vector of the curve: only the component of the
+      field that is <em>aligned with the motion</em> contributes.  The most
+      important physical instance is <em>work</em>: the work done by a force
+      field on a body moving along a path equals the vectorial line integral
+      of the force along the path.
+    </p>
+  </introduction>
+
+  <!-- ─── Definition: vectorial line integral ─── -->
+
+  <definition xml:id="def-vectorial-line-integral">
+    <title>Line Integral of a Vector Field</title>
+    <statement>
+      <p>
+        Let <m>D \subseteq \R^n</m>, let
+        <m>\mathbf{x}\colon [a,b] \to D</m> be a continuously differentiable
+        curve, and let <m>\mathbf{v}\colon D \to \R^n</m> be a continuous
+        vector field.  The <term>line integral of the vector field
+        <m>\mathbf{v}</m> along <m>\mathbf{x}</m></term> is
+        <me>
+          \int_{\mathbf{x}} \mathbf{v} \cdot d\mathbf{x}
+          := \int_a^b
+             \mathbf{v}\!\left(\mathbf{x}(t)\right) \cdot \dot{\mathbf{x}}(t)
+             \, dt,
+        </me>
+        where the dot denotes the Euclidean inner product and
+        <m>\dot{\mathbf{x}}(t) = \mathbf{x}'(t)</m> is the tangent vector.
+      </p>
+    </statement>
+  </definition>
+
+  <!-- ─── Remark: work interpretation ─── -->
+
+  <remark xml:id="rem-work-force-field">
+    <title>Physical Interpretation: Work Done by a Force Field</title>
+    <p>
+      If <m>\mathbf{F}</m> is a force field and <m>\mathbf{s}\colon [a,b] \to \R^n</m>
+      is the path of a moving body, the <term>work</term> done by the force
+      on the body is
+      <me>
+        W = \int_{\mathbf{s}} \mathbf{F} \cdot d\mathbf{s}
+          = \int_a^b \mathbf{F}\!\bigl(\mathbf{s}(t)\bigr)
+            \cdot \dot{\mathbf{s}}(t) \, dt.
+      </me>
+      We can rewrite this by separating the speed and the unit tangent:
+      <me>
+        W = \int_a^b
+            \left[
+              \mathbf{F}\!\bigl(\mathbf{s}(t)\bigr)
+              \cdot \frac{\dot{\mathbf{s}}(t)}{\|\dot{\mathbf{s}}(t)\|}
+            \right]
+            \|\dot{\mathbf{s}}(t)\| \, dt.
+      </me>
+      The bracketed factor is the <em>orthogonal projection</em> of
+      <m>\mathbf{F}</m> onto the unit tangent: it is the component of the
+      force acting along the direction of motion.  Only this tangential
+      component does work; the normal component is perpendicular to the
+      displacement and contributes nothing.
+    </p>
+    <figure xml:id="fig-work-path">
+      <caption>
+        A path <m>\mathbf{s}</m> through a force field <m>\mathbf{F}</m>.
+        At each point the tangential component (blue projection) of
+        <m>\mathbf{F}</m> contributes to the work; the normal component
+        (dashed) does not.
+      </caption>
+      <image xml:id="image-work-path" width="55%">
+        <latex-image>
+          \begin{tikzpicture}[scale=1.1]
+            % Draw a smooth path s
+            \draw[blue!70!black, very thick, ->]
+              plot[smooth, tension=0.7]
+              coordinates {(0.2,0.4) (1.0,0.9) (2.0,1.1) (3.0,0.8) (3.8,0.5)};
+            \node[blue!70!black, below, font=\small] at (2.0,0.65) {$\mathbf{s}$};
+            % A point on the path (roughly at t=0.5)
+            \coordinate (P) at (2.0,1.1);
+            \filldraw[black] (P) circle (1.5pt);
+            % Tangent vector (unit tangent approximated)
+            \coordinate (T) at (2.7,1.05); % direction (0.7,-0.05) normalized
+            \draw[->,very thick,black] (P) -- (T)
+              node[right,font=\small] {$\dot{\mathbf{s}}$};
+            % Force vector F (some direction)
+            \coordinate (F) at (2.6,1.9);
+            \draw[->,thick,red!70!black] (P) -- (F)
+              node[above right,font=\small] {$\mathbf{F}$};
+            % Projection of F onto tangent direction
+            % tangent unit direction approx (0.997,-0.071)
+            % F vector: (0.6, 0.8), projection = 0.6*0.997+0.8*(-0.071)=0.598-0.057=0.541
+            % projected point: P + 0.541*(0.997,-0.071) = (2.0+0.54, 1.1-0.038) = (2.54,1.06)
+            \coordinate (Fproj) at (2.54,1.06);
+            \draw[->,thick,blue!50!black] (P) -- (Fproj)
+              node[below,font=\small] {proj};
+            % Dashed normal component
+            \draw[dashed,gray] (Fproj) -- (F);
+            % Small arc for angle
+            \draw[gray] ($(P)+(0.25,0)$) arc (0:52:0.25)
+              node[midway,right,font=\scriptsize,gray] {$\theta$};
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+    </figure>
+  </remark>
+
+  <!-- ─── Remark: computation procedure ─── -->
+
+  <remark xml:id="rem-vectorial-computation">
+    <title>How to Compute a Vectorial Line Integral</title>
+    <p>
+      To evaluate
+      <m>\displaystyle\int_{\mathbf{x}} \mathbf{v} \cdot d\mathbf{x}</m>,
+      follow three steps.
+    </p>
+    <p>
+      <em>Step 1: Parametrize the curve.</em>
+      Find a continuously differentiable parametrization
+      <m>\mathbf{x}\colon [a,b] \to \R^n</m> whose trace is the desired path.
+    </p>
+    <p>
+      <em>Step 2: Compute the tangent vector.</em>
+      Differentiate: <m>\dot{\mathbf{x}}(t) = \mathbf{x}'(t)</m>.
+    </p>
+    <p>
+      <em>Step 3: Form the dot product and integrate.</em>
+      Evaluate the ordinary integral
+      <me>
+        \int_a^b
+        \mathbf{v}\!\left(\mathbf{x}(t)\right) \cdot \dot{\mathbf{x}}(t)
+        \, dt.
+      </me>
+    </p>
+    <p>
+      Note that the vectorial line integral is <em>orientation-sensitive</em>:
+      reversing the direction of traversal changes the sign of the result,
+      unlike the scalar line integral.
+    </p>
+  </remark>
+
+  <!-- ─── Example: quarter circle ─── -->
+
+  <example xml:id="ex-quarter-circle-vli">
+    <title>Vectorial Line Integral Along a Quarter Circle</title>
+    <statement>
+      <p>
+        Compute the line integral of the vector field
+        <m>\mathbf{v}\colon \R^2 \to \R^2</m>,
+        <m>\mathbf{v}(x,y) = \begin{pmatrix} x^2 \\ -xy \end{pmatrix}</m>,
+        along the quarter circle in the first quadrant, traversed from
+        <m>(1,0)</m> to <m>(0,1)</m>.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        <em>Step 1: Parametrize.</em>
+        <me>
+          \mathbf{x}\colon \left[0,\tfrac{\pi}{2}\right] \to \R^2, \qquad
+          t \mapsto \begin{pmatrix} \cos t \\ \sin t \end{pmatrix}.
+        </me>
+      </p>
+      <p>
+        <em>Step 2: Tangent vector.</em>
+        <me>
+          \dot{\mathbf{x}}(t)
+          = \begin{pmatrix} -\sin t \\ \cos t \end{pmatrix}.
+        </me>
+      </p>
+      <p>
+        <em>Step 3: Compute the dot product.</em>
+        Since <m>x = \cos t</m>, <m>y = \sin t</m>:
+        <me>
+          \mathbf{v}\!\left(\mathbf{x}(t)\right)
+          = \begin{pmatrix} \cos^2 t \\ -\cos t \sin t \end{pmatrix}.
+        </me>
+        Therefore
+        <md>
+          <mrow>
+            \mathbf{v}\!\left(\mathbf{x}(t)\right) \cdot \dot{\mathbf{x}}(t)
+            \amp= \cos^2 t \cdot (-\sin t)
+               + (-\cos t \sin t) \cdot \cos t
+          </mrow>
+          <mrow>
+            \amp= -\sin t \cos^2 t - \sin t \cos^2 t
+               = -2\sin t \cos^2 t.
+          </mrow>
+        </md>
+      </p>
+    <p>
+      <em>Step 4: Integrate.</em>
+      Using the substitution <m>u = \cos t</m>,
+      <m>du = -\sin t \, dt</m>:
+        <md>
+          <mrow>
+            \int_{\mathbf{x}} \mathbf{v} \cdot d\mathbf{x}
+            \amp= \int_0^{\pi/2} (-2\sin t \cos^2 t)\, dt
+          </mrow>
+          <mrow>
+            \amp= \int_1^0 2u^2 \, du
+               = -\int_0^1 2u^2 \, du
+          </mrow>
+          <mrow>
+            \amp= -2 \left[\frac{u^3}{3}\right]_0^1
+               = -\frac{2}{3}.
+          </mrow>
+        </md>
+        Reversing the orientation of the same quarter circle would change the
+        sign of the integral to <m>\frac{2}{3}</m>.
+      </p>
+    </solution>
+  </example>
+
+  <!-- ─── Theorem: fundamental theorem for line integrals ─── -->
+
+  <theorem xml:id="thm-fundamental-theorem-line-integrals">
+    <title>Fundamental Theorem for Line Integrals</title>
+    <statement>
+      <p>
+        Let <m>D \subseteq \R^n</m>, let
+        <m>\mathbf{v}\colon D \to \R^n</m> be a vector field, and
+        let <m>f\colon D \to \R</m> be a differentiable antiderivative of
+        <m>\mathbf{v}</m> (i.e.\ <m>\nabla f = \mathbf{v}</m>).  Then for every
+        continuously differentiable curve <m>\mathbf{x}\colon [a,b] \to D</m>:
+        <me>
+          \int_{\mathbf{x}} \mathbf{v} \cdot d\mathbf{x}
+          = f\!\left(\mathbf{x}(b)\right) - f\!\left(\mathbf{x}(a)\right).
+        </me>
+      </p>
+      <p>
+        Two important consequences follow immediately.
+      </p>
+      <p>
+        <em>Closed curves give zero.</em>
+        If <m>\mathbf{x}(a) = \mathbf{x}(b)</m> (i.e.\ the curve is closed),
+        then
+        <me>
+          \int_{\mathbf{x}} \mathbf{v} \cdot d\mathbf{x} = 0.
+        </me>
+      </p>
+      <p>
+        <em>Path independence.</em>
+        The integral depends only on the start and end points, not on the
+        path taken between them: if <m>\mathbf{x}</m> and <m>\mathbf{y}</m>
+        are two curves in <m>D</m> with the same start and end points, then
+        <me>
+          \int_{\mathbf{x}} \mathbf{v} \cdot d\mathbf{x}
+          = \int_{\mathbf{y}} \mathbf{v} \cdot d\mathbf{y}.
+        </me>
+      </p>
+    </statement>
+    <!-- ADDED: proof to justify the boundary-evaluation formula via the chain rule -->
+    <proof>
+      <p>
+        Consider the composite function
+        <m>g(t) = f(\mathbf{x}(t))</m> on <m>[a,b]</m>.  By the chain rule,
+        <me>
+          g'(t)
+          = \nabla f\!\left(\mathbf{x}(t)\right) \cdot \dot{\mathbf{x}}(t)
+          = \mathbf{v}\!\left(\mathbf{x}(t)\right) \cdot \dot{\mathbf{x}}(t).
+        </me>
+        Integrating from <m>a</m> to <m>b</m> and applying the ordinary
+        fundamental theorem of calculus gives
+        <me>
+          \int_a^b \mathbf{v}\!\left(\mathbf{x}(t)\right)
+          \cdot \dot{\mathbf{x}}(t)\,dt
+          = \int_a^b g'(t)\,dt
+          = g(b)-g(a)
+          = f\!\left(\mathbf{x}(b)\right)-f\!\left(\mathbf{x}(a)\right).
+        </me>
+        This is exactly the stated formula.
+      </p>
+    </proof>
+  </theorem>
+
+  <!-- Figure: path independence illustration -->
+  <figure xml:id="fig-path-independence">
+    <caption>
+      Left: two different paths <m>\mathbf{x}</m> and <m>\mathbf{y}</m>
+      between the same endpoints <m>A</m> and <m>B</m> give the same
+      integral value for a conservative field.
+      Right: a closed curve in a conservative field always gives integral
+      value zero.
+    </caption>
+    <image xml:id="image-path-independence" width="65%">
+      <latex-image>
+        \begin{tikzpicture}[scale=1.0]
+          % Left panel: two paths from A to B
+          \begin{scope}
+            \coordinate (A) at (0,0);
+            \coordinate (B) at (3.2,0);
+            \filldraw[black] (A) circle (1.5pt) node[left,font=\small] {$A$};
+            \filldraw[black] (B) circle (1.5pt) node[right,font=\small] {$B$};
+            % upper path
+            \draw[blue!70!black, thick, ->, bend left=45] (A) to
+              node[above,font=\small] {$\mathbf{x}$} (B);
+            % lower path
+            \draw[red!60!black, thick, ->, bend right=40] (A) to
+              node[below,font=\small] {$\mathbf{y}$} (B);
+            % equality annotation
+            \node[font=\small] at (1.6,0) {$=$};
+          \end{scope}
+          % Right panel: closed curve
+          \begin{scope}[xshift=4.8cm]
+            \coordinate (O) at (1.2,0);
+            \filldraw[black] (O) circle (1.5pt) node[below right,font=\small] {$A=B$};
+            \draw[green!50!black, thick, ->]
+              (O) to[out=60,in=10] (0.5,1.3) to[out=190,in=130] (-0.3,0.5)
+              to[out=-50,in=200] (O);
+            \node[green!50!black, above, font=\small] at (0.6,1.4) {$\oint = 0$};
+          \end{scope}
+        \end{tikzpicture}
+      </latex-image>
+    </image>
+  </figure>
+
+  <!-- ─── Remark: when does an antiderivative exist? ─── -->
+
+  <remark xml:id="rem-antiderivative-existence">
+    <title>Existence and Computation of Antiderivatives</title>
+    <p>
+      The fundamental theorem raises three natural questions.
+    </p>
+    <p>
+      <em>1. Does every continuous vector field have an antiderivative?</em>
+    </p>
+    <p>
+      No.  A simple counterexample is the rotation field
+      <m>\mathbf{v}(x,y) = \begin{pmatrix} -y \\ x \end{pmatrix}</m>.
+      Suppose <m>f</m> were an antiderivative.  Then
+      <m>\partial f/\partial x = -y</m>, so integrating in <m>x</m>:
+      <m>f(x,y) = -yx + g(y)</m>.
+      Differentiating in <m>y</m>:
+      <m>\partial f/\partial y = -x + g'(y) \overset{!}{=} x</m>,
+      which forces <m>g'(y) = 2x</m>.  But <m>g</m> depends only on
+      <m>y</m>, so this is a contradiction.  The rotation field is
+      <em>not</em> conservative.
+    </p>
+    <p>
+      <em>2. When does an antiderivative exist?</em>
+    </p>
+    <p>
+      A necessary condition (in <m>\R^3</m>) is that the curl vanishes:
+      <me>
+        \mathbf{v} \text{ has an antiderivative}
+        \implies
+        \operatorname{rot}\mathbf{v} = \mathbf{0}.
+      </me>
+      This follows from Schwarz's theorem on the equality of mixed partial
+      derivatives.  For a continuously differentiable vector field on a simply
+      connected domain, the converse also holds:
+      <m>\operatorname{rot}\mathbf{v} = \mathbf{0}</m> implies
+      <m>\mathbf{v}</m> is conservative.
+    </p>
+    <p>
+      In the planar case <m>\mathbf{v}(x,y) = (P(x,y),Q(x,y))</m>, the
+      corresponding condition is
+      <m>\partial Q/\partial x = \partial P/\partial y</m>.
+      This is the two-dimensional version students will use most often in
+      examples.
+    </p>
+    <p>
+      <em>3. How to find an antiderivative, if one exists?</em>
+    </p>
+    <p>
+      Use successive integration: integrate the first component equation in
+      <m>x_1</m>, then determine the unknown function of the remaining
+      variables from the second component equation, and so on.
+      The following example illustrates the method in three variables.
+    </p>
+    <p>
+      Let
+      <m>\mathbf{v}(x,y,z)
+         = \begin{pmatrix} e^x y + 1 \\ e^x + z \\ y \end{pmatrix}</m>.
+      We seek <m>f</m> with <m>\nabla f = \mathbf{v}</m>.
+    </p>
+    <p>
+      <em>Integrate <m>\partial f/\partial x = e^x y + 1</m> in <m>x</m>:</em>
+      <me>
+        f(x,y,z) = e^x y + x + g(y,z).
+      </me>
+    </p>
+    <p>
+      <em>Use <m>\partial f/\partial y = e^x + z</m>:</em>
+      <me>
+        e^x + \frac{\partial g}{\partial y}(y,z) = e^x + z
+        \implies
+        \frac{\partial g}{\partial y} = z
+        \implies
+        g(y,z) = zy + h(z).
+      </me>
+    </p>
+    <p>
+      <em>Use <m>\partial f/\partial z = y</m>:</em>
+      <me>
+        y + h'(z) = y
+        \implies
+        h'(z) = 0
+        \implies
+        h(z) = C \in \R.
+      </me>
+    </p>
+    <p>
+      Therefore
+      <me>
+        f(x,y,z) = e^x y + x + zy + C, \qquad C \in \R.
+      </me>
+    </p>
+  </remark>
+
+  <!-- ─── Example: Exercise 4 — conservative field, two paths ─── -->
+
+  <example xml:id="ex-conservative-path-independence">
+    <title>Work Along Two Paths in a Conservative Field</title>
+    <statement>
+      <p>
+        The force field <m>\mathbf{v}\colon \R^2 \to \R^2</m> is defined by
+        <me>
+          \mathbf{v}(x,y)
+          = \begin{pmatrix} x^2 + y \\ x + \cos y \end{pmatrix}.
+        </me>
+        The curve <m>\mathbf{s}_1</m> runs along the <m>x</m>-axis from
+        <m>(1,0)</m> to <m>(-1,0)</m>, and <m>\mathbf{s}_2</m> connects the
+        same two points along the upper unit semicircle.
+      </p>
+      <ol marker="(a)">
+        <li>
+          <p>
+            Compute the work done along <m>\mathbf{s}_1</m>.
+          </p>
+        </li>
+        <li>
+          <p>
+            Compute the work done along <m>\mathbf{s}_2</m>.
+          </p>
+        </li>
+        <li>
+          <p>
+            Find an antiderivative <m>F\colon \R^2 \to \R</m> of
+            <m>\mathbf{v}</m>.
+          </p>
+        </li>
+      </ol>
+      <figure xml:id="fig-two-paths">
+        <caption>
+          The straight path <m>\mathbf{s}_1</m> (on the <m>x</m>-axis) and
+          the semicircular path <m>\mathbf{s}_2</m> share the same endpoints
+          <m>(1,0)</m> and <m>(-1,0)</m>.
+        </caption>
+        <image xml:id="image-two-paths" width="50%">
+          <latex-image>
+            \begin{tikzpicture}[scale=1.4]
+              \draw[->,gray!60] (-1.6,0) -- (1.6,0) node[right,font=\small] {$x$};
+              \draw[->,gray!60] (0,-0.3) -- (0,1.5) node[above,font=\small] {$y$};
+              % s1: straight line on x-axis
+              \draw[blue!70!black, very thick, ->]
+                (1,0) -- (-1,0);
+              \node[blue!70!black, below, font=\small] at (0,-0.12) {$\mathbf{s}_1$};
+              % s2: upper semicircle
+              \draw[red!60!black, very thick, ->]
+                (1,0) arc (0:90:1) coordinate (M);
+              \draw[red!60!black, very thick]
+                (0,1) arc (90:180:1);
+              \node[red!60!black, above right, font=\small] at (M) {$\mathbf{s}_2$};
+              % endpoints
+              \filldraw[black] (1,0) circle (1.2pt)
+                node[below right,font=\small] {$(1,0)$};
+              \filldraw[black] (-1,0) circle (1.2pt)
+                node[below left,font=\small] {$(-1,0)$};
+            \end{tikzpicture}
+          </latex-image>
+        </image>
+      </figure>
+    </statement>
+    <solution>
+      <p>
+        <em>Part (a): Work along <m>\mathbf{s}_1</m>.</em>
+      </p>
+      <p>
+        Parametrize the straight path from <m>(1,0)</m> to <m>(-1,0)</m>:
+        <me>
+          \mathbf{s}_1\colon [-1,1] \to \R^2, \qquad
+          t \mapsto \begin{pmatrix} -t \\ 0 \end{pmatrix}.
+        </me>
+        (At <m>t=-1</m> we are at <m>(1,0)</m>; at <m>t=1</m> at
+        <m>(-1,0)</m>.)
+        The tangent vector is
+        <m>\dot{\mathbf{s}}_1(t) = \begin{pmatrix} -1 \\ 0 \end{pmatrix}</m>.
+        The field along the path:
+        <me>
+          \mathbf{v}\!\left(\mathbf{s}_1(t)\right)
+          = \begin{pmatrix} (-t)^2 + 0 \\ -t + \cos 0 \end{pmatrix}
+          = \begin{pmatrix} t^2 \\ -t + 1 \end{pmatrix}.
+        </me>
+        Therefore
+        <md>
+          <mrow>
+            \int_{\mathbf{s}_1} \mathbf{v} \cdot d\mathbf{s}_1
+            \amp= \int_{-1}^1
+                 \begin{pmatrix} t^2 \\ -t+1 \end{pmatrix}
+                 \cdot
+                 \begin{pmatrix} -1 \\ 0 \end{pmatrix}
+                 \, dt
+          </mrow>
+          <mrow>
+            \amp= \int_{-1}^1 (-t^2) \, dt
+               = \left[-\frac{t^3}{3}\right]_{-1}^1
+               = -\frac{1}{3} - \frac{1}{3}
+               = -\frac{2}{3}.
+          </mrow>
+        </md>
+      </p>
+      <p>
+        <em>Part (c): Antiderivative of <m>\mathbf{v}</m>.</em>
+        (We solve (c) before (b) since (b) uses the result.)
+      </p>
+      <p>
+        We search for <m>F</m> with <m>\nabla F = \mathbf{v}</m>.
+      </p>
+      <p>
+        Integrate <m>\partial F/\partial x = x^2 + y</m>:
+        <me>
+          F(x,y) = \frac{x^3}{3} + xy + C(y).
+        </me>
+        Use <m>\partial F/\partial y = x + \cos y</m>:
+        <me>
+          x + C'(y) = x + \cos y
+          \implies
+          C'(y) = \cos y
+          \implies
+          C(y) = \sin y + C_0, \quad C_0 \in \R.
+        </me>
+        Therefore
+        <me>
+          F(x,y) = \frac{x^3}{3} + xy + \sin y + C_0.
+        </me>
+      </p>
+      <p>
+        <em>Part (b): Work along <m>\mathbf{s}_2</m>.</em>
+      </p>
+      <p>
+        <!-- ADDED: make the role of the theorem explicit before using it on the semicircle -->
+        Since <m>F</m> is an antiderivative, <m>\mathbf{v}</m> is conservative
+        and the integral depends only on the endpoints, not on the particular
+        path.  So we do not need a separate parametrization of the semicircle.
+        By the fundamental theorem:
+        <md>
+          <mrow>
+            \int_{\mathbf{s}_2} \mathbf{v} \cdot d\mathbf{s}_2
+            \amp= F(-1,0) - F(1,0)
+          </mrow>
+          <mrow>
+            \amp= \left(\frac{(-1)^3}{3} + (-1)(0) + \sin 0 + C_0\right)
+               - \left(\frac{1^3}{3} + 1 \cdot 0 + \sin 0 + C_0\right)
+          </mrow>
+          <mrow>
+            \amp= -\frac{1}{3} - \frac{1}{3}
+               = -\frac{2}{3}.
+          </mrow>
+        </md>
+        As expected, both paths give the same work value
+        <m>-\tfrac{2}{3}</m>.
+      </p>
+    </solution>
+  </example>
+
+  <exercises xml:id="exercises-vectorial-line-integrals-check">
+    <title>Check Your Understanding</title>
+
+    <exercise xml:id="exer-vectorial-line-integral-conservative-concept">
+      <title>Path Independence</title>
+      <statement>
+        <p>
+          If a vector field is conservative, what determines the value of the line integral between two points?
+        </p>
+      </statement>
+      <choices>
+        <choice correct="yes">
+          <statement><p>Only the endpoints</p></statement>
+          <feedback><p>Correct. In a conservative field, the integral is path independent and equals a boundary evaluation of a potential.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p>Only the length of the path</p></statement>
+          <feedback><p>Incorrect. Different paths of the same length can still have different integrals in nonconservative fields.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p>Only whether the path is closed</p></statement>
+          <feedback><p>Incorrect. The endpoints matter; closed curves are only a special case.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p>Only the maximum value of the field along the path</p></statement>
+          <feedback><p>Incorrect. That does not determine a line integral.</p></feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+    <exercise xml:id="exer-vectorial-line-integral-constant-field">
+      <title>Integrate a Constant Field Along a Segment</title>
+      <statement>
+        <p>
+          Compute the line integral of the constant vector field
+          <me>
+            \mathbf{v}=\begin{pmatrix}1\\2\end{pmatrix}
+          </me>
+          along the line segment from <m>(0,0)</m> to <m>(1,3)</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          A potential for this field is
+          <me>
+            F(x,y)=x+2y.
+          </me>
+          Therefore, by the fundamental theorem for line integrals,
+          <me>
+            \int_C \mathbf{v}\cdot d\mathbf{s}
+            = F(1,3)-F(0,0)
+            = (1+2\cdot 3)-0
+            = 7.
+          </me>
+        </p>
+      </solution>
+    </exercise>
+  </exercises>
+
+</subsection>

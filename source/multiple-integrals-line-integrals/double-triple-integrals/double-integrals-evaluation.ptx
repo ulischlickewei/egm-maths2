@@ -1,0 +1,835 @@
+<subsection xml:id="subsec-double-integrals-evaluation">
+  <title>Evaluating Double Integrals</title>
+
+  <introduction>
+    <p>
+      A double integral over an arbitrary planar domain is difficult to evaluate
+      directly from its definition.
+      We therefore restrict to a family of domains — called <em>normal domains</em>
+      — for which the double integral reduces to two successive one-variable
+      integrals.
+      This section develops the Cartesian (rectangular) and polar evaluation
+      formulas and illustrates them with worked examples.
+    </p>
+  </introduction>
+
+  <!-- ─── Normal domains ─── -->
+
+  <definition xml:id="def-normal-domains-2d">
+    <title>Normal Domains in <m>\R^2</m></title>
+    <statement>
+      <p>
+        A <term>normal domain</term> is a bounded planar region described by
+        a pair of inequalities of one of the following two types.
+      </p>
+      <ul>
+        <li>
+          <p>
+            <em>Type I</em> (vertical slices): the <m>x</m>-boundaries are
+            constant, and the <m>y</m>-boundaries depend on <m>x</m>:
+            <me>
+              a \leq x \leq b, \qquad y_l(x) \leq y \leq y_u(x).
+            </me>
+            Here the subscripts <m>l</m> and <m>u</m> stand for
+            <em>lower</em> and <em>upper</em>.
+          </p>
+        </li>
+        <li>
+          <p>
+            <em>Type II</em> (horizontal slices): the <m>y</m>-boundaries are
+            constant, and the <m>x</m>-boundaries depend on <m>y</m>:
+            <me>
+              a \leq y \leq b, \qquad g_l(y) \leq x \leq g_r(y).
+            </me>
+          </p>
+        </li>
+      </ul>
+    </statement>
+  </definition>
+
+  <!-- Normal domain figure -->
+  <figure xml:id="fig-normal-domains-2d">
+    <caption>
+      Left: normal domain of Type I, bounded by curves <m>y = y_l(x)</m>
+      (lower) and <m>y = y_u(x)</m> (upper) between <m>x = a</m> and <m>x = b</m>.
+      Right: normal domain of Type II, bounded by curves <m>x = g_l(y)</m>
+      (left) and <m>x = g_r(y)</m> (right) between <m>y = a</m> and <m>y = b</m>.
+    </caption>
+    <image xml:id="image-normal-domains-2d" width="90%">
+      <latex-image>
+        \begin{tikzpicture}[scale=1.0, font=\small]
+          %--- Type I (left panel) ---
+          \begin{scope}
+            \fill[blue!15]
+              (0.5,0.4) -- (0.5,1.9)
+              .. controls (1.0,2.2) and (1.5,2.3) .. (2.5,2.1)
+              -- (2.5,0.6)
+              .. controls (1.8,0.2) and (1.0,0.3) .. (0.5,0.4);
+            \draw[thick]
+              (0.5,0.4)
+              .. controls (1.0,0.3) and (1.8,0.2) .. (2.5,0.6)
+              node[right] {$y=y_l(x)$};
+            \draw[thick]
+              (0.5,1.9)
+              .. controls (1.0,2.2) and (1.5,2.3) .. (2.5,2.1)
+              node[right] {$y=y_u(x)$};
+            \draw[dashed] (0.5,0) -- (0.5,1.9);
+            \draw[dashed] (2.5,0) -- (2.5,2.1);
+            \draw[->,thick] (-0.1,0) -- (3.3,0) node[right] {$x$};
+            \draw[->,thick] (0,-0.1) -- (0,2.8) node[above] {$y$};
+            \node[below] at (0.5,0) {$a$};
+            \node[below] at (2.5,0) {$b$};
+            \node at (1.5,1.25) {$A$};
+            \node[below] at (1.5,-0.5) {Type I};
+          \end{scope}
+          %--- Type II (right panel) ---
+          \begin{scope}[xshift=5.0cm]
+            \fill[orange!20]
+              (0.3,0.5) -- (1.8,0.5)
+              .. controls (2.1,1.0) and (2.2,1.5) .. (1.9,2.5)
+              -- (0.5,2.5)
+              .. controls (0.1,2.0) and (0.2,1.0) .. (0.3,0.5);
+            \draw[thick]
+              (0.3,0.5)
+              .. controls (0.2,1.0) and (0.1,2.0) .. (0.5,2.5);
+            \draw[thick]
+              (1.8,0.5)
+              .. controls (2.1,1.0) and (2.2,1.5) .. (1.9,2.5)
+              ;
+            \node[above] at (0.95,2.65) {$x=g_l(y)$};
+            \draw[gray,thin] (0.9,2.5) -- (0.5,2.35);
+            \node[above] at (2.35,2.65) {$x=g_r(y)$};
+            \draw[gray,thin] (2.25,2.5) -- (1.95,2.25);
+            \draw[dashed] (0,0.5) -- (0.3,0.5);
+            \draw[dashed] (0,2.5) -- (0.5,2.5);
+            \draw[->,thick] (-0.1,0) -- (3.3,0) node[right] {$x$};
+            \draw[->,thick] (0,-0.1) -- (0,2.8) node[above] {$y$};
+            \node[left] at (0,0.5) {$a$};
+            \node[left] at (0,2.5) {$b$};
+            \node at (1.1,1.5) {$A$};
+            \node[below] at (1.5,-0.5) {Type II};
+          \end{scope}
+        \end{tikzpicture}
+      </latex-image>
+    </image>
+  </figure>
+
+  <!-- ─── Normal domain examples ─── -->
+
+  <example xml:id="ex-normal-domain-disk">
+    <title>Normal Domain Representations</title>
+    <ol>
+      <li>
+        <p>
+          <em>Express the disk of radius 2 centered at <m>(1,0)</m> as a normal
+          domain of Type I.</em>
+        </p>
+        <p>
+          The boundary circle satisfies <m>(x-1)^2 + y^2 = 4</m>.
+          Solving for <m>y</m> gives the upper and lower boundary curves:
+          <me>
+            y = \pm\sqrt{4-(x-1)^2}.
+          </me>
+          The <m>x</m>-extremes of the disk are <m>x = -1</m> and <m>x = 3</m>.
+          Therefore the domain is:
+          <md>
+            <mrow>-1 \amp\leq x \leq 3,</mrow>
+            <mrow>-\sqrt{4-(x-1)^2} \amp\leq y \leq \sqrt{4-(x-1)^2}.</mrow>
+          </md>
+        </p>
+      </li>
+      <li>
+        <p>
+          <em>Express the region <m>A</m> between the parabolas
+          <m>y = 2 - 3x^2</m> and <m>y = -x^2</m> as a normal domain.</em>
+        </p>
+        <p>
+          First find the intersection points:
+          <me>
+            2 - 3x^2 = -x^2 \;\Rightarrow\; 2 = 2x^2 \;\Rightarrow\; x = \pm 1.
+          </me>
+          For <m>x \in [-1,1]</m> the parabola <m>y = 2-3x^2</m> lies above
+          <m>y = -x^2</m>. The normal domain is:
+          <md>
+            <mrow>-1 \amp\leq x \leq 1,</mrow>
+            <mrow>-x^2 \amp\leq y \leq 2 - 3x^2.</mrow>
+          </md>
+        </p>
+      </li>
+    </ol>
+  </example>
+
+  <!-- ─── Motivation for iterated integrals ─── -->
+
+  <remark xml:id="rem-iterated-integral-derivation">
+    <title>Deriving the Iterated Integral (Type I)</title>
+    <p>
+      For a Type I domain <m>a \leq x \leq b</m>, <m>y_l(x) \leq y \leq y_u(x)</m>,
+      the Riemann sum can be organised in two stages:
+    </p>
+    <ol>
+      <li>
+        <p>
+          <em>Inner sum (fix <m>x</m>, sum in <m>y</m>).</em>
+          Subdivide <m>A</m> into vertical strips of width <m>\Delta x_j</m>.
+          Within the <m>j</m>-th strip, subdivide further into rectangles of
+          area <m>\Delta A_{jk} = \Delta x_j \,\Delta y_k</m>.
+          The representative point <m>(x_j,y_k)</m> is chosen inside the
+          corresponding rectangle, so in particular
+          <m>y_l(x_j)\leq y_k\leq y_u(x_j)</m>.
+          Summing over all rectangles in this strip approximates the volume
+          of the strip:
+          <me>
+            V_j \approx \sum_k f(x_j, y_k)\,\Delta y_k\cdot\Delta x_j.
+          </me>
+        </p>
+      </li>
+      <li>
+        <p>
+          <em>Outer sum (sum in <m>x</m>).</em>
+          Summing over all strips:
+          <me>
+            \sum_j V_j \;\to\;
+            \int_a^b \!\left(\int_{y_l(x)}^{y_u(x)} f(x,y)\,dy\right)dx.
+          </me>
+        </p>
+      </li>
+    </ol>
+    <figure xml:id="fig-iterated-integral-type-i-strip">
+      <caption>
+        A Type I domain is first divided into vertical strips. In one fixed
+        strip <m>x\approx x_j</m>, the <m>y</m>-values run from
+        <m>y_l(x_j)</m> to <m>y_u(x_j)</m> and are subdivided into small
+        intervals of length <m>\Delta y_k</m>.
+      </caption>
+      <image xml:id="image-iterated-integral-type-i-strip" width="62%">
+        <latex-image>
+          \begin{tikzpicture}[scale=1.15, font=\small]
+            \fill[blue!12]
+              (0.45,0.55)
+              .. controls (1.2,0.25) and (2.6,0.25) .. (3.6,0.7)
+              -- (3.6,2.15)
+              .. controls (2.5,2.45) and (1.35,2.35) .. (0.45,1.75)
+              -- cycle;
+            \draw[thick, blue!65!black]
+              (0.45,0.55)
+              .. controls (1.2,0.25) and (2.6,0.25) .. (3.6,0.7)
+              node[right] {$y=y_l(x)$};
+            \draw[thick, blue!65!black]
+              (0.45,1.75)
+              .. controls (1.35,2.35) and (2.5,2.45) .. (3.6,2.15)
+              node[right] {$y=y_u(x)$};
+            \draw[dashed] (0.45,0) -- (0.45,1.75);
+            \draw[dashed] (3.6,0) -- (3.6,2.15);
+            \draw[->,thick] (0,0) -- (4.25,0) node[right] {$x$};
+            \draw[->,thick] (0,-0.1) -- (0,2.85) node[above] {$y$};
+            \node[below] at (0.45,0) {$a$};
+            \node[below] at (3.6,0) {$b$};
+            \fill[red!16, opacity=0.85] (2.0,0.55) rectangle (2.35,2.28);
+            \draw[red!65!black, thick] (2.0,0.55) rectangle (2.35,2.28);
+            \draw[red!65!black] (2.0,0.95) -- (2.35,0.95);
+            \draw[red!65!black] (2.0,1.35) -- (2.35,1.35);
+            \draw[red!65!black] (2.0,1.75) -- (2.35,1.75);
+            \draw[latex-latex, red!70!black] (2.0,-0.35) -- (2.35,-0.35)
+              node[midway, below] {$\Delta x_j$};
+            \draw[latex-latex, red!70!black] (2.5,0.95) -- (2.5,1.35)
+              node[midway, right] {$\Delta y_k$};
+            \fill[red!80!black] (2.18,1.16) circle (1.4pt);
+            \node[above right, red!80!black] at (2.18,1.16) {$(x_j,y_k)$};
+            \node[below] at (2.18,0) {$x_j$};
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+    </figure>
+    <p>
+      The inner integral (in <m>y</m>) is computed first, treating <m>x</m> as a
+      constant.  Its result depends only on <m>x</m> and is then integrated in the
+      outer integral.
+    </p>
+  </remark>
+
+  <!-- ─── Main theorem ─── -->
+
+  <theorem xml:id="thm-double-integral-cartesian">
+    <title>Double Integral in Cartesian Coordinates</title>
+    <statement>
+      <ul>
+        <li>
+          <p>
+            For a <em>Type I</em> normal domain
+            (<m>a \leq x \leq b</m>, <m>y_l(x) \leq y \leq y_u(x)</m>):
+            <me>
+              \iint\limits_A f(x,y)\,dA
+              = \int_a^b \int_{y_l(x)}^{y_u(x)} f(x,y)\,dy\,dx.
+            </me>
+            The inner integral (variable <m>y</m>) is evaluated first,
+            with <m>x</m> treated as a parameter.
+          </p>
+        </li>
+        <li>
+          <p>
+            For a <em>Type II</em> normal domain
+            (<m>a \leq y \leq b</m>, <m>g_l(y) \leq x \leq g_r(y)</m>):
+            <me>
+              \iint\limits_A f(x,y)\,dA
+              = \int_a^b \int_{g_l(y)}^{g_r(y)} f(x,y)\,dx\,dy.
+            </me>
+          </p>
+        </li>
+      </ul>
+      <p>
+        If <m>f</m> is continuous on a rectangular domain
+        <m>[a,b] \times [c,d]</m>, the order of integration may be reversed
+        without changing the result:
+        <me>
+          \int_a^b \int_c^d f(x,y)\,dy\,dx
+          =
+          \int_c^d \int_a^b f(x,y)\,dx\,dy.
+        </me>
+        This is the simplest form of <em>Fubini's theorem</em>.
+      </p>
+    </statement>
+  </theorem>
+
+  <!-- ─── Worked examples: Cartesian ─── -->
+
+  <example xml:id="ex-double-integral-triangle">
+    <title>Double Integral over a Triangular Domain</title>
+    <statement>
+      <p>
+        Compute
+        <me>
+          \int_0^1 \int_0^{1-x} (2xy - x^2 - y^2)\,dy\,dx.
+        </me>
+      </p>
+      <p>
+        The domain is the triangle with vertices <m>(0,0)</m>, <m>(1,0)</m>,
+        and <m>(0,1)</m>, described as a Type I normal domain with
+        <m>0 \leq x \leq 1</m> and <m>0 \leq y \leq 1 - x</m>.
+      </p>
+      <figure xml:id="fig-triangle-integration-domain">
+        <caption>
+          The triangular domain for
+          <m>0 \leq x \leq 1</m>, <m>0 \leq y \leq 1-x</m>.
+        </caption>
+        <image xml:id="image-triangle-integration-domain" width="42%">
+          <latex-image>
+            \begin{tikzpicture}[scale=3.0]
+              \fill[blue!18] (0,0) -- (1,0) -- (0,1) -- cycle;
+              \draw[->,thick] (-0.08,0) -- (1.18,0) node[right] {$x$};
+              \draw[->,thick] (0,-0.08) -- (0,1.18) node[above] {$y$};
+              \draw[thick,blue!70!black] (0,1) -- (1,0)
+                node[midway, above right] {$y=1-x$};
+              \draw[thick,blue!70!black] (0,0) -- (1,0);
+              \draw[thick,blue!70!black] (0,0) -- (0,1);
+              \draw[dashed,red!70!black] (0.55,0) -- (0.55,0.45);
+              \fill[red!70!black] (0.55,0.22) circle (0.7pt);
+              \node[below] at (0.55,0) {$x$};
+              \node[right,red!70!black] at (0.57,0.25) {\small$0\leq y\leq 1-x$};
+              \node[below left] at (0,0) {$0$};
+              \node[below] at (1,0) {$1$};
+              \node[left] at (0,1) {$1$};
+            \end{tikzpicture}
+          </latex-image>
+        </image>
+      </figure>
+    </statement>
+    <solution>
+      <p>
+        <em>Inner integral (in <m>y</m>):</em>
+        <md>
+          <mrow>
+            \int_0^{1-x}(2xy - x^2 - y^2)\,dy
+            \amp= \left[xy^2 - x^2 y - \tfrac{1}{3}y^3\right]_{y=0}^{y=1-x}
+          </mrow>
+          <mrow>
+            \amp= x(1-x)^2 - x^2(1-x) - \tfrac{1}{3}(1-x)^3.
+          </mrow>
+        </md>
+      </p>
+      <p>
+        <em>Expanding and collecting:</em>
+        <md>
+          <mrow>
+            \amp= x(1 - 2x + x^2) - x^2 + x^3 - \tfrac{1}{3}(1 - 3x + 3x^2 - x^3)
+          </mrow>
+          <mrow>
+            \amp= x - 2x^2 + x^3 - x^2 + x^3
+                 - \tfrac{1}{3} + x - x^2 + \tfrac{1}{3}x^3
+          </mrow>
+          <mrow>
+            \amp= \tfrac{7}{3}x^3 - 4x^2 + 2x - \tfrac{1}{3}.
+          </mrow>
+        </md>
+      </p>
+      <p>
+        <em>Outer integral (in <m>x</m>):</em>
+        <md>
+          <mrow>
+            \int_0^1\!\left(\tfrac{7}{3}x^3 - 4x^2 + 2x - \tfrac{1}{3}\right)dx
+            \amp= \left[\tfrac{7}{12}x^4 - \tfrac{4}{3}x^3 + x^2 - \tfrac{1}{3}x\right]_0^1
+          </mrow>
+          <mrow>
+            \amp= \tfrac{7}{12} - \tfrac{16}{12} + \tfrac{12}{12} - \tfrac{4}{12}
+             = -\tfrac{1}{12}.
+          </mrow>
+        </md>
+      </p>
+    </solution>
+  </example>
+
+  <example xml:id="ex-geometric-center-parabola">
+    <title>Geometric Center of a Parabolic Region</title>
+    <statement>
+      <p>
+        Find the geometric center of the region <m>A</m> bounded by
+        <m>y = 2 - 3x^2</m> and <m>y = -x^2</m>.
+      </p>
+      <p>
+        From <xref ref="ex-normal-domain-disk"/>, the domain is
+        <m>-1 \leq x \leq 1</m>, <m>-x^2 \leq y \leq 2 - 3x^2</m>.
+      </p>
+      <figure xml:id="fig-parabolic-centroid-domain">
+        <caption>
+          The parabolic region between <m>y=-x^2</m> and
+          <m>y=2-3x^2</m>.
+        </caption>
+        <image xml:id="image-parabolic-centroid-domain" width="52%">
+          <latex-image>
+            \begin{tikzpicture}[scale=1.65]
+              \fill[blue!18,domain=-1:1,smooth,variable=\x]
+                plot ({\x},{2-3*\x*\x})
+                -- plot[domain=1:-1] ({\x},{-\x*\x})
+                -- cycle;
+              \draw[->,thick] (-1.35,0) -- (1.35,0) node[right] {$x$};
+              \draw[->,thick] (0,-1.25) -- (0,2.25) node[above] {$y$};
+              \draw[thick,blue!70!black,domain=-1.1:1.1,smooth,variable=\x]
+                plot ({\x},{2-3*\x*\x}) node[right] {$y=2-3x^2$};
+              \draw[thick,blue!70!black,domain=-1.1:1.1,smooth,variable=\x]
+                plot ({\x},{-\x*\x}) node[right] {$y=-x^2$};
+              \draw[dashed,gray] (-1,-1) -- (-1,0);
+              \draw[dashed,gray] (1,-1) -- (1,0);
+              \fill[red!75!black] (0,0.6) circle (1.5pt);
+              \node[right,red!75!black] at (0.03,0.6) {$C=(0,\tfrac35)$};
+              \node[below left] at (0,0) {$0$};
+              \node[below] at (-1,0) {$-1$};
+              \node[below] at (1,0) {$1$};
+            \end{tikzpicture}
+          </latex-image>
+        </image>
+      </figure>
+    </statement>
+    <solution>
+      <p>
+        By symmetry, the centroid lies on the <m>y</m>-axis, so <m>x_C = 0</m>.
+      </p>
+      <p>
+        <em>Area:</em>
+        <md>
+          <mrow>
+            F(A) \amp= \int_{-1}^1 \int_{-x^2}^{2-3x^2} 1\,dy\,dx
+            = \int_{-1}^1 \bigl[(2-3x^2) - (-x^2)\bigr]\,dx
+          </mrow>
+          <mrow>
+            \amp= \int_{-1}^1 (2 - 2x^2)\,dx
+            = \left[2x - \tfrac{2}{3}x^3\right]_{-1}^1 = \tfrac{8}{3}.
+          </mrow>
+        </md>
+      </p>
+      <p>
+        <em><m>y</m>-coordinate of the centroid:</em>
+        <md>
+          <mrow>
+            y_C \amp= \frac{1}{F(A)}\int_{-1}^1\int_{-x^2}^{2-3x^2} y\,dy\,dx
+            = \frac{3}{8}\int_{-1}^1
+              \left[\frac{y^2}{2}\right]_{y=-x^2}^{y=2-3x^2}dx
+          </mrow>
+          <mrow>
+            \amp= \frac{3}{8}\int_{-1}^1
+              \frac{(2-3x^2)^2 - x^4}{2}\,dx
+            = \frac{3}{8}\int_{-1}^1 \left(2 - 6x^2 + 4x^4\right)\,dx
+          </mrow>
+          <mrow>
+            \amp= \frac{3}{4}\int_0^1 \left(2 - 6x^2 + 4x^4\right)\,dx
+            = \frac{3}{4}\left[2x - 2x^3 + \frac{4}{5}x^5\right]_0^1
+            = \frac{3}{5}.
+          </mrow>
+        </md>
+      </p>
+      <p>
+        The geometric center is <m>\bigl(0,\,\tfrac{3}{5}\bigr)</m>.
+      </p>
+    </solution>
+  </example>
+
+  <!-- ─── Polar coordinates ─── -->
+
+  <remark xml:id="rem-polar-domain">
+    <title>Domains in Polar Coordinates</title>
+    <p>
+      For domains with circular or radial symmetry it is convenient to use
+      <em>polar coordinates</em> <m>(r, \varphi)</m>, where
+      <m>x = r\cos\varphi</m> and <m>y = r\sin\varphi</m>.
+      A polar normal domain is described by:
+      <me>
+        r_i(\varphi) \leq r \leq r_a(\varphi),
+        \qquad
+        \varphi_1 \leq \varphi \leq \varphi_2.
+      </me>
+    </p>
+    <p>
+      The key point is that the <em>area element</em> in polar coordinates is
+      <em>not</em> simply <m>dr\,d\varphi</m>.
+      A small polar patch bounded by radii <m>r</m> and <m>r + dr</m> and
+      angles <m>\varphi</m> and <m>\varphi + d\varphi</m> has area
+      <m>dA = r\,dr\,d\varphi</m>
+      (the arc length <m>r\,d\varphi</m> times the radial thickness <m>dr</m>).
+      The extra factor <m>r</m> — called the <em>Jacobian</em> — must always
+      appear when changing to polar coordinates.
+    </p>
+    <figure xml:id="fig-polar-area-element">
+      <caption>
+        The polar area element <m>dA = r\,dr\,d\varphi</m>.
+        The patch is bounded by the circles <m>r</m> and <m>r + dr</m>
+        and the rays <m>\varphi</m> and <m>\varphi + d\varphi</m>.
+        Its arc length is <m>r\,d\varphi</m> and its radial thickness is
+        <m>dr</m>, giving area <m>r\,dr\,d\varphi</m>.
+      </caption>
+      <image xml:id="image-polar-area-element" width="52%">
+        <latex-image>
+          \begin{tikzpicture}[scale=1.4, font=\small]
+            % Origin
+            \coordinate (O) at (0,0);
+            % Angles (in degrees)
+            \def\phiOne{25}
+            \def\phiTwo{55}
+            % Radii
+            \def\rInner{1.25}
+            \def\rOuter{1.85}
+            \tikzset{labelbox/.style={fill=white, fill opacity=0.9,
+              text opacity=1, inner sep=1.2pt}}
+            % Shaded wedge patch
+            \fill[blue!20]
+              (\phiOne:\rInner)
+              arc[start angle=\phiOne, end angle=\phiTwo, radius=\rInner]
+              --
+              (\phiTwo:\rOuter)
+              arc[start angle=\phiTwo, end angle=\phiOne, radius=\rOuter]
+              -- cycle;
+            \draw[thick]
+              (\phiOne:\rInner)
+              arc[start angle=\phiOne, end angle=\phiTwo, radius=\rInner];
+            \draw[thick]
+              (\phiOne:\rOuter)
+              arc[start angle=\phiOne, end angle=\phiTwo, radius=\rOuter];
+            \draw[thick] (\phiOne:\rInner) -- (\phiOne:\rOuter);
+            \draw[thick] (\phiTwo:\rInner) -- (\phiTwo:\rOuter);
+            % Axes
+            \draw[->,thick] (-0.2,0) -- (2.45,0) node[right] {$x$};
+            \draw[->,thick] (0,-0.55) -- (0,2.25) node[above] {$y$};
+            % Angle labels
+            \draw[->,gray] (0.42,0) arc[start angle=0, end angle=\phiOne, radius=0.42];
+            \node[labelbox] at (14:0.62) {$\varphi$};
+            \draw[->,gray] (0.72,0) arc[start angle=0, end angle=\phiTwo, radius=0.72];
+            \node[labelbox, anchor=west] at (62:0.82) {$\varphi{+}d\varphi$};
+            % Radius labels
+            \node[labelbox, below right] at (\phiOne:0.92) {$r$};
+            \node[labelbox, below right] at (\phiOne:2.02) {$r{+}dr$};
+            % Side-length labels for the small patch
+            \draw[latex-latex,blue!70!black] (\phiTwo:\rInner) -- (\phiTwo:\rOuter)
+              node[midway,above right,labelbox] {$dr$};
+            \draw[latex-latex,blue!70!black]
+              (\phiOne:2.08) arc[start angle=\phiOne,end angle=\phiTwo,radius=2.08]
+              node[midway,above,labelbox] {$r\,d\varphi$};
+            % Area label
+            \node[labelbox] at (40:1.55) {$dA$};
+            % dA = r dr dphi label
+            \node[align=center,labelbox] at (1.55, -0.42)
+              {$dA = r\,dr\,d\varphi$};
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+    </figure>
+  </remark>
+
+  <theorem xml:id="thm-double-integral-polar">
+    <title>Double Integrals in Polar Coordinates</title>
+    <statement>
+      <p>
+        For a polar normal domain
+        <m>r_i(\varphi) \leq r \leq r_a(\varphi)</m>,
+        <m>\varphi_1 \leq \varphi \leq \varphi_2</m>:
+        <me>
+          \iint\limits_A f(x,y)\,dA
+          = \int_{\varphi_1}^{\varphi_2}
+            \int_{r_i(\varphi)}^{r_a(\varphi)}
+            f\bigl(r\cos\varphi,\,r\sin\varphi\bigr)\cdot r\,dr\,d\varphi.
+        </me>
+        The factor <m>r</m> in the integrand is the Jacobian of the coordinate
+        change. As in Cartesian coordinates, the inner integral is evaluated
+        first with the outer variable held fixed.
+      </p>
+    </statement>
+  </theorem>
+
+  <!-- ─── Polar examples ─── -->
+
+  <example xml:id="ex-semidisk-polar">
+    <title>Area and Geometric Center of a Semi-Disk</title>
+    <statement>
+      <p>
+        Find the area and geometric center of the upper half-disk of radius <m>R</m>
+        (the part of the disk <m>x^2 + y^2 \leq R^2</m> with <m>y \geq 0</m>).
+      </p>
+      <p>
+        In polar coordinates the domain is <m>0 \leq r \leq R</m>,
+        <m>0 \leq \varphi \leq \pi</m>.
+      </p>
+      <figure xml:id="fig-semidisk-polar-domain">
+        <caption>
+          The upper half-disk, described by
+          <m>0 \leq r \leq R</m>, <m>0 \leq \varphi \leq \pi</m>.
+        </caption>
+        <image xml:id="image-semidisk-polar-domain" width="42%">
+          <latex-image>
+            \begin{tikzpicture}[scale=1.35]
+              \def\R{1.8}
+              \fill[blue!18] (-\R,0) arc[start angle=180,end angle=0,radius=\R] -- cycle;
+              \draw[->,thick] (-2.15,0) -- (2.15,0) node[right] {$x$};
+              \draw[->,thick] (0,-0.25) -- (0,2.15) node[above] {$y$};
+              \draw[thick,blue!70!black] (-\R,0) arc[start angle=180,end angle=0,radius=\R];
+              \draw[thick,blue!70!black] (-\R,0) -- (\R,0);
+              \draw[->,red!70!black] (0,0) -- (50:\R) node[midway,above left] {$R$};
+              \draw[->,gray] (0.55,0) arc[start angle=0,end angle=125,radius=0.55];
+              \node at (0.0,0.72) {\small$0\leq\varphi\leq\pi$};
+              \node[below left] at (0,0) {$0$};
+            \end{tikzpicture}
+          </latex-image>
+        </image>
+      </figure>
+    </statement>
+    <solution>
+      <p>
+        <em>Area:</em>
+        <md>
+          <mrow>
+            F(D) \amp= \int_0^{\pi}\int_0^R r\,dr\,d\varphi
+            = \int_0^{\pi}\left[\tfrac{1}{2}r^2\right]_0^R d\varphi
+            = \tfrac{1}{2}R^2\pi.
+          </mrow>
+        </md>
+      </p>
+      <p>
+        <em>Geometric center:</em>
+        By symmetry, <m>x_C = 0</m>.
+        For <m>y_C</m>, note that <m>y = r\sin\varphi</m>:
+        <md>
+          <mrow>
+            \iint_D y\,dA
+            \amp= \int_0^{\pi}\int_0^R r\sin\varphi\cdot r\,dr\,d\varphi
+            = \int_0^{\pi}\sin\varphi\,d\varphi\cdot\int_0^R r^2\,dr
+          </mrow>
+          <mrow>
+            \amp= \bigl[-\cos\varphi\bigr]_0^{\pi}\cdot\tfrac{R^3}{3}
+            = 2\cdot\tfrac{R^3}{3} = \tfrac{2R^3}{3}.
+          </mrow>
+        </md>
+        Therefore
+        <me>
+          y_C = \frac{1}{F(D)}\iint_D y\,dA
+              = \frac{1}{\pi R^2/2}\cdot\frac{2R^3}{3}
+              = \frac{4R}{3\pi}.
+        </me>
+        The geometric center is at <m>\bigl(0,\,\tfrac{4R}{3\pi}\bigr)</m>.
+      </p>
+    </solution>
+  </example>
+
+  <example xml:id="ex-surface-charge-polar">
+    <title>Surface Charge via Polar Coordinates</title>
+    <statement>
+      <p>
+        A point electric charge <m>q</m> is located at height <m>h</m> above the
+        origin of a grounded conducting plane (the <m>xy</m>-plane).
+        The method of images replaces the grounded plane by a mirror charge
+        chosen so that the plane has zero electric potential. For this setup,
+        the induced surface charge density is
+        <me>
+          \sigma(x,y) = -\frac{hq}{2\pi}\cdot
+          \frac{1}{\bigl(x^2+y^2+h^2\bigr)^{3/2}}.
+        </me>
+        Compute the total induced charge on the disk of radius <m>R</m> centered
+        at the origin.
+      </p>
+      <figure xml:id="fig-surface-charge-disk-domain">
+        <caption>
+          The disk on the grounded plane where the induced charge is integrated.
+        </caption>
+        <image xml:id="image-surface-charge-disk-domain" width="42%">
+          <latex-image>
+            \begin{tikzpicture}[scale=1.25]
+              \def\R{1.55}
+              \fill[blue!18] (0,0) circle (\R);
+              \draw[thick,blue!70!black] (0,0) circle (\R);
+              \draw[->,thick] (-2,0) -- (2,0) node[right] {$x$};
+              \draw[->,thick] (0,-2) -- (0,2) node[above] {$y$};
+              \draw[->,red!70!black] (0,0) -- (35:\R) node[midway,above] {$R$};
+              \node[below left] at (0,0) {$0$};
+              \node at (0,-1.9) {$0\leq r\leq R,\quad 0\leq\varphi\leq2\pi$};
+            \end{tikzpicture}
+          </latex-image>
+        </image>
+      </figure>
+    </statement>
+    <solution>
+      <p>
+        In polar coordinates the disk is <m>0 \leq r \leq R</m>,
+        <m>0 \leq \varphi \leq 2\pi</m>, and
+        <m>x^2 + y^2 = r^2</m>.
+        <md>
+          <mrow>
+            q_D \amp= \iint_D \sigma\,dA
+            = -\frac{hq}{2\pi}
+              \int_0^{2\pi}\int_0^R \frac{r}{\bigl(r^2+h^2\bigr)^{3/2}}\,dr\,d\varphi
+          </mrow>
+          <mrow>
+            \amp= -hq\int_0^R \frac{r}{\bigl(r^2+h^2\bigr)^{3/2}}\,dr.
+          </mrow>
+        </md>
+        Using the substitution <m>u = r^2 + h^2</m>, <m>du = 2r\,dr</m>:
+        <md>
+          <mrow>
+            \int_0^R \frac{r\,dr}{(r^2+h^2)^{3/2}}
+            \amp= \frac{1}{2}\int_{h^2}^{R^2+h^2} u^{-3/2}\,du
+            = \frac{1}{2}\left[-\frac{2}{\sqrt{u}}\right]_{h^2}^{R^2+h^2}
+          </mrow>
+          <mrow>
+            \amp= \frac{1}{h} - \frac{1}{\sqrt{R^2+h^2}}.
+          </mrow>
+        </md>
+        Therefore
+        <me>
+          q_D = -hq\left(\frac{1}{h} - \frac{1}{\sqrt{R^2+h^2}}\right)
+              = q\left(\frac{1}{\sqrt{1 + R^2/h^2}} - 1\right).
+        </me>
+      </p>
+    </solution>
+  </example>
+
+  <example xml:id="ex-annular-sector">
+    <title>Area of an Annular Sector</title>
+    <statement>
+      <p>
+        Sketch the domain
+        <m>D = \{(r,\varphi) \mid 1 \leq r \leq 2,\;
+        \pi/6 \leq \varphi \leq \pi\}</m>
+        and compute its area.
+      </p>
+      <figure xml:id="fig-annular-sector-domain">
+        <caption>
+          The annular sector between <m>r=1</m> and <m>r=2</m>, from
+          <m>\varphi=\pi/6</m> to <m>\varphi=\pi</m>.
+        </caption>
+        <image xml:id="image-annular-sector-domain" width="46%">
+          <latex-image>
+            \begin{tikzpicture}[scale=1.15]
+              \fill[blue!18]
+                (30:1) arc[start angle=30,end angle=180,radius=1]
+                -- (180:2) arc[start angle=180,end angle=30,radius=2]
+                -- cycle;
+              \draw[->,thick] (-2.35,0) -- (2.35,0) node[right] {$x$};
+              \draw[->,thick] (0,-0.25) -- (0,2.35) node[above] {$y$};
+              \draw[thick,blue!70!black] (30:1) arc[start angle=30,end angle=180,radius=1];
+              \draw[thick,blue!70!black] (30:2) arc[start angle=30,end angle=180,radius=2];
+              \draw[thick,blue!70!black] (30:1) -- (30:2);
+              \draw[thick,blue!70!black] (180:1) -- (180:2);
+              \draw[->,gray] (0.55,0) arc[start angle=0,end angle=30,radius=0.55];
+              \node at (0.8,0.2) {\small$\pi/6$};
+              \node[left] at (-2,0) {$r=2$};
+              \node[above left] at (120:1) {$r=1$};
+            \end{tikzpicture}
+          </latex-image>
+        </image>
+      </figure>
+    </statement>
+    <solution>
+      <p>
+        The domain <m>D</m> is a sector of the annulus between the circles
+        <m>r = 1</m> and <m>r = 2</m>, spanning the angle range from
+        <m>\pi/6</m> to <m>\pi</m>.
+      </p>
+      <p>
+        <em>Area:</em>
+        <md>
+          <mrow>
+            F(D) \amp= \int_{\pi/6}^{\pi}\int_1^2 r\,dr\,d\varphi
+            = \int_{\pi/6}^{\pi}\left[\tfrac{r^2}{2}\right]_1^2 d\varphi
+            = \int_{\pi/6}^{\pi}\tfrac{3}{2}\,d\varphi
+          </mrow>
+          <mrow>
+            \amp= \frac{3}{2}\!\left(\pi - \frac{\pi}{6}\right)
+            = \frac{3}{2}\cdot\frac{5\pi}{6}
+            = \frac{5\pi}{4}.
+          </mrow>
+        </md>
+      </p>
+    </solution>
+  </example>
+
+  <exercises xml:id="exercises-double-integrals-evaluation-check">
+    <title>Check Your Understanding</title>
+
+    <exercise xml:id="exer-double-integral-polar-setup">
+      <title>Polar Setup for the Unit Disk</title>
+      <statement>
+        <p>
+          Which polar-coordinate description is correct for the unit disk?
+        </p>
+      </statement>
+      <choices>
+        <choice correct="yes">
+          <statement><p><m>0\le r\le 1,\; 0\le \varphi\le 2\pi</m></p></statement>
+          <feedback><p>Correct. This covers the full disk exactly once.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p><m>0\le r\le 2\pi,\; 0\le \varphi\le 1</m></p></statement>
+          <feedback><p>Incorrect. The ranges for radius and angle are swapped.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p><m>-1\le r\le 1,\; 0\le \varphi\le \pi</m></p></statement>
+          <feedback><p>Incorrect. Standard polar coordinates use nonnegative radii.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p><m>0\le r\le 1,\; 0\le \varphi\le \pi</m></p></statement>
+          <feedback><p>Incorrect. That would cover only a half-disk.</p></feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+    <exercise xml:id="exer-double-integral-triangle-area">
+      <title>Area of a Triangle by Iterated Integration</title>
+      <statement>
+        <p>
+          Compute
+          <me>
+            \int_0^1\int_0^x 1\,dy\,dx.
+          </me>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          First integrate in <m>y</m>:
+          <me>
+            \int_0^x 1\,dy = x.
+          </me>
+          Then
+          <me>
+            \int_0^1 x\,dx = \left[\frac{x^2}{2}\right]_0^1 = \frac12.
+          </me>
+          So the integral equals <m>\tfrac12</m>.
+        </p>
+      </solution>
+    </exercise>
+  </exercises>
+
+</subsection>

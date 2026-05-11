@@ -1,0 +1,509 @@
+<subsection xml:id="subsec-curves">
+  <title>Curves in <m>\R^n</m></title>
+
+  <introduction>
+    <p>
+      Up to now, integration has concerned itself with regions in the plane or in
+      space.  This section and the next move from regions to <em>curves</em>:
+      one-dimensional paths winding through two- or three-dimensional space.
+      We begin by making the notion of a parametrized curve precise, and then
+      develop the calculus tools — tangent vectors, velocities, and differentiation
+      rules — that are needed to compute line integrals in
+      <xref ref="subsec-scalar-line-integrals"/>.
+    </p>
+  </introduction>
+
+  <!-- ─── Definition: curve ─── -->
+
+  <definition xml:id="def-curve">
+    <title>Curve, Trace, Closed Curve, Differentiable Curve</title>
+    <statement>
+      <p>
+        Let <m>I \subseteq \R</m> be an interval.
+      </p>
+      <p>
+        A <term>curve parametrized over <m>I</m></term> is a function
+        <me>
+          \mathbf{x}\colon I \to \R^n,
+          \qquad
+          t \mapsto
+          \begin{pmatrix} x_1(t) \\ \vdots \\ x_n(t) \end{pmatrix},
+        </me>
+        whose component functions <m>x_1, \ldots, x_n \colon I \to \R</m> are
+        continuous.
+        The parameter <m>t</m> is often thought of as <em>time</em>.
+      </p>
+      <p>
+        The set of all values taken by <m>\mathbf{x}</m>,
+        <me>
+          \mathbf{x}(I)
+          = \left\{\, \begin{pmatrix} x_1(t) \\ \vdots \\ x_n(t) \end{pmatrix}
+            \;\middle|\; t \in I \,\right\} \subseteq \R^n,
+        </me>
+        is called the <term>trace</term> of <m>\mathbf{x}</m>.
+        The trace is the actual geometric path in space; the parametrization
+        is one particular way of traversing that path.
+      </p>
+      <p>
+        If <m>I = [a,b]</m> and <m>\mathbf{x}(a) = \mathbf{x}(b)</m>, the curve is
+        <term>closed</term> (the path returns to its starting point).
+        If the component functions <m>x_1, \ldots, x_n</m> are continuously
+        differentiable, the curve is <term>continuously differentiable</term>.
+      </p>
+    </statement>
+  </definition>
+
+  <!-- ─── Example: helix ─── -->
+
+  <example xml:id="ex-helix">
+    <title>Helix</title>
+    <statement>
+      <p>
+        Sketch the trace of the curve
+        <me>
+          \mathbf{x}\colon [0, 4\pi] \to \R^3, \qquad
+          t \mapsto \begin{pmatrix} \cos t \\ \sin t \\ t \end{pmatrix}.
+        </me>
+      </p>
+    </statement>
+    <solution>
+      <p>
+        The first two components <m>(\cos t, \sin t)</m> trace the unit circle
+        in the <m>xy</m>-plane, while the third component <m>t</m> increases
+        monotonically from <m>0</m> to <m>4\pi</m>.
+        The result is a <em>helix</em> that spirals upward around the
+        <m>z</m>-axis, completing two full turns.
+      </p>
+      <p>
+        Selected points help to orient the sketch:
+      </p>
+      <table xml:id="tab-helix-points">
+        <caption>Sample points on the helix</caption>
+        <tabular halign="center" top="minor" bottom="minor">
+          <col right="minor"/> <col right="minor"/> <col/>
+          <row header="yes" bottom="medium">
+            <cell><m>t</m></cell>
+            <cell><m>\mathbf{x}(t)</m></cell>
+            <cell>Position</cell>
+          </row>
+          <row>
+            <cell><m>0</m></cell>
+            <cell><m>(1,\,0,\,0)</m></cell>
+            <cell>Start on the <m>x</m>-axis at height <m>0</m></cell>
+          </row>
+          <row>
+            <cell><m>\pi/2</m></cell>
+            <cell><m>(0,\,1,\,\pi/2)</m></cell>
+            <cell>Quarter turn, height <m>\pi/2</m></cell>
+          </row>
+          <row>
+            <cell><m>\pi</m></cell>
+            <cell><m>(-1,\,0,\,\pi)</m></cell>
+            <cell>Half turn, height <m>\pi</m></cell>
+          </row>
+          <row>
+            <cell><m>2\pi</m></cell>
+            <cell><m>(1,\,0,\,2\pi)</m></cell>
+            <cell>First full revolution at height <m>2\pi</m></cell>
+          </row>
+        </tabular>
+      </table>
+      <figure xml:id="fig-helix">
+        <caption>
+          The helix <m>\mathbf{x}(t)=(\cos t,\sin t,t)</m> for
+          <m>t \in [0,4\pi]</m>.  The projection onto the <m>xy</m>-plane is
+          the unit circle; the height coordinate increases linearly with
+          <m>t</m>, producing two full turns.
+        </caption>
+        <image xml:id="image-helix" width="55%">
+          <latex-image>
+            \begin{tikzpicture}[x={(0.80cm,-0.35cm)}, y={(0.80cm,0.35cm)}, z={(0cm,0.9cm)},
+                                scale=0.85]
+              % axes
+              \draw[->,gray!60] (-1.6,0,0) -- (1.9,0,0) node[right,gray!60] {$x$};
+              \draw[->,gray!60] (0,-1.6,0) -- (0,1.9,0) node[right,gray!60] {$y$};
+              \draw[->,gray!60] (0,0,-0.3) -- (0,0,7.5) node[above,gray!60] {$z$};
+              % xy-plane grid circle (projection)
+              \draw[gray!40,dashed]
+                plot[domain=0:360,samples=60,smooth]
+                  ({cos(\x)},{sin(\x)},0);
+              % helix: two full turns, t=0..4*pi
+              \draw[blue!70!black, thick]
+                plot[domain=0:720,samples=200,smooth]
+                  ({cos(\x)},{sin(\x)},{0.0175*\x});
+              % start and end markers
+              \filldraw[blue!70!black] (1,0,0) circle (1.8pt) node[below right,font=\small] {$t=0$};
+              \filldraw[blue!70!black] (1,0,{4*3.14159}) circle (1.8pt)
+                node[above right,font=\small] {$t=4\pi$};
+              % tick marks on z-axis
+              \foreach \h/\lab in {3.14159/$\pi$, 6.28318/$2\pi$, 9.42478/$3\pi$, 12.56637/$4\pi$} {
+                \draw[gray!60] (-0.07,0,\h) -- (0.07,0,\h);
+                \node[left,gray!60,font=\tiny] at (0,0,\h) {\lab};
+              }
+            \end{tikzpicture}
+          </latex-image>
+        </image>
+      </figure>
+    </solution>
+  </example>
+
+  <!-- ─── Example: intersection curve ─── -->
+
+  <example xml:id="ex-cylinder-plane-intersection">
+    <title>Intersection Curve of a Cylinder with a Plane</title>
+    <statement>
+      <p>
+        Determine a parametrization of the curve of intersection of the
+        cylinder <m>x^2 + y^2 = 1</m> with the plane <m>y + z = 2</m>.
+        That is, find an interval <m>I \subset \R</m> and a curve
+        <m>\mathbf{x}\colon I \to \R^3</m> whose trace is the intersection.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        The projection of the intersection onto the <m>xy</m>-plane is
+        the unit circle <m>x^2 + y^2 = 1</m>, so we parametrize
+        <me>
+          x(t) = \cos t, \qquad y(t) = \sin t, \qquad t \in [0, 2\pi].
+        </me>
+        For the point <m>(\cos t, \sin t, z(t))</m> to lie in the plane
+        <m>y + z = 2</m>, we need
+        <me>
+          z(t) = 2 - \sin t.
+        </me>
+        The parametrization is therefore
+        <me>
+          \mathbf{x}\colon [0,2\pi] \to \R^3, \qquad
+          t \mapsto \begin{pmatrix} \cos t \\ \sin t \\ 2 - \sin t \end{pmatrix}.
+        </me>
+        The trace is an ellipse tilted in space: at <m>y = 0</m> the height is
+        <m>z = 2</m>, while at <m>y = 1</m> (the highest circle point) the
+        height is <m>z = 1</m>, and at <m>y = -1</m> it is <m>z = 3</m>.
+      </p>
+    </solution>
+  </example>
+
+  <!-- ─── Definition: tangent vector, velocity, regular ─── -->
+
+  <definition xml:id="def-tangent-vector">
+    <title>Tangent Vector, Velocity Vector, Speed, Regular Curve</title>
+    <statement>
+      <p>
+        Let <m>\mathbf{x}\colon I \to \R^n</m> be a differentiable curve.
+      </p>
+      <p>
+        The <term>tangent vector</term> of <m>\mathbf{x}</m> at time <m>t</m>
+        is the component-wise derivative
+        <me>
+          \dot{\mathbf{x}}(t)
+          = \frac{d\mathbf{x}}{dt}(t)
+          = \begin{pmatrix} \dot{x}_1(t) \\ \vdots \\ \dot{x}_n(t) \end{pmatrix}.
+        </me>
+        The derivative <m>\dot{\mathbf{x}}(t)</m> is also called the
+        <term>velocity vector</term>.
+        Its length
+        <me>
+          \|\dot{\mathbf{x}}(t)\|
+          = \sqrt{\dot{x}_1(t)^2 + \cdots + \dot{x}_n(t)^2}
+        </me>
+        is called the <term>speed</term> at time <m>t</m>: it measures how
+        fast a particle traversing the curve moves at the instant <m>t</m>.
+      </p>
+      <p>
+        If <m>\dot{\mathbf{x}}(t) \neq \mathbf{0}</m> for all <m>t \in I</m>,
+        the curve is called <term>regular</term>.
+        For a regular curve the tangent vector always points in a definite
+        direction at every parameter value.
+      </p>
+    </statement>
+  </definition>
+
+  <!-- ─── Example: tangent of a circle ─── -->
+
+  <example xml:id="ex-tangent-circle">
+    <title>Tangent Vector of a Circle</title>
+    <statement>
+      <p>
+        Compute the tangent vector of the unit circle
+        <m>\mathbf{x}\colon [0,2\pi] \to \R^2</m>,
+        <m>t \mapsto (\cos t,\, \sin t)</m>,
+        and verify that it is always orthogonal to the position vector.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        Differentiating component-wise:
+        <me>
+          \dot{\mathbf{x}}(t) = \begin{pmatrix} -\sin t \\ \cos t \end{pmatrix}.
+        </me>
+        To check orthogonality, compute the inner product with the position
+        vector:
+        <me>
+          \langle \mathbf{x}(t),\, \dot{\mathbf{x}}(t) \rangle
+          = \cos t \cdot (-\sin t) + \sin t \cdot \cos t = 0.
+        </me>
+        The tangent vector is indeed always perpendicular to the radius.
+        The velocity is
+        <m>\|\dot{\mathbf{x}}(t)\| = \sqrt{\sin^2 t + \cos^2 t} = 1</m>,
+        confirming that the unit circle is traversed at constant speed.
+      </p>
+      <figure xml:id="fig-tangent-circle">
+        <caption>
+          Position vector <m>\mathbf{x}(t)</m> and tangent vector
+          <m>\dot{\mathbf{x}}(t)</m> at an arbitrary point on the unit circle.
+          The tangent vector is always perpendicular to the radius.
+        </caption>
+        <image xml:id="image-tangent-circle" width="48%">
+          <latex-image>
+            \begin{tikzpicture}[scale=1.5]
+              \draw[->,thick] (-1.4,0) -- (1.4,0) node[right] {$x$};
+              \draw[->,thick] (0,-1.4) -- (0,1.4) node[above] {$y$};
+              \draw[blue!70!black,thick] (0,0) circle (1);
+              % angle 50 degrees
+              \pgfmathsetmacro{\ang}{50}
+              \pgfmathsetmacro{\cx}{cos(\ang)}
+              \pgfmathsetmacro{\cy}{sin(\ang)}
+              \pgfmathsetmacro{\tx}{-sin(\ang)}
+              \pgfmathsetmacro{\ty}{cos(\ang)}
+              % position vector
+              \draw[->,thick,red!70!black]
+                (0,0) -- (\cx,\cy) node[above right,font=\small] {$\mathbf{x}(t)$};
+              % tangent vector
+              \draw[->,thick,green!60!black]
+                (\cx,\cy) -- +(\tx,\ty)
+                node[above right,font=\small] {$\dot{\mathbf{x}}(t)$};
+              % right angle mark
+              \coordinate (P) at (\cx,\cy);
+              \coordinate (O) at (0,0);
+              \coordinate (T) at ({\cx+0.12*\tx},{\cy+0.12*\ty});
+              \draw[gray]
+                ({\cx+0.10*\tx-0.10*\cx},{\cy+0.10*\ty-0.10*\cy}) --
+                ({\cx+0.10*\tx},{\cy+0.10*\ty}) --
+                ({\cx-0.10*\cx+0.00*\tx},{\cy-0.10*\cy+0.00*\ty});
+              % angle arc
+              \draw[->,gray!70] (0.35,0) arc (0:\ang:0.35)
+                node[midway,right,font=\tiny] {$t$};
+            \end{tikzpicture}
+          </latex-image>
+        </image>
+      </figure>
+    </solution>
+  </example>
+
+  <!-- ─── Example: angle of intersection ─── -->
+
+  <example xml:id="ex-angle-intersection">
+    <title>Angle of Intersection of Two Curves</title>
+    <statement>
+      <p>
+        The graphs of <m>f(x) = e^{x-1}</m> and <m>g(x) = x^2</m> intersect
+        at <m>(1,1)</m>.  Determine the angle of intersection by parametrizing
+        the graphs as curves and computing the angle between their tangent vectors
+        at the intersection point.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        <em>Step 1: Parametrize both graphs as curves.</em>
+        <md>
+          <mrow>
+            \mathbf{x}_1\colon \R \to \R^2, \quad
+            t \mapsto \begin{pmatrix} t \\ e^{t-1} \end{pmatrix};
+          </mrow>
+          <mrow>
+            \mathbf{x}_2\colon \R \to \R^2, \quad
+            t \mapsto \begin{pmatrix} t \\ t^2 \end{pmatrix}.
+          </mrow>
+        </md>
+        Both curves pass through <m>(1,1)</m> at <m>t = 1</m>.
+      </p>
+      <p>
+        <em>Step 2: Compute the tangent vectors at <m>t = 1</m>.</em>
+        <md>
+          <mrow>
+            \dot{\mathbf{x}}_1(t) = \begin{pmatrix} 1 \\ e^{t-1} \end{pmatrix}
+            \;\Rightarrow\;
+            \dot{\mathbf{x}}_1(1) = \begin{pmatrix} 1 \\ 1 \end{pmatrix},
+          </mrow>
+          <mrow>
+            \dot{\mathbf{x}}_2(t) = \begin{pmatrix} 1 \\ 2t \end{pmatrix}
+            \;\Rightarrow\;
+            \dot{\mathbf{x}}_2(1) = \begin{pmatrix} 1 \\ 2 \end{pmatrix}.
+          </mrow>
+        </md>
+      </p>
+      <p>
+        <em>Step 3: Compute the angle between the tangent vectors.</em>
+        <md>
+          <mrow>
+            \cos\alpha
+            = \frac{\langle \dot{\mathbf{x}}_1(1),\, \dot{\mathbf{x}}_2(1) \rangle}
+                   {\|\dot{\mathbf{x}}_1(1)\|\cdot\|\dot{\mathbf{x}}_2(1)\|}
+            = \frac{1 \cdot 1 + 1 \cdot 2}{\sqrt{1^2+1^2}\cdot\sqrt{1^2+2^2}}
+            = \frac{3}{\sqrt{2}\cdot\sqrt{5}}
+            = \frac{3}{\sqrt{10}}.
+          </mrow>
+        </md>
+        Therefore
+        <me>
+          \alpha = \arccos\!\left(\frac{3}{\sqrt{10}}\right) \approx 18.43^\circ.
+        </me>
+      </p>
+      <figure xml:id="fig-angle-intersection">
+        <caption>
+          The graphs of <m>f(x)=e^{x-1}</m> and <m>g(x)=x^2</m> meet at
+          <m>(1,1)</m>.  Their tangent vectors <m>\dot{\mathbf{x}}_1(1)=(1,1)</m>
+          and <m>\dot{\mathbf{x}}_2(1)=(1,2)</m> form an angle of approximately
+          <m>18.43^\circ</m>.
+        </caption>
+        <image xml:id="image-angle-intersection" width="55%">
+          <latex-image>
+            \begin{tikzpicture}
+              \begin{axis}[
+                  axis lines=center,
+                  xlabel={$x$}, ylabel={$y$},
+                  xmin=-0.3, xmax=2.5, ymin=-0.2, ymax=4.2,
+                  xtick={1}, ytick={1},
+                  width=6.5cm, height=6.5cm,
+                  clip=false,
+                  samples=80,
+                ]
+                % f(x) = e^{x-1}
+                \addplot[blue!70!black, thick, domain=0:2.3] {exp(x-1)}
+                  node[pos=0.9, above left, font=\small] {$f(x)=e^{x-1}$};
+                % g(x) = x^2
+                \addplot[red!70!black, thick, domain=0:2.0] {x^2}
+                  node[pos=0.95, right, font=\small] {$g(x)=x^2$};
+                % intersection point
+                \addplot[mark=*, mark size=2pt, black] coordinates {(1,1)};
+                % tangent vectors (scaled for visibility)
+                \draw[->,green!60!black, very thick]
+                  (axis cs:1,1) -- (axis cs:1.5,1.5)
+                  node[above, font=\small] {$\dot{\mathbf{x}}_1$};
+                \draw[->,orange!80!black, very thick]
+                  (axis cs:1,1) -- (axis cs:1.5,2.0)
+                  node[right, font=\small] {$\dot{\mathbf{x}}_2$};
+                % angle arc annotation
+                \node[font=\small] at (axis cs:1.45,1.6) {$\alpha$};
+              \end{axis}
+            \end{tikzpicture}
+          </latex-image>
+        </image>
+      </figure>
+    </solution>
+  </example>
+
+  <!-- ─── Theorem: differentiation rules ─── -->
+
+  <theorem xml:id="thm-differentiation-curves">
+    <title>Differentiation Rules for Curves</title>
+    <statement>
+      <p>
+        Let <m>\mathbf{x}, \mathbf{x}_1, \mathbf{x}_2\colon I \to \R^n</m>
+        be differentiable curves, let <m>a\colon I \to \R</m> be a scalar
+        function, and let <m>a_1, a_2 \in \R</m>.
+        Then:
+      </p>
+      <p>
+        <em>Linearity:</em>
+        <me>
+          \frac{d}{dt}\!\big(a_1 \mathbf{x}_1(t) + a_2 \mathbf{x}_2(t)\big)
+          = a_1\,\dot{\mathbf{x}}_1(t) + a_2\,\dot{\mathbf{x}}_2(t).
+        </me>
+      </p>
+      <p>
+        <em>Product rule (inner product):</em>
+        <me>
+          \frac{d}{dt}\!\big\langle \mathbf{x}_1(t), \mathbf{x}_2(t) \big\rangle
+          = \langle \dot{\mathbf{x}}_1(t), \mathbf{x}_2(t) \rangle
+            + \langle \mathbf{x}_1(t), \dot{\mathbf{x}}_2(t) \rangle.
+        </me>
+      </p>
+      <p>
+        <em>Product rule (scalar multiplication):</em>
+        <me>
+          \frac{d}{dt}\!\big(a(t)\,\mathbf{x}(t)\big)
+          = \dot{a}(t)\,\mathbf{x}(t) + a(t)\,\dot{\mathbf{x}}(t).
+        </me>
+      </p>
+      <p>
+        <em>Product rule (cross product, only for <m>n = 3</m>):</em>
+        <me>
+          \frac{d}{dt}\!\big(\mathbf{x}_1(t) \times \mathbf{x}_2(t)\big)
+          = \dot{\mathbf{x}}_1(t) \times \mathbf{x}_2(t)
+            + \mathbf{x}_1(t) \times \dot{\mathbf{x}}_2(t).
+        </me>
+      </p>
+    </statement>
+    <proof>
+      <p>
+        All rules follow from the component-wise definition of
+        <m>\dot{\mathbf{x}}(t)</m> and the corresponding single-variable
+        differentiation rules applied component by component.
+        The cross-product rule additionally uses the bilinearity and
+        antisymmetry of the cross product.
+      </p>
+    </proof>
+  </theorem>
+
+  <exercises xml:id="exercises-curves-check">
+    <title>Check Your Understanding</title>
+
+    <exercise xml:id="exer-curves-unit-circle-speed">
+      <title>Speed of the Unit Circle</title>
+      <statement>
+        <p>
+          Let
+          <me>
+            \mathbf{x}(t)=\begin{pmatrix}\cos t\\ \sin t\end{pmatrix}.
+          </me>
+          What is the speed <m>\|\dot{\mathbf{x}}(t)\|</m>?
+        </p>
+      </statement>
+      <choices>
+        <choice>
+          <statement><p><m>0</m></p></statement>
+          <feedback><p>Incorrect. The point is moving along the circle.</p></feedback>
+        </choice>
+        <choice correct="yes">
+          <statement><p><m>1</m></p></statement>
+          <feedback><p>Correct. Since <m>\dot{\mathbf{x}}(t)=(-\sin t,\cos t)</m>, its norm is always <m>1</m>.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p><m>\sqrt{2}</m></p></statement>
+          <feedback><p>Incorrect. The two squared components add to <m>1</m>, not <m>2</m>.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p><m>t</m></p></statement>
+          <feedback><p>Incorrect. The speed is constant here.</p></feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+    <exercise xml:id="exer-curves-tangent-vector-parabola">
+      <title>Tangent Vector of a Parametrized Curve</title>
+      <statement>
+        <p>
+          For
+          <me>
+            \mathbf{x}(t)=\begin{pmatrix}t\\ t^2\end{pmatrix},
+          </me>
+          compute the tangent vector at <m>t=1</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Differentiate componentwise:
+          <me>
+            \dot{\mathbf{x}}(t)=\begin{pmatrix}1\\ 2t\end{pmatrix}.
+          </me>
+          Therefore
+          <me>
+            \dot{\mathbf{x}}(1)=\begin{pmatrix}1\\ 2\end{pmatrix}.
+          </me>
+        </p>
+      </solution>
+    </exercise>
+  </exercises>
+
+</subsection>

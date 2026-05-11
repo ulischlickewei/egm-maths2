@@ -1,0 +1,624 @@
+<subsection xml:id="subsec-triple-integrals-evaluation">
+  <title>Evaluating Triple Integrals</title>
+
+  <introduction>
+    <p>
+      Triple integrals are evaluated by reducing them to three successive
+      one-variable integrals, exactly as for double integrals.
+      For a chosen order of integration, the domain must be expressible as a
+      <em>normal domain</em>: the bounds of an inner variable may depend on the
+      outer variables that are already fixed, but not on variables that are
+      integrated earlier.
+      We treat Cartesian and cylindrical coordinates in turn.
+    </p>
+  </introduction>
+
+  <!-- ─── Normal domains in 3D ─── -->
+
+  <remark xml:id="rem-normal-domain-3d">
+    <title>Normal Domains in <m>\R^3</m></title>
+    <p>
+      For the integration order <m>dz\,dy\,dx</m>, a <em>normal domain</em> in
+      three dimensions is a spatial region described by inequalities of the form:
+      <md>
+        <mrow>a \amp\leq x \leq b,</mrow>
+        <mrow>y_l(x) \amp\leq y \leq y_u(x),</mrow>
+        <mrow>z_l(x,y) \amp\leq z \leq z_u(x,y).</mrow>
+      </md>
+    </p>
+    <p>
+      The structure is hierarchical:
+    </p>
+    <ul>
+      <li>
+        <p>
+          The <em>outer</em> bounds (for <m>x</m>) are constants.
+        </p>
+      </li>
+      <li>
+        <p>
+          The <em>middle</em> bounds (for <m>y</m>) may depend on <m>x</m>.
+        </p>
+      </li>
+      <li>
+        <p>
+          The <em>inner</em> bounds (for <m>z</m>) may depend on both
+          <m>x</m> and <m>y</m>.
+        </p>
+      </li>
+    </ul>
+    <p>
+      Other variable orderings, such as <m>dx\,dz\,dy</m>, are equally valid.
+      The useful order is the one whose bounds describe the geometry most simply.
+    </p>
+  </remark>
+
+  <example xml:id="ex-cylinder-normal-domain">
+    <title>Cylinder as a Normal Domain</title>
+    <p>
+      Show that a solid cylinder of radius <m>R</m> and height <m>h</m>,
+      with its base centred at the origin, is a normal domain.
+    </p>
+    <p>
+      Project the cylinder onto the <m>xy</m>-plane: the cross-section is the
+      disk <m>x^2 + y^2 \leq R^2</m>.  Describing this disk as a Type I planar
+      normal domain gives <m>-R \leq x \leq R</m> and
+      <m>-\sqrt{R^2 - x^2} \leq y \leq \sqrt{R^2 - x^2}</m>.
+      The height runs from <m>0</m> to <m>h</m>.  Combining:
+      <md>
+        <mrow>-R \amp\leq x \leq R,</mrow>
+        <mrow>-\sqrt{R^2-x^2} \amp\leq y \leq \sqrt{R^2-x^2},</mrow>
+        <mrow>0 \amp\leq z \leq h.</mrow>
+      </md>
+    </p>
+    <figure xml:id="fig-cylinder-normal-domain">
+      <caption>
+        A vertical cylinder as a normal domain. For each fixed <m>x</m>, the
+        variable <m>y</m> runs through the chord of the disk, and <m>z</m> runs
+        from the base <m>0</m> to the height <m>h</m>.
+      </caption>
+      <image xml:id="image-cylinder-normal-domain" width="55%">
+        <latex-image>
+          \begin{tikzpicture}[scale=1.0,
+            x={({cos(210)*0.65cm},{sin(210)*0.65cm})},
+            y={({cos(330)*0.65cm},{sin(330)*0.65cm})},
+            z={(0,0.9cm)}, font=\small]
+            \def\R{1.35}
+            \def\H{2.0}
+            \draw[->,thick] (-1.8,0,0) -- (2.0,0,0) node[below right] {$x$};
+            \draw[->,thick] (0,-1.7,0) -- (0,1.9,0) node[right] {$y$};
+            \draw[->,thick] (0,0,0) -- (0,0,2.45) node[above] {$z$};
+            \fill[blue!12, opacity=0.65] (0,0,0) ellipse ({\R} and {0.45});
+            \fill[blue!20, opacity=0.55] (0,0,\H) ellipse ({\R} and {0.45});
+            \draw[blue!65!black, thick] (0,0,0) ellipse ({\R} and {0.45});
+            \draw[blue!65!black, thick] (0,0,\H) ellipse ({\R} and {0.45});
+            \draw[blue!65!black, thick] (-\R,0,0) -- (-\R,0,\H);
+            \draw[blue!65!black, thick] (\R,0,0) -- (\R,0,\H);
+            \draw[dashed, blue!65!black] (0,-\R,0) -- (0,-\R,\H);
+            \draw[dashed, blue!65!black] (0,\R,0) -- (0,\R,\H);
+            \draw[red!70!black, thick] (-0.55,-1.18,0) -- (-0.55,1.18,0);
+            \draw[red!70!black, thick] (-0.55,-1.18,\H) -- (-0.55,1.18,\H);
+            \draw[red!70!black, thick] (-0.55,-1.18,0) -- (-0.55,-1.18,\H);
+            \draw[red!70!black, thick] (-0.55,1.18,0) -- (-0.55,1.18,\H);
+            \node[red!70!black] at (-0.75,1.45,1.0) {$x=\text{const.}$};
+            \node[blue!70!black] at (1.35,0.55,\H) {$z=h$};
+            \node[below] at (-\R,0,0) {$-R$};
+            \node[below] at (\R,0,0) {$R$};
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+    </figure>
+  </example>
+
+  <!-- ─── Cartesian theorem ─── -->
+
+  <theorem xml:id="thm-triple-integral-cartesian">
+    <title>Triple Integrals in Cartesian Coordinates</title>
+    <statement>
+      <p>
+        For a normal domain <m>V</m> with
+        <m>a \leq x \leq b</m>,
+        <m>y_l(x) \leq y \leq y_u(x)</m>,
+        <m>z_l(x,y) \leq z \leq z_u(x,y)</m>:
+        <me>
+          \iiint\limits_V f(x,y,z)\,dV
+          = \int_a^b \int_{y_l(x)}^{y_u(x)} \int_{z_l(x,y)}^{z_u(x,y)}
+            f(x,y,z)\,dz\,dy\,dx.
+        </me>
+        The innermost integral (in <m>z</m>) is computed first, treating
+        <m>x</m> and <m>y</m> as parameters.
+        The middle integral (in <m>y</m>) is then computed, treating <m>x</m>
+        as a parameter.
+        The outermost integral (in <m>x</m>) is an ordinary definite integral.
+      </p>
+    </statement>
+  </theorem>
+
+  <!-- ─── Cartesian worked examples ─── -->
+
+  <example xml:id="ex-triple-integral-sine">
+    <title>Triple Integral with Trigonometric Integrand</title>
+    <statement>
+      <p>
+        Let <m>f(x,y,z) = yz\sin x</m> and
+        <me>
+          V =
+          \{(x,y,z) \in \R^3 \mid
+          0 \leq x \leq \tfrac{\pi}{2},\;
+          0 \leq y \leq 1,\;
+          y^2 \leq z \leq y\}.
+        </me>
+        Compute
+        <me>
+          \iiint\limits_V yz\sin x\,dV.
+        </me>
+      </p>
+      <figure xml:id="fig-triple-integral-sine-domain">
+        <caption>
+          The domain is an extrusion in the <m>x</m>-direction of the region
+          between <m>z=y^2</m> and <m>z=y</m> for <m>0\leq y\leq 1</m>.
+        </caption>
+        <image xml:id="image-triple-integral-sine-domain" width="55%">
+          <latex-image>
+            \begin{tikzpicture}[scale=1.15,
+              x={({cos(210)*0.75cm},{sin(210)*0.75cm})},
+              y={(1cm,0cm)},
+              z={(0,1cm)}, font=\small]
+              \draw[->,thick] (0,0,0) -- (2.0,0,0) node[below left] {$x$};
+              \draw[->,thick] (0,0,0) -- (0,1.45,0) node[right] {$y$};
+              \draw[->,thick] (0,0,0) -- (0,0,1.35) node[above] {$z$};
+              \fill[blue!18, opacity=0.75]
+                (0,0,0) -- (0,0.25,0.25) -- (0,0.5,0.5) -- (0,0.75,0.75)
+                -- (0,1,1) -- (1.65,1,1) -- (1.65,0.75,0.75)
+                -- (1.65,0.5,0.5) -- (1.65,0.25,0.25) -- (1.65,0,0)
+                -- cycle;
+              \fill[blue!10, opacity=0.8]
+                (0,0,0) -- (0,0.25,0.0625) -- (0,0.5,0.25)
+                -- (0,0.75,0.5625) -- (0,1,1) -- (1.65,1,1)
+                -- (1.65,0.75,0.5625) -- (1.65,0.5,0.25)
+                -- (1.65,0.25,0.0625) -- (1.65,0,0) -- cycle;
+              \draw[blue!70!black, thick]
+                plot[domain=0:1, samples=40] (0,\x,\x)
+                node[right] {$z=y$};
+              \draw[blue!70!black, thick]
+                plot[domain=0:1, samples=40] (0,\x,{\x*\x})
+                node[right] {$z=y^2$};
+              \draw[blue!70!black, thick]
+                plot[domain=0:1, samples=40] (1.65,\x,\x);
+              \draw[blue!70!black, thick]
+                plot[domain=0:1, samples=40] (1.65,\x,{\x*\x});
+              \draw[blue!70!black] (0,0,0) -- (1.65,0,0);
+              \draw[blue!70!black] (0,1,1) -- (1.65,1,1);
+              \node[below] at (1.65,0,0) {$\pi/2$};
+              \node at (0.95,0.55,0.42) {$V$};
+            \end{tikzpicture}
+          </latex-image>
+        </image>
+      </figure>
+    </statement>
+    <solution>
+      <p>
+        Note that for <m>y \in [0,1]</m> we have <m>y^2 \leq y</m>, so the
+        <m>z</m>-bounds are valid.
+      </p>
+      <p>
+        <em>Inner integral (in <m>z</m>):</em>
+        <md>
+          <mrow>
+            \int_{y^2}^{y} yz\sin x\,dz
+            \amp= y\sin x\left[\tfrac{1}{2}z^2\right]_{y^2}^{y}
+            = \tfrac{1}{2}y\sin x\,(y^2 - y^4).
+          </mrow>
+        </md>
+      </p>
+      <p>
+        <em>Middle integral (in <m>y</m>):</em>
+        <md>
+          <mrow>
+            \int_0^1 \tfrac{1}{2}y\sin x\,(y^2 - y^4)\,dy
+            \amp= \tfrac{\sin x}{2}\left[\tfrac{y^4}{4} - \tfrac{y^6}{6}\right]_0^1
+            = \tfrac{\sin x}{2}\!\left(\tfrac{1}{4} - \tfrac{1}{6}\right)
+            = \tfrac{\sin x}{24}.
+          </mrow>
+        </md>
+      </p>
+      <p>
+        <em>Outer integral (in <m>x</m>):</em>
+        <md>
+          <mrow>
+            \int_0^{\pi/2} \tfrac{\sin x}{24}\,dx
+            \amp= \tfrac{1}{24}\left[-\cos x\right]_0^{\pi/2}
+            = \tfrac{1}{24}(0 - (-1)) = \tfrac{1}{24}.
+          </mrow>
+        </md>
+      </p>
+    </solution>
+  </example>
+
+  <example xml:id="ex-triple-integral-yez">
+    <title>Triple Integral with Exponential Integrand</title>
+    <statement>
+      <p>
+        Let <m>f(x,y,z) = ye^z</m> and
+        <me>
+          V =
+          \{(x,y,z)\in\R^3 \mid
+          1 \leq x \leq 2,\;
+          0 \leq y \leq x,\;
+          0 \leq z \leq x-y\}.
+        </me>
+        Compute
+        <me>
+          \iiint\limits_V ye^z\,dV.
+        </me>
+      </p>
+      <figure xml:id="fig-triple-integral-yez-domain">
+        <caption>
+          The domain lies between the planes <m>z=0</m> and <m>z=x-y</m>, with
+          <m>1\leq x\leq 2</m> and <m>0\leq y\leq x</m>.
+        </caption>
+        <image xml:id="image-triple-integral-yez-domain" width="55%">
+          <latex-image>
+            \begin{tikzpicture}[scale=0.95,
+              x={({cos(210)*0.75cm},{sin(210)*0.75cm})},
+              y={(1cm,0cm)},
+              z={(0,1cm)}, font=\small]
+              \draw[->,thick] (0,0,0) -- (2.55,0,0) node[below left] {$x$};
+              \draw[->,thick] (0,0,0) -- (0,2.4,0) node[right] {$y$};
+              \draw[->,thick] (0,0,0) -- (0,0,2.35) node[above] {$z$};
+              \fill[green!16, opacity=0.75]
+                (1,0,0) -- (2,0,0) -- (2,2,0) -- (1,1,0) -- cycle;
+              \fill[green!28, opacity=0.65]
+                (1,0,1) -- (2,0,2) -- (2,2,0) -- (1,1,0) -- cycle;
+              \draw[green!55!black, thick]
+                (1,0,0) -- (2,0,0) -- (2,2,0) -- (1,1,0) -- cycle;
+              \draw[green!65!black, thick]
+                (1,0,1) -- (2,0,2) -- (2,2,0) -- (1,1,0) -- cycle;
+              \draw[green!55!black] (1,0,0) -- (1,0,1);
+              \draw[green!55!black] (2,0,0) -- (2,0,2);
+              \node[green!55!black] at (1.55,0.65,0.85) {$z=x-y$};
+              \node at (1.55,1.0,0.25) {$V$};
+              \node[below] at (1,0,0) {$1$};
+              \node[below] at (2,0,0) {$2$};
+            \end{tikzpicture}
+          </latex-image>
+        </image>
+      </figure>
+    </statement>
+    <solution>
+      <p>
+        <em>Inner integral (in <m>z</m>):</em>
+        <me>
+          \int_0^{x-y} ye^z\,dz = y\left[e^z\right]_0^{x-y} = y(e^{x-y} - 1).
+        </me>
+      </p>
+      <p>
+        <em>Middle integral (in <m>y</m>):</em>
+        Split into two parts:
+        <me>
+          \int_0^x y(e^{x-y} - 1)\,dy
+          = \int_0^x ye^{x-y}\,dy - \int_0^x y\,dy.
+        </me>
+        For the first part, integrate by parts with <m>u = y</m>,
+        <m>v' = e^{x-y}</m> (so <m>v = -e^{x-y}</m>):
+        <md>
+          <mrow>
+            \int_0^x ye^{x-y}\,dy
+            \amp= \left[-ye^{x-y}\right]_0^x + \int_0^x e^{x-y}\,dy
+          </mrow>
+          <mrow>
+            \amp= -x + \left[-e^{x-y}\right]_0^x
+            = -x - 1 + e^x.
+          </mrow>
+        </md>
+        The second part: <m>\int_0^x y\,dy = \tfrac{x^2}{2}</m>.
+        Combining:
+        <me>
+          \int_0^x y(e^{x-y}-1)\,dy = e^x - x - 1 - \tfrac{x^2}{2}.
+        </me>
+      </p>
+      <p>
+        <em>Outer integral (in <m>x</m>):</em>
+        <md>
+          <mrow>
+            \int_1^2\!\left(e^x - x - 1 - \tfrac{x^2}{2}\right)dx
+            \amp= \left[e^x - \tfrac{x^2}{2} - x - \tfrac{x^3}{6}\right]_1^2
+          </mrow>
+          <mrow>
+            \amp= \left(e^2 - 2 - 2 - \tfrac{4}{3}\right)
+                 - \left(e - \tfrac{1}{2} - 1 - \tfrac{1}{6}\right)
+          </mrow>
+          <mrow>
+            \amp= e^2 - e - \tfrac{11}{3}.
+          </mrow>
+        </md>
+      </p>
+    </solution>
+  </example>
+
+  <!-- ─── Cylindrical coordinates ─── -->
+
+  <remark xml:id="rem-cylindrical-coordinates">
+    <title>Cylindrical Coordinates</title>
+    <p>
+      For spatial domains with <em>rotational symmetry about the
+      <m>z</m>-axis</em>, the computation simplifies greatly in
+      <term>cylindrical coordinates</term>.
+      A point <m>P = (x,y,z)</m> is described by:
+    </p>
+    <ul>
+      <li>
+        <p>
+          <m>(r,\varphi)</m>: polar coordinates of the orthogonal projection
+          of <m>P</m> into the <m>xy</m>-plane, with
+          <m>x = r\cos\varphi</m> and <m>y = r\sin\varphi</m>, <m>r \geq 0</m>.
+        </p>
+      </li>
+      <li>
+        <p>
+          <m>z</m>: the height coordinate, unchanged.
+        </p>
+      </li>
+    </ul>
+    <p>
+      The <em>volume element</em> in cylindrical coordinates is
+      <me>
+        dV = r\,dr\,d\varphi\,dz.
+      </me>
+      The factor <m>r</m> is the Jacobian of the transformation from
+      <m>(x,y,z)</m> to <m>(r,\varphi,z)</m>, and arises for the same reason
+      as in polar coordinates for double integrals
+      (see <xref ref="rem-polar-domain"/>).
+    </p>
+    <figure xml:id="fig-cylindrical-coordinates">
+      <caption>
+        Cylindrical coordinates <m>(r,\varphi,z)</m>.
+        The volume element (shaded) has dimensions <m>dr</m>,
+        <m>r\,d\varphi</m> (arc length), and <m>dz</m>,
+        giving volume <m>dV = r\,dr\,d\varphi\,dz</m>.
+      </caption>
+      <image xml:id="image-cylindrical-coordinates" width="55%">
+        <latex-image>
+          \begin{tikzpicture}[scale=1.1,
+            x={({cos(210)*0.6cm},{sin(210)*0.6cm})},
+            y={({cos(330)*0.6cm},{sin(330)*0.6cm})},
+            z={(0,0.9cm)}]
+            % Axes
+            \draw[->,thick] (0,0,0) -- (2.8,0,0) node[below right] {$x$};
+            \draw[->,thick] (0,0,0) -- (0,2.5,0) node[right] {$y$};
+            \draw[->,thick] (0,0,0) -- (0,0,2.5) node[above] {$z$};
+            % A point P at r=1.6, phi=40deg, z=1.5
+            \def\rr{1.6}
+            \def\phiP{40}
+            \def\zP{1.5}
+            \pgfmathsetmacro{\px}{\rr*cos(\phiP)}
+            \pgfmathsetmacro{\py}{\rr*sin(\phiP)}
+            % Projection on xy-plane
+            \draw[dashed,gray] (0,0,0) -- (\px,\py,0);
+            \draw[dashed,gray] (\px,\py,0) -- (\px,\py,\zP);
+            % Point
+            \fill (\px,\py,\zP) circle (1.5pt)
+              node[above right] {$P=(r,\varphi,z)$};
+            % r label
+            \node[below, gray] at (0.5*\px, 0.5*\py, 0) {$r$};
+            % phi arc
+            \draw[->,gray] (0.6,0,0)
+              arc[start angle=0, end angle=\phiP, radius=0.6]
+              node[midway, below right] {$\varphi$};
+            % z label
+            \draw[&lt;-&gt;,gray] (\px+0.15,\py,0) -- (\px+0.15,\py,\zP)
+              node[midway,right] {$z$};
+            % Volume element (schematic box at r=1.0, phi=20deg, z=0.7)
+            \def\ri{0.9}
+            \def\ro{1.2}
+            \def\phiA{20}
+            \def\phiB{45}
+            \def\zA{0.6}
+            \def\zB{1.1}
+            \pgfmathsetmacro{\axA}{\ri*cos(\phiA)}
+            \pgfmathsetmacro{\ayA}{\ri*sin(\phiA)}
+            \pgfmathsetmacro{\axB}{\ro*cos(\phiA)}
+            \pgfmathsetmacro{\ayB}{\ro*sin(\phiA)}
+            \pgfmathsetmacro{\bxA}{\ri*cos(\phiB)}
+            \pgfmathsetmacro{\byA}{\ri*sin(\phiB)}
+            \pgfmathsetmacro{\bxB}{\ro*cos(\phiB)}
+            \pgfmathsetmacro{\byB}{\ro*sin(\phiB)}
+            % Bottom face
+            \fill[blue!15, opacity=0.7]
+              (\axA,\ayA,\zA) -- (\axB,\ayB,\zA)
+              -- (\bxB,\byB,\zA) -- (\bxA,\byA,\zA) -- cycle;
+            % Top face
+            \fill[blue!25, opacity=0.7]
+              (\axA,\ayA,\zB) -- (\axB,\ayB,\zB)
+              -- (\bxB,\byB,\zB) -- (\bxA,\byA,\zB) -- cycle;
+            % Side faces
+            \fill[blue!10, opacity=0.5]
+              (\axA,\ayA,\zA) -- (\axA,\ayA,\zB)
+              -- (\axB,\ayB,\zB) -- (\axB,\ayB,\zA) -- cycle;
+            \fill[blue!10, opacity=0.5]
+              (\bxA,\byA,\zA) -- (\bxA,\byA,\zB)
+              -- (\bxB,\byB,\zB) -- (\bxB,\byB,\zA) -- cycle;
+            % Labels on element
+            \node[right, font=\footnotesize, blue!70!black]
+              at (\axB,\ayB,{0.5*(\zA+\zB)}) {$dr$};
+            \node[below, font=\footnotesize, blue!70!black]
+              at ({0.5*(\axA+\bxA)},{0.5*(\ayA+\byA)},\zA) {$r\,d\varphi$};
+            \node[right, font=\footnotesize, blue!70!black]
+              at (\bxB,\byB,{0.5*(\zA+\zB)}) {$dz$};
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+    </figure>
+  </remark>
+
+  <theorem xml:id="thm-triple-integral-cylindrical">
+    <title>Triple Integrals in Cylindrical Coordinates</title>
+    <statement>
+      <p>
+        For a normal domain <m>V</m> described in cylindrical coordinates by
+        <m>r_0 \leq r \leq r_1</m>,
+        <m>f_i(r) \leq \varphi \leq f_a(r)</m>,
+        <m>z_l(r,\varphi) \leq z \leq z_u(r,\varphi)</m>:
+        <me>
+          \iiint\limits_V f(x,y,z)\,dV
+          = \int_{r_0}^{r_1}
+            \int_{f_i(r)}^{f_a(r)}
+            \int_{z_l(r,\varphi)}^{z_u(r,\varphi)}
+            f(r\cos\varphi,\,r\sin\varphi,\,z)\cdot r
+            \,dz\,d\varphi\,dr.
+        </me>
+        The Jacobian factor <m>r</m> must always be included. As in Cartesian
+        coordinates, other orders of integration are possible if they describe
+        the same solid more simply.
+      </p>
+    </statement>
+  </theorem>
+
+  <!-- ─── Cylindrical examples ─── -->
+
+  <example xml:id="ex-cylinder-moment-inertia">
+    <title>Moment of Inertia of a Solid Cylinder</title>
+    <p>
+      Consider a solid cylinder with radius <m>R</m>, height <m>h</m>
+      (centred at the origin, so <m>-h/2 \leq z \leq h/2</m>), and
+      constant mass density <m>\rho</m>.
+      The total mass is <m>m = \rho\operatorname{vol}(Z) = \rho\pi R^2 h</m>.
+      Compute the moment of inertia <m>J_z</m> about the <m>z</m>-axis.
+    </p>
+    <p>
+      In cylindrical coordinates, the cylinder is
+      <m>0 \leq r \leq R</m>,
+      <m>0 \leq \varphi \leq 2\pi</m>,
+      <m>-h/2 \leq z \leq h/2</m>.
+      The squared distance from the <m>z</m>-axis is
+      <m>x^2 + y^2 = r^2</m>.
+    </p>
+    <p>
+      <md>
+        <mrow>
+          J_z \amp= \iiint\limits_Z (x^2+y^2)\,\rho\,dV
+          = \rho\int_0^R\int_0^{2\pi}\int_{-h/2}^{h/2}
+            r^2 \cdot r\,dz\,d\varphi\,dr
+        </mrow>
+        <mrow>
+          \amp= \rho\int_0^R\int_0^{2\pi} r^3 h\,d\varphi\,dr
+          = \rho\cdot 2\pi h\int_0^R r^3\,dr
+          = 2\pi\rho h\cdot\frac{R^4}{4}
+          = \frac{\pi\rho h R^4}{2}.
+        </mrow>
+      </md>
+      Since <m>m = \rho\pi R^2 h</m>:
+      <me>
+        J_z = \frac{1}{2}mR^2.
+      </me>
+      This classical result states that the moment of inertia of a cylinder
+      about its axis of symmetry equals half the product of its mass and the
+      square of its radius.
+    </p>
+  </example>
+
+  <example xml:id="ex-halfball-geometric-center">
+    <title>Geometric Center of a Half-Ball</title>
+    <p>
+      Find the geometric center of the upper half-ball of radius <m>R</m>:
+      <m>V = \{(x,y,z) \mid x^2 + y^2 + z^2 \leq R^2,\; z \geq 0\}</m>.
+    </p>
+    <p>
+      By symmetry, <m>x_S = y_S = 0</m>.
+      In cylindrical coordinates, the half-ball is bounded by
+      <m>0 \leq r \leq R</m>,
+      <m>0 \leq \varphi \leq 2\pi</m>,
+      <m>0 \leq z \leq \sqrt{R^2 - r^2}</m>.
+      The volume is <m>\operatorname{vol}(V) = \tfrac{2}{3}\pi R^3</m>.
+    </p>
+    <p>
+      <em><m>z</m>-coordinate of the centroid:</em>
+      <md>
+        <mrow>
+          \iiint_V z\,dV
+          \amp= \int_0^{2\pi}\int_0^R\int_0^{\sqrt{R^2-r^2}}
+            z\cdot r\,dz\,dr\,d\varphi
+        </mrow>
+        <mrow>
+          \amp= 2\pi\int_0^R r\left[\frac{z^2}{2}\right]_0^{\sqrt{R^2-r^2}}dr
+          = 2\pi\int_0^R \frac{r(R^2-r^2)}{2}\,dr
+        </mrow>
+        <mrow>
+          \amp= \pi\int_0^R (R^2 r - r^3)\,dr
+          = \pi\left[\frac{R^2 r^2}{2} - \frac{r^4}{4}\right]_0^R
+          = \pi\left(\frac{R^4}{2} - \frac{R^4}{4}\right)
+          = \frac{\pi R^4}{4}.
+        </mrow>
+      </md>
+      Therefore
+      <me>
+        z_S = \frac{1}{\operatorname{vol}(V)}\iiint_V z\,dV
+            = \frac{1}{\tfrac{2}{3}\pi R^3}\cdot\frac{\pi R^4}{4}
+            = \frac{3}{8}R.
+      </me>
+      The geometric center of the half-ball is at
+      <m>\bigl(0,\,0,\,\tfrac{3}{8}R\bigr)</m>.
+    </p>
+  </example>
+
+  <exercises xml:id="exercises-triple-integrals-evaluation-check">
+    <title>Check Your Understanding</title>
+
+    <exercise xml:id="exer-triple-integral-cylindrical-jacobian">
+      <title>Cylindrical Jacobian Factor</title>
+      <statement>
+        <p>
+          Which extra factor appears when converting a triple integral to cylindrical coordinates?
+        </p>
+      </statement>
+      <choices>
+        <choice>
+          <statement><p><m>\rho</m></p></statement>
+          <feedback><p>Incorrect. That symbol is often used for density, not for the cylindrical Jacobian here.</p></feedback>
+        </choice>
+        <choice correct="yes">
+          <statement><p><m>r</m></p></statement>
+          <feedback><p>Correct. In cylindrical coordinates, <m>dV=r\,dr\,d\varphi\,dz</m>.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p><m>r^2</m></p></statement>
+          <feedback><p>Incorrect. The Jacobian contributes only one factor <m>r</m>.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p><m>\sin\varphi</m></p></statement>
+          <feedback><p>Incorrect. The cylindrical Jacobian is not trigonometric.</p></feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+    <exercise xml:id="exer-triple-integral-cylinder-z">
+      <title>Compute a Cylindrical Triple Integral</title>
+      <statement>
+        <p>
+          Compute
+          <me>
+            \int_0^{2\pi}\int_0^1\int_0^2 z\,r\,dz\,dr\,d\varphi.
+          </me>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          First integrate with respect to <m>z</m>:
+          <me>
+            \int_0^2 z\,dz = \left[\frac{z^2}{2}\right]_0^2 = 2.
+          </me>
+          Then
+          <me>
+            \int_0^1 2r\,dr = \left[r^2\right]_0^1 = 1.
+          </me>
+          Finally,
+          <me>
+            \int_0^{2\pi} 1\,d\varphi = 2\pi.
+          </me>
+          Hence the value of the integral is <m>2\pi</m>.
+        </p>
+      </solution>
+    </exercise>
+  </exercises>
+
+</subsection>

@@ -1,0 +1,349 @@
+<subsection xml:id="subsec-double-integrals">
+  <title>Double Integrals</title>
+
+  <introduction>
+    <p>
+      The definite integral of a single-variable function measures the signed area
+      enclosed between the graph and the horizontal axis.
+      We now generalise this idea to functions of two variables: instead of an area,
+      the integral will measure a <em>volume</em>, and instead of an interval, the
+      domain of integration is a planar region.
+      The construction follows the same Riemann-sum logic — approximate by simple
+      pieces, then pass to the limit.
+    </p>
+  </introduction>
+
+  <!-- ─── Univariate Riemann sum review ─── -->
+
+  <remark xml:id="rem-riemann-sum-univariate">
+    <title>Review: Univariate Integrals as Riemann Sums</title>
+    <p>
+      For a continuous function <m>f\colon [a,b] \to \R</m>, the definite integral
+      <me>
+        \int_a^b f(x) \, dx
+      </me>
+      measures the signed area enclosed between the graph of <m>f</m> and the
+      <m>x</m>-axis.
+      It is defined as the limit of <em>Riemann sums</em>: subdivide <m>[a,b]</m>
+      into <m>n</m> sub-intervals of equal length <m>\Delta x_i = \tfrac{b-a}{n}</m>,
+      choose a representative point <m>x_i</m> in each sub-interval, and sum the
+      rectangle areas:
+      <me>
+        \sum_{i=1}^n f(x_i)\,\Delta x_i
+        \;\xrightarrow{\;n \to \infty\;}\;
+        \int_a^b f(x) \, dx.
+      </me>
+      Each term <m>f(x_i)\,\Delta x_i</m> is the area of a thin rectangle of
+      height <m>f(x_i)</m> and width <m>\Delta x_i</m>.
+      As the subdivision is refined, the approximation converges to the exact integral.
+    </p>
+    <figure xml:id="fig-riemann-sum-1d">
+      <caption>
+        Approximating <m>\int_a^b f(x)\,dx</m> by Riemann sum rectangles (shown in
+        blue). As the number of rectangles increases the total rectangle area
+        converges to the exact integral.
+      </caption>
+      <image xml:id="image-riemann-sum-1d" width="60%">
+        <latex-image>
+          \begin{tikzpicture}[scale=1.05]
+            \fill[blue!20] (0.5,0) rectangle (1.0,1.20);
+            \fill[blue!20] (1.0,0) rectangle (1.5,2.08);
+            \fill[blue!20] (1.5,0) rectangle (2.0,2.81);
+            \fill[blue!20] (2.0,0) rectangle (2.5,2.71);
+            \fill[blue!20] (2.5,0) rectangle (3.0,1.90);
+            \fill[blue!20] (3.0,0) rectangle (3.5,1.06);
+            \draw[blue!60] (0.5,0) rectangle (1.0,1.20);
+            \draw[blue!60] (1.0,0) rectangle (1.5,2.08);
+            \draw[blue!60] (1.5,0) rectangle (2.0,2.81);
+            \draw[blue!60] (2.0,0) rectangle (2.5,2.71);
+            \draw[blue!60] (2.5,0) rectangle (3.0,1.90);
+            \draw[blue!60] (3.0,0) rectangle (3.5,1.06);
+            \draw[thick, blue!80!black]
+              plot[smooth, domain=0.5:3.5, samples=60]
+              (\x, {2.5*exp(-(\x-2.2)*(\x-2.2)/1.3)+0.38})
+              node[right] {$f(x)$};
+            \fill[blue!80!black] (1.0,1.20) circle (1.2pt);
+            \fill[blue!80!black] (1.5,2.08) circle (1.2pt);
+            \fill[blue!80!black] (2.0,2.81) circle (1.2pt);
+            \fill[blue!80!black] (2.5,2.71) circle (1.2pt);
+            \fill[blue!80!black] (3.0,1.90) circle (1.2pt);
+            \fill[blue!80!black] (3.5,1.06) circle (1.2pt);
+            \draw[->,thick] (0.2,0) -- (4.0,0) node[right] {$x$};
+            \draw[->,thick] (0.5,-0.15) -- (0.5,3.25) node[above] {$y$};
+            \node[below] at (0.5,-0.02) {$a$};
+            \node[below] at (3.5,-0.02) {$b$};
+            \draw[latex-latex] (0.5,-0.52) -- (1.0,-0.52)
+              node[midway, below, font=\small] {$\Delta x_i$};
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+    </figure>
+  </remark>
+
+  <!-- ─── Volume motivation ─── -->
+
+  <remark xml:id="rem-double-integral-volume-motivation">
+    <title>Volume Between a Bivariate Function and the <m>xy</m>-Plane</title>
+    <p>
+      Now let <m>f\colon D_f \to \R</m> be a continuous function of two variables,
+      and let <m>A \subset D_f</m> be a bounded planar domain.
+      We want to compute the <em>volume</em> of the solid region lying between
+      the surface <m>z = f(x,y)</m> and the <m>xy</m>-plane above <m>A</m>.
+      This volume is called the <em>double integral</em>:
+      <me>
+        \iint\limits_A f(x,y) \, dA,
+      </me>
+      where <m>A</m> is the domain of integration and <m>f(x,y)</m> is the integrand.
+    </p>
+    <p>
+      The construction mirrors the univariate case.
+      Subdivide <m>A</m> into <m>n</m> small sub-domains with areas
+      <m>\Delta A_1, \ldots, \Delta A_n</m>.
+      Over each sub-domain <m>A_k</m>, approximate the solid by a
+      <em>vertical cylinder with a flat top</em>: choose any point
+      <m>(x_k, y_k) \in A_k</m> and form the approximate volume
+      <me>
+        \Delta V_k = f(x_k, y_k)\cdot\Delta A_k.
+      </me>
+      Summing over all sub-domains gives the Riemann sum approximation:
+      <me>
+        \iint\limits_A f(x,y)\,dA
+        \;\approx\;
+        \sum_{k=1}^n f(x_k,y_k)\cdot\Delta A_k.
+      </me>
+      Refining the subdivision indefinitely (so that each <m>\Delta A_k \to 0</m>)
+      makes this sum converge to the exact double integral.
+    </p>
+  </remark>
+
+  <!-- ─── Definition ─── -->
+
+  <definition xml:id="def-double-integral">
+    <title>Double Integral in <m>\R^2</m></title>
+    <statement>
+      <p>
+        Let <m>A \subset \R^2</m> be a bounded domain and <m>f\colon A \to \R</m>
+        a continuous function.
+        For sub-domain areas <m>\Delta A_k</m> and representative points
+        <m>(x_k, y_k) \in A_k</m> as described above, the
+        <term>double integral</term> of <m>f</m> over <m>A</m> is defined as:
+        <me>
+          \iint\limits_A f(x,y)\,dA
+          \;=\;
+          \lim_{\substack{n \to \infty \\ \Delta A_k \to 0}}
+          \sum_{k=1}^n f(x_k,y_k)\,\Delta A_k.
+        </me>
+      </p>
+    </statement>
+  </definition>
+
+  <remark xml:id="rem-double-integral-existence">
+    <p>
+      This limit does not exist for all functions and all domains.
+      In this course we work exclusively with continuous functions on
+      bounded domains for which the double integral is well-defined.
+    </p>
+  </remark>
+
+  <!-- ─── Applications ─── -->
+
+  <remark xml:id="rem-double-integral-applications-transition">
+    <title>Three Basic Applications of Double Integrals</title>
+    <p>
+      We now start a new line of thought. After defining the double integral as
+      a Riemann-sum limit, we use the same idea in three concrete applications:
+      computing the area of a planar domain, locating its geometric center, and
+      accumulating a variable surface density such as electric charge. In each
+      case, the double integral adds up a local contribution over all small area
+      elements of the domain.
+    </p>
+  </remark>
+
+  <definition xml:id="def-area-double-integral">
+    <title>Area of a Planar Domain</title>
+    <statement>
+      <p>
+        The <term>area</term> <m>F(A)</m> of a planar domain <m>A \subseteq \R^2</m>
+        is obtained by integrating the constant function <m>1</m>:
+        <me>
+          F(A) = \iint\limits_A 1\,dA.
+        </me>
+      </p>
+    </statement>
+  </definition>
+
+  <figure xml:id="fig-area-double-integral">
+    <caption>
+      The formula <m>F(A)=\iint_A 1\,dA</m> adds one unit of area density over
+      every infinitesimal area element <m>dA</m> in the planar domain <m>A</m>.
+    </caption>
+    <image xml:id="image-area-double-integral" width="55%">
+      <latex-image>
+        \begin{tikzpicture}[scale=1.0, font=\small]
+          \fill[green!18]
+            (0.4,0.5) .. controls (0.7,1.8) and (1.5,2.3) .. (2.8,2.0)
+            .. controls (3.5,1.8) and (3.8,0.8) .. (3.0,0.35)
+            .. controls (2.1,-0.1) and (0.9,0.0) .. (0.4,0.5);
+          \draw[thick, green!45!black]
+            (0.4,0.5) .. controls (0.7,1.8) and (1.5,2.3) .. (2.8,2.0)
+            .. controls (3.5,1.8) and (3.8,0.8) .. (3.0,0.35)
+            .. controls (2.1,-0.1) and (0.9,0.0) .. (0.4,0.5);
+          \foreach \x in {0.9,1.4,1.9,2.4,2.9}
+            \draw[green!55!black, opacity=0.45] (\x,0.35) -- (\x,2.0);
+          \foreach \y in {0.6,1.0,1.4,1.8}
+            \draw[green!55!black, opacity=0.45] (0.6,\y) -- (3.25,\y);
+          \fill[green!45!black] (1.85,1.2) circle (1pt);
+          \node at (2.0,1.15) {$dA$};
+          \node at (2.2,2.45) {$A$};
+          \node[align=center] at (2.0,-0.55)
+            {$\displaystyle F(A)=\iint_A 1\,dA$};
+          \draw[->,thick] (0.0,0) -- (4.1,0) node[right] {$x$};
+          \draw[->,thick] (0,-0.2) -- (0,2.6) node[above] {$y$};
+        \end{tikzpicture}
+      </latex-image>
+    </image>
+  </figure>
+
+  <definition xml:id="def-geometric-center-2d">
+    <title>Geometric Center of a Planar Domain</title>
+    <statement>
+      <p>
+        Integrating the coordinate functions <m>x</m> and <m>y</m> over <m>A</m>
+        gives the total coordinate moments of the domain. Dividing these moments
+        by the total area <m>F(A)</m> yields the average coordinates of all area
+        elements, that is, the coordinates of the <term>geometric center</term>
+        (centroid) of <m>A</m>:
+        <me>
+          x_C = \frac{1}{F(A)}\iint\limits_A x\,dA,
+          \qquad
+          y_C = \frac{1}{F(A)}\iint\limits_A y\,dA.
+        </me>
+      </p>
+    </statement>
+  </definition>
+
+  <figure xml:id="fig-geometric-center-2d">
+    <caption>
+      The geometric center <m>C=(x_C,y_C)</m> is the balance point of a planar
+      domain with uniform density. The integrals of <m>x</m> and <m>y</m> compute
+      coordinate moments; dividing by the total area <m>F(A)</m> turns these
+      moments into average coordinates.
+    </caption>
+    <image xml:id="image-geometric-center-2d" width="55%">
+      <latex-image>
+        \begin{tikzpicture}[scale=1.0, font=\small]
+          \fill[orange!18]
+            (0.45,0.45) .. controls (0.8,1.6) and (1.7,2.25) .. (2.75,1.9)
+            .. controls (3.45,1.65) and (3.55,0.65) .. (2.85,0.25)
+            .. controls (1.95,-0.25) and (0.8,-0.05) .. (0.45,0.45);
+          \draw[thick, orange!65!black]
+            (0.45,0.45) .. controls (0.8,1.6) and (1.7,2.25) .. (2.75,1.9)
+            .. controls (3.45,1.65) and (3.55,0.65) .. (2.85,0.25)
+            .. controls (1.95,-0.25) and (0.8,-0.05) .. (0.45,0.45);
+          \coordinate (C) at (1.95,1.0);
+          \draw[dashed, orange!70!black] (C) -- (1.95,0);
+          \draw[dashed, orange!70!black] (C) -- (0,1.0);
+          \draw[thick, orange!80!black] (1.83,1.0) -- (2.07,1.0);
+          \draw[thick, orange!80!black] (1.95,0.88) -- (1.95,1.12);
+          \fill[orange!90!black] (C) circle (1.5pt);
+          \node[above left] at (C) {$C=(x_C,y_C)$};
+          \node[below] at (1.95,0) {$x_C$};
+          \node[left] at (0,1.0) {$y_C$};
+          \node at (3.0,1.45) {$A$};
+          \draw[->,thick] (0,0) -- (4.0,0) node[right] {$x$};
+          \draw[->,thick] (0,-0.15) -- (0,2.45) node[above] {$y$};
+        \end{tikzpicture}
+      </latex-image>
+    </image>
+  </figure>
+
+  <!-- ─── Physics motivation: surface charge ─── -->
+
+  <example xml:id="ex-surface-charge-setup">
+    <title>Surface Charge Density</title>
+    <p>
+      In physics, many quantities are specified as <em>local densities</em> that
+      only yield a global value after integration.
+      For a charged conductive plane surface <m>A</m>, the distribution of electric
+      charge is described by the <em>charge density</em> <m>\sigma(x,y)</m>,
+      where <m>\sigma(x,y)</m> is the charge per unit area at the point
+      <m>(x,y) \in A</m>.
+    </p>
+    <p>
+      To find the total charge <m>q</m> on the entire surface, one integrates
+      <m>\sigma</m> over <m>A</m>:
+      <me>
+        q = \iint\limits_A \sigma(x,y)\,dA.
+      </me>
+      We will return to this example in <xref ref="ex-surface-charge-polar"/>
+      once we have the tools to evaluate the integral explicitly.
+    </p>
+  </example>
+
+  <exercises xml:id="exercises-double-integrals-check">
+    <title>Check Your Understanding</title>
+
+    <exercise xml:id="exer-double-integral-area-meaning">
+      <title>Meaning of <m>\iint_D 1\,dA</m></title>
+      <statement>
+        <p>
+          What does the double integral
+          <me>
+            \iint_D 1\,dA
+          </me>
+          represent?
+        </p>
+      </statement>
+      <choices>
+        <choice correct="yes">
+          <statement><p>The area of the domain <m>D</m></p></statement>
+          <feedback><p>Correct. Integrating the constant density <m>1</m> over <m>D</m> gives its area.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p>The perimeter of <m>D</m></p></statement>
+          <feedback><p>Incorrect. Perimeters are line-integral quantities, not double integrals.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p>The geometric center of <m>D</m></p></statement>
+          <feedback><p>Incorrect. A centroid needs moment integrals as well.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p>The slope of the boundary of <m>D</m></p></statement>
+          <feedback><p>Incorrect. A double integral does not describe boundary slopes.</p></feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+    <exercise xml:id="exer-double-integral-rectangle-computation">
+      <title>Compute a Simple Double Integral</title>
+      <statement>
+        <p>
+          Compute
+          <me>
+            \int_0^1\int_0^2 (x+y)\,dy\,dx.
+          </me>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          First integrate with respect to <m>y</m>:
+          <me>
+            \int_0^2 (x+y)\,dy
+            =
+            \left[xy+\frac{y^2}{2}\right]_0^2
+            =
+            2x+2.
+          </me>
+          Then integrate with respect to <m>x</m>:
+          <me>
+            \int_0^1 (2x+2)\,dx
+            =
+            \left[x^2+2x\right]_0^1
+            = 3.
+          </me>
+        </p>
+      </solution>
+    </exercise>
+  </exercises>
+
+</subsection>

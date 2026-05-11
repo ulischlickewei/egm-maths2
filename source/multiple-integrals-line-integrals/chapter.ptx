@@ -1,0 +1,22 @@
+<chapter xml:id="chapter-multiple-integrals-line-integrals" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Multiple Integrals and Line Integrals</title>
+
+  <introduction>
+    <p>
+      This chapter develops integration beyond the single-variable setting.
+      We begin with <em>multiple integrals</em> — double and triple integrals
+      over planar and spatial domains — which provide the mathematical foundation
+      for computing areas, volumes, masses, and moments of inertia of
+      two- and three-dimensional bodies.
+      We then turn to <em>line integrals</em>: integrals of scalar or vector
+      fields along curves in the plane or in space.
+      Line integrals arise naturally when computing arc lengths, work done by
+      a force field along a path, or circulation and flux in fluid mechanics.
+    </p>
+  </introduction>
+
+  <xi:include href="double-triple-integrals/section.ptx"/>
+  <!-- <xi:include href="curves-scalar-line-integrals/section.ptx"/> -->
+  <!-- <xi:include href="vector-fields-vectorial-line-integrals/section.ptx"/> -->
+
+</chapter>

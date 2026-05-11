@@ -1,0 +1,32 @@
+<section xml:id="section-double-triple-integrals" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Double and Triple Integrals</title>
+
+  <introduction>
+    <p>
+      This section extends integration from functions of one variable to functions
+      of two and three variables.
+      A <em>double integral</em> over a planar domain computes volumes, areas,
+      geometric centres, and physical quantities such as charge or mass
+      distributed over a surface.
+      A <em>triple integral</em> over a three-dimensional body similarly yields
+      volumes, centres of gravity, and moments of inertia.
+      Both are defined as limits of Riemann sums, and both are evaluated in
+      practice by reducing them to successive one-variable integrals
+      — an iterated integration procedure that depends on choosing suitable
+      coordinate systems and domain descriptions.
+    </p>
+    <p>
+      We treat double integrals first: we define them via Riemann sums, identify
+      their main applications, and derive evaluation formulas in Cartesian and
+      polar coordinates.
+      Triple integrals then follow the same pattern, with Cartesian and cylindrical
+      coordinate formulas for rotationally symmetric domains.
+    </p>
+  </introduction>
+
+  <xi:include href="double-integrals.ptx"/>
+  <xi:include href="double-integrals-evaluation.ptx"/>
+  <xi:include href="triple-integrals.ptx"/>
+  <xi:include href="triple-integrals-evaluation.ptx"/>
+
+</section>

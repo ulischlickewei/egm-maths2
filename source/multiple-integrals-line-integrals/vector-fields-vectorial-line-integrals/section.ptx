@@ -1,0 +1,36 @@
+<section xml:id="section-vector-fields-vectorial-line-integrals" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Vector Fields and Vectorial Line Integrals</title>
+
+  <introduction>
+    <p>
+      This section extends the theory of line integrals to vector fields.
+      Whereas a scalar line integral integrates a scalar function along a curve
+      (weighting by arc length), a <em>vectorial line integral</em> integrates
+      a vector field along a curve by taking the dot product with the curve's
+      tangent vector at each point.  Only the component of the field aligned
+      with the direction of motion contributes to the integral.
+    </p>
+    <p>
+      We begin by studying vector fields themselves — functions that assign a
+      vector to every point of their domain — and introduce the three
+      fundamental differential operators of vector calculus: the
+      <em>gradient</em> (which produces a vector field from a scalar field),
+      the <em>divergence</em> (which produces a scalar field from a vector
+      field), and the <em>curl</em> (which produces a vector field from a
+      vector field in three dimensions).
+    </p>
+    <p>
+      We then define the vectorial line integral and establish its central
+      theoretical result: the <em>fundamental theorem for line integrals</em>.
+      For conservative vector fields — those that possess an antiderivative —
+      the integral reduces to a boundary evaluation, just as in the
+      one-variable case.  This leads to the notion of path independence and
+      to practical methods for finding antiderivatives of vector fields.
+    </p>
+  </introduction>
+
+  <xi:include href="vector-fields.ptx"/>
+  <xi:include href="gradient-divergence-curl.ptx"/>
+  <xi:include href="vectorial-line-integrals.ptx"/>
+
+</section>

@@ -10,6 +10,7 @@
     <xi:include href="linear-algebra/chapter.ptx"/>
     <xi:include href="multivariate-differential-calculus/chapter.ptx"/>
     <xi:include href="ordinary-differential-equations/chapter.ptx"/>
+    <xi:include href="multiple-integrals-line-integrals/chapter.ptx"/>
     <xi:include href="backmatter.ptx"/>
   </book>
 </pretext>

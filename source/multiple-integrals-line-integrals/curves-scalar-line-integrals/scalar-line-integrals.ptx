@@ -1,0 +1,412 @@
+<subsection xml:id="subsec-scalar-line-integrals">
+  <title>Line Integrals of Scalar Fields</title>
+
+  <introduction>
+    <p>
+      A single-variable integral sums a function over an interval on the number
+      line; a double integral sums over a region in the plane.  A
+      <em>scalar line integral</em> sums a function along a curve in the plane or
+      in space.  Geometrically it measures the area of the curved
+      <q>curtain</q> suspended above the curve up to the height given by the
+      function.  Physically it computes the mass of a wire whose density varies
+      along its length, or the arc length of the curve itself.
+    </p>
+  </introduction>
+
+  <!-- ─── Definition: scalar line integral ─── -->
+
+  <definition xml:id="def-scalar-line-integral">
+    <title>Line Integral of a Scalar Field</title>
+    <statement>
+      <p>
+        Let <m>\mathbf{x}\colon [a,b] \to \R^n</m> be a continuously
+        differentiable curve, let <m>D \subseteq \R^n</m> contain the trace
+        <m>C = \mathbf{x}([a,b])</m>, and let <m>f\colon D \to \R</m> be a
+        continuous scalar function (also called a <term>scalar field</term>).
+      </p>
+      <p>
+        The <term>line integral of <m>f</m> along <m>C</m></term> is
+        <me>
+          \int_C f \, ds
+          := \int_a^b f\!\left(\mathbf{x}(t)\right) \, \|\dot{\mathbf{x}}(t)\| \, dt.
+        </me>
+        Here <m>ds = \|\dot{\mathbf{x}}(t)\|\,dt</m> is the <term>arc length
+        element</term>: it converts a small time increment <m>dt</m> into the
+        corresponding arc length traversed along the curve.
+      </p>
+    </statement>
+  </definition>
+
+  <!-- ─── Remark: independence of parametrization ─── -->
+
+  <remark xml:id="rem-line-integral-independence">
+    <title>Independence of Parametrization</title>
+    <p>
+      The value of the line integral <em>does not depend on the particular
+      parametrization</em> chosen for the curve.
+      More precisely: if two continuously differentiable curves
+      <m>\mathbf{x}\colon [a,b] \to \R^n</m> and
+      <m>\mathbf{y}\colon [c,d] \to \R^n</m> have the same trace
+      <m>C = \mathbf{x}([a,b]) = \mathbf{y}([c,d])</m>, and one is obtained
+      from the other by a continuously differentiable reparametrization that
+      traverses <m>C</m> exactly once, then
+      <me>
+        \int_a^b f\!\left(\mathbf{x}(t)\right) \, \|\dot{\mathbf{x}}(t)\| \, dt
+        = \int_c^d f\!\left(\mathbf{y}(u)\right) \, \|\dot{\mathbf{y}}(u)\| \, du.
+      </me>
+      Reversing the direction of traversal also leaves the value unchanged,
+      because <m>ds</m> measures arc length and is always nonnegative.
+      This allows us to write the integral using the trace alone, without
+      specifying a particular parametrization.
+    </p>
+  </remark>
+
+  <!-- ─── Remark: geometric interpretation ─── -->
+
+  <remark xml:id="rem-line-integral-geometric">
+    <title>Geometric Interpretation</title>
+    <p>
+      Analogously to the single-variable integral, the scalar line integral
+      <m>\int_C f \, ds</m> computes the <em>area of the curved curtain</em>
+      (or fence) erected above <m>C</m> up to the height <m>f</m>.
+      At each point of the curve the curtain has height <m>f</m>, and the
+      arc length element <m>ds</m> weights each infinitesimal strip by how
+      long the corresponding piece of curve is.
+    </p>
+    <figure xml:id="fig-line-integral-curtain">
+      <caption>
+        The scalar line integral <m>\int_C f \, ds</m> equals the area of the
+        curved curtain (shown shaded) erected above the curve <m>C</m> in the
+        <m>xy</m>-plane up to the height given by <m>f(x,y)</m>.
+      </caption>
+      <image xml:id="image-line-integral-curtain" width="62%">
+        <latex-image>
+          \begin{tikzpicture}[x={(0.80cm,-0.35cm)}, y={(0.80cm,0.35cm)}, z={(0cm,0.9cm)},
+                              scale=0.9]
+            % xy-plane
+            \fill[gray!10] (-0.5,-0.5,0) -- (3.5,-0.5,0) -- (3.5,1.5,0) -- (-0.5,1.5,0) -- cycle;
+            \draw[gray!50] (-0.5,-0.5,0) -- (3.5,-0.5,0) -- (3.5,1.5,0) -- (-0.5,1.5,0) -- cycle;
+            % axes
+            \draw[->,gray!70] (0,0,0) -- (4.0,0,0) node[right,font=\small,gray!70] {$x$};
+            \draw[->,gray!70] (0,0,0) -- (0,2.0,0) node[right,font=\small,gray!70] {$y$};
+            \draw[->,gray!70] (0,0,0) -- (0,0,3.5) node[above,font=\small,gray!70] {$z$};
+            % curve C in the xy-plane (a smooth path)
+            \draw[blue!80!black, very thick]
+              plot[smooth, tension=0.6]
+                coordinates {(0.3,0.2,0) (0.8,0.8,0) (1.5,1.0,0) (2.2,0.7,0) (2.9,0.3,0)};
+            \node[blue!80!black, below, font=\small] at (1.5,0.2,0) {$C$};
+            % vertical curtain (from curve upward to f)
+            % sample several "ribs" of the curtain
+            \foreach \px/\py/\fh in {
+              0.3/0.2/1.8, 0.8/0.8/2.5, 1.5/1.0/2.0, 2.2/0.7/1.5, 2.9/0.3/1.2
+            }{
+              \draw[blue!30, thin] (\px,\py,0) -- (\px,\py,\fh);
+            }
+            % top of the curtain (the graph of f above C)
+            \draw[red!70!black, thick]
+              plot[smooth, tension=0.6]
+                coordinates {(0.3,0.2,1.8) (0.8,0.8,2.5) (1.5,1.0,2.0) (2.2,0.7,1.5) (2.9,0.3,1.2)};
+            % shaded curtain faces
+            \fill[blue!15, opacity=0.7]
+              (0.3,0.2,0) -- (0.8,0.8,0) -- (0.8,0.8,2.5) -- (0.3,0.2,1.8) -- cycle;
+            \fill[blue!15, opacity=0.7]
+              (0.8,0.8,0) -- (1.5,1.0,0) -- (1.5,1.0,2.0) -- (0.8,0.8,2.5) -- cycle;
+            \fill[blue!15, opacity=0.7]
+              (1.5,1.0,0) -- (2.2,0.7,0) -- (2.2,0.7,1.5) -- (1.5,1.0,2.0) -- cycle;
+            \fill[blue!15, opacity=0.7]
+              (2.2,0.7,0) -- (2.9,0.3,0) -- (2.9,0.3,1.2) -- (2.2,0.7,1.5) -- cycle;
+            % height label
+            \draw[&lt;-&gt;,gray!60] (2.9,0.3,0) -- (2.9,0.3,1.2)
+              node[midway, right, font=\small, gray!60] {$f$};
+            \node[red!70!black, above, font=\small] at (0.8,0.8,2.6) {graph of $f$ above $C$};
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+    </figure>
+  </remark>
+
+  <!-- ─── Remark: computation procedure ─── -->
+
+  <remark xml:id="rem-line-integral-computation">
+    <title>How to Compute a Scalar Line Integral</title>
+    <p>
+      To evaluate <m>\int_C f \, ds</m>, follow three steps:
+    </p>
+    <p>
+      <em>Step 1: Parametrize the curve.</em>
+      Find a continuously differentiable parametrization
+      <m>\mathbf{x}\colon [a,b] \to \R^n</m> with trace <m>C</m>.
+    </p>
+    <p>
+      <em>Step 2: Compute the speed.</em>
+      <me>
+        \|\dot{\mathbf{x}}(t)\|
+        = \sqrt{\dot{x}_1(t)^2 + \cdots + \dot{x}_n(t)^2}.
+      </me>
+    </p>
+    <p>
+      <em>Step 3: Evaluate the one-variable integral.</em>
+      <me>
+        \int_C f \, ds
+        = \int_a^b f\!\left(\mathbf{x}(t)\right) \, \|\dot{\mathbf{x}}(t)\| \, dt.
+      </me>
+    </p>
+    <p>
+      The arc length factor <m>\|\dot{\mathbf{x}}(t)\|</m> compensates for the
+      speed at which the parameter traverses the curve, ensuring the result is
+      independent of the chosen parametrization.
+    </p>
+  </remark>
+
+  <!-- ─── Example: half-circle ─── -->
+
+  <example xml:id="ex-half-circle-integral">
+    <title>Line Integral Along the Upper Half-Circle</title>
+    <statement>
+      <p>
+        Compute the line integral
+        <m>\displaystyle\int_C f \, ds</m>
+        of the scalar field <m>f(x,y) = 2 + x^2 y</m> along the upper
+        semicircle of radius <m>1</m> (i.e.\ the arc with <m>y \ge 0</m>).
+      </p>
+    </statement>
+    <solution>
+      <p>
+        <em>Step 1: Parametrize.</em>
+        <me>
+          \mathbf{x}\colon [0,\pi] \to \R^2, \qquad
+          t \mapsto \begin{pmatrix} \cos t \\ \sin t \end{pmatrix}.
+        </me>
+      </p>
+      <p>
+        <em>Step 2: Compute the velocity.</em>
+        <me>
+          \dot{\mathbf{x}}(t) = \begin{pmatrix} -\sin t \\ \cos t \end{pmatrix},
+          \qquad
+          \|\dot{\mathbf{x}}(t)\| = \sqrt{\sin^2 t + \cos^2 t} = 1.
+        </me>
+        The unit-circle parametrization has speed <m>1</m> throughout.
+      </p>
+      <p>
+        <em>Step 3: Evaluate the integral.</em>
+        <md>
+          <mrow>
+            \int_C f \, ds
+            \amp= \int_0^\pi f(\cos t, \sin t) \cdot 1 \, dt
+          </mrow>
+          <mrow>
+            \amp= \int_0^\pi \bigl(2 + \cos^2\!t \cdot \sin t\bigr) \, dt.
+          </mrow>
+        </md>
+        The first part: <m>\displaystyle\int_0^\pi 2 \, dt = 2\pi</m>.
+        The second part, using the substitution <m>u = \cos t</m>,
+        <m>du = -\sin t \, dt</m>:
+        <me>
+          \int_0^\pi \cos^2\!t \cdot \sin t \, dt
+          = \int_1^{-1} u^2 \cdot (-\,du)
+          = \int_{-1}^1 u^2 \, du
+          = \left[\frac{u^3}{3}\right]_{-1}^{1}
+          = \frac{2}{3}.
+        </me>
+        Therefore
+        <me>
+          \int_C f \, ds = 2\pi + \frac{2}{3}.
+        </me>
+      </p>
+      <figure xml:id="fig-half-circle-integral">
+        <caption>
+          The upper semicircle <m>C</m> (blue arc) parametrized from
+          <m>(1,0)</m> to <m>(-1,0)</m> counter-clockwise.
+        </caption>
+        <image xml:id="image-half-circle" width="45%">
+          <latex-image>
+            \begin{tikzpicture}[scale=1.6]
+              \draw[->,thick] (-1.4,0) -- (1.4,0) node[right] {$x$};
+              \draw[->,thick] (0,-0.3) -- (0,1.4) node[above] {$y$};
+              % upper semicircle arc
+              \draw[blue!70!black, very thick, ->]
+                (1,0) arc (0:90:1) coordinate[midway] (M);
+              \draw[blue!70!black, very thick]
+                (0,1) arc (90:180:1);
+              \node[blue!70!black, above right, font=\small] at (M) {$C$};
+              % endpoints
+              \filldraw[black] (1,0) circle (1.2pt) node[below right,font=\small] {$(1,0)$};
+              \filldraw[black] (-1,0) circle (1.2pt) node[below left,font=\small] {$(-1,0)$};
+              % radius label
+              \draw[gray, dashed] (0,0) -- ({cos(60)},{sin(60)});
+              \node[gray, font=\small] at (0.25,0.35) {$1$};
+            \end{tikzpicture}
+          </latex-image>
+        </image>
+      </figure>
+    </solution>
+  </example>
+
+  <!-- ─── Definition: arc length ─── -->
+
+  <definition xml:id="def-arc-length">
+    <title>Arc Length of a Curve</title>
+    <statement>
+      <p>
+        The special case <m>f \equiv 1</m> yields the <term>arc length</term>:
+        if <m>C \subset \R^n</m> has a continuously differentiable
+        parametrization <m>\mathbf{x}\colon [a,b] \to \R^n</m> with trace
+        <m>C</m>, then
+        <me>
+          L(C) = \int_C \, ds = \int_a^b \|\dot{\mathbf{x}}(t)\| \, dt.
+        </me>
+        The arc length element <m>ds = \|\dot{\mathbf{x}}(t)\|\,dt</m>
+        accumulates the infinitesimal lengths of the curve.
+      </p>
+    </statement>
+  </definition>
+
+  <!-- ADDED: first explicit arc-length computation with a non-unit-speed parametrization -->
+  <example xml:id="ex-arc-length-nonuniform-line-segment">
+    <title>Arc Length with a Non-Uniform Parametrization</title>
+    <statement>
+      <p>
+        Compute the arc length of the curve
+        <me>
+          \mathbf{x}\colon [0,1] \to \R^2, \qquad
+          t \mapsto \begin{pmatrix} t^2 \\ t^2 \end{pmatrix}.
+        </me>
+        This parametrization traces the line segment from <m>(0,0)</m> to
+        <m>(1,1)</m>, but not at constant speed.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        First compute the derivative:
+        <me>
+          \dot{\mathbf{x}}(t) = \begin{pmatrix} 2t \\ 2t \end{pmatrix},
+          \qquad
+          \|\dot{\mathbf{x}}(t)\| = \sqrt{(2t)^2 + (2t)^2} = 2\sqrt{2}\,t.
+        </me>
+      </p>
+      <p>
+        Therefore the arc length is
+        <me>
+          L(C) = \int_0^1 \|\dot{\mathbf{x}}(t)\| \, dt
+          = \int_0^1 2\sqrt{2}\,t \, dt
+          = 2\sqrt{2}\left[\frac{t^2}{2}\right]_0^1
+          = \sqrt{2}.
+        </me>
+        This agrees with the geometric length of the line segment joining
+        <m>(0,0)</m> and <m>(1,1)</m>.  The factor
+        <m>\|\dot{\mathbf{x}}(t)\|</m> corrects for the non-uniform motion
+        along the same trace.
+      </p>
+    </solution>
+  </example>
+
+  <!-- ─── Example: mass and center of gravity of a wire ─── -->
+
+  <example xml:id="ex-wire-mass-center-gravity">
+    <title>Mass and Center of Gravity of a Wire</title>
+    <statement>
+      <p>
+        Line integrals of scalar fields arise naturally in physics when
+        computing the mass and center of gravity of a thin wire.
+      </p>
+      <p>
+        Let <m>\rho\colon C \to \R</m> be the linear mass density of a thin
+        wire shaped along a curve <m>C \subseteq \R^3</m>.
+      </p>
+      <ul>
+        <li>
+          <p>
+            The <term>mass</term> of the wire is
+            <me>
+              M = \int_C \rho \, ds.
+            </me>
+          </p>
+        </li>
+        <li>
+          <p>
+            The coordinates <m>(x_S, y_S, z_S)</m> of the
+            <term>center of gravity</term> are
+            <me>
+              x_S = \frac{1}{M}\int_C x\,\rho \, ds,
+              \quad
+              y_S = \frac{1}{M}\int_C y\,\rho \, ds,
+              \quad
+              z_S = \frac{1}{M}\int_C z\,\rho \, ds.
+            </me>
+          </p>
+        </li>
+      </ul>
+      <p>
+        Each formula is a line integral of the scalar field
+        <m>\rho</m>, or of <m>x\rho</m>, <m>y\rho</m>, <m>z\rho</m>,
+        along the curve <m>C</m> representing the wire.
+        When the density is constant <m>\rho \equiv \rho_0</m>,
+        the mass reduces to <m>M = \rho_0 \, L(C)</m>,
+        confirming that the arc length is the correct measure of the wire's
+        size.
+      </p>
+    </statement>
+  </example>
+
+  <exercises xml:id="exercises-scalar-line-integrals-check">
+    <title>Check Your Understanding</title>
+
+    <exercise xml:id="exer-scalar-line-integral-speed-factor">
+      <title>Why the Speed Factor Appears</title>
+      <statement>
+        <p>
+          In the scalar line integral
+          <me>
+            \int_C f\,ds = \int_a^b f(\mathbf{x}(t))\|\dot{\mathbf{x}}(t)\|\,dt,
+          </me>
+          why does the factor <m>\|\dot{\mathbf{x}}(t)\|</m> appear?
+        </p>
+      </statement>
+      <choices>
+        <choice correct="yes">
+          <statement><p>It converts parameter change into arc length and makes the integral independent of parametrization.</p></statement>
+          <feedback><p>Correct. The speed factor tells us how much curve length is traversed per unit change of the parameter.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p>It makes every line integral equal to the enclosed area.</p></statement>
+          <feedback><p>Incorrect. Scalar line integrals do not generally compute enclosed areas.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p>It forces the integrand to be a vector field.</p></statement>
+          <feedback><p>Incorrect. This is a scalar line integral.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p>It is needed only for closed curves.</p></statement>
+          <feedback><p>Incorrect. The factor is needed for any parametrized curve.</p></feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+    <exercise xml:id="exer-scalar-line-integral-segment-length">
+      <title>Arc Length of a Line Segment</title>
+      <statement>
+        <p>
+          Compute
+          <me>
+            \int_C 1\,ds
+          </me>
+          where <m>C</m> is the line segment from <m>(0,0)</m> to <m>(3,4)</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Since the integrand is <m>1</m>, the scalar line integral equals the arc length of the segment.
+          The distance between the endpoints is
+          <me>
+            \sqrt{3^2+4^2}=5.
+          </me>
+          Therefore
+          <me>
+            \int_C 1\,ds = 5.
+          </me>
+        </p>
+      </solution>
+    </exercise>
+  </exercises>
+
+</subsection>

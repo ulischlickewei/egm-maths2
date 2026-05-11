@@ -1,0 +1,28 @@
+<section xml:id="section-curves-scalar-line-integrals" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Curves and Scalar Line Integrals</title>
+
+  <introduction>
+    <p>
+      This section introduces two closely related topics.
+      First, we develop the concept of a <em>parametrized curve</em> in
+      <m>\R^n</m>: a path traced by a moving point, described by a
+      vector-valued function of a single parameter.
+      We define its trace, its tangent vector (the instantaneous velocity),
+      and establish the differentiation rules that govern combinations of
+      curves.
+    </p>
+    <p>
+      Second, we use these ideas to define the <em>scalar line integral</em>:
+      an integral of a function along a curve.
+      The key insight is that integrating <q>with respect to arc length</q>
+      requires weighting by the speed of the parametrization,
+      which ensures the result is independent of how the curve is traversed.
+      Applications include computing arc lengths, masses of wires with
+      variable density, and centers of gravity.
+    </p>
+  </introduction>
+
+  <xi:include href="curves.ptx"/>
+  <xi:include href="scalar-line-integrals.ptx"/>
+
+</section>

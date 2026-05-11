@@ -1,0 +1,218 @@
+<subsection xml:id="subsec-vector-fields">
+  <title>Vector Fields</title>
+
+  <introduction>
+    <p>
+      Until now we have studied scalar fields: functions that assign a number
+      to each point in a domain.  A <em>vector field</em> instead assigns a
+      <em>vector</em> to each point.  Vector fields arise wherever a physical
+      quantity has both magnitude and direction that varies from place to place:
+      the velocity of a flowing fluid, the force exerted by gravity, or the
+      electric field surrounding a charged particle.  Understanding how to
+      describe and manipulate vector fields is the foundation of the rest of
+      this section.
+    </p>
+  </introduction>
+
+  <!-- ─── Definition: vector field ─── -->
+
+  <definition xml:id="def-vector-field">
+    <title>Vector Field, Continuity, and Differentiability</title>
+    <statement>
+      <p>
+        Let <m>D \subseteq \R^n</m>.  A <term>vector field</term> on <m>D</m>
+        is a function
+        <me>
+          \mathbf{v} \colon D \to \R^n, \qquad
+          \mathbf{x} \mapsto \mathbf{v}(\mathbf{x})
+          = \begin{pmatrix} v_1(\mathbf{x}) \\ \vdots \\ v_n(\mathbf{x}) \end{pmatrix},
+        </me>
+        that assigns a vector to each point of <m>D</m>.
+        The functions <m>v_1, \ldots, v_n\colon D \to \R</m> are called the
+        <term>coordinate functions</term> (or components) of <m>\mathbf{v}</m>.
+      </p>
+      <p>
+        The vector field <m>\mathbf{v}</m> is called <term>continuous</term>
+        (respectively <term>differentiable</term>) if each of its coordinate
+        functions <m>v_1, \ldots, v_n</m> is continuous (respectively
+        differentiable).
+      </p>
+    </statement>
+  </definition>
+
+  <!-- ─── Remark: physical motivation and visualization ─── -->
+
+  <remark xml:id="rem-vector-field-examples">
+    <title>Physical Examples of Vector Fields</title>
+    <p>
+      Vector fields appear throughout engineering and physics.
+    </p>
+    <p>
+      <em>Meteorology.</em>
+      Wind can be modeled as a velocity vector field
+      <m>\mathbf{v}\colon \R^2 \to \R^2</m> over a geographic region:
+      at each point <m>(x,y)</m> the vector <m>\mathbf{v}(x,y)</m> gives
+      the wind speed and direction.  Weather maps visualize such fields as
+      grids of arrows whose length encodes speed and whose direction encodes
+      the wind direction.
+    </p>
+    <p>
+      <em>Aerodynamics.</em>
+      The air flow around a wing is a three-dimensional velocity vector field
+      <m>\mathbf{v}\colon \R^3 \to \R^3</m>.  Engineers compute pressure and
+      lift from the behavior of this field near the surface of the wing.
+    </p>
+    <p>
+      The figure below shows a simple planar rotation field
+      <m>\mathbf{v}(x,y) = \bigl(-y,\, x\bigr)</m> as a representative
+      example.  At each grid point an arrow is drawn in the direction of
+      <m>\mathbf{v}</m>.
+    </p>
+    <figure xml:id="fig-rotation-field">
+      <caption>
+        The rotation field <m>\mathbf{v}(x,y) = (-y,\, x)</m>.
+        Every vector is perpendicular to the position vector, causing
+        counter-clockwise rotation.  This field will later serve as the
+        canonical example of a vector field with <em>no</em> antiderivative.
+      </caption>
+      <image xml:id="image-rotation-field" width="55%">
+        <latex-image>
+          \begin{tikzpicture}[scale=1.0]
+            \draw[->,gray!60] (-2.5,0) -- (2.5,0) node[right,font=\small] {$x$};
+            \draw[->,gray!60] (0,-2.5) -- (0,2.5) node[above,font=\small] {$y$};
+            % Draw arrows for v(x,y) = (-y, x), scaled to length 0.38
+            \foreach \xi in {-2,-1.2,-0.4,0.4,1.2,2} {
+              \foreach \yi in {-2,-1.2,-0.4,0.4,1.2,2} {
+                \pgfmathsetmacro{\vx}{-\yi}
+                \pgfmathsetmacro{\vy}{\xi}
+                \pgfmathsetmacro{\len}{sqrt(\vx*\vx+\vy*\vy)}
+                \pgfmathsetmacro{\sc}{0.35/\len}
+                \draw[->,blue!65!black,thin]
+                  (\xi,\yi) -- +(\sc*\vx, \sc*\vy);
+              }
+            }
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+    </figure>
+  </remark>
+
+  <!-- ─── Example: central force field ─── -->
+
+  <example xml:id="ex-gravitational-force-field">
+    <title>Central Force Field (Newton's Law of Gravitation)</title>
+    <statement>
+      <p>
+        A point mass <m>M</m> located at the origin generates a gravitational
+        force field.  According to Newton's law of gravitation, the force on a
+        test mass at position <m>\mathbf{x} \in \R^3 \setminus \{\mathbf{0}\}</m>
+        is
+        <me>
+          \mathbf{F}(\mathbf{x})
+          = -\frac{MG}{\|\mathbf{x}\|^3}\,\mathbf{x},
+        </me>
+        where <m>G</m> is the universal gravitational constant.
+        This can be rewritten as
+        <me>
+          \mathbf{F}(\mathbf{x})
+          = -\frac{MG}{\|\mathbf{x}\|^2} \cdot \frac{\mathbf{x}}{\|\mathbf{x}\|},
+        </me>
+        showing that the force has magnitude <m>MG/\|\mathbf{x}\|^2</m> and
+        points in the direction <m>-\mathbf{x}/\|\mathbf{x}\|</m>, i.e.\ toward
+        the origin.  This is a <em>central force field</em>: all vectors point
+        toward a single center and their length depends only on the distance
+        from the center.
+      </p>
+    </statement>
+  </example>
+
+  <!-- ─── Example: review question ─── -->
+
+  <example xml:id="ex-vector-field-review-question">
+    <title>Identifying a Vector Field from Its Properties</title>
+    <statement>
+      <p>
+        Which of the following vector fields on <m>\R^2</m> has the property
+        that <em>all vectors point away from the <m>y</m>-axis</em> and
+        <em>all vectors along any fixed vertical line have the same length</em>?
+      </p>
+      <ul>
+        <li><p>(A) <m>\mathbf{v}(x,y) = \begin{pmatrix} x^3 \\ 0 \end{pmatrix}</m></p></li>
+        <li><p>(B) <m>\mathbf{v}(x,y) = \begin{pmatrix} x^2 \\ 0 \end{pmatrix}</m></p></li>
+        <li><p>(C) <m>\mathbf{v}(x,y) = \begin{pmatrix} 0 \\ x^3 \end{pmatrix}</m></p></li>
+        <li><p>(D) <m>\mathbf{v}(x,y) = \begin{pmatrix} 0 \\ x^2 \end{pmatrix}</m></p></li>
+      </ul>
+    </statement>
+    <solution>
+      <p>
+        <em>Away from the <m>y</m>-axis</em> means the first component
+        is positive for <m>x &gt; 0</m> and negative for <m>x &lt; 0</m>.
+        This rules out (B), where <m>x^2 \geq 0</m> always, and (C), (D),
+        where the horizontal component is zero — the vectors are vertical, not
+        pointing away from the axis.
+      </p>
+      <p>
+        <em>Same length along a vertical line</em> (i.e.\ constant <m>x</m>)
+        means the vector length depends only on <m>x</m>, not on <m>y</m>.
+        For (A), <m>\|\mathbf{v}(x,y)\| = |x^3|</m>, which depends only on
+        <m>x</m>.
+      </p>
+      <p>
+        The answer is <em>(A)</em>.
+      </p>
+    </solution>
+  </example>
+
+  <exercises xml:id="exercises-vector-fields-check">
+    <title>Check Your Understanding</title>
+
+    <exercise xml:id="exer-vector-fields-radial-field">
+      <title>Recognise a Radial Field</title>
+      <statement>
+        <p>
+          Which vector field points radially away from the origin in the plane?
+        </p>
+      </statement>
+      <choices>
+        <choice correct="yes">
+          <statement><p><m>\mathbf{v}(x,y)=\begin{pmatrix}x\\y\end{pmatrix}</m></p></statement>
+          <feedback><p>Correct. At every point, the vector points in the same direction as the position vector.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p><m>\mathbf{v}(x,y)=\begin{pmatrix}-y\\x\end{pmatrix}</m></p></statement>
+          <feedback><p>Incorrect. That field is tangential to circles around the origin.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p><m>\mathbf{v}(x,y)=\begin{pmatrix}1\\0\end{pmatrix}</m></p></statement>
+          <feedback><p>Incorrect. This is a constant horizontal field.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p><m>\mathbf{v}(x,y)=\begin{pmatrix}0\\-1\end{pmatrix}</m></p></statement>
+          <feedback><p>Incorrect. This is a constant downward field.</p></feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+    <exercise xml:id="exer-vector-fields-evaluate-point">
+      <title>Evaluate a Vector Field at a Point</title>
+      <statement>
+        <p>
+          Evaluate
+          <me>
+            \mathbf{v}(x,y,z)=\begin{pmatrix}y\\-x\\z\end{pmatrix}
+          </me>
+          at the point <m>(1,2,3)</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Substitute <m>x=1</m>, <m>y=2</m>, <m>z=3</m>:
+          <me>
+            \mathbf{v}(1,2,3)=\begin{pmatrix}2\\-1\\3\end{pmatrix}.
+          </me>
+        </p>
+      </solution>
+    </exercise>
+  </exercises>
+
+</subsection>
