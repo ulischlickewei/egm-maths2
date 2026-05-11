@@ -2863,6 +2863,456 @@ var ptx_lunr_docs = [
   "body": " Free Undamped Oscillation   Solve the homogeneous ODE     The characteristic equation is so the roots are . Therefore the general solution is    "
 },
 {
+  "id": "section-double-triple-integrals",
+  "level": "1",
+  "url": "section-double-triple-integrals.html",
+  "type": "Section",
+  "number": "4.1",
+  "title": "Double and Triple Integrals",
+  "body": " Double and Triple Integrals   This section extends integration from functions of one variable to functions of two and three variables. A double integral over a planar domain computes volumes, areas, geometric centres, and physical quantities such as charge or mass distributed over a surface. A triple integral over a three-dimensional body similarly yields volumes, centres of gravity, and moments of inertia. Both are defined as limits of Riemann sums, and both are evaluated in practice by reducing them to successive one-variable integrals — an iterated integration procedure that depends on choosing suitable coordinate systems and domain descriptions.  We treat double integrals first: we define them via Riemann sums, identify their main applications, and derive evaluation formulas in Cartesian and polar coordinates. Triple integrals then follow the same pattern, with Cartesian and cylindrical coordinate formulas for rotationally symmetric domains.    Double Integrals   The definite integral of a single-variable function measures the signed area enclosed between the graph and the horizontal axis. We now generalise this idea to functions of two variables: instead of an area, the integral will measure a volume , and instead of an interval, the domain of integration is a planar region. The construction follows the same Riemann-sum logic — approximate by simple pieces, then pass to the limit.     Review: Univariate Integrals as Riemann Sums  For a continuous function , the definite integral measures the signed area enclosed between the graph of and the -axis. It is defined as the limit of Riemann sums : subdivide into sub-intervals of equal length , choose a representative point in each sub-interval, and sum the rectangle areas: Each term is the area of a thin rectangle of height and width . As the subdivision is refined, the approximation converges to the exact integral.   Approximating by Riemann sum rectangles (shown in blue). As the number of rectangles increases the total rectangle area converges to the exact integral.         Volume Between a Bivariate Function and the -Plane  Now let be a continuous function of two variables, and let be a bounded planar domain. We want to compute the volume of the solid region lying between the surface and the -plane above . This volume is called the double integral : where is the domain of integration and is the integrand.  The construction mirrors the univariate case. Subdivide into small sub-domains with areas . Over each sub-domain , approximate the solid by a vertical cylinder with a flat top : choose any point and form the approximate volume Summing over all sub-domains gives the Riemann sum approximation: Refining the subdivision indefinitely (so that each ) makes this sum converge to the exact double integral.     Double Integral in   Let be a bounded domain and a continuous function. For sub-domain areas and representative points as described above, the double integral of over is defined as:      This limit does not exist for all functions and all domains. In this course we work exclusively with continuous functions on bounded domains for which the double integral is well-defined.     Three Basic Applications of Double Integrals  We now start a new line of thought. After defining the double integral as a Riemann-sum limit, we use the same idea in three concrete applications: computing the area of a planar domain, locating its geometric center, and accumulating a variable surface density such as electric charge. In each case, the double integral adds up a local contribution over all small area elements of the domain.    Area of a Planar Domain   The area  of a planar domain is obtained by integrating the constant function :      The formula adds one unit of area density over every infinitesimal area element in the planar domain .       Geometric Center of a Planar Domain   Integrating the coordinate functions and over gives the total coordinate moments of the domain. Dividing these moments by the total area yields the average coordinates of all area elements, that is, the coordinates of the geometric center (centroid) of :      The geometric center is the balance point of a planar domain with uniform density. The integrals of and compute coordinate moments; dividing by the total area turns these moments into average coordinates.        Surface Charge Density  In physics, many quantities are specified as local densities that only yield a global value after integration. For a charged conductive plane surface , the distribution of electric charge is described by the charge density  , where is the charge per unit area at the point .  To find the total charge on the entire surface, one integrates over : We will return to this example in once we have the tools to evaluate the integral explicitly.    Check Your Understanding   Meaning of   What does the double integral represent?     The area of the domain  Correct. Integrating the constant density over gives its area.    The perimeter of  Incorrect. Perimeters are line-integral quantities, not double integrals.    The geometric center of  Incorrect. A centroid needs moment integrals as well.    The slope of the boundary of  Incorrect. A double integral does not describe boundary slopes.      Compute a Simple Double Integral   Compute     First integrate with respect to : Then integrate with respect to :        Evaluating Double Integrals   A double integral over an arbitrary planar domain is difficult to evaluate directly from its definition. We therefore restrict to a family of domains — called normal domains — for which the double integral reduces to two successive one-variable integrals. This section develops the Cartesian (rectangular) and polar evaluation formulas and illustrates them with worked examples.     Normal Domains in   A normal domain is a bounded planar region described by a pair of inequalities of one of the following two types.     Type I (vertical slices): the -boundaries are constant, and the -boundaries depend on : Here the subscripts and stand for lower and upper .     Type II (horizontal slices): the -boundaries are constant, and the -boundaries depend on :         Left: normal domain of Type I, bounded by curves (lower) and (upper) between and . Right: normal domain of Type II, bounded by curves (left) and (right) between and .        Normal Domain Representations     Express the disk of radius 2 centered at as a normal domain of Type I.   The boundary circle satisfies . Solving for gives the upper and lower boundary curves: The -extremes of the disk are and . Therefore the domain is:      Express the region between the parabolas and as a normal domain.   First find the intersection points: For the parabola lies above . The normal domain is:        Deriving the Iterated Integral (Type I)  For a Type I domain , , the Riemann sum can be organised in two stages:     Inner sum (fix , sum in ). Subdivide into vertical strips of width . Within the -th strip, subdivide further into rectangles of area . The representative point is chosen inside the corresponding rectangle, so in particular . Summing over all rectangles in this strip approximates the volume of the strip:      Outer sum (sum in ). Summing over all strips:      A Type I domain is first divided into vertical strips. In one fixed strip , the -values run from to and are subdivided into small intervals of length .      The inner integral (in ) is computed first, treating as a constant. Its result depends only on and is then integrated in the outer integral.     Double Integral in Cartesian Coordinates     For a Type I normal domain ( , ): The inner integral (variable ) is evaluated first, with treated as a parameter.    For a Type II normal domain ( , ):     If is continuous on a rectangular domain , the order of integration may be reversed without changing the result: This is the simplest form of Fubini's theorem .      Double Integral over a Triangular Domain   Compute   The domain is the triangle with vertices , , and , described as a Type I normal domain with and .   The triangular domain for , .         Inner integral (in ):     Expanding and collecting:     Outer integral (in ):       Geometric Center of a Parabolic Region   Find the geometric center of the region bounded by and .  From , the domain is , .   The parabolic region between and .        By symmetry, the centroid lies on the -axis, so .   Area:     -coordinate of the centroid:    The geometric center is .      Domains in Polar Coordinates  For domains with circular or radial symmetry it is convenient to use polar coordinates  , where and . A polar normal domain is described by:   The key point is that the area element in polar coordinates is not simply . A small polar patch bounded by radii and and angles and has area (the arc length times the radial thickness ). The extra factor — called the Jacobian — must always appear when changing to polar coordinates.   The polar area element . The patch is bounded by the circles and and the rays and . Its arc length is and its radial thickness is , giving area .        Double Integrals in Polar Coordinates   For a polar normal domain , : The factor in the integrand is the Jacobian of the coordinate change. As in Cartesian coordinates, the inner integral is evaluated first with the outer variable held fixed.      Area and Geometric Center of a Semi-Disk   Find the area and geometric center of the upper half-disk of radius (the part of the disk with ).  In polar coordinates the domain is , .   The upper half-disk, described by , .         Area:     Geometric center: By symmetry, . For , note that : Therefore The geometric center is at .     Surface Charge via Polar Coordinates   A point electric charge is located at height above the origin of a grounded conducting plane (the -plane). The method of images replaces the grounded plane by a mirror charge chosen so that the plane has zero electric potential. For this setup, the induced surface charge density is Compute the total induced charge on the disk of radius centered at the origin.   The disk on the grounded plane where the induced charge is integrated.        In polar coordinates the disk is , , and . Using the substitution , : Therefore      Area of an Annular Sector   Sketch the domain and compute its area.   The annular sector between and , from to .        The domain is a sector of the annulus between the circles and , spanning the angle range from to .   Area:       Check Your Understanding   Polar Setup for the Unit Disk   Which polar-coordinate description is correct for the unit disk?      Correct. This covers the full disk exactly once.     Incorrect. The ranges for radius and angle are swapped.     Incorrect. Standard polar coordinates use nonnegative radii.     Incorrect. That would cover only a half-disk.      Area of a Triangle by Iterated Integration   Compute     First integrate in : Then So the integral equals .       Triple Integrals   The same Riemann-sum construction that defines double integrals over planar regions extends naturally to functions of three variables integrated over three-dimensional domains. A triple integral sums the values of over an infinite number of infinitesimally small volume elements . When , the triple integral gives the ordinary volume of the domain. For a general integrand, it accumulates a density over the body, such as mass density or moment-of-inertia density. This is why triple integrals appear throughout physics as natural tools for computing mass, center of gravity, and moments of inertia of three-dimensional bodies.     Construction of the Triple Integral  Let be a continuous function on a bounded spatial domain .    Subdivide into small sub-domains of volumes .    In each sub-domain , choose an arbitrary representative point and form the approximation .    Sum over all sub-domains:     Passing to the limit as and each gives the exact triple integral.    Triple Integral   Let be a bounded domain and a continuous function. The triple integral of over is:       Volume as Accumulated Unit Density  A triple integral can be read as adding up contributions from tiny volume elements. If the integrand is the constant function , each element contributes exactly its own volume . Summing all these pieces recovers the volume of the whole spatial domain.   The volume formula adds the small volume elements filling the body .        Volume of a Spatial Domain   The volume of a domain is:      Centroid as Average Position  For a body of uniform density, the geometric center is the average position of all volume elements. The coordinate integrals add the -, -, and -coordinates of each small piece and then divide by the total volume.    Geometric Center of a Spatial Domain   The coordinates of the geometric center (centroid) of are:      Mass and Center of Gravity for Variable Density  If density varies from point to point, equal volume elements no longer contribute equally to the balance point. The mass integral weights each small volume element by its density . The center of gravity is then the density-weighted average position, so it is pulled toward regions where the body is heavier.    Mass and Center of Gravity   For a body with variable mass density (mass per unit volume), the total mass and center of gravity are:      If the density is constant throughout the body, the center of gravity coincides with the geometric center. A non-uniform density shifts the center of gravity towards regions of higher density.    Moments of Inertia as Weighted Squared Distance  Rotating a body about an axis is harder when more mass lies far away from that axis. A moment of inertia therefore weights each small mass element by the square of its perpendicular distance to the axis. For example, the distance from to the -axis is , so the corresponding squared distance is .    Moments of Inertia   For a body with density , the moments of inertia with respect to the -, -, and -axes are:      Check Your Understanding   Meaning of a Triple Integral with Density   If is a mass density on a body , what does represent?     The total mass of the body  Correct. Integrating density over volume gives mass.    The surface area of the body  Incorrect. Surface area is not computed by a volume integral.    The center of gravity directly  Incorrect. The center of gravity requires moment integrals divided by the mass.    The moment of inertia about every axis at once  Incorrect. Moments of inertia need extra distance factors.        Evaluating Triple Integrals   Triple integrals are evaluated by reducing them to three successive one-variable integrals, exactly as for double integrals. For a chosen order of integration, the domain must be expressible as a normal domain : the bounds of an inner variable may depend on the outer variables that are already fixed, but not on variables that are integrated earlier. We treat Cartesian and cylindrical coordinates in turn.     Normal Domains in  For the integration order , a normal domain in three dimensions is a spatial region described by inequalities of the form:   The structure is hierarchical:    The outer bounds (for ) are constants.    The middle bounds (for ) may depend on .    The inner bounds (for ) may depend on both and .    Other variable orderings, such as , are equally valid. The useful order is the one whose bounds describe the geometry most simply.    Cylinder as a Normal Domain  Show that a solid cylinder of radius and height , with its base centred at the origin, is a normal domain.  Project the cylinder onto the -plane: the cross-section is the disk . Describing this disk as a Type I planar normal domain gives and . The height runs from to . Combining:    A vertical cylinder as a normal domain. For each fixed , the variable runs through the chord of the disk, and runs from the base to the height .         Triple Integrals in Cartesian Coordinates   For a normal domain with , , : The innermost integral (in ) is computed first, treating and as parameters. The middle integral (in ) is then computed, treating as a parameter. The outermost integral (in ) is an ordinary definite integral.      Triple Integral with Trigonometric Integrand   Let and Compute    The domain is an extrusion in the -direction of the region between and for .        Note that for we have , so the -bounds are valid.   Inner integral (in ):     Middle integral (in ):     Outer integral (in ):       Triple Integral with Exponential Integrand   Let and Compute    The domain lies between the planes and , with and .         Inner integral (in ):     Middle integral (in ): Split into two parts: For the first part, integrate by parts with , (so ): The second part: . Combining:    Outer integral (in ):        Cylindrical Coordinates  For spatial domains with rotational symmetry about the -axis , the computation simplifies greatly in cylindrical coordinates . A point is described by:     : polar coordinates of the orthogonal projection of into the -plane, with and , .     : the height coordinate, unchanged.    The volume element in cylindrical coordinates is The factor is the Jacobian of the transformation from to , and arises for the same reason as in polar coordinates for double integrals (see ).   Cylindrical coordinates . The volume element (shaded) has dimensions , (arc length), and , giving volume .        Triple Integrals in Cylindrical Coordinates   For a normal domain described in cylindrical coordinates by , , : The Jacobian factor must always be included. As in Cartesian coordinates, other orders of integration are possible if they describe the same solid more simply.      Moment of Inertia of a Solid Cylinder  Consider a solid cylinder with radius , height (centred at the origin, so ), and constant mass density . The total mass is . Compute the moment of inertia about the -axis.  In cylindrical coordinates, the cylinder is , , . The squared distance from the -axis is .   Since : This classical result states that the moment of inertia of a cylinder about its axis of symmetry equals half the product of its mass and the square of its radius.    Geometric Center of a Half-Ball  Find the geometric center of the upper half-ball of radius : .  By symmetry, . In cylindrical coordinates, the half-ball is bounded by , , . The volume is .   -coordinate of the centroid:  Therefore The geometric center of the half-ball is at .    Check Your Understanding   Cylindrical Jacobian Factor   Which extra factor appears when converting a triple integral to cylindrical coordinates?      Incorrect. That symbol is often used for density, not for the cylindrical Jacobian here.     Correct. In cylindrical coordinates, .     Incorrect. The Jacobian contributes only one factor .     Incorrect. The cylindrical Jacobian is not trigonometric.      Compute a Cylindrical Triple Integral   Compute     First integrate with respect to : Then Finally, Hence the value of the integral is .      "
+},
+{
+  "id": "rem-riemann-sum-univariate",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#rem-riemann-sum-univariate",
+  "type": "Remark",
+  "number": "4.1.1",
+  "title": "Review: Univariate Integrals as Riemann Sums.",
+  "body": " Review: Univariate Integrals as Riemann Sums  For a continuous function , the definite integral measures the signed area enclosed between the graph of and the -axis. It is defined as the limit of Riemann sums : subdivide into sub-intervals of equal length , choose a representative point in each sub-interval, and sum the rectangle areas: Each term is the area of a thin rectangle of height and width . As the subdivision is refined, the approximation converges to the exact integral.   Approximating by Riemann sum rectangles (shown in blue). As the number of rectangles increases the total rectangle area converges to the exact integral.      "
+},
+{
+  "id": "rem-double-integral-volume-motivation",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#rem-double-integral-volume-motivation",
+  "type": "Remark",
+  "number": "4.1.3",
+  "title": "Volume Between a Bivariate Function and the <span class=\"process-math\">\\(xy\\)<\/span>-Plane.",
+  "body": " Volume Between a Bivariate Function and the -Plane  Now let be a continuous function of two variables, and let be a bounded planar domain. We want to compute the volume of the solid region lying between the surface and the -plane above . This volume is called the double integral : where is the domain of integration and is the integrand.  The construction mirrors the univariate case. Subdivide into small sub-domains with areas . Over each sub-domain , approximate the solid by a vertical cylinder with a flat top : choose any point and form the approximate volume Summing over all sub-domains gives the Riemann sum approximation: Refining the subdivision indefinitely (so that each ) makes this sum converge to the exact double integral.  "
+},
+{
+  "id": "def-double-integral",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#def-double-integral",
+  "type": "Definition",
+  "number": "4.1.4",
+  "title": "Double Integral in <span class=\"process-math\">\\(\\R^2\\)<\/span>.",
+  "body": " Double Integral in   Let be a bounded domain and a continuous function. For sub-domain areas and representative points as described above, the double integral of over is defined as:    "
+},
+{
+  "id": "rem-double-integral-existence",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#rem-double-integral-existence",
+  "type": "Remark",
+  "number": "4.1.5",
+  "title": "",
+  "body": " This limit does not exist for all functions and all domains. In this course we work exclusively with continuous functions on bounded domains for which the double integral is well-defined.  "
+},
+{
+  "id": "rem-double-integral-applications-transition",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#rem-double-integral-applications-transition",
+  "type": "Remark",
+  "number": "4.1.6",
+  "title": "Three Basic Applications of Double Integrals.",
+  "body": " Three Basic Applications of Double Integrals  We now start a new line of thought. After defining the double integral as a Riemann-sum limit, we use the same idea in three concrete applications: computing the area of a planar domain, locating its geometric center, and accumulating a variable surface density such as electric charge. In each case, the double integral adds up a local contribution over all small area elements of the domain.  "
+},
+{
+  "id": "def-area-double-integral",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#def-area-double-integral",
+  "type": "Definition",
+  "number": "4.1.7",
+  "title": "Area of a Planar Domain.",
+  "body": " Area of a Planar Domain   The area  of a planar domain is obtained by integrating the constant function :    "
+},
+{
+  "id": "fig-area-double-integral",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#fig-area-double-integral",
+  "type": "Figure",
+  "number": "4.1.8",
+  "title": "",
+  "body": " The formula adds one unit of area density over every infinitesimal area element in the planar domain .     "
+},
+{
+  "id": "def-geometric-center-2d",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#def-geometric-center-2d",
+  "type": "Definition",
+  "number": "4.1.9",
+  "title": "Geometric Center of a Planar Domain.",
+  "body": " Geometric Center of a Planar Domain   Integrating the coordinate functions and over gives the total coordinate moments of the domain. Dividing these moments by the total area yields the average coordinates of all area elements, that is, the coordinates of the geometric center (centroid) of :    "
+},
+{
+  "id": "fig-geometric-center-2d",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#fig-geometric-center-2d",
+  "type": "Figure",
+  "number": "4.1.10",
+  "title": "",
+  "body": " The geometric center is the balance point of a planar domain with uniform density. The integrals of and compute coordinate moments; dividing by the total area turns these moments into average coordinates.     "
+},
+{
+  "id": "ex-surface-charge-setup",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#ex-surface-charge-setup",
+  "type": "Example",
+  "number": "4.1.11",
+  "title": "Surface Charge Density.",
+  "body": " Surface Charge Density  In physics, many quantities are specified as local densities that only yield a global value after integration. For a charged conductive plane surface , the distribution of electric charge is described by the charge density  , where is the charge per unit area at the point .  To find the total charge on the entire surface, one integrates over : We will return to this example in once we have the tools to evaluate the integral explicitly.  "
+},
+{
+  "id": "exer-double-integral-area-meaning",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#exer-double-integral-area-meaning",
+  "type": "Exercise",
+  "number": "4.1.1.1",
+  "title": "Meaning of <span class=\"process-math\">\\(\\iint_D 1\\,dA\\)<\/span>.",
+  "body": " Meaning of   What does the double integral represent?     The area of the domain  Correct. Integrating the constant density over gives its area.    The perimeter of  Incorrect. Perimeters are line-integral quantities, not double integrals.    The geometric center of  Incorrect. A centroid needs moment integrals as well.    The slope of the boundary of  Incorrect. A double integral does not describe boundary slopes.    "
+},
+{
+  "id": "exer-double-integral-rectangle-computation",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#exer-double-integral-rectangle-computation",
+  "type": "Exercise",
+  "number": "4.1.1.2",
+  "title": "Compute a Simple Double Integral.",
+  "body": " Compute a Simple Double Integral   Compute     First integrate with respect to : Then integrate with respect to :    "
+},
+{
+  "id": "def-normal-domains-2d",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#def-normal-domains-2d",
+  "type": "Definition",
+  "number": "4.1.12",
+  "title": "Normal Domains in <span class=\"process-math\">\\(\\R^2\\)<\/span>.",
+  "body": " Normal Domains in   A normal domain is a bounded planar region described by a pair of inequalities of one of the following two types.     Type I (vertical slices): the -boundaries are constant, and the -boundaries depend on : Here the subscripts and stand for lower and upper .     Type II (horizontal slices): the -boundaries are constant, and the -boundaries depend on :      "
+},
+{
+  "id": "fig-normal-domains-2d",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#fig-normal-domains-2d",
+  "type": "Figure",
+  "number": "4.1.13",
+  "title": "",
+  "body": " Left: normal domain of Type I, bounded by curves (lower) and (upper) between and . Right: normal domain of Type II, bounded by curves (left) and (right) between and .     "
+},
+{
+  "id": "ex-normal-domain-disk",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#ex-normal-domain-disk",
+  "type": "Example",
+  "number": "4.1.14",
+  "title": "Normal Domain Representations.",
+  "body": " Normal Domain Representations     Express the disk of radius 2 centered at as a normal domain of Type I.   The boundary circle satisfies . Solving for gives the upper and lower boundary curves: The -extremes of the disk are and . Therefore the domain is:      Express the region between the parabolas and as a normal domain.   First find the intersection points: For the parabola lies above . The normal domain is:     "
+},
+{
+  "id": "rem-iterated-integral-derivation",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#rem-iterated-integral-derivation",
+  "type": "Remark",
+  "number": "4.1.15",
+  "title": "Deriving the Iterated Integral (Type I).",
+  "body": " Deriving the Iterated Integral (Type I)  For a Type I domain , , the Riemann sum can be organised in two stages:     Inner sum (fix , sum in ). Subdivide into vertical strips of width . Within the -th strip, subdivide further into rectangles of area . The representative point is chosen inside the corresponding rectangle, so in particular . Summing over all rectangles in this strip approximates the volume of the strip:      Outer sum (sum in ). Summing over all strips:      A Type I domain is first divided into vertical strips. In one fixed strip , the -values run from to and are subdivided into small intervals of length .      The inner integral (in ) is computed first, treating as a constant. Its result depends only on and is then integrated in the outer integral.  "
+},
+{
+  "id": "thm-double-integral-cartesian",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#thm-double-integral-cartesian",
+  "type": "Theorem",
+  "number": "4.1.17",
+  "title": "Double Integral in Cartesian Coordinates.",
+  "body": " Double Integral in Cartesian Coordinates     For a Type I normal domain ( , ): The inner integral (variable ) is evaluated first, with treated as a parameter.    For a Type II normal domain ( , ):     If is continuous on a rectangular domain , the order of integration may be reversed without changing the result: This is the simplest form of Fubini's theorem .   "
+},
+{
+  "id": "ex-double-integral-triangle",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#ex-double-integral-triangle",
+  "type": "Example",
+  "number": "4.1.18",
+  "title": "Double Integral over a Triangular Domain.",
+  "body": " Double Integral over a Triangular Domain   Compute   The domain is the triangle with vertices , , and , described as a Type I normal domain with and .   The triangular domain for , .         Inner integral (in ):     Expanding and collecting:     Outer integral (in ):     "
+},
+{
+  "id": "ex-geometric-center-parabola",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#ex-geometric-center-parabola",
+  "type": "Example",
+  "number": "4.1.20",
+  "title": "Geometric Center of a Parabolic Region.",
+  "body": " Geometric Center of a Parabolic Region   Find the geometric center of the region bounded by and .  From , the domain is , .   The parabolic region between and .        By symmetry, the centroid lies on the -axis, so .   Area:     -coordinate of the centroid:    The geometric center is .   "
+},
+{
+  "id": "rem-polar-domain",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#rem-polar-domain",
+  "type": "Remark",
+  "number": "4.1.22",
+  "title": "Domains in Polar Coordinates.",
+  "body": " Domains in Polar Coordinates  For domains with circular or radial symmetry it is convenient to use polar coordinates  , where and . A polar normal domain is described by:   The key point is that the area element in polar coordinates is not simply . A small polar patch bounded by radii and and angles and has area (the arc length times the radial thickness ). The extra factor — called the Jacobian — must always appear when changing to polar coordinates.   The polar area element . The patch is bounded by the circles and and the rays and . Its arc length is and its radial thickness is , giving area .      "
+},
+{
+  "id": "thm-double-integral-polar",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#thm-double-integral-polar",
+  "type": "Theorem",
+  "number": "4.1.24",
+  "title": "Double Integrals in Polar Coordinates.",
+  "body": " Double Integrals in Polar Coordinates   For a polar normal domain , : The factor in the integrand is the Jacobian of the coordinate change. As in Cartesian coordinates, the inner integral is evaluated first with the outer variable held fixed.   "
+},
+{
+  "id": "ex-semidisk-polar",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#ex-semidisk-polar",
+  "type": "Example",
+  "number": "4.1.25",
+  "title": "Area and Geometric Center of a Semi-Disk.",
+  "body": " Area and Geometric Center of a Semi-Disk   Find the area and geometric center of the upper half-disk of radius (the part of the disk with ).  In polar coordinates the domain is , .   The upper half-disk, described by , .         Area:     Geometric center: By symmetry, . For , note that : Therefore The geometric center is at .   "
+},
+{
+  "id": "ex-surface-charge-polar",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#ex-surface-charge-polar",
+  "type": "Example",
+  "number": "4.1.27",
+  "title": "Surface Charge via Polar Coordinates.",
+  "body": " Surface Charge via Polar Coordinates   A point electric charge is located at height above the origin of a grounded conducting plane (the -plane). The method of images replaces the grounded plane by a mirror charge chosen so that the plane has zero electric potential. For this setup, the induced surface charge density is Compute the total induced charge on the disk of radius centered at the origin.   The disk on the grounded plane where the induced charge is integrated.        In polar coordinates the disk is , , and . Using the substitution , : Therefore    "
+},
+{
+  "id": "ex-annular-sector",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#ex-annular-sector",
+  "type": "Example",
+  "number": "4.1.29",
+  "title": "Area of an Annular Sector.",
+  "body": " Area of an Annular Sector   Sketch the domain and compute its area.   The annular sector between and , from to .        The domain is a sector of the annulus between the circles and , spanning the angle range from to .   Area:     "
+},
+{
+  "id": "exer-double-integral-polar-setup",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#exer-double-integral-polar-setup",
+  "type": "Exercise",
+  "number": "4.1.2.1",
+  "title": "Polar Setup for the Unit Disk.",
+  "body": " Polar Setup for the Unit Disk   Which polar-coordinate description is correct for the unit disk?      Correct. This covers the full disk exactly once.     Incorrect. The ranges for radius and angle are swapped.     Incorrect. Standard polar coordinates use nonnegative radii.     Incorrect. That would cover only a half-disk.    "
+},
+{
+  "id": "exer-double-integral-triangle-area",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#exer-double-integral-triangle-area",
+  "type": "Exercise",
+  "number": "4.1.2.2",
+  "title": "Area of a Triangle by Iterated Integration.",
+  "body": " Area of a Triangle by Iterated Integration   Compute     First integrate in : Then So the integral equals .   "
+},
+{
+  "id": "rem-triple-integral-construction",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#rem-triple-integral-construction",
+  "type": "Remark",
+  "number": "4.1.31",
+  "title": "Construction of the Triple Integral.",
+  "body": " Construction of the Triple Integral  Let be a continuous function on a bounded spatial domain .    Subdivide into small sub-domains of volumes .    In each sub-domain , choose an arbitrary representative point and form the approximation .    Sum over all sub-domains:     Passing to the limit as and each gives the exact triple integral.  "
+},
+{
+  "id": "def-triple-integral",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#def-triple-integral",
+  "type": "Definition",
+  "number": "4.1.32",
+  "title": "Triple Integral.",
+  "body": " Triple Integral   Let be a bounded domain and a continuous function. The triple integral of over is:    "
+},
+{
+  "id": "rem-volume-triple-integral-intuition",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#rem-volume-triple-integral-intuition",
+  "type": "Remark",
+  "number": "4.1.33",
+  "title": "Volume as Accumulated Unit Density.",
+  "body": " Volume as Accumulated Unit Density  A triple integral can be read as adding up contributions from tiny volume elements. If the integrand is the constant function , each element contributes exactly its own volume . Summing all these pieces recovers the volume of the whole spatial domain.   The volume formula adds the small volume elements filling the body .      "
+},
+{
+  "id": "def-volume-triple-integral",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#def-volume-triple-integral",
+  "type": "Definition",
+  "number": "4.1.35",
+  "title": "Volume of a Spatial Domain.",
+  "body": " Volume of a Spatial Domain   The volume of a domain is:    "
+},
+{
+  "id": "rem-geometric-center-3d-intuition",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#rem-geometric-center-3d-intuition",
+  "type": "Remark",
+  "number": "4.1.36",
+  "title": "Centroid as Average Position.",
+  "body": " Centroid as Average Position  For a body of uniform density, the geometric center is the average position of all volume elements. The coordinate integrals add the -, -, and -coordinates of each small piece and then divide by the total volume.  "
+},
+{
+  "id": "def-geometric-center-3d",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#def-geometric-center-3d",
+  "type": "Definition",
+  "number": "4.1.37",
+  "title": "Geometric Center of a Spatial Domain.",
+  "body": " Geometric Center of a Spatial Domain   The coordinates of the geometric center (centroid) of are:    "
+},
+{
+  "id": "rem-mass-center-gravity-intuition",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#rem-mass-center-gravity-intuition",
+  "type": "Remark",
+  "number": "4.1.38",
+  "title": "Mass and Center of Gravity for Variable Density.",
+  "body": " Mass and Center of Gravity for Variable Density  If density varies from point to point, equal volume elements no longer contribute equally to the balance point. The mass integral weights each small volume element by its density . The center of gravity is then the density-weighted average position, so it is pulled toward regions where the body is heavier.  "
+},
+{
+  "id": "def-mass-center-gravity",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#def-mass-center-gravity",
+  "type": "Definition",
+  "number": "4.1.39",
+  "title": "Mass and Center of Gravity.",
+  "body": " Mass and Center of Gravity   For a body with variable mass density (mass per unit volume), the total mass and center of gravity are:    "
+},
+{
+  "id": "rem-center-gravity-vs-centroid",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#rem-center-gravity-vs-centroid",
+  "type": "Remark",
+  "number": "4.1.40",
+  "title": "",
+  "body": " If the density is constant throughout the body, the center of gravity coincides with the geometric center. A non-uniform density shifts the center of gravity towards regions of higher density.  "
+},
+{
+  "id": "rem-moments-inertia-intuition",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#rem-moments-inertia-intuition",
+  "type": "Remark",
+  "number": "4.1.41",
+  "title": "Moments of Inertia as Weighted Squared Distance.",
+  "body": " Moments of Inertia as Weighted Squared Distance  Rotating a body about an axis is harder when more mass lies far away from that axis. A moment of inertia therefore weights each small mass element by the square of its perpendicular distance to the axis. For example, the distance from to the -axis is , so the corresponding squared distance is .  "
+},
+{
+  "id": "def-moments-inertia",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#def-moments-inertia",
+  "type": "Definition",
+  "number": "4.1.42",
+  "title": "Moments of Inertia.",
+  "body": " Moments of Inertia   For a body with density , the moments of inertia with respect to the -, -, and -axes are:    "
+},
+{
+  "id": "exer-triple-integral-mass-meaning",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#exer-triple-integral-mass-meaning",
+  "type": "Exercise",
+  "number": "4.1.3.1",
+  "title": "Meaning of a Triple Integral with Density.",
+  "body": " Meaning of a Triple Integral with Density   If is a mass density on a body , what does represent?     The total mass of the body  Correct. Integrating density over volume gives mass.    The surface area of the body  Incorrect. Surface area is not computed by a volume integral.    The center of gravity directly  Incorrect. The center of gravity requires moment integrals divided by the mass.    The moment of inertia about every axis at once  Incorrect. Moments of inertia need extra distance factors.    "
+},
+{
+  "id": "rem-normal-domain-3d",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#rem-normal-domain-3d",
+  "type": "Remark",
+  "number": "4.1.43",
+  "title": "Normal Domains in <span class=\"process-math\">\\(\\R^3\\)<\/span>.",
+  "body": " Normal Domains in  For the integration order , a normal domain in three dimensions is a spatial region described by inequalities of the form:   The structure is hierarchical:    The outer bounds (for ) are constants.    The middle bounds (for ) may depend on .    The inner bounds (for ) may depend on both and .    Other variable orderings, such as , are equally valid. The useful order is the one whose bounds describe the geometry most simply.  "
+},
+{
+  "id": "ex-cylinder-normal-domain",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#ex-cylinder-normal-domain",
+  "type": "Example",
+  "number": "4.1.44",
+  "title": "Cylinder as a Normal Domain.",
+  "body": " Cylinder as a Normal Domain  Show that a solid cylinder of radius and height , with its base centred at the origin, is a normal domain.  Project the cylinder onto the -plane: the cross-section is the disk . Describing this disk as a Type I planar normal domain gives and . The height runs from to . Combining:    A vertical cylinder as a normal domain. For each fixed , the variable runs through the chord of the disk, and runs from the base to the height .      "
+},
+{
+  "id": "thm-triple-integral-cartesian",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#thm-triple-integral-cartesian",
+  "type": "Theorem",
+  "number": "4.1.46",
+  "title": "Triple Integrals in Cartesian Coordinates.",
+  "body": " Triple Integrals in Cartesian Coordinates   For a normal domain with , , : The innermost integral (in ) is computed first, treating and as parameters. The middle integral (in ) is then computed, treating as a parameter. The outermost integral (in ) is an ordinary definite integral.   "
+},
+{
+  "id": "ex-triple-integral-sine",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#ex-triple-integral-sine",
+  "type": "Example",
+  "number": "4.1.47",
+  "title": "Triple Integral with Trigonometric Integrand.",
+  "body": " Triple Integral with Trigonometric Integrand   Let and Compute    The domain is an extrusion in the -direction of the region between and for .        Note that for we have , so the -bounds are valid.   Inner integral (in ):     Middle integral (in ):     Outer integral (in ):     "
+},
+{
+  "id": "ex-triple-integral-yez",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#ex-triple-integral-yez",
+  "type": "Example",
+  "number": "4.1.49",
+  "title": "Triple Integral with Exponential Integrand.",
+  "body": " Triple Integral with Exponential Integrand   Let and Compute    The domain lies between the planes and , with and .         Inner integral (in ):     Middle integral (in ): Split into two parts: For the first part, integrate by parts with , (so ): The second part: . Combining:    Outer integral (in ):     "
+},
+{
+  "id": "rem-cylindrical-coordinates",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#rem-cylindrical-coordinates",
+  "type": "Remark",
+  "number": "4.1.51",
+  "title": "Cylindrical Coordinates.",
+  "body": " Cylindrical Coordinates  For spatial domains with rotational symmetry about the -axis , the computation simplifies greatly in cylindrical coordinates . A point is described by:     : polar coordinates of the orthogonal projection of into the -plane, with and , .     : the height coordinate, unchanged.    The volume element in cylindrical coordinates is The factor is the Jacobian of the transformation from to , and arises for the same reason as in polar coordinates for double integrals (see ).   Cylindrical coordinates . The volume element (shaded) has dimensions , (arc length), and , giving volume .      "
+},
+{
+  "id": "thm-triple-integral-cylindrical",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#thm-triple-integral-cylindrical",
+  "type": "Theorem",
+  "number": "4.1.53",
+  "title": "Triple Integrals in Cylindrical Coordinates.",
+  "body": " Triple Integrals in Cylindrical Coordinates   For a normal domain described in cylindrical coordinates by , , : The Jacobian factor must always be included. As in Cartesian coordinates, other orders of integration are possible if they describe the same solid more simply.   "
+},
+{
+  "id": "ex-cylinder-moment-inertia",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#ex-cylinder-moment-inertia",
+  "type": "Example",
+  "number": "4.1.54",
+  "title": "Moment of Inertia of a Solid Cylinder.",
+  "body": " Moment of Inertia of a Solid Cylinder  Consider a solid cylinder with radius , height (centred at the origin, so ), and constant mass density . The total mass is . Compute the moment of inertia about the -axis.  In cylindrical coordinates, the cylinder is , , . The squared distance from the -axis is .   Since : This classical result states that the moment of inertia of a cylinder about its axis of symmetry equals half the product of its mass and the square of its radius.  "
+},
+{
+  "id": "ex-halfball-geometric-center",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#ex-halfball-geometric-center",
+  "type": "Example",
+  "number": "4.1.55",
+  "title": "Geometric Center of a Half-Ball.",
+  "body": " Geometric Center of a Half-Ball  Find the geometric center of the upper half-ball of radius : .  By symmetry, . In cylindrical coordinates, the half-ball is bounded by , , . The volume is .   -coordinate of the centroid:  Therefore The geometric center of the half-ball is at .  "
+},
+{
+  "id": "exer-triple-integral-cylindrical-jacobian",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#exer-triple-integral-cylindrical-jacobian",
+  "type": "Exercise",
+  "number": "4.1.4.1",
+  "title": "Cylindrical Jacobian Factor.",
+  "body": " Cylindrical Jacobian Factor   Which extra factor appears when converting a triple integral to cylindrical coordinates?      Incorrect. That symbol is often used for density, not for the cylindrical Jacobian here.     Correct. In cylindrical coordinates, .     Incorrect. The Jacobian contributes only one factor .     Incorrect. The cylindrical Jacobian is not trigonometric.    "
+},
+{
+  "id": "exer-triple-integral-cylinder-z",
+  "level": "2",
+  "url": "section-double-triple-integrals.html#exer-triple-integral-cylinder-z",
+  "type": "Exercise",
+  "number": "4.1.4.2",
+  "title": "Compute a Cylindrical Triple Integral.",
+  "body": " Compute a Cylindrical Triple Integral   Compute     First integrate with respect to : Then Finally, Hence the value of the integral is .   "
+},
+{
   "id": "backmatter-2",
   "level": "1",
   "url": "backmatter-2.html",
