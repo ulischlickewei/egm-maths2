@@ -180,6 +180,15 @@
         <m>z = 2</m>, while at <m>y = 1</m> (the highest circle point) the
         height is <m>z = 1</m>, and at <m>y = -1</m> it is <m>z = 3</m>.
       </p>
+      <figure xml:id="fig-cylinder-plane-intersection">
+        <caption>
+          The cylinder <m>x^2 + y^2 = 1</m> and the plane <m>y + z = 2</m>
+          intersect in a tilted ellipse.  The parametrization
+          <m>\mathbf{x}(t) = (\cos t,\,\sin t,\,2-\sin t)</m> traces this
+          ellipse once as <m>t</m> runs from <m>0</m> to <m>2\pi</m>.
+        </caption>
+        <image source="multiple-integrals-line-integrals/curves-scalar-line-integrals/schnittkurve-zylinder-ebene.png" width="55%"/>
+      </figure>
     </solution>
   </example>
 
@@ -217,6 +226,43 @@
       </p>
     </statement>
   </definition>
+
+  <!-- ─── Figure: tangent vector on a general curve ─── -->
+
+  <figure xml:id="fig-tangent-vector-general">
+    <caption>
+      A parametrized curve <m>\mathbf{x}</m> in the plane.
+      At the parameter value <m>t</m>, the position vector
+      <m>\mathbf{x}(t)</m> points from the origin to the curve, while the
+      tangent (velocity) vector <m>\dot{\mathbf{x}}(t)</m> points in the
+      direction of motion along the curve.
+    </caption>
+    <image xml:id="image-tangent-vector-general" width="55%">
+      <latex-image>
+        \begin{tikzpicture}[scale=1.2]
+          % axes
+          \draw[->,gray!70] (-0.3,0) -- (4.0,0) node[right,font=\small,gray!70] {$x$};
+          \draw[->,gray!70] (0,-0.3) -- (0,2.5) node[above,font=\small,gray!70] {$y$};
+          % smooth curve: y = 0.3*t^2 - 0.5*t + 1 for t in [0.5, 3.5]
+          \draw[blue!70!black, thick]
+            plot[domain=0.5:3.5, samples=60, smooth]
+              (\x, {0.3*(\x)^2 - 0.5*\x + 1})
+            node[right, font=\small, blue!70!black] {$\mathbf{x}$};
+          % point at t=2: (2, 1.2)
+          \filldraw[black] (2,1.2) circle (1.5pt)
+            node[below right, font=\small] {$t$};
+          % position vector from origin to point
+          \draw[->,thick,red!70!black]
+            (0,0) -- (2,1.2)
+            node[midway, below right, font=\small] {$\mathbf{x}(t)$};
+          % tangent vector at t=2: direction (1, 0.7), scaled by 0.85
+          \draw[->,thick,green!60!black]
+            (2,1.2) -- ++(0.85,0.595)
+            node[right, font=\small] {$\dot{\mathbf{x}}(t)$};
+        \end{tikzpicture}
+      </latex-image>
+    </image>
+  </figure>
 
   <!-- ─── Example: tangent of a circle ─── -->
 
@@ -271,7 +317,7 @@
               % tangent vector
               \draw[->,thick,green!60!black]
                 (\cx,\cy) -- +(\tx,\ty)
-                node[above right,font=\small] {$\dot{\mathbf{x}}(t)$};
+                node[above left,font=\small] {$\dot{\mathbf{x}}(t)$};
               % right angle mark
               \coordinate (P) at (\cx,\cy);
               \coordinate (O) at (0,0);
@@ -379,12 +425,12 @@
                 % tangent vectors (scaled for visibility)
                 \draw[->,green!60!black, very thick]
                   (axis cs:1,1) -- (axis cs:1.5,1.5)
-                  node[above, font=\small] {$\dot{\mathbf{x}}_1$};
+                  node[right, font=\small] {$\dot{\mathbf{x}}_1$};
                 \draw[->,orange!80!black, very thick]
                   (axis cs:1,1) -- (axis cs:1.5,2.0)
-                  node[right, font=\small] {$\dot{\mathbf{x}}_2$};
+                  node[above, font=\small] {$\dot{\mathbf{x}}_2$};
                 % angle arc annotation
-                \node[font=\small] at (axis cs:1.45,1.6) {$\alpha$};
+                \node[font=\small] at (axis cs:1.25,1.62) {$\alpha$};
               \end{axis}
             \end{tikzpicture}
           </latex-image>

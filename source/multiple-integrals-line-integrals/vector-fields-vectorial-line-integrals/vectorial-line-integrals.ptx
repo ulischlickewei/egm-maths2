@@ -64,48 +64,6 @@
       component does work; the normal component is perpendicular to the
       displacement and contributes nothing.
     </p>
-    <figure xml:id="fig-work-path">
-      <caption>
-        A path <m>\mathbf{s}</m> through a force field <m>\mathbf{F}</m>.
-        At each point the tangential component (blue projection) of
-        <m>\mathbf{F}</m> contributes to the work; the normal component
-        (dashed) does not.
-      </caption>
-      <image xml:id="image-work-path" width="55%">
-        <latex-image>
-          \begin{tikzpicture}[scale=1.1]
-            % Draw a smooth path s
-            \draw[blue!70!black, very thick, ->]
-              plot[smooth, tension=0.7]
-              coordinates {(0.2,0.4) (1.0,0.9) (2.0,1.1) (3.0,0.8) (3.8,0.5)};
-            \node[blue!70!black, below, font=\small] at (2.0,0.65) {$\mathbf{s}$};
-            % A point on the path (roughly at t=0.5)
-            \coordinate (P) at (2.0,1.1);
-            \filldraw[black] (P) circle (1.5pt);
-            % Tangent vector (unit tangent approximated)
-            \coordinate (T) at (2.7,1.05); % direction (0.7,-0.05) normalized
-            \draw[->,very thick,black] (P) -- (T)
-              node[right,font=\small] {$\dot{\mathbf{s}}$};
-            % Force vector F (some direction)
-            \coordinate (F) at (2.6,1.9);
-            \draw[->,thick,red!70!black] (P) -- (F)
-              node[above right,font=\small] {$\mathbf{F}$};
-            % Projection of F onto tangent direction
-            % tangent unit direction approx (0.997,-0.071)
-            % F vector: (0.6, 0.8), projection = 0.6*0.997+0.8*(-0.071)=0.598-0.057=0.541
-            % projected point: P + 0.541*(0.997,-0.071) = (2.0+0.54, 1.1-0.038) = (2.54,1.06)
-            \coordinate (Fproj) at (2.54,1.06);
-            \draw[->,thick,blue!50!black] (P) -- (Fproj)
-              node[below,font=\small] {proj};
-            % Dashed normal component
-            \draw[dashed,gray] (Fproj) -- (F);
-            % Small arc for angle
-            \draw[gray] ($(P)+(0.25,0)$) arc (0:52:0.25)
-              node[midway,right,font=\scriptsize,gray] {$\theta$};
-          \end{tikzpicture}
-        </latex-image>
-      </image>
-    </figure>
   </remark>
 
   <!-- ─── Remark: computation procedure ─── -->

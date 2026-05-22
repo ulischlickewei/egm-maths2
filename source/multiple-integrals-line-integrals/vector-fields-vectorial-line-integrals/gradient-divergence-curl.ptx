@@ -148,55 +148,54 @@
     </statement>
   </definition>
 
-  <!-- ─── Remark: field operations diagram ─── -->
+  <!-- ─── Assemblage: map of field operations ─── -->
 
-  <remark xml:id="rem-field-operations-diagram">
+  <assemblage xml:id="assem-field-operations">
     <title>Map of Field Operations</title>
     <p>
-      The gradient, divergence, and curl, together with the
-      <term>Laplacian</term>
-      <m>\Delta f = \operatorname{div}(\nabla f)
-         = \dfrac{\partial^2 f}{\partial x_1^2} + \cdots
-         + \dfrac{\partial^2 f}{\partial x_n^2}</m>,
-      form a coherent system of differential operators linking scalar and
-      vector fields:
+      The gradient, divergence, curl, and Laplacian form a coherent system
+      of differential operators linking scalar and vector fields.
     </p>
-    <figure xml:id="fig-field-operations-diagram">
-      <caption>
-        Differential operators connecting scalar and vector fields.
-        The gravitational pair <m>f(\mathbf{x}) = MG/\|\mathbf{x}\|</m>
-        and <m>\mathbf{F}(\mathbf{x}) = -MG\,\mathbf{x}/\|\mathbf{x}\|^3</m>
-        is shown as a concrete instance.
-      </caption>
-      <image xml:id="image-field-operations-diagram" width="70%">
-        <latex-image>
-          \begin{tikzpicture}[
-            node distance=2.4cm and 3.6cm,
-            box/.style={draw,rounded corners,minimum width=2.8cm,
-                        minimum height=1.0cm,align=center,font=\small},
-            arr/.style={->,thick,shorten >=2pt,shorten &lt;=2pt}
-          ]
-            \node[box] (sf) {Scalar field\\$f: D \to \R$};
-            \node[box, right=of sf] (vf) {Vector field\\$\mathbf{v}: D \to \R^n$};
-            % grad: scalar -> vector
-            \draw[arr,bend left=18] (sf) to
-              node[above,font=\small] {$\nabla$ (gradient)} (vf);
-            % div: vector -> scalar
-            \draw[arr,bend left=18] (vf) to
-              node[below,font=\small] {$\operatorname{div}$ (divergence)} (sf);
-            % rot: vector -> vector (loop on vf)
-            \draw[arr] (vf.north east)
-              to[out=60,in=30,looseness=3]
-              node[right,font=\small] {$\operatorname{rot}$ (curl)} (vf.south east);
-            % Laplacian: scalar -> scalar (loop on sf)
-            \draw[arr] (sf.north west)
-              to[out=150,in=120,looseness=3]
-              node[left,font=\small] {$\Delta = \operatorname{div}(\nabla\,\cdot)$} (sf.south west);
-          \end{tikzpicture}
-        </latex-image>
-      </image>
-    </figure>
-  </remark>
+    <tabular halign="left" top="minor" bottom="minor">
+      <col width="22%"/> <col width="30%"/> <col width="48%"/>
+      <row header="yes" bottom="medium">
+        <cell>Operator</cell>
+        <cell>Maps</cell>
+        <cell>Formula / remark</cell>
+      </row>
+      <row>
+        <cell>Gradient <m>\nabla f</m></cell>
+        <cell>scalar field <m>\to</m> vector field</cell>
+        <cell>
+          <m>\nabla f = \Bigl(\dfrac{\partial f}{\partial x_1},\ldots,
+          \dfrac{\partial f}{\partial x_n}\Bigr)^{\!\top}</m>
+        </cell>
+      </row>
+      <row>
+        <cell>Divergence <m>\operatorname{div}\mathbf{v}</m></cell>
+        <cell>vector field <m>\to</m> scalar field</cell>
+        <cell>
+          <m>\operatorname{div}\mathbf{v}
+          = \dfrac{\partial v_1}{\partial x_1}+\cdots+
+            \dfrac{\partial v_n}{\partial x_n}</m>
+        </cell>
+      </row>
+      <row>
+        <cell>Curl <m>\operatorname{rot}\mathbf{v}</m></cell>
+        <cell>vector field <m>\to</m> vector field (only <m>n=3</m>)</cell>
+        <cell>see Definition <xref ref="def-divergence-curl"/></cell>
+      </row>
+      <row>
+        <cell>Laplacian <m>\Delta f</m></cell>
+        <cell>scalar field <m>\to</m> scalar field</cell>
+        <cell>
+          <m>\Delta f = \operatorname{div}(\nabla f)
+          = \dfrac{\partial^2 f}{\partial x_1^2}+\cdots+
+            \dfrac{\partial^2 f}{\partial x_n^2}</m>
+        </cell>
+      </row>
+    </tabular>
+  </assemblage>
 
   <!-- ─── Example: computing divergence and curl ─── -->
 

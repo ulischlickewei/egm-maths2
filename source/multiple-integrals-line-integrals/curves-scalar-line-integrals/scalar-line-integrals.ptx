@@ -138,7 +138,7 @@
       <m>\mathbf{x}\colon [a,b] \to \R^n</m> with trace <m>C</m>.
     </p>
     <p>
-      <em>Step 2: Compute the speed.</em>
+      <em>Step 2: Compute the velocity.</em>
       <me>
         \|\dot{\mathbf{x}}(t)\|
         = \sqrt{\dot{x}_1(t)^2 + \cdots + \dot{x}_n(t)^2}.
@@ -153,7 +153,7 @@
     </p>
     <p>
       The arc length factor <m>\|\dot{\mathbf{x}}(t)\|</m> compensates for the
-      speed at which the parameter traverses the curve, ensuring the result is
+      velocity at which the parameter traverses the curve, ensuring the result is
       independent of the chosen parametrization.
     </p>
   </remark>
@@ -185,7 +185,7 @@
           \qquad
           \|\dot{\mathbf{x}}(t)\| = \sqrt{\sin^2 t + \cos^2 t} = 1.
         </me>
-        The unit-circle parametrization has speed <m>1</m> throughout.
+        The unit-circle parametrization has constant velocity of magnitude <m>\|\dot{\mathbf{x}}(t)\| = 1</m> throughout.
       </p>
       <p>
         <em>Step 3: Evaluate the integral.</em>

@@ -71,22 +71,24 @@
     <figure xml:id="fig-rotation-field">
       <caption>
         The rotation field <m>\mathbf{v}(x,y) = (-y,\, x)</m>.
-        Every vector is perpendicular to the position vector, causing
-        counter-clockwise rotation.  This field will later serve as the
-        canonical example of a vector field with <em>no</em> antiderivative.
+        Arrow lengths are proportional to the field magnitude
+        <m>\|\mathbf{v}\| = \sqrt{x^2+y^2}</m>, so arrows further from
+        the origin are longer.  Every vector is perpendicular to the
+        position vector, causing counter-clockwise rotation.  This field
+        will later serve as the canonical example of a vector field with
+        <em>no</em> antiderivative.
       </caption>
       <image xml:id="image-rotation-field" width="55%">
         <latex-image>
           \begin{tikzpicture}[scale=1.0]
             \draw[->,gray!60] (-2.5,0) -- (2.5,0) node[right,font=\small] {$x$};
             \draw[->,gray!60] (0,-2.5) -- (0,2.5) node[above,font=\small] {$y$};
-            % Draw arrows for v(x,y) = (-y, x), scaled to length 0.38
+            % Draw arrows for v(x,y) = (-y, x); length proportional to field magnitude
             \foreach \xi in {-2,-1.2,-0.4,0.4,1.2,2} {
               \foreach \yi in {-2,-1.2,-0.4,0.4,1.2,2} {
                 \pgfmathsetmacro{\vx}{-\yi}
                 \pgfmathsetmacro{\vy}{\xi}
-                \pgfmathsetmacro{\len}{sqrt(\vx*\vx+\vy*\vy)}
-                \pgfmathsetmacro{\sc}{0.35/\len}
+                \pgfmathsetmacro{\sc}{0.18}
                 \draw[->,blue!65!black,thin]
                   (\xi,\yi) -- +(\sc*\vx, \sc*\vy);
               }
@@ -133,8 +135,9 @@
     <statement>
       <p>
         Which of the following vector fields on <m>\R^2</m> has the property
-        that <em>all vectors point away from the <m>y</m>-axis</em> and
-        <em>all vectors along any fixed vertical line have the same length</em>?
+        that <em>at all points with <m>x \neq 0</m>, vectors point away from
+        the <m>y</m>-axis</em> and <em>all vectors along any fixed vertical
+        line have the same length</em>?
       </p>
       <ul>
         <li><p>(A) <m>\mathbf{v}(x,y) = \begin{pmatrix} x^3 \\ 0 \end{pmatrix}</m></p></li>

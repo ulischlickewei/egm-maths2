@@ -2,7 +2,7 @@
   <title>Multiple Integrals and Line Integrals</title>
 
   <introduction>
-    <p>
+    <p> 
       This chapter develops integration beyond the single-variable setting.
       We begin with <em>multiple integrals</em> — double and triple integrals
       over planar and spatial domains — which provide the mathematical foundation
@@ -16,7 +16,7 @@
   </introduction>
 
   <xi:include href="double-triple-integrals/section.ptx"/>
-  <!-- <xi:include href="curves-scalar-line-integrals/section.ptx"/> -->
-  <!-- <xi:include href="vector-fields-vectorial-line-integrals/section.ptx"/> -->
+  <xi:include href="curves-scalar-line-integrals/section.ptx"/>
+  <xi:include href="vector-fields-vectorial-line-integrals/section.ptx"/>
 
 </chapter>
