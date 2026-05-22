@@ -3313,6 +3313,402 @@ var ptx_lunr_docs = [
   "body": " Compute a Cylindrical Triple Integral   Compute     First integrate with respect to : Then Finally, Hence the value of the integral is .   "
 },
 {
+  "id": "section-curves-scalar-line-integrals",
+  "level": "1",
+  "url": "section-curves-scalar-line-integrals.html",
+  "type": "Section",
+  "number": "4.2",
+  "title": "Curves and Scalar Line Integrals",
+  "body": " Curves and Scalar Line Integrals   This section introduces two closely related topics. First, we develop the concept of a parametrized curve in : a path traced by a moving point, described by a vector-valued function of a single parameter. We define its trace, its tangent vector (the instantaneous velocity), and establish the differentiation rules that govern combinations of curves.  Second, we use these ideas to define the scalar line integral : an integral of a function along a curve. The key insight is that integrating with respect to arc length requires weighting by the speed of the parametrization, which ensures the result is independent of how the curve is traversed. Applications include computing arc lengths, masses of wires with variable density, and centers of gravity.    Curves in   Up to now, integration has concerned itself with regions in the plane or in space. This section and the next move from regions to curves : one-dimensional paths winding through two- or three-dimensional space. We begin by making the notion of a parametrized curve precise, and then develop the calculus tools — tangent vectors, velocities, and differentiation rules — that are needed to compute line integrals in .     Curve, Trace, Closed Curve, Differentiable Curve   Let be an interval.  A curve parametrized over is a function whose component functions are continuous. The parameter is often thought of as time .  The set of all values taken by , is called the trace of . The trace is the actual geometric path in space; the parametrization is one particular way of traversing that path.  If and , the curve is closed (the path returns to its starting point). If the component functions are continuously differentiable, the curve is continuously differentiable .      Helix   Sketch the trace of the curve     The first two components trace the unit circle in the -plane, while the third component increases monotonically from to . The result is a helix that spirals upward around the -axis, completing two full turns.  Selected points help to orient the sketch:   Sample points on the helix         Position      Start on the -axis at height      Quarter turn, height      Half turn, height      First full revolution at height      The helix for . The projection onto the -plane is the unit circle; the height coordinate increases linearly with , producing two full turns.          Intersection Curve of a Cylinder with a Plane   Determine a parametrization of the curve of intersection of the cylinder with the plane . That is, find an interval and a curve whose trace is the intersection.    The projection of the intersection onto the -plane is the unit circle , so we parametrize For the point to lie in the plane , we need The parametrization is therefore The trace is an ellipse tilted in space: at the height is , while at (the highest circle point) the height is , and at it is .   The cylinder and the plane intersect in a tilted ellipse. The parametrization traces this ellipse once as runs from to .        Tangent Vector, Velocity Vector, Speed, Regular Curve   Let be a differentiable curve.  The tangent vector of at time is the component-wise derivative The derivative is also called the velocity vector . Its length is called the speed at time : it measures how fast a particle traversing the curve moves at the instant .  If for all , the curve is called regular . For a regular curve the tangent vector always points in a definite direction at every parameter value.      A parametrized curve in the plane. At the parameter value , the position vector points from the origin to the curve, while the tangent (velocity) vector points in the direction of motion along the curve.        Tangent Vector of a Circle   Compute the tangent vector of the unit circle , , and verify that it is always orthogonal to the position vector.    Differentiating component-wise: To check orthogonality, compute the inner product with the position vector: The tangent vector is indeed always perpendicular to the radius. The velocity is , confirming that the unit circle is traversed at constant speed.   Position vector and tangent vector at an arbitrary point on the unit circle. The tangent vector is always perpendicular to the radius.          Angle of Intersection of Two Curves   The graphs of and intersect at . Determine the angle of intersection by parametrizing the graphs as curves and computing the angle between their tangent vectors at the intersection point.     Step 1: Parametrize both graphs as curves.  Both curves pass through at .   Step 2: Compute the tangent vectors at .     Step 3: Compute the angle between the tangent vectors.  Therefore    The graphs of and meet at . Their tangent vectors and form an angle of approximately .          Differentiation Rules for Curves   Let be differentiable curves, let be a scalar function, and let . Then:   Linearity:     Product rule (inner product):     Product rule (scalar multiplication):     Product rule (cross product, only for ):      All rules follow from the component-wise definition of and the corresponding single-variable differentiation rules applied component by component. The cross-product rule additionally uses the bilinearity and antisymmetry of the cross product.     Check Your Understanding   Speed of the Unit Circle   Let What is the speed ?      Incorrect. The point is moving along the circle.     Correct. Since , its norm is always .     Incorrect. The two squared components add to , not .     Incorrect. The speed is constant here.      Tangent Vector of a Parametrized Curve   For compute the tangent vector at .    Differentiate componentwise: Therefore        Line Integrals of Scalar Fields   A single-variable integral sums a function over an interval on the number line; a double integral sums over a region in the plane. A scalar line integral sums a function along a curve in the plane or in space. Geometrically it measures the area of the curved curtain suspended above the curve up to the height given by the function. Physically it computes the mass of a wire whose density varies along its length, or the arc length of the curve itself.     Line Integral of a Scalar Field   Let be a continuously differentiable curve, let contain the trace , and let be a continuous scalar function (also called a scalar field ).  The line integral of along is Here is the arc length element : it converts a small time increment into the corresponding arc length traversed along the curve.      Independence of Parametrization  The value of the line integral does not depend on the particular parametrization chosen for the curve. More precisely: if two continuously differentiable curves and have the same trace , and one is obtained from the other by a continuously differentiable reparametrization that traverses exactly once, then Reversing the direction of traversal also leaves the value unchanged, because measures arc length and is always nonnegative. This allows us to write the integral using the trace alone, without specifying a particular parametrization.     Geometric Interpretation  Analogously to the single-variable integral, the scalar line integral computes the area of the curved curtain (or fence) erected above up to the height . At each point of the curve the curtain has height , and the arc length element weights each infinitesimal strip by how long the corresponding piece of curve is.   The scalar line integral equals the area of the curved curtain (shown shaded) erected above the curve in the -plane up to the height given by .         How to Compute a Scalar Line Integral  To evaluate , follow three steps:   Step 1: Parametrize the curve. Find a continuously differentiable parametrization with trace .   Step 2: Compute the velocity.     Step 3: Evaluate the one-variable integral.    The arc length factor compensates for the velocity at which the parameter traverses the curve, ensuring the result is independent of the chosen parametrization.     Line Integral Along the Upper Half-Circle   Compute the line integral of the scalar field along the upper semicircle of radius (i.e.\\ the arc with ).     Step 1: Parametrize.     Step 2: Compute the velocity.  The unit-circle parametrization has constant velocity of magnitude throughout.   Step 3: Evaluate the integral.  The first part: . The second part, using the substitution , : Therefore    The upper semicircle (blue arc) parametrized from to counter-clockwise.          Arc Length of a Curve   The special case yields the arc length : if has a continuously differentiable parametrization with trace , then The arc length element accumulates the infinitesimal lengths of the curve.      Arc Length with a Non-Uniform Parametrization   Compute the arc length of the curve This parametrization traces the line segment from to , but not at constant speed.    First compute the derivative:   Therefore the arc length is This agrees with the geometric length of the line segment joining and . The factor corrects for the non-uniform motion along the same trace.      Mass and Center of Gravity of a Wire   Line integrals of scalar fields arise naturally in physics when computing the mass and center of gravity of a thin wire.  Let be the linear mass density of a thin wire shaped along a curve .    The mass of the wire is     The coordinates of the center of gravity are     Each formula is a line integral of the scalar field , or of , , , along the curve representing the wire. When the density is constant , the mass reduces to , confirming that the arc length is the correct measure of the wire's size.     Check Your Understanding   Why the Speed Factor Appears   In the scalar line integral why does the factor appear?     It converts parameter change into arc length and makes the integral independent of parametrization.  Correct. The speed factor tells us how much curve length is traversed per unit change of the parameter.    It makes every line integral equal to the enclosed area.  Incorrect. Scalar line integrals do not generally compute enclosed areas.    It forces the integrand to be a vector field.  Incorrect. This is a scalar line integral.    It is needed only for closed curves.  Incorrect. The factor is needed for any parametrized curve.      Arc Length of a Line Segment   Compute where is the line segment from to .    Since the integrand is , the scalar line integral equals the arc length of the segment. The distance between the endpoints is Therefore       "
+},
+{
+  "id": "def-curve",
+  "level": "2",
+  "url": "section-curves-scalar-line-integrals.html#def-curve",
+  "type": "Definition",
+  "number": "4.2.1",
+  "title": "Curve, Trace, Closed Curve, Differentiable Curve.",
+  "body": " Curve, Trace, Closed Curve, Differentiable Curve   Let be an interval.  A curve parametrized over is a function whose component functions are continuous. The parameter is often thought of as time .  The set of all values taken by , is called the trace of . The trace is the actual geometric path in space; the parametrization is one particular way of traversing that path.  If and , the curve is closed (the path returns to its starting point). If the component functions are continuously differentiable, the curve is continuously differentiable .   "
+},
+{
+  "id": "ex-helix",
+  "level": "2",
+  "url": "section-curves-scalar-line-integrals.html#ex-helix",
+  "type": "Example",
+  "number": "4.2.2",
+  "title": "Helix.",
+  "body": " Helix   Sketch the trace of the curve     The first two components trace the unit circle in the -plane, while the third component increases monotonically from to . The result is a helix that spirals upward around the -axis, completing two full turns.  Selected points help to orient the sketch:   Sample points on the helix         Position      Start on the -axis at height      Quarter turn, height      Half turn, height      First full revolution at height      The helix for . The projection onto the -plane is the unit circle; the height coordinate increases linearly with , producing two full turns.       "
+},
+{
+  "id": "ex-cylinder-plane-intersection",
+  "level": "2",
+  "url": "section-curves-scalar-line-integrals.html#ex-cylinder-plane-intersection",
+  "type": "Example",
+  "number": "4.2.5",
+  "title": "Intersection Curve of a Cylinder with a Plane.",
+  "body": " Intersection Curve of a Cylinder with a Plane   Determine a parametrization of the curve of intersection of the cylinder with the plane . That is, find an interval and a curve whose trace is the intersection.    The projection of the intersection onto the -plane is the unit circle , so we parametrize For the point to lie in the plane , we need The parametrization is therefore The trace is an ellipse tilted in space: at the height is , while at (the highest circle point) the height is , and at it is .   The cylinder and the plane intersect in a tilted ellipse. The parametrization traces this ellipse once as runs from to .     "
+},
+{
+  "id": "def-tangent-vector",
+  "level": "2",
+  "url": "section-curves-scalar-line-integrals.html#def-tangent-vector",
+  "type": "Definition",
+  "number": "4.2.7",
+  "title": "Tangent Vector, Velocity Vector, Speed, Regular Curve.",
+  "body": " Tangent Vector, Velocity Vector, Speed, Regular Curve   Let be a differentiable curve.  The tangent vector of at time is the component-wise derivative The derivative is also called the velocity vector . Its length is called the speed at time : it measures how fast a particle traversing the curve moves at the instant .  If for all , the curve is called regular . For a regular curve the tangent vector always points in a definite direction at every parameter value.   "
+},
+{
+  "id": "fig-tangent-vector-general",
+  "level": "2",
+  "url": "section-curves-scalar-line-integrals.html#fig-tangent-vector-general",
+  "type": "Figure",
+  "number": "4.2.8",
+  "title": "",
+  "body": " A parametrized curve in the plane. At the parameter value , the position vector points from the origin to the curve, while the tangent (velocity) vector points in the direction of motion along the curve.     "
+},
+{
+  "id": "ex-tangent-circle",
+  "level": "2",
+  "url": "section-curves-scalar-line-integrals.html#ex-tangent-circle",
+  "type": "Example",
+  "number": "4.2.9",
+  "title": "Tangent Vector of a Circle.",
+  "body": " Tangent Vector of a Circle   Compute the tangent vector of the unit circle , , and verify that it is always orthogonal to the position vector.    Differentiating component-wise: To check orthogonality, compute the inner product with the position vector: The tangent vector is indeed always perpendicular to the radius. The velocity is , confirming that the unit circle is traversed at constant speed.   Position vector and tangent vector at an arbitrary point on the unit circle. The tangent vector is always perpendicular to the radius.       "
+},
+{
+  "id": "ex-angle-intersection",
+  "level": "2",
+  "url": "section-curves-scalar-line-integrals.html#ex-angle-intersection",
+  "type": "Example",
+  "number": "4.2.11",
+  "title": "Angle of Intersection of Two Curves.",
+  "body": " Angle of Intersection of Two Curves   The graphs of and intersect at . Determine the angle of intersection by parametrizing the graphs as curves and computing the angle between their tangent vectors at the intersection point.     Step 1: Parametrize both graphs as curves.  Both curves pass through at .   Step 2: Compute the tangent vectors at .     Step 3: Compute the angle between the tangent vectors.  Therefore    The graphs of and meet at . Their tangent vectors and form an angle of approximately .       "
+},
+{
+  "id": "thm-differentiation-curves",
+  "level": "2",
+  "url": "section-curves-scalar-line-integrals.html#thm-differentiation-curves",
+  "type": "Theorem",
+  "number": "4.2.13",
+  "title": "Differentiation Rules for Curves.",
+  "body": " Differentiation Rules for Curves   Let be differentiable curves, let be a scalar function, and let . Then:   Linearity:     Product rule (inner product):     Product rule (scalar multiplication):     Product rule (cross product, only for ):      All rules follow from the component-wise definition of and the corresponding single-variable differentiation rules applied component by component. The cross-product rule additionally uses the bilinearity and antisymmetry of the cross product.   "
+},
+{
+  "id": "exer-curves-unit-circle-speed",
+  "level": "2",
+  "url": "section-curves-scalar-line-integrals.html#exer-curves-unit-circle-speed",
+  "type": "Exercise",
+  "number": "4.2.1.1",
+  "title": "Speed of the Unit Circle.",
+  "body": " Speed of the Unit Circle   Let What is the speed ?      Incorrect. The point is moving along the circle.     Correct. Since , its norm is always .     Incorrect. The two squared components add to , not .     Incorrect. The speed is constant here.    "
+},
+{
+  "id": "exer-curves-tangent-vector-parabola",
+  "level": "2",
+  "url": "section-curves-scalar-line-integrals.html#exer-curves-tangent-vector-parabola",
+  "type": "Exercise",
+  "number": "4.2.1.2",
+  "title": "Tangent Vector of a Parametrized Curve.",
+  "body": " Tangent Vector of a Parametrized Curve   For compute the tangent vector at .    Differentiate componentwise: Therefore    "
+},
+{
+  "id": "def-scalar-line-integral",
+  "level": "2",
+  "url": "section-curves-scalar-line-integrals.html#def-scalar-line-integral",
+  "type": "Definition",
+  "number": "4.2.14",
+  "title": "Line Integral of a Scalar Field.",
+  "body": " Line Integral of a Scalar Field   Let be a continuously differentiable curve, let contain the trace , and let be a continuous scalar function (also called a scalar field ).  The line integral of along is Here is the arc length element : it converts a small time increment into the corresponding arc length traversed along the curve.   "
+},
+{
+  "id": "rem-line-integral-independence",
+  "level": "2",
+  "url": "section-curves-scalar-line-integrals.html#rem-line-integral-independence",
+  "type": "Remark",
+  "number": "4.2.15",
+  "title": "Independence of Parametrization.",
+  "body": " Independence of Parametrization  The value of the line integral does not depend on the particular parametrization chosen for the curve. More precisely: if two continuously differentiable curves and have the same trace , and one is obtained from the other by a continuously differentiable reparametrization that traverses exactly once, then Reversing the direction of traversal also leaves the value unchanged, because measures arc length and is always nonnegative. This allows us to write the integral using the trace alone, without specifying a particular parametrization.  "
+},
+{
+  "id": "rem-line-integral-geometric",
+  "level": "2",
+  "url": "section-curves-scalar-line-integrals.html#rem-line-integral-geometric",
+  "type": "Remark",
+  "number": "4.2.16",
+  "title": "Geometric Interpretation.",
+  "body": " Geometric Interpretation  Analogously to the single-variable integral, the scalar line integral computes the area of the curved curtain (or fence) erected above up to the height . At each point of the curve the curtain has height , and the arc length element weights each infinitesimal strip by how long the corresponding piece of curve is.   The scalar line integral equals the area of the curved curtain (shown shaded) erected above the curve in the -plane up to the height given by .      "
+},
+{
+  "id": "rem-line-integral-computation",
+  "level": "2",
+  "url": "section-curves-scalar-line-integrals.html#rem-line-integral-computation",
+  "type": "Remark",
+  "number": "4.2.18",
+  "title": "How to Compute a Scalar Line Integral.",
+  "body": " How to Compute a Scalar Line Integral  To evaluate , follow three steps:   Step 1: Parametrize the curve. Find a continuously differentiable parametrization with trace .   Step 2: Compute the velocity.     Step 3: Evaluate the one-variable integral.    The arc length factor compensates for the velocity at which the parameter traverses the curve, ensuring the result is independent of the chosen parametrization.  "
+},
+{
+  "id": "ex-half-circle-integral",
+  "level": "2",
+  "url": "section-curves-scalar-line-integrals.html#ex-half-circle-integral",
+  "type": "Example",
+  "number": "4.2.19",
+  "title": "Line Integral Along the Upper Half-Circle.",
+  "body": " Line Integral Along the Upper Half-Circle   Compute the line integral of the scalar field along the upper semicircle of radius (i.e.\\ the arc with ).     Step 1: Parametrize.     Step 2: Compute the velocity.  The unit-circle parametrization has constant velocity of magnitude throughout.   Step 3: Evaluate the integral.  The first part: . The second part, using the substitution , : Therefore    The upper semicircle (blue arc) parametrized from to counter-clockwise.       "
+},
+{
+  "id": "def-arc-length",
+  "level": "2",
+  "url": "section-curves-scalar-line-integrals.html#def-arc-length",
+  "type": "Definition",
+  "number": "4.2.21",
+  "title": "Arc Length of a Curve.",
+  "body": " Arc Length of a Curve   The special case yields the arc length : if has a continuously differentiable parametrization with trace , then The arc length element accumulates the infinitesimal lengths of the curve.   "
+},
+{
+  "id": "ex-arc-length-nonuniform-line-segment",
+  "level": "2",
+  "url": "section-curves-scalar-line-integrals.html#ex-arc-length-nonuniform-line-segment",
+  "type": "Example",
+  "number": "4.2.22",
+  "title": "Arc Length with a Non-Uniform Parametrization.",
+  "body": " Arc Length with a Non-Uniform Parametrization   Compute the arc length of the curve This parametrization traces the line segment from to , but not at constant speed.    First compute the derivative:   Therefore the arc length is This agrees with the geometric length of the line segment joining and . The factor corrects for the non-uniform motion along the same trace.   "
+},
+{
+  "id": "ex-wire-mass-center-gravity",
+  "level": "2",
+  "url": "section-curves-scalar-line-integrals.html#ex-wire-mass-center-gravity",
+  "type": "Example",
+  "number": "4.2.23",
+  "title": "Mass and Center of Gravity of a Wire.",
+  "body": " Mass and Center of Gravity of a Wire   Line integrals of scalar fields arise naturally in physics when computing the mass and center of gravity of a thin wire.  Let be the linear mass density of a thin wire shaped along a curve .    The mass of the wire is     The coordinates of the center of gravity are     Each formula is a line integral of the scalar field , or of , , , along the curve representing the wire. When the density is constant , the mass reduces to , confirming that the arc length is the correct measure of the wire's size.   "
+},
+{
+  "id": "exer-scalar-line-integral-speed-factor",
+  "level": "2",
+  "url": "section-curves-scalar-line-integrals.html#exer-scalar-line-integral-speed-factor",
+  "type": "Exercise",
+  "number": "4.2.2.1",
+  "title": "Why the Speed Factor Appears.",
+  "body": " Why the Speed Factor Appears   In the scalar line integral why does the factor appear?     It converts parameter change into arc length and makes the integral independent of parametrization.  Correct. The speed factor tells us how much curve length is traversed per unit change of the parameter.    It makes every line integral equal to the enclosed area.  Incorrect. Scalar line integrals do not generally compute enclosed areas.    It forces the integrand to be a vector field.  Incorrect. This is a scalar line integral.    It is needed only for closed curves.  Incorrect. The factor is needed for any parametrized curve.    "
+},
+{
+  "id": "exer-scalar-line-integral-segment-length",
+  "level": "2",
+  "url": "section-curves-scalar-line-integrals.html#exer-scalar-line-integral-segment-length",
+  "type": "Exercise",
+  "number": "4.2.2.2",
+  "title": "Arc Length of a Line Segment.",
+  "body": " Arc Length of a Line Segment   Compute where is the line segment from to .    Since the integrand is , the scalar line integral equals the arc length of the segment. The distance between the endpoints is Therefore    "
+},
+{
+  "id": "section-vector-fields-vectorial-line-integrals",
+  "level": "1",
+  "url": "section-vector-fields-vectorial-line-integrals.html",
+  "type": "Section",
+  "number": "4.3",
+  "title": "Vector Fields and Vectorial Line Integrals",
+  "body": " Vector Fields and Vectorial Line Integrals   This section extends the theory of line integrals to vector fields. Whereas a scalar line integral integrates a scalar function along a curve (weighting by arc length), a vectorial line integral integrates a vector field along a curve by taking the dot product with the curve's tangent vector at each point. Only the component of the field aligned with the direction of motion contributes to the integral.  We begin by studying vector fields themselves — functions that assign a vector to every point of their domain — and introduce the three fundamental differential operators of vector calculus: the gradient (which produces a vector field from a scalar field), the divergence (which produces a scalar field from a vector field), and the curl (which produces a vector field from a vector field in three dimensions).  We then define the vectorial line integral and establish its central theoretical result: the fundamental theorem for line integrals . For conservative vector fields — those that possess an antiderivative — the integral reduces to a boundary evaluation, just as in the one-variable case. This leads to the notion of path independence and to practical methods for finding antiderivatives of vector fields.    Vector Fields   Until now we have studied scalar fields: functions that assign a number to each point in a domain. A vector field instead assigns a vector to each point. Vector fields arise wherever a physical quantity has both magnitude and direction that varies from place to place: the velocity of a flowing fluid, the force exerted by gravity, or the electric field surrounding a charged particle. Understanding how to describe and manipulate vector fields is the foundation of the rest of this section.     Vector Field, Continuity, and Differentiability   Let . A vector field on is a function that assigns a vector to each point of . The functions are called the coordinate functions (or components) of .  The vector field is called continuous (respectively differentiable ) if each of its coordinate functions is continuous (respectively differentiable).      Physical Examples of Vector Fields  Vector fields appear throughout engineering and physics.   Meteorology. Wind can be modeled as a velocity vector field over a geographic region: at each point the vector gives the wind speed and direction. Weather maps visualize such fields as grids of arrows whose length encodes speed and whose direction encodes the wind direction.   Aerodynamics. The air flow around a wing is a three-dimensional velocity vector field . Engineers compute pressure and lift from the behavior of this field near the surface of the wing.  The figure below shows a simple planar rotation field as a representative example. At each grid point an arrow is drawn in the direction of .   The rotation field . Arrow lengths are proportional to the field magnitude , so arrows further from the origin are longer. Every vector is perpendicular to the position vector, causing counter-clockwise rotation. This field will later serve as the canonical example of a vector field with no antiderivative.         Central Force Field (Newton's Law of Gravitation)   A point mass located at the origin generates a gravitational force field. According to Newton's law of gravitation, the force on a test mass at position is where is the universal gravitational constant. This can be rewritten as showing that the force has magnitude and points in the direction , i.e.\\ toward the origin. This is a central force field : all vectors point toward a single center and their length depends only on the distance from the center.      Identifying a Vector Field from Its Properties   Which of the following vector fields on has the property that at all points with , vectors point away from the -axis and all vectors along any fixed vertical line have the same length ?   (A)  (B)  (C)  (D)      Away from the -axis means the first component is positive for and negative for . This rules out (B), where always, and (C), (D), where the horizontal component is zero — the vectors are vertical, not pointing away from the axis.   Same length along a vertical line (i.e.\\ constant ) means the vector length depends only on , not on . For (A), , which depends only on .  The answer is (A) .     Check Your Understanding   Recognise a Radial Field   Which vector field points radially away from the origin in the plane?      Correct. At every point, the vector points in the same direction as the position vector.     Incorrect. That field is tangential to circles around the origin.     Incorrect. This is a constant horizontal field.     Incorrect. This is a constant downward field.      Evaluate a Vector Field at a Point   Evaluate at the point .    Substitute , , :        Gradient Fields, Divergence, and Curl   Every smooth scalar field gives rise to a vector field via the gradient. The reverse question — whether a given vector field comes from some scalar field — leads to the concepts of antiderivative and conservative field . Two further differential operators, divergence and curl , capture how a vector field spreads outward from a point or how it swirls around an axis. These three operations — gradient, divergence, and curl — are the core tools of vector calculus.     Gradient Field, Antiderivative, Scalar Potential, Conservative Field   Let and let be a differentiable scalar function. The gradient field of is the vector field   Let be a vector field. A differentiable scalar function satisfying is called an antiderivative (or potential function ) of .  In force-field applications one often uses the negative function as a potential energy, so that .  A vector field that possesses an antiderivative is called a conservative vector field .      The Gravitational Field Is Conservative   Show that the central force field on has the antiderivative .    We compute and check that it equals . Write . Differentiating with respect to : By symmetry the same calculation applies to and , giving Hence is an antiderivative of , and the gravitational field is conservative.      Divergence and Curl   Let and let be a differentiable vector field.  The divergence of is the scalar field   For , the curl of is the vector field It is also written .   Physical interpretation. The divergence measures the net outward flux per unit volume at a point: a positive value indicates a source (fluid spreads outward), a negative value indicates a sink. The curl measures the circulation density : its magnitude gives the local rotation rate and its direction gives the axis of rotation.      Map of Field Operations  The gradient, divergence, curl, and Laplacian form a coherent system of differential operators linking scalar and vector fields.       Operator  Maps  Formula \/ remark    Gradient  scalar field vector field       Divergence  vector field scalar field       Curl  vector field vector field (only )  see Definition    Laplacian  scalar field scalar field          Computing Divergence and Curl   Let . Compute and .     Divergence:     Curl:       Check Your Understanding   Gradient Fields   If a vector field can be written as for some scalar function , what is it called?     A conservative vector field  Correct. A gradient field is also called conservative and has a scalar potential.    A rotationally symmetric field  Incorrect. Gradient fields need not be rotationally symmetric.    A divergence-free field  Incorrect. A gradient field need not have zero divergence.    A constant field  Incorrect. Gradient fields can vary from point to point.      Compute Divergence and Curl   For compute and .    The divergence is The curl is        Line Integrals of Vector Fields   We now integrate a vector field along a curve. The key difference from scalar line integrals is that we take the dot product of the field with the tangent vector of the curve: only the component of the field that is aligned with the motion contributes. The most important physical instance is work : the work done by a force field on a body moving along a path equals the vectorial line integral of the force along the path.     Line Integral of a Vector Field   Let , let be a continuously differentiable curve, and let be a continuous vector field. The line integral of the vector field along is where the dot denotes the Euclidean inner product and is the tangent vector.      Physical Interpretation: Work Done by a Force Field  If is a force field and is the path of a moving body, the work done by the force on the body is We can rewrite this by separating the speed and the unit tangent: The bracketed factor is the orthogonal projection of onto the unit tangent: it is the component of the force acting along the direction of motion. Only this tangential component does work; the normal component is perpendicular to the displacement and contributes nothing.     How to Compute a Vectorial Line Integral  To evaluate , follow three steps.   Step 1: Parametrize the curve. Find a continuously differentiable parametrization whose trace is the desired path.   Step 2: Compute the tangent vector. Differentiate: .   Step 3: Form the dot product and integrate. Evaluate the ordinary integral   Note that the vectorial line integral is orientation-sensitive : reversing the direction of traversal changes the sign of the result, unlike the scalar line integral.     Vectorial Line Integral Along a Quarter Circle   Compute the line integral of the vector field , , along the quarter circle in the first quadrant, traversed from to .     Step 1: Parametrize.     Step 2: Tangent vector.     Step 3: Compute the dot product. Since , : Therefore    Step 4: Integrate. Using the substitution , : Reversing the orientation of the same quarter circle would change the sign of the integral to .      Fundamental Theorem for Line Integrals   Let , let be a vector field, and let be a differentiable antiderivative of (i.e.\\ ). Then for every continuously differentiable curve :   Two important consequences follow immediately.   Closed curves give zero. If (i.e.\\ the curve is closed), then    Path independence. The integral depends only on the start and end points, not on the path taken between them: if and are two curves in with the same start and end points, then      Consider the composite function on . By the chain rule, Integrating from to and applying the ordinary fundamental theorem of calculus gives This is exactly the stated formula.      Left: two different paths and between the same endpoints and give the same integral value for a conservative field. Right: a closed curve in a conservative field always gives integral value zero.        Existence and Computation of Antiderivatives  The fundamental theorem raises three natural questions.   1. Does every continuous vector field have an antiderivative?   No. A simple counterexample is the rotation field . Suppose were an antiderivative. Then , so integrating in : . Differentiating in : , which forces . But depends only on , so this is a contradiction. The rotation field is not conservative.   2. When does an antiderivative exist?   A necessary condition (in ) is that the curl vanishes: This follows from Schwarz's theorem on the equality of mixed partial derivatives. For a continuously differentiable vector field on a simply connected domain, the converse also holds: implies is conservative.  In the planar case , the corresponding condition is . This is the two-dimensional version students will use most often in examples.   3. How to find an antiderivative, if one exists?   Use successive integration: integrate the first component equation in , then determine the unknown function of the remaining variables from the second component equation, and so on. The following example illustrates the method in three variables.  Let . We seek with .   Integrate in :     Use :     Use :    Therefore      Work Along Two Paths in a Conservative Field   The force field is defined by The curve runs along the -axis from to , and connects the same two points along the upper unit semicircle.    Compute the work done along .    Compute the work done along .    Find an antiderivative of .     The straight path (on the -axis) and the semicircular path share the same endpoints and .         Part (a): Work along .   Parametrize the straight path from to : (At we are at ; at at .) The tangent vector is . The field along the path: Therefore    Part (c): Antiderivative of . (We solve (c) before (b) since (b) uses the result.)  We search for with .  Integrate : Use : Therefore    Part (b): Work along .    Since is an antiderivative, is conservative and the integral depends only on the endpoints, not on the particular path. So we do not need a separate parametrization of the semicircle. By the fundamental theorem: As expected, both paths give the same work value .     Check Your Understanding   Path Independence   If a vector field is conservative, what determines the value of the line integral between two points?     Only the endpoints  Correct. In a conservative field, the integral is path independent and equals a boundary evaluation of a potential.    Only the length of the path  Incorrect. Different paths of the same length can still have different integrals in nonconservative fields.    Only whether the path is closed  Incorrect. The endpoints matter; closed curves are only a special case.    Only the maximum value of the field along the path  Incorrect. That does not determine a line integral.      Integrate a Constant Field Along a Segment   Compute the line integral of the constant vector field along the line segment from to .    A potential for this field is Therefore, by the fundamental theorem for line integrals,       "
+},
+{
+  "id": "def-vector-field",
+  "level": "2",
+  "url": "section-vector-fields-vectorial-line-integrals.html#def-vector-field",
+  "type": "Definition",
+  "number": "4.3.1",
+  "title": "Vector Field, Continuity, and Differentiability.",
+  "body": " Vector Field, Continuity, and Differentiability   Let . A vector field on is a function that assigns a vector to each point of . The functions are called the coordinate functions (or components) of .  The vector field is called continuous (respectively differentiable ) if each of its coordinate functions is continuous (respectively differentiable).   "
+},
+{
+  "id": "rem-vector-field-examples",
+  "level": "2",
+  "url": "section-vector-fields-vectorial-line-integrals.html#rem-vector-field-examples",
+  "type": "Remark",
+  "number": "4.3.2",
+  "title": "Physical Examples of Vector Fields.",
+  "body": " Physical Examples of Vector Fields  Vector fields appear throughout engineering and physics.   Meteorology. Wind can be modeled as a velocity vector field over a geographic region: at each point the vector gives the wind speed and direction. Weather maps visualize such fields as grids of arrows whose length encodes speed and whose direction encodes the wind direction.   Aerodynamics. The air flow around a wing is a three-dimensional velocity vector field . Engineers compute pressure and lift from the behavior of this field near the surface of the wing.  The figure below shows a simple planar rotation field as a representative example. At each grid point an arrow is drawn in the direction of .   The rotation field . Arrow lengths are proportional to the field magnitude , so arrows further from the origin are longer. Every vector is perpendicular to the position vector, causing counter-clockwise rotation. This field will later serve as the canonical example of a vector field with no antiderivative.      "
+},
+{
+  "id": "ex-gravitational-force-field",
+  "level": "2",
+  "url": "section-vector-fields-vectorial-line-integrals.html#ex-gravitational-force-field",
+  "type": "Example",
+  "number": "4.3.4",
+  "title": "Central Force Field (Newton’s Law of Gravitation).",
+  "body": " Central Force Field (Newton's Law of Gravitation)   A point mass located at the origin generates a gravitational force field. According to Newton's law of gravitation, the force on a test mass at position is where is the universal gravitational constant. This can be rewritten as showing that the force has magnitude and points in the direction , i.e.\\ toward the origin. This is a central force field : all vectors point toward a single center and their length depends only on the distance from the center.   "
+},
+{
+  "id": "ex-vector-field-review-question",
+  "level": "2",
+  "url": "section-vector-fields-vectorial-line-integrals.html#ex-vector-field-review-question",
+  "type": "Example",
+  "number": "4.3.5",
+  "title": "Identifying a Vector Field from Its Properties.",
+  "body": " Identifying a Vector Field from Its Properties   Which of the following vector fields on has the property that at all points with , vectors point away from the -axis and all vectors along any fixed vertical line have the same length ?   (A)  (B)  (C)  (D)      Away from the -axis means the first component is positive for and negative for . This rules out (B), where always, and (C), (D), where the horizontal component is zero — the vectors are vertical, not pointing away from the axis.   Same length along a vertical line (i.e.\\ constant ) means the vector length depends only on , not on . For (A), , which depends only on .  The answer is (A) .   "
+},
+{
+  "id": "exer-vector-fields-radial-field",
+  "level": "2",
+  "url": "section-vector-fields-vectorial-line-integrals.html#exer-vector-fields-radial-field",
+  "type": "Exercise",
+  "number": "4.3.1.1",
+  "title": "Recognise a Radial Field.",
+  "body": " Recognise a Radial Field   Which vector field points radially away from the origin in the plane?      Correct. At every point, the vector points in the same direction as the position vector.     Incorrect. That field is tangential to circles around the origin.     Incorrect. This is a constant horizontal field.     Incorrect. This is a constant downward field.    "
+},
+{
+  "id": "exer-vector-fields-evaluate-point",
+  "level": "2",
+  "url": "section-vector-fields-vectorial-line-integrals.html#exer-vector-fields-evaluate-point",
+  "type": "Exercise",
+  "number": "4.3.1.2",
+  "title": "Evaluate a Vector Field at a Point.",
+  "body": " Evaluate a Vector Field at a Point   Evaluate at the point .    Substitute , , :    "
+},
+{
+  "id": "def-gradient-field-potential",
+  "level": "2",
+  "url": "section-vector-fields-vectorial-line-integrals.html#def-gradient-field-potential",
+  "type": "Definition",
+  "number": "4.3.6",
+  "title": "Gradient Field, Antiderivative, Scalar Potential, Conservative Field.",
+  "body": " Gradient Field, Antiderivative, Scalar Potential, Conservative Field   Let and let be a differentiable scalar function. The gradient field of is the vector field   Let be a vector field. A differentiable scalar function satisfying is called an antiderivative (or potential function ) of .  In force-field applications one often uses the negative function as a potential energy, so that .  A vector field that possesses an antiderivative is called a conservative vector field .   "
+},
+{
+  "id": "ex-central-force-antiderivative",
+  "level": "2",
+  "url": "section-vector-fields-vectorial-line-integrals.html#ex-central-force-antiderivative",
+  "type": "Example",
+  "number": "4.3.7",
+  "title": "The Gravitational Field Is Conservative.",
+  "body": " The Gravitational Field Is Conservative   Show that the central force field on has the antiderivative .    We compute and check that it equals . Write . Differentiating with respect to : By symmetry the same calculation applies to and , giving Hence is an antiderivative of , and the gravitational field is conservative.   "
+},
+{
+  "id": "def-divergence-curl",
+  "level": "2",
+  "url": "section-vector-fields-vectorial-line-integrals.html#def-divergence-curl",
+  "type": "Definition",
+  "number": "4.3.8",
+  "title": "Divergence and Curl.",
+  "body": " Divergence and Curl   Let and let be a differentiable vector field.  The divergence of is the scalar field   For , the curl of is the vector field It is also written .   Physical interpretation. The divergence measures the net outward flux per unit volume at a point: a positive value indicates a source (fluid spreads outward), a negative value indicates a sink. The curl measures the circulation density : its magnitude gives the local rotation rate and its direction gives the axis of rotation.   "
+},
+{
+  "id": "ex-compute-divergence-curl",
+  "level": "2",
+  "url": "section-vector-fields-vectorial-line-integrals.html#ex-compute-divergence-curl",
+  "type": "Example",
+  "number": "4.3.9",
+  "title": "Computing Divergence and Curl.",
+  "body": " Computing Divergence and Curl   Let . Compute and .     Divergence:     Curl:     "
+},
+{
+  "id": "exer-gradient-field-conservative",
+  "level": "2",
+  "url": "section-vector-fields-vectorial-line-integrals.html#exer-gradient-field-conservative",
+  "type": "Exercise",
+  "number": "4.3.2.1",
+  "title": "Gradient Fields.",
+  "body": " Gradient Fields   If a vector field can be written as for some scalar function , what is it called?     A conservative vector field  Correct. A gradient field is also called conservative and has a scalar potential.    A rotationally symmetric field  Incorrect. Gradient fields need not be rotationally symmetric.    A divergence-free field  Incorrect. A gradient field need not have zero divergence.    A constant field  Incorrect. Gradient fields can vary from point to point.    "
+},
+{
+  "id": "exer-divergence-curl-simple",
+  "level": "2",
+  "url": "section-vector-fields-vectorial-line-integrals.html#exer-divergence-curl-simple",
+  "type": "Exercise",
+  "number": "4.3.2.2",
+  "title": "Compute Divergence and Curl.",
+  "body": " Compute Divergence and Curl   For compute and .    The divergence is The curl is    "
+},
+{
+  "id": "def-vectorial-line-integral",
+  "level": "2",
+  "url": "section-vector-fields-vectorial-line-integrals.html#def-vectorial-line-integral",
+  "type": "Definition",
+  "number": "4.3.10",
+  "title": "Line Integral of a Vector Field.",
+  "body": " Line Integral of a Vector Field   Let , let be a continuously differentiable curve, and let be a continuous vector field. The line integral of the vector field along is where the dot denotes the Euclidean inner product and is the tangent vector.   "
+},
+{
+  "id": "rem-work-force-field",
+  "level": "2",
+  "url": "section-vector-fields-vectorial-line-integrals.html#rem-work-force-field",
+  "type": "Remark",
+  "number": "4.3.11",
+  "title": "Physical Interpretation: Work Done by a Force Field.",
+  "body": " Physical Interpretation: Work Done by a Force Field  If is a force field and is the path of a moving body, the work done by the force on the body is We can rewrite this by separating the speed and the unit tangent: The bracketed factor is the orthogonal projection of onto the unit tangent: it is the component of the force acting along the direction of motion. Only this tangential component does work; the normal component is perpendicular to the displacement and contributes nothing.  "
+},
+{
+  "id": "rem-vectorial-computation",
+  "level": "2",
+  "url": "section-vector-fields-vectorial-line-integrals.html#rem-vectorial-computation",
+  "type": "Remark",
+  "number": "4.3.12",
+  "title": "How to Compute a Vectorial Line Integral.",
+  "body": " How to Compute a Vectorial Line Integral  To evaluate , follow three steps.   Step 1: Parametrize the curve. Find a continuously differentiable parametrization whose trace is the desired path.   Step 2: Compute the tangent vector. Differentiate: .   Step 3: Form the dot product and integrate. Evaluate the ordinary integral   Note that the vectorial line integral is orientation-sensitive : reversing the direction of traversal changes the sign of the result, unlike the scalar line integral.  "
+},
+{
+  "id": "ex-quarter-circle-vli",
+  "level": "2",
+  "url": "section-vector-fields-vectorial-line-integrals.html#ex-quarter-circle-vli",
+  "type": "Example",
+  "number": "4.3.13",
+  "title": "Vectorial Line Integral Along a Quarter Circle.",
+  "body": " Vectorial Line Integral Along a Quarter Circle   Compute the line integral of the vector field , , along the quarter circle in the first quadrant, traversed from to .     Step 1: Parametrize.     Step 2: Tangent vector.     Step 3: Compute the dot product. Since , : Therefore    Step 4: Integrate. Using the substitution , : Reversing the orientation of the same quarter circle would change the sign of the integral to .   "
+},
+{
+  "id": "thm-fundamental-theorem-line-integrals",
+  "level": "2",
+  "url": "section-vector-fields-vectorial-line-integrals.html#thm-fundamental-theorem-line-integrals",
+  "type": "Theorem",
+  "number": "4.3.14",
+  "title": "Fundamental Theorem for Line Integrals.",
+  "body": " Fundamental Theorem for Line Integrals   Let , let be a vector field, and let be a differentiable antiderivative of (i.e.\\ ). Then for every continuously differentiable curve :   Two important consequences follow immediately.   Closed curves give zero. If (i.e.\\ the curve is closed), then    Path independence. The integral depends only on the start and end points, not on the path taken between them: if and are two curves in with the same start and end points, then      Consider the composite function on . By the chain rule, Integrating from to and applying the ordinary fundamental theorem of calculus gives This is exactly the stated formula.   "
+},
+{
+  "id": "fig-path-independence",
+  "level": "2",
+  "url": "section-vector-fields-vectorial-line-integrals.html#fig-path-independence",
+  "type": "Figure",
+  "number": "4.3.15",
+  "title": "",
+  "body": " Left: two different paths and between the same endpoints and give the same integral value for a conservative field. Right: a closed curve in a conservative field always gives integral value zero.     "
+},
+{
+  "id": "rem-antiderivative-existence",
+  "level": "2",
+  "url": "section-vector-fields-vectorial-line-integrals.html#rem-antiderivative-existence",
+  "type": "Remark",
+  "number": "4.3.16",
+  "title": "Existence and Computation of Antiderivatives.",
+  "body": " Existence and Computation of Antiderivatives  The fundamental theorem raises three natural questions.   1. Does every continuous vector field have an antiderivative?   No. A simple counterexample is the rotation field . Suppose were an antiderivative. Then , so integrating in : . Differentiating in : , which forces . But depends only on , so this is a contradiction. The rotation field is not conservative.   2. When does an antiderivative exist?   A necessary condition (in ) is that the curl vanishes: This follows from Schwarz's theorem on the equality of mixed partial derivatives. For a continuously differentiable vector field on a simply connected domain, the converse also holds: implies is conservative.  In the planar case , the corresponding condition is . This is the two-dimensional version students will use most often in examples.   3. How to find an antiderivative, if one exists?   Use successive integration: integrate the first component equation in , then determine the unknown function of the remaining variables from the second component equation, and so on. The following example illustrates the method in three variables.  Let . We seek with .   Integrate in :     Use :     Use :    Therefore   "
+},
+{
+  "id": "ex-conservative-path-independence",
+  "level": "2",
+  "url": "section-vector-fields-vectorial-line-integrals.html#ex-conservative-path-independence",
+  "type": "Example",
+  "number": "4.3.17",
+  "title": "Work Along Two Paths in a Conservative Field.",
+  "body": " Work Along Two Paths in a Conservative Field   The force field is defined by The curve runs along the -axis from to , and connects the same two points along the upper unit semicircle.    Compute the work done along .    Compute the work done along .    Find an antiderivative of .     The straight path (on the -axis) and the semicircular path share the same endpoints and .         Part (a): Work along .   Parametrize the straight path from to : (At we are at ; at at .) The tangent vector is . The field along the path: Therefore    Part (c): Antiderivative of . (We solve (c) before (b) since (b) uses the result.)  We search for with .  Integrate : Use : Therefore    Part (b): Work along .    Since is an antiderivative, is conservative and the integral depends only on the endpoints, not on the particular path. So we do not need a separate parametrization of the semicircle. By the fundamental theorem: As expected, both paths give the same work value .   "
+},
+{
+  "id": "exer-vectorial-line-integral-conservative-concept",
+  "level": "2",
+  "url": "section-vector-fields-vectorial-line-integrals.html#exer-vectorial-line-integral-conservative-concept",
+  "type": "Exercise",
+  "number": "4.3.3.1",
+  "title": "Path Independence.",
+  "body": " Path Independence   If a vector field is conservative, what determines the value of the line integral between two points?     Only the endpoints  Correct. In a conservative field, the integral is path independent and equals a boundary evaluation of a potential.    Only the length of the path  Incorrect. Different paths of the same length can still have different integrals in nonconservative fields.    Only whether the path is closed  Incorrect. The endpoints matter; closed curves are only a special case.    Only the maximum value of the field along the path  Incorrect. That does not determine a line integral.    "
+},
+{
+  "id": "exer-vectorial-line-integral-constant-field",
+  "level": "2",
+  "url": "section-vector-fields-vectorial-line-integrals.html#exer-vectorial-line-integral-constant-field",
+  "type": "Exercise",
+  "number": "4.3.3.2",
+  "title": "Integrate a Constant Field Along a Segment.",
+  "body": " Integrate a Constant Field Along a Segment   Compute the line integral of the constant vector field along the line segment from to .    A potential for this field is Therefore, by the fundamental theorem for line integrals,    "
+},
+{
   "id": "backmatter-2",
   "level": "1",
   "url": "backmatter-2.html",

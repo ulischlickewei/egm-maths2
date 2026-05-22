@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: denver                         *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Curves and Scalar Line Integrals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+<link href="_static/pretext/css/theme.css" rel="stylesheet" type="text/css">
+<link href="_static/pretext/css/ol-markers.css" rel="stylesheet" type="text/css">
+<script>
+var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
+  "tex": {
+    "inlineMath": [
+      [
+        "\\(",
+        "\\)"
+      ]
+    ],
+    "tags": "none",
+    "tagSide": "right",
+    "tagIndent": ".8em",
+    "packages": {
+      "[+]": [
+        "base",
+        "extpfeil",
+        "ams",
+        "amscd",
+        "color",
+        "newcommand",
+        "knowl"
+      ]
+    }
+  },
+  "options": {
+    "ignoreHtmlClass": "tex2jax_ignore|ignore-math",
+    "processHtmlClass": "process-math"
+  },
+  "chtml": {
+    "scale": 0.98,
+    "mtextInheritFont": true
+  },
+  "loader": {
+    "load": [
+      "input/asciimath",
+      "[tex]/extpfeil",
+      "[tex]/amscd",
+      "[tex]/color",
+      "[tex]/newcommand",
+      "[pretext]/mathjaxknowl3.js"
+    ],
+    "paths": {
+      "pretext": "_static/pretext/js"
+    }
+  },
+  "startup": {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+  }
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="Mathematics 2">
+<meta property="book:author" content="Ulrich Schlickewei">
+<script src="_static/pretext/js/jquery.min.js"></script><script src="_static/pretext/js/pretext.js"></script><script src="_static/pretext/js/pretext_add_on.js?x=1"></script><!--** eBookCongig is necessary to configure interactive       **-->
+<!--** Runestone components to run locally in reader's browser **-->
+<!--** No external communication:                              **-->
+<!--**     log level is 0, Runestone Services are disabled     **-->
+<script type="text/javascript">
+eBookConfig = {};
+eBookConfig.useRunestoneServices = false;
+eBookConfig.host = 'http://127.0.0.1:8000';
+eBookConfig.course = 'PTX_Course_Title_Here';
+eBookConfig.basecourse = 'PTX_Base_Course';
+eBookConfig.isLoggedIn = false;
+eBookConfig.email = '';
+eBookConfig.isInstructor = false;
+eBookConfig.logLevel = 0;
+eBookConfig.username = '';
+eBookConfig.readings = null;
+eBookConfig.activities = null;
+eBookConfig.downloadsEnabled = false;
+eBookConfig.allow_pairs = false;
+eBookConfig.enableScratchAC = false;
+eBookConfig.build_info = "";
+eBookConfig.python3 = null;
+eBookConfig.runestone_version = '8.0.0';
+eBookConfig.jobehost = '';
+eBookConfig.proxyuri_runs = '';
+eBookConfig.proxyuri_files = '';
+eBookConfig.enable_chatcodes =  false;
+</script>
+<!--*** Runestone Services ***-->
+<script src="_static/prefix-runtime.ce7e0a2163cb330f.bundle.js"></script><script src="_static/prefix-713.de0ab26248766350.bundle.js"></script><script src="_static/prefix-runestone.f4a2ffb04bb978bb.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-713.f43ced6a6134ea74.css">
+<link rel="stylesheet" type="text/css" href="_static/prefix-runestone.87414d180ebeebd6.css">
+<script src="_static/pretext/js/lti_iframe_resizer.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/pretext_search.js"></script><script src="_static/pretext/js/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script>
+</head>
+<body id="Mathematics 2" class="pretext book ignore-math">
+<a class="assistive" href="#ptx-content">Skip to main content</a><header id="ptx-masthead" class="ptx-masthead"><div class="ptx-banner"><div class="title-container">
+<h1 class="heading"><a href="egm-maths2.html"><span class="title">Mathematics 2</span> <span class="subtitle">Lecture notes</span></a></h1>
+<p class="byline">Ulrich Schlickewei</p>
+</div></div></header><nav id="ptx-navbar" class="ptx-navbar navbar"><div class="ptx-navbar-contents">
+<button class="toc-toggle button" title="Contents"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5d2;</span><span class="name">Contents</span></button><div class="searchbox">
+<div class="searchwidget"><button id="searchbutton" class="searchbutton button" type="button" title="Search book"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe8b6;</span><span class="name">Search Book</span></button></div>
+<div id="searchresultsplaceholder" class="searchresultsplaceholder" style="display: none">
+<div class="search-results-controls">
+<input aria-label="Search term" id="ptxsearch" class="ptxsearch" type="text" name="terms" placeholder="Search term"><button title="Close search" id="closesearchresults" class="closesearchresults"><span class="material-symbols-outlined">close</span></button>
+</div>
+<h2 class="search-results-heading">Search Results: </h2>
+<div id="searchempty" class="searchempty"><span>No results.</span></div>
+<ol id="searchresults" class="searchresults"></ol>
+</div>
+</div>
+<span class="nav-other-controls"><button id="light-dark-button" class="light-dark-button button" title="Dark Mode"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe51c;</span><span class="name">Dark Mode</span></button></span><span class="treebuttons"><a class="previous-button button" href="section-double-triple-integrals.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="up-button button" href="chapter-multiple-integrals-line-integrals.html" title="Up"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Up</span></a><a class="next-button button" href="section-vector-fields-vectorial-line-integrals.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a></span>
+</div></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\newcommand{\N}{\mathbb N} \newcommand{\Z}{\mathbb Z} \newcommand{\Q}{\mathbb Q} \newcommand{\R}{\mathbb R}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\)</span></div>
+<div class="ptx-page">
+<div id="ptx-sidebar" class="ptx-sidebar"><nav id="ptx-toc" class="ptx-toc depth3 focused" data-preexpanded-levels="0" data-max-levels="3"><ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-frontmatter">
+<div class="toc-title-box"><a href="egm-maths2-3.html" class="internal"><span class="title">Front Matter</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-preface"><div class="toc-title-box"><a href="egm-maths2-3-3.html" class="internal"><span class="title">Preface</span></a></div></li>
+<li class="toc-item toc-colophon"><div class="toc-title-box"><a href="front-colophon.html" class="internal"><span class="title">Colophon</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="chapter-linear-algebra.html" class="internal"><span class="codenumber">1</span> <span class="title">Linear Algebra</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html" class="internal"><span class="codenumber">1.1</span> <span class="title">Vectors, Matrices and Linear Systems of Equations</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html#subsec-vectors" class="internal"><span class="codenumber">1.1.1</span> <span class="title">Brief reminder: vectors</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html#exercises-vectors-reminder" class="internal"><span class="codenumber">1.1.1</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html#subsec-matrices" class="internal"><span class="codenumber">1.1.2</span> <span class="title">Matrices</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html#subsubsec-matrix-operations" class="internal"><span class="codenumber">1.1.2.1</span> <span class="title">Arithmetic Operations on Matrices</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html#subsubsec-special-matrices" class="internal"><span class="codenumber">1.1.2.2</span> <span class="title">Special Matrices and Laws of Arithmetic</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html#subsec-linear-systems" class="internal"><span class="codenumber">1.1.3</span> <span class="title">Linear Systems and the Gauss--Jordan Method</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-vectors-matrices-linear-systems.html#subsec-linear-systems-49" class="internal"><span class="codenumber">1.1.3</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-determinants-inverse-matrices.html" class="internal"><span class="codenumber">1.2</span> <span class="title">Determinants and Inverse Matrices</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-determinants-inverse-matrices.html#section-determinants-inverse-matrices-3" class="internal"><span class="codenumber">1.2.1</span> <span class="title">Inverse Matrices</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-determinants-inverse-matrices.html#exercises-inverse-matrices" class="internal"><span class="codenumber">1.2.1</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-determinants-inverse-matrices.html#section-determinants-inverse-matrices-4" class="internal"><span class="codenumber">1.2.2</span> <span class="title">Determinants</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-determinants-inverse-matrices.html#section-determinants-inverse-matrices-4-25" class="internal"><span class="codenumber">1.2.2</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-eigenvalues-eigenvectors.html" class="internal"><span class="codenumber">1.3</span> <span class="title">Eigenvalues, Diagonalization, and Quadratic Forms</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-eigenvalues-eigenvectors.html#section-eigenvalues-eigenvectors-3" class="internal"><span class="codenumber">1.3.1</span> <span class="title">Eigenvalues and Eigenvectors</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-eigenvalues-eigenvectors.html#exercises-eigenvalues-eigenvectors" class="internal"><span class="codenumber">1.3.1</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-eigenvalues-eigenvectors.html#subsec-diagonalization" class="internal"><span class="codenumber">1.3.2</span> <span class="title">Diagonalization of Matrices</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-eigenvalues-eigenvectors.html#exercises-diagonalization" class="internal"><span class="codenumber">1.3.2</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-eigenvalues-eigenvectors.html#subsec-quadratic-forms" class="internal"><span class="codenumber">1.3.3</span> <span class="title">Quadratic Forms</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-eigenvalues-eigenvectors.html#exercises-quadratic-forms" class="internal"><span class="codenumber">1.3.3</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="chapter-multivariate-differential-calculus.html" class="internal"><span class="codenumber">2</span> <span class="title">Multivariate Differential Calculus</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-functions-continuity-partial-derivatives.html" class="internal"><span class="codenumber">2.1</span> <span class="title">Functions, Continuity, and Partial Derivatives</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-functions-continuity-partial-derivatives.html#subsec-multivariable-functions" class="internal"><span class="codenumber">2.1.1</span> <span class="title">Functions of Several Variables</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-functions-continuity-partial-derivatives.html#subsec-continuity-multivariate" class="internal"><span class="codenumber">2.1.2</span> <span class="title">Continuity</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-functions-continuity-partial-derivatives.html#subsec-partial-derivatives" class="internal"><span class="codenumber">2.1.3</span> <span class="title">Partial Derivatives, Gradient, and Differentiability</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-functions-continuity-partial-derivatives.html#subsec-higher-order-partial-derivatives" class="internal"><span class="codenumber">2.1.4</span> <span class="title">Higher-Order Partial Derivatives and the Hessian Matrix</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-functions-continuity-partial-derivatives.html#exercises-functions-continuity-partial-derivatives" class="internal"><span class="codenumber">2.1.5</span> <span class="title">Check Your Understanding</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-error-propagation-taylor-extrema.html" class="internal"><span class="codenumber">2.2</span> <span class="title">Error Propagation, Taylor Expansion, and Extrema</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-error-propagation-taylor-extrema.html#subsec-error-propagation" class="internal"><span class="codenumber">2.2.1</span> <span class="title">Error Propagation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-error-propagation-taylor-extrema.html#subsec-taylor-expansion" class="internal"><span class="codenumber">2.2.2</span> <span class="title">Multivariate Taylor Expansion</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="section-error-propagation-taylor-extrema.html#subsec-extrema" class="internal"><span class="codenumber">2.2.3</span> <span class="title">Local Extrema of Multivariable Functions</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-error-propagation-taylor-extrema.html#exercises-error-propagation-taylor-extrema" class="internal"><span class="codenumber">2.2.4</span> <span class="title">Check Your Understanding</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="chapter-ordinary-differential-equations.html" class="internal"><span class="codenumber">3</span> <span class="title">Ordinary Differential Equations</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-first-order-odes.html" class="internal"><span class="codenumber">3.1</span> <span class="title">First-Order ODEs</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-first-order-odes.html#subsec-ode-introduction" class="internal"><span class="codenumber">3.1.1</span> <span class="title">Ordinary Differential Equations and Their Solutions</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-first-order-odes.html#exercises-ode-introduction-check" class="internal"><span class="codenumber">3.1.1</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-first-order-odes.html#subsec-qualitative-analysis" class="internal"><span class="codenumber">3.1.2</span> <span class="title">Qualitative Analysis and Slope Fields</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-first-order-odes.html#exercises-qualitative-analysis-check" class="internal"><span class="codenumber">3.1.2</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-first-order-odes.html#subsec-separable-odes" class="internal"><span class="codenumber">3.1.3</span> <span class="title">Separable ODEs</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-first-order-odes.html#exercises-separable-odes-check" class="internal"><span class="codenumber">3.1.3</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-first-order-odes.html#subsec-linear-first-order-odes" class="internal"><span class="codenumber">3.1.4</span> <span class="title">Linear First-Order ODEs</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-first-order-odes.html#exercises-linear-first-order-odes-check" class="internal"><span class="codenumber">3.1.4</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-higher-order-linear-odes.html" class="internal"><span class="codenumber">3.2</span> <span class="title">Higher-Order Linear ODEs</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-higher-order-linear-odes.html#subsec-higher-order-introduction" class="internal"><span class="codenumber">3.2.1</span> <span class="title">Linear ODEs of Higher Order</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-higher-order-linear-odes.html#exercises-higher-order-introduction-check" class="internal"><span class="codenumber">3.2.1</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-higher-order-linear-odes.html#subsec-homogeneous-higher-order" class="internal"><span class="codenumber">3.2.2</span> <span class="title">Homogeneous Linear ODEs with Constant Coefficients</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-higher-order-linear-odes.html#exercises-homogeneous-higher-order-check" class="internal"><span class="codenumber">3.2.2</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-higher-order-linear-odes.html#subsec-inhomogeneous-higher-order" class="internal"><span class="codenumber">3.2.3</span> <span class="title">Inhomogeneous Linear ODEs — Method of Undetermined Coefficients</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-higher-order-linear-odes.html#exercises-inhomogeneous-higher-order-check" class="internal"><span class="codenumber">3.2.3</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-higher-order-linear-odes.html#subsec-harmonic-oscillator" class="internal"><span class="codenumber">3.2.4</span> <span class="title">Application: The Harmonic Oscillator</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-higher-order-linear-odes.html#exercises-harmonic-oscillator-check" class="internal"><span class="codenumber">3.2.4</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter contains-active">
+<div class="toc-title-box"><a href="chapter-multiple-integrals-line-integrals.html" class="internal"><span class="codenumber">4</span> <span class="title">Multiple Integrals and Line Integrals</span></a></div>
+<ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-double-triple-integrals.html" class="internal"><span class="codenumber">4.1</span> <span class="title">Double and Triple Integrals</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-double-triple-integrals.html#subsec-double-integrals" class="internal"><span class="codenumber">4.1.1</span> <span class="title">Double Integrals</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-double-triple-integrals.html#exercises-double-integrals-check" class="internal"><span class="codenumber">4.1.1</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-double-triple-integrals.html#subsec-double-integrals-evaluation" class="internal"><span class="codenumber">4.1.2</span> <span class="title">Evaluating Double Integrals</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-double-triple-integrals.html#exercises-double-integrals-evaluation-check" class="internal"><span class="codenumber">4.1.2</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-double-triple-integrals.html#subsec-triple-integrals" class="internal"><span class="codenumber">4.1.3</span> <span class="title">Triple Integrals</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-double-triple-integrals.html#exercises-triple-integrals-check" class="internal"><span class="codenumber">4.1.3</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-double-triple-integrals.html#subsec-triple-integrals-evaluation" class="internal"><span class="codenumber">4.1.4</span> <span class="title">Evaluating Triple Integrals</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-double-triple-integrals.html#exercises-triple-integrals-evaluation-check" class="internal"><span class="codenumber">4.1.4</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-section contains-active">
+<div class="toc-title-box"><a href="section-curves-scalar-line-integrals.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Curves and Scalar Line Integrals</span></a></div>
+<ul class="structural toc-item-list active">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-curves-scalar-line-integrals.html#subsec-curves" class="internal"><span class="codenumber">4.2.1</span> <span class="title">Curves in <span class="process-math">\(\R^n\)</span></span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-curves-scalar-line-integrals.html#exercises-curves-check" class="internal"><span class="codenumber">4.2.1</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-curves-scalar-line-integrals.html#subsec-scalar-line-integrals" class="internal"><span class="codenumber">4.2.2</span> <span class="title">Line Integrals of Scalar Fields</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-curves-scalar-line-integrals.html#exercises-scalar-line-integrals-check" class="internal"><span class="codenumber">4.2.2</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="section-vector-fields-vectorial-line-integrals.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Vector Fields and Vectorial Line Integrals</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-vector-fields-vectorial-line-integrals.html#subsec-vector-fields" class="internal"><span class="codenumber">4.3.1</span> <span class="title">Vector Fields</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-vector-fields-vectorial-line-integrals.html#exercises-vector-fields-check" class="internal"><span class="codenumber">4.3.1</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-vector-fields-vectorial-line-integrals.html#subsec-gradient-divergence-curl" class="internal"><span class="codenumber">4.3.2</span> <span class="title">Gradient Fields, Divergence, and Curl</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-vector-fields-vectorial-line-integrals.html#exercises-gradient-divergence-curl-check" class="internal"><span class="codenumber">4.3.2</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="section-vector-fields-vectorial-line-integrals.html#subsec-vectorial-line-integrals" class="internal"><span class="codenumber">4.3.3</span> <span class="title">Line Integrals of Vector Fields</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="section-vector-fields-vectorial-line-integrals.html#exercises-vectorial-line-integrals-check" class="internal"><span class="codenumber">4.3.3</span> <span class="title">Check Your Understanding</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-backmatter"><div class="toc-title-box"><a href="backmatter.html" class="internal"><span class="title">Backmatter</span></a></div></li>
+</ul></nav></div>
+<main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="section" id="section-curves-scalar-line-integrals"><h2 class="heading hide-type">
+<span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Curves and Scalar Line Integrals</span>
+</h2>
+<section class="introduction" id="section-curves-scalar-line-integrals-2"><div class="para" id="section-curves-scalar-line-integrals-2-1">This section introduces two closely related topics. First, we develop the concept of a <em class="emphasis">parametrized curve</em> in <span class="process-math">\(\R^n\text{:}\)</span> a path traced by a moving point, described by a vector-valued function of a single parameter. We define its trace, its tangent vector (the instantaneous velocity), and establish the differentiation rules that govern combinations of curves.<div class="autopermalink" data-description="Paragraph"><a href="#section-curves-scalar-line-integrals-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="section-curves-scalar-line-integrals-2-2">Second, we use these ideas to define the <em class="emphasis">scalar line integral</em>: an integral of a function along a curve. The key insight is that integrating “with respect to arc length” requires weighting by the speed of the parametrization, which ensures the result is independent of how the curve is traversed. Applications include computing arc lengths, masses of wires with variable density, and centers of gravity.<div class="autopermalink" data-description="Paragraph"><a href="#section-curves-scalar-line-integrals-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></section><section class="subsection" id="subsec-curves"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.1</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Curves in <span class="process-math">\(\R^n\)</span></span>
+</h3>
+<section class="introduction" id="subsec-curves-2"><div class="para" id="subsec-curves-2-1">Up to now, integration has concerned itself with regions in the plane or in space.  This section and the next move from regions to <em class="emphasis">curves</em>: one-dimensional paths winding through two- or three-dimensional space. We begin by making the notion of a parametrized curve precise, and then develop the calculus tools — tangent vectors, velocities, and differentiation rules — that are needed to compute line integrals in <a href="section-curves-scalar-line-integrals.html#subsec-scalar-line-integrals" class="internal" title="Subsection 4.2.2: Line Integrals of Scalar Fields">Subsection 4.2.2</a>.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-curves-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></section><article class="definition definition-like" id="def-curve"><h4 class="heading">
+<span class="type">Definition</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Curve, Trace, Closed Curve, Differentiable Curve.</span>
+</h4>
+<div class="para" id="def-curve-2-1">Let <span class="process-math">\(I \subseteq \R\)</span> be an interval.<div class="autopermalink" data-description="Paragraph"><a href="#def-curve-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para logical" id="def-curve-2-2">
+<div class="para">A <dfn class="terminology">curve parametrized over <span class="process-math">\(I\)</span></dfn> is a function</div>
+<div class="displaymath process-math" id="def-curve-2-2-2">
+\begin{equation*}
+\mathbf{x}\colon I \to \R^n,
+\qquad
+t \mapsto
+\begin{pmatrix} x_1(t) \\ \vdots \\ x_n(t) \end{pmatrix},
+\end{equation*}
+</div>
+<div class="para">whose component functions <span class="process-math">\(x_1, \ldots, x_n \colon I \to \R\)</span> are continuous. The parameter <span class="process-math">\(t\)</span> is often thought of as <em class="emphasis">time</em>.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#def-curve-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para logical" id="def-curve-2-3">
+<div class="para">The set of all values taken by <span class="process-math">\(\mathbf{x}\text{,}\)</span>
+</div>
+<div class="displaymath process-math" id="def-curve-2-3-2">
+\begin{equation*}
+\mathbf{x}(I)
+= \left\{\, \begin{pmatrix} x_1(t) \\ \vdots \\ x_n(t) \end{pmatrix}
+\;\middle|\; t \in I \,\right\} \subseteq \R^n,
+\end{equation*}
+</div>
+<div class="para">is called the <dfn class="terminology">trace</dfn> of <span class="process-math">\(\mathbf{x}\text{.}\)</span> The trace is the actual geometric path in space; the parametrization is one particular way of traversing that path.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#def-curve-2-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para" id="def-curve-2-4">If <span class="process-math">\(I = [a,b]\)</span> and <span class="process-math">\(\mathbf{x}(a) = \mathbf{x}(b)\text{,}\)</span> the curve is <dfn class="terminology">closed</dfn> (the path returns to its starting point). If the component functions <span class="process-math">\(x_1, \ldots, x_n\)</span> are continuously differentiable, the curve is <dfn class="terminology">continuously differentiable</dfn>.<div class="autopermalink" data-description="Paragraph"><a href="#def-curve-2-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 4.2.1: Curve, Trace, Closed Curve, Differentiable Curve"><a href="#def-curve" title="Copy heading and permalink for Definition 4.2.1: Curve, Trace, Closed Curve, Differentiable Curve" aria-label="Copy heading and permalink for Definition 4.2.1: Curve, Trace, Closed Curve, Differentiable Curve">🔗</a></div></article><details id="ex-helix" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.2</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Helix.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para logical" id="ex-helix-2-1">
+<div class="para">Sketch the trace of the curve</div>
+<div class="displaymath process-math" id="ex-helix-2-1-1">
+\begin{equation*}
+\mathbf{x}\colon [0, 4\pi] \to \R^3, \qquad
+t \mapsto \begin{pmatrix} \cos t \\ \sin t \\ t \end{pmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-helix-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="ex-helix-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para" id="ex-helix-3-1">The first two components <span class="process-math">\((\cos t, \sin t)\)</span> trace the unit circle in the <span class="process-math">\(xy\)</span>-plane, while the third component <span class="process-math">\(t\)</span> increases monotonically from <span class="process-math">\(0\)</span> to <span class="process-math">\(4\pi\text{.}\)</span> The result is a <em class="emphasis">helix</em> that spirals upward around the <span class="process-math">\(z\)</span>-axis, completing two full turns.<div class="autopermalink" data-description="Paragraph"><a href="#ex-helix-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="ex-helix-3-2">Selected points help to orient the sketch:<div class="autopermalink" data-description="Paragraph"><a href="#ex-helix-3-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="table table-like" id="tab-helix-points"><figcaption><span class="type">Table</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.3<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><div class="autopermalink" data-description="Table 4.2.3"><a href="#tab-helix-points" title="Copy heading and permalink for Table 4.2.3" aria-label="Copy heading and permalink for Table 4.2.3">🔗</a></div></figcaption><div class="tabular-box natural-width"><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="c m b2 r1 l0 t1 lines"><span class="process-math">\(t\)</span></th>
+<th scope="col" class="c m b2 r1 l0 t1 lines"><span class="process-math">\(\mathbf{x}(t)\)</span></th>
+<th scope="col" class="c m b2 r0 l0 t1 lines">Position</th>
+</tr>
+<tr>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(0\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\((1,\,0,\,0)\)</span></td>
+<td class="c m b1 r0 l0 t0 lines">Start on the <span class="process-math">\(x\)</span>-axis at height <span class="process-math">\(0\)</span>
+</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(\pi/2\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\((0,\,1,\,\pi/2)\)</span></td>
+<td class="c m b1 r0 l0 t0 lines">Quarter turn, height <span class="process-math">\(\pi/2\)</span>
+</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(\pi\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\((-1,\,0,\,\pi)\)</span></td>
+<td class="c m b1 r0 l0 t0 lines">Half turn, height <span class="process-math">\(\pi\)</span>
+</td>
+</tr>
+<tr>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\(2\pi\)</span></td>
+<td class="c m b1 r1 l0 t0 lines"><span class="process-math">\((1,\,0,\,2\pi)\)</span></td>
+<td class="c m b1 r0 l0 t0 lines">First full revolution at height <span class="process-math">\(2\pi\)</span>
+</td>
+</tr>
+</table></div></figure><figure class="figure figure-like" id="fig-helix"><div class="image-box" style="width: 55%; margin-left: 22.5%; margin-right: 22.5%;"><img src="generated/latex-image/image-helix.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.4<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>The helix <span class="process-math">\(\mathbf{x}(t)=(\cos t,\sin t,t)\)</span> for <span class="process-math">\(t \in [0,4\pi]\text{.}\)</span>  The projection onto the <span class="process-math">\(xy\)</span>-plane is the unit circle; the height coordinate increases linearly with <span class="process-math">\(t\text{,}\)</span> producing two full turns.<div class="autopermalink" data-description="Figure 4.2.4"><a href="#fig-helix" title="Copy heading and permalink for Figure 4.2.4" aria-label="Copy heading and permalink for Figure 4.2.4">🔗</a></div></figcaption></figure><div class="autopermalink" data-description="Solution 4.2.2.1"><a href="#ex-helix-3" title="Copy heading and permalink for Solution 4.2.2.1" aria-label="Copy heading and permalink for Solution 4.2.2.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Example 4.2.2: Helix"><a href="#ex-helix" title="Copy heading and permalink for Example 4.2.2: Helix" aria-label="Copy heading and permalink for Example 4.2.2: Helix">🔗</a></div></article></details><details id="ex-cylinder-plane-intersection" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.5</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Intersection Curve of a Cylinder with a Plane.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para" id="ex-cylinder-plane-intersection-2-1">Determine a parametrization of the curve of intersection of the cylinder <span class="process-math">\(x^2 + y^2 = 1\)</span> with the plane <span class="process-math">\(y + z = 2\text{.}\)</span> That is, find an interval <span class="process-math">\(I \subset \R\)</span> and a curve <span class="process-math">\(\mathbf{x}\colon I \to \R^3\)</span> whose trace is the intersection.<div class="autopermalink" data-description="Paragraph"><a href="#ex-cylinder-plane-intersection-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="ex-cylinder-plane-intersection-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="ex-cylinder-plane-intersection-3-1">
+<div class="para">The projection of the intersection onto the <span class="process-math">\(xy\)</span>-plane is the unit circle <span class="process-math">\(x^2 + y^2 = 1\text{,}\)</span> so we parametrize</div>
+<div class="displaymath process-math" id="ex-cylinder-plane-intersection-3-1-3">
+\begin{equation*}
+x(t) = \cos t, \qquad y(t) = \sin t, \qquad t \in [0, 2\pi].
+\end{equation*}
+</div>
+<div class="para">For the point <span class="process-math">\((\cos t, \sin t, z(t))\)</span> to lie in the plane <span class="process-math">\(y + z = 2\text{,}\)</span> we need</div>
+<div class="displaymath process-math" id="ex-cylinder-plane-intersection-3-1-6">
+\begin{equation*}
+z(t) = 2 - \sin t.
+\end{equation*}
+</div>
+<div class="para">The parametrization is therefore</div>
+<div class="displaymath process-math" id="ex-cylinder-plane-intersection-3-1-7">
+\begin{equation*}
+\mathbf{x}\colon [0,2\pi] \to \R^3, \qquad
+t \mapsto \begin{pmatrix} \cos t \\ \sin t \\ 2 - \sin t \end{pmatrix}.
+\end{equation*}
+</div>
+<div class="para">The trace is an ellipse tilted in space: at <span class="process-math">\(y = 0\)</span> the height is <span class="process-math">\(z = 2\text{,}\)</span> while at <span class="process-math">\(y = 1\)</span> (the highest circle point) the height is <span class="process-math">\(z = 1\text{,}\)</span> and at <span class="process-math">\(y = -1\)</span> it is <span class="process-math">\(z = 3\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-cylinder-plane-intersection-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="figure figure-like" id="fig-cylinder-plane-intersection"><div class="image-box" style="width: 55%; margin-left: 22.5%; margin-right: 22.5%;"><img src="external/multiple-integrals-line-integrals/curves-scalar-line-integrals/schnittkurve-zylinder-ebene.png" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.6<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>The cylinder <span class="process-math">\(x^2 + y^2 = 1\)</span> and the plane <span class="process-math">\(y + z = 2\)</span> intersect in a tilted ellipse.  The parametrization <span class="process-math">\(\mathbf{x}(t) = (\cos t,\,\sin t,\,2-\sin t)\)</span> traces this ellipse once as <span class="process-math">\(t\)</span> runs from <span class="process-math">\(0\)</span> to <span class="process-math">\(2\pi\text{.}\)</span><div class="autopermalink" data-description="Figure 4.2.6"><a href="#fig-cylinder-plane-intersection" title="Copy heading and permalink for Figure 4.2.6" aria-label="Copy heading and permalink for Figure 4.2.6">🔗</a></div></figcaption></figure><div class="autopermalink" data-description="Solution 4.2.5.1"><a href="#ex-cylinder-plane-intersection-3" title="Copy heading and permalink for Solution 4.2.5.1" aria-label="Copy heading and permalink for Solution 4.2.5.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Example 4.2.5: Intersection Curve of a Cylinder with a Plane"><a href="#ex-cylinder-plane-intersection" title="Copy heading and permalink for Example 4.2.5: Intersection Curve of a Cylinder with a Plane" aria-label="Copy heading and permalink for Example 4.2.5: Intersection Curve of a Cylinder with a Plane">🔗</a></div></article></details><article class="definition definition-like" id="def-tangent-vector"><h4 class="heading">
+<span class="type">Definition</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.7</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Tangent Vector, Velocity Vector, Speed, Regular Curve.</span>
+</h4>
+<div class="para" id="def-tangent-vector-2-1">Let <span class="process-math">\(\mathbf{x}\colon I \to \R^n\)</span> be a differentiable curve.<div class="autopermalink" data-description="Paragraph"><a href="#def-tangent-vector-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para logical" id="def-tangent-vector-2-2">
+<div class="para">The <dfn class="terminology">tangent vector</dfn> of <span class="process-math">\(\mathbf{x}\)</span> at time <span class="process-math">\(t\)</span> is the component-wise derivative</div>
+<div class="displaymath process-math" id="def-tangent-vector-2-2-4">
+\begin{equation*}
+\dot{\mathbf{x}}(t)
+= \frac{d\mathbf{x}}{dt}(t)
+= \begin{pmatrix} \dot{x}_1(t) \\ \vdots \\ \dot{x}_n(t) \end{pmatrix}.
+\end{equation*}
+</div>
+<div class="para">The derivative <span class="process-math">\(\dot{\mathbf{x}}(t)\)</span> is also called the <dfn class="terminology">velocity vector</dfn>. Its length</div>
+<div class="displaymath process-math" id="def-tangent-vector-2-2-7">
+\begin{equation*}
+\|\dot{\mathbf{x}}(t)\|
+= \sqrt{\dot{x}_1(t)^2 + \cdots + \dot{x}_n(t)^2}
+\end{equation*}
+</div>
+<div class="para">is called the <dfn class="terminology">speed</dfn> at time <span class="process-math">\(t\text{:}\)</span> it measures how fast a particle traversing the curve moves at the instant <span class="process-math">\(t\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#def-tangent-vector-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para" id="def-tangent-vector-2-3">If <span class="process-math">\(\dot{\mathbf{x}}(t) \neq \mathbf{0}\)</span> for all <span class="process-math">\(t \in I\text{,}\)</span> the curve is called <dfn class="terminology">regular</dfn>. For a regular curve the tangent vector always points in a definite direction at every parameter value.<div class="autopermalink" data-description="Paragraph"><a href="#def-tangent-vector-2-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 4.2.7: Tangent Vector, Velocity Vector, Speed, Regular Curve"><a href="#def-tangent-vector" title="Copy heading and permalink for Definition 4.2.7: Tangent Vector, Velocity Vector, Speed, Regular Curve" aria-label="Copy heading and permalink for Definition 4.2.7: Tangent Vector, Velocity Vector, Speed, Regular Curve">🔗</a></div></article><figure class="figure figure-like" id="fig-tangent-vector-general"><div class="image-box" style="width: 55%; margin-left: 22.5%; margin-right: 22.5%;"><img src="generated/latex-image/image-tangent-vector-general.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.8<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>A parametrized curve <span class="process-math">\(\mathbf{x}\)</span> in the plane. At the parameter value <span class="process-math">\(t\text{,}\)</span> the position vector <span class="process-math">\(\mathbf{x}(t)\)</span> points from the origin to the curve, while the tangent (velocity) vector <span class="process-math">\(\dot{\mathbf{x}}(t)\)</span> points in the direction of motion along the curve.<div class="autopermalink" data-description="Figure 4.2.8"><a href="#fig-tangent-vector-general" title="Copy heading and permalink for Figure 4.2.8" aria-label="Copy heading and permalink for Figure 4.2.8">🔗</a></div></figcaption></figure><details id="ex-tangent-circle" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.9</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Tangent Vector of a Circle.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para" id="ex-tangent-circle-2-1">Compute the tangent vector of the unit circle <span class="process-math">\(\mathbf{x}\colon [0,2\pi] \to \R^2\text{,}\)</span> <span class="process-math">\(t \mapsto (\cos t,\, \sin t)\text{,}\)</span> and verify that it is always orthogonal to the position vector.<div class="autopermalink" data-description="Paragraph"><a href="#ex-tangent-circle-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="ex-tangent-circle-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="ex-tangent-circle-3-1">
+<div class="para">Differentiating component-wise:</div>
+<div class="displaymath process-math" id="ex-tangent-circle-3-1-1">
+\begin{equation*}
+\dot{\mathbf{x}}(t) = \begin{pmatrix} -\sin t \\ \cos t \end{pmatrix}.
+\end{equation*}
+</div>
+<div class="para">To check orthogonality, compute the inner product with the position vector:</div>
+<div class="displaymath process-math" id="ex-tangent-circle-3-1-2">
+\begin{equation*}
+\langle \mathbf{x}(t),\, \dot{\mathbf{x}}(t) \rangle
+= \cos t \cdot (-\sin t) + \sin t \cdot \cos t = 0.
+\end{equation*}
+</div>
+<div class="para">The tangent vector is indeed always perpendicular to the radius. The velocity is <span class="process-math">\(\|\dot{\mathbf{x}}(t)\| = \sqrt{\sin^2 t + \cos^2 t} = 1\text{,}\)</span> confirming that the unit circle is traversed at constant speed.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-tangent-circle-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="figure figure-like" id="fig-tangent-circle"><div class="image-box" style="width: 48%; margin-left: 26%; margin-right: 26%;"><img src="generated/latex-image/image-tangent-circle.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.10<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Position vector <span class="process-math">\(\mathbf{x}(t)\)</span> and tangent vector <span class="process-math">\(\dot{\mathbf{x}}(t)\)</span> at an arbitrary point on the unit circle. The tangent vector is always perpendicular to the radius.<div class="autopermalink" data-description="Figure 4.2.10"><a href="#fig-tangent-circle" title="Copy heading and permalink for Figure 4.2.10" aria-label="Copy heading and permalink for Figure 4.2.10">🔗</a></div></figcaption></figure><div class="autopermalink" data-description="Solution 4.2.9.1"><a href="#ex-tangent-circle-3" title="Copy heading and permalink for Solution 4.2.9.1" aria-label="Copy heading and permalink for Solution 4.2.9.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Example 4.2.9: Tangent Vector of a Circle"><a href="#ex-tangent-circle" title="Copy heading and permalink for Example 4.2.9: Tangent Vector of a Circle" aria-label="Copy heading and permalink for Example 4.2.9: Tangent Vector of a Circle">🔗</a></div></article></details><details id="ex-angle-intersection" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.11</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Angle of Intersection of Two Curves.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para" id="ex-angle-intersection-2-1">The graphs of <span class="process-math">\(f(x) = e^{x-1}\)</span> and <span class="process-math">\(g(x) = x^2\)</span> intersect at <span class="process-math">\((1,1)\text{.}\)</span>  Determine the angle of intersection by parametrizing the graphs as curves and computing the angle between their tangent vectors at the intersection point.<div class="autopermalink" data-description="Paragraph"><a href="#ex-angle-intersection-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="ex-angle-intersection-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="ex-angle-intersection-3-1">
+<div class="para"><em class="emphasis">Step 1: Parametrize both graphs as curves.</em></div>
+<div class="displaymath process-math" id="ex-angle-intersection-3-1-2">
+\begin{gather*}
+\mathbf{x}_1\colon \R \to \R^2, \quad
+t \mapsto \begin{pmatrix} t \\ e^{t-1} \end{pmatrix};\\
+\mathbf{x}_2\colon \R \to \R^2, \quad
+t \mapsto \begin{pmatrix} t \\ t^2 \end{pmatrix}.
+\end{gather*}
+</div>
+<div class="para">Both curves pass through <span class="process-math">\((1,1)\)</span> at <span class="process-math">\(t = 1\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-angle-intersection-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-angle-intersection-3-2">
+<div class="para"><em class="emphasis">Step 2: Compute the tangent vectors at <span class="process-math">\(t = 1\text{.}\)</span></em></div>
+<div class="displaymath process-math" id="ex-angle-intersection-3-2-2">
+\begin{gather*}
+\dot{\mathbf{x}}_1(t) = \begin{pmatrix} 1 \\ e^{t-1} \end{pmatrix}
+\;\Rightarrow\;
+\dot{\mathbf{x}}_1(1) = \begin{pmatrix} 1 \\ 1 \end{pmatrix},\\
+\dot{\mathbf{x}}_2(t) = \begin{pmatrix} 1 \\ 2t \end{pmatrix}
+\;\Rightarrow\;
+\dot{\mathbf{x}}_2(1) = \begin{pmatrix} 1 \\ 2 \end{pmatrix}.
+\end{gather*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-angle-intersection-3-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-angle-intersection-3-3">
+<div class="para"><em class="emphasis">Step 3: Compute the angle between the tangent vectors.</em></div>
+<div class="displaymath process-math" id="ex-angle-intersection-3-3-2">
+\begin{gather*}
+\cos\alpha
+= \frac{\langle \dot{\mathbf{x}}_1(1),\, \dot{\mathbf{x}}_2(1) \rangle}
+{\|\dot{\mathbf{x}}_1(1)\|\cdot\|\dot{\mathbf{x}}_2(1)\|}
+= \frac{1 \cdot 1 + 1 \cdot 2}{\sqrt{1^2+1^2}\cdot\sqrt{1^2+2^2}}
+= \frac{3}{\sqrt{2}\cdot\sqrt{5}}
+= \frac{3}{\sqrt{10}}.
+\end{gather*}
+</div>
+<div class="para">Therefore</div>
+<div class="displaymath process-math" id="ex-angle-intersection-3-3-3">
+\begin{equation*}
+\alpha = \arccos\!\left(\frac{3}{\sqrt{10}}\right) \approx 18.43^\circ.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-angle-intersection-3-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="figure figure-like" id="fig-angle-intersection"><div class="image-box" style="width: 55%; margin-left: 22.5%; margin-right: 22.5%;"><img src="generated/latex-image/image-angle-intersection.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.12<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>The graphs of <span class="process-math">\(f(x)=e^{x-1}\)</span> and <span class="process-math">\(g(x)=x^2\)</span> meet at <span class="process-math">\((1,1)\text{.}\)</span>  Their tangent vectors <span class="process-math">\(\dot{\mathbf{x}}_1(1)=(1,1)\)</span> and <span class="process-math">\(\dot{\mathbf{x}}_2(1)=(1,2)\)</span> form an angle of approximately <span class="process-math">\(18.43^\circ\text{.}\)</span><div class="autopermalink" data-description="Figure 4.2.12"><a href="#fig-angle-intersection" title="Copy heading and permalink for Figure 4.2.12" aria-label="Copy heading and permalink for Figure 4.2.12">🔗</a></div></figcaption></figure><div class="autopermalink" data-description="Solution 4.2.11.1"><a href="#ex-angle-intersection-3" title="Copy heading and permalink for Solution 4.2.11.1" aria-label="Copy heading and permalink for Solution 4.2.11.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Example 4.2.11: Angle of Intersection of Two Curves"><a href="#ex-angle-intersection" title="Copy heading and permalink for Example 4.2.11: Angle of Intersection of Two Curves" aria-label="Copy heading and permalink for Example 4.2.11: Angle of Intersection of Two Curves">🔗</a></div></article></details><article class="theorem theorem-like" id="thm-differentiation-curves"><h4 class="heading">
+<span class="type">Theorem</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.13</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Differentiation Rules for Curves.</span>
+</h4>
+<div class="para" id="thm-differentiation-curves-2-1">Let <span class="process-math">\(\mathbf{x}, \mathbf{x}_1, \mathbf{x}_2\colon I \to \R^n\)</span> be differentiable curves, let <span class="process-math">\(a\colon I \to \R\)</span> be a scalar function, and let <span class="process-math">\(a_1, a_2 \in \R\text{.}\)</span> Then:<div class="autopermalink" data-description="Paragraph"><a href="#thm-differentiation-curves-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para logical" id="thm-differentiation-curves-2-2">
+<div class="para"><em class="emphasis">Linearity:</em></div>
+<div class="displaymath process-math" id="thm-differentiation-curves-2-2-2">
+\begin{equation*}
+\frac{d}{dt}\!\big(a_1 \mathbf{x}_1(t) + a_2 \mathbf{x}_2(t)\big)
+= a_1\,\dot{\mathbf{x}}_1(t) + a_2\,\dot{\mathbf{x}}_2(t).
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-differentiation-curves-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para logical" id="thm-differentiation-curves-2-3">
+<div class="para"><em class="emphasis">Product rule (inner product):</em></div>
+<div class="displaymath process-math" id="thm-differentiation-curves-2-3-2">
+\begin{equation*}
+\frac{d}{dt}\!\big\langle \mathbf{x}_1(t), \mathbf{x}_2(t) \big\rangle
+= \langle \dot{\mathbf{x}}_1(t), \mathbf{x}_2(t) \rangle
++ \langle \mathbf{x}_1(t), \dot{\mathbf{x}}_2(t) \rangle.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-differentiation-curves-2-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para logical" id="thm-differentiation-curves-2-4">
+<div class="para"><em class="emphasis">Product rule (scalar multiplication):</em></div>
+<div class="displaymath process-math" id="thm-differentiation-curves-2-4-2">
+\begin{equation*}
+\frac{d}{dt}\!\big(a(t)\,\mathbf{x}(t)\big)
+= \dot{a}(t)\,\mathbf{x}(t) + a(t)\,\dot{\mathbf{x}}(t).
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-differentiation-curves-2-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para logical" id="thm-differentiation-curves-2-5">
+<div class="para"><em class="emphasis">Product rule (cross product, only for <span class="process-math">\(n = 3\)</span>):</em></div>
+<div class="displaymath process-math" id="thm-differentiation-curves-2-5-2">
+\begin{equation*}
+\frac{d}{dt}\!\big(\mathbf{x}_1(t) \times \mathbf{x}_2(t)\big)
+= \dot{\mathbf{x}}_1(t) \times \mathbf{x}_2(t)
++ \mathbf{x}_1(t) \times \dot{\mathbf{x}}_2(t).
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#thm-differentiation-curves-2-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Theorem 4.2.13: Differentiation Rules for Curves"><a href="#thm-differentiation-curves" title="Copy heading and permalink for Theorem 4.2.13: Differentiation Rules for Curves" aria-label="Copy heading and permalink for Theorem 4.2.13: Differentiation Rules for Curves">🔗</a></div></article><details id="thm-differentiation-curves-3" class="hiddenproof born-hidden-knowl"><summary class="knowl__link"><h4 class="heading"><span class="type">Proof<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h4></summary><article class="hiddenproof knowl__content"><div class="para" id="thm-differentiation-curves-3-1">All rules follow from the component-wise definition of <span class="process-math">\(\dot{\mathbf{x}}(t)\)</span> and the corresponding single-variable differentiation rules applied component by component. The cross-product rule additionally uses the bilinearity and antisymmetry of the cross product.<div class="autopermalink" data-description="Paragraph"><a href="#thm-differentiation-curves-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Proof 4.2.13.1"><a href="#thm-differentiation-curves-3" title="Copy heading and permalink for Proof 4.2.13.1" aria-label="Copy heading and permalink for Proof 4.2.13.1">🔗</a></div></article></details><section class="exercises" id="exercises-curves-check"><h4 class="heading hide-type">
+<span class="type">Exercises</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber"></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Check Your Understanding</span>
+</h4>
+<article class="exercise exercise-like" id="exer-curves-unit-circle-speed"><h5 class="heading">
+<span class="codenumber">1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Speed of the Unit Circle.</span>
+</h5>
+<div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
+<div class="exercise-statement"><div class="para logical" id="exer-curves-unit-circle-speed-2-1">
+<div class="para">Let</div>
+<div class="displaymath process-math" id="exer-curves-unit-circle-speed-2-1-1">
+\begin{equation*}
+\mathbf{x}(t)=\begin{pmatrix}\cos t\\ \sin t\end{pmatrix}.
+\end{equation*}
+</div>
+<div class="para">What is the speed <span class="process-math">\(\|\dot{\mathbf{x}}(t)\|\text{?}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#exer-curves-unit-circle-speed-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div>
+<ul data-component="multiplechoice" class="exercise-interactives" id="rs-exer-curves-unit-circle-speed" data-multipleanswers="false">
+<li data-component="answer" id="rs-exer-curves-unit-circle-speed_opt_a"><div class="para" id="exer-curves-unit-circle-speed-3-1-1-1"><span class="process-math">\(0\)</span></div></li>
+<li data-component="feedback" id="rs-exer-curves-unit-circle-speed_opt_a"><div class="para" id="exer-curves-unit-circle-speed-3-1-2-1">Incorrect. The point is moving along the circle.</div></li>
+<li data-component="answer" id="rs-exer-curves-unit-circle-speed_opt_b" data-correct=""><div class="para" id="exer-curves-unit-circle-speed-3-2-1-1"><span class="process-math">\(1\)</span></div></li>
+<li data-component="feedback" id="rs-exer-curves-unit-circle-speed_opt_b"><div class="para" id="exer-curves-unit-circle-speed-3-2-2-1">Correct. Since <span class="process-math">\(\dot{\mathbf{x}}(t)=(-\sin t,\cos t)\text{,}\)</span> its norm is always <span class="process-math">\(1\text{.}\)</span>
+</div></li>
+<li data-component="answer" id="rs-exer-curves-unit-circle-speed_opt_c"><div class="para" id="exer-curves-unit-circle-speed-3-3-1-1"><span class="process-math">\(\sqrt{2}\)</span></div></li>
+<li data-component="feedback" id="rs-exer-curves-unit-circle-speed_opt_c"><div class="para" id="exer-curves-unit-circle-speed-3-3-2-1">Incorrect. The two squared components add to <span class="process-math">\(1\text{,}\)</span> not <span class="process-math">\(2\text{.}\)</span>
+</div></li>
+<li data-component="answer" id="rs-exer-curves-unit-circle-speed_opt_d"><div class="para" id="exer-curves-unit-circle-speed-3-4-1-1"><span class="process-math">\(t\)</span></div></li>
+<li data-component="feedback" id="rs-exer-curves-unit-circle-speed_opt_d"><div class="para" id="exer-curves-unit-circle-speed-3-4-2-1">Incorrect. The speed is constant here.</div></li>
+</ul>
+</div></div>
+<div class="autopermalink" data-description="Exercise 4.2.1.1: Speed of the Unit Circle"><a href="#exer-curves-unit-circle-speed" title="Copy heading and permalink for Exercise 4.2.1.1: Speed of the Unit Circle" aria-label="Copy heading and permalink for Exercise 4.2.1.1: Speed of the Unit Circle">🔗</a></div></article><article class="exercise exercise-like" id="exer-curves-tangent-vector-parabola"><h5 class="heading">
+<span class="codenumber">2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Tangent Vector of a Parametrized Curve.</span>
+</h5>
+<div class="para logical" id="exer-curves-tangent-vector-parabola-2-1">
+<div class="para">For</div>
+<div class="displaymath process-math" id="exer-curves-tangent-vector-parabola-2-1-1">
+\begin{equation*}
+\mathbf{x}(t)=\begin{pmatrix}t\\ t^2\end{pmatrix},
+\end{equation*}
+</div>
+<div class="para">compute the tangent vector at <span class="process-math">\(t=1\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#exer-curves-tangent-vector-parabola-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="exer-curves-tangent-vector-parabola-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="exer-curves-tangent-vector-parabola-3-1">
+<div class="para">Differentiate componentwise:</div>
+<div class="displaymath process-math" id="exer-curves-tangent-vector-parabola-3-1-1">
+\begin{equation*}
+\dot{\mathbf{x}}(t)=\begin{pmatrix}1\\ 2t\end{pmatrix}.
+\end{equation*}
+</div>
+<div class="para">Therefore</div>
+<div class="displaymath process-math" id="exer-curves-tangent-vector-parabola-3-1-2">
+\begin{equation*}
+\dot{\mathbf{x}}(1)=\begin{pmatrix}1\\ 2\end{pmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#exer-curves-tangent-vector-parabola-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 4.2.1.2.1"><a href="#exer-curves-tangent-vector-parabola-3" title="Copy heading and permalink for Solution 4.2.1.2.1" aria-label="Copy heading and permalink for Solution 4.2.1.2.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Exercise 4.2.1.2: Tangent Vector of a Parametrized Curve"><a href="#exer-curves-tangent-vector-parabola" title="Copy heading and permalink for Exercise 4.2.1.2: Tangent Vector of a Parametrized Curve" aria-label="Copy heading and permalink for Exercise 4.2.1.2: Tangent Vector of a Parametrized Curve">🔗</a></div></article><div class="autopermalink" data-description="Exercises 4.2.1: Check Your Understanding"><a href="#exercises-curves-check" title="Copy heading and permalink for Exercises 4.2.1: Check Your Understanding" aria-label="Copy heading and permalink for Exercises 4.2.1: Check Your Understanding">🔗</a></div></section><div class="autopermalink" data-description="Subsection 4.2.1: Curves in \R^n"><a href="#subsec-curves" title="Copy heading and permalink for Subsection 4.2.1: Curves in \R^n" aria-label="Copy heading and permalink for Subsection 4.2.1: Curves in \R^n">🔗</a></div></section><section class="subsection" id="subsec-scalar-line-integrals"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Line Integrals of Scalar Fields</span>
+</h3>
+<section class="introduction" id="subsec-scalar-line-integrals-2"><div class="para" id="subsec-scalar-line-integrals-2-1">A single-variable integral sums a function over an interval on the number line; a double integral sums over a region in the plane.  A <em class="emphasis">scalar line integral</em> sums a function along a curve in the plane or in space.  Geometrically it measures the area of the curved “curtain” suspended above the curve up to the height given by the function.  Physically it computes the mass of a wire whose density varies along its length, or the arc length of the curve itself.<div class="autopermalink" data-description="Paragraph"><a href="#subsec-scalar-line-integrals-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></section><article class="definition definition-like" id="def-scalar-line-integral"><h4 class="heading">
+<span class="type">Definition</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.14</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Line Integral of a Scalar Field.</span>
+</h4>
+<div class="para" id="def-scalar-line-integral-2-1">Let <span class="process-math">\(\mathbf{x}\colon [a,b] \to \R^n\)</span> be a continuously differentiable curve, let <span class="process-math">\(D \subseteq \R^n\)</span> contain the trace <span class="process-math">\(C = \mathbf{x}([a,b])\text{,}\)</span> and let <span class="process-math">\(f\colon D \to \R\)</span> be a continuous scalar function (also called a <dfn class="terminology">scalar field</dfn>).<div class="autopermalink" data-description="Paragraph"><a href="#def-scalar-line-integral-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para logical" id="def-scalar-line-integral-2-2">
+<div class="para">The <dfn class="terminology">line integral of <span class="process-math">\(f\)</span> along <span class="process-math">\(C\)</span></dfn> is</div>
+<div class="displaymath process-math" id="def-scalar-line-integral-2-2-2">
+\begin{equation*}
+\int_C f \, ds
+:= \int_a^b f\!\left(\mathbf{x}(t)\right) \, \|\dot{\mathbf{x}}(t)\| \, dt.
+\end{equation*}
+</div>
+<div class="para">Here <span class="process-math">\(ds = \|\dot{\mathbf{x}}(t)\|\,dt\)</span> is the <dfn class="terminology">arc length element</dfn>: it converts a small time increment <span class="process-math">\(dt\)</span> into the corresponding arc length traversed along the curve.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#def-scalar-line-integral-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 4.2.14: Line Integral of a Scalar Field"><a href="#def-scalar-line-integral" title="Copy heading and permalink for Definition 4.2.14: Line Integral of a Scalar Field" aria-label="Copy heading and permalink for Definition 4.2.14: Line Integral of a Scalar Field">🔗</a></div></article><article class="remark remark-like" id="rem-line-integral-independence"><h4 class="heading">
+<span class="type">Remark</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.15</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Independence of Parametrization.</span>
+</h4>
+<div class="para logical" id="rem-line-integral-independence-2">
+<div class="para">The value of the line integral <em class="emphasis">does not depend on the particular parametrization</em> chosen for the curve. More precisely: if two continuously differentiable curves <span class="process-math">\(\mathbf{x}\colon [a,b] \to \R^n\)</span> and <span class="process-math">\(\mathbf{y}\colon [c,d] \to \R^n\)</span> have the same trace <span class="process-math">\(C = \mathbf{x}([a,b]) = \mathbf{y}([c,d])\text{,}\)</span> and one is obtained from the other by a continuously differentiable reparametrization that traverses <span class="process-math">\(C\)</span> exactly once, then</div>
+<div class="displaymath process-math" id="rem-line-integral-independence-2-6">
+\begin{equation*}
+\int_a^b f\!\left(\mathbf{x}(t)\right) \, \|\dot{\mathbf{x}}(t)\| \, dt
+= \int_c^d f\!\left(\mathbf{y}(u)\right) \, \|\dot{\mathbf{y}}(u)\| \, du.
+\end{equation*}
+</div>
+<div class="para">Reversing the direction of traversal also leaves the value unchanged, because <span class="process-math">\(ds\)</span> measures arc length and is always nonnegative. This allows us to write the integral using the trace alone, without specifying a particular parametrization.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#rem-line-integral-independence-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Remark 4.2.15: Independence of Parametrization"><a href="#rem-line-integral-independence" title="Copy heading and permalink for Remark 4.2.15: Independence of Parametrization" aria-label="Copy heading and permalink for Remark 4.2.15: Independence of Parametrization">🔗</a></div></article><article class="remark remark-like" id="rem-line-integral-geometric"><h4 class="heading">
+<span class="type">Remark</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.16</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Geometric Interpretation.</span>
+</h4>
+<div class="para" id="rem-line-integral-geometric-2">Analogously to the single-variable integral, the scalar line integral <span class="process-math">\(\int_C f \, ds\)</span> computes the <em class="emphasis">area of the curved curtain</em> (or fence) erected above <span class="process-math">\(C\)</span> up to the height <span class="process-math">\(f\text{.}\)</span> At each point of the curve the curtain has height <span class="process-math">\(f\text{,}\)</span> and the arc length element <span class="process-math">\(ds\)</span> weights each infinitesimal strip by how long the corresponding piece of curve is.<div class="autopermalink" data-description="Paragraph"><a href="#rem-line-integral-geometric-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="figure figure-like" id="fig-line-integral-curtain"><div class="image-box" style="width: 62%; margin-left: 19%; margin-right: 19%;"><img src="generated/latex-image/image-line-integral-curtain.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.17<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>The scalar line integral <span class="process-math">\(\int_C f \, ds\)</span> equals the area of the curved curtain (shown shaded) erected above the curve <span class="process-math">\(C\)</span> in the <span class="process-math">\(xy\)</span>-plane up to the height given by <span class="process-math">\(f(x,y)\text{.}\)</span><div class="autopermalink" data-description="Figure 4.2.17"><a href="#fig-line-integral-curtain" title="Copy heading and permalink for Figure 4.2.17" aria-label="Copy heading and permalink for Figure 4.2.17">🔗</a></div></figcaption></figure><div class="autopermalink" data-description="Remark 4.2.16: Geometric Interpretation"><a href="#rem-line-integral-geometric" title="Copy heading and permalink for Remark 4.2.16: Geometric Interpretation" aria-label="Copy heading and permalink for Remark 4.2.16: Geometric Interpretation">🔗</a></div></article><article class="remark remark-like" id="rem-line-integral-computation"><h4 class="heading">
+<span class="type">Remark</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.18</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">How to Compute a Scalar Line Integral.</span>
+</h4>
+<div class="para" id="rem-line-integral-computation-2">To evaluate <span class="process-math">\(\int_C f \, ds\text{,}\)</span> follow three steps:<div class="autopermalink" data-description="Paragraph"><a href="#rem-line-integral-computation-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="rem-line-integral-computation-3">
+<em class="emphasis">Step 1: Parametrize the curve.</em> Find a continuously differentiable parametrization <span class="process-math">\(\mathbf{x}\colon [a,b] \to \R^n\)</span> with trace <span class="process-math">\(C\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#rem-line-integral-computation-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="rem-line-integral-computation-4">
+<div class="para"><em class="emphasis">Step 2: Compute the velocity.</em></div>
+<div class="displaymath process-math" id="rem-line-integral-computation-4-2">
+\begin{equation*}
+\|\dot{\mathbf{x}}(t)\|
+= \sqrt{\dot{x}_1(t)^2 + \cdots + \dot{x}_n(t)^2}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#rem-line-integral-computation-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="rem-line-integral-computation-5">
+<div class="para"><em class="emphasis">Step 3: Evaluate the one-variable integral.</em></div>
+<div class="displaymath process-math" id="rem-line-integral-computation-5-2">
+\begin{equation*}
+\int_C f \, ds
+= \int_a^b f\!\left(\mathbf{x}(t)\right) \, \|\dot{\mathbf{x}}(t)\| \, dt.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#rem-line-integral-computation-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="rem-line-integral-computation-6">The arc length factor <span class="process-math">\(\|\dot{\mathbf{x}}(t)\|\)</span> compensates for the velocity at which the parameter traverses the curve, ensuring the result is independent of the chosen parametrization.<div class="autopermalink" data-description="Paragraph"><a href="#rem-line-integral-computation-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Remark 4.2.18: How to Compute a Scalar Line Integral"><a href="#rem-line-integral-computation" title="Copy heading and permalink for Remark 4.2.18: How to Compute a Scalar Line Integral" aria-label="Copy heading and permalink for Remark 4.2.18: How to Compute a Scalar Line Integral">🔗</a></div></article><details id="ex-half-circle-integral" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.19</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Line Integral Along the Upper Half-Circle.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para" id="ex-half-circle-integral-2-1">Compute the line integral <span class="process-math">\(\displaystyle\int_C f \, ds\)</span> of the scalar field <span class="process-math">\(f(x,y) = 2 + x^2 y\)</span> along the upper semicircle of radius <span class="process-math">\(1\)</span> (i.e.\ the arc with <span class="process-math">\(y \ge 0\)</span>).<div class="autopermalink" data-description="Paragraph"><a href="#ex-half-circle-integral-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="ex-half-circle-integral-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="ex-half-circle-integral-3-1">
+<div class="para"><em class="emphasis">Step 1: Parametrize.</em></div>
+<div class="displaymath process-math" id="ex-half-circle-integral-3-1-2">
+\begin{equation*}
+\mathbf{x}\colon [0,\pi] \to \R^2, \qquad
+t \mapsto \begin{pmatrix} \cos t \\ \sin t \end{pmatrix}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-half-circle-integral-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-half-circle-integral-3-2">
+<div class="para"><em class="emphasis">Step 2: Compute the velocity.</em></div>
+<div class="displaymath process-math" id="ex-half-circle-integral-3-2-2">
+\begin{equation*}
+\dot{\mathbf{x}}(t) = \begin{pmatrix} -\sin t \\ \cos t \end{pmatrix},
+\qquad
+\|\dot{\mathbf{x}}(t)\| = \sqrt{\sin^2 t + \cos^2 t} = 1.
+\end{equation*}
+</div>
+<div class="para">The unit-circle parametrization has constant velocity of magnitude <span class="process-math">\(\|\dot{\mathbf{x}}(t)\| = 1\)</span> throughout.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-half-circle-integral-3-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-half-circle-integral-3-3">
+<div class="para"><em class="emphasis">Step 3: Evaluate the integral.</em></div>
+<div class="displaymath process-math" id="ex-half-circle-integral-3-3-2">
+\begin{align*}
+\int_C f \, ds
+\amp= \int_0^\pi f(\cos t, \sin t) \cdot 1 \, dt\\
+\amp= \int_0^\pi \bigl(2 + \cos^2\!t \cdot \sin t\bigr) \, dt.
+\end{align*}
+</div>
+<div class="para">The first part: <span class="process-math">\(\displaystyle\int_0^\pi 2 \, dt = 2\pi\text{.}\)</span> The second part, using the substitution <span class="process-math">\(u = \cos t\text{,}\)</span> <span class="process-math">\(du = -\sin t \, dt\text{:}\)</span>
+</div>
+<div class="displaymath process-math" id="ex-half-circle-integral-3-3-6">
+\begin{equation*}
+\int_0^\pi \cos^2\!t \cdot \sin t \, dt
+= \int_1^{-1} u^2 \cdot (-\,du)
+= \int_{-1}^1 u^2 \, du
+= \left[\frac{u^3}{3}\right]_{-1}^{1}
+= \frac{2}{3}.
+\end{equation*}
+</div>
+<div class="para">Therefore</div>
+<div class="displaymath process-math" id="ex-half-circle-integral-3-3-7">
+\begin{equation*}
+\int_C f \, ds = 2\pi + \frac{2}{3}.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-half-circle-integral-3-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="figure figure-like" id="fig-half-circle-integral"><div class="image-box" style="width: 45%; margin-left: 27.5%; margin-right: 27.5%;"><img src="generated/latex-image/image-half-circle.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.20<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>The upper semicircle <span class="process-math">\(C\)</span> (blue arc) parametrized from <span class="process-math">\((1,0)\)</span> to <span class="process-math">\((-1,0)\)</span> counter-clockwise.<div class="autopermalink" data-description="Figure 4.2.20"><a href="#fig-half-circle-integral" title="Copy heading and permalink for Figure 4.2.20" aria-label="Copy heading and permalink for Figure 4.2.20">🔗</a></div></figcaption></figure><div class="autopermalink" data-description="Solution 4.2.19.1"><a href="#ex-half-circle-integral-3" title="Copy heading and permalink for Solution 4.2.19.1" aria-label="Copy heading and permalink for Solution 4.2.19.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Example 4.2.19: Line Integral Along the Upper Half-Circle"><a href="#ex-half-circle-integral" title="Copy heading and permalink for Example 4.2.19: Line Integral Along the Upper Half-Circle" aria-label="Copy heading and permalink for Example 4.2.19: Line Integral Along the Upper Half-Circle">🔗</a></div></article></details><article class="definition definition-like" id="def-arc-length"><h4 class="heading">
+<span class="type">Definition</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.21</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Arc Length of a Curve.</span>
+</h4>
+<div class="para logical" id="def-arc-length-2-1">
+<div class="para">The special case <span class="process-math">\(f \equiv 1\)</span> yields the <dfn class="terminology">arc length</dfn>: if <span class="process-math">\(C \subset \R^n\)</span> has a continuously differentiable parametrization <span class="process-math">\(\mathbf{x}\colon [a,b] \to \R^n\)</span> with trace <span class="process-math">\(C\text{,}\)</span> then</div>
+<div class="displaymath process-math" id="def-arc-length-2-1-6">
+\begin{equation*}
+L(C) = \int_C \, ds = \int_a^b \|\dot{\mathbf{x}}(t)\| \, dt.
+\end{equation*}
+</div>
+<div class="para">The arc length element <span class="process-math">\(ds = \|\dot{\mathbf{x}}(t)\|\,dt\)</span> accumulates the infinitesimal lengths of the curve.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#def-arc-length-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Definition 4.2.21: Arc Length of a Curve"><a href="#def-arc-length" title="Copy heading and permalink for Definition 4.2.21: Arc Length of a Curve" aria-label="Copy heading and permalink for Definition 4.2.21: Arc Length of a Curve">🔗</a></div></article><details id="ex-arc-length-nonuniform-line-segment" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.22</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Arc Length with a Non-Uniform Parametrization.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para logical" id="ex-arc-length-nonuniform-line-segment-2-1">
+<div class="para">Compute the arc length of the curve</div>
+<div class="displaymath process-math" id="ex-arc-length-nonuniform-line-segment-2-1-1">
+\begin{equation*}
+\mathbf{x}\colon [0,1] \to \R^2, \qquad
+t \mapsto \begin{pmatrix} t^2 \\ t^2 \end{pmatrix}.
+\end{equation*}
+</div>
+<div class="para">This parametrization traces the line segment from <span class="process-math">\((0,0)\)</span> to <span class="process-math">\((1,1)\text{,}\)</span> but not at constant speed.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-arc-length-nonuniform-line-segment-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="ex-arc-length-nonuniform-line-segment-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="ex-arc-length-nonuniform-line-segment-3-1">
+<div class="para">First compute the derivative:</div>
+<div class="displaymath process-math" id="ex-arc-length-nonuniform-line-segment-3-1-1">
+\begin{equation*}
+\dot{\mathbf{x}}(t) = \begin{pmatrix} 2t \\ 2t \end{pmatrix},
+\qquad
+\|\dot{\mathbf{x}}(t)\| = \sqrt{(2t)^2 + (2t)^2} = 2\sqrt{2}\,t.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-arc-length-nonuniform-line-segment-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="ex-arc-length-nonuniform-line-segment-3-2">
+<div class="para">Therefore the arc length is</div>
+<div class="displaymath process-math" id="ex-arc-length-nonuniform-line-segment-3-2-1">
+\begin{equation*}
+L(C) = \int_0^1 \|\dot{\mathbf{x}}(t)\| \, dt
+= \int_0^1 2\sqrt{2}\,t \, dt
+= 2\sqrt{2}\left[\frac{t^2}{2}\right]_0^1
+= \sqrt{2}.
+\end{equation*}
+</div>
+<div class="para">This agrees with the geometric length of the line segment joining <span class="process-math">\((0,0)\)</span> and <span class="process-math">\((1,1)\text{.}\)</span>  The factor <span class="process-math">\(\|\dot{\mathbf{x}}(t)\|\)</span> corrects for the non-uniform motion along the same trace.</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-arc-length-nonuniform-line-segment-3-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 4.2.22.1"><a href="#ex-arc-length-nonuniform-line-segment-3" title="Copy heading and permalink for Solution 4.2.22.1" aria-label="Copy heading and permalink for Solution 4.2.22.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Example 4.2.22: Arc Length with a Non-Uniform Parametrization"><a href="#ex-arc-length-nonuniform-line-segment" title="Copy heading and permalink for Example 4.2.22: Arc Length with a Non-Uniform Parametrization" aria-label="Copy heading and permalink for Example 4.2.22: Arc Length with a Non-Uniform Parametrization">🔗</a></div></article></details><details id="ex-wire-mass-center-gravity" class="example example-like born-hidden-knowl"><summary class="knowl__link"><h4 class="heading">
+<span class="type">Example</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.23</span><span class="period heading-divison-mark heading-divison-mark__period">.</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Mass and Center of Gravity of a Wire.</span>
+</h4></summary><article class="example example-like knowl__content"><div class="para" id="ex-wire-mass-center-gravity-2-1">Line integrals of scalar fields arise naturally in physics when computing the mass and center of gravity of a thin wire.<div class="autopermalink" data-description="Paragraph"><a href="#ex-wire-mass-center-gravity-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="para" id="ex-wire-mass-center-gravity-2-2">Let <span class="process-math">\(\rho\colon C \to \R\)</span> be the linear mass density of a thin wire shaped along a curve <span class="process-math">\(C \subseteq \R^3\text{.}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#ex-wire-mass-center-gravity-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <ul class="disc" id="ex-wire-mass-center-gravity-2-3">
+<li id="ex-wire-mass-center-gravity-2-3-1">
+<div class="para logical" id="ex-wire-mass-center-gravity-2-3-1-1">
+<div class="para">The <dfn class="terminology">mass</dfn> of the wire is</div>
+<div class="displaymath process-math" id="ex-wire-mass-center-gravity-2-3-1-1-2">
+\begin{equation*}
+M = \int_C \rho \, ds.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-wire-mass-center-gravity-2-3-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#ex-wire-mass-center-gravity-2-3-1" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="ex-wire-mass-center-gravity-2-3-2">
+<div class="para logical" id="ex-wire-mass-center-gravity-2-3-2-1">
+<div class="para">The coordinates <span class="process-math">\((x_S, y_S, z_S)\)</span> of the <dfn class="terminology">center of gravity</dfn> are</div>
+<div class="displaymath process-math" id="ex-wire-mass-center-gravity-2-3-2-1-3">
+\begin{equation*}
+x_S = \frac{1}{M}\int_C x\,\rho \, ds,
+\quad
+y_S = \frac{1}{M}\int_C y\,\rho \, ds,
+\quad
+z_S = \frac{1}{M}\int_C z\,\rho \, ds.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#ex-wire-mass-center-gravity-2-3-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#ex-wire-mass-center-gravity-2-3-2" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul> <div class="para" id="ex-wire-mass-center-gravity-2-4">Each formula is a line integral of the scalar field <span class="process-math">\(\rho\text{,}\)</span> or of <span class="process-math">\(x\rho\text{,}\)</span> <span class="process-math">\(y\rho\text{,}\)</span> <span class="process-math">\(z\rho\text{,}\)</span> along the curve <span class="process-math">\(C\)</span> representing the wire. When the density is constant <span class="process-math">\(\rho \equiv \rho_0\text{,}\)</span> the mass reduces to <span class="process-math">\(M = \rho_0 \, L(C)\text{,}\)</span> confirming that the arc length is the correct measure of the wire’s size.<div class="autopermalink" data-description="Paragraph"><a href="#ex-wire-mass-center-gravity-2-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Example 4.2.23: Mass and Center of Gravity of a Wire"><a href="#ex-wire-mass-center-gravity" title="Copy heading and permalink for Example 4.2.23: Mass and Center of Gravity of a Wire" aria-label="Copy heading and permalink for Example 4.2.23: Mass and Center of Gravity of a Wire">🔗</a></div></article></details><section class="exercises" id="exercises-scalar-line-integrals-check"><h4 class="heading hide-type">
+<span class="type">Exercises</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber"></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Check Your Understanding</span>
+</h4>
+<article class="exercise exercise-like" id="exer-scalar-line-integral-speed-factor"><h5 class="heading">
+<span class="codenumber">1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Why the Speed Factor Appears.</span>
+</h5>
+<div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
+<div class="exercise-statement"><div class="para logical" id="exer-scalar-line-integral-speed-factor-2-1">
+<div class="para">In the scalar line integral</div>
+<div class="displaymath process-math" id="exer-scalar-line-integral-speed-factor-2-1-1">
+\begin{equation*}
+\int_C f\,ds = \int_a^b f(\mathbf{x}(t))\|\dot{\mathbf{x}}(t)\|\,dt,
+\end{equation*}
+</div>
+<div class="para">why does the factor <span class="process-math">\(\|\dot{\mathbf{x}}(t)\|\)</span> appear?</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#exer-scalar-line-integral-speed-factor-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div>
+<ul data-component="multiplechoice" class="exercise-interactives" id="rs-exer-scalar-line-integral-speed-factor" data-multipleanswers="false">
+<li data-component="answer" id="rs-exer-scalar-line-integral-speed-factor_opt_a" data-correct=""><div class="para" id="exer-scalar-line-integral-speed-factor-3-1-1-1">It converts parameter change into arc length and makes the integral independent of parametrization.</div></li>
+<li data-component="feedback" id="rs-exer-scalar-line-integral-speed-factor_opt_a"><div class="para" id="exer-scalar-line-integral-speed-factor-3-1-2-1">Correct. The speed factor tells us how much curve length is traversed per unit change of the parameter.</div></li>
+<li data-component="answer" id="rs-exer-scalar-line-integral-speed-factor_opt_b"><div class="para" id="exer-scalar-line-integral-speed-factor-3-2-1-1">It makes every line integral equal to the enclosed area.</div></li>
+<li data-component="feedback" id="rs-exer-scalar-line-integral-speed-factor_opt_b"><div class="para" id="exer-scalar-line-integral-speed-factor-3-2-2-1">Incorrect. Scalar line integrals do not generally compute enclosed areas.</div></li>
+<li data-component="answer" id="rs-exer-scalar-line-integral-speed-factor_opt_c"><div class="para" id="exer-scalar-line-integral-speed-factor-3-3-1-1">It forces the integrand to be a vector field.</div></li>
+<li data-component="feedback" id="rs-exer-scalar-line-integral-speed-factor_opt_c"><div class="para" id="exer-scalar-line-integral-speed-factor-3-3-2-1">Incorrect. This is a scalar line integral.</div></li>
+<li data-component="answer" id="rs-exer-scalar-line-integral-speed-factor_opt_d"><div class="para" id="exer-scalar-line-integral-speed-factor-3-4-1-1">It is needed only for closed curves.</div></li>
+<li data-component="feedback" id="rs-exer-scalar-line-integral-speed-factor_opt_d"><div class="para" id="exer-scalar-line-integral-speed-factor-3-4-2-1">Incorrect. The factor is needed for any parametrized curve.</div></li>
+</ul>
+</div></div>
+<div class="autopermalink" data-description="Exercise 4.2.2.1: Why the Speed Factor Appears"><a href="#exer-scalar-line-integral-speed-factor" title="Copy heading and permalink for Exercise 4.2.2.1: Why the Speed Factor Appears" aria-label="Copy heading and permalink for Exercise 4.2.2.1: Why the Speed Factor Appears">🔗</a></div></article><article class="exercise exercise-like" id="exer-scalar-line-integral-segment-length"><h5 class="heading">
+<span class="codenumber">2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Arc Length of a Line Segment.</span>
+</h5>
+<div class="para logical" id="exer-scalar-line-integral-segment-length-2-1">
+<div class="para">Compute</div>
+<div class="displaymath process-math" id="exer-scalar-line-integral-segment-length-2-1-1">
+\begin{equation*}
+\int_C 1\,ds
+\end{equation*}
+</div>
+<div class="para">where <span class="process-math">\(C\)</span> is the line segment from <span class="process-math">\((0,0)\)</span> to <span class="process-math">\((3,4)\text{.}\)</span>
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#exer-scalar-line-integral-segment-length-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="solutions"><details id="exer-scalar-line-integral-segment-length-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary><div class="solution solution-like knowl__content">
+<div class="para logical" id="exer-scalar-line-integral-segment-length-3-1">
+<div class="para">Since the integrand is <span class="process-math">\(1\text{,}\)</span> the scalar line integral equals the arc length of the segment. The distance between the endpoints is</div>
+<div class="displaymath process-math" id="exer-scalar-line-integral-segment-length-3-1-2">
+\begin{equation*}
+\sqrt{3^2+4^2}=5.
+\end{equation*}
+</div>
+<div class="para">Therefore</div>
+<div class="displaymath process-math" id="exer-scalar-line-integral-segment-length-3-1-3">
+\begin{equation*}
+\int_C 1\,ds = 5.
+\end{equation*}
+</div>
+<div class="autopermalink" data-description="Paragraph"><a href="#exer-scalar-line-integral-segment-length-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Solution 4.2.2.2.1"><a href="#exer-scalar-line-integral-segment-length-3" title="Copy heading and permalink for Solution 4.2.2.2.1" aria-label="Copy heading and permalink for Solution 4.2.2.2.1">🔗</a></div>
+</div></details></div>
+<div class="autopermalink" data-description="Exercise 4.2.2.2: Arc Length of a Line Segment"><a href="#exer-scalar-line-integral-segment-length" title="Copy heading and permalink for Exercise 4.2.2.2: Arc Length of a Line Segment" aria-label="Copy heading and permalink for Exercise 4.2.2.2: Arc Length of a Line Segment">🔗</a></div></article><div class="autopermalink" data-description="Exercises 4.2.2: Check Your Understanding"><a href="#exercises-scalar-line-integrals-check" title="Copy heading and permalink for Exercises 4.2.2: Check Your Understanding" aria-label="Copy heading and permalink for Exercises 4.2.2: Check Your Understanding">🔗</a></div></section><div class="autopermalink" data-description="Subsection 4.2.2: Line Integrals of Scalar Fields"><a href="#subsec-scalar-line-integrals" title="Copy heading and permalink for Subsection 4.2.2: Line Integrals of Scalar Fields" aria-label="Copy heading and permalink for Subsection 4.2.2: Line Integrals of Scalar Fields">🔗</a></div></section><div class="autopermalink" data-description="Section 4.2: Curves and Scalar Line Integrals"><a href="#section-curves-scalar-line-integrals" title="Copy heading and permalink for Section 4.2: Curves and Scalar Line Integrals" aria-label="Copy heading and permalink for Section 4.2: Curves and Scalar Line Integrals">🔗</a></div></section></div>
+<div id="ptx-content-footer" class="ptx-content-footer">
+<a class="previous-button button" href="section-double-triple-integrals.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="section-vector-fields-vectorial-line-integrals.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
+</div></main>
+</div>
+<div id="ptx-page-footer" class="ptx-page-footer">
+<a class="pretext-link" href="https://pretextbook.org" title="PreTeXt"><div class="logo"><svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="338 3000 8772 6866" role="img"><title>PreTeXt logo</title><g style="stroke-width:.025in; stroke:currentColor; fill:none"><polyline points="472,3590 472,9732 " style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,9448 A 4660 4660  0  0  1  8598  9259"></path><path style="stroke-width:174;stroke-linecap:butt;" d="M 4488,9685 A 4228 4228  0  0  0   472  9732"></path><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,3590 A 4241 4241  0  0  1  8598  3496"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,3496  A 4241 4241  0  0  1  4724  3590"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,9259  A 4507 4507  0  0  1  4724  9448"></path><polyline points="5385,4299 4062,8125" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8598,3496 8598,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="850,3496 850,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="4960,9685 4488,9685" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="3070,4582 1889,6141 3070,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="6418,4582 7600,6141 6418,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8976,3590 8976,9732" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><path style="stroke-width:174;stroke-linecap:butt;" d="M 4960,9685 A 4228 4228  0  0  1  8976  9732"></path></g></svg></div></a><a class="runestone-link" href="https://runestone.academy" title="Runestone Academy"><img class="logo" src="https://runestone.academy/runestone/static/images/RAIcon_cropped.png" alt="Runstone Academy logo"></a><a class="mathjax-link" href="https://www.mathjax.org" title="MathJax"><img class="logo" src="https://www.mathjax.org/badge/badge-square-2.png" alt="MathJax logo"></a>
+</div>
+</body>
+</html>
